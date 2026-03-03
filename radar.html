@@ -23,6 +23,71 @@
 <script type="text/babel" data-type="module">
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
+// --- AUTH GATE ---
+const PASS_HASH="f226a9d29cdb97d342436fe240a05ca06bb3cb037025874347b5ae06f1bf963b";
+async function sha256(str){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function getAuth(){try{return sessionStorage.getItem("radar_auth")==="1";}catch(e){return false;}}
+function setAuth(){try{sessionStorage.setItem("radar_auth","1");}catch(e){}}
+
+function AuthGate({children}){
+  const[ok,setOk]=useState(getAuth);
+  const[pw,setPw]=useState("");
+  const[err,setErr]=useState(false);
+  const[checking,setChecking]=useState(false);
+  const inputRef=useRef(null);
+  useEffect(()=>{if(!ok&&inputRef.current)inputRef.current.focus();},[ok]);
+  async function check(){
+    setChecking(true);setErr(false);
+    const h=await sha256(pw);
+    if(h===PASS_HASH){setAuth();setOk(true);}
+    else{setErr(true);setPw("");setTimeout(()=>setErr(false),2000);}
+    setChecking(false);
+  }
+  if(ok)return children;
+  const dk=typeof window!=="undefined"&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+  const bg=dk?"#0c0d0e":"#f5f5f3";
+  const fg=dk?"#c8c6c2":"#1a1917";
+  const fg2=dk?"rgba(180,178,174,0.58)":"rgba(60,58,54,0.5)";
+  const fg3=dk?"rgba(155,153,148,0.34)":"rgba(60,58,54,0.3)";
+  const accent=dk?"#c8c6c2":"#1a1917";
+  const fill=dk?"rgba(180,185,190,0.07)":"rgba(60,62,66,0.06)";
+  const border=dk?"rgba(180,185,190,0.06)":"rgba(60,62,66,0.08)";
+  const red="#ff453a";
+  const mono="'SF Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
+  const sf="-apple-system,'SF Pro Display','Helvetica Neue',system-ui,sans-serif";
+  return(
+    <div style={{width:"100vw",height:"100dvh",background:bg,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:sf}}>
+      <div style={{width:320,display:"flex",flexDirection:"column",alignItems:"center",gap:24}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <span style={{fontSize:28}}>{"📡"}</span>
+          <span style={{fontSize:15,fontWeight:700,letterSpacing:"0.15em",fontFamily:mono,color:fg}}>RADAR</span>
+        </div>
+        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Product intelligence for Sift</p>
+        <div style={{width:"100%",display:"flex",gap:8}}>
+          <input ref={inputRef} type="password" value={pw} onChange={e=>setPw(e.target.value)}
+            onKeyDown={e=>{if(e.key==="Enter"&&pw)check();}}
+            placeholder="Password"
+            style={{flex:1,padding:"12px 14px",borderRadius:12,border:"0.5px solid "+(err?red:border),
+              background:fill,color:fg,fontFamily:mono,fontSize:13,outline:"none",
+              transition:"border-color 0.2s"}}/>
+          <button onClick={check} disabled={!pw||checking}
+            style={{padding:"12px 20px",borderRadius:12,border:"none",cursor:pw?"pointer":"default",
+              fontWeight:600,fontSize:12,fontFamily:mono,letterSpacing:"0.05em",
+              background:pw?accent:fill,color:pw?(dk?"#0c0d0e":"#fff"):fg3,
+              opacity:checking?0.6:1,transition:"all 0.2s"}}>
+            {checking?"...":"\u2192"}
+          </button>
+        </div>
+        {err&&<p style={{fontSize:11,color:red,fontFamily:mono,animation:"fadeIn 0.2s ease"}}>Wrong password</p>}
+      </div>
+    </div>
+  );
+}
+// --- END AUTH GATE ---
+
 function SiftIcon(props){
   var size=props.size||22,color=props.color||"#1a1917",opacity=props.opacity===undefined?1:props.opacity,style=props.style||{};
   return(
@@ -1638,7 +1703,7 @@ function SiftIntel(){
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(SiftIntel));
+root.render(React.createElement(AuthGate, null, React.createElement(SiftIntel)));
 
 </script>
 </body>
