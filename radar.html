@@ -239,12 +239,16 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   var t0=Date.now();
   onProgress("Connecting to synthesis engine...");
   var compact=compactData(data);
+  var customPrompt="";
+  try{customPrompt=window.__RADAR_CUSTOM_PROMPT||getCustomPrompt()||"";}catch(e){}
+  var defaultPrompt="You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou are given a data.json containing signals from 5+ sources (Amplitude, Slack, Linear, Calendar, Google Docs). Your job is to synthesize ALL signals \u2014 not just the top few.\n\nCRITICAL RULES:\n1. SURFACE 10-15 items minimum. Every signal in the data deserves evaluation. If the input has 15 signals, you should produce at least 12 items. Do NOT over-filter.\n2. VALIDATE COVERAGE: Before responding, audit your output. Every data source (amplitude, slack, linear, calendar) must be represented. If a source has signals you did not surface, add them.\n3. PRESERVE EVIDENCE: Each signal in the input may have an 'evidence' array with real URLs. Copy these into your output exactly \u2014 they are pre-validated clickable links.\n4. ASK THE RIGHT QUESTIONS: Include one final item with id 'meta-questions' and category 'blind_spot' that lists 2-3 questions Noah should be asking that the data does NOT answer. Frame as 'What RADAR can\u2019t see from this data.'\n\nCategories:\n\u2022 INSIGHT \u2014 data anomaly or pattern needing attention\n\u2022 PREP \u2014 meeting/event within 24h needing briefing\n\u2022 NUDGE \u2014 person to message, thank, unblock, follow up with\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments, coverage gaps\n\u2022 MOMENTUM \u2014 wins to celebrate or amplify\n\nMix categories. At least 2 NUDGE, 2 LEVERAGE, and 2 BLIND SPOT items.\n\nSift customers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Orbital Ops, Parallel Systems, Inversion Space, The Exploration Company, OHB, Lockheed Martin, Dust Moto.\n\nRESPOND WITH ONLY VALID JSON \u2014 no markdown fences:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<REAL url from input data>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[{\"source\":\"<src>\",\"chart\":\"<id>\",\"freshness\":\""+data.fetchedAt+"\"}]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI\nCategory guidance: PREP for meetings within 24h. NUDGE for people waiting on you. LEVERAGE for things to delegate or connect. BLIND SPOT for items >5 days stale or customers gone quiet.\n\nIMPORTANT: Preserve all evidence URLs from the input signals. Do not fabricate URLs. If the input signal has evidence[].url values, copy them exactly into your output.";
+  var systemPrompt=customPrompt||defaultPrompt;
   var r=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-haiku-4-5-20251001",max_tokens:3000,stream:true,
-      system:"You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nSynthesize the data into 6-10 actionable items across these categories:\n\n\u2022 INSIGHT \u2014 data anomaly or pattern that needs attention\n\u2022 PREP \u2014 meeting/event happening soon that needs briefing material\n\u2022 NUDGE \u2014 someone you should message, thank, unblock, or follow up with\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, or connect dots across squads\n\u2022 BLIND SPOT \u2014 something falling through cracks: stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate or amplify\n\nMix categories. At least 2 NUDGE/LEVERAGE/BLIND SPOT items. Be specific\u2014use real names, channels, ticket IDs from the data.\n\nSift customers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Orbital Ops, Parallel Systems, Inversion Space, The Exploration Company, OHB, Lockheed Martin, Dust Moto.\n\nRESPOND WITH ONLY VALID JSON \u2014 no markdown fences, no commentary:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[{\"source\":\"<src>\",\"chart\":\"<id>\",\"freshness\":\""+data.fetchedAt+"\"}]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI\nCategory guidance: PREP items for meetings within 24h. NUDGE for people waiting on you or you should proactively reach out to. LEVERAGE for things Noah can delegate or connect. BLIND SPOT for items >5 days stale or customers gone quiet.",
-      messages:[{role:"user",content:"Synthesize into actionable items:\n\n"+JSON.stringify(compact)}],
+      model:"claude-haiku-4-5-20251001",max_tokens:4096,stream:true,
+      system:systemPrompt,
+      messages:[{role:"user",content:"Synthesize ALL signals into actionable items. There are "+((data.signals||[]).length)+" input signals \u2014 produce at least 10 items. Preserve evidence URLs.\n\n"+JSON.stringify(compact)}],
     }),
   });
   if(!r.ok){
@@ -758,10 +762,25 @@ function SpeedBrief({insight,onClick,p,dk,mob,index,focused,itemState,onStateCha
   );
 }
 
-function SummaryHeader({counts,p,mob,feedMode}){
+function SummaryHeader({counts,p,mob,feedMode,scanMeta,lastScanAt,coverageGaps}){
   const parts=[];
+  // Source provenance line
+  var provenanceParts=[];
+  if(scanMeta){
+    if(scanMeta.amplitudeCharts) provenanceParts.push(scanMeta.amplitudeCharts+" charts");
+    if(scanMeta.slackChannels) provenanceParts.push(scanMeta.slackChannels+" channels");
+    if(scanMeta.linearProjects) provenanceParts.push(scanMeta.linearProjects+" projects");
+    if(scanMeta.calendarEvents) provenanceParts.push(scanMeta.calendarEvents+" events");
+    if(scanMeta.googleDocs) provenanceParts.push(scanMeta.googleDocs+" docs");
+  }
+  var provenanceLine=provenanceParts.length>0
+    ? provenanceParts.join(" \u00b7 ")+" scanned"
+    : null;
+  var tsLine=lastScanAt
+    ? new Date(lastScanAt).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})
+    : null;
+
   if(feedMode==="brief"){
-    // Blunt prose mode
     if(counts.urgent>0) parts.push(`${counts.urgent} thing${counts.urgent>1?"s":""} need${counts.urgent===1?"s":""} you right now`);
     if(counts.high>0) parts.push(`${counts.high} more today`);
     if(parts.length===0) return(
@@ -774,6 +793,7 @@ function SummaryHeader({counts,p,mob,feedMode}){
     return(
       <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
         <p style={{fontSize:mob?12:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>{text}</p>
+        {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3}}>{provenanceLine}{tsLine?" \u00b7 "+tsLine:""}</p>}
       </div>
     );
   }
@@ -791,6 +811,15 @@ function SummaryHeader({counts,p,mob,feedMode}){
       <p style={{fontSize:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>
         {parts.join(", ")}.{counts.low>0?` Plus ${counts.low} FYI.`:""}
       </p>
+      {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3,display:"flex",alignItems:"center",gap:6}}>
+        <span>{scanMeta?.sources||0} sources</span>
+        <span style={{opacity:0.3}}>{"\u2022"}</span>
+        <span>{provenanceLine}</span>
+        {tsLine&&<><span style={{opacity:0.3}}>{"\u2022"}</span><span>{tsLine}</span></>}
+      </p>}
+      {coverageGaps&&<p style={{fontSize:10,fontFamily:MONO,color:p.orange,marginTop:4,padding:"4px 8px",borderRadius:6,background:p.orange+"10",display:"inline-block"}}>
+        {"\u26A0"} {coverageGaps.headline||"Coverage gaps detected"}
+      </p>}
     </div>
   );
 }
@@ -1231,6 +1260,8 @@ function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e)
 function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
 function getLive(){try{return localStorage.getItem("radar_live_mode")==="true";}catch(e){return false;}}
 function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
+function getCustomPrompt(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}}
+function setCustomPromptStore(v){try{localStorage.setItem("radar_custom_prompt",v);}catch(e){}}
 // Init live mode flag
 try{window.__RADAR_LIVE_MODE=getLive();}catch(e){}
 
@@ -1257,21 +1288,25 @@ function SettingsPanel({show,onClose,p,mob}){
   var[key,setKey]=useState(getKey);
   var[live,setLive]=useState(getLive);
   var[saved,setSaved]=useState(false);
+  var[customPrompt,setCustomPrompt]=useState(getCustomPrompt);
+  var[showPrompt,setShowPrompt]=useState(false);
   if(!show)return null;
   function save(){
     setKeyStore(key);
     setLiveStore(live);
+    setCustomPromptStore(customPrompt);
+    window.__RADAR_CUSTOM_PROMPT=customPrompt||"";
     setSaved(true);
     setTimeout(function(){setSaved(false);},2000);
   }
   return(
     <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.5)",animation:"fadeIn 0.2s ease"}} onClick={onClose}>
-      <div onClick={function(e){e.stopPropagation();}} style={{width:mob?"92%":420,maxHeight:"80vh",borderRadius:20,overflow:"hidden",background:p.bgElevated,border:"0.5px solid "+p.glassBorder,animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",borderBottom:"0.5px solid "+p.sep}}>
+      <div onClick={function(e){e.stopPropagation();}} style={{width:mob?"92%":480,maxHeight:"85vh",borderRadius:20,overflow:"hidden",background:p.bgElevated,border:"0.5px solid "+p.glassBorder,animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)",display:"flex",flexDirection:"column"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",borderBottom:"0.5px solid "+p.sep,flexShrink:0}}>
           <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label}}>SETTINGS</span>
           <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:16,cursor:"pointer"}}>{"\u2715"}</button>
         </div>
-        <div style={{padding:"16px 20px",display:"flex",flexDirection:"column",gap:16}}>
+        <div style={{padding:"16px 20px",display:"flex",flexDirection:"column",gap:16,overflowY:"auto",flex:1}}>
           <div>
             <label style={{fontSize:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label3,marginBottom:6,display:"block"}}>ANTHROPIC API KEY</label>
             <input ref={keyRef} type="password" value={key} onChange={function(e){setKey(e.target.value);}}
@@ -1295,6 +1330,29 @@ function SettingsPanel({show,onClose,p,mob}){
               Live mode uses MCP servers to pull real-time data. Slower (~15-30s) but data is always fresh. Requires active Anthropic MCP connections for Slack, Linear, Calendar.
             </p>
           </div>}
+          <div>
+            <button onClick={function(){setShowPrompt(!showPrompt);}} style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"100%",
+              padding:"12px 14px",borderRadius:12,background:p.fill4,border:"none",cursor:"pointer",color:p.label}}>
+              <div style={{textAlign:"left"}}>
+                <div style={{fontSize:12,fontWeight:600,fontFamily:SF}}>Synthesis Prompt</div>
+                <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>{customPrompt?"Custom prompt active":"Using default prompt \u2014 click to customize"}</div>
+              </div>
+              <span style={{fontSize:12,color:p.label3,transition:"transform 0.2s",transform:showPrompt?"rotate(90deg)":"rotate(0)"}}>{"\u25B6"}</span>
+            </button>
+            {showPrompt&&<div style={{marginTop:8}}>
+              <textarea value={customPrompt} onChange={function(e){setCustomPrompt(e.target.value);}}
+                placeholder="Leave empty for default. Or paste custom instructions for how RADAR should synthesize your data. The data.json context is always appended automatically."
+                style={{width:"100%",height:180,padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
+                  background:p.glass,color:p.label,fontFamily:MONO,fontSize:11,lineHeight:1.5,outline:"none",resize:"vertical"}}/>
+              <div style={{display:"flex",gap:8,marginTop:6}}>
+                <button onClick={function(){setCustomPrompt("");}} style={{padding:"4px 10px",borderRadius:6,border:"0.5px solid "+p.glassBorder,
+                  background:"transparent",color:p.label3,fontFamily:MONO,fontSize:10,cursor:"pointer"}}>Reset to default</button>
+                <p style={{fontSize:9,color:p.label4,fontFamily:MONO,lineHeight:1.5,flex:1}}>
+                  Tip: Tell it what to focus on, what categories to emphasize, which customers matter most, or what questions you want answered.
+                </p>
+              </div>
+            </div>}
+          </div>
           <button onClick={save} style={{padding:"10px 16px",borderRadius:10,border:"none",cursor:"pointer",
             fontWeight:600,fontSize:12,fontFamily:MONO,letterSpacing:"0.05em",
             background:saved?p.green:p.accent,color:"#fff",transition:"all 0.2s"}}>
@@ -1327,6 +1385,8 @@ function SiftIntel(){
   const pullRef=useRef(null);
   const scrollRef=useRef(null);
   const hasScanned=useRef(false);
+  const[scanMeta,setScanMeta]=useState(null);
+  const[coverageGaps,setCoverageGaps]=useState(null);
 
   const active=insights.filter(i=>itemStates[i.id]!=="dismissed");
   const filtered=filter==="all"?active:active.filter(i=>i.priority===filter);
@@ -1388,7 +1448,26 @@ function SiftIntel(){
         };});
         setInsights(normalized);
         setLastScanAt(new Date());
-        setScanStatus(normalized.length+" items from "+String(result.meta.sourcesOk||0)+" sources");
+        // Capture source metadata from data.json
+        var meta=LIVE_DATA?._meta||{sources_scanned:0,source_list:[]};
+        setScanMeta({
+          sources:meta.sources_scanned||result.meta.sourcesOk||0,
+          sourceList:meta.source_list||[],
+          amplitudeCharts:meta.amplitude_charts_queried||0,
+          slackChannels:meta.slack_channels_scanned||0,
+          linearProjects:meta.linear_projects_checked||0,
+          calendarEvents:meta.calendar_events_loaded||0,
+          googleDocs:meta.google_docs_read||0,
+          totalSignals:meta.signal_count||normalized.length,
+          displayedSignals:normalized.length,
+        });
+        // Extract coverage gaps if present
+        var gaps=normalized.filter(function(n){return n.category==="blind_spot"||n.category==="coverage";});
+        if(result.insights.length>0){
+          var covNote=result.insights.find(function(x){return x.id==="coverage-audit";});
+          if(covNote) setCoverageGaps(covNote);
+        }
+        setScanStatus(normalized.length+" items from "+String(result.meta.sourcesOk||meta.sources_scanned||0)+" sources");
       } else {
         setScanStatus("No insights generated \u2014 check data sources");
       }
@@ -1432,6 +1511,9 @@ function SiftIntel(){
   // Keyboard shortcuts
   useEffect(()=>{
     const h=e=>{
+      // Don't capture keys when typing in inputs/textareas
+      const tag=e.target?.tagName?.toLowerCase();
+      if(tag==="input"||tag==="textarea"||e.target?.isContentEditable)return;
       // In modal
       if(modal){if(e.key==="Escape")setModal(null);return;}
       // In detail
@@ -1506,7 +1588,7 @@ function SiftIntel(){
               <div style={{padding:mob?"4px 0":"6px 0"}}>
                 <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
               </div>
-              <SummaryHeader counts={counts} p={p} mob={mob} feedMode={feedMode}/>
+              <SummaryHeader counts={counts} p={p} mob={mob} feedMode={feedMode} scanMeta={scanMeta} lastScanAt={lastScanAt} coverageGaps={coverageGaps}/>
               <div ref={scrollRef} onTouchStart={onPullStart} onTouchMove={onPullMove} onTouchEnd={onPullEnd}
                 style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch",paddingTop:0}}>
                 {pullY>0&&<PullIndicator pullY={pullY} p={p}/>}
