@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0c0d0e" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#e6e6e4" media="(prefers-color-scheme: light)">
-<title>RADAR — Sift Product Intelligence</title>
+<title>RADAR — Product Intelligence</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,7 +65,7 @@ function AuthGate({children}){
           <span style={{fontSize:28}}>{"📡"}</span>
           <span style={{fontSize:15,fontWeight:700,letterSpacing:"0.15em",fontFamily:mono,color:fg}}>RADAR</span>
         </div>
-        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Product intelligence for Sift</p>
+        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Product intelligence</p>
         <div style={{width:"100%",display:"flex",gap:8}}>
           <input ref={inputRef} type="password" value={pw} onChange={e=>setPw(e.target.value)}
             onKeyDown={e=>{if(e.key==="Enter"&&pw)check();}}
@@ -306,7 +306,7 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   var compact=compactData(data);
   var customPrompt="";
   try{customPrompt=window.__RADAR_CUSTOM_PROMPT||getCustomPrompt()||"";}catch(e){}
-  var defaultPrompt="You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou are given a data.json containing signals from 5+ sources (Amplitude, Slack, Linear, Calendar, Google Docs). Your job is to synthesize ALL signals \u2014 not just the top few.\n\nCRITICAL RULES:\n1. SURFACE 10-15 items minimum. Every signal in the data deserves evaluation. If the input has 15 signals, you should produce at least 12 items. Do NOT over-filter.\n2. VALIDATE COVERAGE: Before responding, audit your output. Every data source (amplitude, slack, linear, calendar) must be represented. If a source has signals you did not surface, add them.\n3. PRESERVE EVIDENCE: Each signal in the input may have an 'evidence' array with real URLs. Copy these into your output exactly \u2014 they are pre-validated clickable links.\n4. ASK THE RIGHT QUESTIONS: Include one final item with id 'meta-questions' and category 'blind_spot' that lists 2-3 questions Noah should be asking that the data does NOT answer. Frame as 'What RADAR can\u2019t see from this data.'\n\nCategories:\n\u2022 INSIGHT \u2014 data anomaly or pattern needing attention\n\u2022 PREP \u2014 meeting/event within 24h needing briefing\n\u2022 NUDGE \u2014 person to message, thank, unblock, follow up with\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments, coverage gaps\n\u2022 MOMENTUM \u2014 wins to celebrate or amplify\n\nMix categories. At least 2 NUDGE, 2 LEVERAGE, and 2 BLIND SPOT items.\n\nSift customers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Orbital Ops, Parallel Systems, Inversion Space, The Exploration Company, OHB, Lockheed Martin, Dust Moto.\n\nRESPOND WITH ONLY VALID JSON \u2014 no markdown fences:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<REAL url from input data>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[{\"source\":\"<src>\",\"chart\":\"<id>\",\"freshness\":\""+data.fetchedAt+"\"}]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI\nCategory guidance: PREP for meetings within 24h. NUDGE for people waiting on you. LEVERAGE for things to delegate or connect. BLIND SPOT for items >5 days stale or customers gone quiet.\n\nIMPORTANT: Preserve all evidence URLs from the input signals. Do not fabricate URLs. If the input signal has evidence[].url values, copy them exactly into your output.";
+  var defaultPrompt="You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou are given a data.json containing signals from 5+ sources (Amplitude, Slack, Linear, Calendar, Google Docs). Your job is to synthesize ALL signals \u2014 not just the top few.\n\nCRITICAL RULES:\n1. SURFACE 10-15 items minimum. Every signal in the data deserves evaluation. If the input has 15 signals, you should produce at least 12 items. Do NOT over-filter.\n2. VALIDATE COVERAGE: Before responding, audit your output. Every data source (amplitude, slack, linear, calendar) must be represented. If a source has signals you did not surface, add them.\n3. PRESERVE EVIDENCE: Each signal in the input may have an 'evidence' array with real URLs. Copy these into your output exactly \u2014 they are pre-validated clickable links.\n4. ASK THE RIGHT QUESTIONS: Include one final item with id 'meta-questions' and category 'blind_spot' that lists 2-3 questions Noah should be asking that the data does NOT answer. Frame as 'What RADAR can\u2019t see from this data.'\n\nCategories:\n\u2022 INSIGHT \u2014 data anomaly or pattern needing attention\n\u2022 PREP \u2014 meeting/event within 24h needing briefing\n\u2022 NUDGE \u2014 person to message, thank, unblock, follow up with\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments, coverage gaps\n\u2022 MOMENTUM \u2014 wins to celebrate or amplify\n\nMix categories. At least 2 NUDGE, 2 LEVERAGE, and 2 BLIND SPOT items.\n\nCustomers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Orbital Ops, Parallel Systems, Inversion Space, The Exploration Company, OHB, Lockheed Martin, Dust Moto.\n\nRESPOND WITH ONLY VALID JSON \u2014 no markdown fences:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<REAL url from input data>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[{\"source\":\"<src>\",\"chart\":\"<id>\",\"freshness\":\""+data.fetchedAt+"\"}]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI\nCategory guidance: PREP for meetings within 24h. NUDGE for people waiting on you. LEVERAGE for things to delegate or connect. BLIND SPOT for items >5 days stale or customers gone quiet.\n\nIMPORTANT: Preserve all evidence URLs from the input signals. Do not fabricate URLs. If the input signal has evidence[].url values, copy them exactly into your output.";
   var systemPrompt=customPrompt||defaultPrompt;
   var r=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",headers:{"Content-Type":"application/json"},
@@ -367,7 +367,7 @@ async function synthesizeLiveMCP(onProgress){
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       model:"claude-haiku-4-5-20251001",max_tokens:4000,
-      system:"You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
+      system:"You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
       messages:[{role:"user",content:"Pull fresh data from all available sources and synthesize actionable items for me. Today is "+new Date().toISOString().split("T")[0]+"."}],
       mcp_servers:[
         {type:"url",url:"https://mcp.slack.com/mcp",name:"slack"},
@@ -957,7 +957,7 @@ function InsightChat({insight,p,dk,mob}){
     try{
       const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
         body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
-          system:"You are an embedded product intelligence analyst at Sift (aerospace telemetry platform). User is VP Product. Be direct, concise, operational. Skip preamble. Draft messages ready to paste.\n\nCONTEXT:\n"+ctx,
+          system:"You are an embedded product intelligence analyst for an aerospace telemetry platform. User is VP Product. Be direct, concise, operational. Skip preamble. Draft messages ready to paste.\n\nCONTEXT:\n"+ctx,
           messages:nm.map(m=>({role:m.r==="user"?"user":"assistant",content:m.t}))})});
       if(!r.ok)throw new Error("API "+r.status);
       const d=await r.json();
@@ -1429,6 +1429,308 @@ function SettingsPanel({show,onClose,p,mob}){
   );
 }
 
+// ====== VIEW: TEAM ======
+function TeamView({p,dk,mob}){
+  const[team,setTeam]=useState([]);
+  useEffect(()=>{if(LIVE_DATA?.team)setTeam(LIVE_DATA.team);else loadData().then(()=>{if(LIVE_DATA?.team)setTeam(LIVE_DATA.team);});},[]);
+  const cofounders=LIVE_DATA?.cofounders||[];
+  function statusColor(s){return s==="shipping"?p.green:s==="attention"?p.orange:s==="blocked"?p.red:p.label3;}
+  function statusIcon(s){return s==="shipping"?"\u25CF":s==="attention"?"\u25B2":s==="blocked"?"\u25A0":"\u25CB";}
+  function ageColor(age){if(!age)return p.label4;var n=parseInt(age);if(n<=1)return p.green;if(n<=3)return p.label2;if(n<=5)return p.orange;return p.red;}
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      {cofounders.length>0&&<>
+        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>COFOUNDERS</div>
+        <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:10,marginBottom:24}}>
+          {cofounders.map(cf=>(
+            <div key={cf.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+                <div>
+                  <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF}}>{cf.name}</span>
+                  <span style={{fontSize:11,color:p.label3,fontFamily:MONO,marginLeft:8}}>{cf.role}</span>
+                </div>
+                <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>last msg {timeAgo(cf.lastSlackToNoah)}</span>
+              </div>
+              <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:8}}>{cf.attention}</p>
+              <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                {cf.recentTopics?.map((t,i)=>(
+                  <span key={i} style={{fontSize:10,fontFamily:MONO,padding:"2px 8px",borderRadius:6,background:p.fill4,color:p.label3}}>{t}</span>
+                ))}
+              </div>
+              {cf.pendingDecisions?.length>0&&<div style={{marginTop:8,fontSize:10,fontFamily:MONO,color:p.orange}}>
+                {"\u23F3"} Pending: {cf.pendingDecisions.join(", ")}
+              </div>}
+            </div>
+          ))}
+        </div>
+      </>}
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>DIRECT REPORTS & KEY COLLABORATORS</div>
+      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+        {team.map(person=>(
+          <div key={person.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+            borderLeft:"3px solid "+statusColor(person.status)}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:12,color:statusColor(person.status)}}>{statusIcon(person.status)}</span>
+                <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF}}>{person.name}</span>
+                <span style={{fontSize:11,color:p.label3,fontFamily:MONO}}>{person.role}</span>
+                {person.squad&&<span style={{fontSize:10,color:p.label4,fontFamily:MONO}}>{"\u00b7"} {person.squad}</span>}
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:12}}>
+                {person.fourPAge&&<span style={{fontSize:10,fontFamily:MONO,color:ageColor(person.fourPAge),cursor:person.fourPUrl?"pointer":"default"}}
+                  onClick={()=>{if(person.fourPUrl)window.open(person.fourPUrl,"_blank");}}>
+                  4P: {person.fourPAge}{" \u2197"}
+                </span>}
+                <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>{person.meetingsToday}mtg today</span>
+              </div>
+            </div>
+            <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:8}}>{person.topConcern}</p>
+            <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3}}>
+              <span>{person.linearActive} active</span>
+              {person.linearBlocked>0&&<span style={{color:p.red}}>{person.linearBlocked} blocked</span>}
+              <span>last seen {timeAgo(person.slackLastSeen)}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ====== VIEW: CUSTOMERS ======
+function CustomersView({p,dk,mob}){
+  const[customers,setCustomers]=useState([]);
+  useEffect(()=>{if(LIVE_DATA?.customers)setCustomers(LIVE_DATA.customers);else loadData().then(()=>{if(LIVE_DATA?.customers)setCustomers(LIVE_DATA.customers);});},[]);
+  function trajColor(t){return t==="expanding"?p.green:t==="stable"?p.blue:t==="contracting"?p.orange:p.red;}
+  function trajIcon(t){return t==="expanding"?"\u2197":t==="stable"?"\u2192":t==="contracting"?"\u2198":"\u26A0";}
+  function MiniSparkline({data,color,w,h}){
+    if(!data||data.length<2)return null;
+    var max=Math.max(...data),min=Math.min(...data),range=max-min||1;
+    var pts=data.map((v,i)=>{var x=(i/(data.length-1))*w;var y=h-((v-min)/range)*h;return x+","+y;}).join(" ");
+    return <svg width={w} height={h} style={{display:"block"}}><polyline points={pts} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+  }
+  // Sort: at-risk first, then contracting, then expanding, then stable
+  var sorted=[...customers].sort((a,b)=>{var ord={["at-risk"]:0,contracting:1,expanding:2,stable:3};return(ord[a.trajectory]||9)-(ord[b.trajectory]||9);});
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>
+        CUSTOMER PORTFOLIO {"\u00b7"} {customers.length} ACCOUNTS
+      </div>
+      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+        {sorted.map(c=>(
+          <div key={c.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+            borderLeft:"3px solid "+trajColor(c.trajectory)}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+              <div style={{display:"flex",alignItems:"center",gap:10}}>
+                <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF}}>{c.name}</span>
+                <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:trajColor(c.trajectory)}}>{trajIcon(c.trajectory)} {c.trajectory}</span>
+              </div>
+              <div style={{display:"flex",alignItems:"center",gap:12}}>
+                <MiniSparkline data={c.wauTrend} color={trajColor(c.trajectory)} w={48} h={16}/>
+                <span style={{fontSize:13,fontWeight:700,fontFamily:MONO,color:p.label}}>{c.wau}</span>
+                <span style={{fontSize:10,fontFamily:MONO,color:trajColor(c.trajectory)}}>{c.wauDelta}</span>
+              </div>
+            </div>
+            <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:8}}>{c.topIssue}</p>
+            <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3,flexWrap:"wrap"}}>
+              <span>WAU share: {c.share}</span>
+              {c.openTickets>0&&<span style={{color:c.ticketSeverity==="high"?p.red:p.orange}}>{c.openTickets} tickets ({c.ticketSeverity})</span>}
+              <span>health: {c.healthScore}/100</span>
+              <span>FDE: {timeAgo(c.lastFdeTouch)}</span>
+            </div>
+            {c.risk&&c.trajectory!=="stable"&&c.trajectory!=="expanding"&&
+              <div style={{marginTop:8,fontSize:10,fontFamily:MONO,color:p.red,padding:"4px 8px",borderRadius:6,background:p.red+"10",display:"inline-block"}}>
+                {"\u26A0"} {c.risk}
+              </div>
+            }
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ====== VIEW: DECISIONS ======
+function DecisionsView({p,dk,mob}){
+  const[decisions,setDecisions]=useState([]);
+  useEffect(()=>{if(LIVE_DATA?.decisions)setDecisions(LIVE_DATA.decisions);else loadData().then(()=>{if(LIVE_DATA?.decisions)setDecisions(LIVE_DATA.decisions);});},[]);
+  function urgency(d){
+    if(d.staleDays>=5)return{color:p.red,label:"STALE"};
+    var dl=new Date(d.deadline);var now=new Date();var days=Math.ceil((dl-now)/(86400000));
+    if(days<=0)return{color:p.red,label:"OVERDUE"};
+    if(days<=2)return{color:p.orange,label:days+"d left"};
+    if(days<=7)return{color:p.blue,label:days+"d left"};
+    return{color:p.label3,label:days+"d left"};
+  }
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>
+        OPEN DECISIONS {"\u00b7"} {decisions.length} PENDING
+      </div>
+      <div style={{display:"flex",flexDirection:"column",gap:12}}>
+        {decisions.map(d=>{
+          var u=urgency(d);
+          return(
+            <div key={d.id} style={{padding:"16px 18px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+              borderLeft:"3px solid "+u.color}}>
+              <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
+                <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF,flex:1,lineHeight:1.3}}>{d.title}</span>
+                <span style={{fontSize:10,fontWeight:700,fontFamily:MONO,color:u.color,padding:"2px 8px",borderRadius:6,background:u.color+"14",flexShrink:0,marginLeft:12}}>{u.label}</span>
+              </div>
+              <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:12}}>{d.context}</p>
+              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
+                <div style={{padding:"8px 10px",borderRadius:8,background:p.green+"10",border:"0.5px solid "+p.green+"20"}}>
+                  <div style={{fontSize:9,fontWeight:700,fontFamily:MONO,color:p.green,marginBottom:4}}>FOR</div>
+                  <div style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.4}}>{d.evidenceFor}</div>
+                </div>
+                <div style={{padding:"8px 10px",borderRadius:8,background:p.red+"10",border:"0.5px solid "+p.red+"20"}}>
+                  <div style={{fontSize:9,fontWeight:700,fontFamily:MONO,color:p.red,marginBottom:4}}>AGAINST</div>
+                  <div style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.4}}>{d.evidenceAgainst}</div>
+                </div>
+              </div>
+              <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3}}>
+                <span>owner: {d.owner}</span>
+                <span>waiting on: {d.waitingOn}</span>
+                <span>deadline: {new Date(d.deadline).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span>
+                {d.staleDays>0&&<span style={{color:p.orange}}>stale {d.staleDays}d</span>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {decisions.length===0&&<div style={{textAlign:"center",padding:40,color:p.label3,fontFamily:SF}}>No open decisions in the queue</div>}
+    </div>
+  );
+}
+
+// ====== VIEW: TIME ======
+function TimeView({p,dk,mob}){
+  const[ta,setTa]=useState(null);
+  useEffect(()=>{if(LIVE_DATA?.timeAudit)setTa(LIVE_DATA.timeAudit);else loadData().then(()=>{if(LIVE_DATA?.timeAudit)setTa(LIVE_DATA.timeAudit);});},[]);
+  if(!ta)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading time audit...</div>;
+  var todayPct=ta.today?Math.round((ta.today.meetingHours/ta.today.totalHours)*100):0;
+  var weekPct=ta.thisWeek?Math.round((ta.thisWeek.meetingHours/40)*100):0;
+  function Bar({pct,color,label}){
+    return(
+      <div style={{marginBottom:12}}>
+        <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
+          <span style={{fontSize:11,fontFamily:MONO,color:p.label2}}>{label}</span>
+          <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pct>70?p.red:pct>50?p.orange:p.green}}>{pct}%</span>
+        </div>
+        <div style={{height:6,borderRadius:3,background:p.fill4,overflow:"hidden"}}>
+          <div style={{height:"100%",borderRadius:3,background:color,width:pct+"%",transition:"width 0.5s ease"}}/>
+        </div>
+      </div>
+    );
+  }
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:16,marginBottom:20}}>
+        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>TODAY</div>
+          <div style={{display:"flex",gap:20,marginBottom:14}}>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label}}>{ta.today?.freeHours||0}h</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>free</div>
+            </div>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.orange}}>{ta.today?.meetings||0}</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>meetings</div>
+            </div>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label2}}>{ta.today?.meetingHours||0}h</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>in meetings</div>
+            </div>
+          </div>
+          <Bar pct={todayPct} color={todayPct>70?p.red:todayPct>50?p.orange:p.green} label="Meeting load today"/>
+        </div>
+        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>THIS WEEK</div>
+          <div style={{display:"flex",gap:20,marginBottom:14}}>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label}}>{ta.thisWeek?.freeHours||0}h</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>free</div>
+            </div>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.orange}}>{ta.thisWeek?.meetings||0}</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>meetings</div>
+            </div>
+            <div>
+              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label2}}>{ta.thisWeek?.meetingHours||0}h</div>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>in meetings</div>
+            </div>
+          </div>
+          <Bar pct={weekPct} color={weekPct>70?p.red:weekPct>50?p.orange:p.green} label="Meeting load this week"/>
+          <div style={{fontSize:10,fontFamily:MONO,color:p.label3,marginTop:4}}>
+            Heaviest: {ta.thisWeek?.heaviestDay} {"\u00b7"} Lightest: {ta.thisWeek?.lightestDay}
+          </div>
+        </div>
+      </div>
+
+      {ta.today?.prepNeeded?.length>0&&<div style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.orange,marginBottom:10}}>PREP NEEDED</div>
+        {ta.today.prepNeeded.map((prep,i)=>(
+          <div key={i} style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.6,paddingLeft:12,borderLeft:"2px solid "+p.orange+"40",marginBottom:6}}>{prep}</div>
+        ))}
+      </div>}
+
+      {ta.conflicts?.length>0&&<div style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.red+"20",marginBottom:16}}>
+        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.red,marginBottom:10}}>CONFLICTS</div>
+        {ta.conflicts.map((c,i)=>(
+          <div key={i} style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.6,paddingLeft:12,borderLeft:"2px solid "+p.red+"40",marginBottom:6}}>{c}</div>
+        ))}
+      </div>}
+
+      {ta.leverageRec&&<div style={{padding:"14px 16px",borderRadius:14,background:p.green+"08",border:"0.5px solid "+p.green+"20"}}>
+        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.green,marginBottom:8}}>HIGHEST-LEVERAGE MOVE</div>
+        <p style={{fontSize:13,color:p.label,fontFamily:SF,lineHeight:1.5}}>{ta.leverageRec}</p>
+      </div>}
+
+      {ta.today?.highLeverage&&<div style={{padding:"14px 16px",borderRadius:14,background:p.blue+"08",border:"0.5px solid "+p.blue+"20",marginTop:16}}>
+        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.blue,marginBottom:8}}>RIGHT NOW</div>
+        <p style={{fontSize:13,color:p.label,fontFamily:SF,lineHeight:1.5}}>{ta.today.highLeverage}</p>
+      </div>}
+    </div>
+  );
+}
+
+// ====== VIEW TABS ======
+const VIEWS=[
+  {id:"signals",label:"Signals",shortcut:"1"},
+  {id:"team",label:"Team",shortcut:"2"},
+  {id:"customers",label:"Customers",shortcut:"3"},
+  {id:"decisions",label:"Decisions",shortcut:"4"},
+  {id:"time",label:"Time",shortcut:"5"},
+];
+
+function ViewTabs({active,onChange,p,mob,counts}){
+  return(
+    <div style={{display:"flex",gap:mob?0:4,padding:mob?"0 12px":"0 16px",borderBottom:"0.5px solid "+p.sep,flexShrink:0}}>
+      {VIEWS.map(v=>{
+        var isActive=active===v.id;
+        var badge=null;
+        if(v.id==="signals"&&counts?.urgent>0) badge=counts.urgent;
+        if(v.id==="decisions") badge=(LIVE_DATA?.decisions||[]).length||null;
+        if(v.id==="team"){var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;if(blocked>0)badge=blocked;}
+        if(v.id==="customers"){var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;if(atRisk>0)badge=atRisk;}
+        return(
+          <button key={v.id} onClick={()=>onChange(v.id)}
+            style={{padding:mob?"10px 12px":"10px 16px",background:"none",border:"none",cursor:"pointer",position:"relative",
+              fontSize:mob?11:12,fontWeight:isActive?700:500,fontFamily:SF,
+              color:isActive?p.label:p.label3,transition:"color 0.2s",
+              borderBottom:isActive?"2px solid "+p.label:"2px solid transparent"}}>
+            {v.label}
+            {!mob&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4,marginLeft:4}}>{v.shortcut}</span>}
+            {badge&&<span style={{position:"absolute",top:4,right:mob?2:4,width:16,height:16,borderRadius:8,
+              background:v.id==="signals"?p.red:p.orange,color:"#fff",fontSize:9,fontWeight:700,fontFamily:MONO,
+              display:"flex",alignItems:"center",justifyContent:"center"}}>{badge}</span>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function SiftIntel(){
   const[dk,setDk]=useTheme();
   const mob=useMobile();
@@ -1452,6 +1754,7 @@ function SiftIntel(){
   const hasScanned=useRef(false);
   const[scanMeta,setScanMeta]=useState(null);
   const[coverageGaps,setCoverageGaps]=useState(null);
+  const[activeView,setActiveView]=useState("signals");
 
   const active=insights.filter(i=>itemStates[i.id]!=="dismissed");
   const filtered=filter==="all"?active:active.filter(i=>i.priority===filter);
@@ -1599,6 +1902,11 @@ function SiftIntel(){
       if(num>=1&&num<=9&&num<=flatList.length){setFocusIdx(num-1);}
       if(e.key==="Escape"){setFocusIdx(-1);}
       if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
+      // View switching: 1-5 when no item focused
+      if(focusIdx<0){
+        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time"};
+        if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
+      }
     };
     window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
   },[modal,selected,focusIdx,flatList]);
@@ -1647,8 +1955,14 @@ function SiftIntel(){
           </div>}
         </div>
 
+        <ViewTabs active={activeView} onChange={setActiveView} p={p} mob={mob} counts={counts}/>
+
         <div style={{flex:1,position:"relative",overflow:"hidden",zIndex:1}}>
-          {!selected&&(
+          {activeView==="team"&&<TeamView p={p} dk={dk} mob={mob}/>}
+          {activeView==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
+          {activeView==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
+          {activeView==="time"&&<TimeView p={p} dk={dk} mob={mob}/>}
+          {activeView==="signals"&&!selected&&(
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
               <div style={{padding:mob?"4px 0":"6px 0"}}>
                 <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
@@ -1691,7 +2005,7 @@ function SiftIntel(){
             </div>
           )}
 
-          {selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
+          {activeView==="signals"&&selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
         </div>
 
         {modal&&<ActModal insight={modal} onClose={()=>setModal(null)} onDone={handleDone} p={p} mob={mob}/>}
