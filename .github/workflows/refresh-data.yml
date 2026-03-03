@@ -1,0 +1,127 @@
+name: Refresh RADAR Data
+on:
+  schedule:
+    # Every weekday at 7:00 AM PT (14:00 UTC) — ready before Noah's morning
+    - cron: '0 14 * * 1-5'
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull fresh data via Claude API + MCP
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cat > gather.py << 'PYTHON'
+          import json, os, sys
+          from datetime import datetime, timezone
+          try:
+              from anthropic import Anthropic
+          except ImportError:
+              os.system("pip install anthropic --quiet")
+              from anthropic import Anthropic
+
+          client = Anthropic()
+
+          SYSTEM = """You are a data gathering agent for RADAR, a product intelligence tool for Sift.
+          
+          Use your tools to pull the following data and return it as a single JSON object:
+
+          1. AMPLITUDE: Query the Sift project (ID 465973) dashboard o93d89pz for:
+             - Daily Active Users (chart u5ctmoro) — last 14 days
+             - New Users (chart 5ab27lld) — last 8 weeks  
+             - Session Duration (chart dogczzd8) — last 8 weeks
+             - Feature Adoption: Explore, Rules, Reports, Runs (chart e74ntz32) — last 8 weeks
+             - Key Actions (chart 1v3107dq)
+             - Collaboration metrics (chart pepuaofo) — last 8 weeks
+             - Engagement metrics (chart pr53xnu5) — last 8 weeks
+             - Retention (chart p56xw4r8)
+
+          2. SLACK: Search #product (C0A779UAY8P) and other relevant channels for:
+             - Last 3 days of notable messages about customers, blockers, wins, incidents
+             - Any mentions of K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace
+
+          3. LINEAR: Pull:
+             - Urgent and High priority issues that are In Progress or Backlog
+             - Issues updated in last 3 days
+             - Any blocked issues
+
+          4. CALENDAR: Check today and tomorrow for:
+             - Meetings that Noah should prep for
+
+          Return ONLY valid JSON matching this schema:
+          {
+            "fetchedAt": "<ISO timestamp>",
+            "amplitude": { ... metrics data ... },
+            "slack": [ { "ts": "...", "channel": "...", "user": "...", "text": "...", "thread": "..." } ],
+            "linear": [ { "id": "...", "title": "...", "team": "...", "assignee": "...", "p": "...", "status": "..." } ],
+            "calendar": [ { "title": "...", "start": "...", "attendees": [...] } ]
+          }
+          """
+
+          print("Calling Claude with MCP servers...")
+          response = client.messages.create(
+              model="claude-haiku-4-5-20251001",
+              max_tokens=8000,
+              system=SYSTEM,
+              messages=[{"role": "user", "content": f"Pull all current data. Today is {datetime.now(timezone.utc).strftime('%Y-%m-%d')}."}],
+              mcp_servers=[
+                  {"type": "url", "url": "https://mcp.amplitude.com/mcp", "name": "amplitude"},
+                  {"type": "url", "url": "https://mcp.slack.com/mcp", "name": "slack"},
+                  {"type": "url", "url": "https://mcp.linear.app/mcp", "name": "linear"},
+                  {"type": "url", "url": "https://gcal.mcp.claude.com/mcp", "name": "gcal"},
+              ],
+          )
+
+          # Extract text content
+          texts = [b.text for b in response.content if b.type == "text"]
+          raw = "\n".join(texts)
+          
+          # Try to parse JSON
+          import re
+          # Strip markdown fences if present
+          raw = re.sub(r'^```json\s*', '', raw, flags=re.MULTILINE)
+          raw = re.sub(r'^```\s*$', '', raw, flags=re.MULTILINE)
+          
+          try:
+              data = json.loads(raw)
+          except json.JSONDecodeError:
+              # Try to find JSON in the text
+              match = re.search(r'\{[\s\S]*\}', raw)
+              if match:
+                  data = json.loads(match.group())
+              else:
+                  print("ERROR: Could not parse JSON from response")
+                  print("Raw:", raw[:500])
+                  sys.exit(1)
+
+          # Ensure fetchedAt is set
+          if "fetchedAt" not in data:
+              data["fetchedAt"] = datetime.now(timezone.utc).isoformat()
+
+          with open("data.json", "w") as f:
+              json.dump(data, f, indent=2)
+          
+          print(f"Written data.json: {os.path.getsize('data.json')} bytes")
+          print(f"Keys: {list(data.keys())}")
+          PYTHON
+
+          python3 gather.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "RADAR Bot"
+          git config user.email "radar@noahlucas.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "📡 RADAR data refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git push
+          fi
