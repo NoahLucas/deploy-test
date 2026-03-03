@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0c0d0e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#e6e6e4" media="(prefers-color-scheme: light)">
+<title>RADAR — Sift Product Intelligence</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body, #root { height: 100%; width: 100%; overflow: hidden; }
+  body { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" data-type="module">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
+
+function SiftIcon(props){
+  var size=props.size||22,color=props.color||"#1a1917",opacity=props.opacity===undefined?1:props.opacity,style=props.style||{};
+  return(
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{display:"block",flexShrink:0,opacity,...style}}>
+    <rect x="2" y="2" width="28" height="28" rx="6" fill={color} fillOpacity="0.9"/>
+    <path d="M9 22V10h3v12H9zm5.5-4V10H18v8h-3.5zm5.5 4V10h3v12h-3z" fill="white" fillOpacity="0.95"/>
+  </svg>
+  );
+}
+const SF = "-apple-system,'SF Pro Display','SF Pro Text','Helvetica Neue',system-ui,sans-serif";
+const MONO = "'SF Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
+const FONT_URL = "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap";
+
+const PAL = {
+  // DARK — ISA-101 / MIL-STD-1472F low-luminance display doctrine.
+  // Neutral gray base at 6-8% luminance. No pure black (CRT bloom).
+  // Color ONLY for priority/alarm states — never decorative.
+  // Gray-green undertone matches NVG-compatible cockpit displays.
+  dark: {
+    bg:"#0c0d0e", bgRaised:"#141516", bgElevated:"#1c1d1f",
+    glass:"rgba(180,185,190,0.04)", glassHover:"rgba(180,185,190,0.07)",
+    glassActive:"rgba(180,185,190,0.11)", glassBorder:"rgba(180,185,190,0.06)",
+    glassHighlight:"rgba(180,185,190,0.09)",
+    label:"#c8c6c2", label2:"rgba(180,178,174,0.58)",
+    label3:"rgba(155,153,148,0.34)", label4:"rgba(130,128,124,0.18)",
+    fill1:"rgba(140,138,134,0.16)", fill2:"rgba(140,138,134,0.11)",
+    fill3:"rgba(140,138,134,0.07)", fill4:"rgba(140,138,134,0.04)",
+    sep:"rgba(140,138,134,0.10)", sepOpaque:"#222324",
+    red:"#d04030",orange:"#d08030",blue:"#5088a8",green:"#2d862d",
+    yellow:"#d0a020",purple:"#7868a8",gray:"#686a6c",
+    specular:"rgba(200,198,194,0.03)", specularEdge:"rgba(200,198,194,0.06)",
+    accent:"#5088a8",
+    skeleton:"rgba(140,138,134,0.08)", skeletonShine:"rgba(140,138,134,0.14)",
+  },
+  // LIGHT — ISA-101 high-performance HMI. Light gray background (#E8E8E8 zone).
+  // NOT white (glare). NOT cream (warm bias). Neutral cool gray paper.
+  // All chromatic colors at ISA-101 alarm saturation levels.
+  light: {
+    bg:"#e6e6e4", bgRaised:"#eeedeb", bgElevated:"#f5f4f2",
+    glass:"rgba(255,255,254,0.72)", glassHover:"rgba(255,255,254,0.84)",
+    glassActive:"rgba(255,255,254,0.92)", glassBorder:"rgba(100,100,96,0.10)",
+    glassHighlight:"rgba(255,255,254,0.86)",
+    label:"#1a1a1a", label2:"rgba(40,40,38,0.56)",
+    label3:"rgba(60,60,56,0.30)", label4:"rgba(80,80,76,0.16)",
+    fill1:"rgba(70,70,66,0.10)", fill2:"rgba(70,70,66,0.07)",
+    fill3:"rgba(70,70,66,0.045)", fill4:"rgba(70,70,66,0.025)",
+    sep:"rgba(70,70,66,0.12)", sepOpaque:"#d0d0ce",
+    red:"#cc0000",orange:"#cc6600",blue:"#336688",green:"#2d862d",
+    yellow:"#b89000",purple:"#5c4d8a",gray:"#808080",
+    specular:"rgba(255,255,254,0.35)", specularEdge:"rgba(255,255,254,0.5)",
+    accent:"#336688",
+    skeleton:"rgba(70,70,66,0.06)", skeletonShine:"rgba(70,70,66,0.12)",
+  },
+};
+
+const PRI = {
+  URGENT:{label:"ACT NOW",  color:p=>p.red,   bgA:"14",pulse:true},
+  HIGH:  {label:"TODAY",    color:p=>p.orange, bgA:"0f"},
+  MEDIUM:{label:"THIS WEEK",color:p=>p.blue,   bgA:"0f"},
+  LOW:   {label:"FYI",      color:p=>p.gray,   bgA:"0a"},
+};
+
+const SVC = {
+  amplitude:{icon:"\u{1F4CA}",colorDk:"#5088a8",colorLt:"#336688",label:"Amplitude"},
+  calendar: {icon:"\u{1F4C5}",colorDk:"#5088a8",colorLt:"#336688",label:"Calendar"},
+  linear:   {icon:"\u25C6", colorDk:"#7868a8",colorLt:"#5c4d8a",label:"Linear"},
+  slack:    {icon:"\u{1F4AC}",colorDk:"#d08030",colorLt:"#cc6600",label:"Slack"},
+  hubspot:  {icon:"\u{1F91D}",colorDk:"#d0a020",colorLt:"#b89000",label:"HubSpot"},
+  notion:   {icon:"\u{1F4DD}",colorDk:"#6b6e6f",colorLt:"#8a857c",label:"Notion"},
+  gmail:    {icon:"\u2709\uFE0F",colorDk:"#c27058",colorLt:"#9e5a48",label:"Gmail"},
+  granola:  {icon:"\u{1F399}\uFE0F",colorDk:"#6b6e6f",colorLt:"#8a857c",label:"Granola"},
+};
+const svcColor=(s,dk)=>dk?SVC[s]?.colorDk:SVC[s]?.colorLt;
+
+const CH = {
+  gui:           {label:"Gui Cavalcanti",dm:true},
+  "account-owner":{label:"Account Owner",dm:true},
+  shiproom:      {label:"#shiproom",dm:false},
+  jared:         {label:"Jared Borner",dm:true},
+  "fde-heart":   {label:"FDE (Heart)",dm:true},
+  benji:         {label:"Benji",dm:true},
+  "all-hands":   {label:"#all-hands",dm:false},
+  product:       {label:"#product",dm:false,sid:"C0A779UAY8P"},
+};
+
+const ACT_L = {message:"Send Message",escalate:"Escalate",celebrate:"Share Win",delegate:"Delegate",prep:"Prep Brief"};
+
+async function slackDraft({message,target,channelKey}){
+  const ch=CH[channelKey]; if(!ch) throw new Error("Unknown channel");
+  const isCh=ch.label.startsWith("#");
+  const inst=ch.sid
+    ? `Create a Slack draft in channel ${ch.sid}. Do not modify the message.`
+    : isCh ? `Find Slack channel "${ch.label.replace("#","")}",create draft. Do not modify.`
+    : `Find Slack user "${target||ch.label}",create draft DM. Do not modify.`;
+  const r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-20250514",max_tokens:1000,
+      system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
+      messages:[{role:"user",content:`${inst}\n\nMessage:\n${message}`}],
+      mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp",name:"slack"}],
+    }),
+  });
+  if(!r.ok) throw new Error(`API ${r.status}`);
+  return parseSlack(await r.json());
+}
+
+function parseSlack(d){
+  const txts=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+  const fUrl=s=>s.match(/https:\/\/app\.slack\.com\/[^\s"')\\]+/)?.[0]||null;
+  try{const m=txts.match(/\{[\s\S]*?"success"[\s\S]*?\}/);
+    if(m){const r=JSON.parse(m[0]);return{ok:r.success!==false,link:r.channel_link||null,err:r.error||null};}
+  }catch{}
+  const tools=(d.content||[]).filter(b=>b.type==="mcp_tool_result");
+  if(tools.length)return{ok:true,link:fUrl(JSON.stringify(tools)),err:null};
+  if(txts&&!/error|failed/i.test(txts))return{ok:true,link:fUrl(txts),err:null};
+  return{ok:false,link:null,err:txts||"Unknown"};
+}
+
+async function clip(text){
+  try{await navigator.clipboard.writeText(text);return true;}catch{
+    const t=document.createElement("textarea");t.value=text;t.style.cssText="position:fixed;opacity:0";
+    document.body.appendChild(t);t.select();
+    try{document.execCommand("copy");document.body.removeChild(t);return true;}
+    catch{document.body.removeChild(t);return false;}
+  }
+}
+
+var LIVE_DATA=null;
+var DATA_URL="./data.json";
+
+async function loadData(){
+  try{
+    var r=await fetch(DATA_URL);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    LIVE_DATA=await r.json();
+    return LIVE_DATA;
+  }catch(e){
+    console.error("Failed to load data.json:",e);
+    return null;
+  }
+}
+
+// Preload data immediately on script init
+var _dataPreload=loadData();
+
+const SEED=[];
+
+function tryParse(s){
+  try{return JSON.parse(s);}catch(e){return null;}
+}
+
+function extractInsightsFromPartial(text){
+  var clean=text.replace(/```json\s*/g,"").replace(/```\s*/g,"").trim();
+  var fixed=clean.replace(/,\s*([}\]])/g,"$1");
+  // Try extracting individual insight objects using balanced brace matching
+  var results=[];
+  var inArr=fixed.indexOf("[");
+  if(inArr<0) return results;
+  var sub=fixed.slice(inArr+1);
+  var depth=0; var start=-1;
+  for(var ci=0;ci<sub.length;ci++){
+    if(sub[ci]==="{"){if(depth===0)start=ci;depth++;}
+    if(sub[ci]==="}"){depth--;if(depth===0&&start>=0){
+      var chunk=sub.slice(start,ci+1);
+      var obj=tryParse(chunk);
+      if(obj&&obj.headline) results.push(obj);
+      start=-1;
+    }}
+  }
+  return results;
+}
+
+function robustParseFinal(text){
+  var clean=text.replace(/```json\s*/g,"").replace(/```\s*/g,"").trim();
+  var parsed=tryParse(clean);
+  if(parsed) return parsed;
+  var fixed=clean.replace(/,\s*([}\]])/g,"$1");
+  parsed=tryParse(fixed);
+  if(parsed) return parsed;
+  var m=fixed.match(/\{[\s\S]*"insights"\s*:\s*\[[\s\S]*\]\s*\}/);
+  if(m){parsed=tryParse(m[0]);if(parsed)return parsed;}
+  m=fixed.match(/"insights"\s*:\s*(\[[\s\S]*\])/);
+  if(m){var arr=tryParse(m[1]);if(arr)return{insights:arr};}
+  m=fixed.match(/\[[\s\S]*\]/);
+  if(m){var arr2=tryParse(m[0]);if(arr2)return{insights:arr2};}
+  var fixed2=fixed.replace(/":\s*"[^"]*\n/g,function(m){return m.replace(/\n/g,"\\n");});
+  parsed=tryParse(fixed2);
+  if(parsed) return parsed;
+  // Last resort: extract whatever individual objects we can
+  var partial=extractInsightsFromPartial(text);
+  if(partial.length>0) return{insights:partial};
+  throw new Error("Parse failed (len="+clean.length+"): "+clean.slice(0,200));
+}
+
+function compactData(data){
+  var c=JSON.parse(JSON.stringify(data));
+  function tail(arr,n){if(!arr)return arr;return arr.slice(-(n||7));}
+  if(c.amplitude){
+    var a=c.amplitude;
+    if(a.dau){a.dau.dates=tail(a.dau.dates);a.dau.values=tail(a.dau.values);delete a.dau.chart;}
+    if(a.newUsers){a.newUsers.weeks=tail(a.newUsers.weeks);a.newUsers.values=tail(a.newUsers.values);delete a.newUsers.chart;}
+    if(a.sessionDuration){a.sessionDuration.weeks=tail(a.sessionDuration.weeks);a.sessionDuration.values=tail(a.sessionDuration.values);delete a.sessionDuration.chart;}
+    if(a.featureAdoption){a.featureAdoption.weeks=tail(a.featureAdoption.weeks);a.featureAdoption.explore=tail(a.featureAdoption.explore);a.featureAdoption.rules=tail(a.featureAdoption.rules);a.featureAdoption.reports=tail(a.featureAdoption.reports);a.featureAdoption.runs=tail(a.featureAdoption.runs);delete a.featureAdoption.chart;}
+    if(a.collaboration){a.collaboration.weeks=tail(a.collaboration.weeks);a.collaboration.shareIcon=tail(a.collaboration.shareIcon);a.collaboration.annotationCreate=tail(a.collaboration.annotationCreate);a.collaboration.shareLinkViewed=tail(a.collaboration.shareLinkViewed);delete a.collaboration.chart;}
+    if(a.engagement){a.engagement.weeks=tail(a.engagement.weeks);a.engagement.annotationCreate=tail(a.engagement.annotationCreate);a.engagement.calcChannel=tail(a.engagement.calcChannel);a.engagement.chartShare=tail(a.engagement.chartShare);delete a.engagement.chart;}
+    if(a.keyActions)delete a.keyActions.chart;
+    if(a.retention)delete a.retention.chart;
+  }
+  return c;
+}
+
+async function synthesizeStreaming(data, onInsight, onProgress){
+  var t0=Date.now();
+  onProgress("Connecting to synthesis engine...");
+  var compact=compactData(data);
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-haiku-4-5-20251001",max_tokens:3000,stream:true,
+      system:"You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nSynthesize the data into 6-10 actionable items across these categories:\n\n\u2022 INSIGHT \u2014 data anomaly or pattern that needs attention\n\u2022 PREP \u2014 meeting/event happening soon that needs briefing material\n\u2022 NUDGE \u2014 someone you should message, thank, unblock, or follow up with\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, or connect dots across squads\n\u2022 BLIND SPOT \u2014 something falling through cracks: stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate or amplify\n\nMix categories. At least 2 NUDGE/LEVERAGE/BLIND SPOT items. Be specific\u2014use real names, channels, ticket IDs from the data.\n\nSift customers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Orbital Ops, Parallel Systems, Inversion Space, The Exploration Company, OHB, Lockheed Martin, Dust Moto.\n\nRESPOND WITH ONLY VALID JSON \u2014 no markdown fences, no commentary:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[{\"source\":\"<src>\",\"chart\":\"<id>\",\"freshness\":\""+data.fetchedAt+"\"}]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI\nCategory guidance: PREP items for meetings within 24h. NUDGE for people waiting on you or you should proactively reach out to. LEVERAGE for things Noah can delegate or connect. BLIND SPOT for items >5 days stale or customers gone quiet.",
+      messages:[{role:"user",content:"Synthesize into actionable items:\n\n"+JSON.stringify(compact)}],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+  }
+  var reader=r.body.getReader();
+  var decoder=new TextDecoder();
+  var fullText="";
+  var lastYielded=0;
+  var buffer="";
+  onProgress("Scanning sources...");
+  while(true){
+    var chunk=reader.read();
+    var result=await chunk;
+    if(result.done) break;
+    buffer+=decoder.decode(result.value,{stream:true});
+    var evts=buffer.split("\n");
+    buffer=evts.pop()||"";
+    for(var ei=0;ei<evts.length;ei++){
+      var line=evts[ei];
+      if(!line.startsWith("data: "))continue;
+      var payload=line.slice(6);
+      if(payload==="[DONE]")continue;
+      var evt=tryParse(payload);
+      if(!evt)continue;
+      if(evt.type==="content_block_delta"&&evt.delta&&evt.delta.text){
+        fullText+=evt.delta.text;
+        var partial=extractInsightsFromPartial(fullText);
+        if(partial.length>lastYielded){
+          for(var ni=lastYielded;ni<partial.length;ni++){
+            onInsight(partial[ni],ni);
+          }
+          lastYielded=partial.length;
+          onProgress(lastYielded+" item"+(lastYielded>1?"s":"")+" found...");
+        }
+      }
+    }
+  }
+  var dur=((Date.now()-t0)/1000).toFixed(0);
+  // Final parse for complete data
+  var final=robustParseFinal(fullText);
+  onProgress("Done \u2014 "+dur+"s");
+  return{insights:final.insights||[],meta:{duration:dur,errors:[],sourcesOk:3}};
+}
+
+async function synthesizeLiveMCP(onProgress){
+  var t0=Date.now();
+  onProgress("LIVE MODE \u2014 pulling fresh data via MCP...");
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-haiku-4-5-20251001",max_tokens:4000,
+      system:"You are RADAR, a proactive product intelligence engine for Sift \u2014 an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
+      messages:[{role:"user",content:"Pull fresh data from all available sources and synthesize actionable items for me. Today is "+new Date().toISOString().split("T")[0]+"."}],
+      mcp_servers:[
+        {type:"url",url:"https://mcp.slack.com/mcp",name:"slack"},
+        {type:"url",url:"https://mcp.linear.app/mcp",name:"linear"},
+        {type:"url",url:"https://gcal.mcp.claude.com/mcp",name:"gcal"},
+        {type:"url",url:"https://mcp.amplitude.com/mcp",name:"amplitude"},
+        {type:"url",url:"https://mcp.granola.ai/mcp",name:"granola"},
+      ],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+  }
+  var d=await r.json();
+  if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
+  // Extract text content (skip tool use/result blocks)
+  var texts=(d.content||[]).filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("\n");
+  if(!texts) throw new Error("No text in response after MCP tool use");
+  var dur=((Date.now()-t0)/1000).toFixed(0);
+  onProgress("Done \u2014 "+dur+"s (live)");
+  var parsed=robustParseFinal(texts);
+  return{insights:parsed.insights||[],meta:{duration:dur,errors:[],sourcesOk:5,live:true}};
+}
+
+async function runLiveScan(onInsight, onProgress){
+  // Check if user wants live MCP mode (settings toggle)
+  var liveMode=false;
+  try{liveMode=window.__RADAR_LIVE_MODE===true;}catch(e){}
+  if(liveMode){
+    // Live MCP: non-streaming (MCP + stream incompatible), but pulls FRESH data
+    onProgress("LIVE: gathering from Slack, Linear, Calendar, Amplitude...");
+    return synthesizeLiveMCP(onProgress);
+  }
+  // Default: data.json + streaming Haiku (fastest perceived speed)
+  if(!LIVE_DATA){
+    onProgress("Loading data...");
+    await loadData();
+    if(!LIVE_DATA) throw new Error("No data available. Place data.json alongside this file.");
+  }
+  return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
+}
+
+function useTheme(){
+  const[dk,setDk]=useState(()=>typeof window!=="undefined"?window.matchMedia("(prefers-color-scheme:dark)").matches:true);
+  useEffect(()=>{const mq=window.matchMedia("(prefers-color-scheme:dark)");const h=e=>setDk(e.matches);mq.addEventListener("change",h);return()=>mq.removeEventListener("change",h);},[]);
+  return[dk,setDk];
+}
+
+function useMobile(){
+  const[m,s]=useState(()=>typeof window!=="undefined"?window.innerWidth<768:false);
+  useEffect(()=>{const h=()=>s(window.innerWidth<768);window.addEventListener("resize",h);return()=>window.removeEventListener("resize",h);},[]);
+  return m;
+}
+
+function timeAgo(d){
+  const s=Math.floor((Date.now()-new Date(d).getTime())/1000);
+  if(s<60)return"now"; if(s<3600)return`${Math.floor(s/60)}m`;
+  if(s<86400)return`${Math.floor(s/3600)}h`; return`${Math.floor(s/86400)}d`;
+}
+
+function timeGroup(d){
+  const h=(Date.now()-new Date(d).getTime())/36e5;
+  if(h<1)return"Just Now"; if(h<24)return"Today";
+  if(h<168)return"This Week"; return"Earlier";
+}
+
+function pri(ins,p){const pr=PRI[ins.priority]||PRI.MEDIUM;const c=pr.color(p);return{...pr,c,bg:`${c}${pr.bgA}`};}
+
+function glass(p,opts){
+  if(!opts)opts={};
+  const{elevated,hover,active,tint,noBorder}=opts;
+  const blur=elevated?40:24;
+  const sat=elevated?200:180;
+  const bg=active?p.glassActive:hover?p.glassHover:p.glass;
+  return{
+    background:tint||bg,
+    backdropFilter:`blur(${blur}px) saturate(${sat}%)`,
+    WebkitBackdropFilter:`blur(${blur}px) saturate(${sat}%)`,
+    border:noBorder?"none":`0.5px solid ${p.glassBorder}`,
+    boxShadow:[
+      `0 0 0 0.5px ${p.glassBorder}`,
+      elevated?`0 8px 32px rgba(0,0,0,0.12)`:`0 1px 3px rgba(0,0,0,0.06)`,
+      `inset 0 0.5px 0 ${p.specularEdge}`,
+    ].join(","),
+  };
+};
+
+function Spec({r,i}){
+  var rr=r||16,ii=i||0.06;
+  return <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,borderRadius:rr,pointerEvents:"none",zIndex:1,
+    background:"linear-gradient(135deg, rgba(255,255,255,"+ii+") 0%, transparent 50%)"}}/>;
+}
+
+function AmbientMesh({dk,hasUrgent}){
+  return(
+    <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,overflow:"hidden"}}>
+      {dk ? <>
+        {}
+        <div style={{position:"absolute",width:"60vmax",height:"60vmax",borderRadius:"50%",top:"-10%",left:"-10%",
+          background:`radial-gradient(circle, rgba(122,158,181,0.03) 0%, transparent 70%)`,
+          animation:"meshDrift1 25s ease-in-out infinite",filter:"blur(50px)"}}/>
+        <div style={{position:"absolute",width:"50vmax",height:"50vmax",borderRadius:"50%",bottom:"-5%",right:"-10%",
+          background:`radial-gradient(circle, rgba(142,141,181,0.02) 0%, transparent 70%)`,
+          animation:"meshDrift2 30s ease-in-out infinite",filter:"blur(50px)"}}/>
+        {hasUrgent&&<div style={{position:"absolute",width:"80vmax",height:"20vmax",borderRadius:"50%",top:"-10%",left:"10%",
+          background:`radial-gradient(ellipse, rgba(194,112,88,0.05) 0%, transparent 70%)`,
+          animation:"meshPulse 4s ease-in-out infinite",filter:"blur(30px)"}}/>}
+      </> : <>
+        {}
+        <div style={{position:"absolute",inset:0,
+          background:"radial-gradient(ellipse at 30% 20%, rgba(210,200,180,0.25) 0%, transparent 60%)"}}/>
+        <div style={{position:"absolute",width:"50vmax",height:"50vmax",borderRadius:"50%",bottom:"-5%",right:"5%",
+          background:"radial-gradient(circle, rgba(83,112,128,0.025) 0%, transparent 60%)",filter:"blur(40px)"}}/>
+        <div style={{position:"absolute",inset:0,opacity:0.02,
+          backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundSize:"128px 128px"}}/>
+      </>}
+    </div>
+  );
+}
+
+function UrgencyBar({count,p,onClick,dk}){
+  if(count===0) return null;
+  return(<div onClick={onClick} style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:100,cursor:"pointer",
+    background:`linear-gradient(90deg, transparent, ${p.red}, transparent)`,
+    boxShadow:dk?`0 0 10px ${p.red}40`:`0 1px 3px ${p.red}25`,
+    animation:dk?"urgencyPulse 3s ease-in-out infinite":"none"}}/>);
+}
+
+function Sparkline(props){
+  var data=props.data||[],color=props.color,width=props.width||56,height=props.height||20;
+  if(!data||data.length<2) return null;
+  const max=Math.max(...data)||1, min=Math.min(...data), range=max-min||1;
+  const pts=data.map((v,i)=>({x:(i/(data.length-1))*width,y:height-((v-min)/range)*height*0.85-height*0.075}));
+  let d=`M${pts[0].x},${pts[0].y}`;
+  for(let i=1;i<pts.length;i++){
+    const p0=pts[Math.max(0,i-2)],p1=pts[i-1],p2=pts[i],p3=pts[Math.min(pts.length-1,i+1)];
+    d+=` C${p1.x+(p2.x-p0.x)/6},${p1.y+(p2.y-p0.y)/6} ${p2.x-(p3.x-p1.x)/6},${p2.y-(p3.y-p1.y)/6} ${p2.x},${p2.y}`;
+  }
+  const fillD=d+` L${width},${height} L0,${height} Z`;
+  const id=`sp-${Math.random().toString(36).slice(2,8)}`;
+  return(
+    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{flexShrink:0,display:"block"}}>
+      <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor={color} stopOpacity={0.25}/><stop offset="100%" stopColor={color} stopOpacity={0}/>
+      </linearGradient></defs>
+      <path d={fillD} fill={`url(#${id})`}/>
+      <path d={d} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"/>
+      <circle cx={pts[pts.length-1].x} cy={pts[pts.length-1].y} r={2} fill={color}/>
+    </svg>
+  );
+}
+
+function SkeletonCard({p,mob,index}){
+  var delay=(index||0)*120;
+  var shimBg="linear-gradient(90deg,"+p.skeleton+" 25%,"+p.skeletonShine+" 50%,"+p.skeleton+" 75%)";
+  var bar=function(w,h,mt){return{width:w,height:h,marginTop:mt||0,borderRadius:h>6?6:3,background:shimBg,backgroundSize:"200% 100%",animation:"shimmer 1.8s ease-in-out infinite",animationDelay:delay+"ms"};};
+  return(
+    <div style={{padding:mob?"14px 16px":"16px 20px",borderBottom:"0.5px solid "+p.sep}}>
+      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+        <div style={bar(48,10)}/>
+        <div style={bar(32,10)}/>
+        <div style={{flex:1}}/>
+        <div style={bar(56,10)}/>
+      </div>
+      <div style={bar("85%",13)}/>
+      <div style={bar("60%",11,8)}/>
+      <div style={{display:"flex",gap:8,marginTop:12}}>
+        <div style={bar(64,22)}/>
+        <div style={bar(48,22)}/>
+      </div>
+    </div>
+  );
+}
+
+function SkeletonFeed({p,mob,count}){
+  var n=count||5;
+  var cards=[];
+  for(var i=0;i<n;i++){cards.push(<SkeletonCard key={i} p={p} mob={mob} index={i}/>);}
+  return <div>{cards}</div>;
+}
+
+function Badge({priority,p,small}){
+  const pr=pri({priority},p);
+  return(
+    <span style={{display:"inline-flex",alignItems:"center",gap:small?3:5,
+      padding:small?"2px 7px 2px 5px":"3px 10px 3px 8px",borderRadius:100,
+      background:pr.bg,border:`0.5px solid ${pr.c}30`}}>
+      {pr.pulse&&<span style={{width:small?4:5,height:small?4:5,borderRadius:"50%",background:pr.c,animation:"sp 2s ease-in-out infinite"}}/>}
+      <span style={{fontSize:small?9:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:pr.c}}>{pr.label}</span>
+    </span>
+  );
+}
+
+var CAT_META={
+  insight:{icon:"\u26A0",label:"INSIGHT"},
+  prep:{icon:"\u{1F4CB}",label:"PREP"},
+  nudge:{icon:"\u{1F449}",label:"NUDGE"},
+  leverage:{icon:"\u2693",label:"LEVERAGE"},
+  blind_spot:{icon:"\u{1F441}",label:"BLIND SPOT"},
+  momentum:{icon:"\u26A1",label:"MOMENTUM"},
+};
+
+function CatTag({category,p}){
+  var cat=CAT_META[category]||CAT_META.insight;
+  return(
+    <span style={{display:"inline-flex",alignItems:"center",gap:3,
+      padding:"2px 7px",borderRadius:100,background:p.fill4,
+      fontSize:9,fontWeight:600,letterSpacing:"0.06em",fontFamily:MONO,color:p.label3}}>
+      <span style={{fontSize:10}}>{cat.icon}</span>{cat.label}
+    </span>
+  );
+}
+
+function Srcs({sources,p,compact,dk}){
+  return(
+    <span style={{display:"inline-flex",gap:compact?3:5,alignItems:"center"}}>
+      {sources.map(s=><span key={s} title={SVC[s]?.label} style={{fontSize:compact?11:12,lineHeight:1,opacity:0.9,filter:`drop-shadow(0 0 2px ${svcColor(s,dk)}40)`}}>{SVC[s]?.icon}</span>)}
+    </span>
+  );
+}
+
+function EvChip({ev,p,dk}){
+  const[h,setH]=useState(false);
+  return(
+    <a href={ev.url} target="_blank" rel="noopener noreferrer"
+      onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
+      style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:10,textDecoration:"none",
+        fontSize:12,fontFamily:MONO,fontWeight:500,color:p.label2,
+        transition:"all 0.2s cubic-bezier(0.25,0.46,0.45,0.94)",position:"relative",overflow:"hidden",...glass(p,{hover:h})}}>
+      <span style={{fontSize:11,color:svcColor(ev.source,dk)}}>{SVC[ev.source]?.icon}</span>
+      <span style={{opacity:h?1:0.8,transition:"opacity 0.2s"}}>{ev.label}</span>
+      <span style={{fontSize:9,opacity:0.3,marginLeft:2}}>{"\u2197"}</span>
+    </a>
+  );
+}
+
+function StatePill({state,p}){
+  const cfg={done:{icon:"\u2713",label:"Done",c:p.green},snoozed:{icon:"\u25F7",label:"Snoozed",c:p.orange},dismissed:{icon:"\u2014",label:"Dismissed",c:p.gray}}[state];
+  if(!cfg) return null;
+  return(
+    <span style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:100,
+      background:`${cfg.c}18`,border:`0.5px solid ${cfg.c}25`,fontSize:10,fontWeight:600,fontFamily:MONO,color:cfg.c}}>
+      <span style={{fontSize:9}}>{cfg.icon}</span>{cfg.label}
+    </span>
+  );
+}
+
+function PreviewCard({insight,p,dk}){
+  const pr=pri(insight,p);
+  return(
+    <div style={{width:320,padding:16,borderRadius:16,position:"relative",overflow:"hidden",
+      ...glass(p,{elevated:true}),
+      boxShadow:`0 12px 48px rgba(0,0,0,${dk?0.4:0.15}), 0 0 0 0.5px ${p.glassBorder}`,
+      animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
+      <Spec r={16} i={0.08}/>
+      <div style={{position:"relative",zIndex:2}}>
+        <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
+          <Badge priority={insight.priority} p={p} small/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} compact dk={dk}/>
+        </div>
+        <h4 style={{fontSize:15,fontWeight:600,color:p.label,margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.02em",lineHeight:1.3}}>{insight.headline}</h4>
+        <p style={{fontSize:13,color:p.label2,margin:"0 0 10px",fontFamily:SF,lineHeight:1.45,
+          display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
+        {insight.context&&(
+          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{insight.context.metric}</span>
+            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:6,background:pr.bg}}>{insight.context.delta}</span>
+          </div>
+        )}
+        {insight.sparkline&&<div style={{marginTop:8}}><Sparkline data={insight.sparkline} color={pr.c} width={280} height={32}/></div>}
+      </div>
+    </div>
+  );
+}
+
+function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
+  const pr=pri(insight,p);
+  const ch=CH[insight.channelKey];
+  const[h,setH]=useState(false);
+  const[preview,setPreview]=useState(false);
+  const[swipeX,setSwipeX]=useState(0);
+  const[swiping,setSwiping]=useState(false);
+  const touchRef=useRef(null);
+  const previewTimer=useRef(null);
+  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
+
+  const startPreview=()=>{previewTimer.current=setTimeout(()=>setPreview(true),600);};
+  const endPreview=()=>{clearTimeout(previewTimer.current);setPreview(false);};
+
+  const onTouchStart=useCallback(e=>{
+    touchRef.current={x:e.touches[0].clientX,y:e.touches[0].clientY,scrolling:false};
+  },[]);
+  const onTouchMove=useCallback(e=>{
+    if(!touchRef.current) return;
+    const dx=e.touches[0].clientX-touchRef.current.x;
+    const dy=e.touches[0].clientY-touchRef.current.y;
+    if(!touchRef.current.scrolling&&Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>10){touchRef.current.scrolling=true;}
+    if(touchRef.current.scrolling) return;
+    if(Math.abs(dx)>10){setSwiping(true);setSwipeX(dx);e.preventDefault();}
+  },[]);
+  const onTouchEnd=useCallback(()=>{
+    if(Math.abs(swipeX)>120&&onStateChange){onStateChange(insight.id,swipeX>0?"done":"dismissed");}
+    setSwiping(false);setSwipeX(0);touchRef.current=null;
+  },[swipeX,insight.id,onStateChange]);
+
+  const swipeLabel=swipeX>60?"\u2713 Done":swipeX<-60?"Dismiss":"";
+
+  return(
+    <div style={{position:"relative"}}>
+      {swiping&&(
+        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",
+          justifyContent:swipeX>0?"flex-start":"flex-end",padding:"0 28px",borderRadius:20,
+          background:swipeX>0?`${p.green}15`:`${p.gray}15`}}>
+          <span style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:swipeX>0?p.green:p.gray,
+            opacity:Math.min(1,Math.abs(swipeX)/80)}}>{swipeLabel}</span>
+        </div>
+      )}
+
+      <article
+        onClick={()=>{if(!swiping&&Math.abs(swipeX)<5)onClick(insight);}}
+        onMouseEnter={()=>{setH(true);if(!mob)startPreview();}}
+        onMouseLeave={()=>{setH(false);endPreview();}}
+        onTouchStart={mob?onTouchStart:undefined}
+        onTouchMove={mob?onTouchMove:undefined}
+        onTouchEnd={mob?onTouchEnd:undefined}
+        style={{
+          margin:mob?"0 12px":"0 16px",padding:mob?"14px 16px":"18px 22px",
+          borderRadius:20,cursor:"pointer",position:"relative",overflow:"hidden",
+          transition:swiping?"none":"all 0.4s cubic-bezier(0.34,1.56,0.64,1)",
+          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px) scale(1.003)":"translateY(0) scale(1)",
+          opacity:isDone?0.5:Math.max(0,1-Math.abs(swipeX)/200),
+          animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
+          outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:2,
+          ...glass(p,{hover:h,elevated:h}),WebkitTapHighlightColor:"transparent",
+        }}>
+
+        <Spec r={20} i={h?0.1:0.04}/>
+
+        {}
+        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,position:"relative",zIndex:2}}>
+          <Badge priority={insight.priority} p={p}/>
+          <CatTag category={insight.category} p={p}/>
+          <Srcs sources={insight.sources} p={p} compact dk={dk}/>
+          {isDone&&<StatePill state={itemState} p={p}/>}
+          <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:8}}>
+            {insight.sparkline&&!mob&&<Sparkline data={insight.sparkline} color={pr.c} width={48} height={16}/>}
+            <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500,letterSpacing:"0.02em"}}>{timeAgo(insight.timestamp)}</span>
+          </div>
+        </div>
+
+        {}
+        <h3 style={{fontSize:mob?16:18,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
+          margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.022em",position:"relative",zIndex:2,
+          textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
+
+        {}
+        <p style={{fontSize:14,color:p.label2,lineHeight:1.5,margin:"0 0 10px",fontFamily:SF,fontWeight:400,
+          position:"relative",zIndex:2,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
+
+        {}
+        {insight.context&&(
+          <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:8,position:"relative",zIndex:2}}>
+            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:8,background:p.fill4}}>{insight.context.metric}</span>
+            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:8,background:pr.bg}}>{insight.context.delta}</span>
+            {insight.sparkline&&mob&&<Sparkline data={insight.sparkline} color={pr.c} width={44} height={14}/>}
+          </div>
+        )}
+
+        {}
+        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
+          {insight.evidence?.slice(0,2).map((ev,i)=>(
+            <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
+              style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
+                fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
+              onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
+              onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
+              <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
+              {ev.label.length>22?ev.label.slice(0,20)+"\u2026":ev.label}
+              <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
+            </span>
+          ))}
+          {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
+        </div>
+      </article>
+
+      {}
+      {preview&&!mob&&(
+        <div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%) translateY(-100%)",zIndex:100,pointerEvents:"none"}}>
+          <PreviewCard insight={insight} p={p} dk={dk}/>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SpeedBrief({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
+  const pr=pri(insight,p);
+  const ch=CH[insight.channelKey];
+  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
+  const srcLabels=insight.sources.map(s=>SVC[s]?.label).filter(Boolean).join(" \u00b7 ");
+
+  return(
+    <div onClick={()=>onClick(insight)} style={{
+      borderLeft:`2.5px solid ${pr.c}`,
+      marginLeft:mob?14:20,marginRight:mob?14:20,marginBottom:mob?4:6,
+      cursor:"pointer",position:"relative",
+      opacity:isDone?0.4:1,
+      animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
+      outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:4,
+      transition:"opacity 0.3s ease",
+    }}>
+      {}
+      <div style={{display:"flex",alignItems:"center",gap:6,paddingLeft:mob?12:14,marginBottom:5}}>
+        <span style={{fontSize:mob?8:9,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:pr.c,
+          ...(insight.priority==="URGENT"?{textShadow:`0 0 8px ${pr.c}60`}:{}),
+        }}>{PRI[insight.priority]?.label}</span>
+        <span style={{fontSize:8,color:p.label4,fontFamily:MONO}}>{"\u00b7"}</span>
+        <span style={{fontSize:mob?8:9,color:p.label4,fontFamily:MONO,fontWeight:500}}>{srcLabels}</span>
+        {isDone&&<StatePill state={itemState} p={p}/>}
+        <span style={{marginLeft:"auto",fontSize:mob?8:9,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
+      </div>
+
+      {}
+      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
+        <p style={{fontSize:mob?13.5:14.5,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.38,
+          margin:0,fontFamily:SF,letterSpacing:"-0.015em",
+          textDecoration:isDone?"line-through":"none",
+        }}>{insight.situation||insight.headline}</p>
+      </div>
+
+      {}
+      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
+        <p style={{fontSize:mob?11.5:12.5,color:p.label2,lineHeight:1.48,margin:0,fontFamily:SF,fontWeight:400,
+        }}>{insight.whyItMatters||insight.body}</p>
+      </div>
+
+      {}
+      <div style={{
+        marginLeft:mob?12:14,marginRight:mob?4:8,padding:mob?"7px 10px":"8px 12px",
+        borderRadius:mob?10:12,background:`${pr.c}08`,border:`0.5px solid ${pr.c}18`,
+      }}>
+        <div style={{display:"flex",alignItems:"flex-start",gap:8}}>
+          <span style={{fontSize:11,color:pr.c,marginTop:1,flexShrink:0}}>{"\u2192"}</span>
+          <div style={{flex:1}}>
+            <p style={{fontSize:mob?11.5:12.5,fontWeight:500,color:p.label,lineHeight:1.45,margin:0,fontFamily:SF,
+            }}>{insight.recommendation||insight.action}</p>
+            {(insight.recTarget||ch)&&(
+              <span style={{display:"inline-block",marginTop:5,fontSize:mob?8:9,fontWeight:600,fontFamily:MONO,color:pr.c,
+                padding:"2px 8px",borderRadius:6,background:`${pr.c}14`,
+              }}>{insight.recTarget||(ch?`\u2192 ${ch.label.toUpperCase()}`:"")}</span>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SummaryHeader({counts,p,mob,feedMode}){
+  const parts=[];
+  if(feedMode==="brief"){
+    // Blunt prose mode
+    if(counts.urgent>0) parts.push(`${counts.urgent} thing${counts.urgent>1?"s":""} need${counts.urgent===1?"s":""} you right now`);
+    if(counts.high>0) parts.push(`${counts.high} more today`);
+    if(parts.length===0) return(
+      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
+        <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>Nothing urgent. Scanning continues.</p>
+      </div>
+    );
+    let text=parts.join(". ")+".";
+    if(counts.medium>0) text+=` ${counts.medium} this week.`;
+    return(
+      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
+        <p style={{fontSize:mob?12:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>{text}</p>
+      </div>
+    );
+  }
+  // Standard mode
+  if(counts.urgent>0) parts.push(`${counts.urgent} urgent`);
+  if(counts.high>0) parts.push(`${counts.high} need attention today`);
+  if(counts.medium>0) parts.push(`${counts.medium} this week`);
+  if(parts.length===0) return(
+    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
+      <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>All clear {"\u2014"} scanning continues in the background.</p>
+    </div>
+  );
+  return(
+    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
+      <p style={{fontSize:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>
+        {parts.join(", ")}.{counts.low>0?` Plus ${counts.low} FYI.`:""}
+      </p>
+    </div>
+  );
+}
+
+function GroupLabel({label,p,mob}){
+  return(
+    <div style={{padding:mob?"12px 16px 4px":"14px 20px 6px",display:"flex",alignItems:"center",gap:10}}>
+      <span style={{fontSize:11,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label4}}>{label.toUpperCase()}</span>
+      <div style={{flex:1,height:0.5,background:p.sep,opacity:0.4}}/>
+    </div>
+  );
+}
+
+function FeedProvenance(props){
+  var feeds=props.feeds||[],p=props.p,dk=props.dk,mob=props.mob;
+  const[ex,setEx]=useState(false);
+  if(!feeds?.length) return null;
+  const ts=feeds.map(f=>new Date(f.freshness).getTime());
+  const fresh=ts.every(t=>Date.now()-t<36e5);
+  const stale=ts.some(t=>Date.now()-t>864e5);
+  return(
+    <div style={{marginBottom:20}}>
+      <button onClick={()=>setEx(e=>!e)} style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"9px 14px",
+        borderRadius:ex?"12px 12px 0 0":12,cursor:"pointer",fontFamily:MONO,fontSize:11,
+        color:p.label3,border:"none",textAlign:"left",background:p.fill4}}>
+        <span style={{fontSize:12,opacity:0.6}}>{ex?"\u25BE":"\u25B8"}</span>
+        <span style={{fontWeight:600,letterSpacing:"0.06em"}}>DATA FEEDS</span>
+        <span style={{width:6,height:6,borderRadius:"50%",marginLeft:4,
+          background:stale?p.orange:fresh?p.green:p.yellow}}/>
+        <span style={{fontSize:10,color:p.label4}}>{feeds.length} src{feeds.length!==1?"s":""}</span>
+        <span style={{marginLeft:"auto",fontSize:9,color:p.label4}}>{fresh?"All fresh":"Latest: "+timeAgo(new Date(Math.max(...ts)))}</span>
+      </button>
+      {ex&&<div style={{padding:"2px 0",borderRadius:"0 0 12px 12px",background:p.fill4,animation:"fadeSlide 0.2s ease-out"}}>
+        {feeds.map((f,i)=>{const a=Date.now()-new Date(f.freshness).getTime();const s=SVC[f.source];return(
+          <div key={i} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 14px",borderTop:i?`0.5px solid ${p.sep}`:"none"}}>
+            <span style={{fontSize:12,flexShrink:0}}>{s?.icon}</span>
+            <span style={{fontSize:10,fontWeight:600,fontFamily:MONO,color:svcColor(f.source,dk),minWidth:58}}>{s?.label}</span>
+            <span style={{flex:1,fontSize:10,color:p.label2,fontFamily:SF,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{f.query}</span>
+            <span style={{width:5,height:5,borderRadius:"50%",flexShrink:0,background:a>864e5?p.orange:a<36e5?p.green:p.yellow}}/>
+            <span style={{fontSize:9,fontFamily:MONO,color:p.label4,flexShrink:0}}>{timeAgo(f.freshness)}</span>
+          </div>);})}
+      </div>}
+    </div>
+  );
+}
+
+function InsightChat({insight,p,dk,mob}){
+  const[open,setOpen]=useState(false);
+  const[msgs,setMsgs]=useState([]);
+  const[inp,setInp]=useState("");
+  const[busy,setBusy]=useState(false);
+  const endRef=useRef(null);
+  const inRef=useRef(null);
+  useEffect(()=>{endRef.current?.scrollIntoView({behavior:"smooth"});},[msgs,busy]);
+
+  const ctx=useMemo(()=>[
+    `INSIGHT: "${insight.headline}"`,`PRIORITY: ${insight.priority}`,
+    `SITUATION: ${insight.situation||insight.body}`,
+    insight.whyItMatters?`WHY: ${insight.whyItMatters}`:"",
+    `REC: ${insight.recommendation||insight.action}`,
+    insight.context?`METRICS: ${insight.context.metric} | ${insight.context.delta} | ${insight.context.baseline}`:"",
+    insight.feeds?.length?("FEEDS: "+insight.feeds.map(function(f){return (SVC[f.source]?.label||"")+": "+f.query;}).join("; ")):"",
+  ].filter(Boolean).join("\n"),[insight]);
+
+  const chips=["Worst case if we do nothing?","What should I say in the meeting?","What data am I missing?","Draft a Slack message"];
+
+  const send=async(t)=>{
+    const q=t||inp.trim();if(!q||busy)return;setInp("");
+    const nm=[...msgs,{r:"user",t:q}];setMsgs(nm);setBusy(true);
+    try{
+      const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
+          system:"You are an embedded product intelligence analyst at Sift (aerospace telemetry platform). User is VP Product. Be direct, concise, operational. Skip preamble. Draft messages ready to paste.\n\nCONTEXT:\n"+ctx,
+          messages:nm.map(m=>({role:m.r==="user"?"user":"assistant",content:m.t}))})});
+      if(!r.ok)throw new Error("API "+r.status);
+      const d=await r.json();
+      const reply=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")||"No response";
+      setMsgs([...nm,{r:"ai",t:reply}]);
+    }catch(e){setMsgs([...nm,{r:"ai",t:"Error: "+e.message}]);}finally{setBusy(false);}
+  };
+
+  if(!open)return(
+    <button onClick={()=>{setOpen(true);setTimeout(()=>inRef.current?.focus(),100);}}
+      style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"11px 14px",
+        borderRadius:12,cursor:"pointer",fontFamily:SF,fontSize:13,fontWeight:500,
+        color:p.label2,border:"none",...glass(p)}}>
+      <span style={{fontSize:14}}>{"\u2756"}</span>Ask about this insight...
+      <span style={{marginLeft:"auto",fontSize:9,fontFamily:MONO,color:p.label4,padding:"2px 6px",borderRadius:4,background:p.fill4}}>AI</span>
+    </button>
+  );
+
+  return(
+    <div style={{borderRadius:16,overflow:"hidden",...glass(p,{elevated:true}),animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"9px 14px",borderBottom:`0.5px solid ${p.sep}`}}>
+        <div style={{display:"flex",alignItems:"center",gap:6}}>
+          <span style={{fontSize:13}}>{"\u2756"}</span>
+          <span style={{fontSize:10,fontWeight:600,fontFamily:MONO,letterSpacing:"0.06em",color:p.label3}}>INSIGHT ANALYST</span>
+        </div>
+        <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:p.label3,fontSize:15,cursor:"pointer",padding:"2px 6px"}}>{"\u2715"}</button>
+      </div>
+      <div style={{maxHeight:mob?220:280,overflowY:"auto",padding:"10px 14px",WebkitOverflowScrolling:"touch"}}>
+        {msgs.length===0&&<div style={{marginBottom:10}}>
+          <p style={{fontSize:11,color:p.label3,fontFamily:SF,margin:"0 0 8px"}}>Full context loaded. Ask anything.</p>
+          <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>{chips.map((c,i)=>(
+            <button key={i} onClick={()=>send(c)} style={{padding:"4px 9px",borderRadius:7,cursor:"pointer",fontSize:10,fontFamily:SF,
+              fontWeight:500,color:p.label2,border:"none",background:p.fill4}}>{c}</button>
+          ))}</div>
+        </div>}
+        {msgs.map((m,i)=>(
+          <div key={i} style={{marginBottom:8,display:"flex",flexDirection:"column",alignItems:m.r==="user"?"flex-end":"flex-start"}}>
+            <div style={{maxWidth:"88%",padding:"7px 11px",borderRadius:m.r==="user"?"12px 12px 3px 12px":"12px 12px 12px 3px",
+              fontSize:12,lineHeight:1.5,fontFamily:SF,whiteSpace:"pre-wrap",
+              background:m.r==="user"?`${p.blue}20`:p.fill4,color:p.label,
+              border:`0.5px solid ${m.r==="user"?`${p.blue}30`:p.sep}`}}>{m.t}</div>
+            <span style={{fontSize:7,fontFamily:MONO,color:p.label4,marginTop:1,padding:"0 4px"}}>{m.r==="user"?"YOU":"INTEL"}</span>
+          </div>
+        ))}
+        {busy&&<div style={{display:"flex",alignItems:"center",gap:5,padding:"6px 0"}}>
+          {[0,1,2].map(i=><div key={i} style={{width:4,height:4,borderRadius:"50%",background:p.label3,animation:`sp 1.2s ease-in-out ${i*0.2}s infinite`}}/>)}
+          <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>analyzing...</span>
+        </div>}
+        <div ref={endRef}/>
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:6,padding:"7px 10px",borderTop:`0.5px solid ${p.sep}`}}>
+        <input ref={inRef} value={inp} onChange={e=>setInp(e.target.value)}
+          onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();e.stopPropagation();send();}}}
+          disabled={busy} placeholder="Ask..."
+          style={{flex:1,padding:"7px 10px",borderRadius:8,fontSize:12,fontFamily:SF,
+            color:p.label,outline:"none",border:`0.5px solid ${p.glassBorder}`,background:p.fill4}}/>
+        <button onClick={()=>send()} disabled={!inp.trim()||busy}
+          style={{width:30,height:30,borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",
+            cursor:inp.trim()&&!busy?"pointer":"default",border:"none",fontSize:13,
+            background:inp.trim()&&!busy?p.blue:p.fill3,color:inp.trim()&&!busy?"#fff":p.label4,
+            opacity:inp.trim()&&!busy?1:0.5}}>{"\u2191"}</button>
+      </div>
+    </div>
+  );
+}
+
+function Detail({insight,onBack,onAct,p,dk,mob}){
+  const pr=pri(insight,p);
+  return(
+    <div style={{position:"absolute",inset:0,zIndex:10,overflowY:"auto",WebkitOverflowScrolling:"touch",
+      background:p.bg,animation:"fadeSlide 0.35s cubic-bezier(0.16,1,0.3,1)"}}>
+      <div style={{maxWidth:700,margin:"0 auto",padding:mob?"20px 20px 120px":"48px 28px 80px"}}>
+
+        <button onClick={onBack} style={{display:"inline-flex",alignItems:"center",gap:6,
+          padding:"8px 16px 8px 12px",borderRadius:100,cursor:"pointer",
+          fontSize:14,fontWeight:500,color:p.label2,fontFamily:SF,marginBottom:28,
+          position:"relative",overflow:"hidden",...glass(p),WebkitTapHighlightColor:"transparent"}}>
+          <Spec r={100} i={0.06}/>
+          <span style={{fontSize:16,position:"relative",zIndex:2}}>{"\u2039"}</span>
+          <span style={{position:"relative",zIndex:2}}>Back</span>
+        </button>
+
+        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:24,flexWrap:"wrap"}}>
+          <Badge priority={insight.priority} p={p}/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} dk={dk}/>
+          <span style={{fontSize:12,color:p.label3,marginLeft:"auto",fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
+        </div>
+
+        <h1 style={{fontSize:mob?28:36,fontWeight:700,color:p.label,lineHeight:1.15,margin:"0 0 16px",
+          fontFamily:SF,letterSpacing:"-0.032em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
+
+        {insight.sparkline&&(
+          <div style={{marginBottom:24,padding:16,borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
+            <Spec r={16} i={0.03}/>
+            <div style={{position:"relative",zIndex:2}}>
+              <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:8}}>TREND</div>
+              <Sparkline data={insight.sparkline} color={pr.c} width={mob?280:600} height={40}/>
+            </div>
+          </div>
+        )}
+
+        <p style={{fontSize:17,color:p.label2,lineHeight:1.65,margin:"0 0 32px",fontFamily:SF,fontWeight:400}}>{insight.body}</p>
+
+        {insight.context&&(
+          <div style={{display:"grid",gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)",gap:10,marginBottom:28}}>
+            {[{l:"METRIC",v:insight.context.metric},{l:"DELTA",v:insight.context.delta},
+              {l:"BASELINE",v:insight.context.baseline},{l:"RISK",v:insight.context.risk}].map(x=>(
+              <div key={x.l} style={{padding:mob?"12px 14px":"14px 18px",borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
+                <Spec r={16} i={0.04}/>
+                <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:6,position:"relative",zIndex:2}}>{x.l}</div>
+                <div style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:p.label,lineHeight:1.4,position:"relative",zIndex:2}}>{x.v}</div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {insight.evidence?.length>0&&(
+          <div style={{marginBottom:32}}>
+            <div style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:10}}>EVIDENCE</div>
+            <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{insight.evidence.map((ev,i)=><EvChip key={i} ev={ev} p={p} dk={dk}/>)}</div>
+          </div>
+        )}
+
+        <div style={{padding:mob?18:22,borderRadius:20,marginBottom:32,position:"relative",overflow:"hidden",...glass(p,{elevated:true})}}>
+          <Spec r={20} i={0.06}/>
+          <div style={{position:"relative",zIndex:2}}>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
+              <span style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4}}>RECOMMENDED ACTION</span>
+              {insight.actionTarget&&<span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label3,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{"\u2192"} {insight.actionTarget}</span>}
+            </div>
+            <p style={{fontSize:15,color:p.label,lineHeight:1.55,margin:0,fontFamily:SF,fontWeight:400}}>{insight.action}</p>
+          </div>
+        </div>
+
+        <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
+          <button onClick={()=>onAct(insight)} style={{padding:mob?"14px 32px":"13px 32px",borderRadius:100,
+            fontSize:15,fontWeight:600,cursor:"pointer",fontFamily:SF,color:"#fff",border:"none",position:"relative",overflow:"hidden",
+            background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
+            boxShadow:`0 4px 16px ${p.blue}40, inset 0 1px 0 rgba(255,255,255,0.2)`,
+            transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{ACT_L[insight.actionType]||"Take Action"}</button>
+          <span style={{fontSize:11,color:p.label4,fontFamily:MONO,alignSelf:"center"}}>{"\u2318"}+Enter</span>
+        </div>
+
+        {}
+        <div style={{marginTop:32}}>
+          <FeedProvenance feeds={insight.feeds} p={p} dk={dk} mob={mob}/>
+        </div>
+
+        {}
+        <div style={{marginTop:8}}>
+          <InsightChat insight={insight} p={p} dk={dk} mob={mob}/>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+function ActModal({insight,onClose,onDone,p,mob}){
+  const[draft,setDraft]=useState(insight.action);
+  const[st,setSt]=useState("idle");
+  const[link,setLink]=useState(null);
+  const[err,setErr]=useState(null);
+  const ch=CH[insight.channelKey];
+  const ok=st==="idle"||st==="error";
+
+  const send=async()=>{
+    if(!draft.trim())return; setSt("sending"); setErr(null);
+    try{
+      const r=await slackDraft({message:draft,target:insight.actionTarget,channelKey:insight.channelKey});
+      if(r.ok){setSt("sent");setLink(r.link);setTimeout(()=>onDone(draft),2200);}
+      else throw new Error(r.err||"Failed");
+    }catch(e){
+      if(await clip(draft)){setSt("fallback");setErr(e.message);setTimeout(()=>onDone(draft),2500);}
+      else{setSt("error");setErr(e.message);}
+    }
+  };
+
+  useEffect(()=>{
+    const h=e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter"&&ok){e.preventDefault();send();}};
+    window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
+  },[ok,draft]);
+
+  const info={sent:{c:p.green,ico:"\u2713",msg:"Draft created in Slack"},fallback:{c:p.orange,ico:"\u26A0",msg:"Copied to clipboard"},error:{c:p.red,ico:"\u2715",msg:null}}[st];
+
+  return(
+    <div style={{position:"fixed",inset:0,zIndex:200,display:"flex",justifyContent:"center",alignItems:mob?"flex-end":"center",
+      padding:mob?0:40,background:"rgba(0,0,0,0.4)",
+      backdropFilter:"blur(20px) saturate(120%)",WebkitBackdropFilter:"blur(20px) saturate(120%)",
+      animation:"fadeIn 0.2s ease-out"}} onClick={ok?onClose:undefined}>
+      <div onClick={e=>e.stopPropagation()} style={{maxWidth:540,width:"100%",
+        borderRadius:mob?"24px 24px 0 0":24,padding:mob?"28px 22px 40px":"28px 28px 24px",
+        maxHeight:mob?"85vh":"auto",position:"relative",overflow:"hidden",
+        animation:"sheetUp 0.35s cubic-bezier(0.16,1,0.3,1)",...glass(p,{elevated:true})}}>
+        <Spec r={24} i={0.08}/>
+
+        {mob&&<div style={{width:36,height:4,borderRadius:2,background:p.fill2,margin:"0 auto 20px",position:"relative",zIndex:2}}/>}
+
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18,position:"relative",zIndex:2}}>
+          <div style={{display:"flex",alignItems:"center",gap:10}}>
+            <span style={{fontSize:11,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.06em"}}>{ch?`\u2192 ${ch.label}`:"DRAFT"}</span>
+            <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,letterSpacing:"0.04em",padding:"2px 8px",borderRadius:6,background:`${p.green}14`,color:p.green}}>SLACK DRAFT</span>
+          </div>
+          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:20,cursor:"pointer",padding:"4px 8px",borderRadius:100}}
+            onMouseEnter={e=>{e.currentTarget.style.background=p.fill4;}}
+            onMouseLeave={e=>{e.currentTarget.style.background="transparent";}}>{"\u2715"}</button>
+        </div>
+
+        <div style={{position:"relative",zIndex:2}}>
+          <textarea value={draft} onChange={e=>setDraft(e.target.value)} disabled={!ok} autoFocus
+            style={{width:"100%",minHeight:140,padding:16,borderRadius:16,resize:"vertical",
+              fontSize:15,lineHeight:1.55,fontFamily:SF,color:ok?p.label:p.label3,outline:"none",
+              transition:"all 0.2s",background:p.fill4,
+              border:`1px solid ${info?`${info.c}40`:p.glassBorder}`,
+              boxShadow:"inset 0 1px 3px rgba(0,0,0,0.04)"}}/>
+        </div>
+
+        {info&&(
+          <div style={{marginTop:12,padding:"10px 14px",borderRadius:12,fontSize:12,fontFamily:MONO,fontWeight:500,color:info.c,
+            position:"relative",zIndex:2,...glass(p),border:`0.5px solid ${info.c}25`}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
+              <span style={{display:"flex",alignItems:"center",gap:6}}>
+                <span style={{fontSize:14}}>{info.ico}</span>{info.msg||`Failed: ${err||"Unknown"}`}
+              </span>
+              {st==="sent"&&link&&<a href={link} target="_blank" rel="noopener noreferrer" style={{color:info.c,fontSize:11,textDecoration:"none",fontWeight:600}}>Open Slack {"\u2197"}</a>}
+            </div>
+            {st==="fallback"&&err&&<div style={{fontSize:10,opacity:0.7,marginTop:4}}>Paste manually. ({err})</div>}
+          </div>
+        )}
+
+        <div style={{display:"flex",gap:10,marginTop:18,justifyContent:"flex-end",alignItems:"center",position:"relative",zIndex:2}}>
+          {ok&&<>
+            <button onClick={onClose} style={{padding:"10px 22px",borderRadius:100,cursor:"pointer",fontSize:14,fontWeight:500,fontFamily:SF,color:p.label2,...glass(p)}}>Cancel</button>
+            <button onClick={send} disabled={!draft.trim()} style={{padding:"10px 22px",borderRadius:100,
+              cursor:draft.trim()?"pointer":"default",fontSize:14,fontWeight:600,fontFamily:SF,border:"none",
+              color:"#fff",opacity:draft.trim()?1:0.4,
+              background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
+              boxShadow:`0 2px 8px ${p.blue}30, inset 0 1px 0 rgba(255,255,255,0.15)`,
+              transition:"all 0.2s"}}>{st==="error"?"Retry":"Create Slack Draft"}<span style={{fontSize:10,opacity:0.5,marginLeft:6}}>{"\u2318\u21B5"}</span></button>
+          </>}
+          {st==="sending"&&(
+            <div style={{display:"flex",alignItems:"center",gap:8,fontSize:13,color:p.label3,fontFamily:MONO}}>
+              <div style={{width:16,height:16,border:`2px solid ${p.fill2}`,borderTopColor:p.label2,borderRadius:"50%",animation:"spin 0.6s linear infinite"}}/>Creating draft...
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function NavBar({dk,setDk,scanning,runScan,counts,p,mob,feedMode,setFeedMode,scanStatus,scanError,lastScanAt,onSettings}){
+  return(
+    <div style={{position:"sticky",top:mob?0:12,left:mob?0:16,right:mob?0:16,zIndex:50,borderRadius:mob?0:22,height:mob?54:52,
+      display:"flex",alignItems:"center",justifyContent:"space-between",padding:mob?"0 16px":"0 20px",
+      paddingTop:mob?"env(safe-area-inset-top,0px)":"0",...glass(p,{elevated:true})}}>
+      <Spec r={mob?0:22} i={0.05}/>
+      <div style={{display:"flex",alignItems:"center",gap:10,position:"relative",zIndex:2}}>
+        <span style={{fontSize:20}}>{"\ud83d\udce1"}</span>
+        <span style={{fontSize:13,fontWeight:700,letterSpacing:"0.08em",fontFamily:MONO,color:p.label}}>RADAR</span>
+        {scanning&&<div style={{width:40,height:2,borderRadius:1,overflow:"hidden",background:p.fill3,marginLeft:4}}>
+          <div style={{width:"30%",height:"100%",background:p.blue,animation:"scan 1.2s ease-in-out infinite",borderRadius:1}}/>
+        </div>}
+      </div>
+      <div style={{display:"flex",alignItems:"center",gap:mob?4:6,position:"relative",zIndex:2}}>
+        {counts.urgent>0&&<span style={{fontSize:11,fontWeight:600,color:p.red,fontFamily:MONO,animation:"sp 2s ease-in-out infinite"}}>{counts.urgent}</span>}
+        <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500}}>{counts.total}</span>
+        {}
+        <div style={{display:"flex",borderRadius:8,overflow:"hidden",...glass(p),padding:1,gap:1}}>
+          <button onClick={()=>setFeedMode("cards")} title="Card View" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
+            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
+            color:feedMode==="cards"?p.label:p.label4,
+            background:feedMode==="cards"?p.glassActive:"transparent",
+            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
+          }}>{"\u25A3"}</button>
+          <button onClick={()=>setFeedMode("brief")} title="Speed Brief" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
+            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
+            color:feedMode==="brief"?p.label:p.label4,
+            background:feedMode==="brief"?p.glassActive:"transparent",
+            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
+          }}>{"\u2261"}</button>
+        </div>
+        <button onClick={runScan} disabled={scanning} style={{padding:"6px 10px",borderRadius:100,cursor:scanning?"default":"pointer",
+          fontSize:11,fontWeight:600,fontFamily:MONO,color:scanning?p.label4:p.label2,...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{"\u21BB"}</button>
+        <button onClick={onSettings} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:13,color:p.label3,
+          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent",border:"none"}}>{"\u2699"}</button>
+        <button onClick={()=>setDk(d=>!d)} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:9,fontWeight:600,fontFamily:MONO,letterSpacing:"0.08em",color:p.label2,
+          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{dk?"DAY":"NVG"}</button>
+      </div>
+    </div>
+  );
+}
+
+function FilterBar({active,onChange,counts,p,mob}){
+  const tabs=[{key:"all",label:"All",n:counts.total},{key:"URGENT",label:"Urgent",n:counts.urgent},
+    {key:"HIGH",label:"Today",n:counts.high},{key:"MEDIUM",label:"This Week",n:counts.medium},{key:"LOW",label:"FYI",n:counts.low}];
+  return(
+    <div style={{display:"flex",gap:4,padding:mob?"6px 12px":"6px 16px",margin:mob?"0":"0 16px",borderRadius:mob?0:16,
+      overflowX:"auto",WebkitOverflowScrolling:"touch",scrollbarWidth:"none",msOverflowStyle:"none",...glass(p)}}>
+      {tabs.map(tab=>{
+        const isAct=active===tab.key;
+        const priC=tab.key!=="all"?PRI[tab.key]?.color(p):null;
+        return(
+          <button key={tab.key} onClick={()=>onChange(tab.key)} style={{padding:"6px 12px",borderRadius:100,border:"none",
+            fontSize:12,fontWeight:isAct?600:500,fontFamily:SF,cursor:"pointer",whiteSpace:"nowrap",
+            transition:"all 0.25s cubic-bezier(0.25,0.46,0.45,0.94)",
+            color:isAct?(priC||p.label):p.label3,background:isAct?p.glassActive:"transparent",
+            boxShadow:isAct?`inset 0 0.5px 0 ${p.specularEdge}, 0 1px 3px rgba(0,0,0,0.04)`:"none",
+            WebkitTapHighlightColor:"transparent"}}>
+            {tab.label}
+            {tab.n>0&&<span style={{display:"inline-flex",alignItems:"center",justifyContent:"center",
+              marginLeft:5,fontSize:9,fontWeight:700,fontFamily:MONO,minWidth:16,height:16,borderRadius:8,
+              background:isAct?(priC?`${priC}20`:p.fill3):p.fill4,color:isAct?(priC||p.label2):p.label4}}>{tab.n}</span>}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function PullIndicator({pullY,p}){
+  const progress=Math.min(1,pullY/80);
+  return(
+    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:pullY,overflow:"hidden",
+      transition:pullY===0?"height 0.3s cubic-bezier(0.34,1.56,0.64,1)":"none"}}>
+      <div style={{width:28,height:28,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",
+        ...glass(p),transform:`rotate(${progress*360}deg)`,transition:"transform 0.1s",opacity:Math.max(0.3,progress)}}>
+        <span style={{fontSize:14,color:progress>=1?p.blue:p.label3}}>{progress>=1?"\u21BB":"\u2193"}</span>
+      </div>
+    </div>
+  );
+}
+
+function KbdHint({p,mob}){
+  if(mob)return null;
+  const[show,setShow]=useState(false);
+  return(
+    <div style={{position:"fixed",bottom:16,right:16,zIndex:60}}>
+      <button onClick={()=>setShow(s=>!s)} style={{width:28,height:28,borderRadius:8,cursor:"pointer",
+        fontSize:12,fontWeight:600,color:p.label3,fontFamily:MONO,display:"flex",alignItems:"center",justifyContent:"center",
+        ...glass(p),transition:"all 0.2s"}}>?</button>
+      {show&&(
+        <div style={{position:"absolute",bottom:36,right:0,width:220,padding:14,borderRadius:14,
+          ...glass(p,{elevated:true}),animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
+          <Spec r={14} i={0.06}/>
+          <div style={{position:"relative",zIndex:2,fontSize:11,fontFamily:MONO,color:p.label2,lineHeight:2}}>
+            <div><kbd style={{color:p.label,fontWeight:600}}>j/k</kbd> Navigate</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>Enter</kbd> Open</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>a</kbd> Take action</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>d</kbd> Mark done</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>s</kbd> Snooze</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>x</kbd> Dismiss</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>1-7</kbd> Jump to item</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>v</kbd> Toggle view</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>Esc</kbd> Back / Close</div>
+            <div><kbd style={{color:p.label,fontWeight:600}}>{"\u2318\u21B5"}</kbd> Send draft</div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// API key management for standalone deployment
+function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
+function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
+function getLive(){try{return localStorage.getItem("radar_live_mode")==="true";}catch(e){return false;}}
+function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
+// Init live mode flag
+try{window.__RADAR_LIVE_MODE=getLive();}catch(e){}
+
+// Patch fetch to inject API key when calling Anthropic
+var _origFetch=window.fetch;
+window.fetch=function(url,opts){
+  if(typeof url==="string"&&url.indexOf("api.anthropic.com")>-1){
+    var key=getKey();
+    if(key){
+      opts=opts||{};
+      opts.headers=opts.headers||{};
+      if(typeof opts.headers==="object"&&!Array.isArray(opts.headers)){
+        opts.headers["x-api-key"]=key;
+        opts.headers["anthropic-dangerous-direct-browser-access"]="true";
+      }
+    }
+  }
+  return _origFetch.call(window,url,opts);
+};
+
+function SettingsPanel({show,onClose,p,mob}){
+  var keyRef=useRef(null);
+  var[key,setKey]=useState(getKey);
+  var[live,setLive]=useState(getLive);
+  var[saved,setSaved]=useState(false);
+  if(!show)return null;
+  function save(){
+    setKeyStore(key);
+    setLiveStore(live);
+    setSaved(true);
+    setTimeout(function(){setSaved(false);},2000);
+  }
+  return(
+    <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.5)",animation:"fadeIn 0.2s ease"}} onClick={onClose}>
+      <div onClick={function(e){e.stopPropagation();}} style={{width:mob?"92%":420,maxHeight:"80vh",borderRadius:20,overflow:"hidden",background:p.bgElevated,border:"0.5px solid "+p.glassBorder,animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",borderBottom:"0.5px solid "+p.sep}}>
+          <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label}}>SETTINGS</span>
+          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:16,cursor:"pointer"}}>{"\u2715"}</button>
+        </div>
+        <div style={{padding:"16px 20px",display:"flex",flexDirection:"column",gap:16}}>
+          <div>
+            <label style={{fontSize:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label3,marginBottom:6,display:"block"}}>ANTHROPIC API KEY</label>
+            <input ref={keyRef} type="password" value={key} onChange={function(e){setKey(e.target.value);}}
+              placeholder="sk-ant-..." style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
+              background:p.glass,color:p.label,fontFamily:MONO,fontSize:13,outline:"none"}}/>
+            <p style={{fontSize:10,color:p.label4,marginTop:4,fontFamily:MONO}}>Required for standalone deploy. Get from console.anthropic.com</p>
+          </div>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 14px",borderRadius:12,background:p.fill4}}>
+            <div>
+              <div style={{fontSize:12,fontWeight:600,color:p.label,fontFamily:SF}}>Live MCP Mode</div>
+              <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>Pull fresh data from Slack, Linear, Calendar, Amplitude</div>
+            </div>
+            <button onClick={function(){setLive(!live);}} style={{width:44,height:24,borderRadius:12,border:"none",cursor:"pointer",position:"relative",
+              background:live?p.green:p.fill2,transition:"background 0.2s"}}>
+              <div style={{width:20,height:20,borderRadius:10,background:p.bgElevated,position:"absolute",top:2,
+                left:live?22:2,transition:"left 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.2)"}}/>
+            </button>
+          </div>
+          {live&&<div style={{padding:"10px 14px",borderRadius:10,background:p.blue+"15",border:"0.5px solid "+p.blue+"30"}}>
+            <p style={{fontSize:10,fontFamily:MONO,color:p.blue,lineHeight:1.5}}>
+              Live mode uses MCP servers to pull real-time data. Slower (~15-30s) but data is always fresh. Requires active Anthropic MCP connections for Slack, Linear, Calendar.
+            </p>
+          </div>}
+          <button onClick={save} style={{padding:"10px 16px",borderRadius:10,border:"none",cursor:"pointer",
+            fontWeight:600,fontSize:12,fontFamily:MONO,letterSpacing:"0.05em",
+            background:saved?p.green:p.accent,color:"#fff",transition:"all 0.2s"}}>
+            {saved?"SAVED \u2713":"SAVE"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function SiftIntel(){
+  const[dk,setDk]=useTheme();
+  const mob=useMobile();
+  const p=dk?PAL.dark:PAL.light;
+  const[showSettings,setShowSettings]=useState(false);
+
+  const[insights,setInsights]=useState(SEED);
+  const[filter,setFilter]=useState("all");
+  const[selected,setSelected]=useState(null);
+  const[modal,setModal]=useState(null);
+  const[itemStates,setItemStates]=useState({});
+  const[scanning,setScanning]=useState(false);
+  const[scanStatus,setScanStatus]=useState(null);
+  const[scanError,setScanError]=useState(null);
+  const[lastScanAt,setLastScanAt]=useState(null);
+  const[focusIdx,setFocusIdx]=useState(-1);
+  const[feedMode,setFeedMode]=useState("cards");
+  const[pullY,setPullY]=useState(0);
+  const pullRef=useRef(null);
+  const scrollRef=useRef(null);
+  const hasScanned=useRef(false);
+
+  const active=insights.filter(i=>itemStates[i.id]!=="dismissed");
+  const filtered=filter==="all"?active:active.filter(i=>i.priority===filter);
+  const counts={
+    total:active.length,
+    urgent:active.filter(i=>i.priority==="URGENT").length,
+    high:active.filter(i=>i.priority==="HIGH").length,
+    medium:active.filter(i=>i.priority==="MEDIUM").length,
+    low:active.filter(i=>i.priority==="LOW").length,
+  };
+
+  const grouped=useMemo(()=>{
+    const groups=new Map();
+    filtered.forEach(i=>{const g=timeGroup(i.timestamp);if(!groups.has(g))groups.set(g,[]);groups.get(g).push(i);});
+    return[...groups.entries()];
+  },[filtered]);
+
+  const flatList=useMemo(()=>filtered,[filtered]);
+
+  const runScan=useCallback(async()=>{
+    if(scanning)return;
+    setScanning(true);setScanError(null);setScanStatus("Connecting to data sources...");
+    setInsights([]);setItemStates({});setSelected(null);
+    var seenIds={};
+    try{
+      const result=await runLiveScan(
+        function(insight,idx){
+          // Progressive: each insight appears as it streams in
+          var nIns={
+            ...insight,
+            id:insight.id||("live-"+Date.now()+"-"+idx),
+            timestamp:new Date(),
+            sparkline:insight.sparkline||[],
+            evidence:insight.evidence||[],
+            context:insight.context||{metric:"\u2014",delta:"\u2014",baseline:"\u2014",risk:"\u2014"},
+            feeds:(insight.feeds||[]).map(function(f){return{...f,freshness:f.freshness||new Date().toISOString()};}),
+            sources:insight.sources||[],
+            category:insight.category||"insight",
+          };
+          if(!seenIds[nIns.id]){
+            seenIds[nIns.id]=true;
+            setInsights(function(prev){return[...prev,nIns];});
+          }
+        },
+        function(status){setScanStatus(status);}
+      );
+      // Final pass: replace with fully-parsed data
+      if(result.insights.length>0){
+        var normalized=result.insights.map(function(ins,i){return{
+          ...ins,
+          id:ins.id||("live-"+Date.now()+"-"+i),
+          timestamp:new Date(),
+          sparkline:ins.sparkline||[],
+          evidence:ins.evidence||[],
+          context:ins.context||{metric:"\u2014",delta:"\u2014",baseline:"\u2014",risk:"\u2014"},
+          feeds:(ins.feeds||[]).map(function(f){return{...f,freshness:f.freshness||new Date().toISOString()};}),
+          sources:ins.sources||[],
+          category:ins.category||"insight",
+        };});
+        setInsights(normalized);
+        setLastScanAt(new Date());
+        setScanStatus(normalized.length+" items from "+String(result.meta.sourcesOk||0)+" sources");
+      } else {
+        setScanStatus("No insights generated \u2014 check data sources");
+      }
+      if(result.meta.errors&&result.meta.errors.length>0){
+        setScanError("Partial: "+result.meta.errors.join(", "));
+      }
+    }catch(e){
+      setScanError(e.message);
+      setScanStatus("Scan failed");
+    }finally{
+      setScanning(false);
+      setTimeout(function(){setScanStatus(null);setScanError(null);},8000);
+    }
+  },[scanning]);
+
+  // Auto-scan on first load
+  useEffect(()=>{
+    if(!hasScanned.current){hasScanned.current=true;runScan();}
+  },[]);
+  const handleAct=i=>setModal(i);
+  const handleDone=()=>{
+    if(modal){setItemStates(s=>({...s,[modal.id]:"done"}));setModal(null);setSelected(null);}
+  };
+  const setInsightState=(id,state)=>{setItemStates(s=>({...s,[id]:state}));};
+
+  // Pull-to-scan
+  const onPullStart=useCallback(e=>{
+    if(!mob||!scrollRef.current||scrollRef.current.scrollTop>5) return;
+    pullRef.current={y:e.touches[0].clientY,active:false};
+  },[mob]);
+  const onPullMove=useCallback(e=>{
+    if(!pullRef.current) return;
+    const dy=e.touches[0].clientY-pullRef.current.y;
+    if(dy>10){pullRef.current.active=true;setPullY(Math.min(100,dy*0.5));e.preventDefault();}
+  },[]);
+  const onPullEnd=useCallback(()=>{
+    if(pullRef.current?.active&&pullY>=40&&!scanning){runScan();}
+    setPullY(0);pullRef.current=null;
+  },[pullY,scanning,runScan]);
+
+  // Keyboard shortcuts
+  useEffect(()=>{
+    const h=e=>{
+      // In modal
+      if(modal){if(e.key==="Escape")setModal(null);return;}
+      // In detail
+      if(selected){
+        if(e.key==="Escape")setSelected(null);
+        if(e.key==="a")handleAct(selected);
+        return;
+      }
+      // Feed nav
+      if(e.key==="j"||e.key==="ArrowDown"){e.preventDefault();setFocusIdx(i=>Math.min(flatList.length-1,i+1));}
+      if(e.key==="k"||e.key==="ArrowUp"){e.preventDefault();setFocusIdx(i=>Math.max(0,i-1));}
+      if(e.key==="Enter"&&focusIdx>=0&&flatList[focusIdx]){setSelected(flatList[focusIdx]);}
+      if(e.key==="a"&&focusIdx>=0&&flatList[focusIdx]){handleAct(flatList[focusIdx]);}
+      if(e.key==="d"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"done");}
+      if(e.key==="s"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"snoozed");}
+      if(e.key==="x"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"dismissed");}
+      const num=parseInt(e.key);
+      if(num>=1&&num<=9&&num<=flatList.length){setFocusIdx(num-1);}
+      if(e.key==="Escape"){setFocusIdx(-1);}
+      if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
+    };
+    window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
+  },[modal,selected,focusIdx,flatList]);
+
+  let globalIdx=0;
+
+  return(
+    <>
+      <style>{`
+        @import url('${FONT_URL}');
+        @keyframes sp{0%,100%{opacity:1}50%{opacity:0.3}}
+        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+        @keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
+        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+        @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+        @keyframes sheetUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes staggerIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+        @keyframes springIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+        @keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(8vw,5vh) scale(1.05)}50%{transform:translate(3vw,10vh) scale(0.95)}75%{transform:translate(-5vw,3vh) scale(1.02)}}
+        @keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-10vw,-6vh) scale(1.08)}66%{transform:translate(5vw,-3vh) scale(0.96)}}
+        @keyframes meshDrift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-8vh) scale(1.1)}}
+        @keyframes meshPulse{0%,100%{opacity:0.6}50%{opacity:1}}
+        @keyframes urgencyPulse{0%,100%{opacity:0.7}50%{opacity:1}}
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        body{overscroll-behavior-y:none;font-family:${SF}}
+        ::-webkit-scrollbar{width:0;background:transparent}
+        ::selection{background:${dk?'rgba(10,132,255,0.3)':'rgba(0,122,255,0.2)'}}
+      `}</style>
+
+      <div style={{width:"100vw",height:"100dvh",background:p.bg,position:"relative",overflow:"hidden",
+        fontFamily:SF,color:p.label,transition:"background 0.4s ease, color 0.3s ease",display:"flex",flexDirection:"column"}}>
+        <AmbientMesh dk={dk} hasUrgent={counts.urgent>0}/>
+        <UrgencyBar count={counts.urgent} p={p} dk={dk} onClick={()=>{setFilter("URGENT");setFocusIdx(0);}}/>
+
+        <div style={{position:"relative",zIndex:10,padding:mob?0:"12px 0 0"}}>
+          <NavBar dk={dk} setDk={setDk} scanning={scanning} runScan={runScan} counts={counts} p={p} mob={mob} feedMode={feedMode} setFeedMode={setFeedMode} scanStatus={scanStatus} scanError={scanError} lastScanAt={lastScanAt} onSettings={()=>setShowSettings(true)}/>
+          {(scanStatus||scanError)&&<div style={{margin:mob?"0":"0 16px",padding:"6px 16px",borderRadius:mob?0:10,
+            fontSize:10,fontFamily:MONO,fontWeight:500,display:"flex",alignItems:"flex-start",gap:6,
+            color:scanError?p.red:p.label3,background:scanError?`${p.red}10`:p.fill4,
+            maxHeight:80,overflow:"auto",wordBreak:"break-word"}}>
+            {scanning&&<div style={{width:4,height:4,borderRadius:"50%",background:p.blue,animation:"sp 1s ease-in-out infinite",flexShrink:0,marginTop:3}}/>}
+            <span>{scanError||scanStatus}</span>
+            {lastScanAt&&!scanning&&<span style={{marginLeft:"auto",color:p.label4}}>Last: {timeAgo(lastScanAt)}</span>}
+          </div>}
+        </div>
+
+        <div style={{flex:1,position:"relative",overflow:"hidden",zIndex:1}}>
+          {!selected&&(
+            <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
+              <div style={{padding:mob?"4px 0":"6px 0"}}>
+                <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
+              </div>
+              <SummaryHeader counts={counts} p={p} mob={mob} feedMode={feedMode}/>
+              <div ref={scrollRef} onTouchStart={onPullStart} onTouchMove={onPullMove} onTouchEnd={onPullEnd}
+                style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch",paddingTop:0}}>
+                {pullY>0&&<PullIndicator pullY={pullY} p={p}/>}
+                {filtered.length===0&&!scanning
+                  ? <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"80px 24px",gap:16,animation:"fadeIn 0.4s ease"}}>
+                      <div style={{width:56,height:56,borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",...glass(p)}}>
+                        <Spec r={16} i={0.08}/>
+                        <span style={{fontSize:32,opacity:0.3,position:"relative",zIndex:2}}>{"\ud83d\udce1"}</span>
+                      </div>
+                      <p style={{fontSize:16,color:p.label3,fontFamily:SF,fontWeight:500}}>{active.length>0?"No items match this filter":"Tap \u21BB to scan"}</p>
+                    </div>
+                  : filtered.length===0&&scanning
+                  ? <SkeletonFeed p={p} mob={mob} count={6}/>
+                  : <div>
+                    {grouped.map(([group,items])=>(
+                      <div key={group}>
+                        <GroupLabel label={group} p={p} mob={mob}/>
+                        <div style={{display:"flex",flexDirection:"column",gap:feedMode==="brief"?(mob?2:4):(mob?8:10)}}>
+                          {items.map(insight=>{
+                            const idx=globalIdx++;
+                            const flatIdx=flatList.indexOf(insight);
+                            const ItemComponent=feedMode==="brief"?SpeedBrief:FeedItem;
+                            return <ItemComponent key={insight.id} insight={insight} onClick={setSelected}
+                              p={p} dk={dk} mob={mob} index={idx} focused={flatIdx===focusIdx}
+                              itemState={itemStates[insight.id]} onStateChange={setInsightState}/>;
+                          })}
+                        </div>
+                      </div>
+                    ))}
+                    {scanning&&<SkeletonFeed p={p} mob={mob} count={3}/>}
+                  </div>
+                }
+                <div style={{height:"calc(48px + env(safe-area-inset-bottom,0px))"}}/>
+              </div>
+            </div>
+          )}
+
+          {selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
+        </div>
+
+        {modal&&<ActModal insight={modal} onClose={()=>setModal(null)} onDone={handleDone} p={p} mob={mob}/>}
+        <SettingsPanel show={showSettings} onClose={()=>setShowSettings(false)} p={p} mob={mob}/>
+        <KbdHint p={p} mob={mob}/>
+      </div>
+    </>
+  );
+}
+
+</script>
+</body>
+</html>
