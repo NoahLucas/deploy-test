@@ -1305,7 +1305,7 @@ function SettingsPanel({show,onClose,p,mob}){
   );
 }
 
-export default function SiftIntel(){
+function SiftIntel(){
   const[dk,setDk]=useTheme();
   const mob=useMobile();
   const p=dk?PAL.dark:PAL.light;
@@ -1553,6 +1553,9 @@ export default function SiftIntel(){
     </>
   );
 }
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(SiftIntel));
 
 </script>
 </body>
