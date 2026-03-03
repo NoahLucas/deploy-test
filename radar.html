@@ -1244,6 +1244,7 @@ window.fetch=function(url,opts){
       opts.headers=opts.headers||{};
       if(typeof opts.headers==="object"&&!Array.isArray(opts.headers)){
         opts.headers["x-api-key"]=key;
+        opts.headers["anthropic-version"]="2023-06-01";
         opts.headers["anthropic-dangerous-direct-browser-access"]="true";
       }
     }
