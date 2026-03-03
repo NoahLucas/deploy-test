@@ -1,524 +1,156 @@
 {
-  "fetchedAt": "2026-03-02T17:12:00Z",
-  "amplitude": {
-    "dau": {
-      "chart": "u5ctmoro",
-      "name": "Daily Active Users",
-      "dates": [
-        "2026-01-31",
-        "2026-02-01",
-        "2026-02-02",
-        "2026-02-03",
-        "2026-02-04",
-        "2026-02-05",
-        "2026-02-06",
-        "2026-02-07",
-        "2026-02-08",
-        "2026-02-09",
-        "2026-02-10",
-        "2026-02-11",
-        "2026-02-12",
-        "2026-02-13",
-        "2026-02-14",
-        "2026-02-15",
-        "2026-02-16",
-        "2026-02-17",
-        "2026-02-18",
-        "2026-02-19",
-        "2026-02-20",
-        "2026-02-21",
-        "2026-02-22",
-        "2026-02-23",
-        "2026-02-24",
-        "2026-02-25",
-        "2026-02-26",
-        "2026-02-27",
-        "2026-02-28",
-        "2026-03-01",
-        "2026-03-02"
-      ],
-      "values": [
-        105,
-        77,
-        249,
-        286,
-        352,
-        313,
-        276,
-        100,
-        93,
-        304,
-        308,
-        335,
-        338,
-        281,
-        87,
-        83,
-        158,
-        321,
-        300,
-        316,
-        288,
-        107,
-        107,
-        319,
-        345,
-        319,
-        308,
-        284,
-        122,
-        141,
-        162
-      ]
-    },
-    "newUsers": {
-      "chart": "5ab27lld",
-      "name": "New Users (Weekly)",
-      "weeks": [
-        "2025-12-08",
-        "2025-12-15",
-        "2025-12-22",
-        "2025-12-29",
-        "2026-01-05",
-        "2026-01-12",
-        "2026-01-19",
-        "2026-01-26",
-        "2026-02-02",
-        "2026-02-09",
-        "2026-02-16",
-        "2026-02-23",
-        "2026-03-02"
-      ],
-      "values": [
-        70,
-        81,
-        21,
-        30,
-        127,
-        57,
-        66,
-        93,
-        134,
-        92,
-        84,
-        86,
-        12
-      ]
-    },
-    "sessionDuration": {
-      "chart": "dogczzd8",
-      "name": "Avg Session Duration (sec/week)",
-      "weeks": [
-        "2025-12-08",
-        "2025-12-15",
-        "2025-12-22",
-        "2025-12-29",
-        "2026-01-05",
-        "2026-01-12",
-        "2026-01-19",
-        "2026-01-26",
-        "2026-02-02",
-        "2026-02-09",
-        "2026-02-16",
-        "2026-02-23"
-      ],
-      "values": [
-        6327,
-        6779,
-        4985,
-        4542,
-        4742,
-        5537,
-        5822,
-        5785,
-        5494,
-        5671,
-        6474,
-        6992
-      ]
-    },
-    "featureAdoption": {
-      "chart": "e74ntz32",
-      "name": "Feature Adoption (Weekly Uniques)",
-      "weeks": [
-        "2025-12-08",
-        "2025-12-15",
-        "2025-12-22",
-        "2025-12-29",
-        "2026-01-05",
-        "2026-01-12",
-        "2026-01-19",
-        "2026-01-26",
-        "2026-02-02",
-        "2026-02-09",
-        "2026-02-16",
-        "2026-02-23"
-      ],
-      "explore": [
-        364,
-        356,
-        179,
-        156,
-        320,
-        369,
-        339,
-        355,
-        358,
-        379,
-        333,
-        386
-      ],
-      "rules": [
-        84,
-        64,
-        32,
-        24,
-        46,
-        45,
-        39,
-        48,
-        43,
-        63,
-        48,
-        70
-      ],
-      "reports": [
-        85,
-        77,
-        30,
-        9,
-        28,
-        28,
-        39,
-        29,
-        54,
-        39,
-        45,
-        56
-      ],
-      "runs": [
-        0,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        4,
-        0
-      ]
-    },
-    "keyActions": {
-      "chart": "1v3107dq",
-      "name": "Key Actions Volume",
-      "note": "create/save/edit rule clicks ALL ZERO across 12 weeks. Instrumentation likely broken."
-    },
-    "collaboration": {
-      "chart": "pepuaofo",
-      "name": "Collaboration & Sharing (Weekly Uniques)",
-      "weeks": [
-        "2025-12-08",
-        "2025-12-15",
-        "2025-12-22",
-        "2025-12-29",
-        "2026-01-05",
-        "2026-01-12",
-        "2026-01-19",
-        "2026-01-26",
-        "2026-02-02",
-        "2026-02-09",
-        "2026-02-16",
-        "2026-02-23"
-      ],
-      "shareIcon": [
-        129,
-        131,
-        68,
-        38,
-        99,
-        123,
-        102,
-        105,
-        109,
-        107,
-        100,
-        119
-      ],
-      "annotationCreate": [
-        12,
-        20,
-        2,
-        5,
-        10,
-        17,
-        5,
-        11,
-        15,
-        18,
-        18,
-        13
-      ],
-      "shareLinkViewed": [
-        203,
-        231,
-        97,
-        71,
-        192,
-        237,
-        193,
-        194,
-        197,
-        229,
-        194,
-        244
-      ]
-    },
-    "engagement": {
-      "chart": "pr53xnu5",
-      "name": "Data Engagement (Weekly Totals)",
-      "weeks": [
-        "2025-12-08",
-        "2025-12-15",
-        "2025-12-22",
-        "2025-12-29",
-        "2026-01-05",
-        "2026-01-12",
-        "2026-01-19",
-        "2026-01-26",
-        "2026-02-02",
-        "2026-02-09",
-        "2026-02-16",
-        "2026-02-23"
-      ],
-      "annotationCreate": [
-        143,
-        178,
-        28,
-        27,
-        72,
-        215,
-        26,
-        109,
-        81,
-        125,
-        155,
-        111
-      ],
-      "calcChannel": [
-        169,
-        260,
-        136,
-        49,
-        92,
-        320,
-        80,
-        147,
-        212,
-        178,
-        270,
-        226
-      ],
-      "chartShare": [
-        965,
-        1967,
-        559,
-        286,
-        530,
-        719,
-        617,
-        737,
-        708,
-        817,
-        1130,
-        666
-      ]
-    },
-    "retention": {
-      "chart": "p56xw4r8",
-      "name": "New User Retention (Bracket)",
-      "rates": {
-        "day0": "100%",
-        "day1": "100%",
-        "day1_7": "20.1%",
-        "day7_14": "12.9%",
-        "day14_30": "9.3%",
-        "day30_60": "4.2%"
-      }
-    }
-  },
-  "slack": [
+  "generated": "2026-03-03T22:00:00Z",
+  "source": "claude-mcp-full-scan",
+  "signals": [
     {
-      "ch": "admin-weekly-notes",
-      "from": "Gui",
-      "text": "Lockheed Martin deployment update \u2014 action plan aligned. Execute on Artemis II launch criteria, BEAST check ruleset. Address product areas inhibiting adoption."
+      "id": "sig-001",
+      "title": "Astranis Surpasses All Other Customers in WAU — Quietly Becoming Your Power User",
+      "severity": "high",
+      "category": "customer",
+      "detail": "Astranis (Dev + Mission combined) hit 235 WAU last week — surpassing Sift internal (114) and every other customer. They grew from 195→235 in 4 weeks while Sift internal declined 129→114. Astranis is now 39% of your external WAU. Their engagement is deepening (Family Data onboarding 3 teams, ABAC enablement underway) but they're blocked by data access governance issues (ENG-8732, ENG-8721, ENG-8727). If ABAC slips, your largest customer's expansion stalls.",
+      "action": "In your Kenn 1:1 Thursday: confirm DAG V1 PRs are coordinated with Astranis activation timeline. Ask Sanghee in today's Product Sync about the data leak tickets she flagged — are they prerequisites for ABAC rollout?",
+      "source": "amplitude+slack+calendar",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-incident-20260225",
-      "from": "Philip Wilcox",
-      "text": "Incident: update monitor lag. Reverting code, pushing manual parallel deployment in dry-run."
+      "id": "sig-002",
+      "title": "Lockheed Resourcing Meeting Today Signals Scope Expansion — Global Nav Is Now Two Projects",
+      "severity": "urgent",
+      "category": "strategic",
+      "detail": "Kenn's 2pm meeting description reveals Lockheed feedback has split the original Global Nav work into two separate scopes: Resource/Folder Management AND Global Nav improvements. Combined with Gui's deployment update showing an action plan to 'address product areas inhibiting adoption' and 'execute on Artemis II launch criteria,' Lockheed is becoming a forcing function for GNA scope. Thursday's GNA workshop (11:15am-2pm, 3-hour block with Russ) and tomorrow's UX Research Readout on tree testing are the moments to set boundaries.",
+      "action": "At the 2pm Lockheed Resourcing call: push for clear priority stack between Resource/Folder Management vs Global Nav. Don't let Lockheed scope creep absorb the GNA workshop Thursday. Use the tree test readout tomorrow (4pm) to anchor decisions in data, not customer pressure.",
+      "source": "calendar+slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "admin-weekly-notes",
-      "from": "Weston Rapozo",
-      "text": "Talent: 6 new hires incl VP Engineering. 52 RPS (2.5x avg). Raising hiring bar."
+      "id": "sig-003",
+      "title": "Telemetry Debt Is Real — Sanghee Flagged It, and Your Rule Events Confirm It",
+      "severity": "high",
+      "category": "operational",
+      "detail": "Three separate signals converging: (1) Sanghee messaged this morning that 'some teams were not quite up to date when it comes to event instrumentation' and wants to discuss telemetry debt before next planning, (2) the Key Actions Volume chart shows create/save/edit rule clicks all at ZERO for 12 weeks — clearly broken instrumentation, not zero usage since Rules WAU is at 70 and growing, (3) you and Kenn couldn't open each other's Amplitude links Sunday, suggesting permissions fragmentation. Your North Star metric 'Decisions Captured Per Customer' literally cannot be measured if telemetry is broken.",
+      "action": "Greenlight Sanghee's request to audit instrumentation with Brandon. This should be a prerequisite gate before Q2 planning. Raise in Product Sync today (2:30pm): propose a 1-week telemetry sprint across squads to fix event gaps.",
+      "source": "slack+amplitude",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-gna-team",
-      "from": "Jonathan So",
-      "text": "Status page CMS portal deployment PR merged. User group attributes impl continuing."
+      "id": "sig-004",
+      "title": "DAU Hit 373 Monday — Highest Single Day in 30-Day Window. Something Changed.",
+      "severity": "medium",
+      "category": "metric",
+      "detail": "Monday March 2 DAU spiked to 373 — the highest in the 30-day window, up from prior Monday highs of 347 (2/24) and 321 (2/17). WAU is stable at 598 but this daily concentration suggests more users are active on Mondays specifically. Session duration continues climbing: 116 min/user/week, now the highest since early December. Users are spending almost 2 hours per week in Sift. Combined with Explore hitting a record 387 WAU, the platform is becoming stickier without new user growth driving it.",
+      "action": "Use this in your All Hands presentation Thursday: 'Users are spending 2 hours/week in Sift — that's not checking a dashboard, that's doing real engineering work inside our platform.' The depth story is stronger than the breadth story right now.",
+      "source": "amplitude",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-deployments",
-      "from": "Jared Borner",
-      "text": "Reverting update monitor for incident followup. Old flink/debezium scaled down."
+      "id": "sig-005",
+      "title": "K2 Space Is Stress-Testing Your Live Ops Architecture — and Finding the Ceiling",
+      "severity": "high",
+      "category": "customer",
+      "detail": "K2 filed 4 tickets last week (3 High priority) all pointing at the same gap: Sift can't serve real-time mission infrastructure. They need low-latency fresh data reads, telemetry absence detection, enriched webhook payloads, and stable live mode. Gui's deployment update confirms 'K2 continues to stress Sift with very high-volume operations, exposing E2 live-mode UX bugs.' Meanwhile DFS team is building exactly this capability: DLV3 Fresh Data Reads is on track, CDS hit 4.9M points/sec. The supply and demand exist — they're just not connected yet.",
+      "action": "In Product Review Thursday (1:30pm): draw explicit line between K2 live ops tickets and DFS/CDS progress. Ask: when does fresh-data-reads reach K2? If the answer is 'Q2,' communicate the timeline to K2 via Gui to hold the relationship.",
+      "source": "slack+amplitude",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-production-alerts",
-      "from": "Nick Bowman",
-      "text": "False alert from Grafana config update. Reverted to v2026.09.1.0 tag."
+      "id": "sig-006",
+      "title": "Canvas MVP Timeline at Risk — Varda SLA Absorbed the Eng Team for 2-4 Weeks",
+      "severity": "high",
+      "category": "strategic",
+      "detail": "Your Product Bets framework has Canvas at the Design/Prototype gate needing 2-of-3 evidence types to advance. Prototype validation happened (5 users across ULA + Astro Mechanica), reports can now be published/shared, parameterization in PR. But: (1) Brandon's squad is splitting time on Varda SLA operational improvements, (2) Sanghee can't get a test environment — she was exploring Vercel but pivoted to waiting for ephemeral environments (Jared says 'next week'), (3) all Canvas eng is on Varda SLA per Sanghee. The kill criteria clock is ticking.",
+      "action": "In Sanghee 1:1 Thursday (2:30pm): assess Canvas velocity honestly. Is ephemeral env actually landing this week? Should you invoke the kill criteria conversation, or does the prototype validation evidence justify continued investment despite slower velocity?",
+      "source": "slack+linear",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "admin-general",
-      "from": "Sage Shahi",
-      "text": "Inversion Space officially announced as new customer. LinkedIn engagement push."
+      "id": "sig-007",
+      "title": "Rules Adoption Surge Is Outrunning Instrumentation and Product Quality",
+      "severity": "medium",
+      "category": "product",
+      "detail": "Rules WAU jumped from 48→70 (+46%) in 2 weeks — the fastest-growing feature area. But customers are already outgrowing it: backfill-aware re-evaluation (SCS-1119, High), rule-to-annotation quick-plot (SCS-1125), email group notifications (SCS-1116). Python Rules is pausing after alpha hardening. Meanwhile your rule event telemetry shows zero clicks across create/save/edit for 12 straight weeks, meaning you're flying blind on actual usage patterns during the biggest adoption surge.",
+      "action": "Prioritize rule telemetry fix as part of the instrumentation sprint. For the Review Top Customer Asks meeting today (3:30pm): stack-rank the 3 rules tickets by customer tier impact. SCS-1119 (backfill re-eval) is likely the highest-leverage fix.",
+      "source": "amplitude+slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-sik-squad",
-      "from": "Benji",
-      "text": "Sift edge: onboarded Nathan (frontend), onboarding Taylor (sync). Crash recovery + mdbooks for customer docs."
+      "id": "sig-008",
+      "title": "New User Retention Day 1-7 Is ~22% — Your Growth Bottleneck Is Activation, Not Acquisition",
+      "severity": "medium",
+      "category": "metric",
+      "detail": "89 new users joined last week (consistent ~90/week run rate). But bracket retention shows: Day 0→1 is 100% (good), Day 1-7 drops to ~22%, Day 7-14 to ~15%, Day 14-30 to ~10%. You're acquiring users but 78% disappear within a week. Given Sift's hardware test cycle patterns, some of this is structural. But OHB authentication issues blocking invite redemption and ImpulseSpace gRPC SSL corruption suggest real activation barriers exist for new deployments.",
+      "action": "For your biweekly product update (due 3/16): frame retention as the Q2 theme. 'We've proven value depth (2hr sessions) — now we need to prove value breadth (activation rate).' Flag OHB and Impulse auth blockers to Rowen in your Thursday 1:1.",
+      "source": "amplitude+slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "eng-canvas",
-      "from": "Sanghee Oh",
-      "text": "Prototype Validation Round 1 findings shared. Customer quotes preserved for context."
+      "id": "sig-009",
+      "title": "VP of Engineering Starts March 24 — You Have 3 Weeks to Shape the Product-Eng Interface",
+      "severity": "medium",
+      "category": "strategic",
+      "detail": "Mike Russell starts as VP of Engineering on 3/24. Talent update also shows VP of Sales in final interviews (Jimmy Morocco, Ben Schmidt). The leadership team is about to change shape. Your product operating rhythm — the weekly health reports, biweekly updates, Product Bets framework, rituals calendar — is infrastructure that a new VPE will either adopt or work around. The next 3 weeks are your window to solidify these systems so they become organizational defaults, not just Noah's tools.",
+      "action": "Before 3/24: ensure the Amplitude dashboard, Linear roadmap, and product rituals calendar are documented and shared broadly enough that they survive a leadership transition. Consider scheduling an onboarding session with Mike Russell in his first week to establish the product-eng operating contract.",
+      "source": "slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "product-ideas",
-      "from": "Alex Khan",
-      "text": "Heart Aero feature ask: mark channel as INOP per run. Sensor inoperative flag for flight data."
+      "id": "sig-010",
+      "title": "Kenn's Linear Label Taxonomy Push — Small Move, Big Downstream Impact",
+      "severity": "low",
+      "category": "operational",
+      "detail": "Kenn posted today that he's adding short descriptions to Linear area/feature labels, starting with Ingestion. This seems small but is actually infrastructure for your North Star metric: if labels are inconsistent, you can't accurately map customer requests to product areas, which means your 'Decisions Captured Per Customer' metric has noisy denominators. Kenn noted he 'still gets confused on what goes where' — if your PM can't triage correctly, customers definitely can't.",
+      "action": "Amplify this in Product Sync today: make it a shared PM team exercise, not just Kenn's solo project. Each PM should own their areas' label descriptions by end of week. This directly enables the customer intelligence layer you've been building.",
+      "source": "slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "internal-the-exploration-company",
-      "from": "Josh Morris",
-      "text": "TEC Activation Plan review \u2014 checking if safe to share externally."
+      "id": "sig-011",
+      "title": "Product Bets Framework Announced — All Hands Thursday Is Your Strategy Moment",
+      "severity": "medium",
+      "category": "strategic",
+      "detail": "You posted the Product Bets Framework & Pipeline to #product this morning, flagging it will be presented at All Hands (Thursday 10:15am). This is your first company-wide strategy presentation with the three-gate system (Design/Prototype → Investment/Ship MVP → Scale/Pack). Canvas, Manufacturing/Live Ops, and Robotics bets all have kill criteria. With Squad Showcase at 3pm Thursday, you're bookending the day with strategy + execution.",
+      "action": "For All Hands: lead with the 2-hour session depth stat as proof of product-market fit, then present the bets framework as 'how we decide what to build next.' Keep it to 5 minutes — the framework's power is in its simplicity. Save the kill criteria details for product team only.",
+      "source": "slack+calendar",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "internal-ohb",
-      "from": "Josh Morris",
-      "text": "OHB auth issues \u2014 coordinating approach."
+      "id": "sig-012",
+      "title": "Share Link Views at 12-Week High (244) — Your Users Are Selling Sift for You",
+      "severity": "low",
+      "category": "metric",
+      "detail": "Chart share link views hit 244 last week — the highest in 12 weeks. Chart share icon clicks at 119 and annotation creates at 13. The ratio of views to shares (244:119 = 2.05x) means each shared chart is viewed by ~2 people, indicating organic spread within customer organizations. This is your best leading indicator for seat expansion and 'Embed Deeper' strategy pillar success.",
+      "action": "Track share-to-view ratio as a formal metric. If each share generates 2+ views, your collaboration features are working as a growth loop. Mention in the biweekly update: 'Every chart shared reaches 2 additional viewers — our users are our best salesforce.'",
+      "source": "amplitude",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "ch": "internal-dust-moto",
-      "from": "Rowen Wu",
-      "text": "Ronny tested Family Data for his use case. Family Stats work in progress. Scheduling follow-up training."
-    }
-  ],
-  "linear": [
-    {
-      "id": "ENG-7961",
-      "title": "PTS ID Service Latency Spikes",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "pramod",
-      "project": "CDS: Data Layer V3",
-      "labels": [
-        "Storage"
-      ]
+      "id": "sig-013",
+      "title": "Thursday Is Your Heaviest Day — 8 Meetings Including GNA Workshop, All Hands, Product Review",
+      "severity": "medium",
+      "category": "operational",
+      "detail": "Thursday March 5 schedule: Kenn 1:1 (9:30), All Hands (10:15), GNA Standup (11:00), GNA Workshop (11:15-2:00), Rowen 1:1 (1:00 — overlaps workshop), Product Review (1:30), Sanghee 1:1 (2:30), Squad Showcase (3:00). The GNA Workshop is a 2h45m block that conflicts with your Rowen 1:1 and Product Review. This is a triage problem.",
+      "action": "Move Rowen 1:1 to Wednesday or skip and async. GNA Workshop is where real design decisions happen — you need to be there for at least the first 90 min to set direction, then hand off to Russ/Clint. Protect Product Review at 1:30 — that's your cross-squad alignment moment.",
+      "source": "calendar",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "id": "ENG-7447",
-      "title": "Add authentication for docs",
-      "p": "Urgent",
-      "status": "In Progress",
-      "assignee": "Jack Konyan",
-      "project": "Auth for docs",
-      "labels": [
-        "Infra"
-      ]
+      "id": "sig-014",
+      "title": "CVE Remediation Remains the Silent Blocker — ULA and Chainguard Timeline Risk",
+      "severity": "high",
+      "category": "risk",
+      "detail": "Jared's project update marks CVE remediation as 'At Risk' — the only yellow project in the admin-weekly-notes. They're purchasing Chainguard for CVE-free FIPS images but it may not be ready in time for ULA. A contingency plan is being built. Meanwhile ULA filed compliance tickets (classification banners, dev/prod indicators) that signal they're evaluating Sift's security posture holistically. If CVE fix + compliance UX don't converge, ULA activation stays blocked indefinitely.",
+      "action": "Escalate to Austin/Karthik: CVE remediation timeline and Chainguard contract status need executive attention. This is the single biggest customer revenue blocker and it's an infrastructure problem, not a product problem. Your role: ensure product-side compliance features (SCS-1123, SCS-1122) are prioritized as the 'easy win' while infra catches up.",
+      "source": "slack",
+      "ts": "2026-03-03T22:00:00Z"
     },
     {
-      "id": "ENG-8784",
-      "title": "Update Notification Query (limit 100)",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "andrew"
-    },
-    {
-      "id": "ENG-8732",
-      "title": "User without ABAC access can see Export job",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "Jonathan Deng",
-      "project": "Data Access Governance V1",
-      "labels": [
-        "Access Control"
-      ]
-    },
-    {
-      "id": "ENG-8721",
-      "title": "Renaming user group breaks Cedar policy",
-      "p": "Urgent",
-      "status": "In Review",
-      "assignee": "Jonathan Deng",
-      "project": "Data Access Governance V1",
-      "labels": [
-        "Access Control"
-      ]
-    },
-    {
-      "id": "ENG-8727",
-      "title": "Add ABAC to Remote Files",
-      "p": "Urgent",
-      "status": "In Review",
-      "assignee": "Jonathan Deng",
-      "project": "Data Access Governance V1",
-      "labels": [
-        "Access Control"
-      ]
-    },
-    {
-      "id": "ENG-8602",
-      "title": "Reduce memory for function injection",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "andrew"
-    },
-    {
-      "id": "ENG-7906",
-      "title": "Fine tune demux env vars",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "adam",
-      "project": "CDS: Data Layer V3",
-      "labels": [
-        "Storage"
-      ]
-    },
-    {
-      "id": "ENG-8135",
-      "title": "Customer Grafana Instance for GA EMS",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "frank"
-    },
-    {
-      "id": "ENG-5871",
-      "title": "Rule versions return wrong metadata",
-      "p": "Urgent",
-      "status": "In Verification",
-      "assignee": "andrew",
-      "labels": [
-        "Bug"
-      ]
-    },
-    {
-      "id": "ENG-3683",
-      "title": "Migrate Critical Loop govcloud to prod",
-      "p": "Urgent",
-      "status": "In Progress"
+      "id": "sig-015",
+      "title": "Sift Edge Backend Prototype Complete — Momentum Building Before Demo Day",
+      "severity": "medium",
+      "category": "product",
+      "detail": "Benji's SIK update: Edge backend prototype can now serve reads and writes, frontend prototyping has begun, sync-to-Sift functionality is underway. RFC will be shared broadly next week. They're targeting Squad Showcase for a demo. This is one of your five AI product bets and it's moving faster than Canvas right now despite less attention.",
+      "action": "In Squad Lead Sync Friday (10:30am): ask Benji for Edge demo timeline. If it's ready for Showcase Thursday, amplify it at All Hands as a concrete example of the bets framework in action: 'Here's a bet moving through Gate 1.'",
+      "source": "slack+calendar",
+      "ts": "2026-03-03T22:00:00Z"
     }
   ]
 }
