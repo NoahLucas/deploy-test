@@ -408,5 +408,385 @@
     "linear_projects_checked": 6,
     "calendar_events_loaded": 15,
     "google_docs_read": 4
-  }
+  },
+  "team": [
+    {
+      "name": "Sanghee",
+      "role": "PM",
+      "squad": "Core Platform",
+      "fourPDoc": "1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
+      "fourPUrl": "https://docs.google.com/document/d/1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
+      "fourPAge": "1d",
+      "linearActive": 14,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-03T18:30:00Z",
+      "meetingsToday": 4,
+      "status": "shipping",
+      "topConcern": "Instrumentation debt \u2014 flagged rule telemetry gaps this morning. Also managing Python Rules surge (+46% WoW) while backfill re-eval and annotation quick-plot are pending."
+    },
+    {
+      "name": "Kenn",
+      "role": "PM",
+      "squad": "Data Access & Governance",
+      "fourPDoc": "1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
+      "fourPUrl": "https://docs.google.com/document/d/1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
+      "fourPAge": "2d",
+      "linearActive": 18,
+      "linearBlocked": 3,
+      "slackLastSeen": "2026-03-03T17:45:00Z",
+      "meetingsToday": 5,
+      "status": "attention",
+      "topConcern": "Lockheed split GNA into two projects \u2014 scope expanding. ABAC/DAG tickets (ENG-8732, 8721, 8727) blocking Astranis. Linear label taxonomy work enabling North Star metric."
+    },
+    {
+      "name": "Jess",
+      "role": "PM",
+      "squad": "Canvas & Workflows",
+      "fourPDoc": "1zfYXB9_wqqZf1mR-_UM55My6ArjmyTlqfi3_I8cw6r0",
+      "fourPUrl": "https://docs.google.com/document/d/1zfYXB9_wqqZf1mR-_UM55My6ArjmyTlqfi3_I8cw6r0",
+      "fourPAge": "3d",
+      "linearActive": 8,
+      "linearBlocked": 2,
+      "slackLastSeen": "2026-03-03T16:20:00Z",
+      "meetingsToday": 3,
+      "status": "blocked",
+      "topConcern": "Canvas velocity stalled \u2014 Varda SLA absorbed eng team 2-4 weeks. Ephemeral env delayed. Kill criteria clock ticking on Canvas bet."
+    },
+    {
+      "name": "Rowen",
+      "role": "PM",
+      "squad": "Infrastructure & Security",
+      "fourPDoc": "1r7Zs3u8HyUyWl1IB9WEtdIvnsZN-AYfq4GfwQPsdN_8",
+      "fourPUrl": "https://docs.google.com/document/d/1r7Zs3u8HyUyWl1IB9WEtdIvnsZN-AYfq4GfwQPsdN_8",
+      "fourPAge": "2d",
+      "linearActive": 11,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-03T19:00:00Z",
+      "meetingsToday": 4,
+      "status": "attention",
+      "topConcern": "CVE remediation is only 'At Risk' project (yellow). Chainguard timeline uncertain. Blocking ULA activation. Edge backend prototype complete and ahead of Canvas."
+    },
+    {
+      "name": "Kevin",
+      "role": "Design Lead",
+      "squad": "Design",
+      "fourPDoc": null,
+      "fourPUrl": null,
+      "fourPAge": null,
+      "linearActive": 6,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-03T17:30:00Z",
+      "meetingsToday": 3,
+      "status": "shipping",
+      "topConcern": "GNA tree test readout tomorrow. UX research for Explore V2 navigation in progress."
+    },
+    {
+      "name": "Gui",
+      "role": "FDE Lead",
+      "squad": "Field Engineering",
+      "fourPDoc": null,
+      "fourPUrl": null,
+      "fourPAge": null,
+      "linearActive": 9,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-03T20:00:00Z",
+      "meetingsToday": 2,
+      "status": "shipping",
+      "topConcern": "K2 stress-testing E2 live-mode UX. Confirmed 'product areas inhibiting adoption' note re: Lockheed. Astranis Family Data onboarding 3 teams."
+    }
+  ],
+  "customers": [
+    {
+      "name": "Astranis",
+      "wau": 235,
+      "wauTrend": [
+        145,
+        165,
+        180,
+        195,
+        210,
+        220,
+        235
+      ],
+      "wauDelta": "+40 (4w)",
+      "healthScore": 74,
+      "openTickets": 3,
+      "ticketSeverity": "high",
+      "lastFdeTouch": "2026-03-03T15:00:00Z",
+      "trajectory": "expanding",
+      "share": "39%",
+      "topIssue": "ABAC/DAG blocking multi-team expansion. Family Data onboarding 3 teams.",
+      "risk": "If DAG slips, largest customer's expansion stalls"
+    },
+    {
+      "name": "K2 Space",
+      "wau": 63,
+      "wauTrend": [
+        48,
+        52,
+        55,
+        58,
+        60,
+        61,
+        63
+      ],
+      "wauDelta": "+5 (4w)",
+      "healthScore": 58,
+      "openTickets": 4,
+      "ticketSeverity": "high",
+      "lastFdeTouch": "2026-03-02T14:00:00Z",
+      "trajectory": "at-risk",
+      "share": "10%",
+      "topIssue": "4 High-priority live ops tickets. Real-time reads, telemetry absence detection, enriched webhooks, live mode stability.",
+      "risk": "DFS building what they need but teams aren't connected"
+    },
+    {
+      "name": "ImpulseSpace",
+      "wau": 58,
+      "wauTrend": [
+        40,
+        42,
+        45,
+        50,
+        52,
+        55,
+        58
+      ],
+      "wauDelta": "+8 (4w)",
+      "healthScore": 65,
+      "openTickets": 1,
+      "ticketSeverity": "medium",
+      "lastFdeTouch": "2026-02-28T10:00:00Z",
+      "trajectory": "expanding",
+      "share": "9%",
+      "topIssue": "Steady growth, low-touch. Good health.",
+      "risk": "Low \u2014 organic growth pattern"
+    },
+    {
+      "name": "Varda",
+      "wau": 32,
+      "wauTrend": [
+        28,
+        30,
+        31,
+        32,
+        32,
+        31,
+        32
+      ],
+      "wauDelta": "+0 (4w)",
+      "healthScore": 52,
+      "openTickets": 2,
+      "ticketSeverity": "high",
+      "lastFdeTouch": "2026-03-01T11:00:00Z",
+      "trajectory": "stable",
+      "share": "5%",
+      "topIssue": "SLA commitments absorbing eng team 2-4 weeks. Requires dedicated resources.",
+      "risk": "Engineering cost disproportionate to account size"
+    },
+    {
+      "name": "Reliable Robotics",
+      "wau": 25,
+      "wauTrend": [
+        20,
+        22,
+        23,
+        24,
+        25,
+        25,
+        25
+      ],
+      "wauDelta": "+1 (4w)",
+      "healthScore": 60,
+      "openTickets": 0,
+      "ticketSeverity": null,
+      "lastFdeTouch": "2026-02-25T09:00:00Z",
+      "trajectory": "stable",
+      "share": "4%",
+      "topIssue": "Steady. No recent tickets. FDE touch 6 days ago \u2014 could go stale.",
+      "risk": "Quiet could mean satisfied or disengaged"
+    },
+    {
+      "name": "Heart Aerospace",
+      "wau": 18,
+      "wauTrend": [
+        22,
+        20,
+        19,
+        18,
+        18,
+        17,
+        18
+      ],
+      "wauDelta": "-4 (4w)",
+      "healthScore": 45,
+      "openTickets": 1,
+      "ticketSeverity": "medium",
+      "lastFdeTouch": "2026-02-20T14:00:00Z",
+      "trajectory": "contracting",
+      "share": "3%",
+      "topIssue": "WAU declining. FDE touch 11 days ago. Going quiet.",
+      "risk": "Early churn signal \u2014 needs proactive outreach"
+    },
+    {
+      "name": "Lockheed Martin",
+      "wau": 15,
+      "wauTrend": [
+        8,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "wauDelta": "+3 (4w)",
+      "healthScore": 55,
+      "openTickets": 0,
+      "ticketSeverity": null,
+      "lastFdeTouch": "2026-03-03T14:00:00Z",
+      "trajectory": "expanding",
+      "share": "2%",
+      "topIssue": "Split GNA into two projects. Scope expanding. Resourcing call today at 2pm.",
+      "risk": "Scope creep without clear boundaries"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec-001",
+      "title": "Canvas: continue to MVP or kill",
+      "context": "Canvas prototype validated in user testing but eng velocity stalled. Varda SLA absorbed 2-4 weeks of eng capacity. Ephemeral env delayed. Kill criteria from Product Bets framework: need 2-of-3 evidence types to advance past Gate 1.",
+      "evidenceFor": "Prototype validated, user signal positive",
+      "evidenceAgainst": "Eng absorbed by Varda, velocity stalled, no ephemeral env",
+      "deadline": "2026-03-15",
+      "staleDays": 5,
+      "waitingOn": "Noah",
+      "owner": "Jess",
+      "sources": [
+        "linear",
+        "slack"
+      ]
+    },
+    {
+      "id": "dec-002",
+      "title": "Lockheed GNA: accept scope split or push back",
+      "context": "Lockheed split Global Nav into Resource/Folder Management + Global Nav improvements. Combined with Gui's 'product areas inhibiting adoption' note. Thursday's GNA workshop (3 hours) and tree test readout are decision windows.",
+      "evidenceFor": "Customer is investing in the product, expanding usage",
+      "evidenceAgainst": "Scope creep, two projects instead of one, resource drain",
+      "deadline": "2026-03-03",
+      "staleDays": 0,
+      "waitingOn": "Noah + Kenn",
+      "owner": "Kenn",
+      "sources": [
+        "calendar",
+        "slack",
+        "linear"
+      ]
+    },
+    {
+      "id": "dec-003",
+      "title": "Varda SLA: dedicated staffing or time-box",
+      "context": "Varda SLA commitments absorbing eng team 2-4 weeks. Blocking Canvas. WAU only 32 (5% of external). Is the eng cost proportionate?",
+      "evidenceFor": "Customer commitment, revenue protection",
+      "evidenceAgainst": "Disproportionate eng cost, blocking higher-leverage Canvas work",
+      "deadline": "2026-03-07",
+      "staleDays": 3,
+      "waitingOn": "Noah",
+      "owner": "Jess",
+      "sources": [
+        "linear",
+        "slack"
+      ]
+    },
+    {
+      "id": "dec-004",
+      "title": "VPE onboarding: what to institutionalize before 3/24",
+      "context": "VP Engineering starts 3/24. Three-week window to solidify product operating systems (rituals, 4P cadence, product-eng interface) as org defaults before new eng leader arrives.",
+      "evidenceFor": "Once VPE arrives, changing process becomes political. Set defaults now.",
+      "evidenceAgainst": "Risk of over-prescribing before understanding new VPE's style",
+      "deadline": "2026-03-24",
+      "staleDays": 0,
+      "waitingOn": "Noah",
+      "owner": "Noah",
+      "sources": [
+        "calendar",
+        "slack"
+      ]
+    },
+    {
+      "id": "dec-005",
+      "title": "Telemetry instrumentation: urgent fix or roadmap item",
+      "context": "Rule events showing ZERO for 12 weeks despite Rules WAU at 70 and growing +46% WoW. North Star metric (Decisions Captured Per Customer) literally cannot be measured. Sanghee flagged this morning.",
+      "evidenceFor": "Flying blind during biggest adoption surge. Must fix now.",
+      "evidenceAgainst": "Instrumentation work competes with feature delivery",
+      "deadline": "2026-03-07",
+      "staleDays": 0,
+      "waitingOn": "Noah + Sanghee",
+      "owner": "Sanghee",
+      "sources": [
+        "amplitude",
+        "slack"
+      ]
+    }
+  ],
+  "timeAudit": {
+    "today": {
+      "date": "2026-03-03",
+      "meetings": 5,
+      "meetingHours": 4.0,
+      "freeHours": 4.0,
+      "totalHours": 8.0,
+      "prepNeeded": [
+        "Lockheed Resourcing 2pm \u2014 scope boundaries",
+        "Product Sync 4pm \u2014 telemetry debt decision"
+      ],
+      "highLeverage": "Use morning block for Product Bets All Hands prep (Thursday 10:15am)"
+    },
+    "thisWeek": {
+      "meetings": 28,
+      "meetingHours": 22,
+      "freeHours": 18,
+      "heaviestDay": "Thursday (8 meetings, 6.5hrs)",
+      "lightestDay": "Friday (3 meetings, 2hrs)"
+    },
+    "conflicts": [
+      "Thu 1:00-1:30pm: Rowen 1:1 overlaps GNA Workshop (11:15am-2pm)",
+      "Thu 2:00-2:30pm: Product Review overlaps GNA Workshop tail"
+    ],
+    "leverageRec": "Thursday has 8 meetings in 6.5 hours \u2014 cancel or move Rowen 1:1 to Friday. Use Friday's 6 free hours for deep work on VPE onboarding plan and Product Bets presentation polish."
+  },
+  "cofounders": [
+    {
+      "name": "Austin",
+      "role": "CEO",
+      "recentTopics": [
+        "hiring",
+        "VPE onboarding",
+        "board prep",
+        "customer pipeline"
+      ],
+      "lastSlackToNoah": "2026-03-03T11:30:00Z",
+      "pendingDecisions": [
+        "VPE onboarding scope",
+        "Q2 headcount plan"
+      ],
+      "attention": "VPE starts 3/24 \u2014 align on product-eng interface expectations before arrival"
+    },
+    {
+      "name": "Karthik",
+      "role": "CTO",
+      "recentTopics": [
+        "infrastructure",
+        "edge prototype",
+        "CVE remediation",
+        "Chainguard"
+      ],
+      "lastSlackToNoah": "2026-03-03T16:45:00Z",
+      "pendingDecisions": [
+        "CVE remediation timeline",
+        "Edge demo scope for Squad Showcase"
+      ],
+      "attention": "CVE only 'At Risk' project \u2014 need his read on Chainguard timeline and ULA implications"
+    }
+  ]
 }
