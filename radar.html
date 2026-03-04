@@ -607,6 +607,37 @@ function useMobile(){
 }
 
 
+
+// ============================================================
+// API KEY + FETCH INTERCEPTOR
+// ============================================================
+function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
+function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
+function getLive(){try{var v=localStorage.getItem("radar_live_mode");return v===null?false:v==="true";}catch(e){return false;}}
+function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
+function getCustomPrompt(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}}
+function setCustomPromptStore(v){try{localStorage.setItem("radar_custom_prompt",v);}catch(e){}}
+try{window.__RADAR_LIVE_MODE=getLive();}catch(e){}
+try{window.__RADAR_CUSTOM_PROMPT=getCustomPrompt();}catch(e){}
+
+// Patch fetch to inject API key for Anthropic calls
+var _origFetch=window.fetch;
+window.fetch=function(url,opts){
+  if(typeof url==="string"&&url.indexOf("api.anthropic.com")>-1){
+    var key=getKey();
+    if(key){
+      opts=opts||{};
+      opts.headers=opts.headers||{};
+      if(typeof opts.headers==="object"&&!Array.isArray(opts.headers)){
+        opts.headers["x-api-key"]=key;
+        opts.headers["anthropic-version"]="2023-06-01";
+        opts.headers["anthropic-dangerous-direct-browser-access"]="true";
+      }
+    }
+  }
+  return _origFetch.call(window,url,opts);
+};
+
 // ============================================================
 // V7 UI — Liquid Glass, Single Feed
 // ============================================================
@@ -808,7 +839,7 @@ function GlassCard({item,index,c,dk,onAction}){
 // Settings modal
 function SettingsModal({c,dk,onClose}){
   var[key,setKey]=useState(function(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}});
-  function save(){try{localStorage.setItem("radar_api_key",key);}catch(e){}onClose();}
+  function save(){setKeyStore(key);onClose();}
   return(
     <div style={{position:"fixed",inset:0,zIndex:9000,display:"flex",alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,"+(dk?"0.6":"0.3")+")",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}
@@ -847,6 +878,7 @@ function RadarApp(){
   var[items,setItems]=useState([]);
   var[settings,setSettings]=useState(false);
   var[transitioning,setTransitioning]=useState(false);
+  var[scanError,setScanError]=useState("");
   var c=dk?CP.dark:CP.light;
   var hour=new Date().getHours();
   var mesh=meshColors(dk,hour);
@@ -855,8 +887,9 @@ function RadarApp(){
 
   // Auto-scan on mount
   useEffect(function(){
-    var t=setTimeout(function(){scan();},400);
-    return function(){clearTimeout(t);};
+    var hasKey=!!getKey();
+    var t=hasKey?setTimeout(function(){scan();},400):null;
+    return function(){if(t)clearTimeout(t);};
   },[]);
 
   function toggleTheme(){
@@ -866,7 +899,7 @@ function RadarApp(){
 
   async function scan(){
     if(scanning)return;
-    setScanning(true);setProgress("Starting scan...");setItems([]);
+    setScanning(true);setProgress("Starting scan...");setItems([]);setScanError("");
     try{
       var result=await runLiveScan(
         function(ins,idx){setItems(function(prev){var n=[].concat(prev);n[idx]=ins;return n;});},
@@ -875,7 +908,7 @@ function RadarApp(){
       if(result&&result.insights)setItems(result.insights);
       setProgress("");
     }catch(e){
-      setProgress("Error: "+e.message);
+      setScanError("Error: "+e.message.slice(0,80));setProgress("");
     }
     setScanning(false);
   }
@@ -970,7 +1003,7 @@ function RadarApp(){
               <span style={{color:c.l4,margin:"0 4px"}}>{"·"}</span>
             </>}
             <span style={{fontSize:14,fontFamily:FT,color:c.l4}}>
-              {scanning?progress:items.length>0?"Just now":"Waiting for scan"}
+              {scanning?progress:scanError?scanError:items.length>0?"Just now":"Enter API key in \u2699 to scan"}
             </span>
           </div>
         </header>
