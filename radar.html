@@ -456,9 +456,9 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   var r=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-haiku-4-5-20251001",max_tokens:4096,stream:true,
+      model:"claude-sonnet-4-5-20250929",max_tokens:16000,stream:true,
       system:systemPrompt,
-      messages:[{role:"user",content:"Synthesize ALL signals into actionable items. There are "+((data.signals||[]).length)+" input signals \u2014 produce at least 10 items. Preserve evidence URLs.\n\n"+JSON.stringify(compact)}],
+      messages:[{role:"user",content:"Synthesize ALL signals into 12-15 actionable items. You MUST produce at least 12 items. There are "+((data.signals||[]).length)+" input signals. Every signal should be represented. Do NOT stop at 4-5 items.\n\nData:\n"+JSON.stringify(compact)}],
     }),
   });
   if(!r.ok){
