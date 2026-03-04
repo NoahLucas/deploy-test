@@ -10,7 +10,7 @@
 <title>RADAR — Rapid Analysis, Decision And Response</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -124,8 +124,8 @@ function SiftIcon(props){
 }
 const SF = "'IBM Plex Sans',-apple-system,system-ui,sans-serif";
 const MONO = "'JetBrains Mono','IBM Plex Mono','Fira Code',ui-monospace,monospace";
-const SYNE = "'Syne','IBM Plex Sans',sans-serif";
-const FONT_URL = "https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap";
+const SYNE = "'IBM Plex Serif','Georgia',serif";
+const FONT_URL = "https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
 
 // V6 Design Tokens
 const T={xs:11,sm:13,base:15,lg:19,xl:24,xxl:32};
@@ -233,12 +233,13 @@ async function slackDraft({message,target,channelKey}){
     : isCh ? `Find Slack channel "${ch.label.replace("#","")}",create draft. Do not modify.`
     : `Find Slack user "${target||ch.label}",create draft DM. Do not modify.`;
   const r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
+    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-11-20"},
     body:JSON.stringify({
       model:"claude-sonnet-4-20250514",max_tokens:1000,
       system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
       messages:[{role:"user",content:`${inst}\n\nMessage:\n${message}`}],
       mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp",name:"slack"}],
+      tools:[{type:"mcp_toolset",mcp_server_name:"slack"}],
     }),
   });
   if(!r.ok) throw new Error(`API ${r.status}`);
@@ -529,7 +530,7 @@ async function synthesizeLiveMCP(onProgress){
   var t0=Date.now();
   onProgress("LIVE \u2014 pulling fresh data from 6 sources...");
   var r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
+    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-11-20"},
     body:JSON.stringify({
       model:"claude-sonnet-4-5-20250929",max_tokens:8000,
       system:"You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
@@ -541,6 +542,14 @@ async function synthesizeLiveMCP(onProgress){
         {type:"url",url:"https://mcp.amplitude.com/mcp",name:"amplitude"},
         {type:"url",url:"https://mcp.granola.ai/mcp",name:"granola"},
         {type:"url",url:"https://gmail.mcp.claude.com/mcp",name:"gmail"},
+      ],
+      tools:[
+        {type:"mcp_toolset",mcp_server_name:"slack"},
+        {type:"mcp_toolset",mcp_server_name:"linear"},
+        {type:"mcp_toolset",mcp_server_name:"gcal"},
+        {type:"mcp_toolset",mcp_server_name:"amplitude"},
+        {type:"mcp_toolset",mcp_server_name:"granola"},
+        {type:"mcp_toolset",mcp_server_name:"gmail"},
       ],
     }),
   });
@@ -1027,17 +1036,33 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
             </span>}
           </div>
           <div style={{display:"flex",alignItems:"center",gap:S[2]}}>
-            {insight.evidence?.length>0&&<EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
-              <span style={{fontSize:T.xs,fontFamily:MONO,color:p.label4,padding:"2px 6px",borderRadius:R.sm,
-                background:p.fill4,cursor:"pointer",transition:"background 0.15s"}}
-                onMouseEnter={e=>{e.currentTarget.style.background=p.fill2;}}
-                onMouseLeave={e=>{e.currentTarget.style.background=p.fill4;}}>
-                {insight.evidence.length} ev
-              </span>
-            </EvidenceTip>}
             <span style={{fontSize:T.xs,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
           </div>
         </div>
+
+        {}
+        {insight.evidence?.length>0&&(
+          <div style={{display:"flex",gap:4,flexWrap:"wrap",alignItems:"center",marginTop:S[2],position:"relative",zIndex:2}}>
+            {insight.evidence.slice(0,4).map((ev,i)=>(
+              <a key={i} href={ev.url||"#"} target="_blank" rel="noopener"
+                onClick={e=>{e.stopPropagation();}}
+                style={{display:"inline-flex",alignItems:"center",gap:3,padding:"2px 7px",borderRadius:R.sm,
+                  fontSize:T.xs-1,fontFamily:MONO,color:p.label3,background:p.fill4,
+                  textDecoration:"none",whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis",
+                  maxWidth:180,cursor:"pointer",transition:"background 0.15s,color 0.15s",lineHeight:1.4}}
+                onMouseEnter={e=>{e.currentTarget.style.background=p.fill2;e.currentTarget.style.color=p.label;}}
+                onMouseLeave={e=>{e.currentTarget.style.background=p.fill4;e.currentTarget.style.color=p.label3;}}>
+                <span style={{fontSize:9,flexShrink:0}}>{SVC[ev.source]?.icon||"\u{1F517}"}</span>
+                <span style={{overflow:"hidden",textOverflow:"ellipsis"}}>{(function(){var l=evLabel(ev);return l.length>24?l.slice(0,22)+"\u2026":l;})()}</span>
+              </a>
+            ))}
+            {insight.evidence.length>4&&(
+              <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
+                <span style={{fontSize:T.xs-1,fontFamily:MONO,color:p.label4,padding:"2px 6px",cursor:"pointer"}}>+{insight.evidence.length-4}</span>
+              </EvidenceTip>
+            )}
+          </div>
+        )}
       </article>
 
       {}
