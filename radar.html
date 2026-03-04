@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#e5e4e1" media="(prefers-color-scheme: light)">
-<title>RADAR — Rapid Analysis, Decision And Response</title>
+<title>RADAR — Rapid Decision And Response</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -85,7 +85,7 @@ function AuthGate({children}){
           <span style={{fontSize:28}}>{"📡"}</span>
           <span style={{fontSize:15,fontWeight:700,letterSpacing:"0.15em",fontFamily:mono,color:fg}}>RADAR</span>
         </div>
-        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Rapid Analysis, Decision And Response</p>
+        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Rapid Decision And Response</p>
         <div style={{width:"100%",display:"flex",gap:8}}>
           <input ref={inputRef} type="password" value={pw} onChange={e=>setPw(e.target.value)}
             onKeyDown={e=>{if(e.key==="Enter"&&pw)check();}}
@@ -109,30 +109,19 @@ function AuthGate({children}){
 // --- END AUTH GATE ---
 
 function SiftIcon(props){
-  var size=props.size||20,style=props.style||{};
+  var size=props.size||22,color=props.color||"#1a1917",opacity=props.opacity===undefined?1:props.opacity,style=props.style||{};
   return(
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" style={{display:"block",flexShrink:0,...style}}>
-    <circle cx="20" cy="20" r="18" stroke="currentColor" strokeWidth="1.5" opacity="0.3"/>
-    <circle cx="20" cy="20" r="10" stroke="currentColor" strokeWidth="1.5" opacity="0.5"/>
-    <circle cx="20" cy="20" r="3" fill="currentColor" opacity="0.8"/>
-    <line x1="20" y1="2" x2="20" y2="8" stroke="currentColor" strokeWidth="1.5" opacity="0.4"/>
-    <line x1="20" y1="32" x2="20" y2="38" stroke="currentColor" strokeWidth="1.5" opacity="0.4"/>
-    <line x1="2" y1="20" x2="8" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.4"/>
-    <line x1="32" y1="20" x2="38" y2="20" stroke="currentColor" strokeWidth="1.5" opacity="0.4"/>
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{display:"block",flexShrink:0,opacity,...style}}>
+    <rect x="2" y="2" width="28" height="28" rx="6" fill={color} fillOpacity="0.9"/>
+    <path d="M9 22V10h3v12H9zm5.5-4V10H18v8h-3.5zm5.5 4V10h3v12h-3z" fill="white" fillOpacity="0.95"/>
   </svg>
   );
 }
 const SF = "'IBM Plex Sans',-apple-system,system-ui,sans-serif";
-const MONO = "'JetBrains Mono','IBM Plex Mono','Fira Code',ui-monospace,monospace";
-const SYNE = "'IBM Plex Serif','Georgia',serif";
-const FONT_URL = "https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
+const MONO = "'IBM Plex Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
+const FONT_URL = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap";
 
-// V6 Design Tokens
-const T={xs:11,sm:13,base:15,lg:19,xl:24,xxl:32};
-const S={1:4,2:8,3:12,4:16,5:20,6:24,8:32,10:40,12:48};
-const R={sm:6,md:12,lg:16,full:100};
-
-// RADAR = Rapid Analysis, Decision And Response
+// RADAR = Rapid Decision And Response
 const RADAR_ACRONYM = {
   R: "Realtime",
   A1: "Awareness",
@@ -148,7 +137,7 @@ const PAL = {
   // Color reserved ONLY for alarm/priority states — never decorative.
   // Green/amber/red follow ISA-18.2 alarm annunciation standard.
   dark: {
-    bg:"#0a0a0c", bgRaised:"#131416", bgElevated:"#1a1b1e", bgCard:"rgba(200,205,210,0.035)",
+    bg:"#0a0a0c", bgRaised:"#131416", bgElevated:"#1a1b1e",
     glass:"rgba(200,205,210,0.04)", glassHover:"rgba(200,205,210,0.08)",
     glassActive:"rgba(200,205,210,0.12)", glassBorder:"rgba(200,205,210,0.10)",
     glassHighlight:"rgba(200,205,210,0.14)",
@@ -173,7 +162,7 @@ const PAL = {
   // NOT white (glare). NOT cool gray (fatigue). Warm neutral.
   // Chromatic signals desaturated for bright-room legibility.
   light: {
-    bg:"#e5e4e1", bgRaised:"#edeceb", bgElevated:"#f4f3f1", bgCard:"rgba(255,254,252,0.65)",
+    bg:"#e5e4e1", bgRaised:"#edeceb", bgElevated:"#f4f3f1",
     glass:"rgba(255,254,252,0.55)", glassHover:"rgba(255,254,252,0.70)",
     glassActive:"rgba(255,254,252,0.82)", glassBorder:"rgba(90,88,82,0.15)",
     glassHighlight:"rgba(255,254,252,0.75)",
@@ -233,7 +222,7 @@ async function slackDraft({message,target,channelKey}){
     : isCh ? `Find Slack channel "${ch.label.replace("#","")}",create draft. Do not modify.`
     : `Find Slack user "${target||ch.label}",create draft DM. Do not modify.`;
   const r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
+    method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       model:"claude-sonnet-4-20250514",max_tokens:1000,
       system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
@@ -529,7 +518,7 @@ async function synthesizeLiveMCP(onProgress){
   var t0=Date.now();
   onProgress("LIVE \u2014 pulling fresh data from 6 sources...");
   var r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
+    method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
       model:"claude-sonnet-4-5-20250929",max_tokens:8000,
       system:"You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
@@ -631,17 +620,6 @@ function glass(p,opts){
 };
 
 // Liquid Glass specular highlight overlay — simulates light refraction on curved glass
-// V6 L1 surface — cards. No glass, no blur. Subtle border + fill.
-function card(p,opts){
-  var o=opts||{};
-  return{
-    background:o.hover?p.glassHover:p.bgCard||p.glass,
-    border:"0.5px solid "+p.glassBorder,
-    borderRadius:R.md,
-    transition:"all 0.2s ease",
-  };
-}
-
 function Spec({r,i,direction}){
   var rr=r||16,ii=i||0.06;
   var dir=direction||135;
@@ -923,7 +901,7 @@ function PreviewCard({insight,p,dk}){
         <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
           <Badge priority={insight.priority} p={p} small/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} compact dk={dk}/>
         </div>
-        <h4 style={{fontSize:17,fontWeight:600,color:p.label,margin:"0 0 6px",fontFamily:SYNE,letterSpacing:"-0.01em",lineHeight:1.3}}>{insight.headline}</h4>
+        <h4 style={{fontSize:15,fontWeight:600,color:p.label,margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.02em",lineHeight:1.3}}>{insight.headline}</h4>
         <p style={{fontSize:13,color:p.label2,margin:"0 0 10px",fontFamily:SF,lineHeight:1.45,
           display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
         {insight.context&&(
@@ -1014,8 +992,8 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
         </div>
 
         {}
-        <h3 style={{fontSize:mob?17:19,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
-          margin:"0 0 6px",fontFamily:SYNE,letterSpacing:"-0.01em",position:"relative",zIndex:2,
+        <h3 style={{fontSize:mob?16:18,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
+          margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.022em",position:"relative",zIndex:2,
           textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
 
         {}
@@ -1032,25 +1010,28 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
         )}
 
         {}
-        <div style={{display:"flex",alignItems:"center",gap:4,flexWrap:"wrap",position:"relative",zIndex:2}}>
-          {insight.evidence?.length>0&&insight.evidence.slice(0,4).map((ev,i)=>(
-            <a key={i} href={ev.url||"#"} target="_blank" rel="noopener"
-              onClick={e=>{e.stopPropagation();}}
-              style={{display:"inline-flex",alignItems:"center",gap:3,padding:"2px 7px",borderRadius:6,
-                fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,
-                textDecoration:"none",maxWidth:180,overflow:"hidden",whiteSpace:"nowrap",textOverflow:"ellipsis",
-                cursor:"pointer",transition:"background 0.15s,color 0.15s"}}
-              onMouseEnter={e=>{e.currentTarget.style.background=p.fill2;e.currentTarget.style.color=p.label;}}
-              onMouseLeave={e=>{e.currentTarget.style.background=p.fill4;e.currentTarget.style.color=p.label3;}}>
-              <span style={{fontSize:9,flexShrink:0}}>{SVC[ev.source]?.icon||"\u{1F517}"}</span>
-              <span style={{overflow:"hidden",textOverflow:"ellipsis"}}>{(function(){var l=evLabel(ev);return l.length>24?l.slice(0,22)+"\u2026":l;})()}</span>
-            </a>
-          ))}
-          {insight.evidence?.length>4&&(
+        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
+          {insight.evidence?.length>0&&(
             <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
-              <span style={{fontSize:10,fontFamily:MONO,color:p.label4,padding:"2px 6px",cursor:"pointer"}}>+{insight.evidence.length-4}</span>
+              <span style={{display:"inline-flex",alignItems:"center",gap:6,flexWrap:"wrap",cursor:"pointer"}}>
+                {insight.evidence.slice(0,3).map((ev,i)=>(
+                  <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
+                    style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
+                      fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
+                    onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
+                    onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
+                    <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
+                    {(function(){var l=evLabel(ev);return l.length>22?l.slice(0,20)+"\u2026":l;})()}
+                    <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
+                  </span>
+                ))}
+                {insight.evidence.length>3&&(
+                  <span style={{fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label4,padding:"2px 6px"}}>+{insight.evidence.length-3}</span>
+                )}
+              </span>
             </EvidenceTip>
           )}
+          {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
         </div>
       </article>
 
@@ -1346,7 +1327,7 @@ function Detail({insight,onBack,onAct,p,dk,mob}){
         </div>
 
         <h1 style={{fontSize:mob?28:36,fontWeight:700,color:p.label,lineHeight:1.15,margin:"0 0 16px",
-          fontFamily:SYNE,letterSpacing:"-0.01em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
+          fontFamily:SF,letterSpacing:"-0.032em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
 
         {insight.sparkline&&(
           <div style={{marginBottom:24,padding:16,borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
@@ -1516,7 +1497,7 @@ function NavBar({dk,setDk,scanning,runScan,counts,p,mob,feedMode,setFeedMode,sca
       <Spec r={mob?0:26} i={0.06}/>
       <div style={{display:"flex",alignItems:"center",gap:8,position:"relative",zIndex:2}}>
         <span style={{fontSize:mob?16:20}}>{"\ud83d\udce1"}</span>
-        <span style={{fontSize:mob?13:14,fontWeight:700,letterSpacing:"0.02em",fontFamily:SYNE,color:p.label}} title="Rapid Analysis, Decision And Response">RADAR</span>
+        <span style={{fontSize:mob?12:13,fontWeight:700,letterSpacing:"0.08em",fontFamily:MONO,color:p.label}} title="Rapid Decision And Response">RADAR</span>
         {scanning&&<div style={{width:40,height:2,borderRadius:1,overflow:"hidden",background:p.fill3,marginLeft:4}}>
           <div style={{width:"30%",height:"100%",background:p.blue,animation:"scan 1.2s ease-in-out infinite",borderRadius:1}}/>
         </div>}
@@ -1623,7 +1604,7 @@ function KbdHint({p,mob}){
 // API key management for standalone deployment
 function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
 function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
-function getLive(){try{var v=localStorage.getItem("radar_live_mode");return v===null?false:v==="true";}catch(e){return true;}}
+function getLive(){try{var v=localStorage.getItem("radar_live_mode");return v===null?true:v==="true";}catch(e){return true;}}
 function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
 function getCustomPrompt(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}}
 function setCustomPromptStore(v){try{localStorage.setItem("radar_custom_prompt",v);}catch(e){}}
@@ -2525,7 +2506,7 @@ function ViewTabs({active,onChange,p,mob,counts}){
           <button key={v.id} onClick={()=>onChange(v.id)}
             style={{padding:mob?"8px 2px 6px":"10px 18px",background:mob&&isActive?p.accent+"14":"none",border:"none",cursor:"pointer",position:"relative",
               borderRadius:mob?12:0,
-              fontSize:mob?10:13,fontWeight:isActive?600:400,fontFamily:SYNE,letterSpacing:"0",
+              fontSize:mob?10:13,fontWeight:isActive?600:400,fontFamily:SF,letterSpacing:"0",
               color:isActive?p.accent:p.label3,transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)",
               borderBottom:mob?"none":(isActive?"2.5px solid "+p.accent:"2.5px solid transparent"),
               marginBottom:mob?0:"-0.5px",whiteSpace:"nowrap",flex:mob?1:"none",
