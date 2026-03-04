@@ -885,33 +885,66 @@ function GlassCard({item,index,c,dk,onAction}){
 // Settings modal
 function SettingsModal({c,dk,onClose}){
   var[key,setKey]=useState(function(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}});
-  function save(){setKeyStore(key);onClose();}
+  var[prompt,setPrompt]=useState(function(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}});
+  var[showKey,setShowKey]=useState(false);
+  function save(){
+    try{localStorage.setItem("radar_api_key",key);}catch(e){}
+    try{localStorage.setItem("radar_custom_prompt",prompt);window.__RADAR_CUSTOM_PROMPT=prompt;}catch(e){}
+    onClose();
+  }
+  function resetPrompt(){setPrompt("");try{localStorage.removeItem("radar_custom_prompt");window.__RADAR_CUSTOM_PROMPT="";}catch(e){}}
+  var iStyle={width:"100%",padding:"10px 14px",borderRadius:10,border:"0.5px solid "+c.border,
+    background:c.glassThin,backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
+    color:c.l1,outline:"none"};
   return(
     <div style={{position:"fixed",inset:0,zIndex:9000,display:"flex",alignItems:"center",justifyContent:"center",
       background:"rgba(0,0,0,"+(dk?"0.6":"0.3")+")",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}
       onClick={onClose}>
       <div onClick={function(e){e.stopPropagation();}}
-        style={{width:Math.min(400,window.innerWidth-48),padding:28,borderRadius:22,
+        style={{width:Math.min(520,window.innerWidth-32),maxHeight:"85vh",overflowY:"auto",padding:28,borderRadius:22,
           background:dk?c.glass:c.glassH,backdropFilter:"blur(40px) saturate(180%)",WebkitBackdropFilter:"blur(40px) saturate(180%)",
           border:"0.5px solid "+c.border,
           boxShadow:"0 24px 80px rgba(0,0,0,"+(dk?"0.5":"0.15")+"), inset 0 1px 0 "+c.highlight}}>
-        <h2 style={{fontSize:20,fontWeight:700,fontFamily:FD,color:c.l1,marginBottom:20,letterSpacing:"-0.02em"}}>Settings</h2>
-        <label style={{fontSize:13,fontFamily:FT,color:c.l3,display:"block",marginBottom:6}}>API Key</label>
-        <input value={key} onChange={function(e){setKey(e.target.value);}} type="password"
-          style={{width:"100%",padding:"10px 14px",borderRadius:10,border:"0.5px solid "+c.border,
-            background:c.glassThin,backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
-            color:c.l1,fontSize:14,fontFamily:FM,outline:"none"}} />
-        <div style={{display:"flex",gap:8,marginTop:20}}>
-          <button onClick={save} style={{flex:1,padding:"11px 0",borderRadius:12,border:"none",
-            background:c.blue,color:"#fff",fontSize:15,fontFamily:FT,fontWeight:600,cursor:"pointer"}}>Save</button>
-          <button onClick={onClose} style={{padding:"11px 20px",borderRadius:12,border:"none",
+        <h2 style={{fontSize:20,fontWeight:700,fontFamily:FD,color:c.l1,marginBottom:24,letterSpacing:"-0.02em"}}>Settings</h2>
+
+        <label style={{fontSize:11,fontFamily:FT,color:c.l3,display:"block",marginBottom:6,fontWeight:600,letterSpacing:"0.06em",textTransform:"uppercase"}}>API Key</label>
+        <div style={{display:"flex",gap:8,marginBottom:24}}>
+          <input value={key} onChange={function(e){setKey(e.target.value);}} type={showKey?"text":"password"} placeholder="sk-ant-..."
+            style={Object.assign({},iStyle,{flex:1,fontSize:14,fontFamily:FM})} />
+          <button onClick={function(){setShowKey(!showKey);}} style={{padding:"0 14px",borderRadius:10,border:"0.5px solid "+c.border,
+            background:c.glassThin,color:c.l3,fontSize:13,fontFamily:FT,cursor:"pointer",transition:"color 0.2s"}}
+            onMouseEnter={function(e){e.currentTarget.style.color=c.l1;}}
+            onMouseLeave={function(e){e.currentTarget.style.color=c.l3;}}>
+            {showKey?"Hide":"Show"}
+          </button>
+        </div>
+
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:6}}>
+          <label style={{fontSize:11,fontFamily:FT,color:c.l3,fontWeight:600,letterSpacing:"0.06em",textTransform:"uppercase"}}>Synthesis Prompt</label>
+          {prompt&&<button onClick={resetPrompt} style={{fontSize:12,fontFamily:FT,color:c.blue,background:"none",border:"none",cursor:"pointer"}}>Reset</button>}
+        </div>
+        <p style={{fontSize:13,fontFamily:FT,color:c.l4,marginBottom:8,lineHeight:1.5}}>
+          Customize how RADAR analyzes data and what it surfaces. Leave empty for the built-in prompt.
+        </p>
+        <textarea value={prompt} onChange={function(e){setPrompt(e.target.value);}}
+          placeholder="Leave empty for default. Or write a custom system prompt..."
+          rows={10}
+          style={Object.assign({},iStyle,{resize:"vertical",lineHeight:1.55,fontSize:13,fontFamily:FT,minHeight:160})} />
+
+        <div style={{display:"flex",gap:8,marginTop:24}}>
+          <button onClick={save} style={{flex:1,padding:"12px 0",borderRadius:12,border:"none",
+            background:c.blue,color:"#fff",fontSize:15,fontFamily:FT,fontWeight:600,cursor:"pointer",
+            transition:"transform 0.15s"}}
+            onMouseDown={function(e){e.currentTarget.style.transform="scale(0.97)";}}
+            onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+            onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>Save</button>
+          <button onClick={onClose} style={{padding:"12px 20px",borderRadius:12,border:"none",
             background:c.f4,color:c.l2,fontSize:15,fontFamily:FT,fontWeight:500,cursor:"pointer"}}>Cancel</button>
         </div>
       </div>
     </div>
   );
 }
-
 // ============================================================
 // MAIN APP
 // ============================================================
