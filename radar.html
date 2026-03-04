@@ -28,6 +28,7 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;}
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
+const PASS_HASH="f226a9d29cdb97d342436fe240a05ca06bb3cb037025874347b5ae06f1bf963b";
 async function sha256(str){
   const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
@@ -1585,8 +1586,18 @@ function SiftIntel(){
   </div>);
 }
 
+class ErrorBoundary extends React.Component{
+  constructor(props){super(props);this.state={error:null};}
+  static getDerivedStateFromError(error){return{error};}
+  render(){
+    if(this.state.error)return React.createElement("div",{style:{padding:40,color:"#f44",fontFamily:"monospace",fontSize:13,whiteSpace:"pre-wrap",background:"#111",height:"100vh",overflow:"auto"}},
+      "RADAR Error:\n\n"+this.state.error.toString()+"\n\n"+(this.state.error.stack||""));
+    return this.props.children;
+  }
+}
+
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(AuthGate, null, React.createElement(SiftIntel)));
+root.render(React.createElement(ErrorBoundary, null, React.createElement(AuthGate, null, React.createElement(SiftIntel))));
 
 </script>
 </body>
