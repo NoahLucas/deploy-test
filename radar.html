@@ -12,11 +12,6 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;}
 #root{height:100%;}
-#auth-root{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:#0a0a0c;color:#e8e6e2;font-family:'IBM Plex Sans',sans-serif;}
-#auth-root input{padding:10px 16px;border-radius:6px;border:1px solid rgba(200,205,210,0.15);background:rgba(200,205,210,0.06);color:#e8e6e2;font-size:14px;width:220px;text-align:center;font-family:'JetBrains Mono',monospace;outline:none;}
-#auth-root input:focus{border-color:rgba(200,205,210,0.3);}
-#auth-root button{padding:8px 24px;border-radius:6px;border:none;background:rgba(200,205,210,0.12);color:#e8e6e2;font-size:13px;cursor:pointer;font-family:'IBM Plex Sans',sans-serif;font-weight:500;transition:background 0.15s;}
-#auth-root button:hover{background:rgba(200,205,210,0.2);}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:0.8}}
@@ -27,13 +22,12 @@ html,body{height:100%;overflow:hidden;font-family:'IBM Plex Sans',sans-serif;}
 </style>
 </head>
 <body>
-<div id="auth-root"></div>
-<div id="root" style="display:none"></div>
+<div id="root"></div>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script>
-// --- AUTH GATE ---
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback, useMemo } = React;
 async function sha256(str){
   const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
@@ -96,10 +90,6 @@ function AuthGate({children}){
   );
 }
 // --- END AUTH GATE ---
-// --- END AUTH GATE ---
-</script>
-<script type="text/babel">
-const{useState,useEffect,useRef,useCallback,useMemo}=React;
 
 // ============================================================
 // RADAR V6 — Rapid Analysis, Decision And Response
@@ -1596,7 +1586,7 @@ function SiftIntel(){
 }
 
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(SiftIntel));
+root.render(React.createElement(AuthGate, null, React.createElement(SiftIntel)));
 
 </script>
 </body>
