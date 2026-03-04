@@ -633,6 +633,38 @@ window.fetch=function(url,opts){
 };
 
 // ============================================================
+
+function evLabel(ev){
+  if(ev.label&&ev.label.trim())return ev.label.trim();
+  var srcName=SVC[ev.source]?.label||ev.source||"";
+  if(!ev.url)return srcName||"Link";
+  try{
+    var u=new URL(ev.url);
+    var host=u.hostname.replace(/^www\./,"");
+    var path=u.pathname.split("/").filter(Boolean);
+    if(host.includes("amplitude")){
+      if(path.includes("chart"))return srcName+": Chart "+path.slice(-1)[0];
+      if(path.includes("dashboard"))return srcName+": Dashboard";
+      return srcName+(path.length>2?": "+path.slice(-1)[0]:"");
+    }
+    if(host.includes("linear")){
+      var last=path.slice(-1)[0]||"";
+      if(/^[A-Z]+-\d+$/.test(last))return last;
+      return srcName+(last?": "+last:"");
+    }
+    if(host.includes("slack"))return srcName+": thread";
+    if(host.includes("docs.google"))return "Google Doc";
+    if(host.includes("calendar.google"))return srcName+": event";
+    if(host.includes("granola"))return srcName+": meeting notes";
+    if(host.includes("gmail"))return "Gmail: message";
+    if(path.length>0){
+      var seg=decodeURIComponent(path.slice(-1)[0]).replace(/[-_]/g," ");
+      return seg.length>30?seg.slice(0,28)+"\u2026":seg;
+    }
+    return srcName||host.replace(/\.com$|\.io$|\.app$/,"")||"Link";
+  }catch(e){return srcName||"Link";}
+}
+
 // V7 UI — Liquid Glass, Single Feed
 // ============================================================
 
