@@ -2,37 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#e5e4e1" media="(prefers-color-scheme: light)">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
 <title>RADAR — Rapid Decision And Response</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body, #root { height: 100%; width: 100%; overflow: hidden; }
-  body { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
-  /* Apple-style scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.5); }
-  /* Hide scrollbar for tab bar */
-  div::-webkit-scrollbar { height: 0; }
-  /* Smooth transitions */
-  button { transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); }
-  button:active { transform: scale(0.97); }
-  @media (prefers-color-scheme: dark) { body { background: #0a0a0c; color: #e8e6e2; } }
-  @media (prefers-color-scheme: light) { body { background: #e5e4e1; color: #121210; } }
-  /* Mobile touch optimization */
-  @media (max-width: 767px) {
-    button, [role="button"] { min-height: 44px; min-width: 44px; }
-    ::-webkit-scrollbar { width: 0; height: 0; }
-  }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+html{scroll-behavior:smooth;}
+body{overscroll-behavior:none;font-family:-apple-system,'SF Pro Text','Helvetica Neue',system-ui,sans-serif;}
+::-webkit-scrollbar{display:none;}
+@keyframes glassIn{from{opacity:0;transform:translateY(20px) scale(0.97);filter:blur(6px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+@keyframes headerIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(0.97);}}
+@keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-25px,30px) scale(1.03);}66%{transform:translate(20px,-25px) scale(0.98);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
 </style>
 </head>
 <body>
@@ -41,9 +24,11 @@
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel" data-type="module">
-const { useState, useEffect, useRef, useCallback, useMemo } = React;
+const {useState,useEffect,useRef,useCallback,useMemo} = React;
 
-// --- AUTH GATE ---
+// ============================================================
+// ENGINE — Auth, Data, Parsing, Synthesis (from V5 production)
+// ============================================================
 const PASS_HASH="f226a9d29cdb97d342436fe240a05ca06bb3cb037025874347b5ae06f1bf963b";
 async function sha256(str){
   const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
@@ -552,22 +537,61 @@ async function synthesizeLiveMCP(onProgress){
   return{insights:parsed.insights||[],meta:{duration:dur,errors:[],sourcesOk:5,live:true}};
 }
 
+async function synthesizeFresh(onInsight, onProgress){
+  var t0=Date.now();
+  onProgress("Researching current state...");
+  var today=new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  var time=new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-5-20250929",max_tokens:8000,
+      tools:[{type:"web_search_20250305",name:"web_search",max_uses:8}],
+      system:"You are RADAR, a product intelligence engine for Sift (siftstack.com), a unified telemetry observability platform for aerospace, defense, and robotics. The user is Noah Lucas, VP of Product at Sift.\n\nSift customers include: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, ULA, Lockheed Martin, Parallel Systems, The Exploration Company, OHB, Dust Moto.\nKey team: Kenn (vertical discovery PM), Sanghee (core platform PM), Jess (canvas PM), Rowen (infra PM), Kevin (eng manager), Gui (FDE lead). Cofounders: Austin (CEO), Karthik (CTO).\n2026 strategy: Signal > Evidence > Decision. Three pillars: Nail the Core, Embed Deeper, Build the Moat. North Star metric: Decisions Captured Per Customer.\nKey products: Explore V2, Canvas, Python Rules, Sift Edge, Ask SIFT (AI).\n\nUse web search to find:\n1. Recent news about Sift or siftstack.com\n2. Recent developments at key customers (launches, funding, contracts)\n3. Industry trends in aerospace/defense telemetry, observability\n4. Any competitor activity (Grafana, Datadog in hardware/aerospace)\n\nThen synthesize 8-12 actionable intelligence items.\n\nRESPOND WITH ONLY VALID JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence analysis>\",\"action\":\"<specific next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <person or team>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"web\"],\"evidence\":[{\"label\":\"<descriptive title>\",\"url\":\"<real URL from search>\",\"source\":\"web\"}],\"context\":{\"metric\":\"<if available>\",\"delta\":\"<if available>\"},\"sparkline\":[]}]}\n\nPriority: URGENT=immediate business impact, HIGH=act today, MEDIUM=this week, LOW=FYI/positive",
+      messages:[{role:"user",content:"Today is "+today+" at "+time+". Research fresh intelligence for Sift and synthesize actionable items. Focus on customer developments, industry trends, and competitive dynamics that affect our product strategy."}],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+  }
+  onProgress("Analyzing results...");
+  var d=await r.json();
+  if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
+  var texts=(d.content||[]).filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("\n");
+  if(!texts) throw new Error("No text in response");
+  var parsed=robustParseFinal(texts);
+  var dur=((Date.now()-t0)/1000).toFixed(1);
+  if(parsed&&parsed.insights){
+    parsed.meta={duration:dur,live:false,fresh:true,sources_scanned:1};
+    parsed.insights.forEach(function(ins,i){if(onInsight)onInsight(ins,i);});
+    return parsed;
+  }
+  throw new Error("Could not parse fresh scan results");
+}
+
 async function runLiveScan(onInsight, onProgress){
-  // Check if user wants live MCP mode (settings toggle)
   var liveMode=false;
   try{liveMode=window.__RADAR_LIVE_MODE===true;}catch(e){}
   if(liveMode){
-    // Live MCP: non-streaming (MCP + stream incompatible), but pulls FRESH data
     onProgress("LIVE: gathering from Slack, Linear, Calendar, Amplitude...");
     return synthesizeLiveMCP(onProgress);
   }
-  // Default: data.json + streaming Haiku (fastest perceived speed)
-  if(!LIVE_DATA){
-    onProgress("Loading data...");
-    await loadData();
-    if(!LIVE_DATA) throw new Error("No data available. Place data.json alongside this file.");
+  // Try fresh scan via web search (no stale data)
+  onProgress("Starting fresh scan...");
+  try{
+    return await synthesizeFresh(onInsight, onProgress);
+  }catch(freshErr){
+    console.warn("[radar] Fresh scan failed, falling back to data.json:",freshErr.message);
+    // Fallback to data.json + streaming synthesis
+    if(!LIVE_DATA){
+      onProgress("Loading cached data...");
+      await loadData();
+      if(!LIVE_DATA) throw new Error("No data available and fresh scan failed: "+freshErr.message);
+    }
+    onProgress("Using cached data (fresh scan unavailable)...");
+    return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
   }
-  return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
 }
 
 function useTheme(){
@@ -582,2306 +606,409 @@ function useMobile(){
   return m;
 }
 
-function timeAgo(d){
-  const s=Math.floor((Date.now()-new Date(d).getTime())/1000);
-  if(s<60)return"now"; if(s<3600)return`${Math.floor(s/60)}m`;
-  if(s<86400)return`${Math.floor(s/3600)}h`; return`${Math.floor(s/86400)}d`;
-}
 
-function timeGroup(d){
-  const h=(Date.now()-new Date(d).getTime())/36e5;
-  if(h<1)return"Just Now"; if(h<24)return"Today";
-  if(h<168)return"This Week"; return"Earlier";
-}
+// ============================================================
+// V7 UI — Liquid Glass, Single Feed
+// ============================================================
 
-function pri(ins,p){const pr=PRI[ins.priority]||PRI.MEDIUM;const c=pr.color(p);return{...pr,c,bg:`${c}${pr.bgA}`};}
+const FD = "-apple-system,'SF Pro Display','Helvetica Neue',system-ui,sans-serif";
+const FT = "-apple-system,'SF Pro Text','Helvetica Neue',system-ui,sans-serif";
+const FM = "'SF Mono','Menlo',monospace";
 
-function glass(p,opts){
-  if(!opts)opts={};
-  const{elevated,hover,active,tint,noBorder,clear}=opts;
-  // Liquid Glass: three-layer material system
-  // Layer 1: Backdrop blur + saturation (frosted depth)
-  // Layer 2: Tinted fill with adaptive opacity
-  // Layer 3: Specular highlight + shadow for physical presence
-  const blur=elevated?28:clear?12:20;
-  const sat=elevated?160:140;
-  const brightness=hover?1.08:1.02;
-  const bg=active?p.glassActive:hover?p.glassHover:tint||p.glass;
-  return{
-    background:bg,
-    backdropFilter:`blur(${blur}px) saturate(${sat}%) brightness(${brightness})`,
-    WebkitBackdropFilter:`blur(${blur}px) saturate(${sat}%) brightness(${brightness})`,
-    border:noBorder?"none":`0.5px solid ${p.glassBorder}`,
-    boxShadow:[
-      // Outer shadow — depth separation from background
-      elevated?`0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10)`:`0 1px 4px rgba(0,0,0,0.08)`,
-      // Inner specular — top-edge light catch (Liquid Glass highlight layer)
-      `inset 0 1px 0 ${p.specularEdge}`,
-      // Inner illumination — subtle ambient glow
-      `inset 0 0 0 0.5px ${p.glassBorder}`,
-    ].join(","),
+function meshColors(dk,hour){
+  if(!dk)return{
+    m1:"radial-gradient(ellipse 80% 60% at 25% 25%, rgba(140,170,220,0.22) 0%, transparent 70%)",
+    m2:"radial-gradient(ellipse 60% 70% at 70% 70%, rgba(180,140,210,0.14) 0%, transparent 70%)",
+    m3:"radial-gradient(ellipse 50% 50% at 50% 15%, rgba(120,200,170,0.10) 0%, transparent 60%)",
   };
+  var morning=hour>=6&&hour<12,evening=hour>=17||hour<6;
+  return{
+    m1:"radial-gradient(ellipse 80% 60% at 20% 30%, rgba("+(morning?"120,100,60":evening?"40,60,120":"60,90,140")+",0.16) 0%, transparent 70%)",
+    m2:"radial-gradient(ellipse 60% 70% at 75% 65%, rgba("+(morning?"140,90,60":evening?"80,50,130":"120,80,160")+",0.10) 0%, transparent 70%)",
+    m3:"radial-gradient(ellipse 50% 50% at 50% 20%, rgba("+(morning?"100,120,60":evening?"40,80,100":"80,140,120")+",0.07) 0%, transparent 60%)",
+  };
+}
+
+var CP={
+  dark:{
+    bg:"#000000",
+    glass:"rgba(56,56,62,0.44)",glassH:"rgba(66,66,72,0.56)",glassThin:"rgba(56,56,62,0.28)",
+    border:"rgba(255,255,255,0.11)",borderH:"rgba(255,255,255,0.20)",
+    highlight:"rgba(255,255,255,0.06)",highlightH:"rgba(255,255,255,0.10)",
+    l1:"#FFFFFF",l2:"rgba(235,235,245,0.60)",l3:"rgba(235,235,245,0.30)",l4:"rgba(235,235,245,0.16)",
+    f3:"rgba(118,118,128,0.24)",f4:"rgba(118,118,128,0.16)",
+    blue:"#0A84FF",green:"#30D158",red:"#FF453A",orange:"#FF9F0A",
+    blueTint:"rgba(10,132,255,0.18)",greenTint:"rgba(48,209,88,0.16)",redTint:"rgba(255,69,58,0.16)",
+  },
+  light:{
+    bg:"#F4F4F9",
+    glass:"rgba(255,255,255,0.58)",glassH:"rgba(255,255,255,0.76)",glassThin:"rgba(255,255,255,0.36)",
+    border:"rgba(255,255,255,0.55)",borderH:"rgba(255,255,255,0.80)",
+    highlight:"rgba(255,255,255,0.65)",highlightH:"rgba(255,255,255,0.85)",
+    l1:"#000000",l2:"rgba(60,60,67,0.58)",l3:"rgba(60,60,67,0.30)",l4:"rgba(60,60,67,0.16)",
+    f3:"rgba(118,118,128,0.12)",f4:"rgba(116,116,128,0.08)",
+    blue:"#007AFF",green:"#34C759",red:"#FF3B30",orange:"#FF9500",
+    blueTint:"rgba(0,122,255,0.12)",greenTint:"rgba(52,199,89,0.12)",redTint:"rgba(255,59,48,0.12)",
+  },
 };
 
-// Liquid Glass specular highlight overlay — simulates light refraction on curved glass
-function Spec({r,i,direction}){
-  var rr=r||16,ii=i||0.06;
-  var dir=direction||135;
-  return <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,borderRadius:rr,pointerEvents:"none",zIndex:1,
-    background:`linear-gradient(${dir}deg, rgba(255,255,255,${ii}) 0%, rgba(255,255,255,${ii*0.3}) 30%, transparent 60%)`,
-    mixBlendMode:"overlay"}}/>
-}
+var SRCICON={amplitude:"\u{1F4CA}",slack:"\u{1F4AC}",linear:"\u25C6",calendar:"\u{1F4C5}",web:"\u{1F310}",granola:"\u{1F399}",gmail:"\u2709"};
 
-function AmbientMesh({dk,hasUrgent}){
-  return(
-    <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,overflow:"hidden"}}>
-      {dk ? <>
-        {/* Dark: subtle chromatic orbs for glass to refract */}
-        <div style={{position:"absolute",width:"70vmax",height:"70vmax",borderRadius:"50%",top:"-15%",left:"-15%",
-          background:`radial-gradient(circle, rgba(100,140,180,0.04) 0%, transparent 65%)`,
-          animation:"meshDrift1 25s ease-in-out infinite",filter:"blur(60px)"}}/>
-        <div style={{position:"absolute",width:"55vmax",height:"55vmax",borderRadius:"50%",bottom:"-8%",right:"-12%",
-          background:`radial-gradient(circle, rgba(130,120,170,0.03) 0%, transparent 65%)`,
-          animation:"meshDrift2 30s ease-in-out infinite",filter:"blur(60px)"}}/>
-        <div style={{position:"absolute",width:"40vmax",height:"40vmax",borderRadius:"50%",top:"40%",left:"50%",
-          background:`radial-gradient(circle, rgba(90,150,140,0.02) 0%, transparent 60%)`,
-          animation:"meshDrift1 35s ease-in-out infinite reverse",filter:"blur(50px)"}}/>
-        {hasUrgent&&<div style={{position:"absolute",width:"80vmax",height:"20vmax",borderRadius:"50%",top:"-10%",left:"10%",
-          background:`radial-gradient(ellipse, rgba(194,100,80,0.06) 0%, transparent 70%)`,
-          animation:"meshPulse 4s ease-in-out infinite",filter:"blur(30px)"}}/>}
-      </> : <>
-        {/* Light: warm ambient washes — Liquid Glass refracts warmer in light mode */}
-        <div style={{position:"absolute",inset:0,
-          background:"radial-gradient(ellipse at 25% 15%, rgba(200,190,170,0.30) 0%, transparent 55%)"}}/>
-        <div style={{position:"absolute",width:"60vmax",height:"60vmax",borderRadius:"50%",bottom:"-10%",right:"0%",
-          background:"radial-gradient(circle, rgba(160,180,200,0.08) 0%, transparent 55%)",filter:"blur(40px)"}}/>
-        <div style={{position:"absolute",width:"40vmax",height:"40vmax",borderRadius:"50%",top:"30%",left:"60%",
-          background:"radial-gradient(circle, rgba(140,170,150,0.04) 0%, transparent 50%)",filter:"blur(50px)"}}/>
-        {/* Film grain — very subtle texture for Liquid Glass surface depth */}
-        <div style={{position:"absolute",inset:0,opacity:0.015,
-          backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize:"128px 128px"}}/>
-      </>}
-    </div>
-  );
-}
-
-function UrgencyBar({count,p,onClick,dk}){
-  if(count===0) return null;
-  return(<div onClick={onClick} style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:100,cursor:"pointer",
-    background:`linear-gradient(90deg, transparent, ${p.red}, transparent)`,
-    boxShadow:dk?`0 0 10px ${p.red}40`:`0 1px 3px ${p.red}25`,
-    animation:dk?"urgencyPulse 3s ease-in-out infinite":"none"}}/>);
-}
-
-function Sparkline(props){
-  var data=props.data||[],color=props.color,width=props.width||56,height=props.height||20;
-  if(!data||data.length<2) return null;
-  const max=Math.max(...data)||1, min=Math.min(...data), range=max-min||1;
-  const pts=data.map((v,i)=>({x:(i/(data.length-1))*width,y:height-((v-min)/range)*height*0.85-height*0.075}));
-  let d=`M${pts[0].x},${pts[0].y}`;
-  for(let i=1;i<pts.length;i++){
-    const p0=pts[Math.max(0,i-2)],p1=pts[i-1],p2=pts[i],p3=pts[Math.min(pts.length-1,i+1)];
-    d+=` C${p1.x+(p2.x-p0.x)/6},${p1.y+(p2.y-p0.y)/6} ${p2.x-(p3.x-p1.x)/6},${p2.y-(p3.y-p1.y)/6} ${p2.x},${p2.y}`;
-  }
-  const fillD=d+` L${width},${height} L0,${height} Z`;
-  const id=`sp-${Math.random().toString(36).slice(2,8)}`;
-  return(
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{flexShrink:0,display:"block"}}>
-      <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor={color} stopOpacity={0.25}/><stop offset="100%" stopColor={color} stopOpacity={0}/>
-      </linearGradient></defs>
-      <path d={fillD} fill={`url(#${id})`}/>
-      <path d={d} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx={pts[pts.length-1].x} cy={pts[pts.length-1].y} r={2} fill={color}/>
-    </svg>
-  );
-}
-
-function SkeletonCard({p,mob,index}){
-  var delay=(index||0)*120;
-  var shimBg="linear-gradient(90deg,"+p.skeleton+" 25%,"+p.skeletonShine+" 50%,"+p.skeleton+" 75%)";
-  var bar=function(w,h,mt){return{width:w,height:h,marginTop:mt||0,borderRadius:h>6?6:3,background:shimBg,backgroundSize:"200% 100%",animation:"shimmer 1.8s ease-in-out infinite",animationDelay:delay+"ms"};};
-  return(
-    <div style={{padding:mob?"14px 16px":"16px 20px",borderBottom:"0.5px solid "+p.sep}}>
-      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-        <div style={bar(48,10)}/>
-        <div style={bar(32,10)}/>
-        <div style={{flex:1}}/>
-        <div style={bar(56,10)}/>
-      </div>
-      <div style={bar("85%",13)}/>
-      <div style={bar("60%",11,8)}/>
-      <div style={{display:"flex",gap:8,marginTop:12}}>
-        <div style={bar(64,22)}/>
-        <div style={bar(48,22)}/>
-      </div>
-    </div>
-  );
-}
-
-function SkeletonFeed({p,mob,count}){
-  var n=count||5;
-  var cards=[];
-  for(var i=0;i<n;i++){cards.push(<SkeletonCard key={i} p={p} mob={mob} index={i}/>);}
-  return <div>{cards}</div>;
-}
-
-function Badge({priority,p,small}){
-  const pr=pri({priority},p);
-  return(
-    <span style={{display:"inline-flex",alignItems:"center",gap:small?3:5,
-      padding:small?"2px 7px 2px 5px":"3px 10px 3px 8px",borderRadius:100,
-      background:pr.bg,border:`0.5px solid ${pr.c}30`}}>
-      {pr.pulse&&<span style={{width:small?4:5,height:small?4:5,borderRadius:"50%",background:pr.c,animation:"sp 2s ease-in-out infinite"}}/>}
-      <span style={{fontSize:small?9:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:pr.c}}>{pr.label}</span>
-    </span>
-  );
-}
-
-var CAT_META={
-  insight:{icon:"\u26A0",label:"INSIGHT"},
-  prep:{icon:"\u{1F4CB}",label:"PREP"},
-  nudge:{icon:"\u{1F449}",label:"NUDGE"},
-  leverage:{icon:"\u2693",label:"LEVERAGE"},
-  blind_spot:{icon:"\u{1F441}",label:"BLIND SPOT"},
-  momentum:{icon:"\u26A1",label:"MOMENTUM"},
-};
-
-function CatTag({category,p}){
-  var cat=CAT_META[category]||CAT_META.insight;
-  return(
-    <span style={{display:"inline-flex",alignItems:"center",gap:3,
-      padding:"2px 7px",borderRadius:100,background:p.fill4,
-      fontSize:9,fontWeight:600,letterSpacing:"0.06em",fontFamily:MONO,color:p.label3}}>
-      <span style={{fontSize:10}}>{cat.icon}</span>{cat.label}
-    </span>
-  );
-}
-
-function Srcs({sources,p,compact,dk}){
-  return(
-    <span style={{display:"inline-flex",gap:compact?3:5,alignItems:"center"}}>
-      {sources.map(s=><span key={s} title={SVC[s]?.label} style={{fontSize:compact?11:12,lineHeight:1,opacity:0.9,filter:`drop-shadow(0 0 2px ${svcColor(s,dk)}40)`}}>{SVC[s]?.icon}</span>)}
-    </span>
-  );
-}
-
-function evLabel(ev){
-  if(ev.label&&ev.label.trim())return ev.label.trim();
-  var srcName=SVC[ev.source]?.label||ev.source||"";
-  if(!ev.url)return srcName||"Link";
-  try{
-    var u=new URL(ev.url);
-    var host=u.hostname.replace(/^www\./,"");
-    var path=u.pathname.split("/").filter(Boolean);
-    if(host.includes("amplitude")){
-      if(path.includes("chart"))return srcName+": Chart "+path.slice(-1)[0];
-      if(path.includes("dashboard"))return srcName+": Dashboard";
-      return srcName+(path.length>2?": "+path.slice(-1)[0]:"");
+// Animated counter
+function AnimNum({value,dur}){
+  var duration=dur||800;
+  var[display,setDisplay]=useState(0);
+  var ref=useRef();
+  useEffect(function(){
+    var target=parseInt(value)||0;
+    if(target===0){setDisplay(value);return;}
+    var start=null;
+    function tick(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/duration,1);
+      var ease=1-Math.pow(1-p,4);
+      setDisplay(Math.round(target*ease));
+      if(p<1)ref.current=requestAnimationFrame(tick);
     }
-    if(host.includes("linear")){
-      var last=path.slice(-1)[0]||"";
-      if(/^[A-Z]+-\d+$/.test(last))return last;
-      return srcName+(last?": "+last:"");
-    }
-    if(host.includes("slack")){
-      return srcName+": thread";
-    }
-    if(host.includes("docs.google")){return "Google Doc";}
-    if(host.includes("calendar.google")){return srcName+": event";}
-    if(host.includes("granola")){return srcName+": meeting notes";}
-    if(host.includes("gmail")){return "Gmail: message";}
-    if(path.length>0){
-      var seg=decodeURIComponent(path.slice(-1)[0]).replace(/[-_]/g," ");
-      return seg.length>30?seg.slice(0,28)+"\u2026":seg;
-    }
-    return srcName||host.replace(/\.com$|\.io$|\.app$/,"")||"Link";
-  }catch(e){return srcName||"Link";}
+    ref.current=requestAnimationFrame(tick);
+    return function(){cancelAnimationFrame(ref.current);};
+  },[value,duration]);
+  return <span>{display}</span>;
 }
 
-function EvChip({ev,p,dk}){
-  const[h,setH]=useState(false);
-  var lbl=evLabel(ev);
-  return(
-    <a href={ev.url} target="_blank" rel="noopener noreferrer"
-      onClick={e=>e.stopPropagation()}
-      onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
-      style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:10,textDecoration:"none",
-        fontSize:12,fontFamily:MONO,fontWeight:500,color:p.label2,
-        transition:"all 0.2s cubic-bezier(0.25,0.46,0.45,0.94)",position:"relative",overflow:"hidden",...glass(p,{hover:h})}}>
-      <span style={{fontSize:11,color:svcColor(ev.source,dk)}}>{SVC[ev.source]?.icon}</span>
-      <span style={{opacity:h?1:0.8,transition:"opacity 0.2s"}}>{lbl}</span>
-      <span style={{fontSize:9,opacity:0.3,marginLeft:2}}>{"\u2197"}</span>
-    </a>
-  );
-}
+// Glass Card
+function GlassCard({item,index,c,dk,onAction}){
+  var[h,setH]=useState(false);
+  var[actH,setActH]=useState(false);
+  var[actP,setActP]=useState(false);
+  var[evEx,setEvEx]=useState(false);
+  var[specPos,setSpecPos]=useState({x:50,y:0});
+  var cardRef=useRef(null);
 
-function EvidenceRow({ev,p,dk}){
-  const[h,setH]=useState(false);
-  var lbl=evLabel(ev);
-  return(
-    <a href={ev.url} target="_blank" rel="noopener noreferrer"
-      onClick={e=>e.stopPropagation()}
-      onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
-      style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",borderRadius:8,textDecoration:"none",
-        background:h?p.fill4:"transparent",transition:"background 0.15s",cursor:"pointer"}}>
-      <span style={{fontSize:11,color:svcColor(ev.source,dk),flexShrink:0,width:16,textAlign:"center"}}>{SVC[ev.source]?.icon}</span>
-      <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:h?p.label:p.label2,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{lbl}</span>
-      <span style={{fontSize:9,color:p.label4,flexShrink:0}}>{"\u2197"}</span>
-    </a>
-  );
-}
-
-function EvidenceTip({evidence,p,dk,children}){
-  const[show,setShow]=useState(false);
-  const[pos,setPos]=useState({x:0,y:0,w:0});
-  const ref=useRef(null);
-  const timerRef=useRef(null);
-  const TIP_W=280;
-  function enter(e){
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left,y:rect.top,w:rect.width});
-    setShow(true);
-  }
-  function toggle(e){
-    e.stopPropagation();
-    if(show){setShow(false);return;}
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left,y:rect.top,w:rect.width});
-    setShow(true);
-    clearTimeout(timerRef.current);
-    timerRef.current=setTimeout(()=>setShow(false),5000);
-  }
-  useEffect(()=>()=>clearTimeout(timerRef.current),[]);
-  if(!evidence||evidence.length===0)return children||null;
-  var tipLeft=Math.max(8,Math.min(pos.x,window.innerWidth-TIP_W-8));
-  return(
-    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
-      onClick={toggle} onTouchStart={toggle}
-      style={{position:"relative",WebkitTapHighlightColor:"transparent"}}>
-      {children}
-      {show&&ReactDOM.createPortal(
-        <div onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)}
-          onClick={e=>e.stopPropagation()}
-          style={{position:"fixed",left:tipLeft,top:Math.max(8,pos.y-8),
-          transform:"translateY(-100%)",
-          width:TIP_W,padding:"10px 6px",borderRadius:12,
-          background:p?.bgElevated||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
-          fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
-          boxShadow:"0 12px 48px rgba(0,0,0,"+(p===PAL.dark?"0.45":"0.15")+"), 0 0 0 0.5px "+(p?.glassBorder||"#333"),
-          animation:"fadeIn 0.15s ease"}}>
-          <div style={{position:"absolute",bottom:-12,left:0,right:0,height:12}} />
-          <div style={{fontSize:9,fontWeight:700,letterSpacing:"0.1em",color:p.label4,padding:"0 10px 6px",borderBottom:"0.5px solid "+p.glassBorder,marginBottom:4}}>EVIDENCE ({evidence.length})</div>
-          {evidence.map((ev,i)=><EvidenceRow key={i} ev={ev} p={p} dk={dk}/>)}
-        </div>,
-        document.body
-      )}
-    </span>
-  );
-}
-
-
-function StatePill({state,p}){
-  const cfg={done:{icon:"\u2713",label:"Done",c:p.green},snoozed:{icon:"\u25F7",label:"Snoozed",c:p.orange},dismissed:{icon:"\u2014",label:"Dismissed",c:p.gray}}[state];
-  if(!cfg) return null;
-  return(
-    <span style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:100,
-      background:`${cfg.c}18`,border:`0.5px solid ${cfg.c}25`,fontSize:10,fontWeight:600,fontFamily:MONO,color:cfg.c}}>
-      <span style={{fontSize:9}}>{cfg.icon}</span>{cfg.label}
-    </span>
-  );
-}
-
-function PreviewCard({insight,p,dk}){
-  const pr=pri(insight,p);
-  return(
-    <div style={{width:320,padding:16,borderRadius:16,position:"relative",overflow:"hidden",
-      ...glass(p,{elevated:true}),
-      boxShadow:`0 12px 48px rgba(0,0,0,${dk?0.4:0.15}), 0 0 0 0.5px ${p.glassBorder}`,
-      animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
-      <Spec r={16} i={0.08}/>
-      <div style={{position:"relative",zIndex:2}}>
-        <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-          <Badge priority={insight.priority} p={p} small/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} compact dk={dk}/>
-        </div>
-        <h4 style={{fontSize:15,fontWeight:600,color:p.label,margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.02em",lineHeight:1.3}}>{insight.headline}</h4>
-        <p style={{fontSize:13,color:p.label2,margin:"0 0 10px",fontFamily:SF,lineHeight:1.45,
-          display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
-        {insight.context&&(
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{insight.context.metric}</span>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:6,background:pr.bg}}>{insight.context.delta}</span>
-          </div>
-        )}
-        {insight.sparkline&&<div style={{marginTop:8}}><Sparkline data={insight.sparkline} color={pr.c} width={280} height={32}/></div>}
-      </div>
-    </div>
-  );
-}
-
-function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
-  const pr=pri(insight,p);
-  const ch=CH[insight.channelKey];
-  const[h,setH]=useState(false);
-  const[preview,setPreview]=useState(false);
-  const[swipeX,setSwipeX]=useState(0);
-  const[swiping,setSwiping]=useState(false);
-  const touchRef=useRef(null);
-  const previewTimer=useRef(null);
-  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
-
-  const startPreview=()=>{previewTimer.current=setTimeout(()=>setPreview(true),600);};
-  const endPreview=()=>{clearTimeout(previewTimer.current);setPreview(false);};
-
-  const onTouchStart=useCallback(e=>{
-    touchRef.current={x:e.touches[0].clientX,y:e.touches[0].clientY,scrolling:false};
+  var onMove=useCallback(function(e){
+    if(!cardRef.current)return;
+    var rect=cardRef.current.getBoundingClientRect();
+    setSpecPos({x:((e.clientX-rect.left)/rect.width)*100,y:((e.clientY-rect.top)/rect.height)*100});
   },[]);
-  const onTouchMove=useCallback(e=>{
-    if(!touchRef.current) return;
-    const dx=e.touches[0].clientX-touchRef.current.x;
-    const dy=e.touches[0].clientY-touchRef.current.y;
-    if(!touchRef.current.scrolling&&Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>10){touchRef.current.scrolling=true;}
-    if(touchRef.current.scrolling) return;
-    if(Math.abs(dx)>10){setSwiping(true);setSwipeX(dx);e.preventDefault();}
-  },[]);
-  const onTouchEnd=useCallback(()=>{
-    if(Math.abs(swipeX)>120&&onStateChange){onStateChange(insight.id,swipeX>0?"done":"dismissed");}
-    setSwiping(false);setSwipeX(0);touchRef.current=null;
-  },[swipeX,insight.id,onStateChange]);
 
-  const swipeLabel=swipeX>60?"\u2713 Done":swipeX<-60?"Dismiss":"";
+  var ev=item.evidence||[];
+  var maxEv=3;
+  var visEv=evEx?ev:ev.slice(0,maxEv);
+  var hasMore=ev.length>maxEv;
+  var pr=item.priority?PRI[(item.priority||"").toUpperCase()]:null;
 
   return(
-    <div style={{position:"relative"}}>
-      {swiping&&(
-        <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",
-          justifyContent:swipeX>0?"flex-start":"flex-end",padding:"0 28px",borderRadius:20,
-          background:swipeX>0?`${p.green}15`:`${p.gray}15`}}>
-          <span style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:swipeX>0?p.green:p.gray,
-            opacity:Math.min(1,Math.abs(swipeX)/80)}}>{swipeLabel}</span>
-        </div>
-      )}
-
-      <article
-        onClick={()=>{if(!swiping&&Math.abs(swipeX)<5)onClick(insight);}}
-        onMouseEnter={()=>{setH(true);if(!mob)startPreview();}}
-        onMouseLeave={()=>{setH(false);endPreview();}}
-        onTouchStart={mob?onTouchStart:undefined}
-        onTouchMove={mob?onTouchMove:undefined}
-        onTouchEnd={mob?onTouchEnd:undefined}
-        style={{
-          margin:mob?"0 12px":"0 16px",padding:mob?"14px 16px":"18px 22px",
-          borderRadius:24,cursor:"pointer",position:"relative",overflow:"hidden",
-          transition:swiping?"none":"all 0.4s cubic-bezier(0.34,1.56,0.64,1)",
-          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px) scale(1.003)":"translateY(0) scale(1)",
-          opacity:isDone?0.5:Math.max(0,1-Math.abs(swipeX)/200),
-          animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
-          outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:2,
-          ...glass(p,{hover:h,elevated:h}),WebkitTapHighlightColor:"transparent",
-        }}>
-
-        <Spec r={20} i={h?0.1:0.04}/>
-
-        {}
-        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,position:"relative",zIndex:2}}>
-          <Badge priority={insight.priority} p={p}/>
-          <CatTag category={insight.category} p={p}/>
-          <Srcs sources={insight.sources} p={p} compact dk={dk}/>
-          {isDone&&<StatePill state={itemState} p={p}/>}
-          <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:8}}>
-            {insight.sparkline&&!mob&&<Sparkline data={insight.sparkline} color={pr.c} width={48} height={16}/>}
-            <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500,letterSpacing:"0.02em"}}>{timeAgo(insight.timestamp)}</span>
-          </div>
-        </div>
-
-        {}
-        <h3 style={{fontSize:mob?16:18,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
-          margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.022em",position:"relative",zIndex:2,
-          textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
-
-        {}
-        <p style={{fontSize:14,color:p.label2,lineHeight:1.5,margin:"0 0 10px",fontFamily:SF,fontWeight:400,
-          position:"relative",zIndex:2,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
-
-        {}
-        {insight.context&&(
-          <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:8,position:"relative",zIndex:2}}>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:8,background:p.fill4}}>{insight.context.metric}</span>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:8,background:pr.bg}}>{insight.context.delta}</span>
-            {insight.sparkline&&mob&&<Sparkline data={insight.sparkline} color={pr.c} width={44} height={14}/>}
-          </div>
-        )}
-
-        {}
-        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
-          {insight.evidence?.length>0&&(
-            <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,flexWrap:"wrap",cursor:"pointer"}}>
-                {insight.evidence.slice(0,3).map((ev,i)=>(
-                  <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
-                    style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
-                      fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
-                    onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
-                    onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
-                    <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
-                    {(function(){var l=evLabel(ev);return l.length>22?l.slice(0,20)+"\u2026":l;})()}
-                    <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
-                  </span>
-                ))}
-                {insight.evidence.length>3&&(
-                  <span style={{fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label4,padding:"2px 6px"}}>+{insight.evidence.length-3}</span>
-                )}
-              </span>
-            </EvidenceTip>
-          )}
-          {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
-        </div>
-      </article>
-
-      {}
-      {preview&&!mob&&(
-        <div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%) translateY(-100%)",zIndex:100,pointerEvents:"none"}}>
-          <PreviewCard insight={insight} p={p} dk={dk}/>
-        </div>
-      )}
-    </div>
-  );
-}
-
-function SpeedBrief({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
-  const pr=pri(insight,p);
-  const ch=CH[insight.channelKey];
-  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
-  const srcLabels=insight.sources.map(s=>SVC[s]?.label).filter(Boolean).join(" \u00b7 ");
-
-  return(
-    <div onClick={()=>onClick(insight)} style={{
-      borderLeft:`2.5px solid ${pr.c}`,
-      marginLeft:mob?14:20,marginRight:mob?14:20,marginBottom:mob?4:6,
-      cursor:"pointer",position:"relative",
-      opacity:isDone?0.4:1,
-      animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
-      outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:4,
-      transition:"opacity 0.3s ease",
-    }}>
-      {}
-      <div style={{display:"flex",alignItems:"center",gap:6,paddingLeft:mob?12:14,marginBottom:5}}>
-        <span style={{fontSize:mob?8:9,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:pr.c,
-          ...(insight.priority==="URGENT"?{textShadow:`0 0 8px ${pr.c}60`}:{}),
-        }}>{PRI[insight.priority]?.label}</span>
-        <span style={{fontSize:8,color:p.label4,fontFamily:MONO}}>{"\u00b7"}</span>
-        <span style={{fontSize:mob?8:9,color:p.label4,fontFamily:MONO,fontWeight:500}}>{srcLabels}</span>
-        {isDone&&<StatePill state={itemState} p={p}/>}
-        <span style={{marginLeft:"auto",fontSize:mob?8:9,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
-      </div>
-
-      {}
-      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
-        <p style={{fontSize:mob?13.5:14.5,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.38,
-          margin:0,fontFamily:SF,letterSpacing:"-0.015em",
-          textDecoration:isDone?"line-through":"none",
-        }}>{insight.situation||insight.headline}</p>
-      </div>
-
-      {}
-      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
-        <p style={{fontSize:mob?11.5:12.5,color:p.label2,lineHeight:1.48,margin:0,fontFamily:SF,fontWeight:400,
-        }}>{insight.whyItMatters||insight.body}</p>
-      </div>
-
-      {}
-      <div style={{
-        marginLeft:mob?12:14,marginRight:mob?4:8,padding:mob?"7px 10px":"8px 12px",
-        borderRadius:mob?10:12,background:`${pr.c}08`,border:`0.5px solid ${pr.c}18`,
+    <article ref={cardRef}
+      onMouseEnter={function(){setH(true);}}
+      onMouseLeave={function(){setH(false);setSpecPos({x:50,y:0});}}
+      onMouseMove={h?onMove:undefined}
+      style={{
+        position:"relative",borderRadius:22,padding:"24px 26px 22px",cursor:"default",
+        background:h?c.glassH:c.glass,
+        backdropFilter:"blur(40px) saturate(180%) brightness(1.02)",
+        WebkitBackdropFilter:"blur(40px) saturate(180%) brightness(1.02)",
+        border:"0.5px solid "+(h?c.borderH:c.border),
+        boxShadow:[
+          h?"0 12px 48px rgba(0,0,0,"+(dk?"0.35":"0.10")+")":"0 1px 8px rgba(0,0,0,"+(dk?"0.12":"0.04")+")",
+          "inset 0 1px 0 "+(h?c.highlightH:c.highlight),
+          "inset 0 0 0 0.5px "+c.border,
+        ].join(","),
+        transition:"all 0.45s cubic-bezier(0.25,1,0.5,1)",
+        transform:h?"translateY(-3px) scale(1.004)":"translateY(0) scale(1)",
+        animation:"glassIn 0.6s cubic-bezier(0.16,1,0.3,1) "+(0.05+index*0.045)+"s both",
+        overflow:"hidden",
       }}>
-        <div style={{display:"flex",alignItems:"flex-start",gap:8}}>
-          <span style={{fontSize:11,color:pr.c,marginTop:1,flexShrink:0}}>{"\u2192"}</span>
-          <div style={{flex:1}}>
-            <p style={{fontSize:mob?11.5:12.5,fontWeight:500,color:p.label,lineHeight:1.45,margin:0,fontFamily:SF,
-            }}>{insight.recommendation||insight.action}</p>
-            {(insight.recTarget||ch)&&(
-              <span style={{display:"inline-block",marginTop:5,fontSize:mob?8:9,fontWeight:600,fontFamily:MONO,color:pr.c,
-                padding:"2px 8px",borderRadius:6,background:`${pr.c}14`,
-              }}>{insight.recTarget||(ch?`\u2192 ${ch.label.toUpperCase()}`:"")}</span>
+      {/* Cursor-reactive specular */}
+      <div style={{position:"absolute",inset:0,borderRadius:22,pointerEvents:"none",
+        background:"radial-gradient(ellipse 60% 50% at "+specPos.x+"% "+specPos.y+"%, "+(h?c.highlightH:c.highlight)+" 0%, transparent 70%)",
+        opacity:h?1:0.5,transition:"opacity 0.4s ease"}} />
+      {/* Top specular edge */}
+      <div style={{position:"absolute",top:0,left:0,right:0,height:1,borderRadius:"22px 22px 0 0",
+        background:"linear-gradient(90deg, transparent 10%, "+c.highlight+" 50%, transparent 90%)",
+        opacity:h?1:0.6,transition:"opacity 0.3s ease"}} />
+
+      <div style={{position:"relative",zIndex:1}}>
+        {/* Synthesis text */}
+        <p style={{fontSize:16.5,lineHeight:1.62,color:c.l1,fontFamily:FT,fontWeight:400,margin:0,
+          letterSpacing:"-0.012em"}}>{item.headline||item.body||item.text||""}</p>
+
+        {/* Metric */}
+        {item.context&&item.context.metric&&(
+          <div style={{display:"flex",alignItems:"baseline",gap:8,marginTop:18}}>
+            <span style={{fontSize:36,fontWeight:700,fontFamily:FD,letterSpacing:"-0.04em",color:c.l1,lineHeight:1,
+              fontFeatureSettings:"'tnum'"}}>{item.context.metric}</span>
+            {item.context.delta&&(
+              <span style={{fontSize:14,fontWeight:600,fontFamily:FT,
+                color:item.context.delta.indexOf("+")===0?c.green:item.context.delta.indexOf("-")===0?c.red:c.l3,
+                background:item.context.delta.indexOf("+")===0?c.greenTint:item.context.delta.indexOf("-")===0?c.redTint:"transparent",
+                padding:"3px 10px",borderRadius:8}}>{item.context.delta}</span>
             )}
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function SummaryHeader({counts,p,mob,feedMode,scanMeta,lastScanAt,coverageGaps}){
-  const parts=[];
-  // Source provenance line
-  var provenanceParts=[];
-  if(scanMeta){
-    if(scanMeta.amplitudeCharts) provenanceParts.push(scanMeta.amplitudeCharts+" charts");
-    if(scanMeta.slackChannels) provenanceParts.push(scanMeta.slackChannels+" channels");
-    if(scanMeta.linearProjects) provenanceParts.push(scanMeta.linearProjects+" projects");
-    if(scanMeta.calendarEvents) provenanceParts.push(scanMeta.calendarEvents+" events");
-    if(scanMeta.googleDocs) provenanceParts.push(scanMeta.googleDocs+" docs");
-  }
-  var provenanceLine=provenanceParts.length>0
-    ? provenanceParts.join(" \u00b7 ")+" scanned"
-    : null;
-  var tsLine=lastScanAt
-    ? new Date(lastScanAt).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})
-    : null;
-
-  if(feedMode==="brief"){
-    if(counts.urgent>0) parts.push(`${counts.urgent} thing${counts.urgent>1?"s":""} need${counts.urgent===1?"s":""} you right now`);
-    if(counts.high>0) parts.push(`${counts.high} more today`);
-    if(parts.length===0) return(
-      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-        <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>Nothing urgent. Scanning continues.</p>
-      </div>
-    );
-    let text=parts.join(". ")+".";
-    if(counts.medium>0) text+=` ${counts.medium} this week.`;
-    return(
-      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-        <p style={{fontSize:mob?12:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>{text}</p>
-        {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3}}>{provenanceLine}{tsLine?" \u00b7 "+tsLine:""}</p>}
-      </div>
-    );
-  }
-  // Standard mode
-  if(counts.urgent>0) parts.push(`${counts.urgent} urgent`);
-  if(counts.high>0) parts.push(`${counts.high} need attention today`);
-  if(counts.medium>0) parts.push(`${counts.medium} this week`);
-  if(parts.length===0) return(
-    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-      <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>All clear {"\u2014"} scanning continues in the background.</p>
-    </div>
-  );
-  return(
-    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-      <p style={{fontSize:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>
-        {parts.join(", ")}.{counts.low>0?` Plus ${counts.low} FYI.`:""}
-      </p>
-      {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3,display:"flex",alignItems:"center",gap:6}}>
-        <span>{scanMeta?.sources||0} sources</span>
-        <span style={{opacity:0.3}}>{"\u2022"}</span>
-        <span>{provenanceLine}</span>
-        {tsLine&&<><span style={{opacity:0.3}}>{"\u2022"}</span><span>{tsLine}</span></>}
-      </p>}
-      {coverageGaps&&<p style={{fontSize:10,fontFamily:MONO,color:p.orange,marginTop:4,padding:"4px 8px",borderRadius:6,background:p.orange+"10",display:"inline-block"}}>
-        {"\u26A0"} {coverageGaps.headline||"Coverage gaps detected"}
-      </p>}
-    </div>
-  );
-}
-
-function GroupLabel({label,p,mob}){
-  return(
-    <div style={{padding:mob?"12px 16px 4px":"14px 20px 6px",display:"flex",alignItems:"center",gap:10}}>
-      <span style={{fontSize:11,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label4}}>{label.toUpperCase()}</span>
-      <div style={{flex:1,height:0.5,background:p.sep,opacity:0.4}}/>
-    </div>
-  );
-}
-
-function FeedProvenance(props){
-  var feeds=props.feeds||[],p=props.p,dk=props.dk,mob=props.mob;
-  const[ex,setEx]=useState(false);
-  if(!feeds?.length) return null;
-  const ts=feeds.map(f=>new Date(f.freshness).getTime());
-  const fresh=ts.every(t=>Date.now()-t<36e5);
-  const stale=ts.some(t=>Date.now()-t>864e5);
-  return(
-    <div style={{marginBottom:20}}>
-      <button onClick={()=>setEx(e=>!e)} style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"9px 14px",
-        borderRadius:ex?"12px 12px 0 0":12,cursor:"pointer",fontFamily:MONO,fontSize:11,
-        color:p.label3,border:"none",textAlign:"left",background:p.fill4}}>
-        <span style={{fontSize:12,opacity:0.6}}>{ex?"\u25BE":"\u25B8"}</span>
-        <span style={{fontWeight:600,letterSpacing:"0.06em"}}>DATA FEEDS</span>
-        <span style={{width:6,height:6,borderRadius:"50%",marginLeft:4,
-          background:stale?p.orange:fresh?p.green:p.yellow}}/>
-        <span style={{fontSize:10,color:p.label4}}>{feeds.length} src{feeds.length!==1?"s":""}</span>
-        <span style={{marginLeft:"auto",fontSize:9,color:p.label4}}>{fresh?"All fresh":"Latest: "+timeAgo(new Date(Math.max(...ts)))}</span>
-      </button>
-      {ex&&<div style={{padding:"2px 0",borderRadius:"0 0 12px 12px",background:p.fill4,animation:"fadeSlide 0.2s ease-out"}}>
-        {feeds.map((f,i)=>{const a=Date.now()-new Date(f.freshness).getTime();const s=SVC[f.source];return(
-          <div key={i} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 14px",borderTop:i?`0.5px solid ${p.sep}`:"none"}}>
-            <span style={{fontSize:12,flexShrink:0}}>{s?.icon}</span>
-            <span style={{fontSize:10,fontWeight:600,fontFamily:MONO,color:svcColor(f.source,dk),minWidth:58}}>{s?.label}</span>
-            <span style={{flex:1,fontSize:10,color:p.label2,fontFamily:SF,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{f.query}</span>
-            <span style={{width:5,height:5,borderRadius:"50%",flexShrink:0,background:a>864e5?p.orange:a<36e5?p.green:p.yellow}}/>
-            <span style={{fontSize:9,fontFamily:MONO,color:p.label4,flexShrink:0}}>{timeAgo(f.freshness)}</span>
-          </div>);})}
-      </div>}
-    </div>
-  );
-}
-
-function InsightChat({insight,p,dk,mob}){
-  const[open,setOpen]=useState(false);
-  const[msgs,setMsgs]=useState([]);
-  const[inp,setInp]=useState("");
-  const[busy,setBusy]=useState(false);
-  const endRef=useRef(null);
-  const inRef=useRef(null);
-  useEffect(()=>{endRef.current?.scrollIntoView({behavior:"smooth"});},[msgs,busy]);
-
-  const ctx=useMemo(()=>[
-    `INSIGHT: "${insight.headline}"`,`PRIORITY: ${insight.priority}`,
-    `SITUATION: ${insight.situation||insight.body}`,
-    insight.whyItMatters?`WHY: ${insight.whyItMatters}`:"",
-    `REC: ${insight.recommendation||insight.action}`,
-    insight.context?`METRICS: ${insight.context.metric} | ${insight.context.delta} | ${insight.context.baseline}`:"",
-    insight.feeds?.length?("FEEDS: "+insight.feeds.map(function(f){return (SVC[f.source]?.label||"")+": "+f.query;}).join("; ")):"",
-  ].filter(Boolean).join("\n"),[insight]);
-
-  const chips=["Worst case if we do nothing?","What should I say in the meeting?","What data am I missing?","Draft a Slack message"];
-
-  const send=async(t)=>{
-    const q=t||inp.trim();if(!q||busy)return;setInp("");
-    const nm=[...msgs,{r:"user",t:q}];setMsgs(nm);setBusy(true);
-    try{
-      const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
-          system:"You are an embedded product intelligence analyst for an aerospace telemetry platform. User is VP Product. Be direct, concise, operational. Skip preamble. Draft messages ready to paste.\n\nCONTEXT:\n"+ctx,
-          messages:nm.map(m=>({role:m.r==="user"?"user":"assistant",content:m.t}))})});
-      if(!r.ok)throw new Error("API "+r.status);
-      const d=await r.json();
-      const reply=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")||"No response";
-      setMsgs([...nm,{r:"ai",t:reply}]);
-    }catch(e){setMsgs([...nm,{r:"ai",t:"Error: "+e.message}]);}finally{setBusy(false);}
-  };
-
-  if(!open)return(
-    <button onClick={()=>{setOpen(true);setTimeout(()=>inRef.current?.focus(),100);}}
-      style={{display:"flex",alignItems:"center",gap:8,width:"100%",padding:"11px 14px",
-        borderRadius:12,cursor:"pointer",fontFamily:SF,fontSize:13,fontWeight:500,
-        color:p.label2,border:"none",...glass(p)}}>
-      <span style={{fontSize:14}}>{"\u2756"}</span>Ask about this insight...
-      <span style={{marginLeft:"auto",fontSize:9,fontFamily:MONO,color:p.label4,padding:"2px 6px",borderRadius:4,background:p.fill4}}>AI</span>
-    </button>
-  );
-
-  return(
-    <div style={{borderRadius:16,overflow:"hidden",...glass(p,{elevated:true}),animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"9px 14px",borderBottom:`0.5px solid ${p.sep}`}}>
-        <div style={{display:"flex",alignItems:"center",gap:6}}>
-          <span style={{fontSize:13}}>{"\u2756"}</span>
-          <span style={{fontSize:10,fontWeight:600,fontFamily:MONO,letterSpacing:"0.06em",color:p.label3}}>INSIGHT ANALYST</span>
-        </div>
-        <button onClick={()=>setOpen(false)} style={{background:"none",border:"none",color:p.label3,fontSize:15,cursor:"pointer",padding:"2px 6px"}}>{"\u2715"}</button>
-      </div>
-      <div style={{maxHeight:mob?220:280,overflowY:"auto",padding:"10px 14px",WebkitOverflowScrolling:"touch"}}>
-        {msgs.length===0&&<div style={{marginBottom:10}}>
-          <p style={{fontSize:11,color:p.label3,fontFamily:SF,margin:"0 0 8px"}}>Full context loaded. Ask anything.</p>
-          <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>{chips.map((c,i)=>(
-            <button key={i} onClick={()=>send(c)} style={{padding:"4px 9px",borderRadius:7,cursor:"pointer",fontSize:10,fontFamily:SF,
-              fontWeight:500,color:p.label2,border:"none",background:p.fill4}}>{c}</button>
-          ))}</div>
-        </div>}
-        {msgs.map((m,i)=>(
-          <div key={i} style={{marginBottom:8,display:"flex",flexDirection:"column",alignItems:m.r==="user"?"flex-end":"flex-start"}}>
-            <div style={{maxWidth:"88%",padding:"7px 11px",borderRadius:m.r==="user"?"12px 12px 3px 12px":"12px 12px 12px 3px",
-              fontSize:12,lineHeight:1.5,fontFamily:SF,whiteSpace:"pre-wrap",
-              background:m.r==="user"?`${p.blue}20`:p.fill4,color:p.label,
-              border:`0.5px solid ${m.r==="user"?`${p.blue}30`:p.sep}`}}>{m.t}</div>
-            <span style={{fontSize:7,fontFamily:MONO,color:p.label4,marginTop:1,padding:"0 4px"}}>{m.r==="user"?"YOU":"INTEL"}</span>
-          </div>
-        ))}
-        {busy&&<div style={{display:"flex",alignItems:"center",gap:5,padding:"6px 0"}}>
-          {[0,1,2].map(i=><div key={i} style={{width:4,height:4,borderRadius:"50%",background:p.label3,animation:`sp 1.2s ease-in-out ${i*0.2}s infinite`}}/>)}
-          <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>analyzing...</span>
-        </div>}
-        <div ref={endRef}/>
-      </div>
-      <div style={{display:"flex",alignItems:"center",gap:6,padding:"7px 10px",borderTop:`0.5px solid ${p.sep}`}}>
-        <input ref={inRef} value={inp} onChange={e=>setInp(e.target.value)}
-          onKeyDown={e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();e.stopPropagation();send();}}}
-          disabled={busy} placeholder="Ask..."
-          style={{flex:1,padding:"7px 10px",borderRadius:8,fontSize:12,fontFamily:SF,
-            color:p.label,outline:"none",border:`0.5px solid ${p.glassBorder}`,background:p.fill4}}/>
-        <button onClick={()=>send()} disabled={!inp.trim()||busy}
-          style={{width:30,height:30,borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",
-            cursor:inp.trim()&&!busy?"pointer":"default",border:"none",fontSize:13,
-            background:inp.trim()&&!busy?p.blue:p.fill3,color:inp.trim()&&!busy?"#fff":p.label4,
-            opacity:inp.trim()&&!busy?1:0.5}}>{"\u2191"}</button>
-      </div>
-    </div>
-  );
-}
-
-function Detail({insight,onBack,onAct,p,dk,mob}){
-  const pr=pri(insight,p);
-  return(
-    <div style={{position:"absolute",inset:0,zIndex:10,overflowY:"auto",WebkitOverflowScrolling:"touch",
-      background:p.bg,animation:"fadeSlide 0.35s cubic-bezier(0.16,1,0.3,1)"}}>
-      <div style={{maxWidth:700,margin:"0 auto",padding:mob?"20px 20px 120px":"48px 28px 80px"}}>
-
-        <button onClick={onBack} style={{display:"inline-flex",alignItems:"center",gap:6,
-          padding:"8px 16px 8px 12px",borderRadius:100,cursor:"pointer",
-          fontSize:14,fontWeight:500,color:p.label2,fontFamily:SF,marginBottom:28,
-          position:"relative",overflow:"hidden",...glass(p),WebkitTapHighlightColor:"transparent"}}>
-          <Spec r={100} i={0.06}/>
-          <span style={{fontSize:16,position:"relative",zIndex:2}}>{"\u2039"}</span>
-          <span style={{position:"relative",zIndex:2}}>Back</span>
-        </button>
-
-        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:24,flexWrap:"wrap"}}>
-          <Badge priority={insight.priority} p={p}/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} dk={dk}/>
-          <span style={{fontSize:12,color:p.label3,marginLeft:"auto",fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
-        </div>
-
-        <h1 style={{fontSize:mob?28:36,fontWeight:700,color:p.label,lineHeight:1.15,margin:"0 0 16px",
-          fontFamily:SF,letterSpacing:"-0.032em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
-
-        {insight.sparkline&&(
-          <div style={{marginBottom:24,padding:16,borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
-            <Spec r={16} i={0.03}/>
-            <div style={{position:"relative",zIndex:2}}>
-              <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:8}}>TREND</div>
-              <Sparkline data={insight.sparkline} color={pr.c} width={mob?280:600} height={40}/>
-            </div>
-          </div>
         )}
 
-        <p style={{fontSize:17,color:p.label2,lineHeight:1.65,margin:"0 0 32px",fontFamily:SF,fontWeight:400}}>{insight.body}</p>
-
-        {insight.context&&(
-          <div style={{display:"grid",gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)",gap:10,marginBottom:28}}>
-            {[{l:"METRIC",v:insight.context.metric},{l:"DELTA",v:insight.context.delta},
-              {l:"BASELINE",v:insight.context.baseline},{l:"RISK",v:insight.context.risk}].map(x=>(
-              <div key={x.l} style={{padding:mob?"12px 14px":"14px 18px",borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
-                <Spec r={16} i={0.04}/>
-                <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:6,position:"relative",zIndex:2}}>{x.l}</div>
-                <div style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:p.label,lineHeight:1.4,position:"relative",zIndex:2}}>{x.v}</div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {insight.evidence?.length>0&&(
-          <div style={{marginBottom:32}}>
-            <div style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:10}}>EVIDENCE</div>
-            <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{insight.evidence.map((ev,i)=><EvChip key={i} ev={ev} p={p} dk={dk}/>)}</div>
-          </div>
-        )}
-
-        <div style={{padding:mob?18:22,borderRadius:20,marginBottom:32,position:"relative",overflow:"hidden",...glass(p,{elevated:true})}}>
-          <Spec r={20} i={0.06}/>
-          <div style={{position:"relative",zIndex:2}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-              <span style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4}}>RECOMMENDED ACTION</span>
-              {insight.actionTarget&&<span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label3,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{"\u2192"} {insight.actionTarget}</span>}
-            </div>
-            <p style={{fontSize:15,color:p.label,lineHeight:1.55,margin:0,fontFamily:SF,fontWeight:400}}>{insight.action}</p>
-          </div>
-        </div>
-
-        <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-          <button onClick={()=>onAct(insight)} style={{padding:mob?"14px 32px":"13px 32px",borderRadius:100,
-            fontSize:15,fontWeight:600,cursor:"pointer",fontFamily:SF,color:"#fff",border:"none",position:"relative",overflow:"hidden",
-            background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
-            boxShadow:`0 4px 16px ${p.blue}40, inset 0 1px 0 rgba(255,255,255,0.2)`,
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{ACT_L[insight.actionType]||"Take Action"}</button>
-          <span style={{fontSize:11,color:p.label4,fontFamily:MONO,alignSelf:"center"}}>{"\u2318"}+Enter</span>
-        </div>
-
-        {}
-        <div style={{marginTop:32}}>
-          <FeedProvenance feeds={insight.feeds} p={p} dk={dk} mob={mob}/>
-        </div>
-
-        {}
-        <div style={{marginTop:8}}>
-          <InsightChat insight={insight} p={p} dk={dk} mob={mob}/>
-        </div>
-
-      </div>
-    </div>
-  );
-}
-
-function ActModal({insight,onClose,onDone,p,mob}){
-  const[draft,setDraft]=useState(insight.action);
-  const[st,setSt]=useState("idle");
-  const[link,setLink]=useState(null);
-  const[err,setErr]=useState(null);
-  const ch=CH[insight.channelKey];
-  const ok=st==="idle"||st==="error";
-
-  const send=async()=>{
-    if(!draft.trim())return; setSt("sending"); setErr(null);
-    try{
-      const r=await slackDraft({message:draft,target:insight.actionTarget,channelKey:insight.channelKey});
-      if(r.ok){setSt("sent");setLink(r.link);setTimeout(()=>onDone(draft),2200);}
-      else throw new Error(r.err||"Failed");
-    }catch(e){
-      if(await clip(draft)){setSt("fallback");setErr(e.message);setTimeout(()=>onDone(draft),2500);}
-      else{setSt("error");setErr(e.message);}
-    }
-  };
-
-  useEffect(()=>{
-    const h=e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter"&&ok){e.preventDefault();send();}};
-    window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
-  },[ok,draft]);
-
-  const info={sent:{c:p.green,ico:"\u2713",msg:"Draft created in Slack"},fallback:{c:p.orange,ico:"\u26A0",msg:"Copied to clipboard"},error:{c:p.red,ico:"\u2715",msg:null}}[st];
-
-  return(
-    <div style={{position:"fixed",inset:0,zIndex:200,display:"flex",justifyContent:"center",alignItems:mob?"flex-end":"center",
-      padding:mob?0:40,background:"rgba(0,0,0,0.4)",
-      backdropFilter:"blur(20px) saturate(120%)",WebkitBackdropFilter:"blur(20px) saturate(120%)",
-      animation:"fadeIn 0.2s ease-out"}} onClick={ok?onClose:undefined}>
-      <div onClick={e=>e.stopPropagation()} style={{maxWidth:540,width:"100%",
-        borderRadius:mob?"24px 24px 0 0":24,padding:mob?"28px 22px 40px":"28px 28px 24px",
-        maxHeight:mob?"85vh":"auto",position:"relative",overflow:"hidden",
-        animation:"sheetUp 0.35s cubic-bezier(0.16,1,0.3,1)",...glass(p,{elevated:true})}}>
-        <Spec r={24} i={0.08}/>
-
-        {mob&&<div style={{width:36,height:4,borderRadius:2,background:p.fill2,margin:"0 auto 20px",position:"relative",zIndex:2}}/>}
-
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18,position:"relative",zIndex:2}}>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <span style={{fontSize:11,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.06em"}}>{ch?`\u2192 ${ch.label}`:"DRAFT"}</span>
-            <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,letterSpacing:"0.04em",padding:"2px 8px",borderRadius:6,background:`${p.green}14`,color:p.green}}>SLACK DRAFT</span>
-          </div>
-          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:20,cursor:"pointer",padding:"4px 8px",borderRadius:100}}
-            onMouseEnter={e=>{e.currentTarget.style.background=p.fill4;}}
-            onMouseLeave={e=>{e.currentTarget.style.background="transparent";}}>{"\u2715"}</button>
-        </div>
-
-        <div style={{position:"relative",zIndex:2}}>
-          <textarea value={draft} onChange={e=>setDraft(e.target.value)} disabled={!ok} autoFocus
-            style={{width:"100%",minHeight:140,padding:16,borderRadius:16,resize:"vertical",
-              fontSize:15,lineHeight:1.55,fontFamily:SF,color:ok?p.label:p.label3,outline:"none",
-              transition:"all 0.2s",background:p.fill4,
-              border:`1px solid ${info?`${info.c}40`:p.glassBorder}`,
-              boxShadow:"inset 0 1px 3px rgba(0,0,0,0.04)"}}/>
-        </div>
-
-        {info&&(
-          <div style={{marginTop:12,padding:"10px 14px",borderRadius:12,fontSize:12,fontFamily:MONO,fontWeight:500,color:info.c,
-            position:"relative",zIndex:2,...glass(p),border:`0.5px solid ${info.c}25`}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
-              <span style={{display:"flex",alignItems:"center",gap:6}}>
-                <span style={{fontSize:14}}>{info.ico}</span>{info.msg||`Failed: ${err||"Unknown"}`}
-              </span>
-              {st==="sent"&&link&&<a href={link} target="_blank" rel="noopener noreferrer" style={{color:info.c,fontSize:11,textDecoration:"none",fontWeight:600}}>Open Slack {"\u2197"}</a>}
-            </div>
-            {st==="fallback"&&err&&<div style={{fontSize:10,opacity:0.7,marginTop:4}}>Paste manually. ({err})</div>}
-          </div>
-        )}
-
-        <div style={{display:"flex",gap:10,marginTop:18,justifyContent:"flex-end",alignItems:"center",position:"relative",zIndex:2}}>
-          {ok&&<>
-            <button onClick={onClose} style={{padding:"10px 22px",borderRadius:100,cursor:"pointer",fontSize:14,fontWeight:500,fontFamily:SF,color:p.label2,...glass(p)}}>Cancel</button>
-            <button onClick={send} disabled={!draft.trim()} style={{padding:"10px 22px",borderRadius:100,
-              cursor:draft.trim()?"pointer":"default",fontSize:14,fontWeight:600,fontFamily:SF,border:"none",
-              color:"#fff",opacity:draft.trim()?1:0.4,
-              background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
-              boxShadow:`0 2px 8px ${p.blue}30, inset 0 1px 0 rgba(255,255,255,0.15)`,
-              transition:"all 0.2s"}}>{st==="error"?"Retry":"Create Slack Draft"}<span style={{fontSize:10,opacity:0.5,marginLeft:6}}>{"\u2318\u21B5"}</span></button>
-          </>}
-          {st==="sending"&&(
-            <div style={{display:"flex",alignItems:"center",gap:8,fontSize:13,color:p.label3,fontFamily:MONO}}>
-              <div style={{width:16,height:16,border:`2px solid ${p.fill2}`,borderTopColor:p.label2,borderRadius:"50%",animation:"spin 0.6s linear infinite"}}/>Creating draft...
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function NavBar({dk,setDk,scanning,runScan,counts,p,mob,feedMode,setFeedMode,scanStatus,scanError,lastScanAt,onSettings}){
-  return(
-    <div style={{position:"sticky",top:mob?0:12,left:mob?0:16,right:mob?0:16,zIndex:50,borderRadius:mob?0:26,height:mob?48:52,
-      display:"flex",alignItems:"center",justifyContent:"space-between",padding:mob?"0 12px":"0 20px",
-      paddingTop:mob?"env(safe-area-inset-top,0px)":"0",...glass(p,{elevated:true})}}>
-      <Spec r={mob?0:26} i={0.06}/>
-      <div style={{display:"flex",alignItems:"center",gap:8,position:"relative",zIndex:2}}>
-        <span style={{fontSize:mob?16:20}}>{"\ud83d\udce1"}</span>
-        <span style={{fontSize:mob?12:13,fontWeight:700,letterSpacing:"0.08em",fontFamily:MONO,color:p.label}} title="Rapid Decision And Response">RADAR</span>
-        {scanning&&<div style={{width:40,height:2,borderRadius:1,overflow:"hidden",background:p.fill3,marginLeft:4}}>
-          <div style={{width:"30%",height:"100%",background:p.blue,animation:"scan 1.2s ease-in-out infinite",borderRadius:1}}/>
-        </div>}
-      </div>
-      <div style={{display:"flex",alignItems:"center",gap:mob?4:6,position:"relative",zIndex:2}}>
-        {counts.urgent>0&&<span style={{fontSize:11,fontWeight:600,color:p.red,fontFamily:MONO,animation:"sp 2s ease-in-out infinite"}}>{counts.urgent}</span>}
-        <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500}}>{counts.total}</span>
-        {}
-        <div style={{display:"flex",borderRadius:8,overflow:"hidden",...glass(p),padding:1,gap:1}}>
-          <button onClick={()=>setFeedMode("cards")} title="Card View" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
-            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
-            color:feedMode==="cards"?p.label:p.label4,
-            background:feedMode==="cards"?p.glassActive:"transparent",
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
-          }}>{"\u25A3"}</button>
-          <button onClick={()=>setFeedMode("brief")} title="Speed Brief" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
-            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
-            color:feedMode==="brief"?p.label:p.label4,
-            background:feedMode==="brief"?p.glassActive:"transparent",
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
-          }}>{"\u2261"}</button>
-        </div>
-        <button onClick={runScan} disabled={scanning} style={{padding:"6px 10px",borderRadius:100,cursor:scanning?"default":"pointer",
-          fontSize:11,fontWeight:600,fontFamily:MONO,color:scanning?p.label4:p.label2,...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{"\u21BB"}</button>
-        <button onClick={onSettings} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:13,color:p.label3,
-          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent",border:"none"}}>{"\u2699"}</button>
-        <button onClick={()=>setDk(d=>!d)} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:9,fontWeight:600,fontFamily:MONO,letterSpacing:"0.08em",color:p.label2,
-          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{dk?"☀️":"🌙"}</button>
-      </div>
-    </div>
-  );
-}
-
-function FilterBar({active,onChange,counts,p,mob}){
-  const tabs=[{key:"all",label:"All",n:counts.total},{key:"URGENT",label:"Urgent",n:counts.urgent},
-    {key:"HIGH",label:"Today",n:counts.high},{key:"MEDIUM",label:"This Week",n:counts.medium},{key:"LOW",label:"FYI",n:counts.low}];
-  return(
-    <div style={{display:"flex",gap:4,padding:mob?"6px 12px":"6px 16px",margin:mob?"0":"0 16px",borderRadius:mob?0:20,
-      overflowX:"auto",WebkitOverflowScrolling:"touch",scrollbarWidth:"none",msOverflowStyle:"none",...glass(p,{clear:true})}}>
-      {tabs.map(tab=>{
-        const isAct=active===tab.key;
-        const priC=tab.key!=="all"?PRI[tab.key]?.color(p):null;
-        return(
-          <button key={tab.key} onClick={()=>onChange(tab.key)} style={{padding:"6px 12px",borderRadius:100,border:"none",
-            fontSize:12,fontWeight:isAct?600:500,fontFamily:SF,cursor:"pointer",whiteSpace:"nowrap",
-            transition:"all 0.25s cubic-bezier(0.25,0.46,0.45,0.94)",
-            color:isAct?(priC||p.label):p.label3,background:isAct?p.glassActive:"transparent",
-            boxShadow:isAct?`inset 0 0.5px 0 ${p.specularEdge}, 0 1px 3px rgba(0,0,0,0.04)`:"none",
-            WebkitTapHighlightColor:"transparent"}}>
-            {tab.label}
-            {tab.n>0&&<span style={{display:"inline-flex",alignItems:"center",justifyContent:"center",
-              marginLeft:5,fontSize:9,fontWeight:700,fontFamily:MONO,minWidth:16,height:16,borderRadius:8,
-              background:isAct?(priC?`${priC}20`:p.fill3):p.fill4,color:isAct?(priC||p.label2):p.label4}}>{tab.n}</span>}
+        {/* Action */}
+        {item.action&&(
+          <button
+            onMouseEnter={function(){setActH(true);}}
+            onMouseLeave={function(){setActH(false);setActP(false);}}
+            onMouseDown={function(){setActP(true);}}
+            onMouseUp={function(){setActP(false);if(onAction)onAction(item);}}
+            style={{marginTop:18,padding:"11px 24px",borderRadius:14,border:"none",
+              background:actP?c.f3:actH?c.blueTint:c.f4,
+              color:actH?c.blue:c.l2,
+              fontSize:15,fontFamily:FT,fontWeight:500,cursor:"pointer",letterSpacing:"-0.01em",
+              transition:"all 0.2s cubic-bezier(0.25,1,0.5,1)",
+              transform:actP?"scale(0.96)":"scale(1)",
+              WebkitTapHighlightColor:"transparent"}}>
+            {item.action}
           </button>
-        );
-      })}
-    </div>
-  );
-}
+        )}
 
-function PullIndicator({pullY,p}){
-  const progress=Math.min(1,pullY/80);
-  return(
-    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:pullY,overflow:"hidden",
-      transition:pullY===0?"height 0.3s cubic-bezier(0.34,1.56,0.64,1)":"none"}}>
-      <div style={{width:28,height:28,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",
-        ...glass(p),transform:`rotate(${progress*360}deg)`,transition:"transform 0.1s",opacity:Math.max(0.3,progress)}}>
-        <span style={{fontSize:14,color:progress>=1?p.blue:p.label3}}>{progress>=1?"\u21BB":"\u2193"}</span>
-      </div>
-    </div>
-  );
-}
-
-function KbdHint({p,mob}){
-  if(mob)return null;
-  const[show,setShow]=useState(false);
-  return(
-    <div style={{position:"fixed",bottom:16,right:16,zIndex:60}}>
-      <button onClick={()=>setShow(s=>!s)} style={{width:28,height:28,borderRadius:8,cursor:"pointer",
-        fontSize:12,fontWeight:600,color:p.label3,fontFamily:MONO,display:"flex",alignItems:"center",justifyContent:"center",
-        ...glass(p),transition:"all 0.2s"}}>?</button>
-      {show&&(
-        <div style={{position:"absolute",bottom:36,right:0,width:220,padding:14,borderRadius:14,
-          ...glass(p,{elevated:true}),animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
-          <Spec r={14} i={0.06}/>
-          <div style={{position:"relative",zIndex:2,fontSize:11,fontFamily:MONO,color:p.label2,lineHeight:2}}>
-            <div><kbd style={{color:p.label,fontWeight:600}}>j/k</kbd> Navigate</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>Enter</kbd> Open</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>a</kbd> Take action</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>d</kbd> Mark done</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>s</kbd> Snooze</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>x</kbd> Dismiss</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>1-7</kbd> Jump to item</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>v</kbd> Toggle view</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>Esc</kbd> Back / Close</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>{"\u2318\u21B5"}</kbd> Send draft</div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
-// API key management for standalone deployment
-function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
-function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
-function getLive(){try{var v=localStorage.getItem("radar_live_mode");return v===null?true:v==="true";}catch(e){return true;}}
-function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
-function getCustomPrompt(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}}
-function setCustomPromptStore(v){try{localStorage.setItem("radar_custom_prompt",v);}catch(e){}}
-// Init live mode flag
-try{window.__RADAR_LIVE_MODE=getLive();}catch(e){}
-
-// Patch fetch to inject API key when calling Anthropic
-var _origFetch=window.fetch;
-window.fetch=function(url,opts){
-  if(typeof url==="string"&&url.indexOf("api.anthropic.com")>-1){
-    var key=getKey();
-    if(key){
-      opts=opts||{};
-      opts.headers=opts.headers||{};
-      if(typeof opts.headers==="object"&&!Array.isArray(opts.headers)){
-        opts.headers["x-api-key"]=key;
-        opts.headers["anthropic-version"]="2023-06-01";
-        opts.headers["anthropic-dangerous-direct-browser-access"]="true";
-      }
-    }
-  }
-  return _origFetch.call(window,url,opts);
-};
-
-function SettingsPanel({show,onClose,p,mob}){
-  var keyRef=useRef(null);
-  var[key,setKey]=useState(getKey);
-  var[live,setLive]=useState(getLive);
-  var[saved,setSaved]=useState(false);
-  var[customPrompt,setCustomPrompt]=useState(getCustomPrompt);
-  var[showPrompt,setShowPrompt]=useState(false);
-  if(!show)return null;
-  function save(){
-    setKeyStore(key);
-    setLiveStore(live);
-    setCustomPromptStore(customPrompt);
-    window.__RADAR_CUSTOM_PROMPT=customPrompt||"";
-    setSaved(true);
-    setTimeout(function(){setSaved(false);},2000);
-  }
-  return(
-    <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.5)",animation:"fadeIn 0.2s ease"}} onClick={onClose}>
-      <div onClick={function(e){e.stopPropagation();}} style={{width:mob?"92%":480,maxHeight:"85vh",borderRadius:24,overflow:"hidden",
-        background:p.materialThick,backdropFilter:"blur(40px) saturate(160%)",WebkitBackdropFilter:"blur(40px) saturate(160%)",
-        border:"0.5px solid "+p.glassBorder,
-        boxShadow:"0 24px 80px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.12), inset 0 1px 0 "+p.specularEdge,
-        animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)",display:"flex",flexDirection:"column"}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",borderBottom:"0.5px solid "+p.sep,flexShrink:0}}>
-          <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label}}>SETTINGS</span>
-          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:16,cursor:"pointer"}}>{"\u2715"}</button>
-        </div>
-        <div style={{padding:"16px 20px",display:"flex",flexDirection:"column",gap:16,overflowY:"auto",flex:1}}>
-          <div>
-            <label style={{fontSize:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label3,marginBottom:6,display:"block"}}>ANTHROPIC API KEY</label>
-            <input ref={keyRef} type="password" value={key} onChange={function(e){setKey(e.target.value);}}
-              placeholder="sk-ant-..." style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
-              background:p.glass,color:p.label,fontFamily:MONO,fontSize:13,outline:"none"}}/>
-            <p style={{fontSize:10,color:p.label4,marginTop:4,fontFamily:MONO}}>Required for standalone deploy. Get from console.anthropic.com</p>
-          </div>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 14px",borderRadius:12,background:p.fill4}}>
-            <div>
-              <div style={{fontSize:12,fontWeight:600,color:p.label,fontFamily:SF}}>Live MCP Mode</div>
-              <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>Pull fresh data from Slack, Linear, Calendar, Amplitude</div>
-            </div>
-            <button onClick={function(){setLive(!live);}} style={{width:44,height:24,borderRadius:12,border:"none",cursor:"pointer",position:"relative",
-              background:live?p.green:p.fill2,transition:"background 0.2s"}}>
-              <div style={{width:20,height:20,borderRadius:10,background:p.bgElevated,position:"absolute",top:2,
-                left:live?22:2,transition:"left 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.2)"}}/>
-            </button>
-          </div>
-          {live&&<div style={{padding:"10px 14px",borderRadius:10,background:p.blue+"15",border:"0.5px solid "+p.blue+"30"}}>
-            <p style={{fontSize:10,fontFamily:MONO,color:p.blue,lineHeight:1.5}}>
-              Live mode uses MCP servers to pull real-time data. Slower (~15-30s) but data is always fresh. Requires active Anthropic MCP connections for Slack, Linear, Calendar.
-            </p>
-          </div>}
-          <div>
-            <button onClick={function(){setShowPrompt(!showPrompt);}} style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"100%",
-              padding:"12px 14px",borderRadius:12,background:p.fill4,border:"none",cursor:"pointer",color:p.label}}>
-              <div style={{textAlign:"left"}}>
-                <div style={{fontSize:12,fontWeight:600,fontFamily:SF}}>Synthesis Prompt</div>
-                <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>{customPrompt?"Custom prompt active":"Using default prompt \u2014 click to customize"}</div>
-              </div>
-              <span style={{fontSize:12,color:p.label3,transition:"transform 0.2s",transform:showPrompt?"rotate(90deg)":"rotate(0)"}}>{"\u25B6"}</span>
-            </button>
-            {showPrompt&&<div style={{marginTop:8}}>
-              <textarea value={customPrompt} onChange={function(e){setCustomPrompt(e.target.value);}}
-                placeholder="Leave empty for default. Or paste custom instructions for how RADAR should synthesize your data. The data.json context is always appended automatically."
-                style={{width:"100%",height:180,padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
-                  background:p.glass,color:p.label,fontFamily:MONO,fontSize:11,lineHeight:1.5,outline:"none",resize:"vertical"}}/>
-              <div style={{display:"flex",gap:8,marginTop:6}}>
-                <button onClick={function(){setCustomPrompt("");}} style={{padding:"4px 10px",borderRadius:6,border:"0.5px solid "+p.glassBorder,
-                  background:"transparent",color:p.label3,fontFamily:MONO,fontSize:10,cursor:"pointer"}}>Reset to default</button>
-                <p style={{fontSize:9,color:p.label4,fontFamily:MONO,lineHeight:1.5,flex:1}}>
-                  Tip: Tell it what to focus on, what categories to emphasize, which customers matter most, or what questions you want answered.
-                </p>
-              </div>
-            </div>}
-          </div>
-          <button onClick={save} style={{padding:"10px 16px",borderRadius:10,border:"none",cursor:"pointer",
-            fontWeight:600,fontSize:12,fontFamily:MONO,letterSpacing:"0.05em",
-            background:saved?p.green:p.accent,color:"#fff",transition:"all 0.2s"}}>
-            {saved?"SAVED \u2713":"SAVE"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ====== TOOLTIP ======
-function Tip({text,children,p,maxW}){
-  const[show,setShow]=useState(false);
-  const[pos,setPos]=useState({x:0,y:0});
-  const ref=useRef(null);
-  const timerRef=useRef(null);
-  function enter(e){
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left+rect.width/2,y:rect.top});
-    setShow(true);
-  }
-  function toggle(e){
-    e.stopPropagation();
-    if(show){setShow(false);return;}
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left+rect.width/2,y:rect.top});
-    setShow(true);
-    clearTimeout(timerRef.current);
-    timerRef.current=setTimeout(()=>setShow(false),3500);
-  }
-  if(!text)return children;
-  return(
-    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
-      onClick={toggle} onTouchStart={toggle}
-      style={{position:"relative",cursor:"help",WebkitTapHighlightColor:"transparent"}}>
-      {children}
-      {show&&ReactDOM.createPortal(
-        <div style={{position:"fixed",left:Math.max(8,Math.min(pos.x-((maxW||260)/2),window.innerWidth-(maxW||260)-8)),top:Math.max(8,pos.y-8),
-          transform:"translateY(-100%)",
-          maxWidth:maxW||260,padding:"8px 12px",borderRadius:8,
-          background:p?.bgElevated||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
-          fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
-          pointerEvents:"none",boxShadow:"0 8px 32px rgba(0,0,0,"+(p===PAL.dark?"0.4":"0.15")+")",
-          animation:"fadeIn 0.15s ease",whiteSpace:"pre-line"}}>
-          {text}
-        </div>,
-        document.body
-      )}
-    </span>
-  );
-}
-
-
-// ====== VIEW: TEAM ======
-function TeamView({p,dk,mob}){
-  const[team,setTeam]=useState([]);
-  useEffect(()=>{if(LIVE_DATA?.team)setTeam(LIVE_DATA.team);else loadData().then(()=>{if(LIVE_DATA?.team)setTeam(LIVE_DATA.team);});},[]);
-  const cofounders=LIVE_DATA?.cofounders||[];
-  function statusColor(s){return s==="shipping"?p.green:s==="attention"?p.orange:s==="blocked"?p.red:p.label3;}
-  function statusIcon(s){return s==="shipping"?"\u25CF":s==="attention"?"\u25B2":s==="blocked"?"\u25A0":"\u25CB";}
-  function ageColor(age){if(!age)return p.label4;var n=parseInt(age);if(n<=1)return p.green;if(n<=3)return p.label2;if(n<=5)return p.orange;return p.red;}
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      {cofounders.length>0&&<>
-        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>COFOUNDERS</div>
-        <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:10,marginBottom:24}}>
-          {cofounders.map(cf=>(
-            <div key={cf.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-                <div>
-                  <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF}}>{cf.name}</span>
-                  <span style={{fontSize:11,color:p.label3,fontFamily:MONO,marginLeft:8}}>{cf.role}</span>
-                </div>
-                <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>last msg {timeAgo(cf.lastSlackToNoah)}</span>
-              </div>
-              <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:8}}>{cf.attention}</p>
-              <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                {cf.recentTopics?.map((t,i)=>(
-                  <span key={i} style={{fontSize:10,fontFamily:MONO,padding:"2px 8px",borderRadius:6,background:p.fill4,color:p.label3}}>{t}</span>
-                ))}
-              </div>
-              {cf.pendingDecisions?.length>0&&<Tip text={"Open items between you and "+cf.name+" that need resolution. These decisions may have downstream dependencies."} p={p}>
-                <div style={{marginTop:8,fontSize:10,fontFamily:MONO,color:p.orange}}>
-                {"\u23F3"} Pending: {cf.pendingDecisions.join(", ")}
-              </div></Tip>}
-            </div>
-          ))}
-        </div>
-      </>}
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>DIRECT REPORTS & KEY COLLABORATORS</div>
-      <div style={{display:"flex",flexDirection:"column",gap:10}}>
-        {team.map(person=>(
-          <div key={person.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
-            borderLeft:"3px solid "+statusColor(person.status)}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
-              <div style={{display:"flex",alignItems:"center",gap:10}}>
-                <span style={{fontSize:12,color:statusColor(person.status)}}>{statusIcon(person.status)}</span>
-                <Tip text={person.status==="shipping"?"Actively delivering. No blockers.":person.status==="attention"?"Needs VP attention. Check top concern.":person.status==="blocked"?"Blocked or stalled. Intervene.":"No recent signal."} p={p}>
-                  <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF}}>{person.name}</span>
-                </Tip>
-                <span style={{fontSize:11,color:p.label3,fontFamily:MONO}}>{person.role}</span>
-                {person.squad&&<span style={{fontSize:10,color:p.label4,fontFamily:MONO}}>{"\u00b7"} {person.squad}</span>}
-              </div>
-              <div style={{display:"flex",alignItems:"center",gap:12}}>
-                {person.fourPAge&&<Tip text={"4 P's doc last updated "+person.fourPAge+" ago. Click to open. Stale threshold: >5 days."} p={p}>
-                  <span style={{fontSize:10,fontFamily:MONO,color:ageColor(person.fourPAge),cursor:person.fourPUrl?"pointer":"default"}}
-                  onClick={()=>{if(person.fourPUrl)window.open(person.fourPUrl,"_blank");}}>
-                  4P: {person.fourPAge}{" \u2197"}
-                </span></Tip>}
-                <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>{person.meetingsToday}mtg today</span>
-              </div>
-            </div>
-            <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:8}}>{person.topConcern}</p>
-            <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3}}>
-              <span>{person.linearActive} active</span>
-              {person.linearBlocked>0&&<span style={{color:p.red}}>{person.linearBlocked} blocked</span>}
-              <span>last seen {timeAgo(person.slackLastSeen)}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ====== VIEW: CUSTOMERS ======
-function CustomersView({p,dk,mob}){
-  const[customers,setCustomers]=useState([]);
-  const[tierFilter,setTierFilter]=useState("all");
-  const[expanded,setExpanded]=useState({});
-  useEffect(()=>{if(LIVE_DATA?.customers)setCustomers(LIVE_DATA.customers);else loadData().then(()=>{if(LIVE_DATA?.customers)setCustomers(LIVE_DATA.customers);});},[]);
-  function trajColor(t){return t==="expanding"?p.green:t==="stable"?p.blue:t==="contracting"?p.orange:t==="churned"?p.red:t==="pre-launch"?p.purple:p.red;}
-  function trajIcon(t){return t==="expanding"?"\u2197":t==="stable"?"\u2192":t==="contracting"?"\u2198":t==="churned"?"\u2717":t==="pre-launch"?"\u25cb":"\u26A0";}
-  function tierLabel(t){return t==="strategic"?"Strategic":t==="growth"?"Growth":t==="emerging"?"Emerging":"Watchlist";}
-  function tierColor(t){return t==="strategic"?p.accent:t==="growth"?p.green:t==="emerging"?p.label3:p.label4;}
-
-  // Group by tier
-  const tiers=["strategic","growth","emerging","watchlist"];
-  const byTier={};
-  tiers.forEach(t=>{byTier[t]=customers.filter(c=>c.tier===t);});
-
-  const filtered=tierFilter==="all"?customers:customers.filter(c=>c.tier===tierFilter);
-  const sortedFiltered=[...filtered].sort((a,b)=>{
-    var ord={"at-risk":0,contracting:1,churned:2,expanding:3,"pre-launch":4,stable:5};
-    var d=(ord[a.trajectory]||9)-(ord[b.trajectory]||9);
-    if(d!==0)return d;return(b.wau||0)-(a.wau||0);
-  });
-
-  // Stats
-  var totalWau=customers.reduce((s,c)=>s+(c.wau||0),0);
-  var activeCount=customers.filter(c=>c.wau>0).length;
-  var churnedCount=customers.filter(c=>c.trajectory==="churned").length;
-  var contractingCount=customers.filter(c=>c.trajectory==="contracting").length;
-
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      {/* Summary bar */}
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:14,flexWrap:"wrap",gap:6}}>
-        <div style={{fontSize:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label3}}>
-          CUSTOMER PORTFOLIO
-        </div>
-        <div style={{display:"flex",gap:mob?8:12,fontSize:mob?10:11,fontFamily:MONO,flexWrap:"wrap"}}>
-          <span style={{color:p.label2}}>{activeCount} active</span>
-          <span style={{color:p.orange}}>{contractingCount} declining</span>
-          <span style={{color:p.red}}>{churnedCount} churned</span>
-          <span style={{color:p.accent}}>{totalWau} WAU</span>
-        </div>
-      </div>
-
-      {/* Tier filter pills — Apple segmented control style */}
-      <div style={{display:"flex",gap:6,marginBottom:16,padding:3,borderRadius:10,background:p.fill4}}>
-        {["all",...tiers].map(t=>{
-          var isA=tierFilter===t;
-          var count=t==="all"?customers.length:(byTier[t]||[]).length;
-          return <button key={t} onClick={()=>setTierFilter(t)} style={{flex:1,padding:"7px 0",borderRadius:8,border:"none",cursor:"pointer",
-            background:isA?p.bgRaised:"transparent",color:isA?p.label:p.label3,
-            fontSize:11,fontWeight:isA?600:400,fontFamily:SF,
-            boxShadow:isA?"0 1px 3px rgba(0,0,0,0.08)":"none",
-            transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)"}}>{t==="all"?"All":tierLabel(t)} ({count})</button>;
-        })}
-      </div>
-
-      {/* Customer list — Apple-style grouped list */}
-      <div style={{display:"flex",flexDirection:"column",gap:2}}>
-        {sortedFiltered.map(c=>{
-          var isExpanded=expanded[c.name];
-          var wauDelta=c.wauPrior>0?Math.round(((c.wau-c.wauPrior)/c.wauPrior)*100):0;
-          var wauDeltaStr=wauDelta>0?"+"+wauDelta+"%":wauDelta+"%";
-          return(
-            <div key={c.name} onClick={()=>setExpanded(x=>({...x,[c.name]:!x[c.name]}))}
-              style={{padding:"12px 16px",borderRadius:12,cursor:"pointer",
-                background:isExpanded?p.bgRaised:"transparent",
-                border:"0.5px solid "+(isExpanded?p.glassBorder:"transparent"),
-                transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)"}}>
-              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
-                <div style={{display:"flex",alignItems:"center",gap:10,flex:1,minWidth:0}}>
-                  <span style={{width:8,height:8,borderRadius:4,background:trajColor(c.trajectory),flexShrink:0}}/>
-                  <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF,letterSpacing:"0"}}>{c.name}</span>
-                  {c.segment&&<span style={{fontSize:10,fontFamily:SF,color:p.label3,fontWeight:400}}>{c.segment}</span>}
-                </div>
-                <div style={{display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
-                  <span style={{fontSize:14,fontWeight:600,fontFamily:MONO,color:p.label,minWidth:28,textAlign:"right"}}>{c.wau}</span>
-                  <span style={{fontSize:10,fontFamily:MONO,color:wauDelta>=0?p.green:wauDelta>-20?p.orange:p.red,minWidth:40,textAlign:"right"}}>{c.wauPrior>0?wauDeltaStr:"new"}</span>
-                  <span style={{fontSize:10,color:p.label4,transform:isExpanded?"rotate(90deg)":"none",transition:"transform 0.2s"}}>›</span>
-                </div>
-              </div>
-              {isExpanded&&(
-                <div style={{marginTop:10,paddingTop:10,borderTop:"0.5px solid "+p.sep}}>
-                  <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3,marginBottom:8,flexWrap:"wrap"}}>
-                    <span>tier: {c.tier}</span>
-                    <span>health: {c.health}/100</span>
-                    <span>FDE: {c.fdeLastTouch}</span>
-                    {c.openTickets>0&&<span style={{color:p.orange}}>tickets: {c.openTickets}</span>}
-                    <span style={{color:trajColor(c.trajectory)}}>{trajIcon(c.trajectory)} {c.trajectory}</span>
-                  </div>
-                  {c.teams&&c.teams.length>0&&<div style={{fontSize:10,fontFamily:MONO,color:p.label2,marginBottom:6}}>Teams: {c.teams.join(", ")}</div>}
-                  {c.blockers&&c.blockers.length>0&&(
-                    <div style={{marginBottom:6}}>
-                      {c.blockers.map((b,i)=>(
-                        <div key={i} style={{fontSize:11,fontFamily:SF,color:p.red,marginBottom:2}}>{"⚠ "}{b}</div>
-                      ))}
-                    </div>
-                  )}
-                  {c.signals&&c.signals.length>0&&(
-                    <div>
-                      {c.signals.map((s,i)=>(
-                        <div key={i} style={{fontSize:11,fontFamily:SF,color:p.label2,lineHeight:1.5}}>{"· "}{s}</div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Voice of the Customer */}
-      {(()=>{
-        var voc=LIVE_DATA?.voc;
-        if(!voc)return null;
-        function trendIcon(t){return t==="increasing"?"\u2191":t==="decreasing"?"\u2193":"\u2192";}
-        function trendColor(t){return t==="increasing"?p.red:t==="decreasing"?p.green:p.label3;}
-        function statusColor(s){return s==="In Progress"?p.blue:s==="Captured"?p.label3:s==="Under Review"?p.orange:s==="Candidate"?p.green:p.label4;}
-        return(
-          <div style={{marginTop:28}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
-              <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>
-                VOICE OF THE CUSTOMER {"\u00b7"} {voc.themes?.length||0} THEMES
-              </div>
-              <div style={{display:"flex",gap:8,alignItems:"center"}}>
-                <Tip text={"Two-loop VoC program: Loop 1 (Support breadth) + Loop 2 (FDE deployment depth). "+voc.coverage?.accountsWithRankedTop10+" of "+voc.coverage?.targetAccounts+" accounts with ranked Top 10. Freshness: "+voc.coverage?.avgFreshnessDays+"d avg (SLA: "+voc.coverage?.freshnessSLA+"d)."} p={p}>
-                  <span style={{fontSize:9,fontFamily:MONO,color:voc.programStatus==="pilot"?p.orange:p.green,padding:"2px 6px",borderRadius:4,background:(voc.programStatus==="pilot"?p.orange:p.green)+"14"}}>{voc.programStatus}</span>
-                </Tip>
-                {voc.docUrl&&<a href={voc.docUrl} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>VoC doc {"\u2197"}</a>}
-              </div>
-            </div>
-
-            {/* Theme cards */}
-            <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:20}}>
-              {(voc.themes||[]).map(theme=>(
-                <div key={theme.id} style={{padding:"12px 14px",borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder}}>
-                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
-                    <div style={{display:"flex",alignItems:"center",gap:8}}>
-                      <span style={{fontSize:13,fontWeight:600,color:p.label,fontFamily:SF}}>{theme.name}</span>
-                      <Tip text={"Frequency: "+theme.frequency+" requests across "+theme.accounts?.length+" accounts. Trend: "+theme.trend+". Product area: "+theme.productArea+"."} p={p}>
-                        <span style={{fontSize:10,fontFamily:MONO,color:theme.severity==="high"?p.red:p.orange}}>{theme.severity}</span>
-                      </Tip>
-                    </div>
-                    <div style={{display:"flex",alignItems:"center",gap:8}}>
-                      <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:trendColor(theme.trend)}}>{trendIcon(theme.trend)} {theme.frequency}</span>
-                      <Tip text={"Mapped to "+theme.productArea+" theme. Owner: "+(theme.productArea==="Core Platform"?"Rowen":theme.productArea==="Engagement"?"Sanghee":"Kenn")+"."} p={p}>
-                        <span style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.fill4,color:p.label3}}>{theme.productArea}</span>
-                      </Tip>
-                    </div>
-                  </div>
-                  <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:6}}>{theme.summary}</p>
-                  <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                    {(theme.evidence||[]).map((ev,i)=>(
-                      <Tip key={i} text={evLabel(ev)} p={p}>
-                        <a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none",padding:"2px 6px",borderRadius:4,background:p.blue+"10"}}>{(function(){var l=evLabel(ev);return l.length>40?l.slice(0,37)+"...":l;})()}{" "}{"\u2197"}</a>
-                      </Tip>
-                    ))}
-                    {(theme.accounts||[]).map((a,i)=>(
-                      <span key={"a"+i} style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.fill4,color:p.label3}}>{a}</span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Top Customer Requests */}
-            <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>
-              TOP CUSTOMER REQUESTS {"\u00b7"} CROSS-ACCOUNT PRIORITY
-            </div>
-            <div style={{borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,overflow:"hidden"}}>
-              {(voc.topCustomerRequests||[]).map((req,i)=>(
-                <div key={req.id} style={{padding:"10px 14px",display:"flex",alignItems:"center",gap:10,
-                  borderBottom:i<(voc.topCustomerRequests||[]).length-1?"0.5px solid "+p.sep:"none"}}>
-                  <span style={{fontSize:12,fontWeight:700,fontFamily:MONO,color:i<3?p.red:p.label3,width:20,textAlign:"center"}}>{req.rank}</span>
-                  <div style={{flex:1,minWidth:0}}>
-                    <Tip text={"Account: "+req.account+". Age: "+req.age+"d. Criticality: "+req.criticality+". Status: "+req.status+"."} p={p}>
-                      <a href={req.url} target="_blank" rel="noopener" style={{fontSize:12,color:p.label,fontFamily:SF,textDecoration:"none",fontWeight:500}}>{req.title} <span style={{color:p.blue}}>{"\u2197"}</span></a>
-                    </Tip>
-                    <div style={{fontSize:10,fontFamily:MONO,color:p.label3,marginTop:2}}>{req.account} {"\u00b7"} {req.id}</div>
-                  </div>
-                  <Tip text={req.status+". Created "+req.age+" days ago."} p={p}>
-                    <span style={{fontSize:9,fontFamily:MONO,padding:"2px 8px",borderRadius:4,background:statusColor(req.status)+"14",color:statusColor(req.status)}}>{req.status}</span>
-                  </Tip>
-                  {req.criticality!=="None"&&<Tip text={req.criticality+" for "+req.account} p={p}>
-                    <span style={{fontSize:9,fontFamily:MONO,color:req.criticality==="Hard blocker"?p.red:p.orange}}>{req.criticality==="Hard blocker"?"\u26D4":"\u26A0"}</span>
-                  </Tip>}
-                </div>
-              ))}
-            </div>
-          </div>
-        );
-      })()}
-    </div>
-  );
-}
-
-// ====== VIEW: DECISIONS ======
-function DecisionsView({p,dk,mob}){
-  const[decisions,setDecisions]=useState([]);
-  useEffect(()=>{if(LIVE_DATA?.decisions)setDecisions(LIVE_DATA.decisions);else loadData().then(()=>{if(LIVE_DATA?.decisions)setDecisions(LIVE_DATA.decisions);});},[]);
-  function urgency(d){
-    if(d.staleDays>=5)return{color:p.red,label:"STALE"};
-    var dl=new Date(d.deadline);var now=new Date();var days=Math.ceil((dl-now)/(86400000));
-    if(days<=0)return{color:p.red,label:"OVERDUE"};
-    if(days<=2)return{color:p.orange,label:days+"d left"};
-    if(days<=7)return{color:p.blue,label:days+"d left"};
-    return{color:p.label3,label:days+"d left"};
-  }
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>
-        OPEN DECISIONS {"\u00b7"} {decisions.length} PENDING
-      </div>
-      <div style={{display:"flex",flexDirection:"column",gap:12}}>
-        {decisions.map(d=>{
-          var u=urgency(d);
-          return(
-            <div key={d.id} style={{padding:"16px 18px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
-              borderLeft:"3px solid "+u.color}}>
-              <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
-                <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF,flex:1,lineHeight:1.3}}>{d.title}</span>
-                <Tip text={u.label==="STALE"?"This decision has been waiting "+d.staleDays+" days without progress. Risk of context decay.":u.label==="OVERDUE"?"Past deadline. Blocking downstream work.":"Deadline: "+new Date(d.deadline).toLocaleDateString("en-US",{month:"long",day:"numeric"})+". Evidence may shift before then."} p={p}>
-                  <span style={{fontSize:10,fontWeight:700,fontFamily:MONO,color:u.color,padding:"2px 8px",borderRadius:6,background:u.color+"14",flexShrink:0,marginLeft:12}}>{u.label}</span>
-                </Tip>
-              </div>
-              <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:12}}>{d.context}</p>
-              <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
-                <div style={{padding:"8px 10px",borderRadius:8,background:p.green+"10",border:"0.5px solid "+p.green+"20"}}>
-                  <div style={{fontSize:9,fontWeight:700,fontFamily:MONO,color:p.green,marginBottom:4}}>FOR</div>
-                  <div style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.4}}>{d.evidenceFor}</div>
-                </div>
-                <div style={{padding:"8px 10px",borderRadius:8,background:p.red+"10",border:"0.5px solid "+p.red+"20"}}>
-                  <div style={{fontSize:9,fontWeight:700,fontFamily:MONO,color:p.red,marginBottom:4}}>AGAINST</div>
-                  <div style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.4}}>{d.evidenceAgainst}</div>
-                </div>
-              </div>
-              <div style={{display:"flex",gap:16,fontSize:10,fontFamily:MONO,color:p.label3}}>
-                <span>owner: {d.owner}</span>
-                <span>waiting on: {d.waitingOn}</span>
-                <span>deadline: {new Date(d.deadline).toLocaleDateString("en-US",{month:"short",day:"numeric"})}</span>
-                {d.staleDays>0&&<span style={{color:p.orange}}>stale {d.staleDays}d</span>}
-              </div>
-            </div>
-          );
-        })}
-      </div>
-      {decisions.length===0&&<div style={{textAlign:"center",padding:40,color:p.label3,fontFamily:SF}}>No open decisions in the queue</div>}
-    </div>
-  );
-}
-
-// ====== VIEW: TIME ======
-function TimeView({p,dk,mob}){
-  const[ta,setTa]=useState(null);
-  useEffect(()=>{if(LIVE_DATA?.timeAudit)setTa(LIVE_DATA.timeAudit);else loadData().then(()=>{if(LIVE_DATA?.timeAudit)setTa(LIVE_DATA.timeAudit);});},[]);
-  if(!ta)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading time audit...</div>;
-  var todayPct=ta.today?Math.round((ta.today.meetingHours/ta.today.totalHours)*100):0;
-  var weekPct=ta.thisWeek?Math.round((ta.thisWeek.meetingHours/40)*100):0;
-  function Bar({pct,color,label}){
-    return(
-      <div style={{marginBottom:12}}>
-        <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
-          <span style={{fontSize:11,fontFamily:MONO,color:p.label2}}>{label}</span>
-          <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pct>70?p.red:pct>50?p.orange:p.green}}>{pct}%</span>
-        </div>
-        <div style={{height:6,borderRadius:3,background:p.fill4,overflow:"hidden"}}>
-          <div style={{height:"100%",borderRadius:3,background:color,width:pct+"%",transition:"width 0.5s ease"}}/>
-        </div>
-      </div>
-    );
-  }
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:16,marginBottom:20}}>
-        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>TODAY</div>
-          <div style={{display:"flex",gap:20,marginBottom:14}}>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label}}>{ta.today?.freeHours||0}h</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>free</div>
-            </div>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.orange}}>{ta.today?.meetings||0}</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>meetings</div>
-            </div>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label2}}>{ta.today?.meetingHours||0}h</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>in meetings</div>
-            </div>
-          </div>
-          <Bar pct={todayPct} color={todayPct>70?p.red:todayPct>50?p.orange:p.green} label="Meeting load today"/>
-        </div>
-        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>THIS WEEK</div>
-          <div style={{display:"flex",gap:20,marginBottom:14}}>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label}}>{ta.thisWeek?.freeHours||0}h</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>free</div>
-            </div>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.orange}}>{ta.thisWeek?.meetings||0}</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>meetings</div>
-            </div>
-            <div>
-              <div style={{fontSize:28,fontWeight:700,fontFamily:MONO,color:p.label2}}>{ta.thisWeek?.meetingHours||0}h</div>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.label3}}>in meetings</div>
-            </div>
-          </div>
-          <Bar pct={weekPct} color={weekPct>70?p.red:weekPct>50?p.orange:p.green} label="Meeting load this week"/>
-          <div style={{fontSize:10,fontFamily:MONO,color:p.label3,marginTop:4}}>
-            Heaviest: {ta.thisWeek?.heaviestDay} {"\u00b7"} Lightest: {ta.thisWeek?.lightestDay}
-          </div>
-        </div>
-      </div>
-
-      {ta.today?.prepNeeded?.length>0&&<div style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,marginBottom:16}}>
-        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.orange,marginBottom:10}}>PREP NEEDED</div>
-        {ta.today.prepNeeded.map((prep,i)=>(
-          <div key={i} style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.6,paddingLeft:12,borderLeft:"2px solid "+p.orange+"40",marginBottom:6}}>{prep}</div>
-        ))}
-      </div>}
-
-      {ta.conflicts?.length>0&&<div style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.red+"20",marginBottom:16}}>
-        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.red,marginBottom:10}}>CONFLICTS</div>
-        {ta.conflicts.map((c,i)=>(
-          <div key={i} style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.6,paddingLeft:12,borderLeft:"2px solid "+p.red+"40",marginBottom:6}}>{c}</div>
-        ))}
-      </div>}
-
-      {ta.leverageRec&&<div style={{padding:"14px 16px",borderRadius:14,background:p.green+"08",border:"0.5px solid "+p.green+"20"}}>
-        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.green,marginBottom:8}}>HIGHEST-LEVERAGE MOVE</div>
-        <p style={{fontSize:13,color:p.label,fontFamily:SF,lineHeight:1.5}}>{ta.leverageRec}</p>
-      </div>}
-
-      {ta.today?.highLeverage&&<div style={{padding:"14px 16px",borderRadius:14,background:p.blue+"08",border:"0.5px solid "+p.blue+"20",marginTop:16}}>
-        <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.blue,marginBottom:8}}>RIGHT NOW</div>
-        <p style={{fontSize:13,color:p.label,fontFamily:SF,lineHeight:1.5}}>{ta.today.highLeverage}</p>
-      </div>}
-    </div>
-  );
-}
-
-// ====== VIEW: DATA (Strategy Metrics) ======
-function DataView({p,dk,mob}){
-  const[sm,setSm]=useState(null);
-  useEffect(()=>{if(LIVE_DATA?.strategyMetrics)setSm(LIVE_DATA.strategyMetrics);else loadData().then(()=>{if(LIVE_DATA?.strategyMetrics)setSm(LIVE_DATA.strategyMetrics);});},[]);
-  if(!sm)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading strategy data...</div>;
-  function stColor(s){return s==="on_track"||s==="achieved"?p.green:s==="at_risk"?p.red:s==="attention"?p.orange:s==="not_measurable"?p.red:p.label3;}
-  function stLabel(s){return s==="on_track"?"On Track":s==="at_risk"?"At Risk":s==="achieved"?"Achieved":s==="attention"?"Needs Attention":s==="not_measurable"?"Not Measurable":s;}
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      {/* North Star */}
-      <div style={{padding:"16px 18px",borderRadius:14,background:sm.northStar?.status==="not_measurable"?p.red+"08":p.green+"08",
-        border:"0.5px solid "+(sm.northStar?.status==="not_measurable"?p.red:p.green)+"20",marginBottom:20}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
-          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>NORTH STAR METRIC</div>
-          <Tip text={sm.northStar?.note||""} p={p}>
-            <span style={{fontSize:10,fontFamily:MONO,fontWeight:700,color:stColor(sm.northStar?.status),padding:"2px 8px",borderRadius:4,background:stColor(sm.northStar?.status)+"14"}}>{stLabel(sm.northStar?.status)}</span>
-          </Tip>
-        </div>
-        <div style={{fontSize:16,fontWeight:700,fontFamily:SF,color:p.label,marginBottom:4}}>{sm.northStar?.metric}</div>
-        <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5}}>{sm.northStar?.note}</p>
-        {sm.northStar?.amplitudeChart&&<a href={sm.northStar.amplitudeChart} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none",marginTop:6,display:"inline-block"}}>View in Amplitude {"\u2197"}</a>}
-      </div>
-
-      {/* Strategy Pillars */}
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>STRATEGIC PILLARS {"\u00b7"} SIGNAL \u2192 EVIDENCE \u2192 DECISION</div>
-      <div style={{display:"flex",flexDirection:"column",gap:14,marginBottom:24}}>
-        {(sm.pillars||[]).map(pillar=>(
-          <div key={pillar.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
-            borderLeft:"3px solid "+stColor(pillar.status)}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-              <div style={{display:"flex",alignItems:"center",gap:8}}>
-                <span style={{fontSize:14,fontWeight:700,color:p.label,fontFamily:SF}}>{pillar.name}</span>
-                <Tip text={"Theme: "+pillar.theme+". Owner: "+pillar.owner+". This pillar maps to the "+pillar.theme+" product area."} p={p}>
-                  <span style={{fontSize:10,fontFamily:MONO,color:p.label3}}>{pillar.owner}</span>
-                </Tip>
-              </div>
-              <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,color:stColor(pillar.status)}}>{stLabel(pillar.status)}</span>
-            </div>
-            <div style={{display:"flex",flexDirection:"column",gap:6}}>
-              {(pillar.keyResults||[]).map((kr,i)=>(
-                <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"6px 0",borderTop:i>0?"0.5px solid "+p.sep:"none"}}>
-                  <span style={{width:8,height:8,borderRadius:4,background:stColor(kr.status),flexShrink:0}}/>
-                  <Tip text={kr.tooltip||kr.kr} p={p} maxW={300}>
-                    <span style={{fontSize:12,fontFamily:SF,color:p.label,flex:1,cursor:"help"}}>{kr.kr}</span>
-                  </Tip>
-                  <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
-                    <span style={{fontSize:12,fontWeight:600,fontFamily:MONO,color:p.label}}>{kr.current}</span>
-                    <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>/ {kr.target}</span>
-                  </div>
-                  {kr.chartId&&<Tip text={"View chart "+kr.chartId+" in Amplitude"} p={p}>
-                    <a href={"https://app.amplitude.com/analytics/sift-stack/chart/"+kr.chartId} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"\u2197"}</a>
-                  </Tip>}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Product Bets */}
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>PRODUCT BETS {"\u00b7"} THREE-GATE SYSTEM</div>
-      <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr 1fr",gap:10,marginBottom:24}}>
-        {(sm.bets||[]).map(bet=>(
-          <div key={bet.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
-            borderTop:"3px solid "+stColor(bet.status)}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
-              <span style={{fontSize:14,fontWeight:700,color:p.label,fontFamily:SF}}>{bet.name}</span>
-              <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,color:stColor(bet.status)}}>{stLabel(bet.status)}</span>
-            </div>
-            <Tip text={bet.gate} p={p}>
-              <div style={{fontSize:9,fontFamily:MONO,color:p.label3,marginBottom:8,cursor:"help"}}>{bet.gate}</div>
-            </Tip>
-            <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:6}}>{bet.evidence}</p>
-            <Tip text={bet.killCriteria} p={p} maxW={300}>
-              <div style={{fontSize:10,fontFamily:MONO,color:p.orange,padding:"4px 8px",borderRadius:6,background:p.orange+"10",cursor:"help"}}>{"\u2620"} {bet.killCriteria?.length>80?bet.killCriteria.slice(0,77)+"...":bet.killCriteria}</div>
-            </Tip>
-            <div style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:6}}>Owner: {bet.owner}</div>
-          </div>
-        ))}
-      </div>
-
-      {/* Squad Status */}
-      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>SQUAD STATUS {"\u00b7"} Q1 PRIORITIES</div>
-      <div style={{borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,overflow:"hidden"}}>
-        {(sm.squads||[]).map((sq,i)=>(
-          <div key={sq.name} style={{padding:"10px 14px",display:"flex",alignItems:"center",gap:10,
-            borderBottom:i<(sm.squads||[]).length-1?"0.5px solid "+p.sep:"none"}}>
-            <span style={{width:8,height:8,borderRadius:4,background:stColor(sq.status),flexShrink:0}}/>
-            <span style={{fontSize:12,fontWeight:600,fontFamily:SF,color:p.label,width:mob?100:150}}>{sq.name}</span>
-            <Tip text={sq.q1} p={p} maxW={340}>
-              <span style={{fontSize:11,fontFamily:SF,color:p.label2,flex:1,cursor:"help",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{sq.q1}</span>
-            </Tip>
-            <span style={{fontSize:9,fontFamily:MONO,color:stColor(sq.status),flexShrink:0}}>{stLabel(sq.status)}</span>
-          </div>
-        ))}
-      </div>
-
-      {/* Doc links */}
-      <div style={{display:"flex",gap:12,marginTop:16,flexWrap:"wrap"}}>
-        {sm.strategyDocUrl&&<a href={sm.strategyDocUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>2026 Strategy {"\u2197"}</a>}
-        {sm.q1PlanUrl&&<a href={sm.q1PlanUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>Q1 Plan {"\u2197"}</a>}
-        {sm.metricsSheetUrl&&<a href={sm.metricsSheetUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>Metrics Sheet {"\u2197"}</a>}
-      </div>
-    </div>
-  );
-}
-
-// ====== CALENDAR VIEW ======
-function CalendarView({p,dk,mob}){
-  const[tl,setTl]=useState(null);
-  const[activeSection,setActiveSection]=useState("all");
-  const[viewMode,setViewMode]=useState("timeline"); // timeline | month
-  const[monthOffset,setMonthOffset]=useState(0);
-  useEffect(()=>{if(LIVE_DATA?.timeline)setTl(LIVE_DATA.timeline);else loadData().then(()=>{if(LIVE_DATA?.timeline)setTl(LIVE_DATA.timeline);});},[]);
-  if(!tl)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading timeline...</div>;
-
-  const sections=tl.sections||[];
-  const allEvents=sections.flatMap(s=>s.events.map(e=>({...e,sectionId:s.id,sectionLabel:s.label,sectionIcon:s.icon})));
-  const filtered=activeSection==="all"?allEvents:allEvents.filter(e=>e.sectionId===activeSection);
-
-  // Group by date
-  const byDate={};
-  filtered.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
-  const sortedDates=Object.keys(byDate).sort();
-
-  const today=new Date().toISOString().slice(0,10);
-  const todayIdx=sortedDates.findIndex(d=>d>=today);
-
-  // Month view helpers
-  const now=new Date();
-  const viewMonth=new Date(now.getFullYear(),now.getMonth()+monthOffset,1);
-  const monthName=viewMonth.toLocaleDateString("en-US",{month:"long",year:"numeric"});
-  const daysInMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+1,0).getDate();
-  const firstDow=viewMonth.getDay();
-  const monthPrefix=viewMonth.toISOString().slice(0,7);
-
-  function stColor(s){return s==="achieved"||s==="shipped"?p.green:s==="at_risk"?p.red:s==="today"?p.blue:s==="upcoming"?p.label3:p.orange;}
-  function typeIcon(t){return t==="deadline"?"⚠":t==="gate"?"🚦":t==="shipped"?"✅":t==="milestone"?"◆":t==="meeting"?"📅":t==="recurring"?"🔄":t==="ritual"?"🔮":"•";}
-  function relDay(d){
-    var diff=Math.round((new Date(d+"T12:00:00")-new Date(today+"T12:00:00"))/(86400000));
-    if(diff===0)return "TODAY";if(diff===1)return "TOMORROW";if(diff===-1)return "YESTERDAY";
-    if(diff>0&&diff<=7)return "in "+diff+"d";if(diff>7)return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
-    if(diff<0&&diff>=-7)return Math.abs(diff)+"d ago";
-    return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
-  }
-  function fmtDate(d){return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});}
-  function isPast(d){return d<today;}
-  function isToday(d){return d===today;}
-
-  // Count upcoming deadlines & gates
-  var urgentCount=allEvents.filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=today&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;
-
-  return(
-    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
-      {/* Header bar */}
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
-        <div style={{display:"flex",alignItems:"center",gap:10}}>
-          <span style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>TIMELINE</span>
-          {urgentCount>0&&<span style={{fontSize:9,fontFamily:MONO,fontWeight:700,padding:"2px 8px",borderRadius:4,background:p.orange+"14",color:p.orange}}>{urgentCount} due next 14d</span>}
-        </div>
-        <div style={{display:"flex",gap:4}}>
-          {["timeline","month"].map(m=>(
-            <button key={m} onClick={()=>setViewMode(m)} style={{padding:"4px 10px",borderRadius:6,border:"0.5px solid "+(viewMode===m?p.label3:p.sep),
-              background:viewMode===m?p.label+"0a":"transparent",color:viewMode===m?p.label:p.label4,
-              fontSize:10,fontFamily:MONO,fontWeight:viewMode===m?700:500,cursor:"pointer"}}>{m==="timeline"?"List":"Month"}</button>
-          ))}
-        </div>
-      </div>
-
-      {/* Section filter pills */}
-      <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
-        <button onClick={()=>setActiveSection("all")} style={{padding:"5px 12px",borderRadius:8,border:"0.5px solid "+(activeSection==="all"?p.label3:p.sep),
-          background:activeSection==="all"?p.label+"0a":"transparent",color:activeSection==="all"?p.label:p.label3,
-          fontSize:10,fontFamily:MONO,fontWeight:activeSection==="all"?700:500,cursor:"pointer"}}>All ({allEvents.length})</button>
-        {sections.map(s=>{
-          var ct=s.events.length;
-          return <button key={s.id} onClick={()=>setActiveSection(s.id)} style={{padding:"5px 12px",borderRadius:8,
-            border:"0.5px solid "+(activeSection===s.id?p.label3:p.sep),
-            background:activeSection===s.id?p.label+"0a":"transparent",
-            color:activeSection===s.id?p.label:p.label3,
-            fontSize:10,fontFamily:MONO,fontWeight:activeSection===s.id?700:500,cursor:"pointer"}}>{s.icon} {s.label} ({ct})</button>;
-        })}
-      </div>
-
-      {viewMode==="timeline"?(
-        <div style={{display:"flex",flexDirection:"column",gap:0}}>
-          {sortedDates.map((date,di)=>{
-            var events=byDate[date];
-            var past=isPast(date)&&!isToday(date);
-            var isTd=isToday(date);
-            return(
-              <div key={date} style={{position:"relative",paddingLeft:mob?24:40,paddingBottom:di<sortedDates.length-1?4:0,marginBottom:0}}>
-                {/* Timeline rail */}
-                <div style={{position:"absolute",left:mob?10:20,top:0,bottom:0,width:2,
-                  background:isTd?p.blue:past?p.sep:p.label+"18"}}/>
-                {/* Date node */}
-                <div style={{position:"absolute",left:mob?5:15,top:4,width:12,height:12,borderRadius:6,
-                  background:isTd?p.blue:past?p.label4:p.label3,border:"2px solid "+(dk?"#0c0d0e":"#f5f5f3"),
-                  zIndex:1}}/>
-                {/* Date header */}
-                <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:6,paddingTop:2}}>
-                  <span style={{fontSize:12,fontWeight:700,fontFamily:MONO,color:isTd?p.blue:past?p.label4:p.label}}>{fmtDate(date)}</span>
-                  <span style={{fontSize:10,fontWeight:isTd?700:500,fontFamily:MONO,color:isTd?p.blue:past?p.label4:p.label3}}>{relDay(date)}</span>
-                </div>
-                {/* Events */}
-                <div style={{display:"flex",flexDirection:"column",gap:6,paddingBottom:12}}>
-                  {events.map((ev,ei)=>(
-                    <div key={ei} style={{padding:"10px 14px",borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,
-                      borderLeft:"3px solid "+stColor(ev.status),opacity:past&&!isTd?0.6:1,transition:"opacity 0.2s"}}>
-                      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:ev.context?4:0}}>
-                        <div style={{display:"flex",alignItems:"center",gap:8,flex:1,minWidth:0}}>
-                          <span style={{fontSize:13,flexShrink:0}}>{typeIcon(ev.type)}</span>
-                          <span style={{fontSize:13,fontWeight:600,fontFamily:SF,color:p.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.title}</span>
-                        </div>
-                        <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
-                          {ev.account&&<span style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.blue+"14",color:p.blue,fontWeight:600}}>{ev.account}</span>}
-                          {ev.url&&<a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"↗"}</a>}
-                        </div>
-                      </div>
-                      {ev.context&&<p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,margin:"2px 0 0 21px"}}>{ev.context}</p>}
-                      <div style={{display:"flex",alignItems:"center",gap:8,marginTop:ev.context?4:2,marginLeft:21}}>
-                        <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>{ev.sectionIcon} {ev.sectionLabel}</span>
-                        {ev.owner&&<span style={{fontSize:9,fontFamily:MONO,color:p.label3}}>→ {ev.owner}</span>}
-                        <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>via {ev.source}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-          {sortedDates.length===0&&<div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF,fontSize:12}}>No events in this category.</div>}
-        </div>
-      ):(
-        /* Month grid view */
-        <div>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
-            <button onClick={()=>setMonthOffset(o=>o-1)} style={{background:"none",border:"none",cursor:"pointer",fontSize:16,color:p.label3,padding:"4px 10px"}}>←</button>
-            <span style={{fontSize:14,fontWeight:700,fontFamily:SF,color:p.label}}>{monthName}</span>
-            <button onClick={()=>setMonthOffset(o=>o+1)} style={{background:"none",border:"none",cursor:"pointer",fontSize:16,color:p.label3,padding:"4px 10px"}}>→</button>
-          </div>
-          {/* Day headers */}
-          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2,marginBottom:4}}>
-            {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>(<div key={d} style={{textAlign:"center",fontSize:9,fontFamily:MONO,color:p.label4,padding:4}}>{d}</div>))}
-          </div>
-          {/* Calendar cells */}
-          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
-            {Array.from({length:firstDow}).map((_,i)=>(<div key={"empty"+i}/>))}
-            {Array.from({length:daysInMonth}).map((_,i)=>{
-              var day=i+1;
-              var dateStr=monthPrefix+"-"+String(day).padStart(2,"0");
-              var dayEvents=filtered.filter(e=>e.date===dateStr);
-              var isTd=dateStr===today;
+        {/* Evidence */}
+        {ev.length>0&&(
+          <div style={{display:"flex",gap:5,flexWrap:"wrap",marginTop:16,alignItems:"center"}}>
+            {visEv.map(function(e,i){
+              var icon=SRCICON[e.source]||"\u{1F517}";
+              var label=evLabel?evLabel(e):(e.label||e.source||"Link");
               return(
-                <Tip key={day} text={dayEvents.length>0?dayEvents.map(e=>typeIcon(e.type)+" "+e.title).join("\n"):"No events"} p={p} maxW={280}>
-                  <div style={{minHeight:mob?44:56,padding:4,borderRadius:8,
-                    background:isTd?p.blue+"14":dayEvents.length>0?p.label+"06":"transparent",
-                    border:isTd?"1px solid "+p.blue+"40":"1px solid transparent",cursor:dayEvents.length>0?"pointer":"default"}}>
-                    <div style={{fontSize:11,fontWeight:isTd?700:500,fontFamily:MONO,color:isTd?p.blue:p.label,marginBottom:2}}>{day}</div>
-                    <div style={{display:"flex",flexDirection:"column",gap:1}}>
-                      {dayEvents.slice(0,3).map((ev,ei)=>(
-                        <div key={ei} style={{fontSize:8,fontFamily:MONO,color:"#fff",padding:"1px 3px",borderRadius:3,
-                          background:stColor(ev.status),overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
-                          {ev.title.length>12?ev.title.slice(0,11)+"…":ev.title}
-                        </div>
-                      ))}
-                      {dayEvents.length>3&&<div style={{fontSize:8,fontFamily:MONO,color:p.label3}}>+{dayEvents.length-3}</div>}
-                    </div>
-                  </div>
-                </Tip>
+                <a key={i} href={e.url||"#"} target="_blank" rel="noopener"
+                  onClick={function(ev){ev.stopPropagation();}}
+                  style={{display:"inline-flex",alignItems:"center",gap:5,
+                    padding:"5px 12px",borderRadius:10,
+                    fontSize:13,fontFamily:FT,fontWeight:400,
+                    color:c.l2,textDecoration:"none",
+                    background:c.glassThin,
+                    backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
+                    border:"0.5px solid "+(dk?"rgba(255,255,255,0.06)":"rgba(255,255,255,0.30)"),
+                    transition:"all 0.2s ease",letterSpacing:"-0.01em",
+                    animation:evEx&&i>=maxEv?"glassIn 0.3s ease "+((i-maxEv)*0.05)+"s both":"none"}}
+                  onMouseEnter={function(ev){ev.currentTarget.style.color=c.l1;ev.currentTarget.style.borderColor=dk?"rgba(255,255,255,0.14)":"rgba(255,255,255,0.50)";}}
+                  onMouseLeave={function(ev){ev.currentTarget.style.color=c.l2;ev.currentTarget.style.borderColor=dk?"rgba(255,255,255,0.06)":"rgba(255,255,255,0.30)";}}>
+                  <span style={{fontSize:12,lineHeight:1}}>{icon}</span>
+                  {label.length>28?label.slice(0,26)+"\u2026":label}
+                </a>
               );
             })}
+            {hasMore&&!evEx&&(
+              <button onClick={function(e){e.stopPropagation();setEvEx(true);}}
+                style={{padding:"5px 12px",borderRadius:10,border:"none",background:"transparent",
+                  color:c.l3,fontSize:13,fontFamily:FT,cursor:"pointer",transition:"color 0.2s"}}
+                onMouseEnter={function(e){e.currentTarget.style.color=c.l1;}}
+                onMouseLeave={function(e){e.currentTarget.style.color=c.l3;}}>
+                +{ev.length-maxEv} more
+              </button>
+            )}
           </div>
-          {/* Events for selected month below grid */}
-          {(()=>{
-            var monthEvents=filtered.filter(e=>e.date.startsWith(monthPrefix)).sort((a,b)=>a.date.localeCompare(b.date));
-            if(monthEvents.length===0)return <div style={{padding:20,textAlign:"center",color:p.label3,fontFamily:SF,fontSize:11}}>No events this month</div>;
-            return(
-              <div style={{marginTop:16,display:"flex",flexDirection:"column",gap:6}}>
-                <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:4}}>{monthEvents.length} EVENTS IN {monthName.toUpperCase()}</div>
-                {monthEvents.map((ev,i)=>(
-                  <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 12px",borderRadius:10,...glass(p),border:"0.5px solid "+p.glassBorder,
-                    borderLeft:"3px solid "+stColor(ev.status)}}>
-                    <span style={{fontSize:12,flexShrink:0}}>{typeIcon(ev.type)}</span>
-                    <span style={{fontSize:10,fontFamily:MONO,color:p.label3,flexShrink:0,width:44}}>{ev.date.slice(5)}</span>
-                    <span style={{fontSize:12,fontWeight:600,fontFamily:SF,color:p.label,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.title}</span>
-                    {ev.account&&<span style={{fontSize:8,fontFamily:MONO,padding:"2px 5px",borderRadius:3,background:p.blue+"14",color:p.blue}}>{ev.account}</span>}
-                    {ev.owner&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>{ev.owner}</span>}
-                    {ev.url&&<a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"↗"}</a>}
-                  </div>
-                ))}
-              </div>
-            );
-          })()}
+        )}
+      </div>
+    </article>
+  );
+}
+
+// Settings modal
+function SettingsModal({c,dk,onClose}){
+  var[key,setKey]=useState(function(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}});
+  function save(){try{localStorage.setItem("radar_api_key",key);}catch(e){}onClose();}
+  return(
+    <div style={{position:"fixed",inset:0,zIndex:9000,display:"flex",alignItems:"center",justifyContent:"center",
+      background:"rgba(0,0,0,"+(dk?"0.6":"0.3")+")",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}
+      onClick={onClose}>
+      <div onClick={function(e){e.stopPropagation();}}
+        style={{width:Math.min(400,window.innerWidth-48),padding:28,borderRadius:22,
+          background:dk?c.glass:c.glassH,backdropFilter:"blur(40px) saturate(180%)",WebkitBackdropFilter:"blur(40px) saturate(180%)",
+          border:"0.5px solid "+c.border,
+          boxShadow:"0 24px 80px rgba(0,0,0,"+(dk?"0.5":"0.15")+"), inset 0 1px 0 "+c.highlight}}>
+        <h2 style={{fontSize:20,fontWeight:700,fontFamily:FD,color:c.l1,marginBottom:20,letterSpacing:"-0.02em"}}>Settings</h2>
+        <label style={{fontSize:13,fontFamily:FT,color:c.l3,display:"block",marginBottom:6}}>API Key</label>
+        <input value={key} onChange={function(e){setKey(e.target.value);}} type="password"
+          style={{width:"100%",padding:"10px 14px",borderRadius:10,border:"0.5px solid "+c.border,
+            background:c.glassThin,backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
+            color:c.l1,fontSize:14,fontFamily:FM,outline:"none"}} />
+        <div style={{display:"flex",gap:8,marginTop:20}}>
+          <button onClick={save} style={{flex:1,padding:"11px 0",borderRadius:12,border:"none",
+            background:c.blue,color:"#fff",fontSize:15,fontFamily:FT,fontWeight:600,cursor:"pointer"}}>Save</button>
+          <button onClick={onClose} style={{padding:"11px 20px",borderRadius:12,border:"none",
+            background:c.f4,color:c.l2,fontSize:15,fontFamily:FT,fontWeight:500,cursor:"pointer"}}>Cancel</button>
         </div>
-      )}
-    </div>
-  );
-}
-
-// ====== VIEW TABS ======
-const VIEWS=[
-  {id:"now",label:"Now",shortcut:"1",icon:"\u{1F4E1}",shortLabel:"NOW",phase:"OBSERVE"},
-  {id:"who",label:"Who",shortcut:"2",icon:"\u{1F465}",shortLabel:"WHO",phase:"ORIENT"},
-  {id:"how",label:"How",shortcut:"3",icon:"\u{2696}",shortLabel:"HOW",phase:"DECIDE"},
-  {id:"when",label:"When",shortcut:"4",icon:"\u{1F4C5}",shortLabel:"WHEN",phase:"ACT"},
-];
-
-function ViewTabs({active,onChange,p,mob,counts}){
-  return(
-    <div style={{display:"flex",gap:0,padding:mob?"0 4px":"0 12px",borderBottom:mob?"none":"0.5px solid "+p.sep,flexShrink:0,
-      ...(mob?{borderTop:"0.5px solid "+p.sep,order:99,position:"fixed",bottom:0,left:0,right:0,zIndex:60,
-        background:p.materialThick,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
-        borderTop:"0.5px solid "+p.glassBorder,
-        paddingBottom:"env(safe-area-inset-bottom,0px)",justifyContent:"space-evenly"}:{})}}>
-      {VIEWS.map(v=>{
-        var isActive=active===v.id;
-        var badge=null;
-        if(v.id==="now"&&counts?.urgent>0) badge=counts.urgent;
-        if(v.id==="who"){
-          var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;
-          var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;
-          if(blocked+atRisk>0)badge=blocked+atRisk;
-        }
-        if(v.id==="how"){
-          var decCount=(LIVE_DATA?.decisions||[]).length||0;
-          var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});
-          if(decCount+arKr>0)badge=decCount+arKr;
-        }
-        if(v.id==="when"){var td=new Date().toISOString().slice(0,10);var urg=(LIVE_DATA?.timeline?.sections||[]).flatMap(s=>s.events).filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=td&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;if(urg>0)badge=urg;}
-        return(
-          <button key={v.id} onClick={()=>onChange(v.id)}
-            style={{padding:mob?"8px 2px 6px":"10px 18px",background:mob&&isActive?p.accent+"14":"none",border:"none",cursor:"pointer",position:"relative",
-              borderRadius:mob?12:0,
-              fontSize:mob?10:13,fontWeight:isActive?600:400,fontFamily:SF,letterSpacing:"0",
-              color:isActive?p.accent:p.label3,transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)",
-              borderBottom:mob?"none":(isActive?"2.5px solid "+p.accent:"2.5px solid transparent"),
-              marginBottom:mob?0:"-0.5px",whiteSpace:"nowrap",flex:mob?1:"none",
-              display:"flex",flexDirection:mob?"column":"row",alignItems:"center",gap:mob?1:0,
-              minHeight:mob?48:undefined,WebkitTapHighlightColor:"transparent"}}>
-            {mob&&<span style={{fontSize:18}}>{v.icon||""}</span>}
-            {!mob&&v.label}
-            {mob&&<span style={{fontSize:10,fontWeight:isActive?700:500,letterSpacing:"0.04em"}}>{v.shortLabel||v.label}</span>}
-            {mob&&<span style={{fontSize:6,fontWeight:400,letterSpacing:"0.1em",color:isActive?p.accent+"88":p.label4,marginTop:-1}}>{v.phase}</span>}
-            {!mob&&<span style={{fontSize:8,fontFamily:MONO,color:isActive?p.accent+"66":p.label4,marginLeft:6,fontWeight:400,letterSpacing:"0.08em"}}>{v.phase}</span>}
-            {!mob&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4,marginLeft:4,fontWeight:400}}>{v.shortcut}</span>}
-            {badge!=null&&badge>0&&<span style={{position:"absolute",top:mob?2:3,right:mob?"50%":2,
-              transform:mob?"translateX(14px)":"none",
-              minWidth:16,height:16,borderRadius:8,
-              padding:"0 4px",
-              background:v.id==="now"?p.red:p.orange,color:"#fff",fontSize:9,fontWeight:700,fontFamily:SF,
-              display:"flex",alignItems:"center",justifyContent:"center",
-              boxShadow:"0 1px 3px rgba(0,0,0,0.3)"}}>{badge}</span>}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function SubTab({tabs,active,onChange,p,mob}){
-  return(
-    <div style={{display:"flex",gap:2,padding:mob?"6px 12px":"6px 16px",background:p.fill4,borderRadius:0}}>
-      {tabs.map(t=>(
-        <button key={t.id} onClick={()=>onChange(t.id)}
-          style={{padding:mob?"5px 12px":"5px 14px",background:active===t.id?p.accent+"18":"transparent",
-            border:active===t.id?"1px solid "+p.accent+"33":"1px solid transparent",
-            borderRadius:8,cursor:"pointer",
-            fontSize:mob?10:11,fontWeight:active===t.id?600:400,fontFamily:SF,
-            color:active===t.id?p.accent:p.label3,transition:"all 0.2s",
-            WebkitTapHighlightColor:"transparent"}}>
-          {t.icon&&<span style={{marginRight:4}}>{t.icon}</span>}{t.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
-function WhoView({p,dk,mob}){
-  const[sub,setSub]=useState("team");
-  return(
-    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-      <SubTab tabs={[{id:"team",label:"Team",icon:"👥"},{id:"customers",label:"Customers",icon:"🏭"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
-      <div style={{flex:1,overflow:"hidden"}}>
-        {sub==="team"&&<TeamView p={p} dk={dk} mob={mob}/>}
-        {sub==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
       </div>
     </div>
   );
 }
 
-function HowView({p,dk,mob}){
-  const[sub,setSub]=useState("decisions");
-  return(
-    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-      <SubTab tabs={[{id:"decisions",label:"Decisions",icon:"⚖"},{id:"data",label:"Strategy",icon:"📊"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
-      <div style={{flex:1,overflow:"hidden"}}>
-        {sub==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
-        {sub==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
-      </div>
-    </div>
-  );
-}
+// ============================================================
+// MAIN APP
+// ============================================================
+function RadarApp(){
+  var sysDark=typeof window!=="undefined"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+  var[dk,setDk]=useState(sysDark!==false);
+  var[ready,setReady]=useState(false);
+  var[scanning,setScanning]=useState(false);
+  var[progress,setProgress]=useState("");
+  var[items,setItems]=useState([]);
+  var[settings,setSettings]=useState(false);
+  var[transitioning,setTransitioning]=useState(false);
+  var c=dk?CP.dark:CP.light;
+  var hour=new Date().getHours();
+  var mesh=meshColors(dk,hour);
 
-function WhenView({p,dk,mob}){
-  const[sub,setSub]=useState("timeline");
-  return(
-    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-      <SubTab tabs={[{id:"timeline",label:"Timeline",icon:"⏱"},{id:"calendar",label:"Calendar",icon:"📅"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
-      <div style={{flex:1,overflow:"hidden"}}>
-        {sub==="timeline"&&<TimeView p={p} dk={dk} mob={mob}/>}
-        {sub==="calendar"&&<CalendarView p={p} dk={dk} mob={mob}/>}
-      </div>
-    </div>
-  );
-}
+  useEffect(function(){requestAnimationFrame(function(){setReady(true);});},[]);
 
-function SiftIntel(){
-  const[dk,setDk]=useTheme();
-  const mob=useMobile();
-  const p=dk?PAL.dark:PAL.light;
-  const[showSettings,setShowSettings]=useState(false);
+  // Auto-scan on mount
+  useEffect(function(){
+    var t=setTimeout(function(){scan();},400);
+    return function(){clearTimeout(t);};
+  },[]);
 
-  const[insights,setInsights]=useState(SEED);
-  const[filter,setFilter]=useState("all");
-  const[selected,setSelected]=useState(null);
-  const[modal,setModal]=useState(null);
-  const[itemStates,setItemStates]=useState({});
-  const[scanning,setScanning]=useState(false);
-  const[scanStatus,setScanStatus]=useState(null);
-  const[scanError,setScanError]=useState(null);
-  const[lastScanAt,setLastScanAt]=useState(null);
-  const[focusIdx,setFocusIdx]=useState(-1);
-  const[feedMode,setFeedMode]=useState("cards");
-  const[pullY,setPullY]=useState(0);
-  const pullRef=useRef(null);
-  const scrollRef=useRef(null);
-  const hasScanned=useRef(false);
-  const[scanMeta,setScanMeta]=useState(null);
-  const[coverageGaps,setCoverageGaps]=useState(null);
-  const[activeView,setActiveView]=useState("now");
+  function toggleTheme(){
+    setTransitioning(true);
+    setTimeout(function(){setDk(!dk);setTimeout(function(){setTransitioning(false);},500);},50);
+  }
 
-  const active=insights.filter(i=>itemStates[i.id]!=="dismissed");
-  const filtered=filter==="all"?active:active.filter(i=>i.priority===filter);
-  const counts={
-    total:active.length,
-    urgent:active.filter(i=>i.priority==="URGENT").length,
-    high:active.filter(i=>i.priority==="HIGH").length,
-    medium:active.filter(i=>i.priority==="MEDIUM").length,
-    low:active.filter(i=>i.priority==="LOW").length,
-  };
-
-  const grouped=useMemo(()=>{
-    const groups=new Map();
-    filtered.forEach(i=>{const g=timeGroup(i.timestamp);if(!groups.has(g))groups.set(g,[]);groups.get(g).push(i);});
-    return[...groups.entries()];
-  },[filtered]);
-
-  const flatList=useMemo(()=>filtered,[filtered]);
-
-  const runScan=useCallback(async()=>{
+  async function scan(){
     if(scanning)return;
-    setScanning(true);setScanError(null);setScanStatus("Connecting to data sources...");
-    setInsights([]);setItemStates({});setSelected(null);
-    var seenIds={};
+    setScanning(true);setProgress("Starting scan...");setItems([]);
     try{
-      const result=await runLiveScan(
-        function(insight,idx){
-          // Progressive: each insight appears as it streams in
-          var nIns={
-            ...insight,
-            id:insight.id||("live-"+Date.now()+"-"+idx),
-            timestamp:new Date(),
-            sparkline:insight.sparkline||[],
-            evidence:insight.evidence||[],
-            context:insight.context||{metric:"\u2014",delta:"\u2014",baseline:"\u2014",risk:"\u2014"},
-            feeds:(insight.feeds||[]).map(function(f){return{...f,freshness:f.freshness||new Date().toISOString()};}),
-            sources:insight.sources||[],
-            category:insight.category||"insight",
-          };
-          if(!seenIds[nIns.id]){
-            seenIds[nIns.id]=true;
-            setInsights(function(prev){return[...prev,nIns];});
-          }
-        },
-        function(status){setScanStatus(status);}
+      var result=await runLiveScan(
+        function(ins,idx){setItems(function(prev){var n=[].concat(prev);n[idx]=ins;return n;});},
+        function(msg){setProgress(msg);}
       );
-      // Final pass: replace with fully-parsed data
-      if(result.insights.length>0){
-        var normalized=result.insights.map(function(ins,i){return{
-          ...ins,
-          id:ins.id||("live-"+Date.now()+"-"+i),
-          timestamp:new Date(),
-          sparkline:ins.sparkline||[],
-          evidence:ins.evidence||[],
-          context:ins.context||{metric:"\u2014",delta:"\u2014",baseline:"\u2014",risk:"\u2014"},
-          feeds:(ins.feeds||[]).map(function(f){return{...f,freshness:f.freshness||new Date().toISOString()};}),
-          sources:ins.sources||[],
-          category:ins.category||"insight",
-        };});
-        setInsights(normalized);
-        setLastScanAt(new Date());
-        // Capture source metadata from data.json
-        var meta=LIVE_DATA?._meta||{sources_scanned:0,source_list:[]};
-        setScanMeta({
-          sources:meta.sources_scanned||result.meta.sourcesOk||0,
-          sourceList:meta.source_list||[],
-          amplitudeCharts:meta.amplitude_charts_queried||0,
-          slackChannels:meta.slack_channels_scanned||0,
-          linearProjects:meta.linear_projects_checked||0,
-          calendarEvents:meta.calendar_events_loaded||0,
-          googleDocs:meta.google_docs_read||0,
-          totalSignals:meta.signal_count||normalized.length,
-          displayedSignals:normalized.length,
-        });
-        // Extract coverage gaps if present
-        var gaps=normalized.filter(function(n){return n.category==="blind_spot"||n.category==="coverage";});
-        if(result.insights.length>0){
-          var covNote=result.insights.find(function(x){return x.id==="coverage-audit";});
-          if(covNote) setCoverageGaps(covNote);
-        }
-        setScanStatus(normalized.length+" items from "+String(result.meta.sourcesOk||meta.sources_scanned||0)+" sources");
-      } else {
-        setScanStatus("No insights generated \u2014 check data sources");
-      }
-      if(result.meta.errors&&result.meta.errors.length>0){
-        setScanError("Partial: "+result.meta.errors.join(", "));
-      }
+      if(result&&result.insights)setItems(result.insights);
+      setProgress("");
     }catch(e){
-      var msg=e.message||"Unknown error";
-      if(msg.indexOf("Parse failed (len=0)")>=0) msg="AI returned empty response \u2014 try again";
-      else if(msg.indexOf("Parse failed")>=0) msg="AI response couldn\u2019t be parsed \u2014 try again";
-      setScanError(msg);
-      setScanStatus("Scan failed");
-    }finally{
-      setScanning(false);
-      setTimeout(function(){setScanStatus(null);setScanError(null);},8000);
+      setProgress("Error: "+e.message);
     }
-  },[scanning]);
+    setScanning(false);
+  }
 
-  // Auto-scan on first load
-  useEffect(()=>{
-    if(!hasScanned.current){hasScanned.current=true;runScan();}
-  },[]);
-  const handleAct=i=>setModal(i);
-  const handleDone=()=>{
-    if(modal){setItemStates(s=>({...s,[modal.id]:"done"}));setModal(null);setSelected(null);}
-  };
-  const setInsightState=(id,state)=>{setItemStates(s=>({...s,[id]:state}));};
+  function handleAction(item){
+    if(item.action){
+      try{navigator.clipboard.writeText(item.action);}catch(e){}
+    }
+  }
 
-  // Pull-to-scan
-  const onPullStart=useCallback(e=>{
-    if(!mob||!scrollRef.current||scrollRef.current.scrollTop>5) return;
-    pullRef.current={y:e.touches[0].clientY,active:false};
-  },[mob]);
-  const onPullMove=useCallback(e=>{
-    if(!pullRef.current) return;
-    const dy=e.touches[0].clientY-pullRef.current.y;
-    if(dy>10){pullRef.current.active=true;setPullY(Math.min(100,dy*0.5));e.preventDefault();}
-  },[]);
-  const onPullEnd=useCallback(()=>{
-    if(pullRef.current?.active&&pullY>=40&&!scanning){runScan();}
-    setPullY(0);pullRef.current=null;
-  },[pullY,scanning,runScan]);
+  var now=new Date();
+  var greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Good evening";
+  var dateStr=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
 
-  // Keyboard shortcuts
-  useEffect(()=>{
-    const h=e=>{
-      // Don't capture keys when typing in inputs/textareas
-      const tag=e.target?.tagName?.toLowerCase();
-      if(tag==="input"||tag==="textarea"||e.target?.isContentEditable)return;
-      // In modal
-      if(modal){if(e.key==="Escape")setModal(null);return;}
-      // In detail
-      if(selected){
-        if(e.key==="Escape")setSelected(null);
-        if(e.key==="a")handleAct(selected);
-        return;
-      }
-      // Feed nav
-      if(e.key==="j"||e.key==="ArrowDown"){e.preventDefault();setFocusIdx(i=>Math.min(flatList.length-1,i+1));}
-      if(e.key==="k"||e.key==="ArrowUp"){e.preventDefault();setFocusIdx(i=>Math.max(0,i-1));}
-      if(e.key==="Enter"&&focusIdx>=0&&flatList[focusIdx]){setSelected(flatList[focusIdx]);}
-      if(e.key==="a"&&focusIdx>=0&&flatList[focusIdx]){handleAct(flatList[focusIdx]);}
-      if(e.key==="d"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"done");}
-      if(e.key==="s"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"snoozed");}
-      if(e.key==="x"&&focusIdx>=0&&flatList[focusIdx]){setInsightState(flatList[focusIdx].id,"dismissed");}
-      const num=parseInt(e.key);
-      if(num>=1&&num<=9&&num<=flatList.length){setFocusIdx(num-1);}
-      if(e.key==="Escape"){setFocusIdx(-1);}
-      if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
-      // View switching: 1-5 when no item focused
-      if(focusIdx<0){
-        var viewMap={"1":"now","2":"who","3":"how","4":"when"};
-        if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
-      }
-    };
-    window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
-  },[modal,selected,focusIdx,flatList]);
-
-  let globalIdx=0;
+  // Combine headline+body into synthesis text for display
+  var feedItems=items.map(function(item){
+    var text=item.body||item.headline||"";
+    if(item.headline&&item.body&&item.headline!==item.body){
+      text=item.body;
+    }
+    return Object.assign({},item,{text:text});
+  });
 
   return(
-    <>
-      <style>{`
-        @import url('${FONT_URL}');
-        @keyframes sp{0%,100%{opacity:1}50%{opacity:0.3}}
-        @keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-        @keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
-        @keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
-        @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes sheetUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes staggerIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-        @keyframes springIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
-        @keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(8vw,5vh) scale(1.05)}50%{transform:translate(3vw,10vh) scale(0.95)}75%{transform:translate(-5vw,3vh) scale(1.02)}}
-        @keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-10vw,-6vh) scale(1.08)}66%{transform:translate(5vw,-3vh) scale(0.96)}}
-        @keyframes meshDrift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-8vh) scale(1.1)}}
-        @keyframes meshPulse{0%,100%{opacity:0.6}50%{opacity:1}}
-        @keyframes urgencyPulse{0%,100%{opacity:0.7}50%{opacity:1}}
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-        body{overscroll-behavior-y:none;font-family:${SF}}
-        ::-webkit-scrollbar{width:0;background:transparent}
-        ::selection{background:${dk?'rgba(68,136,187,0.3)':'rgba(42,96,144,0.2)'}}
-      `}</style>
+    <div style={{minHeight:"100vh",background:c.bg,position:"relative",overflow:"hidden",
+      transition:"background 0.6s cubic-bezier(0.25,1,0.5,1)",
+      opacity:transitioning?0.92:1}}>
+      <style>{"::selection{background:"+(dk?"rgba(10,132,255,0.40)":"rgba(0,122,255,0.20)")+"}"}</style>
 
-      <div style={{width:"100vw",height:"100dvh",background:p.bg,position:"relative",overflow:"hidden",
-        fontFamily:SF,color:p.label,transition:"background 0.4s ease, color 0.3s ease",display:"flex",flexDirection:"column"}}>
-        <AmbientMesh dk={dk} hasUrgent={counts.urgent>0}/>
-        <UrgencyBar count={counts.urgent} p={p} dk={dk} onClick={()=>{setFilter("URGENT");setFocusIdx(0);}}/>
-
-        <div style={{position:"relative",zIndex:10,padding:mob?0:"12px 0 0"}}>
-          <NavBar dk={dk} setDk={setDk} scanning={scanning} runScan={runScan} counts={counts} p={p} mob={mob} feedMode={feedMode} setFeedMode={setFeedMode} scanStatus={scanStatus} scanError={scanError} lastScanAt={lastScanAt} onSettings={()=>setShowSettings(true)}/>
-          {(scanStatus||scanError)&&<div style={{margin:mob?"0":"0 16px",padding:"6px 16px",borderRadius:mob?0:10,
-            fontSize:10,fontFamily:MONO,fontWeight:500,display:"flex",alignItems:"flex-start",gap:6,
-            color:scanError?p.red:p.label3,background:scanError?`${p.red}10`:p.fill4,
-            maxHeight:80,overflow:"auto",wordBreak:"break-word"}}>
-            {scanning&&<div style={{width:4,height:4,borderRadius:"50%",background:p.blue,animation:"sp 1s ease-in-out infinite",flexShrink:0,marginTop:3}}/>}
-            <span>{scanError||scanStatus}</span>
-            {lastScanAt&&!scanning&&<span style={{marginLeft:"auto",color:p.label4}}>Last: {timeAgo(lastScanAt)}</span>}
-          </div>}
-        </div>
-
-        <ViewTabs active={activeView} onChange={setActiveView} p={p} mob={mob} counts={counts}/>
-
-        <div style={{flex:1,position:"relative",overflow:"hidden",zIndex:1}}>
-          {activeView==="who"&&<WhoView p={p} dk={dk} mob={mob}/>}
-          {activeView==="how"&&<HowView p={p} dk={dk} mob={mob}/>}
-          {activeView==="when"&&<WhenView p={p} dk={dk} mob={mob}/>}
-          {activeView==="now"&&!selected&&(
-            <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-              <div style={{padding:mob?"4px 0":"6px 0"}}>
-                <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
-              </div>
-              <SummaryHeader counts={counts} p={p} mob={mob} feedMode={feedMode} scanMeta={scanMeta} lastScanAt={lastScanAt} coverageGaps={coverageGaps}/>
-              <div ref={scrollRef} onTouchStart={onPullStart} onTouchMove={onPullMove} onTouchEnd={onPullEnd}
-                style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch",paddingTop:0}}>
-                {pullY>0&&<PullIndicator pullY={pullY} p={p}/>}
-                {filtered.length===0&&!scanning
-                  ? <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"80px 24px",gap:16,animation:"fadeIn 0.4s ease"}}>
-                      <div style={{width:56,height:56,borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",...glass(p)}}>
-                        <Spec r={16} i={0.08}/>
-                        <span style={{fontSize:32,opacity:0.3,position:"relative",zIndex:2}}>{"\ud83d\udce1"}</span>
-                      </div>
-                      <p style={{fontSize:16,color:p.label3,fontFamily:SF,fontWeight:500}}>{active.length>0?"No items match this filter":"Tap \u21BB to scan"}</p>
-                    </div>
-                  : filtered.length===0&&scanning
-                  ? <SkeletonFeed p={p} mob={mob} count={6}/>
-                  : <div>
-                    {grouped.map(([group,items])=>(
-                      <div key={group}>
-                        <GroupLabel label={group} p={p} mob={mob}/>
-                        <div style={{display:"flex",flexDirection:"column",gap:feedMode==="brief"?(mob?2:4):(mob?8:10)}}>
-                          {items.map(insight=>{
-                            const idx=globalIdx++;
-                            const flatIdx=flatList.indexOf(insight);
-                            const ItemComponent=feedMode==="brief"?SpeedBrief:FeedItem;
-                            return <ItemComponent key={insight.id} insight={insight} onClick={setSelected}
-                              p={p} dk={dk} mob={mob} index={idx} focused={flatIdx===focusIdx}
-                              itemState={itemStates[insight.id]} onStateChange={setInsightState}/>;
-                          })}
-                        </div>
-                      </div>
-                    ))}
-                    {scanning&&<SkeletonFeed p={p} mob={mob} count={3}/>}
-                  </div>
-                }
-                <div style={{height:mob?"calc(80px + env(safe-area-inset-bottom,0px))":"calc(48px + env(safe-area-inset-bottom,0px))"}}/>
-              </div>
-            </div>
-          )}
-
-          {activeView==="now"&&selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
-        </div>
-
-        {modal&&<ActModal insight={modal} onClose={()=>setModal(null)} onDone={handleDone} p={p} mob={mob}/>}
-        <SettingsPanel show={showSettings} onClose={()=>setShowSettings(false)} p={p} mob={mob}/>
-        <KbdHint p={p} mob={mob}/>
+      {/* Ambient mesh */}
+      <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,transition:"opacity 0.8s ease",opacity:transitioning?0:1}}>
+        <div style={{position:"absolute",inset:"-25%",background:mesh.m1,animation:"meshDrift1 28s ease-in-out infinite",willChange:"transform"}} />
+        <div style={{position:"absolute",inset:"-15%",background:mesh.m2,animation:"meshDrift2 22s ease-in-out infinite",willChange:"transform"}} />
+        <div style={{position:"absolute",inset:"-20%",background:mesh.m3,animation:"meshDrift1 32s ease-in-out infinite reverse",willChange:"transform"}} />
       </div>
-    </>
+
+      <div style={{position:"relative",zIndex:1,maxWidth:700,margin:"0 auto",padding:"0 24px"}}>
+
+        {/* Header */}
+        <header style={{paddingTop:64,paddingBottom:28,animation:"headerIn 0.9s cubic-bezier(0.16,1,0.3,1) both"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+            <div>
+              <div style={{fontSize:11,fontFamily:FM,fontWeight:500,color:c.l4,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:14}}>RADAR</div>
+              <h1 style={{fontSize:42,fontWeight:700,fontFamily:FD,color:c.l1,letterSpacing:"-0.025em",lineHeight:1.04}}>{greeting}</h1>
+              <p style={{fontSize:20,fontFamily:FT,color:c.l3,fontWeight:400,marginTop:6,letterSpacing:"-0.01em"}}>{dateStr}</p>
+            </div>
+            <div style={{display:"flex",gap:10,paddingTop:30}}>
+              <button onClick={function(){setSettings(true);}} aria-label="Settings" style={{
+                width:44,height:44,borderRadius:22,
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:"0.5px solid "+c.border,color:c.l2,fontSize:16,cursor:"pointer",
+                display:"grid",placeItems:"center",transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}
+                onMouseDown={function(e){e.currentTarget.style.transform="scale(0.88)";}}
+                onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+                onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>
+                {"⚙"}
+              </button>
+              <button onClick={toggleTheme} aria-label="Toggle theme" style={{
+                width:44,height:44,borderRadius:22,
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:"0.5px solid "+c.border,color:c.l2,fontSize:18,cursor:"pointer",
+                display:"grid",placeItems:"center",transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}
+                onMouseDown={function(e){e.currentTarget.style.transform="scale(0.88)";}}
+                onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+                onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>
+                {dk?"\u2600\uFE0F":"\u{1F319}"}
+              </button>
+              <button onClick={scan} style={{
+                height:44,borderRadius:22,padding:"0 22px",
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:"0.5px solid "+c.border,color:scanning?c.blue:c.l2,
+                fontSize:14.5,fontFamily:FT,fontWeight:500,cursor:"pointer",
+                display:"flex",alignItems:"center",gap:8,
+                transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",letterSpacing:"-0.01em",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}>
+                <span style={{display:"inline-block",fontSize:16,animation:scanning?"spin 0.8s linear infinite":"none"}}>{"\u21BB"}</span>
+                {scanning?"Scanning\u2026":"Scan"}
+              </button>
+            </div>
+          </div>
+
+          {/* Meta */}
+          <div style={{marginTop:28,display:"flex",alignItems:"baseline",gap:6,animation:"headerIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.12s both"}}>
+            {items.length>0&&<>
+              <span style={{fontSize:14,fontFamily:FT,fontWeight:600,color:c.l2}}><AnimNum value={items.length} /></span>
+              <span style={{fontSize:14,fontFamily:FT,color:c.l3}}>items</span>
+              <span style={{color:c.l4,margin:"0 4px"}}>{"·"}</span>
+            </>}
+            <span style={{fontSize:14,fontFamily:FT,color:c.l4}}>
+              {scanning?progress:items.length>0?"Just now":"Waiting for scan"}
+            </span>
+          </div>
+        </header>
+
+        {/* Scanning skeleton */}
+        {scanning&&items.length===0&&(
+          <div style={{display:"flex",flexDirection:"column",gap:12,paddingBottom:40}}>
+            {[0,1,2,3].map(function(i){return(
+              <div key={i} style={{borderRadius:22,padding:"24px 26px",
+                background:c.glass,backdropFilter:"blur(40px)",WebkitBackdropFilter:"blur(40px)",
+                border:"0.5px solid "+c.border,animation:"pulse 1.5s ease infinite",animationDelay:(i*0.2)+"s"}}>
+                <div style={{height:16,width:"75%",background:c.f4,borderRadius:8,marginBottom:12}} />
+                <div style={{height:14,width:"90%",background:c.f4,borderRadius:8,marginBottom:8,opacity:0.6}} />
+                <div style={{height:14,width:"50%",background:c.f4,borderRadius:8,opacity:0.4}} />
+              </div>
+            );})}
+          </div>
+        )}
+
+        {/* Feed */}
+        {ready&&(
+          <div style={{display:"flex",flexDirection:"column",gap:12,paddingBottom:120}}>
+            {feedItems.map(function(item,i){return(
+              <GlassCard key={item.id||i} item={item} index={i} c={c} dk={dk} onAction={handleAction} />
+            );})}
+          </div>
+        )}
+      </div>
+
+      {/* Settings */}
+      {settings&&<SettingsModal c={c} dk={dk} onClose={function(){setSettings(false);}} />}
+    </div>
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(React.createElement(AuthGate, null, React.createElement(SiftIntel)));
+// Wrap in AuthGate
+var root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(AuthGate,null,React.createElement(RadarApp)));
 
 </script>
 </body>
