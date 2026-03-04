@@ -2464,7 +2464,10 @@ function SiftIntel(){
         setScanError("Partial: "+result.meta.errors.join(", "));
       }
     }catch(e){
-      setScanError(e.message);
+      var msg=e.message||"Unknown error";
+      if(msg.indexOf("Parse failed (len=0)")>=0) msg="AI returned empty response \u2014 try again";
+      else if(msg.indexOf("Parse failed")>=0) msg="AI response couldn\u2019t be parsed \u2014 try again";
+      setScanError(msg);
       setScanStatus("Scan failed");
     }finally{
       setScanning(false);
