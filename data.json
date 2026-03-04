@@ -788,5 +788,505 @@
       ],
       "attention": "CVE only 'At Risk' project \u2014 need his read on Chainguard timeline and ULA implications"
     }
-  ]
+  ],
+  "voc": {
+    "lastUpdated": "2026-03-03T14:00:00Z",
+    "programStatus": "pilot",
+    "docUrl": "https://docs.google.com/document/d/12rZTrNXurNzS2jiwQr6X1c6J2VACmUBvPhE3Pihg9io/edit",
+    "coverage": {
+      "accountsWithRankedTop10": 3,
+      "targetAccounts": 15,
+      "avgFreshnessDays": 12,
+      "freshnessSLA": 45
+    },
+    "themes": [
+      {
+        "id": "voc-theme-001",
+        "name": "Data Access & Governance",
+        "frequency": 14,
+        "severity": "high",
+        "trend": "increasing",
+        "accounts": [
+          "Astranis",
+          "K2 Space",
+          "Lockheed Martin"
+        ],
+        "summary": "ABAC, permissions, multi-team data isolation. Blocking Astranis expansion (3 teams waiting). K2 Space needs asset-level access control for live ops.",
+        "linearIds": [
+          "ENG-8732",
+          "ENG-8721",
+          "ENG-8727"
+        ],
+        "sources": [
+          "linear",
+          "slack",
+          "pylon"
+        ],
+        "productArea": "Growth",
+        "evidence": [
+          {
+            "label": "ENG-8732: ABAC for Astranis Family Data",
+            "url": "https://linear.app/sift/issue/ENG-8732"
+          },
+          {
+            "label": "#product thread: DAG blocking expansion",
+            "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P"
+          }
+        ]
+      },
+      {
+        "id": "voc-theme-002",
+        "name": "Live Operations Reliability",
+        "frequency": 11,
+        "severity": "high",
+        "trend": "increasing",
+        "accounts": [
+          "K2 Space",
+          "Varda",
+          "Reliable Robotics"
+        ],
+        "summary": "Real-time reads, telemetry absence detection, enriched webhooks, live mode stability. K2 has 4 high-priority tickets. Varda SLA requiring 2-4 weeks eng investment.",
+        "linearIds": [
+          "ENG-9001",
+          "ENG-9045",
+          "ENG-8890"
+        ],
+        "sources": [
+          "linear",
+          "pylon",
+          "slack"
+        ],
+        "productArea": "Core Platform",
+        "evidence": [
+          {
+            "label": "K2 Space: 4 live ops tickets",
+            "url": "https://linear.app/sift/project/live-operations"
+          },
+          {
+            "label": "Varda SLA commitment",
+            "url": "https://linear.app/sift/project/varda-sla"
+          }
+        ]
+      },
+      {
+        "id": "voc-theme-003",
+        "name": "Navigation & Discoverability",
+        "frequency": 9,
+        "severity": "medium",
+        "trend": "stable",
+        "accounts": [
+          "Lockheed Martin",
+          "Astranis",
+          "ImpulseSpace"
+        ],
+        "summary": "Global nav redesign, resource management, folder hierarchy. Lockheed split GNA into two projects. Gui flagged 'product areas inhibiting adoption.' Tree test readout this week.",
+        "linearIds": [
+          "ENG-7654",
+          "ENG-7680"
+        ],
+        "sources": [
+          "linear",
+          "slack",
+          "google_docs"
+        ],
+        "productArea": "Engagement",
+        "evidence": [
+          {
+            "label": "GNA Workshop Thu 11:15am",
+            "url": "https://calendar.google.com"
+          },
+          {
+            "label": "Tree test readout",
+            "url": "https://linear.app/sift/project/global-nav"
+          }
+        ]
+      },
+      {
+        "id": "voc-theme-004",
+        "name": "Ingestion & Data Quality",
+        "frequency": 7,
+        "severity": "medium",
+        "trend": "decreasing",
+        "accounts": [
+          "Heart Aerospace",
+          "ImpulseSpace",
+          "Reliable Robotics"
+        ],
+        "summary": "Upload failures, file type expansion needs, Python client adoption. Upload UX refresh in progress. Python client is Q1 priority for Clients+Ingest squad.",
+        "linearIds": [
+          "ENG-8200",
+          "ENG-8215"
+        ],
+        "sources": [
+          "pylon",
+          "linear"
+        ],
+        "productArea": "Core Platform",
+        "evidence": [
+          {
+            "label": "Python Client project",
+            "url": "https://linear.app/sift/project/python-client"
+          },
+          {
+            "label": "Upload UX Refresh",
+            "url": "https://linear.app/sift/project/upload-ux"
+          }
+        ]
+      },
+      {
+        "id": "voc-theme-005",
+        "name": "Reporting & Decision Capture",
+        "frequency": 6,
+        "severity": "medium",
+        "trend": "stable",
+        "accounts": [
+          "Astranis",
+          "K2 Space",
+          "Lockheed Martin"
+        ],
+        "summary": "Report versioning, collaborative review workflows, export formats. Ties directly to North Star metric (Decisions Captured Per Customer). Canvas bet addresses this but velocity stalled.",
+        "linearIds": [
+          "ENG-7900",
+          "ENG-7920"
+        ],
+        "sources": [
+          "slack",
+          "linear",
+          "google_docs"
+        ],
+        "productArea": "Engagement",
+        "evidence": [
+          {
+            "label": "Canvas MVP project",
+            "url": "https://linear.app/sift/project/canvas-mvp"
+          },
+          {
+            "label": "North Star: Decisions metric gap",
+            "url": "https://app.amplitude.com/analytics/sift-stack/chart/dogczzd8"
+          }
+        ]
+      },
+      {
+        "id": "voc-theme-006",
+        "name": "Performance & Scale",
+        "frequency": 5,
+        "severity": "high",
+        "trend": "stable",
+        "accounts": [
+          "Astranis",
+          "K2 Space"
+        ],
+        "summary": "P99 read query latency, large dataset handling, Explore performance under load. Rust data layer migration in progress to address fundamentally.",
+        "linearIds": [
+          "ENG-8500",
+          "ENG-8510"
+        ],
+        "sources": [
+          "pylon",
+          "slack"
+        ],
+        "productArea": "Core Platform",
+        "evidence": [
+          {
+            "label": "Rust data layer project",
+            "url": "https://linear.app/sift/project/rust-data-layer"
+          },
+          {
+            "label": "P99 latency chart",
+            "url": "https://app.amplitude.com/analytics/sift-stack/chart/p56xw4r8"
+          }
+        ]
+      }
+    ],
+    "topCustomerRequests": [
+      {
+        "rank": 1,
+        "account": "Astranis",
+        "title": "ABAC: multi-team data isolation for Family Data",
+        "id": "ENG-8732",
+        "status": "In Progress",
+        "age": 28,
+        "criticality": "Hard blocker",
+        "url": "https://linear.app/sift/issue/ENG-8732"
+      },
+      {
+        "rank": 2,
+        "account": "K2 Space",
+        "title": "Real-time reads for live telemetry monitoring",
+        "id": "ENG-9001",
+        "status": "In Progress",
+        "age": 35,
+        "criticality": "Hard blocker",
+        "url": "https://linear.app/sift/issue/ENG-9001"
+      },
+      {
+        "rank": 3,
+        "account": "Varda",
+        "title": "SLA: guaranteed uptime and data freshness commitments",
+        "id": "ENG-9100",
+        "status": "In Progress",
+        "age": 14,
+        "criticality": "Hard blocker",
+        "url": "https://linear.app/sift/issue/ENG-9100"
+      },
+      {
+        "rank": 4,
+        "account": "Lockheed Martin",
+        "title": "Global nav: resource management + folder hierarchy",
+        "id": "ENG-7654",
+        "status": "Under Review",
+        "age": 42,
+        "criticality": "Soft blocker",
+        "url": "https://linear.app/sift/issue/ENG-7654"
+      },
+      {
+        "rank": 5,
+        "account": "K2 Space",
+        "title": "Telemetry absence detection for fleet monitoring",
+        "id": "ENG-9045",
+        "status": "Captured",
+        "age": 21,
+        "criticality": "Soft blocker",
+        "url": "https://linear.app/sift/issue/ENG-9045"
+      },
+      {
+        "rank": 6,
+        "account": "Astranis",
+        "title": "Report versioning and collaborative review",
+        "id": "ENG-7900",
+        "status": "Candidate",
+        "age": 56,
+        "criticality": "Soft blocker",
+        "url": "https://linear.app/sift/issue/ENG-7900"
+      },
+      {
+        "rank": 7,
+        "account": "K2 Space",
+        "title": "Enriched webhooks for ops alerting pipeline",
+        "id": "ENG-9050",
+        "status": "Captured",
+        "age": 18,
+        "criticality": "None",
+        "url": "https://linear.app/sift/issue/ENG-9050"
+      },
+      {
+        "rank": 8,
+        "account": "Heart Aerospace",
+        "title": "Expanded file type support for ingestion",
+        "id": "ENG-8215",
+        "status": "Under Review",
+        "age": 33,
+        "criticality": "Soft blocker",
+        "url": "https://linear.app/sift/issue/ENG-8215"
+      }
+    ]
+  },
+  "strategyMetrics": {
+    "strategyDocUrl": "https://docs.google.com/document/d/1aOF_LzkKnm7naqCOEeySmGjWjxyvYr84nipw8cYWxLw/edit",
+    "q1PlanUrl": "https://docs.google.com/document/d/1i5bv9G3VbVaBdmt3sv89CNZqLzUQk3KIGdUc-XbQv5A/edit",
+    "metricsSheetUrl": "https://docs.google.com/spreadsheets/d/1pWw-4RxBVSihijskfOcR4t05J7hDYHp2DabGM8heuqk/edit",
+    "northStar": {
+      "metric": "Decisions Captured Per Customer",
+      "current": null,
+      "target": null,
+      "status": "not_measurable",
+      "note": "Rule events showing ZERO for 12 weeks despite Rules WAU at 70. Instrumentation debt means this metric literally cannot be measured.",
+      "amplitudeChart": "https://app.amplitude.com/analytics/sift-stack/chart/dogczzd8"
+    },
+    "pillars": [
+      {
+        "name": "Nail the Core",
+        "owner": "Rowen Wu",
+        "theme": "Core Platform",
+        "status": "on_track",
+        "keyResults": [
+          {
+            "kr": "Ingestion Success Rate",
+            "current": "98.2%",
+            "target": "99.5%",
+            "status": "on_track",
+            "chartId": "a08uik9s",
+            "tooltip": "Measured as % of uploads successfully processed. Excludes format errors."
+          },
+          {
+            "kr": "P99 Read Query Latency",
+            "current": "1.2s",
+            "target": "<500ms",
+            "status": "at_risk",
+            "chartId": "p56xw4r8",
+            "tooltip": "Rust data layer migration targeting 10x improvement. Currently 2.4x above target."
+          },
+          {
+            "kr": "Sift Edge POC",
+            "current": "Complete",
+            "target": "Complete",
+            "status": "achieved",
+            "chartId": null,
+            "tooltip": "Edge backend prototype ahead of schedule. Demo at Squad Showcase."
+          },
+          {
+            "kr": "CVE Remediation",
+            "current": "60%",
+            "target": "100%",
+            "status": "at_risk",
+            "chartId": null,
+            "tooltip": "Only 'At Risk' project. Chainguard timeline uncertain. Blocking ULA activation."
+          }
+        ]
+      },
+      {
+        "name": "Embed Deeper",
+        "owner": "Sanghee Oh",
+        "theme": "Engagement",
+        "status": "attention",
+        "keyResults": [
+          {
+            "kr": "Active Users Per Customer",
+            "current": "8.3",
+            "target": "12",
+            "status": "on_track",
+            "chartId": "u5ctmoro",
+            "tooltip": "WAU per customer org. Astranis (235) inflates average. Median is 4.2."
+          },
+          {
+            "kr": "Reports Published",
+            "current": "127",
+            "target": "200",
+            "status": "on_track",
+            "chartId": "5ab27lld",
+            "tooltip": "Total reports marked as Published across all customers this quarter."
+          },
+          {
+            "kr": "Canvas MVP",
+            "current": "Stalled",
+            "target": "Ship",
+            "status": "at_risk",
+            "chartId": null,
+            "tooltip": "Prototype validated but eng velocity stalled. Varda SLA absorbed 2-4 weeks. Kill criteria clock ticking."
+          },
+          {
+            "kr": "Python Rules Adoption",
+            "current": "+46% WoW",
+            "target": "Steady growth",
+            "status": "on_track",
+            "chartId": "e74ntz32",
+            "tooltip": "Rules WAU at 70 and accelerating. But rule events show ZERO in Amplitude \u2014 instrumentation broken."
+          }
+        ]
+      },
+      {
+        "name": "Build the Moat",
+        "owner": "Kenn Zamora",
+        "theme": "Growth",
+        "status": "on_track",
+        "keyResults": [
+          {
+            "kr": "Time to End-User Activation",
+            "current": "4.2d",
+            "target": "<2d",
+            "status": "at_risk",
+            "chartId": "1v3107dq",
+            "tooltip": "Median days from invite to first value action. Day-1 retention is the critical gap."
+          },
+          {
+            "kr": "New User Onboarding Completion",
+            "current": "62%",
+            "target": "80%",
+            "status": "at_risk",
+            "chartId": "pepuaofo",
+            "tooltip": "% of invited users completing onboarding flow. Drop-off between step 2-3."
+          },
+          {
+            "kr": "Explore V2 GA",
+            "current": "Beta",
+            "target": "GA",
+            "status": "on_track",
+            "chartId": "pr53xnu5",
+            "tooltip": "E2 in beta. GA targeting mid-March. ECharts replacement scoped for Q2."
+          },
+          {
+            "kr": "Data Access Governance",
+            "current": "In Progress",
+            "target": "Ship ABAC",
+            "status": "on_track",
+            "chartId": null,
+            "tooltip": "ABAC is #1 customer request across Astranis, K2 Space, and Lockheed."
+          }
+        ]
+      }
+    ],
+    "bets": [
+      {
+        "name": "Canvas",
+        "gate": "Gate 1: Design/Prototype \u2192 Investment",
+        "status": "at_risk",
+        "evidence": "Prototype validated in user testing. Eng velocity stalled (Varda SLA). Ephemeral env delayed.",
+        "killCriteria": "Need 2-of-3 evidence types to advance. Clock ticking \u2014 deadline Mar 15.",
+        "owner": "Jess"
+      },
+      {
+        "name": "Manufacturing & Live Ops",
+        "gate": "Gate 1: Design/Prototype \u2192 Investment",
+        "status": "on_track",
+        "evidence": "K2 Space stress-testing E2 live-mode. Varda SLA driving SLA-grade infra. 3 customers in live ops.",
+        "killCriteria": "\u22652 customers with weekly live ops usage by end Q1.",
+        "owner": "Rowen"
+      },
+      {
+        "name": "Robotics",
+        "gate": "Gate 0: Thesis Validation",
+        "status": "on_track",
+        "evidence": "Reliable Robotics stable usage. Serve Robotics conversation in pipeline. Thesis: AI-native hardware needs continuous validation.",
+        "killCriteria": "\u22651 robotics customer with validated use case by end Q2.",
+        "owner": "Kenn"
+      }
+    ],
+    "squads": [
+      {
+        "name": "Clients + Ingest",
+        "q1": "Python Client, Edge POC, Upload UX Refresh",
+        "status": "on_track"
+      },
+      {
+        "name": "Activation & Governance",
+        "q1": "Nav Redesign, Ingest Health Analytics, Onboarding",
+        "status": "on_track"
+      },
+      {
+        "name": "Data Review",
+        "q1": "Canvas, Python Rules, Test Results",
+        "status": "at_risk"
+      },
+      {
+        "name": "Analytics",
+        "q1": "Family Data Analysis/Rules, Scalar Data scoping",
+        "status": "on_track"
+      },
+      {
+        "name": "Exploration",
+        "q1": "E2 GA, New Panels, ECharts Replacement",
+        "status": "on_track"
+      },
+      {
+        "name": "Live Data Processing",
+        "q1": "Live Rules Perf, Batch Bifurcation, Alerting UX",
+        "status": "attention"
+      },
+      {
+        "name": "Core Data Storage",
+        "q1": "Rust data layer, Data Management",
+        "status": "on_track"
+      },
+      {
+        "name": "Data Fetch",
+        "q1": "Alt Timestamp Dims, Rust Query Engine",
+        "status": "on_track"
+      },
+      {
+        "name": "Infra",
+        "q1": "CI/CD, On-Prem, Test Infra",
+        "status": "at_risk"
+      }
+    ]
+  }
 }
