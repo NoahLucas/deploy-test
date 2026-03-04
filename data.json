@@ -498,157 +498,722 @@
   "customers": [
     {
       "name": "Astranis",
-      "wau": 235,
-      "wauTrend": [
-        145,
-        165,
-        180,
-        195,
-        210,
-        220,
-        235
-      ],
-      "wauDelta": "+40 (4w)",
-      "healthScore": 74,
-      "openTickets": 3,
-      "ticketSeverity": "high",
-      "lastFdeTouch": "2026-03-03T15:00:00Z",
+      "wau": 252,
+      "wauPrior": 331,
+      "tier": "strategic",
       "trajectory": "expanding",
-      "share": "39%",
-      "topIssue": "ABAC/DAG blocking multi-team expansion. Family Data onboarding 3 teams.",
-      "risk": "If DAG slips, largest customer's expansion stalls"
+      "segment": "Satellite",
+      "teams": [
+        "Development (128)",
+        "Mission (124)"
+      ],
+      "health": 82,
+      "fdeLastTouch": "2d",
+      "openTickets": 4,
+      "blockers": [
+        "ABAC for Family Data (3 teams waiting)",
+        "Security: asset-level access needed"
+      ],
+      "signals": [
+        "Multi-team expansion blocked by ABAC",
+        "Highest WAU customer",
+        "3 separate orgs in Amplitude"
+      ]
+    },
+    {
+      "name": "ImpulseSpace",
+      "wau": 63,
+      "wauPrior": 126,
+      "tier": "strategic",
+      "trajectory": "contracting",
+      "segment": "Launch",
+      "teams": [],
+      "health": 58,
+      "fdeLastTouch": "5d",
+      "openTickets": 2,
+      "blockers": [
+        "Upload UX issues affecting data quality"
+      ],
+      "signals": [
+        "WAU dropped 50% WoW \u2014 significant decline",
+        "Upload data quality impacting workflows"
+      ]
     },
     {
       "name": "K2 Space",
       "wau": 63,
-      "wauTrend": [
-        48,
-        52,
-        55,
-        58,
-        60,
-        61,
-        63
-      ],
-      "wauDelta": "+5 (4w)",
-      "healthScore": 58,
-      "openTickets": 4,
-      "ticketSeverity": "high",
-      "lastFdeTouch": "2026-03-02T14:00:00Z",
-      "trajectory": "at-risk",
-      "share": "10%",
-      "topIssue": "4 High-priority live ops tickets. Real-time reads, telemetry absence detection, enriched webhooks, live mode stability.",
-      "risk": "DFS building what they need but teams aren't connected"
-    },
-    {
-      "name": "ImpulseSpace",
-      "wau": 58,
-      "wauTrend": [
-        40,
-        42,
-        45,
-        50,
-        52,
-        55,
-        58
-      ],
-      "wauDelta": "+8 (4w)",
-      "healthScore": 65,
-      "openTickets": 1,
-      "ticketSeverity": "medium",
-      "lastFdeTouch": "2026-02-28T10:00:00Z",
-      "trajectory": "expanding",
-      "share": "9%",
-      "topIssue": "Steady growth, low-touch. Good health.",
-      "risk": "Low \u2014 organic growth pattern"
-    },
-    {
-      "name": "Varda",
-      "wau": 32,
-      "wauTrend": [
-        28,
-        30,
-        31,
-        32,
-        32,
-        31,
-        32
-      ],
-      "wauDelta": "+0 (4w)",
-      "healthScore": 52,
-      "openTickets": 2,
-      "ticketSeverity": "high",
-      "lastFdeTouch": "2026-03-01T11:00:00Z",
+      "wauPrior": 78,
+      "tier": "strategic",
       "trajectory": "stable",
-      "share": "5%",
-      "topIssue": "SLA commitments absorbing eng team 2-4 weeks. Requires dedicated resources.",
-      "risk": "Engineering cost disproportionate to account size"
+      "segment": "Satellite",
+      "teams": [],
+      "health": 68,
+      "fdeLastTouch": "3d",
+      "openTickets": 4,
+      "blockers": [
+        "4 high-priority live ops tickets",
+        "E2 real-time reads critical"
+      ],
+      "signals": [
+        "Stress-testing E2 live mode",
+        "Infrastructure load testing active",
+        "Live ops power user"
+      ]
+    },
+    {
+      "name": "Karman Space Programme",
+      "wau": 24,
+      "wauPrior": 29,
+      "tier": "growth",
+      "trajectory": "stable",
+      "segment": "Academic/Launch",
+      "teams": [],
+      "health": 65,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Steady academic/team usage"
+      ]
+    },
+    {
+      "name": "Purdue Space Program",
+      "wau": 24,
+      "wauPrior": 29,
+      "tier": "growth",
+      "trajectory": "stable",
+      "segment": "Academic",
+      "teams": [],
+      "health": 64,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "University team \u2014 consistent usage"
+      ]
+    },
+    {
+      "name": "Astrolab",
+      "wau": 22,
+      "wauPrior": 37,
+      "tier": "growth",
+      "trajectory": "contracting",
+      "segment": "Robotics/Space",
+      "teams": [],
+      "health": 55,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU declining from 37\u219222",
+        "Needs proactive outreach"
+      ]
+    },
+    {
+      "name": "Parallel Systems",
+      "wau": 16,
+      "wauPrior": 27,
+      "tier": "growth",
+      "trajectory": "contracting",
+      "segment": "Autonomous Rail",
+      "teams": [],
+      "health": 52,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU declining from 27\u219216",
+        "Rail autonomous vehicles"
+      ]
     },
     {
       "name": "Reliable Robotics",
-      "wau": 25,
-      "wauTrend": [
-        20,
-        22,
-        23,
-        24,
-        25,
-        25,
-        25
-      ],
-      "wauDelta": "+1 (4w)",
-      "healthScore": 60,
+      "wau": 13,
+      "wauPrior": 39,
+      "tier": "growth",
+      "trajectory": "contracting",
+      "segment": "Autonomy/Aviation",
+      "teams": [],
+      "health": 42,
+      "fdeLastTouch": "?",
       "openTickets": 0,
-      "ticketSeverity": null,
-      "lastFdeTouch": "2026-02-25T09:00:00Z",
-      "trajectory": "stable",
-      "share": "4%",
-      "topIssue": "Steady. No recent tickets. FDE touch 6 days ago \u2014 could go stale.",
-      "risk": "Quiet could mean satisfied or disengaged"
+      "blockers": [],
+      "signals": [
+        "Severe WAU drop 39\u219213 (-67%)",
+        "Needs urgent re-engagement"
+      ]
     },
     {
       "name": "Heart Aerospace",
-      "wau": 18,
-      "wauTrend": [
-        22,
-        20,
-        19,
-        18,
-        18,
-        17,
-        18
-      ],
-      "wauDelta": "-4 (4w)",
-      "healthScore": 45,
-      "openTickets": 1,
-      "ticketSeverity": "medium",
-      "lastFdeTouch": "2026-02-20T14:00:00Z",
+      "wau": 10,
+      "wauPrior": 14,
+      "tier": "growth",
       "trajectory": "contracting",
-      "share": "3%",
-      "topIssue": "WAU declining. FDE touch 11 days ago. Going quiet.",
-      "risk": "Early churn signal \u2014 needs proactive outreach"
+      "segment": "Electric Aviation",
+      "teams": [],
+      "health": 38,
+      "fdeLastTouch": "11d",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU declining steadily (-4 over 4 weeks)",
+        "FDE touch 11d ago \u2014 going quiet"
+      ]
     },
     {
       "name": "Lockheed Martin",
-      "wau": 15,
-      "wauTrend": [
-        8,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15
-      ],
-      "wauDelta": "+3 (4w)",
-      "healthScore": 55,
-      "openTickets": 0,
-      "ticketSeverity": null,
-      "lastFdeTouch": "2026-03-03T14:00:00Z",
+      "wau": 5,
+      "wauPrior": 8,
+      "tier": "emerging",
       "trajectory": "expanding",
-      "share": "2%",
-      "topIssue": "Split GNA into two projects. Scope expanding. Resourcing call today at 2pm.",
-      "risk": "Scope creep without clear boundaries"
+      "segment": "Defense/Aerospace",
+      "teams": [
+        "lmco demo (5)"
+      ],
+      "health": 55,
+      "fdeLastTouch": "0d",
+      "openTickets": 2,
+      "blockers": [
+        "GNA scope split \u2014 Resource/Folder vs Global Nav"
+      ],
+      "signals": [
+        "Active GNA design workshops this week",
+        "Tree test readout Mar 4",
+        "High strategic value despite low WAU"
+      ]
+    },
+    {
+      "name": "Critical Loop",
+      "wau": 5,
+      "wauPrior": 13,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 35,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped 13\u21925"
+      ]
+    },
+    {
+      "name": "Orbital Ops",
+      "wau": 6,
+      "wauPrior": 11,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Space Ops",
+      "teams": [],
+      "health": 40,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Declining usage"
+      ]
+    },
+    {
+      "name": "Revel",
+      "wau": 4,
+      "wauPrior": 12,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "EV/Mobility",
+      "teams": [],
+      "health": 30,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped significantly 12\u21924"
+      ]
+    },
+    {
+      "name": "Varda",
+      "wau": 4,
+      "wauPrior": 7,
+      "tier": "emerging",
+      "trajectory": "stable",
+      "segment": "Space Manufacturing",
+      "teams": [],
+      "health": 48,
+      "fdeLastTouch": "5d",
+      "openTickets": 1,
+      "blockers": [
+        "SLA commitment requires 2-4 weeks eng"
+      ],
+      "signals": [
+        "Low WAU but high strategic value",
+        "SLA negotiation in progress"
+      ]
+    },
+    {
+      "name": "Plantd",
+      "wau": 4,
+      "wauPrior": 18,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Climate/Manufacturing",
+      "teams": [],
+      "health": 25,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Major WAU drop 18\u21924 \u2014 potential churn"
+      ]
+    },
+    {
+      "name": "Also",
+      "wau": 4,
+      "wauPrior": 6,
+      "tier": "emerging",
+      "trajectory": "stable",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 40,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Astro Mechanica",
+      "wau": 4,
+      "wauPrior": 6,
+      "tier": "emerging",
+      "trajectory": "stable",
+      "segment": "Space/Propulsion",
+      "teams": [],
+      "health": 42,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "TEC",
+      "wau": 4,
+      "wauPrior": 5,
+      "tier": "emerging",
+      "trajectory": "stable",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 42,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Pilatus",
+      "wau": 4,
+      "wauPrior": 3,
+      "tier": "emerging",
+      "trajectory": "expanding",
+      "segment": "Aviation",
+      "teams": [],
+      "health": 45,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU growing 3\u21924",
+        "Swiss aircraft manufacturer"
+      ]
+    },
+    {
+      "name": "Inversion",
+      "wau": 3,
+      "wauPrior": 7,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Re-entry Vehicles",
+      "teams": [],
+      "health": 32,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU halved"
+      ]
+    },
+    {
+      "name": "CX2",
+      "wau": 3,
+      "wauPrior": 5,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 35,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Azimuth",
+      "wau": 2,
+      "wauPrior": 5,
+      "tier": "emerging",
+      "trajectory": "contracting",
+      "segment": "Space",
+      "teams": [],
+      "health": 28,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped from 5\u21922"
+      ]
+    },
+    {
+      "name": "RTX",
+      "wau": 2,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Defense",
+      "teams": [],
+      "health": 30,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Major defense contractor \u2014 low engagement"
+      ]
+    },
+    {
+      "name": "Neros",
+      "wau": 2,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 28,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Anduril",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Defense",
+      "teams": [],
+      "health": 22,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Defense unicorn \u2014 minimal engagement"
+      ]
+    },
+    {
+      "name": "Millennium Space",
+      "wau": 1,
+      "wauPrior": 5,
+      "tier": "watchlist",
+      "trajectory": "contracting",
+      "segment": "Satellite/Defense",
+      "teams": [],
+      "health": 18,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped 5\u21921 \u2014 likely churning"
+      ]
+    },
+    {
+      "name": "Divergent",
+      "wau": 1,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "contracting",
+      "segment": "Advanced Manufacturing",
+      "teams": [],
+      "health": 20,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "OHB",
+      "wau": 1,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "contracting",
+      "segment": "European Space",
+      "teams": [],
+      "health": 20,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "European satellite manufacturer"
+      ]
+    },
+    {
+      "name": "Gravitics",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Space Habitats",
+      "teams": [],
+      "health": 22,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "MetroStar",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "GovTech",
+      "teams": [],
+      "health": 22,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Pixxel",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Earth Observation",
+      "teams": [],
+      "health": 22,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Indian hyperspectral imaging satellite co"
+      ]
+    },
+    {
+      "name": "Loft",
+      "wau": 1,
+      "wauPrior": 3,
+      "tier": "watchlist",
+      "trajectory": "contracting",
+      "segment": "Space",
+      "teams": [],
+      "health": 18,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped 3\u21921"
+      ]
+    },
+    {
+      "name": "Arbor",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 22,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": []
+    },
+    {
+      "name": "Orion Demo",
+      "wau": 1,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "stable",
+      "segment": "Demo",
+      "teams": [],
+      "health": 20,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Demo account"
+      ]
+    },
+    {
+      "name": "Starpath",
+      "wau": 1,
+      "wauPrior": 5,
+      "tier": "watchlist",
+      "trajectory": "contracting",
+      "segment": "Space",
+      "teams": [],
+      "health": 15,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "WAU dropped 5\u21921 \u2014 likely churning"
+      ]
+    },
+    {
+      "name": "GA-EMS",
+      "wau": 0,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Defense",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "General Atomics subsidiary \u2014 went dark"
+      ]
+    },
+    {
+      "name": "EnduroSat",
+      "wau": 0,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Satellite",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Bulgarian satellite company \u2014 no activity"
+      ]
+    },
+    {
+      "name": "HII",
+      "wau": 0,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Defense/Shipbuilding",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Huntington Ingalls \u2014 went dark"
+      ]
+    },
+    {
+      "name": "True Anomaly",
+      "wau": 0,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Space Domain Awareness",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Space surveillance \u2014 went dark"
+      ]
+    },
+    {
+      "name": "Skyroot",
+      "wau": 0,
+      "wauPrior": 7,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Launch (India)",
+      "teams": [],
+      "health": 3,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Indian launch company \u2014 WAU 7\u21920, fully churned"
+      ]
+    },
+    {
+      "name": "Synnax Labs",
+      "wau": 0,
+      "wauPrior": 3,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "DAQ/Test",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Data acquisition startup \u2014 went dark"
+      ]
+    },
+    {
+      "name": "General Matter",
+      "wau": 0,
+      "wauPrior": 1,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Unknown",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Went dark"
+      ]
+    },
+    {
+      "name": "Odys",
+      "wau": 0,
+      "wauPrior": 2,
+      "tier": "watchlist",
+      "trajectory": "churned",
+      "segment": "Aviation",
+      "teams": [],
+      "health": 5,
+      "fdeLastTouch": "?",
+      "openTickets": 0,
+      "blockers": [],
+      "signals": [
+        "Hybrid-electric aviation \u2014 went dark"
+      ]
+    },
+    {
+      "name": "ULA",
+      "wau": 0,
+      "wauPrior": 0,
+      "tier": "watchlist",
+      "trajectory": "pre-launch",
+      "segment": "Launch",
+      "teams": [],
+      "health": 15,
+      "fdeLastTouch": "?",
+      "openTickets": 1,
+      "blockers": [
+        "Blocked by CVE remediation (60% complete)"
+      ],
+      "signals": [
+        "New customer \u2014 not yet activated",
+        "Activation blocked by security compliance"
+      ]
     }
   ],
   "decisions": [
@@ -1079,7 +1644,10 @@
         "criticality": "Soft blocker",
         "url": "https://linear.app/sift/issue/ENG-8215"
       }
-    ]
+    ],
+    "totalCustomers": 44,
+    "activeCustomers": 35,
+    "churnedCustomers": 8
   },
   "strategyMetrics": {
     "strategyDocUrl": "https://docs.google.com/document/d/1aOF_LzkKnm7naqCOEeySmGjWjxyvYr84nipw8cYWxLw/edit",
