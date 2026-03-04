@@ -765,18 +765,35 @@ function Srcs({sources,p,compact,dk}){
 
 function evLabel(ev){
   if(ev.label&&ev.label.trim())return ev.label.trim();
-  if(!ev.url)return ev.source||"Link";
+  var srcName=SVC[ev.source]?.label||ev.source||"";
+  if(!ev.url)return srcName||"Link";
   try{
     var u=new URL(ev.url);
-    var host=u.hostname.replace(/^www\./,"").replace(/\.com$|\.io$|\.app$/,"");
+    var host=u.hostname.replace(/^www\./,"");
     var path=u.pathname.split("/").filter(Boolean);
-    if(host.includes("amplitude")&&path.length>2)return path.slice(-1)[0];
-    if(host.includes("linear")&&path.length>1)return path.slice(-1)[0];
-    if(host.includes("slack")){var last=path.slice(-1)[0];return last&&last.length<20?last:"Slack thread";}
-    if(host.includes("docs.google")){return"Google Doc";}
-    if(path.length>0){var seg=decodeURIComponent(path.slice(-1)[0]).replace(/[-_]/g," ");return seg.length>30?seg.slice(0,28)+"\u2026":seg;}
-    return host;
-  }catch(e){return ev.source||"Link";}
+    if(host.includes("amplitude")){
+      if(path.includes("chart"))return srcName+": Chart "+path.slice(-1)[0];
+      if(path.includes("dashboard"))return srcName+": Dashboard";
+      return srcName+(path.length>2?": "+path.slice(-1)[0]:"");
+    }
+    if(host.includes("linear")){
+      var last=path.slice(-1)[0]||"";
+      if(/^[A-Z]+-\d+$/.test(last))return last;
+      return srcName+(last?": "+last:"");
+    }
+    if(host.includes("slack")){
+      return srcName+": thread";
+    }
+    if(host.includes("docs.google")){return "Google Doc";}
+    if(host.includes("calendar.google")){return srcName+": event";}
+    if(host.includes("granola")){return srcName+": meeting notes";}
+    if(host.includes("gmail")){return "Gmail: message";}
+    if(path.length>0){
+      var seg=decodeURIComponent(path.slice(-1)[0]).replace(/[-_]/g," ");
+      return seg.length>30?seg.slice(0,28)+"\u2026":seg;
+    }
+    return srcName||host.replace(/\.com$|\.io$|\.app$/,"")||"Link";
+  }catch(e){return srcName||"Link";}
 }
 
 function EvChip({ev,p,dk}){
@@ -846,9 +863,9 @@ function EvidenceTip({evidence,p,dk,children}){
           style={{position:"fixed",left:tipLeft,top:Math.max(8,pos.y-8),
           transform:"translateY(-100%)",
           width:TIP_W,padding:"10px 6px",borderRadius:12,
-          background:p?.raised||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
+          background:p?.bgElevated||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
           fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
-          boxShadow:"0 12px 48px rgba(0,0,0,0.45), 0 0 0 0.5px "+(p?.glassBorder||"#333"),
+          boxShadow:"0 12px 48px rgba(0,0,0,"+(p===PAL.dark?"0.45":"0.15")+"), 0 0 0 0.5px "+(p?.glassBorder||"#333"),
           animation:"fadeIn 0.15s ease"}}>
           <div style={{position:"absolute",bottom:-12,left:0,right:0,height:12}} />
           <div style={{fontSize:9,fontWeight:700,letterSpacing:"0.1em",color:p.label4,padding:"0 10px 6px",borderBottom:"0.5px solid "+p.glassBorder,marginBottom:4}}>EVIDENCE ({evidence.length})</div>
@@ -1727,9 +1744,9 @@ function Tip({text,children,p,maxW}){
         <div style={{position:"fixed",left:Math.max(8,Math.min(pos.x-((maxW||260)/2),window.innerWidth-(maxW||260)-8)),top:Math.max(8,pos.y-8),
           transform:"translateY(-100%)",
           maxWidth:maxW||260,padding:"8px 12px",borderRadius:8,
-          background:p?.raised||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
+          background:p?.bgElevated||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
           fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
-          pointerEvents:"none",boxShadow:"0 8px 32px rgba(0,0,0,0.4)",
+          pointerEvents:"none",boxShadow:"0 8px 32px rgba(0,0,0,"+(p===PAL.dark?"0.4":"0.15")+")",
           animation:"fadeIn 0.15s ease",whiteSpace:"pre-line"}}>
           {text}
         </div>,
