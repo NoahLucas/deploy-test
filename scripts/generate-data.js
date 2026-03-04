@@ -21,7 +21,50 @@ const AMPLITUDE_CHARTS = {
 };
 
 const SLACK_CHANNELS = [
+  // Product & leadership
   { id: 'C0A779UAY8P', name: '#product' },
+  { id: 'C08LNSRG2MU', name: '#product-team' },
+  { id: 'C099VTZA8G2', name: '#product-mdma' },
+  { id: 'C07V8N850RK', name: '#product-release' },
+  { id: 'C049F933D7C', name: '#product-ideas' },
+  { id: 'C04LAUHFLTX', name: '#product-market-intel' },
+  { id: 'C08MKM3HSF6', name: '#product-roadmap' },
+  { id: 'C07V9L589RT', name: '#product-design' },
+  // Engineering
+  { id: 'C0464JXMVMJ', name: '#eng-team' },
+  { id: 'C04KZ3J5ZNK', name: '#eng-bugs' },
+  { id: 'C080J4P6F63', name: '#eng-help' },
+  // Squads
+  { id: 'C0A2RA3518C', name: '#eng-infra-squad' },
+  { id: 'C0ACH15DACA', name: '#eng-sik-squad' },
+  { id: 'C06QA1GH1B9', name: '#eng-rdi-squad' },
+  { id: 'C095XPU779D', name: '#eng-gna-team' },
+  { id: 'C098PHNDZGF', name: '#eng-canvas' },
+  { id: 'C09BURW9F7D', name: '#eng-abac' },
+  { id: 'C096YA0L4Q7', name: '#eng-e2' },
+  { id: 'C0ACXS3TER4', name: '#eng-timeseries-data' },
+  // GTM & support
+  { id: 'C04M70TRKFY', name: '#eng-customer-support' },
+  { id: 'C08VDGPEEPP', name: '#customer-asks' },
+  { id: 'C06H3EM89SS', name: '#gtm-sales' },
+  { id: 'C0810HWSV4M', name: '#gtm-sales-alerts' },
+  { id: 'C08PU6TRMSA', name: '#gtm-feedback' },
+  // Company
+  { id: 'C03E58EKZQB', name: '#admin-general' },
+  { id: 'C0AAWCX284X', name: '#admin-weekly-notes' },
+  // Key customer channels
+  { id: 'C05GKMLAB8X', name: '#ext-sift-k2' },
+  { id: 'C05PJGX4CE8', name: '#ext-sift-astranis' },
+  { id: 'C04S5URE1HR', name: '#ext-sift-parallel' },
+  { id: 'C09QBK3CURM', name: '#ext-sift-varda' },
+  { id: 'C090W0P5V9R', name: '#ext-sift-heart' },
+  { id: 'C09TA1U7KFX', name: '#ext-sift-dust-moto' },
+  { id: 'C0A7AU7TD5X', name: '#ext-sift-inversion' },
+  { id: 'C09DS0EJNPP', name: '#ext-sift-orbitaloperations' },
+  { id: 'C09PAJEAX2N', name: '#ext-sift-arbor-energy' },
+  { id: 'C0AB7629Z9B', name: '#ext-sift-synnax' },
+  { id: 'C09PHN5L6RY', name: '#ext-sift-zipline' },
+  { id: 'C08B1T9AYS2', name: '#ext-sift-revel' },
 ];
 
 const TEAM = [
@@ -41,7 +84,11 @@ const COFOUNDERS = [
 const CUSTOMERS = [
   'K2 Space', 'Astranis', 'Reliable Robotics', 'Varda', 'Heart Aerospace',
   'Lockheed Martin', 'ULA', 'Parallel Systems', 'The Exploration Company',
-  'OHB', 'Dust Moto', 'Orbital Ops', 'Inversion Space',
+  'OHB', 'Dust Moto', 'Orbital Operations', 'Inversion Space',
+  'Revel', 'CX2', 'Also', 'Arbor Energy', 'Synnax', 'OdysAviation',
+  'CriticalLoop', 'RadTeam', 'Starpath', 'Astrolab', 'AstroMecha',
+  'Neros', 'Zipline', 'PlantD', 'Halo One', 'First Resonance',
+  'Manufacturo', 'AstroForge', 'Exdanris',
 ];
 
 // --- HELPERS ---
@@ -164,6 +211,49 @@ async function pullLinear() {
       console.log(`[linear] ✓ ${data.data.issues.nodes.length} issues`);
     }
   } catch (e) { console.warn(`[linear] ✗ ${e.message}`); }
+  
+  // Also pull active projects (Annual Roadmap view equivalent)
+  try {
+    const projData = await fetchJSON('https://api.linear.app/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: key },
+      body: JSON.stringify({
+        query: `{ projects(filter: { state: { type: { in: ["started", "planned", "backlog"] } } }, first: 50, orderBy: updatedAt) {
+          nodes { id name summary url startDate targetDate 
+            status { name } priority { name value }
+            lead { name } 
+            teams { nodes { name key } }
+            initiatives { nodes { name } }
+            issues { nodes { identifier state { name type } priority } }
+          } } }`
+      }),
+    });
+    if (projData.data?.projects?.nodes) {
+      const projects = projData.data.projects.nodes;
+      for (const proj of projects) {
+        const issues = proj.issues?.nodes || [];
+        const inProgress = issues.filter(i => i.state?.type === 'started').length;
+        const blocked = issues.filter(i => i.priority?.value <= 1).length;
+        signals.push({
+          source: 'linear', type: 'project',
+          title: proj.name,
+          status: proj.status?.name,
+          priority: proj.priority?.name || 'Medium',
+          lead: proj.lead?.name,
+          team: proj.teams?.nodes?.[0]?.name,
+          initiative: proj.initiatives?.nodes?.[0]?.name,
+          startDate: proj.startDate,
+          targetDate: proj.targetDate,
+          issueCount: issues.length,
+          inProgress, blocked,
+          timestamp: proj.targetDate || proj.startDate,
+          evidence: [{ label: proj.name, url: proj.url, source: 'linear' }],
+        });
+      }
+      console.log(`[linear] ✓ ${projects.length} projects (roadmap)`);
+    }
+  } catch (e) { console.warn(`[linear] ✗ projects: ${e.message}`); }
+  
   return signals;
 }
 
