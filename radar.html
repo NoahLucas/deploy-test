@@ -445,6 +445,8 @@ function compactData(data){
   return c;
 }
 
+var DEFAULT_PROMPT="You are RADAR, a product intelligence engine that creates superhuman leverage for a VP of Product at an aerospace/defense telemetry observability platform (Sift).\n\nYou are given data.json containing signals from multiple sources (Amplitude, Slack, Linear, Calendar, Google Docs). Synthesize ALL signals into a single prioritized feed.\n\nRULES:\n1. SURFACE 10-15 items. Every signal deserves evaluation. Do NOT over-filter.\n2. WRITE COMPLETE THOUGHTS. Each item should be a full synthesis paragraph — not a headline + body, but a single narrative that explains what is happening, why it matters, and what to do. Write as a chief of staff briefing the VP.\n3. RANK BY LEVERAGE. Highest-impact action first. The user scrolls down = less urgent.\n4. PRESERVE EVIDENCE. Copy evidence arrays with real URLs exactly from input.\n5. INCLUDE ACTIONS. Each item should have a ready-to-execute action string (a message to send, a meeting to schedule, a decision to make).\n6. ASK WHAT RADAR CAN’T SEE. Final item should surface 2-3 questions the data doesn’t answer.\n\nCategories: insight, prep, nudge, leverage, blind_spot, momentum\n\nCustomers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Lockheed Martin, ULA, Parallel Systems, The Exploration Company, OHB, Dust Moto, Orbital Operations, Inversion Space, Revel, Arbor Energy, Synnax, Zipline, First Resonance, AstroForge.\n\nTeam: Sanghee (Core Platform PM), Kenn (Data Access PM), Jess (Canvas PM), Rowen (Infra PM), Kevin (Eng Manager), Gui (FDE Lead). Cofounders: Austin (CEO), Karthik (CTO).\n\nRESPOND WITH ONLY VALID JSON:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"<cat>\",\"headline\":\"<max 60 chars>\",\"body\":\"<2-3 sentence synthesis — the complete thought>\",\"action\":\"<ready-to-paste next step>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"evidence\":[{\"label\":\"<descriptive>\",\"url\":\"<real URL>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\"}}]}\n\nPriority: URGENT=revenue/security/customer blocked, HIGH=act today, MEDIUM=this week, LOW=FYI";
+
 async function synthesizeStreaming(data, onInsight, onProgress){
   var t0=Date.now();
   onProgress("Connecting to synthesis engine...");
@@ -885,7 +887,7 @@ function GlassCard({item,index,c,dk,onAction}){
 // Settings modal
 function SettingsModal({c,dk,onClose}){
   var[key,setKey]=useState(function(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}});
-  var[prompt,setPrompt]=useState(function(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}});
+  var[prompt,setPrompt]=useState(function(){try{return localStorage.getItem("radar_custom_prompt")||DEFAULT_PROMPT||"";}catch(e){return"";}});
   var[showKey,setShowKey]=useState(false);
   function save(){
     try{localStorage.setItem("radar_api_key",key);}catch(e){}
@@ -924,10 +926,10 @@ function SettingsModal({c,dk,onClose}){
           {prompt&&<button onClick={resetPrompt} style={{fontSize:12,fontFamily:FT,color:c.blue,background:"none",border:"none",cursor:"pointer"}}>Reset</button>}
         </div>
         <p style={{fontSize:13,fontFamily:FT,color:c.l4,marginBottom:8,lineHeight:1.5}}>
-          Customize how RADAR analyzes data and what it surfaces. Leave empty for the built-in prompt.
+          This prompt tells Claude how to synthesize your data. Edit to change what RADAR looks for and how it writes.
         </p>
         <textarea value={prompt} onChange={function(e){setPrompt(e.target.value);}}
-          placeholder="Leave empty for default. Or write a custom system prompt..."
+          placeholder="Enter your synthesis prompt..."
           rows={10}
           style={Object.assign({},iStyle,{resize:"vertical",lineHeight:1.55,fontSize:13,fontFamily:FT,minHeight:160})} />
 
