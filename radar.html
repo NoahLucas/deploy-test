@@ -15,6 +15,8 @@ body{overscroll-behavior:none;font-family:-apple-system,'SF Pro Text','Helvetica
 @keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(0.97);}}
 @keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-25px,30px) scale(1.03);}66%{transform:translate(20px,-25px) scale(0.98);}}
 @keyframes spin{to{transform:rotate(360deg);}}
+@keyframes shimmer{0%{border-color:rgba(10,132,255,0.15);}25%{border-color:rgba(10,132,255,0.5);}50%{border-color:rgba(48,209,88,0.4);}75%{border-color:rgba(10,132,255,0.5);}100%{border-color:rgba(10,132,255,0.15);}}
+@keyframes shimmerLight{0%{border-color:rgba(0,122,255,0.12);}25%{border-color:rgba(0,122,255,0.45);}50%{border-color:rgba(52,199,89,0.35);}75%{border-color:rgba(0,122,255,0.45);}100%{border-color:rgba(0,122,255,0.12);}}
 @keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
 </style>
 </head>
@@ -922,12 +924,10 @@ function RadarApp(){
     setScanning(true);setProgress("Starting scan...");setItems([]);setScanError("");
     try{
       // 90 second timeout for scan
-      var scanPromise=runLiveScan(
+      var result=await runLiveScan(
         function(ins,idx){setItems(function(prev){var n=[].concat(prev);n[idx]=ins;return n;});},
         function(msg){setProgress(msg);}
       );
-      var timeout=new Promise(function(_,rej){setTimeout(function(){rej(new Error("Scan timed out after 90s"));},90000);});
-      var result=await Promise.race([scanPromise,timeout]);
       if(result&&result.insights)setItems(result.insights);
       setProgress("");
     }catch(e){
@@ -1006,14 +1006,14 @@ function RadarApp(){
               <button onClick={scan} style={{
                 height:44,borderRadius:22,padding:"0 22px",
                 background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
-                border:"0.5px solid "+c.border,color:scanning?c.blue:c.l2,
+                border:scanning?"1.5px solid "+c.blue:"0.5px solid "+c.border,color:scanning?c.blue:c.l2,
                 fontSize:14.5,fontFamily:FT,fontWeight:500,cursor:"pointer",
-                display:"flex",alignItems:"center",gap:8,
+                display:"flex",alignItems:"center",gap:0,
+                animation:scanning?(dk?"shimmer 2s ease-in-out infinite":"shimmerLight 2s ease-in-out infinite"):"none",
                 transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",letterSpacing:"-0.01em",
                 boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
                 WebkitTapHighlightColor:"transparent"}}>
-                <span style={{display:"inline-block",fontSize:16,animation:scanning?"spin 0.8s linear infinite":"none"}}>{"\u21BB"}</span>
-                {scanning?"Scanning\u2026":"Scan"}
+  {scanning?"Scanning\u2026":"Scan"}
               </button>
             </div>
           </div>
