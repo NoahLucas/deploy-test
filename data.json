@@ -1,2279 +1,2088 @@
 {
-  "generated": "2026-03-03T22:00:00Z",
-  "source": "claude-mcp-full-scan",
-  "signals": [
-    {
-      "id": "sig-001",
-      "title": "Astranis Surpasses All Other Customers in WAU \u2014 Quietly Becoming Your Power User",
-      "severity": "high",
-      "category": "customer",
-      "detail": "Astranis (Dev + Mission combined) hit 235 WAU last week \u2014 surpassing Sift internal (114) and every other customer. They grew from 195\u2192235 in 4 weeks while Sift internal declined 129\u2192114. Astranis is now 39% of your external WAU. Their engagement is deepening (Family Data onboarding 3 teams, ABAC enablement underway) but they're blocked by data access governance issues (ENG-8732, ENG-8721, ENG-8727). If ABAC slips, your largest customer's expansion stalls.",
-      "action": "In your Kenn 1:1 Thursday: confirm DAG V1 PRs are coordinated with Astranis activation timeline. Ask Sanghee in today's Product Sync about the data leak tickets she flagged \u2014 are they prerequisites for ABAC rollout?",
-      "source": "amplitude+slack+calendar",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Astranis WAU: 195\u2192235",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/jsyefmb5",
-          "source": "amplitude"
-        },
-        {
-          "label": "ENG-8732: ABAC",
-          "url": "https://linear.app/sift/issue/ENG-8732",
-          "source": "linear"
-        },
-        {
-          "label": "ENG-8721: DAG V1",
-          "url": "https://linear.app/sift/issue/ENG-8721",
-          "source": "linear"
-        },
-        {
-          "label": "ENG-8727: Data Access",
-          "url": "https://linear.app/sift/issue/ENG-8727",
-          "source": "linear"
-        },
-        {
-          "label": "#product thread",
-          "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-002",
-      "title": "Lockheed Resourcing Meeting Today Signals Scope Expansion \u2014 Global Nav Is Now Two Projects",
-      "severity": "urgent",
-      "category": "strategic",
-      "detail": "Kenn's 2pm meeting description reveals Lockheed feedback has split the original Global Nav work into two separate scopes: Resource/Folder Management AND Global Nav improvements. Combined with Gui's deployment update showing an action plan to 'address product areas inhibiting adoption' and 'execute on Artemis II launch criteria,' Lockheed is becoming a forcing function for GNA scope. Thursday's GNA workshop (11:15am-2pm, 3-hour block with Russ) and tomorrow's UX Research Readout on tree testing are the moments to set boundaries.",
-      "action": "At the 2pm Lockheed Resourcing call: push for clear priority stack between Resource/Folder Management vs Global Nav. Don't let Lockheed scope creep absorb the GNA workshop Thursday. Use the tree test readout tomorrow (4pm) to anchor decisions in data, not customer pressure.",
-      "source": "calendar+slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Lockheed Resourcing 2pm",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        },
-        {
-          "label": "GNA Workshop Thu",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        },
-        {
-          "label": "GNA project",
-          "url": "https://linear.app/sift/project/gna",
-          "source": "linear"
-        },
-        {
-          "label": "#internal-lockheed",
-          "url": "https://app.slack.com/client/T0A779UAWN1/internal-lockheed-orion",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-003",
-      "title": "Telemetry Debt Is Real \u2014 Sanghee Flagged It, and Your Rule Events Confirm It",
-      "severity": "high",
-      "category": "operational",
-      "detail": "Three separate signals converging: (1) Sanghee messaged this morning that 'some teams were not quite up to date when it comes to event instrumentation' and wants to discuss telemetry debt before next planning, (2) the Key Actions Volume chart shows create/save/edit rule clicks all at ZERO for 12 weeks \u2014 clearly broken instrumentation, not zero usage since Rules WAU is at 70 and growing, (3) you and Kenn couldn't open each other's Amplitude links Sunday, suggesting permissions fragmentation. Your North Star metric 'Decisions Captured Per Customer' literally cannot be measured if telemetry is broken.",
-      "action": "Greenlight Sanghee's request to audit instrumentation with Brandon. This should be a prerequisite gate before Q2 planning. Raise in Product Sync today (2:30pm): propose a 1-week telemetry sprint across squads to fix event gaps.",
-      "source": "slack+amplitude",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Key Actions Volume: 0",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/1v3107dq",
-          "source": "amplitude"
-        },
-        {
-          "label": "Rules WAU: 48\u219270",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/5ab27lld",
-          "source": "amplitude"
-        },
-        {
-          "label": "Sanghee 4P",
-          "url": "https://docs.google.com/document/d/1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-004",
-      "title": "DAU Hit 373 Monday \u2014 Highest Single Day in 30-Day Window. Something Changed.",
-      "severity": "medium",
-      "category": "metric",
-      "detail": "Monday March 2 DAU spiked to 373 \u2014 the highest in the 30-day window, up from prior Monday highs of 347 (2/24) and 321 (2/17). WAU is stable at 598 but this daily concentration suggests more users are active on Mondays specifically. Session duration continues climbing: 116 min/user/week, now the highest since early December. Users are spending almost 2 hours per week in Sift. Combined with Explore hitting a record 387 WAU, the platform is becoming stickier without new user growth driving it.",
-      "action": "Use this in your All Hands presentation Thursday: 'Users are spending 2 hours/week in Sift \u2014 that's not checking a dashboard, that's doing real engineering work inside our platform.' The depth story is stronger than the breadth story right now.",
-      "source": "amplitude",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "DAU chart: 373 peak",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/u5ctmoro",
-          "source": "amplitude"
-        },
-        {
-          "label": "Session duration: 116m",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/e74ntz32",
-          "source": "amplitude"
-        },
-        {
-          "label": "WAU chart",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/a08uik9s",
-          "source": "amplitude"
-        }
-      ]
-    },
-    {
-      "id": "sig-005",
-      "title": "K2 Space Is Stress-Testing Your Live Ops Architecture \u2014 and Finding the Ceiling",
-      "severity": "high",
-      "category": "customer",
-      "detail": "K2 filed 4 tickets last week (3 High priority) all pointing at the same gap: Sift can't serve real-time mission infrastructure. They need low-latency fresh data reads, telemetry absence detection, enriched webhook payloads, and stable live mode. Gui's deployment update confirms 'K2 continues to stress Sift with very high-volume operations, exposing E2 live-mode UX bugs.' Meanwhile DFS team is building exactly this capability: DLV3 Fresh Data Reads is on track, CDS hit 4.9M points/sec. The supply and demand exist \u2014 they're just not connected yet.",
-      "action": "In Product Review Thursday (1:30pm): draw explicit line between K2 live ops tickets and DFS/CDS progress. Ask: when does fresh-data-reads reach K2? If the answer is 'Q2,' communicate the timeline to K2 via Gui to hold the relationship.",
-      "source": "slack+amplitude",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "K2: 4 High-priority tickets",
-          "url": "https://linear.app/sift/team/k2-space",
-          "source": "linear"
-        },
-        {
-          "label": "DFS: CDS 4.9M pts/sec",
-          "url": "https://linear.app/sift/project/dfs",
-          "source": "linear"
-        },
-        {
-          "label": "#admin-weekly-notes",
-          "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UADMIN",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-006",
-      "title": "Canvas MVP Timeline at Risk \u2014 Varda SLA Absorbed the Eng Team for 2-4 Weeks",
-      "severity": "high",
-      "category": "strategic",
-      "detail": "Your Product Bets framework has Canvas at the Design/Prototype gate needing 2-of-3 evidence types to advance. Prototype validation happened (5 users across ULA + Astro Mechanica), reports can now be published/shared, parameterization in PR. But: (1) Brandon's squad is splitting time on Varda SLA operational improvements, (2) Sanghee can't get a test environment \u2014 she was exploring Vercel but pivoted to waiting for ephemeral environments (Jared says 'next week'), (3) all Canvas eng is on Varda SLA per Sanghee. The kill criteria clock is ticking.",
-      "action": "In Sanghee 1:1 Thursday (2:30pm): assess Canvas velocity honestly. Is ephemeral env actually landing this week? Should you invoke the kill criteria conversation, or does the prototype validation evidence justify continued investment despite slower velocity?",
-      "source": "slack+linear",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Canvas project",
-          "url": "https://linear.app/sift/project/canvas",
-          "source": "linear"
-        },
-        {
-          "label": "Jess 4P",
-          "url": "https://docs.google.com/document/d/1zfYXB9_wqqZf1mR-_UM55My6ArjmyTlqfi3_I8cw6r0",
-          "source": "slack"
-        },
-        {
-          "label": "Varda SLA thread",
-          "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-007",
-      "title": "Rules Adoption Surge Is Outrunning Instrumentation and Product Quality",
-      "severity": "medium",
-      "category": "product",
-      "detail": "Rules WAU jumped from 48\u219270 (+46%) in 2 weeks \u2014 the fastest-growing feature area. But customers are already outgrowing it: backfill-aware re-evaluation (SCS-1119, High), rule-to-annotation quick-plot (SCS-1125), email group notifications (SCS-1116). Python Rules is pausing after alpha hardening. Meanwhile your rule event telemetry shows zero clicks across create/save/edit for 12 straight weeks, meaning you're flying blind on actual usage patterns during the biggest adoption surge.",
-      "action": "Prioritize rule telemetry fix as part of the instrumentation sprint. For the Review Top Customer Asks meeting today (3:30pm): stack-rank the 3 rules tickets by customer tier impact. SCS-1119 (backfill re-eval) is likely the highest-leverage fix.",
-      "source": "amplitude+slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Rules WAU: +46% WoW",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/5ab27lld",
-          "source": "amplitude"
-        },
-        {
-          "label": "Python Rules project",
-          "url": "https://linear.app/sift/project/python-rules",
-          "source": "linear"
-        },
-        {
-          "label": "Sanghee 4P",
-          "url": "https://docs.google.com/document/d/1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-008",
-      "title": "New User Retention Day 1-7 Is ~22% \u2014 Your Growth Bottleneck Is Activation, Not Acquisition",
-      "severity": "medium",
-      "category": "metric",
-      "detail": "89 new users joined last week (consistent ~90/week run rate). But bracket retention shows: Day 0\u21921 is 100% (good), Day 1-7 drops to ~22%, Day 7-14 to ~15%, Day 14-30 to ~10%. You're acquiring users but 78% disappear within a week. Given Sift's hardware test cycle patterns, some of this is structural. But OHB authentication issues blocking invite redemption and ImpulseSpace gRPC SSL corruption suggest real activation barriers exist for new deployments.",
-      "action": "For your biweekly product update (due 3/16): frame retention as the Q2 theme. 'We've proven value depth (2hr sessions) \u2014 now we need to prove value breadth (activation rate).' Flag OHB and Impulse auth blockers to Rowen in your Thursday 1:1.",
-      "source": "amplitude+slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Retention: Day 1-7 22%",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/dogczzd8",
-          "source": "amplitude"
-        },
-        {
-          "label": "New users: 89/week",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/p56xw4r8",
-          "source": "amplitude"
-        },
-        {
-          "label": "Product dashboard",
-          "url": "https://app.amplitude.com/analytics/sift-stack/dashboard/o93d89pz",
-          "source": "amplitude"
-        }
-      ]
-    },
-    {
-      "id": "sig-009",
-      "title": "VP of Engineering Starts March 24 \u2014 You Have 3 Weeks to Shape the Product-Eng Interface",
-      "severity": "medium",
-      "category": "strategic",
-      "detail": "Mike Russell starts as VP of Engineering on 3/24. Talent update also shows VP of Sales in final interviews (Jimmy Morocco, Ben Schmidt). The leadership team is about to change shape. Your product operating rhythm \u2014 the weekly health reports, biweekly updates, Product Bets framework, rituals calendar \u2014 is infrastructure that a new VPE will either adopt or work around. The next 3 weeks are your window to solidify these systems so they become organizational defaults, not just Noah's tools.",
-      "action": "Before 3/24: ensure the Amplitude dashboard, Linear roadmap, and product rituals calendar are documented and shared broadly enough that they survive a leadership transition. Consider scheduling an onboarding session with Mike Russell in his first week to establish the product-eng operating contract.",
-      "source": "slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "VP Eng starts 3/24",
-          "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P",
-          "source": "slack"
-        },
-        {
-          "label": "Product Rituals calendar",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        }
-      ]
-    },
-    {
-      "id": "sig-010",
-      "title": "Kenn's Linear Label Taxonomy Push \u2014 Small Move, Big Downstream Impact",
-      "severity": "low",
-      "category": "operational",
-      "detail": "Kenn posted today that he's adding short descriptions to Linear area/feature labels, starting with Ingestion. This seems small but is actually infrastructure for your North Star metric: if labels are inconsistent, you can't accurately map customer requests to product areas, which means your 'Decisions Captured Per Customer' metric has noisy denominators. Kenn noted he 'still gets confused on what goes where' \u2014 if your PM can't triage correctly, customers definitely can't.",
-      "action": "Amplify this in Product Sync today: make it a shared PM team exercise, not just Kenn's solo project. Each PM should own their areas' label descriptions by end of week. This directly enables the customer intelligence layer you've been building.",
-      "source": "slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Kenn 4P",
-          "url": "https://docs.google.com/document/d/1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
-          "source": "slack"
-        },
-        {
-          "label": "Linear labels taxonomy",
-          "url": "https://linear.app/sift/settings/labels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "id": "sig-011",
-      "title": "Product Bets Framework Announced \u2014 All Hands Thursday Is Your Strategy Moment",
-      "severity": "medium",
-      "category": "strategic",
-      "detail": "You posted the Product Bets Framework & Pipeline to #product this morning, flagging it will be presented at All Hands (Thursday 10:15am). This is your first company-wide strategy presentation with the three-gate system (Design/Prototype \u2192 Investment/Ship MVP \u2192 Scale/Pack). Canvas, Manufacturing/Live Ops, and Robotics bets all have kill criteria. With Squad Showcase at 3pm Thursday, you're bookending the day with strategy + execution.",
-      "action": "For All Hands: lead with the 2-hour session depth stat as proof of product-market fit, then present the bets framework as 'how we decide what to build next.' Keep it to 5 minutes \u2014 the framework's power is in its simplicity. Save the kill criteria details for product team only.",
-      "source": "slack+calendar",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "All Hands Thu 10:15a",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        },
-        {
-          "label": "#product",
-          "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-012",
-      "title": "Share Link Views at 12-Week High (244) \u2014 Your Users Are Selling Sift for You",
-      "severity": "low",
-      "category": "metric",
-      "detail": "Chart share link views hit 244 last week \u2014 the highest in 12 weeks. Chart share icon clicks at 119 and annotation creates at 13. The ratio of views to shares (244:119 = 2.05x) means each shared chart is viewed by ~2 people, indicating organic spread within customer organizations. This is your best leading indicator for seat expansion and 'Embed Deeper' strategy pillar success.",
-      "action": "Track share-to-view ratio as a formal metric. If each share generates 2+ views, your collaboration features are working as a growth loop. Mention in the biweekly update: 'Every chart shared reaches 2 additional viewers \u2014 our users are our best salesforce.'",
-      "source": "amplitude",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Share link views: 244",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/pr53xnu5",
-          "source": "amplitude"
-        },
-        {
-          "label": "Collaboration chart",
-          "url": "https://app.amplitude.com/analytics/sift-stack/chart/pr53xnu5",
-          "source": "amplitude"
-        }
-      ]
-    },
-    {
-      "id": "sig-013",
-      "title": "Thursday Is Your Heaviest Day \u2014 8 Meetings Including GNA Workshop, All Hands, Product Review",
-      "severity": "medium",
-      "category": "operational",
-      "detail": "Thursday March 5 schedule: Kenn 1:1 (9:30), All Hands (10:15), GNA Standup (11:00), GNA Workshop (11:15-2:00), Rowen 1:1 (1:00 \u2014 overlaps workshop), Product Review (1:30), Sanghee 1:1 (2:30), Squad Showcase (3:00). The GNA Workshop is a 2h45m block that conflicts with your Rowen 1:1 and Product Review. This is a triage problem.",
-      "action": "Move Rowen 1:1 to Wednesday or skip and async. GNA Workshop is where real design decisions happen \u2014 you need to be there for at least the first 90 min to set direction, then hand off to Russ/Clint. Protect Product Review at 1:30 \u2014 that's your cross-squad alignment moment.",
-      "source": "calendar",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Thu: 8 meetings",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        },
-        {
-          "label": "GNA Workshop 11:15-2p",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        },
-        {
-          "label": "Rowen 1:1 conflict",
-          "url": "https://calendar.google.com",
-          "source": "calendar"
-        }
-      ]
-    },
-    {
-      "id": "sig-014",
-      "title": "CVE Remediation Remains the Silent Blocker \u2014 ULA and Chainguard Timeline Risk",
-      "severity": "high",
-      "category": "risk",
-      "detail": "Jared's project update marks CVE remediation as 'At Risk' \u2014 the only yellow project in the admin-weekly-notes. They're purchasing Chainguard for CVE-free FIPS images but it may not be ready in time for ULA. A contingency plan is being built. Meanwhile ULA filed compliance tickets (classification banners, dev/prod indicators) that signal they're evaluating Sift's security posture holistically. If CVE fix + compliance UX don't converge, ULA activation stays blocked indefinitely.",
-      "action": "Escalate to Austin/Karthik: CVE remediation timeline and Chainguard contract status need executive attention. This is the single biggest customer revenue blocker and it's an infrastructure problem, not a product problem. Your role: ensure product-side compliance features (SCS-1123, SCS-1122) are prioritized as the 'easy win' while infra catches up.",
-      "source": "slack",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "CVE project: At Risk",
-          "url": "https://linear.app/sift/project/cve-remediation",
-          "source": "linear"
-        },
-        {
-          "label": "Rowen 4P",
-          "url": "https://docs.google.com/document/d/1r7Zs3u8HyUyWl1IB9WEtdIvnsZN-AYfq4GfwQPsdN_8",
-          "source": "slack"
-        }
-      ]
-    },
-    {
-      "id": "sig-015",
-      "title": "Sift Edge Backend Prototype Complete \u2014 Momentum Building Before Demo Day",
-      "severity": "medium",
-      "category": "product",
-      "detail": "Benji's SIK update: Edge backend prototype can now serve reads and writes, frontend prototyping has begun, sync-to-Sift functionality is underway. RFC will be shared broadly next week. They're targeting Squad Showcase for a demo. This is one of your five AI product bets and it's moving faster than Canvas right now despite less attention.",
-      "action": "In Squad Lead Sync Friday (10:30am): ask Benji for Edge demo timeline. If it's ready for Showcase Thursday, amplify it at All Hands as a concrete example of the bets framework in action: 'Here's a bet moving through Gate 1.'",
-      "source": "slack+calendar",
-      "ts": "2026-03-03T22:00:00Z",
-      "evidence": [
-        {
-          "label": "Sift Edge project",
-          "url": "https://linear.app/sift/project/sift-edge",
-          "source": "linear"
-        },
-        {
-          "label": "Kenn 4P",
-          "url": "https://docs.google.com/document/d/1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
-          "source": "slack"
-        }
-      ]
-    }
-  ],
+  "fetchedAt": "2026-03-04T21:51:18.520Z",
   "_meta": {
-    "sources_scanned": 5,
+    "sources_scanned": 2,
     "source_list": [
       "amplitude",
-      "slack",
-      "linear",
-      "calendar",
-      "google_docs"
+      "linear"
     ],
-    "signal_count": 15,
-    "amplitude_charts_queried": 10,
-    "slack_channels_scanned": 4,
-    "linear_projects_checked": 6,
-    "calendar_events_loaded": 15,
-    "google_docs_read": 4
+    "signal_count": 30
   },
-  "team": [
+  "signals": [
     {
-      "name": "Sanghee",
-      "role": "PM",
-      "squad": "Core Platform",
-      "fourPDoc": "1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
-      "fourPUrl": "https://docs.google.com/document/d/1yTZv7JPnaz9RfIQ6eHzuTVw6C2kxuPIPUXL1VdUzuEQ",
-      "fourPAge": "1d",
-      "linearActive": 14,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-03-03T18:30:00Z",
-      "meetingsToday": 4,
-      "status": "shipping",
-      "topConcern": "Instrumentation debt \u2014 flagged rule telemetry gaps this morning. Also managing Python Rules surge (+46% WoW) while backfill re-eval and annotation quick-plot are pending."
-    },
-    {
-      "name": "Kenn",
-      "role": "PM",
-      "squad": "Data Access & Governance",
-      "fourPDoc": "1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
-      "fourPUrl": "https://docs.google.com/document/d/1pE0u7j7NfLHrHu--wukmBr4ZXAv0W7E6HGOAgLam7SA",
-      "fourPAge": "2d",
-      "linearActive": 18,
-      "linearBlocked": 3,
-      "slackLastSeen": "2026-03-03T17:45:00Z",
-      "meetingsToday": 5,
-      "status": "attention",
-      "topConcern": "Lockheed split GNA into two projects \u2014 scope expanding. ABAC/DAG tickets (ENG-8732, 8721, 8727) blocking Astranis. Linear label taxonomy work enabling North Star metric."
-    },
-    {
-      "name": "Jess",
-      "role": "PM",
-      "squad": "Canvas & Workflows",
-      "fourPDoc": "1zfYXB9_wqqZf1mR-_UM55My6ArjmyTlqfi3_I8cw6r0",
-      "fourPUrl": "https://docs.google.com/document/d/1zfYXB9_wqqZf1mR-_UM55My6ArjmyTlqfi3_I8cw6r0",
-      "fourPAge": "3d",
-      "linearActive": 8,
-      "linearBlocked": 2,
-      "slackLastSeen": "2026-03-03T16:20:00Z",
-      "meetingsToday": 3,
-      "status": "blocked",
-      "topConcern": "Canvas velocity stalled \u2014 Varda SLA absorbed eng team 2-4 weeks. Ephemeral env delayed. Kill criteria clock ticking on Canvas bet."
-    },
-    {
-      "name": "Rowen",
-      "role": "PM",
-      "squad": "Infrastructure & Security",
-      "fourPDoc": "1r7Zs3u8HyUyWl1IB9WEtdIvnsZN-AYfq4GfwQPsdN_8",
-      "fourPUrl": "https://docs.google.com/document/d/1r7Zs3u8HyUyWl1IB9WEtdIvnsZN-AYfq4GfwQPsdN_8",
-      "fourPAge": "2d",
-      "linearActive": 11,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-03-03T19:00:00Z",
-      "meetingsToday": 4,
-      "status": "attention",
-      "topConcern": "CVE remediation is only 'At Risk' project (yellow). Chainguard timeline uncertain. Blocking ULA activation. Edge backend prototype complete and ahead of Canvas."
-    },
-    {
-      "name": "Kevin",
-      "role": "Software Engineering Manager",
-      "squad": "Engineering",
-      "fourPDoc": null,
-      "fourPUrl": null,
-      "fourPAge": null,
-      "linearActive": 6,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-03T17:30:00Z",
-      "meetingsToday": 3,
-      "status": "shipping",
-      "topConcern": "GNA tree test readout tomorrow. UX research for Explore V2 navigation in progress."
-    },
-    {
-      "name": "Gui",
-      "role": "FDE Lead",
-      "squad": "Field Engineering",
-      "fourPDoc": null,
-      "fourPUrl": null,
-      "fourPAge": null,
-      "linearActive": 9,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-03T20:00:00Z",
-      "meetingsToday": 2,
-      "status": "shipping",
-      "topConcern": "K2 stress-testing E2 live-mode UX. Confirmed 'product areas inhibiting adoption' note re: Lockheed. Astranis Family Data onboarding 3 teams."
-    }
-  ],
-  "customers": [
-    {
-      "name": "Astranis",
-      "wau": 252,
-      "wauPrior": 331,
-      "tier": "strategic",
-      "trajectory": "expanding",
-      "segment": "Satellite",
-      "teams": [
-        "Development (128)",
-        "Mission (124)"
-      ],
-      "health": 82,
-      "fdeLastTouch": "2d",
-      "openTickets": 4,
-      "blockers": [
-        "ABAC for Family Data (3 teams waiting)",
-        "Security: asset-level access needed"
-      ],
-      "signals": [
-        "Multi-team expansion blocked by ABAC",
-        "Highest WAU customer",
-        "3 separate orgs in Amplitude"
+      "source": "linear",
+      "title": "ENG-8887: add prometheus metrics",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Felix Wong",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T21:50:24.943Z",
+      "evidence": [
+        {
+          "label": "ENG-8887",
+          "url": "https://linear.app/siftstack/issue/ENG-8887/add-prometheus-metrics",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "ImpulseSpace",
-      "wau": 63,
-      "wauPrior": 126,
-      "tier": "strategic",
-      "trajectory": "contracting",
-      "segment": "Launch",
-      "teams": [],
-      "health": 58,
-      "fdeLastTouch": "5d",
-      "openTickets": 2,
-      "blockers": [
-        "Upload UX issues affecting data quality"
-      ],
-      "signals": [
-        "WAU dropped 50% WoW \u2014 significant decline",
-        "Upload data quality impacting workflows"
+      "source": "linear",
+      "title": "ENG-8852: Add alert when keycloak user registration fails",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Felix Wong",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T21:50:24.941Z",
+      "evidence": [
+        {
+          "label": "ENG-8852",
+          "url": "https://linear.app/siftstack/issue/ENG-8852/add-alert-when-keycloak-user-registration-fails",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "K2 Space",
-      "wau": 63,
-      "wauPrior": 78,
-      "tier": "strategic",
-      "trajectory": "stable",
-      "segment": "Satellite",
-      "teams": [],
-      "health": 68,
-      "fdeLastTouch": "3d",
-      "openTickets": 4,
-      "blockers": [
-        "4 high-priority live ops tickets",
-        "E2 real-time reads critical"
-      ],
-      "signals": [
-        "Stress-testing E2 live mode",
-        "Infrastructure load testing active",
-        "Live ops power user"
+      "source": "linear",
+      "title": "ENG-8256: [FE] Create Rule from Family View Page",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Adrienne Chang",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T21:06:47.217Z",
+      "evidence": [
+        {
+          "label": "ENG-8256",
+          "url": "https://linear.app/siftstack/issue/ENG-8256/fe-create-rule-from-family-view-page",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Karman Space Programme",
-      "wau": 24,
-      "wauPrior": 29,
-      "tier": "growth",
-      "trajectory": "stable",
-      "segment": "Academic/Launch",
-      "teams": [],
-      "health": 65,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Steady academic/team usage"
+      "source": "linear",
+      "title": "ENG-8945: Parquet Exports",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T21:03:43.205Z",
+      "evidence": [
+        {
+          "label": "ENG-8945",
+          "url": "https://linear.app/siftstack/issue/ENG-8945/parquet-exports",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Purdue Space Program",
-      "wau": 24,
-      "wauPrior": 29,
-      "tier": "growth",
-      "trajectory": "stable",
-      "segment": "Academic",
-      "teams": [],
-      "health": 64,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "University team \u2014 consistent usage"
+      "source": "linear",
+      "title": "ENG-8882: ReadAdapter should cancel context on early exits to ensure read service frees resources",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:44:53.719Z",
+      "evidence": [
+        {
+          "label": "ENG-8882",
+          "url": "https://linear.app/siftstack/issue/ENG-8882/readadapter-should-cancel-context-on-early-exits-to-ensure-read",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Astrolab",
-      "wau": 22,
-      "wauPrior": 37,
-      "tier": "growth",
-      "trajectory": "contracting",
-      "segment": "Robotics/Space",
-      "teams": [],
-      "health": 55,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU declining from 37\u219222",
-        "Needs proactive outreach"
+      "source": "linear",
+      "title": "ENG-8921: [FE] Add Agg Review Alignment Step to Run Create Report",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:36:34.863Z",
+      "evidence": [
+        {
+          "label": "ENG-8921",
+          "url": "https://linear.app/siftstack/issue/ENG-8921/fe-add-agg-review-alignment-step-to-run-create-report",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Parallel Systems",
-      "wau": 16,
-      "wauPrior": 27,
-      "tier": "growth",
-      "trajectory": "contracting",
-      "segment": "Autonomous Rail",
-      "teams": [],
-      "health": 52,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU declining from 27\u219216",
-        "Rail autonomous vehicles"
+      "source": "linear",
+      "title": "ENG-8944: [FE] Hide and Set Default Dynamic Window",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:36:31.001Z",
+      "evidence": [
+        {
+          "label": "ENG-8944",
+          "url": "https://linear.app/siftstack/issue/ENG-8944/fe-hide-and-set-default-dynamic-window",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Reliable Robotics",
-      "wau": 13,
-      "wauPrior": 39,
-      "tier": "growth",
-      "trajectory": "contracting",
-      "segment": "Autonomy/Aviation",
-      "teams": [],
-      "health": 42,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Severe WAU drop 39\u219213 (-67%)",
-        "Needs urgent re-engagement"
+      "source": "linear",
+      "title": "ENG-7870: [FE] Show family stat results in reports",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:30:19.305Z",
+      "evidence": [
+        {
+          "label": "ENG-7870",
+          "url": "https://linear.app/siftstack/issue/ENG-7870/fe-show-family-stat-results-in-reports",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Heart Aerospace",
-      "wau": 10,
-      "wauPrior": 14,
-      "tier": "growth",
-      "trajectory": "contracting",
-      "segment": "Electric Aviation",
-      "teams": [],
-      "health": 38,
-      "fdeLastTouch": "11d",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU declining steadily (-4 over 4 weeks)",
-        "FDE touch 11d ago \u2014 going quiet"
+      "source": "linear",
+      "title": "ENG-8941: Create Github action to destroy an ephemeral environment",
+      "priority": "URGENT",
+      "state": "In Review",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:26:00.364Z",
+      "evidence": [
+        {
+          "label": "ENG-8941",
+          "url": "https://linear.app/siftstack/issue/ENG-8941/create-github-action-to-destroy-an-ephemeral-environment",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Lockheed Martin",
-      "wau": 5,
-      "wauPrior": 8,
-      "tier": "emerging",
-      "trajectory": "expanding",
-      "segment": "Defense/Aerospace",
-      "teams": [
-        "lmco demo (5)"
-      ],
-      "health": 55,
-      "fdeLastTouch": "0d",
-      "openTickets": 2,
-      "blockers": [
-        "GNA scope split \u2014 Resource/Folder vs Global Nav"
-      ],
-      "signals": [
-        "Active GNA design workshops this week",
-        "Tree test readout Mar 4",
-        "High strategic value despite low WAU"
+      "source": "linear",
+      "title": "ENG-8915: Create Github deploy workflow",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "sfu@lardoandassociates.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:22:24.472Z",
+      "evidence": [
+        {
+          "label": "ENG-8915",
+          "url": "https://linear.app/siftstack/issue/ENG-8915/create-github-deploy-workflow",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Critical Loop",
-      "wau": 5,
-      "wauPrior": 13,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 35,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped 13\u21925"
+      "source": "linear",
+      "title": "ENG-8815: Rule Parameterization",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "andrew@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T20:16:04.843Z",
+      "evidence": [
+        {
+          "label": "ENG-8815",
+          "url": "https://linear.app/siftstack/issue/ENG-8815/rule-parameterization",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Orbital Ops",
-      "wau": 6,
-      "wauPrior": 11,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Space Ops",
-      "teams": [],
-      "health": 40,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Declining usage"
+      "source": "linear",
+      "title": "ENG-8655: E2: UI polish - Update panel colors",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "jessica@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:52:15.581Z",
+      "evidence": [
+        {
+          "label": "ENG-8655",
+          "url": "https://linear.app/siftstack/issue/ENG-8655/e2-ui-polish-update-panel-colors",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Revel",
-      "wau": 4,
-      "wauPrior": 12,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "EV/Mobility",
-      "teams": [],
-      "health": 30,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped significantly 12\u21924"
+      "source": "linear",
+      "title": "ENG-6688: Foreign Key Removal for Run-Asset-Channels",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:40:57.678Z",
+      "evidence": [
+        {
+          "label": "ENG-6688",
+          "url": "https://linear.app/siftstack/issue/ENG-6688/foreign-key-removal-for-run-asset-channels",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Varda",
-      "wau": 4,
-      "wauPrior": 7,
-      "tier": "emerging",
-      "trajectory": "stable",
-      "segment": "Space Manufacturing",
-      "teams": [],
-      "health": 48,
-      "fdeLastTouch": "5d",
-      "openTickets": 1,
-      "blockers": [
-        "SLA commitment requires 2-4 weeks eng"
-      ],
-      "signals": [
-        "Low WAU but high strategic value",
-        "SLA negotiation in progress"
+      "source": "linear",
+      "title": "ENG-8287: Increase Data Export worker memory to prevent crashes on large jobs",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "benjamin@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:40:31.893Z",
+      "evidence": [
+        {
+          "label": "ENG-8287",
+          "url": "https://linear.app/siftstack/issue/ENG-8287/increase-data-export-worker-memory-to-prevent-crashes-on-large-jobs",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Plantd",
-      "wau": 4,
-      "wauPrior": 18,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Climate/Manufacturing",
-      "teams": [],
-      "health": 25,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Major WAU drop 18\u21924 \u2014 potential churn"
+      "source": "linear",
+      "title": "ENG-6214: Changing channel enum config creates nondeterministic \"channels\"",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:40:08.278Z",
+      "evidence": [
+        {
+          "label": "ENG-6214",
+          "url": "https://linear.app/siftstack/issue/ENG-6214/changing-channel-enum-config-creates-nondeterministic-channels",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Also",
-      "wau": 4,
-      "wauPrior": 6,
-      "tier": "emerging",
-      "trajectory": "stable",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 40,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Astro Mechanica",
-      "wau": 4,
-      "wauPrior": 6,
-      "tier": "emerging",
-      "trajectory": "stable",
-      "segment": "Space/Propulsion",
-      "teams": [],
-      "health": 42,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "TEC",
-      "wau": 4,
-      "wauPrior": 5,
-      "tier": "emerging",
-      "trajectory": "stable",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 42,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Pilatus",
-      "wau": 4,
-      "wauPrior": 3,
-      "tier": "emerging",
-      "trajectory": "expanding",
-      "segment": "Aviation",
-      "teams": [],
-      "health": 45,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU growing 3\u21924",
-        "Swiss aircraft manufacturer"
+      "source": "linear",
+      "title": "ENG-6748: Review and improve ingestion docs",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "frank@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:40:08.261Z",
+      "evidence": [
+        {
+          "label": "ENG-6748",
+          "url": "https://linear.app/siftstack/issue/ENG-6748/review-and-improve-ingestion-docs",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Inversion",
-      "wau": 3,
-      "wauPrior": 7,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Re-entry Vehicles",
-      "teams": [],
-      "health": 32,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU halved"
+      "source": "linear",
+      "title": "ENG-5041: Soft variant for icon toggle",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:18.574Z",
+      "evidence": [
+        {
+          "label": "ENG-5041",
+          "url": "https://linear.app/siftstack/issue/ENG-5041/soft-variant-for-icon-toggle",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "CX2",
-      "wau": 3,
-      "wauPrior": 5,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 35,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Azimuth",
-      "wau": 2,
-      "wauPrior": 5,
-      "tier": "emerging",
-      "trajectory": "contracting",
-      "segment": "Space",
-      "teams": [],
-      "health": 28,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped from 5\u21922"
+      "source": "linear",
+      "title": "ENG-5489: Stat Panel type",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:18.005Z",
+      "evidence": [
+        {
+          "label": "ENG-5489",
+          "url": "https://linear.app/siftstack/issue/ENG-5489/stat-panel-type",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "RTX",
-      "wau": 2,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Defense",
-      "teams": [],
-      "health": 30,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Major defense contractor \u2014 low engagement"
+      "source": "linear",
+      "title": "ENG-8021: “Micro Chart” overlays panel tab and removes tab close button when shift-clicking in Explore 2",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:17.949Z",
+      "evidence": [
+        {
+          "label": "ENG-8021",
+          "url": "https://linear.app/siftstack/issue/ENG-8021/micro-chart-overlays-panel-tab-and-removes-tab-close-button-when-shift",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Neros",
-      "wau": 2,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 28,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Anduril",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Defense",
-      "teams": [],
-      "health": 22,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Defense unicorn \u2014 minimal engagement"
+      "source": "linear",
+      "title": "ENG-5234: Channel List Service should allow requests to be aborted",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:17.908Z",
+      "evidence": [
+        {
+          "label": "ENG-5234",
+          "url": "https://linear.app/siftstack/issue/ENG-5234/channel-list-service-should-allow-requests-to-be-aborted",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Millennium Space",
-      "wau": 1,
-      "wauPrior": 5,
-      "tier": "watchlist",
-      "trajectory": "contracting",
-      "segment": "Satellite/Defense",
-      "teams": [],
-      "health": 18,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped 5\u21921 \u2014 likely churning"
+      "source": "linear",
+      "title": "ENG-6924: Reset Sync Range/Sync Time causing strange Geomap behavior",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:17.864Z",
+      "evidence": [
+        {
+          "label": "ENG-6924",
+          "url": "https://linear.app/siftstack/issue/ENG-6924/reset-sync-rangesync-time-causing-strange-geomap-behavior",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Divergent",
-      "wau": 1,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "contracting",
-      "segment": "Advanced Manufacturing",
-      "teams": [],
-      "health": 20,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "OHB",
-      "wau": 1,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "contracting",
-      "segment": "European Space",
-      "teams": [],
-      "health": 20,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "European satellite manufacturer"
+      "source": "linear",
+      "title": "ENG-5699: Run with multiple assets only recognizes assets with data flowing when Run is added to Explorer (E2)",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:17.826Z",
+      "evidence": [
+        {
+          "label": "ENG-5699",
+          "url": "https://linear.app/siftstack/issue/ENG-5699/run-with-multiple-assets-only-recognizes-assets-with-data-flowing-when",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Gravitics",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Space Habitats",
-      "teams": [],
-      "health": 22,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "MetroStar",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "GovTech",
-      "teams": [],
-      "health": 22,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Pixxel",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Earth Observation",
-      "teams": [],
-      "health": 22,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Indian hyperspectral imaging satellite co"
+      "source": "linear",
+      "title": "SCS-872: Data gaps in live mode",
+      "priority": "HIGH",
+      "state": "Planned",
+      "assignee": "James Kelly",
+      "team": "Customer Support",
+      "timestamp": "2026-03-04T19:39:17.691Z",
+      "evidence": [
+        {
+          "label": "SCS-872",
+          "url": "https://linear.app/siftstack/issue/SCS-872/data-gaps-in-live-mode",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Loft",
-      "wau": 1,
-      "wauPrior": 3,
-      "tier": "watchlist",
-      "trajectory": "contracting",
-      "segment": "Space",
-      "teams": [],
-      "health": 18,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped 3\u21921"
+      "source": "linear",
+      "title": "SCS-798: Data in Explore V2 doesn't match data in Explore V1",
+      "priority": "HIGH",
+      "state": "Planned",
+      "assignee": "James Kelly",
+      "team": "Customer Support",
+      "timestamp": "2026-03-04T19:39:17.649Z",
+      "evidence": [
+        {
+          "label": "SCS-798",
+          "url": "https://linear.app/siftstack/issue/SCS-798/data-in-explore-v2-doesnt-match-data-in-explore-v1",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Arbor",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 22,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": []
-    },
-    {
-      "name": "Orion Demo",
-      "wau": 1,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "stable",
-      "segment": "Demo",
-      "teams": [],
-      "health": 20,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Demo account"
+      "source": "linear",
+      "title": "ENG-5848: E2 Table Channel Filters Broken",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "leo@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:39:17.610Z",
+      "evidence": [
+        {
+          "label": "ENG-5848",
+          "url": "https://linear.app/siftstack/issue/ENG-5848/e2-table-channel-filters-broken",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "Starpath",
-      "wau": 1,
-      "wauPrior": 5,
-      "tier": "watchlist",
-      "trajectory": "contracting",
-      "segment": "Space",
-      "teams": [],
-      "health": 15,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "WAU dropped 5\u21921 \u2014 likely churning"
+      "source": "linear",
+      "title": "SCS-910: Missing data from some channels in live explore v2",
+      "priority": "HIGH",
+      "state": "In Review",
+      "team": "Customer Support",
+      "timestamp": "2026-03-04T19:39:17.571Z",
+      "evidence": [
+        {
+          "label": "SCS-910",
+          "url": "https://linear.app/siftstack/issue/SCS-910/missing-data-from-some-channels-in-live-explore-v2",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "GA-EMS",
-      "wau": 0,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Defense",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "General Atomics subsidiary \u2014 went dark"
+      "source": "linear",
+      "title": "ENG-7213: Investigate sending ingestion metrics to Amplitude",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:23:23.149Z",
+      "evidence": [
+        {
+          "label": "ENG-7213",
+          "url": "https://linear.app/siftstack/issue/ENG-7213/investigate-sending-ingestion-metrics-to-amplitude",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "EnduroSat",
-      "wau": 0,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Satellite",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Bulgarian satellite company \u2014 no activity"
+      "source": "linear",
+      "title": "ENG-8910: Migrate `sift_py` gRPC module to `sift_client`",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Wei Lu",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:15:05.889Z",
+      "evidence": [
+        {
+          "label": "ENG-8910",
+          "url": "https://linear.app/siftstack/issue/ENG-8910/migrate-sift-py-grpc-module-to-sift-client",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "HII",
-      "wau": 0,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Defense/Shipbuilding",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Huntington Ingalls \u2014 went dark"
+      "source": "linear",
+      "title": "ENG-8335: Cannot remember which attribute I added, can the dropdown show me?",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:13:29.761Z",
+      "evidence": [
+        {
+          "label": "ENG-8335",
+          "url": "https://linear.app/siftstack/issue/ENG-8335/cannot-remember-which-attribute-i-added-can-the-dropdown-show-me",
+          "source": "linear"
+        }
       ]
     },
     {
-      "name": "True Anomaly",
-      "wau": 0,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Space Domain Awareness",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Space surveillance \u2014 went dark"
-      ]
-    },
-    {
-      "name": "Skyroot",
-      "wau": 0,
-      "wauPrior": 7,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Launch (India)",
-      "teams": [],
-      "health": 3,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Indian launch company \u2014 WAU 7\u21920, fully churned"
-      ]
-    },
-    {
-      "name": "Synnax Labs",
-      "wau": 0,
-      "wauPrior": 3,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "DAQ/Test",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Data acquisition startup \u2014 went dark"
-      ]
-    },
-    {
-      "name": "General Matter",
-      "wau": 0,
-      "wauPrior": 1,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Unknown",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Went dark"
-      ]
-    },
-    {
-      "name": "Odys",
-      "wau": 0,
-      "wauPrior": 2,
-      "tier": "watchlist",
-      "trajectory": "churned",
-      "segment": "Aviation",
-      "teams": [],
-      "health": 5,
-      "fdeLastTouch": "?",
-      "openTickets": 0,
-      "blockers": [],
-      "signals": [
-        "Hybrid-electric aviation \u2014 went dark"
-      ]
-    },
-    {
-      "name": "ULA",
-      "wau": 0,
-      "wauPrior": 0,
-      "tier": "watchlist",
-      "trajectory": "pre-launch",
-      "segment": "Launch",
-      "teams": [],
-      "health": 15,
-      "fdeLastTouch": "?",
-      "openTickets": 1,
-      "blockers": [
-        "Blocked by CVE remediation (60% complete)"
-      ],
-      "signals": [
-        "New customer \u2014 not yet activated",
-        "Activation blocked by security compliance"
+      "source": "linear",
+      "title": "ENG-8888: Enforce ABAC in IngestArbitraryProtobufDataStream",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T19:03:12.005Z",
+      "evidence": [
+        {
+          "label": "ENG-8888",
+          "url": "https://linear.app/siftstack/issue/ENG-8888/enforce-abac-in-ingestarbitraryprotobufdatastream",
+          "source": "linear"
+        }
       ]
     }
   ],
-  "decisions": [
-    {
-      "id": "dec-001",
-      "title": "Canvas: continue to MVP or kill",
-      "context": "Canvas prototype validated in user testing but eng velocity stalled. Varda SLA absorbed 2-4 weeks of eng capacity. Ephemeral env delayed. Kill criteria from Product Bets framework: need 2-of-3 evidence types to advance past Gate 1.",
-      "evidenceFor": "Prototype validated, user signal positive",
-      "evidenceAgainst": "Eng absorbed by Varda, velocity stalled, no ephemeral env",
-      "deadline": "2026-03-15",
-      "staleDays": 5,
-      "waitingOn": "Noah",
-      "owner": "Jess",
-      "sources": [
-        "linear",
-        "slack"
-      ]
+  "amplitude": {
+    "dau": {
+      "chart": "a08uik9s",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 573
+            },
+            {
+              "setId": "",
+              "value": 567
+            },
+            {
+              "setId": "",
+              "value": 299
+            },
+            {
+              "setId": "",
+              "value": 286
+            },
+            {
+              "setId": "",
+              "value": 596
+            },
+            {
+              "setId": "",
+              "value": 549
+            },
+            {
+              "setId": "",
+              "value": 527
+            },
+            {
+              "setId": "",
+              "value": 572
+            },
+            {
+              "setId": "",
+              "value": 601
+            },
+            {
+              "setId": "",
+              "value": 600
+            },
+            {
+              "setId": "",
+              "value": 571
+            },
+            {
+              "setId": "",
+              "value": 601
+            },
+            {
+              "setId": "",
+              "value": 525
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 1843
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
     },
-    {
-      "id": "dec-002",
-      "title": "Lockheed GNA: accept scope split or push back",
-      "context": "Lockheed split Global Nav into Resource/Folder Management + Global Nav improvements. Combined with Gui's 'product areas inhibiting adoption' note. Thursday's GNA workshop (3 hours) and tree test readout are decision windows.",
-      "evidenceFor": "Customer is investing in the product, expanding usage",
-      "evidenceAgainst": "Scope creep, two projects instead of one, resource drain",
-      "deadline": "2026-03-03",
-      "staleDays": 0,
-      "waitingOn": "Noah + Kenn",
-      "owner": "Kenn",
-      "sources": [
-        "calendar",
-        "slack",
-        "linear"
-      ]
+    "newUsers": {
+      "chart": "u5ctmoro",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 249
+            },
+            {
+              "setId": "",
+              "value": 287
+            },
+            {
+              "setId": "",
+              "value": 353
+            },
+            {
+              "setId": "",
+              "value": 313
+            },
+            {
+              "setId": "",
+              "value": 276
+            },
+            {
+              "setId": "",
+              "value": 100
+            },
+            {
+              "setId": "",
+              "value": 94
+            },
+            {
+              "setId": "",
+              "value": 305
+            },
+            {
+              "setId": "",
+              "value": 308
+            },
+            {
+              "setId": "",
+              "value": 336
+            },
+            {
+              "setId": "",
+              "value": 338
+            },
+            {
+              "setId": "",
+              "value": 283
+            },
+            {
+              "setId": "",
+              "value": 87
+            },
+            {
+              "setId": "",
+              "value": 83
+            },
+            {
+              "setId": "",
+              "value": 158
+            },
+            {
+              "setId": "",
+              "value": 321
+            },
+            {
+              "setId": "",
+              "value": 300
+            },
+            {
+              "setId": "",
+              "value": 317
+            },
+            {
+              "setId": "",
+              "value": 289
+            },
+            {
+              "setId": "",
+              "value": 108
+            },
+            {
+              "setId": "",
+              "value": 108
+            },
+            {
+              "setId": "",
+              "value": 320
+            },
+            {
+              "setId": "",
+              "value": 349
+            },
+            {
+              "setId": "",
+              "value": 320
+            },
+            {
+              "setId": "",
+              "value": 310
+            },
+            {
+              "setId": "",
+              "value": 288
+            },
+            {
+              "setId": "",
+              "value": 122
+            },
+            {
+              "setId": "",
+              "value": 141
+            },
+            {
+              "setId": "",
+              "value": 375
+            },
+            {
+              "setId": "",
+              "value": 372
+            },
+            {
+              "setId": "",
+              "value": 273
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 1199
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          }
+        ],
+        "xValues": [
+          "2026-02-02",
+          "2026-02-03",
+          "2026-02-04",
+          "2026-02-05",
+          "2026-02-06",
+          "2026-02-07",
+          "2026-02-08",
+          "2026-02-09",
+          "2026-02-10",
+          "2026-02-11",
+          "2026-02-12",
+          "2026-02-13",
+          "2026-02-14",
+          "2026-02-15",
+          "2026-02-16",
+          "2026-02-17",
+          "2026-02-18",
+          "2026-02-19",
+          "2026-02-20",
+          "2026-02-21",
+          "2026-02-22",
+          "2026-02-23",
+          "2026-02-24",
+          "2026-02-25",
+          "2026-02-26",
+          "2026-02-27",
+          "2026-02-28",
+          "2026-03-01",
+          "2026-03-02",
+          "2026-03-03",
+          "2026-03-04"
+        ]
+      }
     },
-    {
-      "id": "dec-003",
-      "title": "Varda SLA: dedicated staffing or time-box",
-      "context": "Varda SLA commitments absorbing eng team 2-4 weeks. Blocking Canvas. WAU only 32 (5% of external). Is the eng cost proportionate?",
-      "evidenceFor": "Customer commitment, revenue protection",
-      "evidenceAgainst": "Disproportionate eng cost, blocking higher-leverage Canvas work",
-      "deadline": "2026-03-07",
-      "staleDays": 3,
-      "waitingOn": "Noah",
-      "owner": "Jess",
-      "sources": [
-        "linear",
-        "slack"
-      ]
+    "featureAdoption": {
+      "chart": "5ab27lld",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 70
+            },
+            {
+              "setId": "",
+              "value": 81
+            },
+            {
+              "setId": "",
+              "value": 21
+            },
+            {
+              "setId": "",
+              "value": 30
+            },
+            {
+              "setId": "",
+              "value": 127
+            },
+            {
+              "setId": "",
+              "value": 57
+            },
+            {
+              "setId": "",
+              "value": 66
+            },
+            {
+              "setId": "",
+              "value": 93
+            },
+            {
+              "setId": "",
+              "value": 134
+            },
+            {
+              "setId": "",
+              "value": 94
+            },
+            {
+              "setId": "",
+              "value": 86
+            },
+            {
+              "setId": "",
+              "value": 90
+            },
+            {
+              "setId": "",
+              "value": 61
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 1010
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
     },
-    {
-      "id": "dec-004",
-      "title": "VPE onboarding: what to institutionalize before 3/24",
-      "context": "VP Engineering starts 3/24. Three-week window to solidify product operating systems (rituals, 4P cadence, product-eng interface) as org defaults before new eng leader arrives.",
-      "evidenceFor": "Once VPE arrives, changing process becomes political. Set defaults now.",
-      "evidenceAgainst": "Risk of over-prescribing before understanding new VPE's style",
-      "deadline": "2026-03-24",
-      "staleDays": 0,
-      "waitingOn": "Noah",
-      "owner": "Noah",
-      "sources": [
-        "calendar",
-        "slack"
-      ]
+    "retention": {
+      "chart": "dogczzd8",
+      "data": {
+        "series": [
+          [
+            6283.494127596439,
+            6779.056342507645,
+            4984.823647058824,
+            4474.877482269503,
+            4742.11715614618,
+            5521.405282738096,
+            5783.94728956229,
+            5755.358492113565,
+            5484.686567213115,
+            5554.528930513595,
+            6390.377416393442,
+            6904.323279503105,
+            4250.030587719299
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 23879.974971846845
+            }
+          ]
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "sessionIndex": 0
+          }
+        ],
+        "xValues": [
+          "2025-12-08T00:00:00",
+          "2025-12-15T00:00:00",
+          "2025-12-22T00:00:00",
+          "2025-12-29T00:00:00",
+          "2026-01-05T00:00:00",
+          "2026-01-12T00:00:00",
+          "2026-01-19T00:00:00",
+          "2026-01-26T00:00:00",
+          "2026-02-02T00:00:00",
+          "2026-02-09T00:00:00",
+          "2026-02-16T00:00:00",
+          "2026-02-23T00:00:00",
+          "2026-03-02T00:00:00"
+        ]
+      }
     },
-    {
-      "id": "dec-005",
-      "title": "Telemetry instrumentation: urgent fix or roadmap item",
-      "context": "Rule events showing ZERO for 12 weeks despite Rules WAU at 70 and growing +46% WoW. North Star metric (Decisions Captured Per Customer) literally cannot be measured. Sanghee flagged this morning.",
-      "evidenceFor": "Flying blind during biggest adoption surge. Must fix now.",
-      "evidenceAgainst": "Instrumentation work competes with feature delivery",
-      "deadline": "2026-03-07",
-      "staleDays": 0,
-      "waitingOn": "Noah + Sanghee",
-      "owner": "Sanghee",
-      "sources": [
-        "amplitude",
-        "slack"
-      ]
+    "collaboration": {
+      "chart": "e74ntz32",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 364
+            },
+            {
+              "setId": "",
+              "value": 356
+            },
+            {
+              "setId": "",
+              "value": 179
+            },
+            {
+              "setId": "",
+              "value": 156
+            },
+            {
+              "setId": "",
+              "value": 320
+            },
+            {
+              "setId": "",
+              "value": 369
+            },
+            {
+              "setId": "",
+              "value": 339
+            },
+            {
+              "setId": "",
+              "value": 355
+            },
+            {
+              "setId": "",
+              "value": 359
+            },
+            {
+              "setId": "",
+              "value": 379
+            },
+            {
+              "setId": "",
+              "value": 333
+            },
+            {
+              "setId": "",
+              "value": 387
+            },
+            {
+              "setId": "",
+              "value": 334
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 84
+            },
+            {
+              "setId": "",
+              "value": 64
+            },
+            {
+              "setId": "",
+              "value": 32
+            },
+            {
+              "setId": "",
+              "value": 24
+            },
+            {
+              "setId": "",
+              "value": 46
+            },
+            {
+              "setId": "",
+              "value": 45
+            },
+            {
+              "setId": "",
+              "value": 39
+            },
+            {
+              "setId": "",
+              "value": 48
+            },
+            {
+              "setId": "",
+              "value": 43
+            },
+            {
+              "setId": "",
+              "value": 63
+            },
+            {
+              "setId": "",
+              "value": 48
+            },
+            {
+              "setId": "",
+              "value": 70
+            },
+            {
+              "setId": "",
+              "value": 46
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 85
+            },
+            {
+              "setId": "",
+              "value": 77
+            },
+            {
+              "setId": "",
+              "value": 30
+            },
+            {
+              "setId": "",
+              "value": 9
+            },
+            {
+              "setId": "",
+              "value": 28
+            },
+            {
+              "setId": "",
+              "value": 28
+            },
+            {
+              "setId": "",
+              "value": 39
+            },
+            {
+              "setId": "",
+              "value": 29
+            },
+            {
+              "setId": "",
+              "value": 54
+            },
+            {
+              "setId": "",
+              "value": 39
+            },
+            {
+              "setId": "",
+              "value": 45
+            },
+            {
+              "setId": "",
+              "value": 56
+            },
+            {
+              "setId": "",
+              "value": 33
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 1
+            },
+            {
+              "setId": "",
+              "value": 1
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 1
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 4
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 1
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 954
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 267
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 247
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 7
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 1
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 2
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 3
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
+    },
+    "engagement": {
+      "chart": "1v3107dq",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0,
+          0,
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 1
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 2
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
+    },
+    "sessionDuration": {
+      "chart": "pepuaofo",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 129
+            },
+            {
+              "setId": "",
+              "value": 131
+            },
+            {
+              "setId": "",
+              "value": 68
+            },
+            {
+              "setId": "",
+              "value": 38
+            },
+            {
+              "setId": "",
+              "value": 99
+            },
+            {
+              "setId": "",
+              "value": 123
+            },
+            {
+              "setId": "",
+              "value": 102
+            },
+            {
+              "setId": "",
+              "value": 105
+            },
+            {
+              "setId": "",
+              "value": 109
+            },
+            {
+              "setId": "",
+              "value": 107
+            },
+            {
+              "setId": "",
+              "value": 100
+            },
+            {
+              "setId": "",
+              "value": 119
+            },
+            {
+              "setId": "",
+              "value": 78
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 12
+            },
+            {
+              "setId": "",
+              "value": 20
+            },
+            {
+              "setId": "",
+              "value": 2
+            },
+            {
+              "setId": "",
+              "value": 5
+            },
+            {
+              "setId": "",
+              "value": 10
+            },
+            {
+              "setId": "",
+              "value": 17
+            },
+            {
+              "setId": "",
+              "value": 5
+            },
+            {
+              "setId": "",
+              "value": 11
+            },
+            {
+              "setId": "",
+              "value": 15
+            },
+            {
+              "setId": "",
+              "value": 18
+            },
+            {
+              "setId": "",
+              "value": 18
+            },
+            {
+              "setId": "",
+              "value": 13
+            },
+            {
+              "setId": "",
+              "value": 2
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 4
+            },
+            {
+              "setId": "",
+              "value": 11
+            },
+            {
+              "setId": "",
+              "value": 5
+            },
+            {
+              "setId": "",
+              "value": 3
+            },
+            {
+              "setId": "",
+              "value": 3
+            },
+            {
+              "setId": "",
+              "value": 3
+            },
+            {
+              "setId": "",
+              "value": 3
+            },
+            {
+              "setId": "",
+              "value": 1
+            },
+            {
+              "setId": "",
+              "value": 3
+            },
+            {
+              "setId": "",
+              "value": 4
+            },
+            {
+              "setId": "",
+              "value": 6
+            },
+            {
+              "setId": "",
+              "value": 4
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 203
+            },
+            {
+              "setId": "",
+              "value": 231
+            },
+            {
+              "setId": "",
+              "value": 97
+            },
+            {
+              "setId": "",
+              "value": 71
+            },
+            {
+              "setId": "",
+              "value": 192
+            },
+            {
+              "setId": "",
+              "value": 237
+            },
+            {
+              "setId": "",
+              "value": 193
+            },
+            {
+              "setId": "",
+              "value": 194
+            },
+            {
+              "setId": "",
+              "value": 197
+            },
+            {
+              "setId": "",
+              "value": 229
+            },
+            {
+              "setId": "",
+              "value": 194
+            },
+            {
+              "setId": "",
+              "value": 244
+            },
+            {
+              "setId": "",
+              "value": 210
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 358
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 90
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 29
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 677
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 1
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 2
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 3
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
+    },
+    "keyActions": {
+      "chart": "pr53xnu5",
+      "data": {
+        "series": [
+          [
+            {
+              "setId": "",
+              "value": 143
+            },
+            {
+              "setId": "",
+              "value": 178
+            },
+            {
+              "setId": "",
+              "value": 28
+            },
+            {
+              "setId": "",
+              "value": 27
+            },
+            {
+              "setId": "",
+              "value": 72
+            },
+            {
+              "setId": "",
+              "value": 215
+            },
+            {
+              "setId": "",
+              "value": 26
+            },
+            {
+              "setId": "",
+              "value": 109
+            },
+            {
+              "setId": "",
+              "value": 81
+            },
+            {
+              "setId": "",
+              "value": 125
+            },
+            {
+              "setId": "",
+              "value": 155
+            },
+            {
+              "setId": "",
+              "value": 111
+            },
+            {
+              "setId": "",
+              "value": 15
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 169
+            },
+            {
+              "setId": "",
+              "value": 260
+            },
+            {
+              "setId": "",
+              "value": 136
+            },
+            {
+              "setId": "",
+              "value": 49
+            },
+            {
+              "setId": "",
+              "value": 92
+            },
+            {
+              "setId": "",
+              "value": 320
+            },
+            {
+              "setId": "",
+              "value": 80
+            },
+            {
+              "setId": "",
+              "value": 147
+            },
+            {
+              "setId": "",
+              "value": 212
+            },
+            {
+              "setId": "",
+              "value": 178
+            },
+            {
+              "setId": "",
+              "value": 270
+            },
+            {
+              "setId": "",
+              "value": 226
+            },
+            {
+              "setId": "",
+              "value": 78
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 965
+            },
+            {
+              "setId": "",
+              "value": 1967
+            },
+            {
+              "setId": "",
+              "value": 559
+            },
+            {
+              "setId": "",
+              "value": 286
+            },
+            {
+              "setId": "",
+              "value": 530
+            },
+            {
+              "setId": "",
+              "value": 719
+            },
+            {
+              "setId": "",
+              "value": 617
+            },
+            {
+              "setId": "",
+              "value": 737
+            },
+            {
+              "setId": "",
+              "value": 708
+            },
+            {
+              "setId": "",
+              "value": 817
+            },
+            {
+              "setId": "",
+              "value": 1130
+            },
+            {
+              "setId": "",
+              "value": 666
+            },
+            {
+              "setId": "",
+              "value": 283
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ]
+        ],
+        "seriesCollapsed": [
+          [
+            {
+              "setId": "",
+              "value": 1285
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 2217
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 9984
+            }
+          ],
+          [
+            {
+              "setId": "",
+              "value": 0
+            }
+          ]
+        ],
+        "seriesLabels": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "seriesMeta": [
+          {
+            "segmentIndex": 0,
+            "eventIndex": 0
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 1
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 2
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 3
+          },
+          {
+            "segmentIndex": 0,
+            "eventIndex": 4
+          }
+        ],
+        "xValues": [
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22",
+          "2025-12-29",
+          "2026-01-05",
+          "2026-01-12",
+          "2026-01-19",
+          "2026-01-26",
+          "2026-02-02",
+          "2026-02-09",
+          "2026-02-16",
+          "2026-02-23",
+          "2026-03-02"
+        ]
+      }
+    },
+    "wauByOrg": {
+      "chart": "jsyefmb5",
+      "error": "https://amplitude.com/api/3/chart/jsyefmb5/query: HTTP 404"
+    },
+    "healthScore": {
+      "chart": "dwzndtkp",
+      "error": "https://amplitude.com/api/3/chart/dwzndtkp/query: HTTP 404"
+    },
+    "concentrationRisk": {
+      "chart": "za2wat9s",
+      "error": "https://amplitude.com/api/3/chart/za2wat9s/query: HTTP 404"
+    },
+    "retentionCorrelation": {
+      "chart": "ssf3pwo6",
+      "error": "https://amplitude.com/api/3/chart/ssf3pwo6/query: HTTP 404"
     }
-  ],
-  "timeAudit": {
-    "today": {
-      "date": "2026-03-03",
-      "meetings": 5,
-      "meetingHours": 4.0,
-      "freeHours": 4.0,
-      "totalHours": 8.0,
-      "prepNeeded": [
-        "Lockheed Resourcing 2pm \u2014 scope boundaries",
-        "Product Sync 4pm \u2014 telemetry debt decision"
-      ],
-      "highLeverage": "Use morning block for Product Bets All Hands prep (Thursday 10:15am)"
-    },
-    "thisWeek": {
-      "meetings": 28,
-      "meetingHours": 22,
-      "freeHours": 18,
-      "heaviestDay": "Thursday (8 meetings, 6.5hrs)",
-      "lightestDay": "Friday (3 meetings, 2hrs)"
-    },
-    "conflicts": [
-      "Thu 1:00-1:30pm: Rowen 1:1 overlaps GNA Workshop (11:15am-2pm)",
-      "Thu 2:00-2:30pm: Product Review overlaps GNA Workshop tail"
-    ],
-    "leverageRec": "Thursday has 8 meetings in 6.5 hours \u2014 cancel or move Rowen 1:1 to Friday. Use Friday's 6 free hours for deep work on VPE onboarding plan and Product Bets presentation polish."
   },
-  "cofounders": [
-    {
-      "name": "Austin",
-      "role": "CEO",
-      "recentTopics": [
-        "hiring",
-        "VPE onboarding",
-        "board prep",
-        "customer pipeline"
-      ],
-      "lastSlackToNoah": "2026-03-03T11:30:00Z",
-      "pendingDecisions": [
-        "VPE onboarding scope",
-        "Q2 headcount plan"
-      ],
-      "attention": "VPE starts 3/24 \u2014 align on product-eng interface expectations before arrival"
-    },
-    {
-      "name": "Karthik",
-      "role": "CTO",
-      "recentTopics": [
-        "infrastructure",
-        "edge prototype",
-        "CVE remediation",
-        "Chainguard"
-      ],
-      "lastSlackToNoah": "2026-03-03T16:45:00Z",
-      "pendingDecisions": [
-        "CVE remediation timeline",
-        "Edge demo scope for Squad Showcase"
-      ],
-      "attention": "CVE only 'At Risk' project \u2014 need his read on Chainguard timeline and ULA implications"
-    }
-  ],
+  "team": [],
+  "cofounders": [],
+  "customers": [],
+  "decisions": [],
+  "strategyMetrics": {},
+  "timeAudit": {},
+  "timeline": {},
   "voc": {
-    "lastUpdated": "2026-03-03T14:00:00Z",
-    "programStatus": "pilot",
-    "docUrl": "https://docs.google.com/document/d/12rZTrNXurNzS2jiwQr6X1c6J2VACmUBvPhE3Pihg9io/edit",
-    "coverage": {
-      "accountsWithRankedTop10": 3,
-      "targetAccounts": 15,
-      "avgFreshnessDays": 12,
-      "freshnessSLA": 45
-    },
-    "themes": [
-      {
-        "id": "voc-theme-001",
-        "name": "Data Access & Governance",
-        "frequency": 14,
-        "severity": "high",
-        "trend": "increasing",
-        "accounts": [
-          "Astranis",
-          "K2 Space",
-          "Lockheed Martin"
-        ],
-        "summary": "ABAC, permissions, multi-team data isolation. Blocking Astranis expansion (3 teams waiting). K2 Space needs asset-level access control for live ops.",
-        "linearIds": [
-          "ENG-8732",
-          "ENG-8721",
-          "ENG-8727"
-        ],
-        "sources": [
-          "linear",
-          "slack",
-          "pylon"
-        ],
-        "productArea": "Growth",
-        "evidence": [
-          {
-            "label": "ENG-8732: ABAC for Astranis Family Data",
-            "url": "https://linear.app/sift/issue/ENG-8732"
-          },
-          {
-            "label": "#product thread: DAG blocking expansion",
-            "url": "https://app.slack.com/client/T0A779UAWN1/C0A779UAY8P"
-          }
-        ]
-      },
-      {
-        "id": "voc-theme-002",
-        "name": "Live Operations Reliability",
-        "frequency": 11,
-        "severity": "high",
-        "trend": "increasing",
-        "accounts": [
-          "K2 Space",
-          "Varda",
-          "Reliable Robotics"
-        ],
-        "summary": "Real-time reads, telemetry absence detection, enriched webhooks, live mode stability. K2 has 4 high-priority tickets. Varda SLA requiring 2-4 weeks eng investment.",
-        "linearIds": [
-          "ENG-9001",
-          "ENG-9045",
-          "ENG-8890"
-        ],
-        "sources": [
-          "linear",
-          "pylon",
-          "slack"
-        ],
-        "productArea": "Core Platform",
-        "evidence": [
-          {
-            "label": "K2 Space: 4 live ops tickets",
-            "url": "https://linear.app/sift/project/live-operations"
-          },
-          {
-            "label": "Varda SLA commitment",
-            "url": "https://linear.app/sift/project/varda-sla"
-          }
-        ]
-      },
-      {
-        "id": "voc-theme-003",
-        "name": "Navigation & Discoverability",
-        "frequency": 9,
-        "severity": "medium",
-        "trend": "stable",
-        "accounts": [
-          "Lockheed Martin",
-          "Astranis",
-          "ImpulseSpace"
-        ],
-        "summary": "Global nav redesign, resource management, folder hierarchy. Lockheed split GNA into two projects. Gui flagged 'product areas inhibiting adoption.' Tree test readout this week.",
-        "linearIds": [
-          "ENG-7654",
-          "ENG-7680"
-        ],
-        "sources": [
-          "linear",
-          "slack",
-          "google_docs"
-        ],
-        "productArea": "Engagement",
-        "evidence": [
-          {
-            "label": "GNA Workshop Thu 11:15am",
-            "url": "https://calendar.google.com"
-          },
-          {
-            "label": "Tree test readout",
-            "url": "https://linear.app/sift/project/global-nav"
-          }
-        ]
-      },
-      {
-        "id": "voc-theme-004",
-        "name": "Ingestion & Data Quality",
-        "frequency": 7,
-        "severity": "medium",
-        "trend": "decreasing",
-        "accounts": [
-          "Heart Aerospace",
-          "ImpulseSpace",
-          "Reliable Robotics"
-        ],
-        "summary": "Upload failures, file type expansion needs, Python client adoption. Upload UX refresh in progress. Python client is Q1 priority for Clients+Ingest squad.",
-        "linearIds": [
-          "ENG-8200",
-          "ENG-8215"
-        ],
-        "sources": [
-          "pylon",
-          "linear"
-        ],
-        "productArea": "Core Platform",
-        "evidence": [
-          {
-            "label": "Python Client project",
-            "url": "https://linear.app/sift/project/python-client"
-          },
-          {
-            "label": "Upload UX Refresh",
-            "url": "https://linear.app/sift/project/upload-ux"
-          }
-        ]
-      },
-      {
-        "id": "voc-theme-005",
-        "name": "Reporting & Decision Capture",
-        "frequency": 6,
-        "severity": "medium",
-        "trend": "stable",
-        "accounts": [
-          "Astranis",
-          "K2 Space",
-          "Lockheed Martin"
-        ],
-        "summary": "Report versioning, collaborative review workflows, export formats. Ties directly to North Star metric (Decisions Captured Per Customer). Canvas bet addresses this but velocity stalled.",
-        "linearIds": [
-          "ENG-7900",
-          "ENG-7920"
-        ],
-        "sources": [
-          "slack",
-          "linear",
-          "google_docs"
-        ],
-        "productArea": "Engagement",
-        "evidence": [
-          {
-            "label": "Canvas MVP project",
-            "url": "https://linear.app/sift/project/canvas-mvp"
-          },
-          {
-            "label": "North Star: Decisions metric gap",
-            "url": "https://app.amplitude.com/analytics/sift-stack/chart/dogczzd8"
-          }
-        ]
-      },
-      {
-        "id": "voc-theme-006",
-        "name": "Performance & Scale",
-        "frequency": 5,
-        "severity": "high",
-        "trend": "stable",
-        "accounts": [
-          "Astranis",
-          "K2 Space"
-        ],
-        "summary": "P99 read query latency, large dataset handling, Explore performance under load. Rust data layer migration in progress to address fundamentally.",
-        "linearIds": [
-          "ENG-8500",
-          "ENG-8510"
-        ],
-        "sources": [
-          "pylon",
-          "slack"
-        ],
-        "productArea": "Core Platform",
-        "evidence": [
-          {
-            "label": "Rust data layer project",
-            "url": "https://linear.app/sift/project/rust-data-layer"
-          },
-          {
-            "label": "P99 latency chart",
-            "url": "https://app.amplitude.com/analytics/sift-stack/chart/p56xw4r8"
-          }
-        ]
-      }
-    ],
-    "topCustomerRequests": [
-      {
-        "rank": 1,
-        "account": "Astranis",
-        "title": "ABAC: multi-team data isolation for Family Data",
-        "id": "ENG-8732",
-        "status": "In Progress",
-        "age": 28,
-        "criticality": "Hard blocker",
-        "url": "https://linear.app/sift/issue/ENG-8732"
-      },
-      {
-        "rank": 2,
-        "account": "K2 Space",
-        "title": "Real-time reads for live telemetry monitoring",
-        "id": "ENG-9001",
-        "status": "In Progress",
-        "age": 35,
-        "criticality": "Hard blocker",
-        "url": "https://linear.app/sift/issue/ENG-9001"
-      },
-      {
-        "rank": 3,
-        "account": "Varda",
-        "title": "SLA: guaranteed uptime and data freshness commitments",
-        "id": "ENG-9100",
-        "status": "In Progress",
-        "age": 14,
-        "criticality": "Hard blocker",
-        "url": "https://linear.app/sift/issue/ENG-9100"
-      },
-      {
-        "rank": 4,
-        "account": "Lockheed Martin",
-        "title": "Global nav: resource management + folder hierarchy",
-        "id": "ENG-7654",
-        "status": "Under Review",
-        "age": 42,
-        "criticality": "Soft blocker",
-        "url": "https://linear.app/sift/issue/ENG-7654"
-      },
-      {
-        "rank": 5,
-        "account": "K2 Space",
-        "title": "Telemetry absence detection for fleet monitoring",
-        "id": "ENG-9045",
-        "status": "Captured",
-        "age": 21,
-        "criticality": "Soft blocker",
-        "url": "https://linear.app/sift/issue/ENG-9045"
-      },
-      {
-        "rank": 6,
-        "account": "Astranis",
-        "title": "Report versioning and collaborative review",
-        "id": "ENG-7900",
-        "status": "Candidate",
-        "age": 56,
-        "criticality": "Soft blocker",
-        "url": "https://linear.app/sift/issue/ENG-7900"
-      },
-      {
-        "rank": 7,
-        "account": "K2 Space",
-        "title": "Enriched webhooks for ops alerting pipeline",
-        "id": "ENG-9050",
-        "status": "Captured",
-        "age": 18,
-        "criticality": "None",
-        "url": "https://linear.app/sift/issue/ENG-9050"
-      },
-      {
-        "rank": 8,
-        "account": "Heart Aerospace",
-        "title": "Expanded file type support for ingestion",
-        "id": "ENG-8215",
-        "status": "Under Review",
-        "age": 33,
-        "criticality": "Soft blocker",
-        "url": "https://linear.app/sift/issue/ENG-8215"
-      }
-    ],
-    "totalCustomers": 44,
-    "activeCustomers": 35,
-    "churnedCustomers": 8
-  },
-  "strategyMetrics": {
-    "strategyDocUrl": "https://docs.google.com/document/d/1aOF_LzkKnm7naqCOEeySmGjWjxyvYr84nipw8cYWxLw/edit",
-    "q1PlanUrl": "https://docs.google.com/document/d/1i5bv9G3VbVaBdmt3sv89CNZqLzUQk3KIGdUc-XbQv5A/edit",
-    "metricsSheetUrl": "https://docs.google.com/spreadsheets/d/1pWw-4RxBVSihijskfOcR4t05J7hDYHp2DabGM8heuqk/edit",
-    "northStar": {
-      "metric": "Decisions Captured Per Customer",
-      "current": null,
-      "target": null,
-      "status": "not_measurable",
-      "note": "Rule events showing ZERO for 12 weeks despite Rules WAU at 70. Instrumentation debt means this metric literally cannot be measured.",
-      "amplitudeChart": "https://app.amplitude.com/analytics/sift-stack/chart/dogczzd8"
-    },
-    "pillars": [
-      {
-        "name": "Nail the Core",
-        "owner": "Rowen Wu",
-        "theme": "Core Platform",
-        "status": "on_track",
-        "keyResults": [
-          {
-            "kr": "Ingestion Success Rate",
-            "current": "98.2%",
-            "target": "99.5%",
-            "status": "on_track",
-            "chartId": "a08uik9s",
-            "tooltip": "Measured as % of uploads successfully processed. Excludes format errors."
-          },
-          {
-            "kr": "P99 Read Query Latency",
-            "current": "1.2s",
-            "target": "<500ms",
-            "status": "at_risk",
-            "chartId": "p56xw4r8",
-            "tooltip": "Rust data layer migration targeting 10x improvement. Currently 2.4x above target."
-          },
-          {
-            "kr": "Sift Edge POC",
-            "current": "Complete",
-            "target": "Complete",
-            "status": "achieved",
-            "chartId": null,
-            "tooltip": "Edge backend prototype ahead of schedule. Demo at Squad Showcase."
-          },
-          {
-            "kr": "CVE Remediation",
-            "current": "60%",
-            "target": "100%",
-            "status": "at_risk",
-            "chartId": null,
-            "tooltip": "Only 'At Risk' project. Chainguard timeline uncertain. Blocking ULA activation."
-          }
-        ]
-      },
-      {
-        "name": "Embed Deeper",
-        "owner": "Sanghee Oh",
-        "theme": "Engagement",
-        "status": "attention",
-        "keyResults": [
-          {
-            "kr": "Active Users Per Customer",
-            "current": "8.3",
-            "target": "12",
-            "status": "on_track",
-            "chartId": "u5ctmoro",
-            "tooltip": "WAU per customer org. Astranis (235) inflates average. Median is 4.2."
-          },
-          {
-            "kr": "Reports Published",
-            "current": "127",
-            "target": "200",
-            "status": "on_track",
-            "chartId": "5ab27lld",
-            "tooltip": "Total reports marked as Published across all customers this quarter."
-          },
-          {
-            "kr": "Canvas MVP",
-            "current": "Stalled",
-            "target": "Ship",
-            "status": "at_risk",
-            "chartId": null,
-            "tooltip": "Prototype validated but eng velocity stalled. Varda SLA absorbed 2-4 weeks. Kill criteria clock ticking."
-          },
-          {
-            "kr": "Python Rules Adoption",
-            "current": "+46% WoW",
-            "target": "Steady growth",
-            "status": "on_track",
-            "chartId": "e74ntz32",
-            "tooltip": "Rules WAU at 70 and accelerating. But rule events show ZERO in Amplitude \u2014 instrumentation broken."
-          }
-        ]
-      },
-      {
-        "name": "Build the Moat",
-        "owner": "Kenn Zamora",
-        "theme": "Growth",
-        "status": "on_track",
-        "keyResults": [
-          {
-            "kr": "Time to End-User Activation",
-            "current": "4.2d",
-            "target": "<2d",
-            "status": "at_risk",
-            "chartId": "1v3107dq",
-            "tooltip": "Median days from invite to first value action. Day-1 retention is the critical gap."
-          },
-          {
-            "kr": "New User Onboarding Completion",
-            "current": "62%",
-            "target": "80%",
-            "status": "at_risk",
-            "chartId": "pepuaofo",
-            "tooltip": "% of invited users completing onboarding flow. Drop-off between step 2-3."
-          },
-          {
-            "kr": "Explore V2 GA",
-            "current": "Beta",
-            "target": "GA",
-            "status": "on_track",
-            "chartId": "pr53xnu5",
-            "tooltip": "E2 in beta. GA targeting mid-March. ECharts replacement scoped for Q2."
-          },
-          {
-            "kr": "Data Access Governance",
-            "current": "In Progress",
-            "target": "Ship ABAC",
-            "status": "on_track",
-            "chartId": null,
-            "tooltip": "ABAC is #1 customer request across Astranis, K2 Space, and Lockheed."
-          }
-        ]
-      }
-    ],
-    "bets": [
-      {
-        "name": "Canvas",
-        "gate": "Gate 1: Design/Prototype \u2192 Investment",
-        "status": "at_risk",
-        "evidence": "Prototype validated in user testing. Eng velocity stalled (Varda SLA). Ephemeral env delayed.",
-        "killCriteria": "Need 2-of-3 evidence types to advance. Clock ticking \u2014 deadline Mar 15.",
-        "owner": "Jess"
-      },
-      {
-        "name": "Manufacturing & Live Ops",
-        "gate": "Gate 1: Design/Prototype \u2192 Investment",
-        "status": "on_track",
-        "evidence": "K2 Space stress-testing E2 live-mode. Varda SLA driving SLA-grade infra. 3 customers in live ops.",
-        "killCriteria": "\u22652 customers with weekly live ops usage by end Q1.",
-        "owner": "Rowen"
-      },
-      {
-        "name": "Robotics",
-        "gate": "Gate 0: Thesis Validation",
-        "status": "on_track",
-        "evidence": "Reliable Robotics stable usage. Serve Robotics conversation in pipeline. Thesis: AI-native hardware needs continuous validation.",
-        "killCriteria": "\u22651 robotics customer with validated use case by end Q2.",
-        "owner": "Kenn"
-      }
-    ],
-    "squads": [
-      {
-        "name": "Clients + Ingest",
-        "q1": "Python Client, Edge POC, Upload UX Refresh",
-        "status": "on_track"
-      },
-      {
-        "name": "Activation & Governance",
-        "q1": "Nav Redesign, Ingest Health Analytics, Onboarding",
-        "status": "on_track"
-      },
-      {
-        "name": "Data Review",
-        "q1": "Canvas, Python Rules, Test Results",
-        "status": "at_risk"
-      },
-      {
-        "name": "Analytics",
-        "q1": "Family Data Analysis/Rules, Scalar Data scoping",
-        "status": "on_track"
-      },
-      {
-        "name": "Exploration",
-        "q1": "E2 GA, New Panels, ECharts Replacement",
-        "status": "on_track"
-      },
-      {
-        "name": "Live Data Processing",
-        "q1": "Live Rules Perf, Batch Bifurcation, Alerting UX",
-        "status": "attention"
-      },
-      {
-        "name": "Core Data Storage",
-        "q1": "Rust data layer, Data Management",
-        "status": "on_track"
-      },
-      {
-        "name": "Data Fetch",
-        "q1": "Alt Timestamp Dims, Rust Query Engine",
-        "status": "on_track"
-      },
-      {
-        "name": "Infra",
-        "q1": "CI/CD, On-Prem, Test Infra",
-        "status": "at_risk"
-      }
-    ]
-  },
-  "timeline": {
-    "generatedAt": "2026-03-03T22:00:00Z",
-    "sections": [
-      {
-        "id": "deadlines",
-        "label": "Deadlines & Gates",
-        "icon": "\u26a0",
-        "events": [
-          {
-            "date": "2026-03-03",
-            "title": "Lockheed GNA Scope Decision",
-            "type": "deadline",
-            "status": "today",
-            "owner": "Noah + Kenn",
-            "context": "Split into Resource/Folder Mgmt + Global Nav improvements. Resourcing meeting today 2pm.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=N24wOGo4bDlucXIwOG1pZW4xaGRzcGhsNXUgbm9haEBzaWZ0c3RhY2suY29t"
-          },
-          {
-            "date": "2026-03-07",
-            "title": "Varda SLA Staffing Decision",
-            "type": "deadline",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "SLA commitment requires 2-4 weeks eng investment. Need to decide staffing trade-offs vs Canvas velocity.",
-            "source": "decisions"
-          },
-          {
-            "date": "2026-03-07",
-            "title": "Telemetry Instrumentation Urgency",
-            "type": "deadline",
-            "status": "upcoming",
-            "owner": "Sanghee",
-            "context": "Rule events showing ZERO in Amplitude for 12 weeks. North Star metric literally unmeasurable.",
-            "source": "decisions"
-          },
-          {
-            "date": "2026-03-15",
-            "title": "Canvas Kill/Continue Gate",
-            "type": "gate",
-            "status": "upcoming",
-            "owner": "Jess",
-            "context": "Gate 1: Design/Prototype \u2192 Investment. Need 2-of-3 evidence types. Prototype validated but eng velocity stalled. Stale 5 days.",
-            "source": "decisions"
-          },
-          {
-            "date": "2026-03-24",
-            "title": "VPE Onboarding Institutionalization",
-            "type": "deadline",
-            "status": "upcoming",
-            "owner": "Noah + Rowen",
-            "context": "Document and systematize the eng onboarding process before it becomes tribal knowledge.",
-            "source": "decisions"
-          },
-          {
-            "date": "2026-03-31",
-            "title": "Q1 End \u2014 OKR Scorecard Due",
-            "type": "gate",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "All Q1 key results evaluated. Inputs to Q2 planning. Strategy doc and Q1 plan updated.",
-            "source": "strategy"
-          }
-        ]
-      },
-      {
-        "id": "shipping",
-        "label": "Engineering Shipping",
-        "icon": "\ud83d\ude80",
-        "events": [
-          {
-            "date": "2026-03-03",
-            "title": "Sift Edge POC Complete",
-            "type": "shipped",
-            "status": "achieved",
-            "owner": "Rowen",
-            "context": "Edge backend prototype ahead of schedule. Demo at Squad Showcase Thu Mar 5.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-03-05",
-            "title": "Squad Showcase \u2014 Edge Demo",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Austin",
-            "context": "Biweekly demo day. Edge POC demo confirmed. Sign up sheet in GDrive.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=dGZwYzN1Nm01azR0OGluNGFwYTYzdm02MzdfMjAyNjAzMDVUMjMwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          },
-          {
-            "date": "2026-03-09",
-            "title": "Weekly Shiproom",
-            "type": "recurring",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "Release readiness check-in. Go/no-go decision. Engineers add features to weekly doc beforehand.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=M3RtMDAyZzYyMmpyY2wzYWZqNmo1MjVyMm1fMjAyNjAzMDlUMjAwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          },
-          {
-            "date": "2026-03-15",
-            "title": "Explore V2 GA Target",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Sanghee",
-            "context": "E2 currently in beta. GA targeting mid-March. ECharts replacement scoped for Q2.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-03-15",
-            "title": "Python Client Beta",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "Q1 priority for Clients+Ingest squad. Python rules adoption already +46% WoW.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-03-20",
-            "title": "Upload UX Refresh Ship",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "Addressing ingestion data quality issues. Heart Aerospace and ImpulseSpace impacted.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-03-25",
-            "title": "ABAC Phase 1 Ship",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Kenn",
-            "context": "#1 cross-account customer request. Blocking Astranis multi-team expansion. K2 Space needs asset-level access.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-03-31",
-            "title": "CVE Remediation Target",
-            "type": "milestone",
-            "status": "at_risk",
-            "owner": "Rowen",
-            "context": "Only At Risk project in Q1. Chainguard timeline uncertain. Currently 60% complete. Blocking ULA activation.",
-            "source": "linear"
-          },
-          {
-            "date": "2026-04-02",
-            "title": "Squad Showcase \u2014 Q1 Final",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Austin",
-            "context": "Last showcase of Q1. All squads expected to demo shipped work.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=dGZwYzN1Nm01azR0OGluNGFwYTYzdm02MzdfMjAyNjA0MDJUMjIwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          }
-        ]
-      },
-      {
-        "id": "customer",
-        "label": "Customer Events",
-        "icon": "\ud83c\udfe2",
-        "events": [
-          {
-            "date": "2026-03-03",
-            "title": "Lockheed Work Resourcing",
-            "type": "meeting",
-            "status": "today",
-            "owner": "Kenn",
-            "context": "Review Lockheed feedback, split GNA into Resource/Folder Mgmt + Global Nav improvements. Sequencing discussion.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=N24wOGo4bDlucXIwOG1pZW4xaGRzcGhsNXUgbm9haEBzaWZ0c3RhY2suY29t",
-            "account": "Lockheed Martin"
-          },
-          {
-            "date": "2026-03-03",
-            "title": "Review Top Customer Asks",
-            "type": "recurring",
-            "status": "today",
-            "owner": "Rowen",
-            "context": "Weekly cross-functional review. DS enters revenue/requests in Linear, FDE brings WIP, PM updates roadmap.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=M2JjZHVqOTc1bG8yY25nb2dzNmcwbmowbGFfMjAyNjAzMDNUMjMzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          },
-          {
-            "date": "2026-03-04",
-            "title": "GNA Tree Test Readout",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Clinton",
-            "context": "Internal tree test with FDE and Deployment team. Findings inform Global Nav Redesign next steps.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=N3FxODRkNHFrMHQzbnAzcG9jZWhkcmpwbmogbm9haEBzaWZ0c3RhY2suY29t",
-            "account": "Lockheed Martin"
-          },
-          {
-            "date": "2026-03-05",
-            "title": "GNA Workshop (2.75hr)",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Russ",
-            "context": "Review designs, discuss UI patterns for navigation and sitemap architecture. Bring lunch, casual.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=YmQ1NTc1YjNhYTA4NDJhMmE1ODAwMWRhMjg1NzZiYTEgbm9haEBzaWZ0c3RhY2suY29t",
-            "account": "Lockheed Martin"
-          },
-          {
-            "date": "2026-03-10",
-            "title": "Astranis ABAC Escalation Window",
-            "type": "deadline",
-            "status": "upcoming",
-            "owner": "Kenn",
-            "context": "3 Astranis teams waiting on ABAC for Family Data. Each week of delay = blocked expansion revenue.",
-            "source": "linear",
-            "account": "Astranis"
-          },
-          {
-            "date": "2026-03-15",
-            "title": "K2 Space Live Ops Checkpoint",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "K2 stress-testing E2 live-mode. 4 high-priority live ops tickets open. Real-time reads critical.",
-            "source": "linear",
-            "account": "K2 Space"
-          },
-          {
-            "date": "2026-03-20",
-            "title": "Varda SLA Delivery Window",
-            "type": "deadline",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "SLA requiring guaranteed uptime and data freshness. 2-4 weeks eng investment committed.",
-            "source": "linear",
-            "account": "Varda"
-          },
-          {
-            "date": "2026-03-25",
-            "title": "Heart Aerospace Re-engagement",
-            "type": "milestone",
-            "status": "at_risk",
-            "owner": "Kevin",
-            "context": "WAU declining (-4 in 4 weeks). FDE touch 11d ago. Going quiet. Need proactive outreach before Q1 end.",
-            "source": "slack",
-            "account": "Heart Aerospace"
-          },
-          {
-            "date": "2026-04-01",
-            "title": "ULA Activation Target",
-            "type": "milestone",
-            "status": "at_risk",
-            "owner": "Rowen",
-            "context": "Blocked by CVE remediation (60% complete). Chainguard timeline uncertain. New customer at risk.",
-            "source": "linear",
-            "account": "ULA"
-          }
-        ]
-      },
-      {
-        "id": "rituals",
-        "label": "Product Rituals",
-        "icon": "\ud83d\udd04",
-        "events": [
-          {
-            "date": "2026-03-03",
-            "title": "Product Sync",
-            "type": "recurring",
-            "status": "today",
-            "owner": "Noah",
-            "context": "Weekly product team sync. Starship room.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=NDViOWUwNXJ0YTFqY3Jycmg5NDd2MzM0YzFfMjAyNjAzMDNUMjIzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          },
-          {
-            "date": "2026-03-05",
-            "title": "All Hands",
-            "type": "recurring",
-            "status": "upcoming",
-            "owner": "Nick",
-            "context": "Biweekly all-hands. In-person at 201 Arena St.",
-            "source": "calendar"
-          },
-          {
-            "date": "2026-03-06",
-            "title": "Squad Lead Sync",
-            "type": "recurring",
-            "status": "upcoming",
-            "owner": "Austin",
-            "context": "Weekly sync across all squad leads. 19 attendees.",
-            "source": "calendar"
-          },
-          {
-            "date": "2026-03-09",
-            "title": "Weekly Customer Intelligence Report",
-            "type": "recurring",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Pull Amplitude + Slack + Linear data via Claude. Monday AM ritual.",
-            "source": "calendar"
-          },
-          {
-            "date": "2026-03-10",
-            "title": "Monthly Roadmap Review",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen",
-            "context": "Monthly cadence. Review roadmap priorities against customer asks and strategy.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=ODRmOG9uMGJiZGw3M2Q4aWhwb2wyOXJqODZfMjAyNjAzMTBUMTgzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
-          },
-          {
-            "date": "2026-03-16",
-            "title": "Biweekly Product Update",
-            "type": "recurring",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Pull 4P docs, query Amplitude, synthesize, post to #product. Team 4Ps due Fri EOD prior.",
-            "source": "calendar"
-          },
-          {
-            "date": "2026-03-30",
-            "title": "Q1 Retrospective",
-            "type": "ritual",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Product Rituals calendar. First ceremony of Q2 planning cycle. 2hr block, Mon 10am PT.",
-            "source": "rituals_calendar"
-          },
-          {
-            "date": "2026-04-06",
-            "title": "Strategy Alignment Workshop",
-            "type": "ritual",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Q2 planning Week 2. Align on company priorities, market positioning, competitive landscape.",
-            "source": "calendar",
-            "url": "https://www.google.com/calendar/event?eid=NTc2YnN0cjFtNHUyc3NmNjMwaWpubG45MGMgbm9haEBzaWZ0c3RhY2suY29t"
-          },
-          {
-            "date": "2026-04-13",
-            "title": "OKR Drafting Session",
-            "type": "ritual",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Q2 planning Week 3. Draft Q2 OKRs based on strategy alignment outputs.",
-            "source": "rituals_calendar"
-          },
-          {
-            "date": "2026-04-20",
-            "title": "Roadmap Prioritization",
-            "type": "ritual",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Q2 planning Week 4. Stack-rank initiatives against OKRs. Resource allocation.",
-            "source": "rituals_calendar"
-          },
-          {
-            "date": "2026-04-27",
-            "title": "Q2 Kickoff",
-            "type": "ritual",
-            "status": "upcoming",
-            "owner": "Noah",
-            "context": "Q2 planning Week 5. Final ceremony. Communicate plan to org. Squads begin execution.",
-            "source": "rituals_calendar"
-          }
-        ]
-      },
-      {
-        "id": "gtm",
-        "label": "GTM & Marketing",
-        "icon": "\ud83d\udce3",
-        "events": [
-          {
-            "date": "2026-03-15",
-            "title": "Explore V2 GA Announcement",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Sanghee + Marketing",
-            "context": "External announcement of Explore V2 general availability. Blog post + changelog.",
-            "source": "strategy"
-          },
-          {
-            "date": "2026-03-20",
-            "title": "Python Client Beta Announcement",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen + Marketing",
-            "context": "Developer-facing announcement. SDK docs, quickstart guide, migration path from legacy clients.",
-            "source": "strategy"
-          },
-          {
-            "date": "2026-03-25",
-            "title": "ABAC Launch Communication",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Kenn + Marketing",
-            "context": "Customer-facing comms for ABAC Phase 1. Astranis, K2, Lockheed as primary audiences.",
-            "source": "strategy"
-          },
-          {
-            "date": "2026-03-31",
-            "title": "Q1 Customer Newsletter",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Marketing",
-            "context": "Quarterly product update to all customers. Feature highlights, roadmap teasers, case studies.",
-            "source": "strategy"
-          },
-          {
-            "date": "2026-04-15",
-            "title": "Sift Edge Announcement (Tentative)",
-            "type": "milestone",
-            "status": "upcoming",
-            "owner": "Rowen + Marketing",
-            "context": "Edge computing capability announcement. Depends on POC results and customer validation.",
-            "source": "strategy"
-          }
-        ]
-      }
-    ]
+    "customers": []
   }
 }
