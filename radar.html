@@ -263,6 +263,51 @@ async function loadData(){
     var r=await fetch(DATA_URL);
     if(!r.ok) throw new Error("HTTP "+r.status);
     LIVE_DATA=await r.json();
+    // Post-process: make timeAudit relative to today
+    if(LIVE_DATA.timeAudit&&LIVE_DATA.timeAudit.today){
+      LIVE_DATA.timeAudit.today.date=new Date().toISOString().slice(0,10);
+    }
+    // Post-process: make timeline event dates relative to today
+    if(LIVE_DATA.timeline&&LIVE_DATA.timeline.sections){
+      var dataDate=new Date("2026-03-03T12:00:00");
+      var realToday=new Date();realToday.setHours(12,0,0,0);
+      var offsetMs=realToday.getTime()-dataDate.getTime();
+      var offsetDays=Math.round(offsetMs/86400000);
+      if(offsetDays!==0){
+        LIVE_DATA.timeline.sections.forEach(function(sec){
+          if(sec.events)sec.events.forEach(function(ev){
+            if(ev.date){
+              var d=new Date(ev.date+"T12:00:00");
+              d.setDate(d.getDate()+offsetDays);
+              ev.date=d.toISOString().slice(0,10);
+            }
+          });
+        });
+      }
+    }
+    // Post-process: make Slack timestamps relative
+    if(LIVE_DATA.team){
+      var slackBase=new Date("2026-03-03T12:00:00").getTime();
+      var nowMs=Date.now();
+      var slackOff=nowMs-slackBase;
+      LIVE_DATA.team.forEach(function(person){
+        if(person.slackLastSeen){
+          var t=new Date(person.slackLastSeen).getTime()+slackOff;
+          person.slackLastSeen=new Date(t).toISOString();
+        }
+      });
+    }
+    // Post-process: make cofounder timestamps relative
+    if(LIVE_DATA.cofounders){
+      var cfBase=new Date("2026-03-03T12:00:00").getTime();
+      var cfOff=Date.now()-cfBase;
+      LIVE_DATA.cofounders.forEach(function(cf){
+        if(cf.lastSlackToNoah){
+          var t=new Date(cf.lastSlackToNoah).getTime()+cfOff;
+          cf.lastSlackToNoah=new Date(t).toISOString();
+        }
+      });
+    }
     return LIVE_DATA;
   }catch(e){
     console.error("Failed to load data.json:",e);
@@ -1495,23 +1540,35 @@ function Tip({text,children,p,maxW}){
   const[show,setShow]=useState(false);
   const[pos,setPos]=useState({x:0,y:0});
   const ref=useRef(null);
+  const timerRef=useRef(null);
   function enter(e){
     var rect=e.currentTarget.getBoundingClientRect();
     setPos({x:rect.left+rect.width/2,y:rect.top});
     setShow(true);
   }
+  function toggle(e){
+    e.stopPropagation();
+    if(show){setShow(false);return;}
+    var rect=e.currentTarget.getBoundingClientRect();
+    setPos({x:rect.left+rect.width/2,y:rect.top});
+    setShow(true);
+    clearTimeout(timerRef.current);
+    timerRef.current=setTimeout(()=>setShow(false),3500);
+  }
   if(!text)return children;
   return(
-    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)} style={{position:"relative",cursor:"help"}}>
+    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
+      onClick={toggle} onTouchStart={toggle}
+      style={{position:"relative",cursor:"help",WebkitTapHighlightColor:"transparent"}}>
       {children}
       {show&&ReactDOM.createPortal(
-        <div style={{position:"fixed",left:Math.min(pos.x,window.innerWidth-(maxW||260)-16),top:pos.y-8,
+        <div style={{position:"fixed",left:Math.max(8,Math.min(pos.x-((maxW||260)/2),window.innerWidth-(maxW||260)-8)),top:Math.max(8,pos.y-8),
           transform:"translateY(-100%)",
           maxWidth:maxW||260,padding:"8px 12px",borderRadius:8,
-          background:p?.bg2||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
+          background:p?.raised||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
           fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
           pointerEvents:"none",boxShadow:"0 8px 32px rgba(0,0,0,0.4)",
-          animation:"fadeIn 0.15s ease"}}>
+          animation:"fadeIn 0.15s ease",whiteSpace:"pre-line"}}>
           {text}
         </div>,
         document.body
@@ -1519,6 +1576,7 @@ function Tip({text,children,p,maxW}){
     </span>
   );
 }
+
 
 // ====== VIEW: TEAM ======
 function TeamView({p,dk,mob}){
