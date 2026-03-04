@@ -1288,5 +1288,424 @@
         "status": "at_risk"
       }
     ]
+  },
+  "timeline": {
+    "generatedAt": "2026-03-03T22:00:00Z",
+    "sections": [
+      {
+        "id": "deadlines",
+        "label": "Deadlines & Gates",
+        "icon": "\u26a0",
+        "events": [
+          {
+            "date": "2026-03-03",
+            "title": "Lockheed GNA Scope Decision",
+            "type": "deadline",
+            "status": "today",
+            "owner": "Noah + Kenn",
+            "context": "Split into Resource/Folder Mgmt + Global Nav improvements. Resourcing meeting today 2pm.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=N24wOGo4bDlucXIwOG1pZW4xaGRzcGhsNXUgbm9haEBzaWZ0c3RhY2suY29t"
+          },
+          {
+            "date": "2026-03-07",
+            "title": "Varda SLA Staffing Decision",
+            "type": "deadline",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "SLA commitment requires 2-4 weeks eng investment. Need to decide staffing trade-offs vs Canvas velocity.",
+            "source": "decisions"
+          },
+          {
+            "date": "2026-03-07",
+            "title": "Telemetry Instrumentation Urgency",
+            "type": "deadline",
+            "status": "upcoming",
+            "owner": "Sanghee",
+            "context": "Rule events showing ZERO in Amplitude for 12 weeks. North Star metric literally unmeasurable.",
+            "source": "decisions"
+          },
+          {
+            "date": "2026-03-15",
+            "title": "Canvas Kill/Continue Gate",
+            "type": "gate",
+            "status": "upcoming",
+            "owner": "Jess",
+            "context": "Gate 1: Design/Prototype \u2192 Investment. Need 2-of-3 evidence types. Prototype validated but eng velocity stalled. Stale 5 days.",
+            "source": "decisions"
+          },
+          {
+            "date": "2026-03-24",
+            "title": "VPE Onboarding Institutionalization",
+            "type": "deadline",
+            "status": "upcoming",
+            "owner": "Noah + Rowen",
+            "context": "Document and systematize the eng onboarding process before it becomes tribal knowledge.",
+            "source": "decisions"
+          },
+          {
+            "date": "2026-03-31",
+            "title": "Q1 End \u2014 OKR Scorecard Due",
+            "type": "gate",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "All Q1 key results evaluated. Inputs to Q2 planning. Strategy doc and Q1 plan updated.",
+            "source": "strategy"
+          }
+        ]
+      },
+      {
+        "id": "shipping",
+        "label": "Engineering Shipping",
+        "icon": "\ud83d\ude80",
+        "events": [
+          {
+            "date": "2026-03-03",
+            "title": "Sift Edge POC Complete",
+            "type": "shipped",
+            "status": "achieved",
+            "owner": "Rowen",
+            "context": "Edge backend prototype ahead of schedule. Demo at Squad Showcase Thu Mar 5.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-03-05",
+            "title": "Squad Showcase \u2014 Edge Demo",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Austin",
+            "context": "Biweekly demo day. Edge POC demo confirmed. Sign up sheet in GDrive.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=dGZwYzN1Nm01azR0OGluNGFwYTYzdm02MzdfMjAyNjAzMDVUMjMwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          },
+          {
+            "date": "2026-03-09",
+            "title": "Weekly Shiproom",
+            "type": "recurring",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "Release readiness check-in. Go/no-go decision. Engineers add features to weekly doc beforehand.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=M3RtMDAyZzYyMmpyY2wzYWZqNmo1MjVyMm1fMjAyNjAzMDlUMjAwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          },
+          {
+            "date": "2026-03-15",
+            "title": "Explore V2 GA Target",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Sanghee",
+            "context": "E2 currently in beta. GA targeting mid-March. ECharts replacement scoped for Q2.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-03-15",
+            "title": "Python Client Beta",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "Q1 priority for Clients+Ingest squad. Python rules adoption already +46% WoW.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-03-20",
+            "title": "Upload UX Refresh Ship",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "Addressing ingestion data quality issues. Heart Aerospace and ImpulseSpace impacted.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-03-25",
+            "title": "ABAC Phase 1 Ship",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Kenn",
+            "context": "#1 cross-account customer request. Blocking Astranis multi-team expansion. K2 Space needs asset-level access.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-03-31",
+            "title": "CVE Remediation Target",
+            "type": "milestone",
+            "status": "at_risk",
+            "owner": "Rowen",
+            "context": "Only At Risk project in Q1. Chainguard timeline uncertain. Currently 60% complete. Blocking ULA activation.",
+            "source": "linear"
+          },
+          {
+            "date": "2026-04-02",
+            "title": "Squad Showcase \u2014 Q1 Final",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Austin",
+            "context": "Last showcase of Q1. All squads expected to demo shipped work.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=dGZwYzN1Nm01azR0OGluNGFwYTYzdm02MzdfMjAyNjA0MDJUMjIwMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          }
+        ]
+      },
+      {
+        "id": "customer",
+        "label": "Customer Events",
+        "icon": "\ud83c\udfe2",
+        "events": [
+          {
+            "date": "2026-03-03",
+            "title": "Lockheed Work Resourcing",
+            "type": "meeting",
+            "status": "today",
+            "owner": "Kenn",
+            "context": "Review Lockheed feedback, split GNA into Resource/Folder Mgmt + Global Nav improvements. Sequencing discussion.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=N24wOGo4bDlucXIwOG1pZW4xaGRzcGhsNXUgbm9haEBzaWZ0c3RhY2suY29t",
+            "account": "Lockheed Martin"
+          },
+          {
+            "date": "2026-03-03",
+            "title": "Review Top Customer Asks",
+            "type": "recurring",
+            "status": "today",
+            "owner": "Rowen",
+            "context": "Weekly cross-functional review. DS enters revenue/requests in Linear, FDE brings WIP, PM updates roadmap.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=M2JjZHVqOTc1bG8yY25nb2dzNmcwbmowbGFfMjAyNjAzMDNUMjMzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          },
+          {
+            "date": "2026-03-04",
+            "title": "GNA Tree Test Readout",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Clinton",
+            "context": "Internal tree test with FDE and Deployment team. Findings inform Global Nav Redesign next steps.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=N3FxODRkNHFrMHQzbnAzcG9jZWhkcmpwbmogbm9haEBzaWZ0c3RhY2suY29t",
+            "account": "Lockheed Martin"
+          },
+          {
+            "date": "2026-03-05",
+            "title": "GNA Workshop (2.75hr)",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Russ",
+            "context": "Review designs, discuss UI patterns for navigation and sitemap architecture. Bring lunch, casual.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=YmQ1NTc1YjNhYTA4NDJhMmE1ODAwMWRhMjg1NzZiYTEgbm9haEBzaWZ0c3RhY2suY29t",
+            "account": "Lockheed Martin"
+          },
+          {
+            "date": "2026-03-10",
+            "title": "Astranis ABAC Escalation Window",
+            "type": "deadline",
+            "status": "upcoming",
+            "owner": "Kenn",
+            "context": "3 Astranis teams waiting on ABAC for Family Data. Each week of delay = blocked expansion revenue.",
+            "source": "linear",
+            "account": "Astranis"
+          },
+          {
+            "date": "2026-03-15",
+            "title": "K2 Space Live Ops Checkpoint",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "K2 stress-testing E2 live-mode. 4 high-priority live ops tickets open. Real-time reads critical.",
+            "source": "linear",
+            "account": "K2 Space"
+          },
+          {
+            "date": "2026-03-20",
+            "title": "Varda SLA Delivery Window",
+            "type": "deadline",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "SLA requiring guaranteed uptime and data freshness. 2-4 weeks eng investment committed.",
+            "source": "linear",
+            "account": "Varda"
+          },
+          {
+            "date": "2026-03-25",
+            "title": "Heart Aerospace Re-engagement",
+            "type": "milestone",
+            "status": "at_risk",
+            "owner": "Kevin",
+            "context": "WAU declining (-4 in 4 weeks). FDE touch 11d ago. Going quiet. Need proactive outreach before Q1 end.",
+            "source": "slack",
+            "account": "Heart Aerospace"
+          },
+          {
+            "date": "2026-04-01",
+            "title": "ULA Activation Target",
+            "type": "milestone",
+            "status": "at_risk",
+            "owner": "Rowen",
+            "context": "Blocked by CVE remediation (60% complete). Chainguard timeline uncertain. New customer at risk.",
+            "source": "linear",
+            "account": "ULA"
+          }
+        ]
+      },
+      {
+        "id": "rituals",
+        "label": "Product Rituals",
+        "icon": "\ud83d\udd04",
+        "events": [
+          {
+            "date": "2026-03-03",
+            "title": "Product Sync",
+            "type": "recurring",
+            "status": "today",
+            "owner": "Noah",
+            "context": "Weekly product team sync. Starship room.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=NDViOWUwNXJ0YTFqY3Jycmg5NDd2MzM0YzFfMjAyNjAzMDNUMjIzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          },
+          {
+            "date": "2026-03-05",
+            "title": "All Hands",
+            "type": "recurring",
+            "status": "upcoming",
+            "owner": "Nick",
+            "context": "Biweekly all-hands. In-person at 201 Arena St.",
+            "source": "calendar"
+          },
+          {
+            "date": "2026-03-06",
+            "title": "Squad Lead Sync",
+            "type": "recurring",
+            "status": "upcoming",
+            "owner": "Austin",
+            "context": "Weekly sync across all squad leads. 19 attendees.",
+            "source": "calendar"
+          },
+          {
+            "date": "2026-03-09",
+            "title": "Weekly Customer Intelligence Report",
+            "type": "recurring",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Pull Amplitude + Slack + Linear data via Claude. Monday AM ritual.",
+            "source": "calendar"
+          },
+          {
+            "date": "2026-03-10",
+            "title": "Monthly Roadmap Review",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen",
+            "context": "Monthly cadence. Review roadmap priorities against customer asks and strategy.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=ODRmOG9uMGJiZGw3M2Q4aWhwb2wyOXJqODZfMjAyNjAzMTBUMTgzMDAwWiBub2FoQHNpZnRzdGFjay5jb20"
+          },
+          {
+            "date": "2026-03-16",
+            "title": "Biweekly Product Update",
+            "type": "recurring",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Pull 4P docs, query Amplitude, synthesize, post to #product. Team 4Ps due Fri EOD prior.",
+            "source": "calendar"
+          },
+          {
+            "date": "2026-03-30",
+            "title": "Q1 Retrospective",
+            "type": "ritual",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Product Rituals calendar. First ceremony of Q2 planning cycle. 2hr block, Mon 10am PT.",
+            "source": "rituals_calendar"
+          },
+          {
+            "date": "2026-04-06",
+            "title": "Strategy Alignment Workshop",
+            "type": "ritual",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Q2 planning Week 2. Align on company priorities, market positioning, competitive landscape.",
+            "source": "calendar",
+            "url": "https://www.google.com/calendar/event?eid=NTc2YnN0cjFtNHUyc3NmNjMwaWpubG45MGMgbm9haEBzaWZ0c3RhY2suY29t"
+          },
+          {
+            "date": "2026-04-13",
+            "title": "OKR Drafting Session",
+            "type": "ritual",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Q2 planning Week 3. Draft Q2 OKRs based on strategy alignment outputs.",
+            "source": "rituals_calendar"
+          },
+          {
+            "date": "2026-04-20",
+            "title": "Roadmap Prioritization",
+            "type": "ritual",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Q2 planning Week 4. Stack-rank initiatives against OKRs. Resource allocation.",
+            "source": "rituals_calendar"
+          },
+          {
+            "date": "2026-04-27",
+            "title": "Q2 Kickoff",
+            "type": "ritual",
+            "status": "upcoming",
+            "owner": "Noah",
+            "context": "Q2 planning Week 5. Final ceremony. Communicate plan to org. Squads begin execution.",
+            "source": "rituals_calendar"
+          }
+        ]
+      },
+      {
+        "id": "gtm",
+        "label": "GTM & Marketing",
+        "icon": "\ud83d\udce3",
+        "events": [
+          {
+            "date": "2026-03-15",
+            "title": "Explore V2 GA Announcement",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Sanghee + Marketing",
+            "context": "External announcement of Explore V2 general availability. Blog post + changelog.",
+            "source": "strategy"
+          },
+          {
+            "date": "2026-03-20",
+            "title": "Python Client Beta Announcement",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen + Marketing",
+            "context": "Developer-facing announcement. SDK docs, quickstart guide, migration path from legacy clients.",
+            "source": "strategy"
+          },
+          {
+            "date": "2026-03-25",
+            "title": "ABAC Launch Communication",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Kenn + Marketing",
+            "context": "Customer-facing comms for ABAC Phase 1. Astranis, K2, Lockheed as primary audiences.",
+            "source": "strategy"
+          },
+          {
+            "date": "2026-03-31",
+            "title": "Q1 Customer Newsletter",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Marketing",
+            "context": "Quarterly product update to all customers. Feature highlights, roadmap teasers, case studies.",
+            "source": "strategy"
+          },
+          {
+            "date": "2026-04-15",
+            "title": "Sift Edge Announcement (Tentative)",
+            "type": "milestone",
+            "status": "upcoming",
+            "owner": "Rowen + Marketing",
+            "context": "Edge computing capability announcement. Depends on POC results and customer validation.",
+            "source": "strategy"
+          }
+        ]
+      }
+    ]
   }
 }
