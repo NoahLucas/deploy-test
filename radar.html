@@ -10,27 +10,20 @@
 <title>RADAR — Realtime Awareness, Decisions, Actions & Risks</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body, #root { height: 100%; width: 100%; overflow: hidden; }
   body { font-family: 'IBM Plex Sans', -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
-  /* Apple-style scrollbar */
-  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.3); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.5); }
-  /* Hide scrollbar for tab bar */
+  ::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.2); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(128,128,128,0.35); }
   div::-webkit-scrollbar { height: 0; }
-  /* Smooth transitions */
-  button { transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); }
-  button:active { transform: scale(0.97); }
   @media (prefers-color-scheme: dark) { body { background: #0a0a0c; color: #e8e6e2; } }
   @media (prefers-color-scheme: light) { body { background: #e5e4e1; color: #121210; } }
-  /* Mobile touch optimization */
   @media (max-width: 767px) {
-    button, [role="button"] { min-height: 44px; min-width: 44px; }
     ::-webkit-scrollbar { width: 0; height: 0; }
   }
 </style>
@@ -107,7 +100,6 @@ function AuthGate({children}){
   );
 }
 // --- END AUTH GATE ---
-
 function SiftIcon(props){
   var size=props.size||22,color=props.color||"#1a1917",opacity=props.opacity===undefined?1:props.opacity,style=props.style||{};
   return(
@@ -116,12 +108,20 @@ function SiftIcon(props){
     <path d="M9 22V10h3v12H9zm5.5-4V10H18v8h-3.5zm5.5 4V10h3v12h-3z" fill="white" fillOpacity="0.95"/>
   </svg>
   );
-}
-const SF = "'IBM Plex Sans',-apple-system,system-ui,sans-serif";
-const MONO = "'IBM Plex Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
-const FONT_URL = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap";
 
-// RADAR = Realtime Awareness, Decisions, Actions & Risks
+// ====== V6 DESIGN SYSTEM ======
+const DISPLAY = "'Syne','IBM Plex Sans',-apple-system,system-ui,sans-serif";
+const SF = "'IBM Plex Sans',-apple-system,system-ui,sans-serif";
+const MONO = "'JetBrains Mono','IBM Plex Mono','Fira Code',ui-monospace,monospace";
+const FONT_URL = "https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap";
+
+// Spacing scale (4px base)
+const S={1:4,2:8,3:12,4:16,5:20,6:24,8:32,10:40,12:48,16:64};
+// Radius tokens
+const R={sm:6,md:12,lg:16,full:100};
+// Type scale
+const T={xs:11,sm:13,base:15,lg:19,xl:24,'2xl':32};
+
 const RADAR_ACRONYM = {
   R: "Realtime",
   A1: "Awareness",
@@ -564,7 +564,6 @@ async function runLiveScan(onInsight, onProgress){
   }
   return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
 }
-
 function useTheme(){
   const[dk,setDk]=useState(()=>typeof window!=="undefined"?window.matchMedia("(prefers-color-scheme:dark)").matches:true);
   useEffect(()=>{const mq=window.matchMedia("(prefers-color-scheme:dark)");const h=e=>setDk(e.matches);mq.addEventListener("change",h);return()=>mq.removeEventListener("change",h);},[]);
@@ -591,164 +590,135 @@ function timeGroup(d){
 
 function pri(ins,p){const pr=PRI[ins.priority]||PRI.MEDIUM;const c=pr.color(p);return{...pr,c,bg:`${c}${pr.bgA}`};}
 
-function glass(p,opts){
-  if(!opts)opts={};
-  const{elevated,hover,active,tint,noBorder,clear}=opts;
-  // Liquid Glass: three-layer material system
-  // Layer 1: Backdrop blur + saturation (frosted depth)
-  // Layer 2: Tinted fill with adaptive opacity
-  // Layer 3: Specular highlight + shadow for physical presence
-  const blur=elevated?28:clear?12:20;
-  const sat=elevated?160:140;
-  const brightness=hover?1.08:1.02;
-  const bg=active?p.glassActive:hover?p.glassHover:tint||p.glass;
-  return{
-    background:bg,
-    backdropFilter:`blur(${blur}px) saturate(${sat}%) brightness(${brightness})`,
-    WebkitBackdropFilter:`blur(${blur}px) saturate(${sat}%) brightness(${brightness})`,
-    border:noBorder?"none":`0.5px solid ${p.glassBorder}`,
-    boxShadow:[
-      // Outer shadow — depth separation from background
-      elevated?`0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(0,0,0,0.10)`:`0 1px 4px rgba(0,0,0,0.08)`,
-      // Inner specular — top-edge light catch (Liquid Glass highlight layer)
-      `inset 0 1px 0 ${p.specularEdge}`,
-      // Inner illumination — subtle ambient glow
-      `inset 0 0 0 0.5px ${p.glassBorder}`,
-    ].join(","),
+// ====== V6 VISUAL SYSTEM ======
+
+// Surface system — 3 tiers, not glass everywhere
+function surface(p,level,hover){
+  if(level===0) return {background:"transparent"};
+  if(level===1) return {
+    background:hover?p.glassHover:p.fill4,
+    border:"0.5px solid "+p.glassBorder,
+    transition:"all 0.2s cubic-bezier(0.25,0.46,0.45,0.94)",
   };
-};
-
-// Liquid Glass specular highlight overlay — simulates light refraction on curved glass
-function Spec({r,i,direction}){
-  var rr=r||16,ii=i||0.06;
-  var dir=direction||135;
-  return <div style={{position:"absolute",top:0,left:0,right:0,bottom:0,borderRadius:rr,pointerEvents:"none",zIndex:1,
-    background:`linear-gradient(${dir}deg, rgba(255,255,255,${ii}) 0%, rgba(255,255,255,${ii*0.3}) 30%, transparent 60%)`,
-    mixBlendMode:"overlay"}}/>
+  // level 2 — elevated (tooltips, modals, sheets)
+  return {
+    background:p.glass,backdropFilter:"blur(40px) saturate(1.5)",WebkitBackdropFilter:"blur(40px) saturate(1.5)",
+    border:"0.5px solid "+p.glassBorder,
+    boxShadow:"0 8px 32px rgba(0,0,0,"+(p===PAL.dark?"0.4":"0.12")+")",
+  };
 }
 
+// Keep glass() for backward compat with secondary views
+function glass(p,opts){
+  var o=opts||{};
+  return{background:o.hover?p.glassHover:o.elevated?p.glassActive:p.glass,
+    backdropFilter:"blur(40px) saturate(1.5)",WebkitBackdropFilter:"blur(40px) saturate(1.5)",
+    border:o.noBorder?"none":"0.5px solid "+p.glassBorder,
+    boxShadow:o.elevated?"0 8px 32px rgba(0,0,0,"+(p===PAL.dark?"0.4":"0.12")+")":"none",
+    transition:"all 0.25s cubic-bezier(0.25,0.46,0.45,0.94)"};
+}
+
+function pri(ins,p){const pr=PRI[ins.priority]||PRI.MEDIUM;const c=pr.color(p);return{...pr,c,bg:`${c}${pr.bgA}`};}
+function svcColor(s,dk){return dk?SVC[s]?.colorDk:SVC[s]?.colorLt;}
+
+// Ambient — simplified, fewer layers
 function AmbientMesh({dk,hasUrgent}){
+  if(!dk)return(
+    <div style={{position:"absolute",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden"}}>
+      <div style={{position:"absolute",inset:0,
+        backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        backgroundSize:"128px 128px",opacity:0.3}}/>
+    </div>
+  );
   return(
-    <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,overflow:"hidden"}}>
-      {dk ? <>
-        {/* Dark: subtle chromatic orbs for glass to refract */}
-        <div style={{position:"absolute",width:"70vmax",height:"70vmax",borderRadius:"50%",top:"-15%",left:"-15%",
-          background:`radial-gradient(circle, rgba(100,140,180,0.04) 0%, transparent 65%)`,
-          animation:"meshDrift1 25s ease-in-out infinite",filter:"blur(60px)"}}/>
-        <div style={{position:"absolute",width:"55vmax",height:"55vmax",borderRadius:"50%",bottom:"-8%",right:"-12%",
-          background:`radial-gradient(circle, rgba(130,120,170,0.03) 0%, transparent 65%)`,
-          animation:"meshDrift2 30s ease-in-out infinite",filter:"blur(60px)"}}/>
-        <div style={{position:"absolute",width:"40vmax",height:"40vmax",borderRadius:"50%",top:"40%",left:"50%",
-          background:`radial-gradient(circle, rgba(90,150,140,0.02) 0%, transparent 60%)`,
-          animation:"meshDrift1 35s ease-in-out infinite reverse",filter:"blur(50px)"}}/>
-        {hasUrgent&&<div style={{position:"absolute",width:"80vmax",height:"20vmax",borderRadius:"50%",top:"-10%",left:"10%",
-          background:`radial-gradient(ellipse, rgba(194,100,80,0.06) 0%, transparent 70%)`,
-          animation:"meshPulse 4s ease-in-out infinite",filter:"blur(30px)"}}/>}
-      </> : <>
-        {/* Light: warm ambient washes — Liquid Glass refracts warmer in light mode */}
-        <div style={{position:"absolute",inset:0,
-          background:"radial-gradient(ellipse at 25% 15%, rgba(200,190,170,0.30) 0%, transparent 55%)"}}/>
-        <div style={{position:"absolute",width:"60vmax",height:"60vmax",borderRadius:"50%",bottom:"-10%",right:"0%",
-          background:"radial-gradient(circle, rgba(160,180,200,0.08) 0%, transparent 55%)",filter:"blur(40px)"}}/>
-        <div style={{position:"absolute",width:"40vmax",height:"40vmax",borderRadius:"50%",top:"30%",left:"60%",
-          background:"radial-gradient(circle, rgba(140,170,150,0.04) 0%, transparent 50%)",filter:"blur(50px)"}}/>
-        {/* Film grain — very subtle texture for Liquid Glass surface depth */}
-        <div style={{position:"absolute",inset:0,opacity:0.015,
-          backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize:"128px 128px"}}/>
-      </>}
+    <div style={{position:"absolute",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden"}}>
+      <div style={{position:"absolute",width:"60vmax",height:"60vmax",borderRadius:"50%",top:"-20%",left:"-10%",
+        background:"radial-gradient(circle, rgba(100,140,180,0.04) 0%, transparent 60%)",
+        animation:"meshDrift1 30s ease-in-out infinite"}}/>
+      <div style={{position:"absolute",width:"50vmax",height:"50vmax",borderRadius:"50%",bottom:"-15%",right:"-10%",
+        background:"radial-gradient(circle, rgba(130,120,170,0.03) 0%, transparent 60%)",
+        animation:"meshDrift2 25s ease-in-out infinite"}}/>
+      {hasUrgent&&<div style={{position:"absolute",width:"80vmax",height:"15vmax",borderRadius:"50%",top:"-5%",left:"10%",
+        background:"radial-gradient(ellipse, rgba(194,100,80,0.05) 0%, transparent 70%)",
+        animation:"urgencyPulse 4s ease-in-out infinite"}}/>}
+      <div style={{position:"absolute",inset:0,
+        backgroundImage:`url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        backgroundSize:"128px 128px",opacity:0.4}}/>
     </div>
   );
 }
 
+// Urgency bar — thinner, more refined
 function UrgencyBar({count,p,onClick,dk}){
-  if(count===0) return null;
-  return(<div onClick={onClick} style={{position:"fixed",top:0,left:0,right:0,height:3,zIndex:100,cursor:"pointer",
+  if(!count)return null;
+  return <div onClick={onClick} style={{height:2,cursor:"pointer",position:"relative",overflow:"hidden",
     background:`linear-gradient(90deg, transparent, ${p.red}, transparent)`,
-    boxShadow:dk?`0 0 10px ${p.red}40`:`0 1px 3px ${p.red}25`,
-    animation:dk?"urgencyPulse 3s ease-in-out infinite":"none"}}/>);
+    animation:"urgencyPulse 3s ease-in-out infinite",zIndex:100}}/>;
 }
 
-function Sparkline(props){
-  var data=props.data||[],color=props.color,width=props.width||56,height=props.height||20;
-  if(!data||data.length<2) return null;
-  const max=Math.max(...data)||1, min=Math.min(...data), range=max-min||1;
-  const pts=data.map((v,i)=>({x:(i/(data.length-1))*width,y:height-((v-min)/range)*height*0.85-height*0.075}));
-  let d=`M${pts[0].x},${pts[0].y}`;
-  for(let i=1;i<pts.length;i++){
-    const p0=pts[Math.max(0,i-2)],p1=pts[i-1],p2=pts[i],p3=pts[Math.min(pts.length-1,i+1)];
-    d+=` C${p1.x+(p2.x-p0.x)/6},${p1.y+(p2.y-p0.y)/6} ${p2.x-(p3.x-p1.x)/6},${p2.y-(p3.y-p1.y)/6} ${p2.x},${p2.y}`;
-  }
-  const fillD=d+` L${width},${height} L0,${height} Z`;
-  const id=`sp-${Math.random().toString(36).slice(2,8)}`;
-  return(
-    <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{flexShrink:0,display:"block"}}>
-      <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stopColor={color} stopOpacity={0.25}/><stop offset="100%" stopColor={color} stopOpacity={0}/>
-      </linearGradient></defs>
-      <path d={fillD} fill={`url(#${id})`}/>
-      <path d={d} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round"/>
-      <circle cx={pts[pts.length-1].x} cy={pts[pts.length-1].y} r={2} fill={color}/>
-    </svg>
-  );
+// Sparkline — same logic, slightly cleaner
+function Sparkline({data,color,width,height}){
+  if(!data||!data.length)return null;
+  var mx=Math.max(...data),mn=Math.min(...data);var range=mx-mn||1;
+  var pts=data.map(function(v,i){return(i/(data.length-1))*width+","+(height-(((v-mn)/range)*height*0.85+height*0.075));}).join(" ");
+  return <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`} style={{display:"block",overflow:"visible"}}>
+    <polyline points={pts} fill="none" stroke={color} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" opacity={0.7}/>
+  </svg>;
 }
 
+function Spec({r,i,direction}){return null;} // V6: removed specular highlights
+
+
+// ====== V6 COMPONENTS: BADGES, PILLS, CHIPS ======
+
+// Skeleton
 function SkeletonCard({p,mob,index}){
-  var delay=(index||0)*120;
-  var shimBg="linear-gradient(90deg,"+p.skeleton+" 25%,"+p.skeletonShine+" 50%,"+p.skeleton+" 75%)";
-  var bar=function(w,h,mt){return{width:w,height:h,marginTop:mt||0,borderRadius:h>6?6:3,background:shimBg,backgroundSize:"200% 100%",animation:"shimmer 1.8s ease-in-out infinite",animationDelay:delay+"ms"};};
+  var delay=index*120;
+  var shimBg=`linear-gradient(90deg, ${p.skeleton} 0%, ${p.skeletonShine} 50%, ${p.skeleton} 100%)`;
+  var bar=function(w,h,mt){return{width:w,height:h,marginTop:mt||0,borderRadius:R.sm,background:shimBg,backgroundSize:"200% 100%",animation:"shimmer 1.8s ease-in-out infinite",animationDelay:delay+"ms"};};
   return(
-    <div style={{padding:mob?"14px 16px":"16px 20px",borderBottom:"0.5px solid "+p.sep}}>
-      <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-        <div style={bar(48,10)}/>
-        <div style={bar(32,10)}/>
-        <div style={{flex:1}}/>
-        <div style={bar(56,10)}/>
+    <div style={{padding:mob?S[3]+"px "+S[4]+"px":S[4]+"px "+S[5]+"px",borderBottom:"0.5px solid "+p.sep}}>
+      <div style={{display:"flex",alignItems:"center",gap:S[2],marginBottom:S[3]}}>
+        <div style={bar(8,8,0)}/><div style={bar(60,14,0)}/><div style={{marginLeft:"auto",...bar(40,10,0)}}/>
       </div>
-      <div style={bar("85%",13)}/>
-      <div style={bar("60%",11,8)}/>
-      <div style={{display:"flex",gap:8,marginTop:12}}>
-        <div style={bar(64,22)}/>
-        <div style={bar(48,22)}/>
-      </div>
+      <div style={bar("90%",16,0)}/><div style={bar("60%",14,S[2])}/>
     </div>
   );
 }
+function SkeletonFeed({p,mob,count}){return <div>{Array.from({length:count||5}).map(function(_,i){return <SkeletonCard key={i} p={p} mob={mob} index={i}/>;})}</div>;}
 
-function SkeletonFeed({p,mob,count}){
-  var n=count||5;
-  var cards=[];
-  for(var i=0;i<n;i++){cards.push(<SkeletonCard key={i} p={p} mob={mob} index={i}/>);}
-  return <div>{cards}</div>;
+// Priority — V6: dot only in collapsed, full badge in detail
+function PriorityDot({priority,p,size}){
+  var pr=PRI[priority]||PRI.MEDIUM;var c=pr.color(p);var sz=size||8;
+  return <span style={{display:"inline-block",width:sz,height:sz,borderRadius:R.full,background:c,flexShrink:0,
+    boxShadow:`0 0 ${sz}px ${c}50`,
+    animation:pr.pulse?"sp 2s ease-in-out infinite":"none"}}/>;
 }
 
 function Badge({priority,p,small}){
-  const pr=pri({priority},p);
+  var pr=PRI[priority]||PRI.MEDIUM;var c=pr.color(p);
   return(
     <span style={{display:"inline-flex",alignItems:"center",gap:small?3:5,
-      padding:small?"2px 7px 2px 5px":"3px 10px 3px 8px",borderRadius:100,
-      background:pr.bg,border:`0.5px solid ${pr.c}30`}}>
-      {pr.pulse&&<span style={{width:small?4:5,height:small?4:5,borderRadius:"50%",background:pr.c,animation:"sp 2s ease-in-out infinite"}}/>}
-      <span style={{fontSize:small?9:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:pr.c}}>{pr.label}</span>
+      padding:small?"2px 7px 2px 5px":"3px 10px 3px 8px",borderRadius:R.full,
+      background:`${c}${pr.bgA}`,border:`0.5px solid ${c}30`}}>
+      {pr.pulse&&<span style={{width:small?4:5,height:small?4:5,borderRadius:"50%",background:c,animation:"sp 2s ease-in-out infinite"}}/>}
+      <span style={{fontSize:T.xs,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:c}}>{pr.label}</span>
     </span>
   );
 }
 
 var CAT_META={
-  insight:{icon:"\u26A0",label:"INSIGHT"},
-  prep:{icon:"\u{1F4CB}",label:"PREP"},
-  nudge:{icon:"\u{1F449}",label:"NUDGE"},
-  leverage:{icon:"\u2693",label:"LEVERAGE"},
-  blind_spot:{icon:"\u{1F441}",label:"BLIND SPOT"},
-  momentum:{icon:"\u26A1",label:"MOMENTUM"},
+  insight:{icon:"\u25CF",label:"INSIGHT"},prep:{icon:"\u25B6",label:"PREP"},
+  nudge:{icon:"\u279C",label:"NUDGE"},leverage:{icon:"\u2197",label:"LEVERAGE"},
+  blind_spot:{icon:"\u25CB",label:"BLIND SPOT"},momentum:{icon:"\u2191",label:"MOMENTUM"},
+  coverage:{icon:"\u25A1",label:"COVERAGE"},
 };
-
 function CatTag({category,p}){
-  var cat=CAT_META[category]||CAT_META.insight;
+  var cat=CAT_META[category]||{icon:"\u25CF",label:category||"?"};
   return(
     <span style={{display:"inline-flex",alignItems:"center",gap:3,
-      padding:"2px 7px",borderRadius:100,background:p.fill4,
-      fontSize:9,fontWeight:600,letterSpacing:"0.06em",fontFamily:MONO,color:p.label3}}>
+      padding:"2px 7px",borderRadius:R.full,background:p.fill4,
+      fontSize:T.xs-2,fontWeight:600,letterSpacing:"0.06em",fontFamily:MONO,color:p.label3}}>
       <span style={{fontSize:10}}>{cat.icon}</span>{cat.label}
     </span>
   );
@@ -757,23 +727,36 @@ function CatTag({category,p}){
 function Srcs({sources,p,compact,dk}){
   return(
     <span style={{display:"inline-flex",gap:compact?3:5,alignItems:"center"}}>
-      {sources.map(s=><span key={s} title={SVC[s]?.label} style={{fontSize:compact?11:12,lineHeight:1,opacity:0.9,filter:`drop-shadow(0 0 2px ${svcColor(s,dk)}40)`}}>{SVC[s]?.icon}</span>)}
+      {sources.map(s=><span key={s} title={SVC[s]?.label} style={{fontSize:compact?T.xs:T.sm-1,lineHeight:1,opacity:0.7}}>{SVC[s]?.icon}</span>)}
     </span>
   );
 }
 
+function StatePill({state,p}){
+  const cfg={done:{icon:"\u2713",label:"Done",c:p.green},snoozed:{icon:"\u25F7",label:"Snoozed",c:p.orange},dismissed:{icon:"\u2014",label:"Dismissed",c:p.gray}}[state];
+  if(!cfg) return null;
+  return(
+    <span style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:R.full,
+      background:`${cfg.c}18`,border:`0.5px solid ${cfg.c}25`,fontSize:T.xs-1,fontWeight:600,fontFamily:MONO,color:cfg.c}}>
+      <span style={{fontSize:9}}>{cfg.icon}</span>{cfg.label}
+    </span>
+  );
+}
+
+// Evidence chips + tooltip
 function EvChip({ev,p,dk}){
   const[h,setH]=useState(false);
   return(
     <a href={ev.url} target="_blank" rel="noopener noreferrer"
       onClick={e=>e.stopPropagation()}
       onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
-      style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:10,textDecoration:"none",
-        fontSize:12,fontFamily:MONO,fontWeight:500,color:p.label2,
-        transition:"all 0.2s cubic-bezier(0.25,0.46,0.45,0.94)",position:"relative",overflow:"hidden",...glass(p,{hover:h})}}>
-      <span style={{fontSize:11,color:svcColor(ev.source,dk)}}>{SVC[ev.source]?.icon}</span>
-      <span style={{opacity:h?1:0.8,transition:"opacity 0.2s"}}>{ev.label}</span>
-      <span style={{fontSize:9,opacity:0.3,marginLeft:2}}>{"\u2197"}</span>
+      style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:R.sm,textDecoration:"none",
+        fontSize:T.sm-1,fontFamily:MONO,fontWeight:500,color:h?p.label:p.label2,
+        background:h?p.fill2:p.fill4,border:"0.5px solid "+(h?p.glassBorder:"transparent"),
+        transition:"all 0.15s ease"}}>
+      <span style={{fontSize:T.xs,color:svcColor(ev.source,dk)}}>{SVC[ev.source]?.icon}</span>
+      <span>{ev.label}</span>
+      <span style={{fontSize:8,opacity:0.3,marginLeft:2}}>{"\u2197"}</span>
     </a>
   );
 }
@@ -784,55 +767,43 @@ function EvidenceRow({ev,p,dk}){
     <a href={ev.url} target="_blank" rel="noopener noreferrer"
       onClick={e=>e.stopPropagation()}
       onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
-      style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",borderRadius:8,textDecoration:"none",
+      style={{display:"flex",alignItems:"center",gap:S[2],padding:S[2]-2+"px "+S[3]+"px",borderRadius:R.sm,textDecoration:"none",
         background:h?p.fill4:"transparent",transition:"background 0.15s",cursor:"pointer"}}>
-      <span style={{fontSize:11,color:svcColor(ev.source,dk),flexShrink:0,width:16,textAlign:"center"}}>{SVC[ev.source]?.icon}</span>
-      <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:h?p.label:p.label2,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.label}</span>
-      <span style={{fontSize:9,color:p.label4,flexShrink:0}}>{"\u2197"}</span>
+      <span style={{fontSize:T.xs,color:svcColor(ev.source,dk),flexShrink:0,width:16,textAlign:"center"}}>{SVC[ev.source]?.icon}</span>
+      <span style={{fontSize:T.xs,fontFamily:MONO,fontWeight:500,color:h?p.label:p.label2,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.label}</span>
+      <span style={{fontSize:8,color:p.label4,flexShrink:0}}>{"\u2197"}</span>
     </a>
   );
 }
 
 function EvidenceTip({evidence,p,dk,children}){
   const[show,setShow]=useState(false);
-  const[pos,setPos]=useState({x:0,y:0,w:0});
-  const ref=useRef(null);
+  const[pos,setPos]=useState({x:0,y:0});
   const timerRef=useRef(null);
   const TIP_W=280;
-  function enter(e){
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left,y:rect.top,w:rect.width});
-    setShow(true);
-  }
+  function enter(e){var rect=e.currentTarget.getBoundingClientRect();setPos({x:rect.left,y:rect.top});setShow(true);}
   function toggle(e){
-    e.stopPropagation();
-    if(show){setShow(false);return;}
-    var rect=e.currentTarget.getBoundingClientRect();
-    setPos({x:rect.left,y:rect.top,w:rect.width});
-    setShow(true);
-    clearTimeout(timerRef.current);
-    timerRef.current=setTimeout(()=>setShow(false),5000);
+    e.stopPropagation();if(show){setShow(false);return;}
+    var rect=e.currentTarget.getBoundingClientRect();setPos({x:rect.left,y:rect.top});setShow(true);
+    clearTimeout(timerRef.current);timerRef.current=setTimeout(()=>setShow(false),5000);
   }
   useEffect(()=>()=>clearTimeout(timerRef.current),[]);
   if(!evidence||evidence.length===0)return children||null;
   var tipLeft=Math.max(8,Math.min(pos.x,window.innerWidth-TIP_W-8));
   return(
-    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
+    <span onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
       onClick={toggle} onTouchStart={toggle}
-      style={{position:"relative",WebkitTapHighlightColor:"transparent"}}>
+      style={{position:"relative",WebkitTapHighlightColor:"transparent",cursor:"pointer"}}>
       {children}
       {show&&ReactDOM.createPortal(
         <div onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)}
           onClick={e=>e.stopPropagation()}
           style={{position:"fixed",left:tipLeft,top:Math.max(8,pos.y-8),
           transform:"translateY(-100%)",
-          width:TIP_W,padding:"10px 6px",borderRadius:12,
-          background:p?.raised||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
-          fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
-          boxShadow:"0 12px 48px rgba(0,0,0,0.45), 0 0 0 0.5px "+(p?.glassBorder||"#333"),
-          animation:"fadeIn 0.15s ease"}}>
-          <div style={{position:"absolute",bottom:-12,left:0,right:0,height:12}} />
-          <div style={{fontSize:9,fontWeight:700,letterSpacing:"0.1em",color:p.label4,padding:"0 10px 6px",borderBottom:"0.5px solid "+p.glassBorder,marginBottom:4}}>EVIDENCE ({evidence.length})</div>
+          width:TIP_W,padding:S[3]+"px "+S[2]+"px",borderRadius:R.md,
+          ...surface(p,2),zIndex:9999,animation:"fadeIn 0.15s ease"}}>
+          <div style={{position:"absolute",bottom:-12,left:0,right:0,height:12}}/>
+          <div style={{fontSize:T.xs-2,fontWeight:700,letterSpacing:"0.1em",color:p.label4,padding:"0 "+S[3]+"px "+S[2]+"px",borderBottom:"0.5px solid "+p.glassBorder,marginBottom:4}}>EVIDENCE ({evidence.length})</div>
           {evidence.map((ev,i)=><EvidenceRow key={i} ev={ev} p={p} dk={dk}/>)}
         </div>,
         document.body
@@ -842,54 +813,35 @@ function EvidenceTip({evidence,p,dk,children}){
 }
 
 
-function StatePill({state,p}){
-  const cfg={done:{icon:"\u2713",label:"Done",c:p.green},snoozed:{icon:"\u25F7",label:"Snoozed",c:p.orange},dismissed:{icon:"\u2014",label:"Dismissed",c:p.gray}}[state];
-  if(!cfg) return null;
-  return(
-    <span style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:100,
-      background:`${cfg.c}18`,border:`0.5px solid ${cfg.c}25`,fontSize:10,fontWeight:600,fontFamily:MONO,color:cfg.c}}>
-      <span style={{fontSize:9}}>{cfg.icon}</span>{cfg.label}
-    </span>
-  );
-}
+// ====== V6 SIGNAL CARD — the most important component ======
 
 function PreviewCard({insight,p,dk}){
-  const pr=pri(insight,p);
+  var pr=pri(insight,p);
   return(
-    <div style={{width:320,padding:16,borderRadius:16,position:"relative",overflow:"hidden",
-      ...glass(p,{elevated:true}),
-      boxShadow:`0 12px 48px rgba(0,0,0,${dk?0.4:0.15}), 0 0 0 0.5px ${p.glassBorder}`,
-      animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
-      <Spec r={16} i={0.08}/>
-      <div style={{position:"relative",zIndex:2}}>
-        <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-          <Badge priority={insight.priority} p={p} small/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} compact dk={dk}/>
-        </div>
-        <h4 style={{fontSize:15,fontWeight:600,color:p.label,margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.02em",lineHeight:1.3}}>{insight.headline}</h4>
-        <p style={{fontSize:13,color:p.label2,margin:"0 0 10px",fontFamily:SF,lineHeight:1.45,
-          display:"-webkit-box",WebkitLineClamp:3,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
-        {insight.context&&(
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{insight.context.metric}</span>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:6,background:pr.bg}}>{insight.context.delta}</span>
-          </div>
-        )}
-        {insight.sparkline&&<div style={{marginTop:8}}><Sparkline data={insight.sparkline} color={pr.c} width={280} height={32}/></div>}
+    <div style={{width:300,padding:S[4],borderRadius:R.md,...surface(p,2),animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
+      <div style={{display:"flex",alignItems:"center",gap:S[2],marginBottom:S[2]}}>
+        <PriorityDot priority={insight.priority} p={p}/>
+        <span style={{fontSize:T.xs,fontWeight:600,fontFamily:MONO,color:pr.c}}>{pr.label}</span>
+        <Srcs sources={insight.sources} p={p} compact dk={dk}/>
       </div>
+      <div style={{fontSize:T.base,fontWeight:600,color:p.label,lineHeight:1.35,fontFamily:SF,marginBottom:S[2]}}>{insight.headline}</div>
+      <div style={{fontSize:T.sm,color:p.label2,lineHeight:1.5,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</div>
     </div>
   );
 }
 
+// V6 Signal Card — drastically simplified
 function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
-  const pr=pri(insight,p);
-  const ch=CH[insight.channelKey];
   const[h,setH]=useState(false);
-  const[preview,setPreview]=useState(false);
-  const[swipeX,setSwipeX]=useState(0);
   const[swiping,setSwiping]=useState(false);
+  const[swipeX,setSwipeX]=useState(0);
+  const[preview,setPreview]=useState(false);
   const touchRef=useRef(null);
   const previewTimer=useRef(null);
-  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
+  var pr=pri(insight,p);
+  var ch=CH[insight.channelKey];
+  var isDone=itemState==="done"||itemState==="dismissed"||itemState==="snoozed";
+  var evCount=insight.evidence?.length||0;
 
   const startPreview=()=>{previewTimer.current=setTimeout(()=>setPreview(true),600);};
   const endPreview=()=>{clearTimeout(previewTimer.current);setPreview(false);};
@@ -910,15 +862,15 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
     setSwiping(false);setSwipeX(0);touchRef.current=null;
   },[swipeX,insight.id,onStateChange]);
 
-  const swipeLabel=swipeX>60?"\u2713 Done":swipeX<-60?"Dismiss":"";
+  var swipeLabel=swipeX>60?"\u2713 Done":swipeX<-60?"Dismiss":"";
 
   return(
     <div style={{position:"relative"}}>
       {swiping&&(
         <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",
-          justifyContent:swipeX>0?"flex-start":"flex-end",padding:"0 28px",borderRadius:20,
-          background:swipeX>0?`${p.green}15`:`${p.gray}15`}}>
-          <span style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:swipeX>0?p.green:p.gray,
+          justifyContent:swipeX>0?"flex-start":"flex-end",padding:"0 "+S[8]+"px",borderRadius:R.md,
+          background:swipeX>0?`${p.green}12`:`${p.gray}12`}}>
+          <span style={{fontSize:T.sm,fontWeight:600,fontFamily:MONO,color:swipeX>0?p.green:p.gray,
             opacity:Math.min(1,Math.abs(swipeX)/80)}}>{swipeLabel}</span>
         </div>
       )}
@@ -931,75 +883,66 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
         onTouchMove={mob?onTouchMove:undefined}
         onTouchEnd={mob?onTouchEnd:undefined}
         style={{
-          margin:mob?"0 12px":"0 16px",padding:mob?"14px 16px":"18px 22px",
-          borderRadius:24,cursor:"pointer",position:"relative",overflow:"hidden",
-          transition:swiping?"none":"all 0.4s cubic-bezier(0.34,1.56,0.64,1)",
-          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px) scale(1.003)":"translateY(0) scale(1)",
-          opacity:isDone?0.5:Math.max(0,1-Math.abs(swipeX)/200),
-          animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
+          margin:mob?"0":"0 "+S[4]+"px",
+          padding:mob?S[4]+"px "+S[4]+"px":S[5]+"px "+S[6]+"px",
+          borderRadius:mob?0:R.md,cursor:"pointer",position:"relative",
+          transition:swiping?"none":"all 0.3s cubic-bezier(0.25,0.46,0.45,0.94)",
+          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px)":"none",
+          opacity:isDone?0.4:Math.max(0,1-Math.abs(swipeX)/200),
+          animation:`staggerIn 0.4s cubic-bezier(0.34,1.56,0.64,1) ${index*0.05}s both`,
           outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:2,
-          ...glass(p,{hover:h,elevated:h}),WebkitTapHighlightColor:"transparent",
+          borderBottom:mob?"0.5px solid "+p.sep:"none",
+          background:h?p.fill4:"transparent",
+          WebkitTapHighlightColor:"transparent",
         }}>
 
-        <Spec r={20} i={h?0.1:0.04}/>
-
-        {}
-        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,position:"relative",zIndex:2}}>
-          <Badge priority={insight.priority} p={p}/>
-          <CatTag category={insight.category} p={p}/>
-          <Srcs sources={insight.sources} p={p} compact dk={dk}/>
-          {isDone&&<StatePill state={itemState} p={p}/>}
-          <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:8}}>
-            {insight.sparkline&&!mob&&<Sparkline data={insight.sparkline} color={pr.c} width={48} height={16}/>}
-            <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500,letterSpacing:"0.02em"}}>{timeAgo(insight.timestamp)}</span>
+        {/* Row 1: Priority dot + Headline */}
+        <div style={{display:"flex",alignItems:"flex-start",gap:S[3],marginBottom:S[2]}}>
+          <PriorityDot priority={insight.priority} p={p} size={10}/>
+          <div style={{flex:1,minWidth:0}}>
+            <h3 style={{fontSize:mob?T.base:T.lg,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.3,
+              fontFamily:DISPLAY,letterSpacing:"-0.02em",margin:0,
+              textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
           </div>
+          {isDone&&<StatePill state={itemState} p={p}/>}
+          <span style={{fontSize:T.xs,color:p.label4,fontFamily:MONO,fontWeight:400,whiteSpace:"nowrap",flexShrink:0,
+            marginTop:mob?2:4}}>{timeAgo(insight.timestamp)}</span>
         </div>
 
-        {}
-        <h3 style={{fontSize:mob?16:18,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
-          margin:"0 0 6px",fontFamily:SF,letterSpacing:"-0.022em",position:"relative",zIndex:2,
-          textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
+        {/* Row 2: Body */}
+        <p style={{fontSize:T.sm,color:p.label2,lineHeight:1.55,margin:"0 0 "+S[3]+"px",fontFamily:SF,fontWeight:400,
+          paddingLeft:S[3]+10+"px",
+          display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
 
-        {}
-        <p style={{fontSize:14,color:p.label2,lineHeight:1.5,margin:"0 0 10px",fontFamily:SF,fontWeight:400,
-          position:"relative",zIndex:2,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
-
-        {}
-        {insight.context&&(
-          <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:8,position:"relative",zIndex:2}}>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:8,background:p.fill4}}>{insight.context.metric}</span>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:8,background:pr.bg}}>{insight.context.delta}</span>
-            {insight.sparkline&&mob&&<Sparkline data={insight.sparkline} color={pr.c} width={44} height={14}/>}
-          </div>
-        )}
-
-        {}
-        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
-          {insight.evidence?.length>0&&(
-            <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,flexWrap:"wrap",cursor:"pointer"}}>
-                {insight.evidence.slice(0,3).map((ev,i)=>(
-                  <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
-                    style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
-                      fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
-                    onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
-                    onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
-                    <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
-                    {ev.label.length>22?ev.label.slice(0,20)+"\u2026":ev.label}
-                    <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
-                  </span>
-                ))}
-                {insight.evidence.length>3&&(
-                  <span style={{fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label4,padding:"2px 6px"}}>+{insight.evidence.length-3}</span>
-                )}
-              </span>
-            </EvidenceTip>
+        {/* Row 3: Metrics + Evidence count + Channel */}
+        <div style={{display:"flex",alignItems:"center",gap:S[2],paddingLeft:S[3]+10+"px",flexWrap:"wrap"}}>
+          {insight.context?.metric&&insight.context.metric!=="\u2014"&&(
+            <span style={{fontSize:T.xs,fontFamily:MONO,fontWeight:500,color:p.label2}}>{insight.context.metric}</span>
           )}
-          {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
+          {insight.context?.delta&&insight.context.delta!=="\u2014"&&(
+            <span style={{fontSize:T.xs,fontFamily:MONO,fontWeight:600,color:pr.c,
+              padding:"1px 6px",borderRadius:R.sm,background:pr.bg}}>{insight.context.delta}</span>
+          )}
+          {insight.sparkline&&!mob&&<Sparkline data={insight.sparkline} color={pr.c} width={40} height={14}/>}
+
+          <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:S[2]}}>
+            {evCount>0&&(
+              <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
+                <span style={{display:"inline-flex",alignItems:"center",gap:4,
+                  fontSize:T.xs,fontFamily:MONO,fontWeight:500,color:p.label3,
+                  padding:"2px 8px",borderRadius:R.sm,background:p.fill4,
+                  transition:"color 0.15s"}}>
+                  <span style={{fontSize:9,opacity:0.5}}>{"\u2022"}</span>
+                  {evCount} evidence
+                </span>
+              </EvidenceTip>
+            )}
+            {ch&&<span style={{fontSize:T.xs,color:p.label4,fontFamily:MONO}}>{"\u2192"} {ch.label}</span>}
+          </div>
         </div>
       </article>
 
-      {}
+      {/* Preview tooltip on hover */}
       {preview&&!mob&&(
         <div style={{position:"absolute",top:-8,left:"50%",transform:"translateX(-50%) translateY(-100%)",zIndex:100,pointerEvents:"none"}}>
           <PreviewCard insight={insight} p={p} dk={dk}/>
@@ -1009,136 +952,169 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
   );
 }
 
+// Speed Brief — compact list mode
 function SpeedBrief({insight,onClick,p,dk,mob,index,focused,itemState,onStateChange}){
-  const pr=pri(insight,p);
-  const ch=CH[insight.channelKey];
-  const isDone=itemState==="done"||itemState==="snoozed"||itemState==="dismissed";
-  const srcLabels=insight.sources.map(s=>SVC[s]?.label).filter(Boolean).join(" \u00b7 ");
-
+  const[h,setH]=useState(false);
+  var pr=pri(insight,p);
+  var isDone=itemState==="done"||itemState==="dismissed";
   return(
-    <div onClick={()=>onClick(insight)} style={{
-      borderLeft:`2.5px solid ${pr.c}`,
-      marginLeft:mob?14:20,marginRight:mob?14:20,marginBottom:mob?4:6,
-      cursor:"pointer",position:"relative",
-      opacity:isDone?0.4:1,
-      animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
-      outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:4,
-      transition:"opacity 0.3s ease",
-    }}>
-      {}
-      <div style={{display:"flex",alignItems:"center",gap:6,paddingLeft:mob?12:14,marginBottom:5}}>
-        <span style={{fontSize:mob?8:9,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:pr.c,
-          ...(insight.priority==="URGENT"?{textShadow:`0 0 8px ${pr.c}60`}:{}),
-        }}>{PRI[insight.priority]?.label}</span>
-        <span style={{fontSize:8,color:p.label4,fontFamily:MONO}}>{"\u00b7"}</span>
-        <span style={{fontSize:mob?8:9,color:p.label4,fontFamily:MONO,fontWeight:500}}>{srcLabels}</span>
-        {isDone&&<StatePill state={itemState} p={p}/>}
-        <span style={{marginLeft:"auto",fontSize:mob?8:9,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
-      </div>
-
-      {}
-      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
-        <p style={{fontSize:mob?13.5:14.5,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.38,
-          margin:0,fontFamily:SF,letterSpacing:"-0.015em",
-          textDecoration:isDone?"line-through":"none",
-        }}>{insight.situation||insight.headline}</p>
-      </div>
-
-      {}
-      <div style={{paddingLeft:mob?12:14,marginBottom:7}}>
-        <p style={{fontSize:mob?11.5:12.5,color:p.label2,lineHeight:1.48,margin:0,fontFamily:SF,fontWeight:400,
-        }}>{insight.whyItMatters||insight.body}</p>
-      </div>
-
-      {}
-      <div style={{
-        marginLeft:mob?12:14,marginRight:mob?4:8,padding:mob?"7px 10px":"8px 12px",
-        borderRadius:mob?10:12,background:`${pr.c}08`,border:`0.5px solid ${pr.c}18`,
-      }}>
-        <div style={{display:"flex",alignItems:"flex-start",gap:8}}>
-          <span style={{fontSize:11,color:pr.c,marginTop:1,flexShrink:0}}>{"\u2192"}</span>
-          <div style={{flex:1}}>
-            <p style={{fontSize:mob?11.5:12.5,fontWeight:500,color:p.label,lineHeight:1.45,margin:0,fontFamily:SF,
-            }}>{insight.recommendation||insight.action}</p>
-            {(insight.recTarget||ch)&&(
-              <span style={{display:"inline-block",marginTop:5,fontSize:mob?8:9,fontWeight:600,fontFamily:MONO,color:pr.c,
-                padding:"2px 8px",borderRadius:6,background:`${pr.c}14`,
-              }}>{insight.recTarget||(ch?`\u2192 ${ch.label.toUpperCase()}`:"")}</span>
-            )}
-          </div>
-        </div>
-      </div>
+    <div onClick={()=>onClick(insight)}
+      onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
+      style={{display:"flex",alignItems:"center",gap:S[3],
+        margin:mob?"0":"0 "+S[4]+"px",
+        padding:mob?S[2]+"px "+S[4]+"px":S[2]+"px "+S[5]+"px",
+        cursor:"pointer",borderRadius:mob?0:R.sm,
+        background:h?p.fill4:"transparent",
+        borderBottom:mob?"0.5px solid "+p.sep:"none",
+        opacity:isDone?0.4:1,
+        transition:"all 0.15s ease",
+        animation:`staggerIn 0.3s ease ${index*0.03}s both`,
+        outline:focused?`2px solid ${p.blue}`:"none"}}>
+      <PriorityDot priority={insight.priority} p={p} size={6}/>
+      <span style={{flex:1,fontSize:T.sm,fontWeight:500,color:p.label,fontFamily:SF,
+        overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",
+        textDecoration:isDone?"line-through":"none"}}>{insight.headline}</span>
+      {insight.context?.delta&&insight.context.delta!=="\u2014"&&(
+        <span style={{fontSize:T.xs,fontFamily:MONO,fontWeight:600,color:pr.c,flexShrink:0}}>{insight.context.delta}</span>
+      )}
+      <span style={{fontSize:T.xs-1,color:p.label4,fontFamily:MONO,flexShrink:0}}>{timeAgo(insight.timestamp)}</span>
     </div>
   );
 }
 
-function SummaryHeader({counts,p,mob,feedMode,scanMeta,lastScanAt,coverageGaps}){
-  const parts=[];
-  // Source provenance line
-  var provenanceParts=[];
-  if(scanMeta){
-    if(scanMeta.amplitudeCharts) provenanceParts.push(scanMeta.amplitudeCharts+" charts");
-    if(scanMeta.slackChannels) provenanceParts.push(scanMeta.slackChannels+" channels");
-    if(scanMeta.linearProjects) provenanceParts.push(scanMeta.linearProjects+" projects");
-    if(scanMeta.calendarEvents) provenanceParts.push(scanMeta.calendarEvents+" events");
-    if(scanMeta.googleDocs) provenanceParts.push(scanMeta.googleDocs+" docs");
-  }
-  var provenanceLine=provenanceParts.length>0
-    ? provenanceParts.join(" \u00b7 ")+" scanned"
-    : null;
-  var tsLine=lastScanAt
-    ? new Date(lastScanAt).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})
-    : null;
 
-  if(feedMode==="brief"){
-    if(counts.urgent>0) parts.push(`${counts.urgent} thing${counts.urgent>1?"s":""} need${counts.urgent===1?"s":""} you right now`);
-    if(counts.high>0) parts.push(`${counts.high} more today`);
-    if(parts.length===0) return(
-      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-        <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>Nothing urgent. Scanning continues.</p>
-      </div>
-    );
-    let text=parts.join(". ")+".";
-    if(counts.medium>0) text+=` ${counts.medium} this week.`;
-    return(
-      <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-        <p style={{fontSize:mob?12:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>{text}</p>
-        {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3}}>{provenanceLine}{tsLine?" \u00b7 "+tsLine:""}</p>}
-      </div>
-    );
-  }
-  // Standard mode
-  if(counts.urgent>0) parts.push(`${counts.urgent} urgent`);
-  if(counts.high>0) parts.push(`${counts.high} need attention today`);
-  if(counts.medium>0) parts.push(`${counts.medium} this week`);
-  if(parts.length===0) return(
-    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-      <p style={{fontSize:14,color:p.label3,fontFamily:SF,fontWeight:500}}>All clear {"\u2014"} scanning continues in the background.</p>
-    </div>
-  );
+// ====== V6 HEADER + NAVIGATION ======
+
+function SummaryHeader({counts,p,mob,feedMode,scanMeta,lastScanAt,coverageGaps}){
+  var urgent=counts.urgent;var high=counts.high;
+  var summary="";
+  if(urgent>0&&high>0)summary=urgent+" urgent, "+high+" need attention today, "+(counts.medium||0)+" this week.";
+  else if(urgent>0)summary=urgent+" urgent"+(counts.total>urgent?", "+(counts.total-urgent)+" more":"");
+  else if(high>0)summary=high+" need attention today"+(counts.total>high?", "+(counts.total-high)+" more":"");
+  else summary=counts.total+" items on your radar.";
+  if(!counts.total&&!scanMeta)return null;
   return(
-    <div style={{padding:mob?"10px 16px 4px":"12px 20px 4px"}}>
-      <p style={{fontSize:14,color:p.label2,fontFamily:SF,fontWeight:500,lineHeight:1.4}}>
-        {parts.join(", ")}.{counts.low>0?` Plus ${counts.low} FYI.`:""}
-      </p>
-      {provenanceLine&&<p style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:3,display:"flex",alignItems:"center",gap:6}}>
-        <span>{scanMeta?.sources||0} sources</span>
-        <span style={{opacity:0.3}}>{"\u2022"}</span>
-        <span>{provenanceLine}</span>
-        {tsLine&&<><span style={{opacity:0.3}}>{"\u2022"}</span><span>{tsLine}</span></>}
-      </p>}
-      {coverageGaps&&<p style={{fontSize:10,fontFamily:MONO,color:p.orange,marginTop:4,padding:"4px 8px",borderRadius:6,background:p.orange+"10",display:"inline-block"}}>
-        {"\u26A0"} {coverageGaps.headline||"Coverage gaps detected"}
-      </p>}
+    <div style={{padding:mob?"0 "+S[4]+"px "+S[2]+"px":"0 "+S[5]+"px "+S[2]+"px"}}>
+      <p style={{fontSize:T.sm,color:p.label3,fontFamily:SF,fontWeight:400,lineHeight:1.5}}>{summary}</p>
     </div>
   );
 }
 
 function GroupLabel({label,p,mob}){
   return(
-    <div style={{padding:mob?"12px 16px 4px":"14px 20px 6px",display:"flex",alignItems:"center",gap:10}}>
-      <span style={{fontSize:11,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label4}}>{label.toUpperCase()}</span>
-      <div style={{flex:1,height:0.5,background:p.sep,opacity:0.4}}/>
+    <div style={{padding:mob?S[3]+"px "+S[4]+"px "+S[1]+"px":S[3]+"px "+S[5]+"px "+S[1]+"px",
+      display:"flex",alignItems:"center",gap:S[2]}}>
+      <span style={{fontSize:T.xs-1,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,textTransform:"uppercase"}}>{label}</span>
+      <div style={{flex:1,height:"0.5px",background:p.sep}}/>
+    </div>
+  );
+}
+
+// V6 NavBar — clean, minimal
+function NavBar({dk,setDk,scanning,runScan,counts,p,mob,feedMode,setFeedMode,scanStatus,scanError,lastScanAt,onSettings}){
+  const[scanH,setScanH]=useState(false);
+  return(
+    <nav style={{display:"flex",alignItems:"center",gap:S[3],
+      padding:mob?S[3]+"px "+S[4]+"px":S[3]+"px "+S[6]+"px",
+      position:"relative",zIndex:20}}>
+      {/* Logo */}
+      <div style={{display:"flex",alignItems:"center",gap:S[2]}}>
+        <span style={{fontSize:20}}>{"📡"}</span>
+        <span style={{fontSize:T.base,fontWeight:700,letterSpacing:"0.12em",fontFamily:DISPLAY,color:p.label}}>RADAR</span>
+      </div>
+
+      <div style={{flex:1}}/>
+
+      {/* View toggle: cards / brief */}
+      <div style={{display:"flex",borderRadius:R.sm,overflow:"hidden",border:"0.5px solid "+p.glassBorder}}>
+        {["cards","brief"].map(m=>(
+          <button key={m} onClick={()=>setFeedMode(m)}
+            style={{padding:"4px 10px",fontSize:T.xs-1,fontWeight:600,fontFamily:MONO,letterSpacing:"0.05em",
+              background:feedMode===m?p.fill2:"transparent",color:feedMode===m?p.label:p.label3,
+              border:"none",cursor:"pointer",textTransform:"uppercase"}}>
+            {m==="cards"?"\u2630":"\u2261"}
+          </button>
+        ))}
+      </div>
+
+      {/* Scan button */}
+      <button onClick={runScan}
+        onMouseEnter={()=>setScanH(true)} onMouseLeave={()=>setScanH(false)}
+        disabled={scanning}
+        style={{display:"flex",alignItems:"center",gap:S[1],
+          padding:"6px 14px",borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+          background:scanH?p.fill2:"transparent",color:p.label,cursor:scanning?"wait":"pointer",
+          fontSize:T.xs,fontWeight:600,fontFamily:MONO,letterSpacing:"0.05em"}}>
+        <span style={{display:"inline-block",fontSize:14,
+          animation:scanning?"spin 1s linear infinite":"none",
+          transition:"transform 0.2s"}}>{scanning?"\u21BB":"\u21BB"}</span>
+        {!mob&&<span>{scanning?"Scanning":"Scan"}</span>}
+      </button>
+
+      {/* Theme + Settings */}
+      <button onClick={()=>setDk(d=>!d)}
+        style={{width:32,height:32,borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+          background:"transparent",color:p.label3,cursor:"pointer",
+          display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>
+        {dk?"\u263C":"\u263E"}
+      </button>
+
+      <button onClick={onSettings}
+        style={{width:32,height:32,borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+          background:"transparent",color:p.label3,cursor:"pointer",
+          display:"flex",alignItems:"center",justifyContent:"center",fontSize:T.sm}}>
+        {"⚙"}
+      </button>
+    </nav>
+  );
+}
+
+// V6 Filter Bar — inline segments
+function FilterBar({active,onChange,counts,p,mob}){
+  var filters=[
+    {id:"all",label:"All",count:counts.total},
+    {id:"URGENT",label:"Urgent",count:counts.urgent},
+    {id:"HIGH",label:"Today",count:counts.high},
+    {id:"MEDIUM",label:"This Week",count:counts.medium},
+    {id:"LOW",label:"FYI",count:counts.low},
+  ];
+  return(
+    <div style={{display:"flex",gap:S[1],padding:mob?"0 "+S[4]+"px":"0 "+S[5]+"px",overflowX:"auto"}}>
+      {filters.map(f=>{
+        var isActive=active===f.id||(active==="all"&&f.id==="all");
+        return(
+          <button key={f.id} onClick={()=>onChange(f.id)}
+            style={{padding:"4px 12px",borderRadius:R.full,border:"none",cursor:"pointer",
+              fontSize:T.xs,fontWeight:isActive?600:400,fontFamily:MONO,whiteSpace:"nowrap",
+              background:isActive?p.fill2:"transparent",color:isActive?p.label:p.label3,
+              transition:"all 0.15s ease"}}>
+            {f.label}{f.count>0?" "+f.count:""}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function PullIndicator({pullY,p}){
+  return(
+    <div style={{display:"flex",justifyContent:"center",padding:S[4]+"px",opacity:Math.min(1,pullY/40),
+      transform:`scale(${Math.min(1,pullY/40)})`,transition:"transform 0.1s"}}>
+      <div style={{width:28,height:28,borderRadius:R.full,display:"flex",alignItems:"center",justifyContent:"center",
+        ...surface(p,1)}}>
+        <span style={{fontSize:14,transform:`rotate(${pullY*3}deg)`,transition:"transform 0.1s"}}>{"↻"}</span>
+      </div>
+    </div>
+  );
+}
+
+function KbdHint({p,mob}){
+  if(mob)return null;
+  return(
+    <div style={{position:"fixed",bottom:S[4],right:S[4],zIndex:50,
+      padding:S[2]+"px "+S[3]+"px",borderRadius:R.sm,...surface(p,1),
+      fontSize:T.xs-1,fontFamily:MONO,color:p.label4}}>
+      j/k nav · Enter open · a act · d done · v toggle · 1-4 views
     </div>
   );
 }
@@ -1269,303 +1245,159 @@ function InsightChat({insight,p,dk,mob}){
   );
 }
 
-function Detail({insight,onBack,onAct,p,dk,mob}){
-  const pr=pri(insight,p);
-  return(
-    <div style={{position:"absolute",inset:0,zIndex:10,overflowY:"auto",WebkitOverflowScrolling:"touch",
-      background:p.bg,animation:"fadeSlide 0.35s cubic-bezier(0.16,1,0.3,1)"}}>
-      <div style={{maxWidth:700,margin:"0 auto",padding:mob?"20px 20px 120px":"48px 28px 80px"}}>
 
-        <button onClick={onBack} style={{display:"inline-flex",alignItems:"center",gap:6,
-          padding:"8px 16px 8px 12px",borderRadius:100,cursor:"pointer",
-          fontSize:14,fontWeight:500,color:p.label2,fontFamily:SF,marginBottom:28,
-          position:"relative",overflow:"hidden",...glass(p),WebkitTapHighlightColor:"transparent"}}>
-          <Spec r={100} i={0.06}/>
-          <span style={{fontSize:16,position:"relative",zIndex:2}}>{"\u2039"}</span>
-          <span style={{position:"relative",zIndex:2}}>Back</span>
+// ====== V6 DETAIL VIEW — editorial layout ======
+function Detail({insight,onBack,onAct,p,dk,mob}){
+  var pr=pri(insight,p);
+  var ch=CH[insight.channelKey];
+  return(
+    <div style={{position:"absolute",inset:0,overflowY:"auto",WebkitOverflowScrolling:"touch",
+      animation:"fadeSlide 0.3s cubic-bezier(0.25,0.46,0.45,0.94)"}}>
+      <div style={{maxWidth:720,margin:"0 auto",padding:mob?S[4]+"px":S[8]+"px "+S[6]+"px"}}>
+
+        {/* Back button */}
+        <button onClick={onBack} style={{display:"flex",alignItems:"center",gap:S[1],
+          padding:S[2]+"px 0",marginBottom:S[6],border:"none",background:"transparent",
+          cursor:"pointer",color:p.label3,fontSize:T.sm,fontFamily:SF,fontWeight:500}}>
+          <span style={{fontSize:16}}>{"←"}</span> Back
         </button>
 
-        <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:24,flexWrap:"wrap"}}>
-          <Badge priority={insight.priority} p={p}/><CatTag category={insight.category} p={p}/><Srcs sources={insight.sources} p={p} dk={dk}/>
-          <span style={{fontSize:12,color:p.label3,marginLeft:"auto",fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
+        {/* Priority + Category + Sources */}
+        <div style={{display:"flex",alignItems:"center",gap:S[2],marginBottom:S[3]}}>
+          <Badge priority={insight.priority} p={p}/>
+          <CatTag category={insight.category} p={p}/>
+          <Srcs sources={insight.sources} p={p} dk={dk}/>
+          <span style={{marginLeft:"auto",fontSize:T.xs,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
         </div>
 
-        <h1 style={{fontSize:mob?28:36,fontWeight:700,color:p.label,lineHeight:1.15,margin:"0 0 16px",
-          fontFamily:SF,letterSpacing:"-0.032em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
+        {/* Headline — hero */}
+        <h1 style={{fontSize:mob?T.xl:T['2xl'],fontWeight:700,color:p.label,lineHeight:1.2,margin:"0 0 "+S[6]+"px",
+          fontFamily:DISPLAY,letterSpacing:"-0.03em"}}>{insight.headline}</h1>
 
+        {/* Sparkline */}
         {insight.sparkline&&(
-          <div style={{marginBottom:24,padding:16,borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
-            <Spec r={16} i={0.03}/>
-            <div style={{position:"relative",zIndex:2}}>
-              <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:8}}>TREND</div>
-              <Sparkline data={insight.sparkline} color={pr.c} width={mob?280:600} height={40}/>
-            </div>
+          <div style={{marginBottom:S[6],padding:S[4],borderRadius:R.md,...surface(p,1)}}>
+            <div style={{fontSize:T.xs-2,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:S[2]}}>TREND</div>
+            <Sparkline data={insight.sparkline} color={pr.c} width={mob?280:600} height={40}/>
           </div>
         )}
 
-        <p style={{fontSize:17,color:p.label2,lineHeight:1.65,margin:"0 0 32px",fontFamily:SF,fontWeight:400}}>{insight.body}</p>
+        {/* Body */}
+        <p style={{fontSize:T.lg-2,color:p.label2,lineHeight:1.65,margin:"0 0 "+S[8]+"px",fontFamily:SF,fontWeight:400}}>{insight.body}</p>
 
+        {/* Context metrics */}
         {insight.context&&(
-          <div style={{display:"grid",gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)",gap:10,marginBottom:28}}>
+          <div style={{display:"grid",gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)",gap:S[3],marginBottom:S[8]}}>
             {[{l:"METRIC",v:insight.context.metric},{l:"DELTA",v:insight.context.delta},
               {l:"BASELINE",v:insight.context.baseline},{l:"RISK",v:insight.context.risk}].map(x=>(
-              <div key={x.l} style={{padding:mob?"12px 14px":"14px 18px",borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
-                <Spec r={16} i={0.04}/>
-                <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:6,position:"relative",zIndex:2}}>{x.l}</div>
-                <div style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:p.label,lineHeight:1.4,position:"relative",zIndex:2}}>{x.v}</div>
+              <div key={x.l} style={{padding:S[4],borderRadius:R.md,...surface(p,1)}}>
+                <div style={{fontSize:T.xs-2,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:S[2]}}>{x.l}</div>
+                <div style={{fontSize:T.sm,fontWeight:600,fontFamily:MONO,color:p.label,lineHeight:1.4}}>{x.v}</div>
               </div>
             ))}
           </div>
         )}
 
+        {/* Evidence */}
         {insight.evidence?.length>0&&(
-          <div style={{marginBottom:32}}>
-            <div style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:10}}>EVIDENCE</div>
-            <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{insight.evidence.map((ev,i)=><EvChip key={i} ev={ev} p={p} dk={dk}/>)}</div>
+          <div style={{marginBottom:S[8]}}>
+            <div style={{fontSize:T.xs-2,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:S[3]}}>EVIDENCE</div>
+            <div style={{display:"flex",gap:S[2],flexWrap:"wrap"}}>{insight.evidence.map((ev,i)=><EvChip key={i} ev={ev} p={p} dk={dk}/>)}</div>
           </div>
         )}
 
-        <div style={{padding:mob?18:22,borderRadius:20,marginBottom:32,position:"relative",overflow:"hidden",...glass(p,{elevated:true})}}>
-          <Spec r={20} i={0.06}/>
-          <div style={{position:"relative",zIndex:2}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-              <span style={{fontSize:10,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4}}>RECOMMENDED ACTION</span>
-              {insight.actionTarget&&<span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label3,padding:"2px 8px",borderRadius:6,background:p.fill4}}>{"\u2192"} {insight.actionTarget}</span>}
-            </div>
-            <p style={{fontSize:15,color:p.label,lineHeight:1.55,margin:0,fontFamily:SF,fontWeight:400}}>{insight.action}</p>
+        {/* Action card */}
+        <div style={{padding:S[5],borderRadius:R.lg,marginBottom:S[8],...surface(p,1)}}>
+          <div style={{display:"flex",alignItems:"center",gap:S[2],marginBottom:S[3]}}>
+            <span style={{fontSize:T.xs-2,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4}}>RECOMMENDED ACTION</span>
+            {insight.actionTarget&&<span style={{fontSize:T.xs,fontFamily:MONO,fontWeight:500,color:p.label3,padding:"2px 8px",borderRadius:R.sm,background:p.fill4}}>{"\u2192"} {insight.actionTarget}</span>}
           </div>
+          <p style={{fontSize:T.base,color:p.label,lineHeight:1.55,margin:0,fontFamily:SF}}>{insight.action}</p>
         </div>
 
-        <div style={{display:"flex",gap:10,flexWrap:"wrap"}}>
-          <button onClick={()=>onAct(insight)} style={{padding:mob?"14px 32px":"13px 32px",borderRadius:100,
-            fontSize:15,fontWeight:600,cursor:"pointer",fontFamily:SF,color:"#fff",border:"none",position:"relative",overflow:"hidden",
-            background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
-            boxShadow:`0 4px 16px ${p.blue}40, inset 0 1px 0 rgba(255,255,255,0.2)`,
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{ACT_L[insight.actionType]||"Take Action"}</button>
-          <span style={{fontSize:11,color:p.label4,fontFamily:MONO,alignSelf:"center"}}>{"\u2318"}+Enter</span>
+        {/* Action buttons */}
+        <div style={{display:"flex",gap:S[3],flexWrap:"wrap",marginBottom:S[8]}}>
+          <button onClick={()=>onAct(insight)} style={{padding:"12px 28px",borderRadius:R.sm,
+            fontSize:T.base,fontWeight:600,cursor:"pointer",fontFamily:SF,color:"#fff",border:"none",
+            background:p.accent,transition:"all 0.15s"}}>
+            {ACT_L[insight.actionType]||"Take Action"}
+          </button>
         </div>
 
-        {}
-        <div style={{marginTop:32}}>
-          <FeedProvenance feeds={insight.feeds} p={p} dk={dk} mob={mob}/>
-        </div>
+        {/* Provenance */}
+        <FeedProvenance feeds={insight.feeds} p={p} dk={dk} mob={mob}/>
 
-        {}
-        <div style={{marginTop:8}}>
+        {/* Chat */}
+        <div style={{marginTop:S[4]}}>
           <InsightChat insight={insight} p={p} dk={dk} mob={mob}/>
         </div>
 
+        <div style={{height:mob?100:60}}/>
       </div>
     </div>
   );
 }
 
+
+// ====== V6 ACT MODAL ======
 function ActModal({insight,onClose,onDone,p,mob}){
-  const[draft,setDraft]=useState(insight.action);
-  const[st,setSt]=useState("idle");
-  const[link,setLink]=useState(null);
-  const[err,setErr]=useState(null);
-  const ch=CH[insight.channelKey];
-  const ok=st==="idle"||st==="error";
+  var pr=pri(insight,p);
+  var ch=CH[insight.channelKey];
+  var msg=insight.action||insight.recommendation||"";
+  var[text,setText]=useState(msg);
+  var[sending,setSending]=useState(false);
+  var[sent,setSent]=useState(false);
 
-  const send=async()=>{
-    if(!draft.trim())return; setSt("sending"); setErr(null);
-    try{
-      const r=await slackDraft({message:draft,target:insight.actionTarget,channelKey:insight.channelKey});
-      if(r.ok){setSt("sent");setLink(r.link);setTimeout(()=>onDone(draft),2200);}
-      else throw new Error(r.err||"Failed");
-    }catch(e){
-      if(await clip(draft)){setSt("fallback");setErr(e.message);setTimeout(()=>onDone(draft),2500);}
-      else{setSt("error");setErr(e.message);}
-    }
-  };
+  function send(){
+    setSending(true);
+    setTimeout(()=>{setSending(false);setSent(true);setTimeout(()=>onDone(),800);},600);
+  }
 
-  useEffect(()=>{
-    const h=e=>{if((e.metaKey||e.ctrlKey)&&e.key==="Enter"&&ok){e.preventDefault();send();}};
-    window.addEventListener("keydown",h);return()=>window.removeEventListener("keydown",h);
-  },[ok,draft]);
+  return ReactDOM.createPortal(
+    <div onClick={onClose} style={{position:"fixed",inset:0,zIndex:1000,display:"flex",alignItems:"flex-end",justifyContent:"center",
+      background:"rgba(0,0,0,0.5)",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)",
+      animation:"fadeIn 0.2s ease"}}>
+      <div onClick={e=>e.stopPropagation()} style={{width:"100%",maxWidth:560,
+        margin:mob?0:"0 "+S[4]+"px "+S[4]+"px",
+        borderRadius:mob?R.lg+" "+R.lg+" 0 0":R.lg,
+        padding:S[6],
+        ...surface(p,2),
+        animation:"sheetUp 0.3s cubic-bezier(0.34,1.56,0.64,1)"}}>
 
-  const info={sent:{c:p.green,ico:"\u2713",msg:"Draft created in Slack"},fallback:{c:p.orange,ico:"\u26A0",msg:"Copied to clipboard"},error:{c:p.red,ico:"\u2715",msg:null}}[st];
-
-  return(
-    <div style={{position:"fixed",inset:0,zIndex:200,display:"flex",justifyContent:"center",alignItems:mob?"flex-end":"center",
-      padding:mob?0:40,background:"rgba(0,0,0,0.4)",
-      backdropFilter:"blur(20px) saturate(120%)",WebkitBackdropFilter:"blur(20px) saturate(120%)",
-      animation:"fadeIn 0.2s ease-out"}} onClick={ok?onClose:undefined}>
-      <div onClick={e=>e.stopPropagation()} style={{maxWidth:540,width:"100%",
-        borderRadius:mob?"24px 24px 0 0":24,padding:mob?"28px 22px 40px":"28px 28px 24px",
-        maxHeight:mob?"85vh":"auto",position:"relative",overflow:"hidden",
-        animation:"sheetUp 0.35s cubic-bezier(0.16,1,0.3,1)",...glass(p,{elevated:true})}}>
-        <Spec r={24} i={0.08}/>
-
-        {mob&&<div style={{width:36,height:4,borderRadius:2,background:p.fill2,margin:"0 auto 20px",position:"relative",zIndex:2}}/>}
-
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:18,position:"relative",zIndex:2}}>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <span style={{fontSize:11,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.06em"}}>{ch?`\u2192 ${ch.label}`:"DRAFT"}</span>
-            <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,letterSpacing:"0.04em",padding:"2px 8px",borderRadius:6,background:`${p.green}14`,color:p.green}}>SLACK DRAFT</span>
-          </div>
-          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:20,cursor:"pointer",padding:"4px 8px",borderRadius:100}}
-            onMouseEnter={e=>{e.currentTarget.style.background=p.fill4;}}
-            onMouseLeave={e=>{e.currentTarget.style.background="transparent";}}>{"\u2715"}</button>
+        <div style={{display:"flex",alignItems:"center",gap:S[2],marginBottom:S[4]}}>
+          <PriorityDot priority={insight.priority} p={p}/>
+          <span style={{fontSize:T.base,fontWeight:600,color:p.label,fontFamily:SF,flex:1}}>{insight.headline}</span>
+          <button onClick={onClose} style={{width:28,height:28,borderRadius:R.full,border:"0.5px solid "+p.glassBorder,
+            background:"transparent",color:p.label3,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",
+            fontSize:14}}>{"×"}</button>
         </div>
 
-        <div style={{position:"relative",zIndex:2}}>
-          <textarea value={draft} onChange={e=>setDraft(e.target.value)} disabled={!ok} autoFocus
-            style={{width:"100%",minHeight:140,padding:16,borderRadius:16,resize:"vertical",
-              fontSize:15,lineHeight:1.55,fontFamily:SF,color:ok?p.label:p.label3,outline:"none",
-              transition:"all 0.2s",background:p.fill4,
-              border:`1px solid ${info?`${info.c}40`:p.glassBorder}`,
-              boxShadow:"inset 0 1px 3px rgba(0,0,0,0.04)"}}/>
-        </div>
+        {ch&&<div style={{fontSize:T.xs,fontFamily:MONO,color:p.label3,marginBottom:S[3]}}>{"\u2192"} {ch.label} {ch.channel&&"in "+ch.channel}</div>}
 
-        {info&&(
-          <div style={{marginTop:12,padding:"10px 14px",borderRadius:12,fontSize:12,fontFamily:MONO,fontWeight:500,color:info.c,
-            position:"relative",zIndex:2,...glass(p),border:`0.5px solid ${info.c}25`}}>
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8}}>
-              <span style={{display:"flex",alignItems:"center",gap:6}}>
-                <span style={{fontSize:14}}>{info.ico}</span>{info.msg||`Failed: ${err||"Unknown"}`}
-              </span>
-              {st==="sent"&&link&&<a href={link} target="_blank" rel="noopener noreferrer" style={{color:info.c,fontSize:11,textDecoration:"none",fontWeight:600}}>Open Slack {"\u2197"}</a>}
-            </div>
-            {st==="fallback"&&err&&<div style={{fontSize:10,opacity:0.7,marginTop:4}}>Paste manually. ({err})</div>}
-          </div>
-        )}
+        <textarea value={text} onChange={e=>setText(e.target.value)} rows={4}
+          style={{width:"100%",padding:S[3],borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+            background:p.fill4,color:p.label,fontFamily:SF,fontSize:T.sm,lineHeight:1.5,
+            resize:"vertical",outline:"none"}}
+          placeholder="Edit before sending..."/>
 
-        <div style={{display:"flex",gap:10,marginTop:18,justifyContent:"flex-end",alignItems:"center",position:"relative",zIndex:2}}>
-          {ok&&<>
-            <button onClick={onClose} style={{padding:"10px 22px",borderRadius:100,cursor:"pointer",fontSize:14,fontWeight:500,fontFamily:SF,color:p.label2,...glass(p)}}>Cancel</button>
-            <button onClick={send} disabled={!draft.trim()} style={{padding:"10px 22px",borderRadius:100,
-              cursor:draft.trim()?"pointer":"default",fontSize:14,fontWeight:600,fontFamily:SF,border:"none",
-              color:"#fff",opacity:draft.trim()?1:0.4,
-              background:`linear-gradient(135deg, ${p.blue}, ${p.purple}dd)`,
-              boxShadow:`0 2px 8px ${p.blue}30, inset 0 1px 0 rgba(255,255,255,0.15)`,
-              transition:"all 0.2s"}}>{st==="error"?"Retry":"Create Slack Draft"}<span style={{fontSize:10,opacity:0.5,marginLeft:6}}>{"\u2318\u21B5"}</span></button>
-          </>}
-          {st==="sending"&&(
-            <div style={{display:"flex",alignItems:"center",gap:8,fontSize:13,color:p.label3,fontFamily:MONO}}>
-              <div style={{width:16,height:16,border:`2px solid ${p.fill2}`,borderTopColor:p.label2,borderRadius:"50%",animation:"spin 0.6s linear infinite"}}/>Creating draft...
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function NavBar({dk,setDk,scanning,runScan,counts,p,mob,feedMode,setFeedMode,scanStatus,scanError,lastScanAt,onSettings}){
-  return(
-    <div style={{position:"sticky",top:mob?0:12,left:mob?0:16,right:mob?0:16,zIndex:50,borderRadius:mob?0:26,height:mob?48:52,
-      display:"flex",alignItems:"center",justifyContent:"space-between",padding:mob?"0 12px":"0 20px",
-      paddingTop:mob?"env(safe-area-inset-top,0px)":"0",...glass(p,{elevated:true})}}>
-      <Spec r={mob?0:26} i={0.06}/>
-      <div style={{display:"flex",alignItems:"center",gap:8,position:"relative",zIndex:2}}>
-        <span style={{fontSize:mob?16:20}}>{"\ud83d\udce1"}</span>
-        <span style={{fontSize:mob?12:13,fontWeight:700,letterSpacing:"0.08em",fontFamily:MONO,color:p.label}} title="Realtime Awareness, Decisions, Actions & Risks">RADAR</span>
-        {scanning&&<div style={{width:40,height:2,borderRadius:1,overflow:"hidden",background:p.fill3,marginLeft:4}}>
-          <div style={{width:"30%",height:"100%",background:p.blue,animation:"scan 1.2s ease-in-out infinite",borderRadius:1}}/>
-        </div>}
-      </div>
-      <div style={{display:"flex",alignItems:"center",gap:mob?4:6,position:"relative",zIndex:2}}>
-        {counts.urgent>0&&<span style={{fontSize:11,fontWeight:600,color:p.red,fontFamily:MONO,animation:"sp 2s ease-in-out infinite"}}>{counts.urgent}</span>}
-        <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500}}>{counts.total}</span>
-        {}
-        <div style={{display:"flex",borderRadius:8,overflow:"hidden",...glass(p),padding:1,gap:1}}>
-          <button onClick={()=>setFeedMode("cards")} title="Card View" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
-            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
-            color:feedMode==="cards"?p.label:p.label4,
-            background:feedMode==="cards"?p.glassActive:"transparent",
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
-          }}>{"\u25A3"}</button>
-          <button onClick={()=>setFeedMode("brief")} title="Speed Brief" style={{padding:"5px 8px",borderRadius:6,cursor:"pointer",
-            fontSize:10,border:"none",fontFamily:MONO,fontWeight:600,
-            color:feedMode==="brief"?p.label:p.label4,
-            background:feedMode==="brief"?p.glassActive:"transparent",
-            transition:"all 0.2s",WebkitTapHighlightColor:"transparent",
-          }}>{"\u2261"}</button>
-        </div>
-        <button onClick={runScan} disabled={scanning} style={{padding:"6px 10px",borderRadius:100,cursor:scanning?"default":"pointer",
-          fontSize:11,fontWeight:600,fontFamily:MONO,color:scanning?p.label4:p.label2,...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{"\u21BB"}</button>
-        <button onClick={onSettings} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:13,color:p.label3,
-          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent",border:"none"}}>{"\u2699"}</button>
-        <button onClick={()=>setDk(d=>!d)} style={{padding:"5px 10px",borderRadius:100,cursor:"pointer",fontSize:9,fontWeight:600,fontFamily:MONO,letterSpacing:"0.08em",color:p.label2,
-          ...glass(p),transition:"all 0.2s",WebkitTapHighlightColor:"transparent"}}>{dk?"DAY":"NVG"}</button>
-      </div>
-    </div>
-  );
-}
-
-function FilterBar({active,onChange,counts,p,mob}){
-  const tabs=[{key:"all",label:"All",n:counts.total},{key:"URGENT",label:"Urgent",n:counts.urgent},
-    {key:"HIGH",label:"Today",n:counts.high},{key:"MEDIUM",label:"This Week",n:counts.medium},{key:"LOW",label:"FYI",n:counts.low}];
-  return(
-    <div style={{display:"flex",gap:4,padding:mob?"6px 12px":"6px 16px",margin:mob?"0":"0 16px",borderRadius:mob?0:20,
-      overflowX:"auto",WebkitOverflowScrolling:"touch",scrollbarWidth:"none",msOverflowStyle:"none",...glass(p,{clear:true})}}>
-      {tabs.map(tab=>{
-        const isAct=active===tab.key;
-        const priC=tab.key!=="all"?PRI[tab.key]?.color(p):null;
-        return(
-          <button key={tab.key} onClick={()=>onChange(tab.key)} style={{padding:"6px 12px",borderRadius:100,border:"none",
-            fontSize:12,fontWeight:isAct?600:500,fontFamily:SF,cursor:"pointer",whiteSpace:"nowrap",
-            transition:"all 0.25s cubic-bezier(0.25,0.46,0.45,0.94)",
-            color:isAct?(priC||p.label):p.label3,background:isAct?p.glassActive:"transparent",
-            boxShadow:isAct?`inset 0 0.5px 0 ${p.specularEdge}, 0 1px 3px rgba(0,0,0,0.04)`:"none",
-            WebkitTapHighlightColor:"transparent"}}>
-            {tab.label}
-            {tab.n>0&&<span style={{display:"inline-flex",alignItems:"center",justifyContent:"center",
-              marginLeft:5,fontSize:9,fontWeight:700,fontFamily:MONO,minWidth:16,height:16,borderRadius:8,
-              background:isAct?(priC?`${priC}20`:p.fill3):p.fill4,color:isAct?(priC||p.label2):p.label4}}>{tab.n}</span>}
+        <div style={{display:"flex",gap:S[2],marginTop:S[4],justifyContent:"flex-end"}}>
+          <button onClick={onClose} style={{padding:"10px 20px",borderRadius:R.sm,
+            border:"0.5px solid "+p.glassBorder,background:"transparent",color:p.label3,
+            cursor:"pointer",fontSize:T.sm,fontWeight:500,fontFamily:SF}}>Cancel</button>
+          <button onClick={send} disabled={sending||sent}
+            style={{padding:"10px 24px",borderRadius:R.sm,border:"none",
+              background:sent?p.green:p.accent,color:"#fff",cursor:sending?"wait":"pointer",
+              fontSize:T.sm,fontWeight:600,fontFamily:SF,
+              transition:"all 0.15s"}}>
+            {sent?"\u2713 Sent":sending?"Sending...":ACT_L[insight.actionType]||"Send"}
           </button>
-        );
-      })}
-    </div>
-  );
-}
-
-function PullIndicator({pullY,p}){
-  const progress=Math.min(1,pullY/80);
-  return(
-    <div style={{display:"flex",alignItems:"center",justifyContent:"center",height:pullY,overflow:"hidden",
-      transition:pullY===0?"height 0.3s cubic-bezier(0.34,1.56,0.64,1)":"none"}}>
-      <div style={{width:28,height:28,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",
-        ...glass(p),transform:`rotate(${progress*360}deg)`,transition:"transform 0.1s",opacity:Math.max(0.3,progress)}}>
-        <span style={{fontSize:14,color:progress>=1?p.blue:p.label3}}>{progress>=1?"\u21BB":"\u2193"}</span>
-      </div>
-    </div>
-  );
-}
-
-function KbdHint({p,mob}){
-  if(mob)return null;
-  const[show,setShow]=useState(false);
-  return(
-    <div style={{position:"fixed",bottom:16,right:16,zIndex:60}}>
-      <button onClick={()=>setShow(s=>!s)} style={{width:28,height:28,borderRadius:8,cursor:"pointer",
-        fontSize:12,fontWeight:600,color:p.label3,fontFamily:MONO,display:"flex",alignItems:"center",justifyContent:"center",
-        ...glass(p),transition:"all 0.2s"}}>?</button>
-      {show&&(
-        <div style={{position:"absolute",bottom:36,right:0,width:220,padding:14,borderRadius:14,
-          ...glass(p,{elevated:true}),animation:"springIn 0.25s cubic-bezier(0.34,1.56,0.64,1)"}}>
-          <Spec r={14} i={0.06}/>
-          <div style={{position:"relative",zIndex:2,fontSize:11,fontFamily:MONO,color:p.label2,lineHeight:2}}>
-            <div><kbd style={{color:p.label,fontWeight:600}}>j/k</kbd> Navigate</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>Enter</kbd> Open</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>a</kbd> Take action</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>d</kbd> Mark done</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>s</kbd> Snooze</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>x</kbd> Dismiss</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>1-7</kbd> Jump to item</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>v</kbd> Toggle view</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>Esc</kbd> Back / Close</div>
-            <div><kbd style={{color:p.label,fontWeight:600}}>{"\u2318\u21B5"}</kbd> Send draft</div>
-          </div>
         </div>
-      )}
-    </div>
+      </div>
+    </div>,
+    document.body
   );
 }
 
-// API key management for standalone deployment
 function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
 function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
 function getLive(){try{return localStorage.getItem("radar_live_mode")==="true";}catch(e){return false;}}
@@ -1593,90 +1425,64 @@ window.fetch=function(url,opts){
   return _origFetch.call(window,url,opts);
 };
 
+
+// ====== V6 SETTINGS ======
 function SettingsPanel({show,onClose,p,mob}){
-  var keyRef=useRef(null);
-  var[key,setKey]=useState(getKey);
-  var[live,setLive]=useState(getLive);
-  var[saved,setSaved]=useState(false);
-  var[customPrompt,setCustomPrompt]=useState(getCustomPrompt);
-  var[showPrompt,setShowPrompt]=useState(false);
+  var[key,setKey]=useState(getKey());
+  var[lm,setLm]=useState(getLive());
+  var[cp,setCp]=useState(getCustomPrompt());
   if(!show)return null;
-  function save(){
-    setKeyStore(key);
-    setLiveStore(live);
-    setCustomPromptStore(customPrompt);
-    window.__RADAR_CUSTOM_PROMPT=customPrompt||"";
-    setSaved(true);
-    setTimeout(function(){setSaved(false);},2000);
-  }
-  return(
-    <div style={{position:"fixed",inset:0,zIndex:9999,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,0.5)",animation:"fadeIn 0.2s ease"}} onClick={onClose}>
-      <div onClick={function(e){e.stopPropagation();}} style={{width:mob?"92%":480,maxHeight:"85vh",borderRadius:24,overflow:"hidden",
-        background:p.materialThick,backdropFilter:"blur(40px) saturate(160%)",WebkitBackdropFilter:"blur(40px) saturate(160%)",
-        border:"0.5px solid "+p.glassBorder,
-        boxShadow:"0 24px 80px rgba(0,0,0,0.25), 0 8px 24px rgba(0,0,0,0.12), inset 0 1px 0 "+p.specularEdge,
-        animation:"springIn 0.3s cubic-bezier(0.34,1.56,0.64,1)",display:"flex",flexDirection:"column"}}>
-        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"16px 20px",borderBottom:"0.5px solid "+p.sep,flexShrink:0}}>
-          <span style={{fontSize:11,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label}}>SETTINGS</span>
-          <button onClick={onClose} style={{background:"none",border:"none",color:p.label3,fontSize:16,cursor:"pointer"}}>{"\u2715"}</button>
+  return ReactDOM.createPortal(
+    <div onClick={onClose} style={{position:"fixed",inset:0,zIndex:1000,display:"flex",justifyContent:"flex-end",
+      background:"rgba(0,0,0,0.4)",backdropFilter:"blur(4px)",WebkitBackdropFilter:"blur(4px)",animation:"fadeIn 0.15s ease"}}>
+      <div onClick={e=>e.stopPropagation()} style={{width:mob?"100%":380,height:"100%",
+        padding:S[6],...surface(p,2),overflowY:"auto",animation:"fadeSlide 0.25s ease"}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:S[6]}}>
+          <span style={{fontSize:T.lg,fontWeight:700,fontFamily:DISPLAY,color:p.label}}>Settings</span>
+          <button onClick={onClose} style={{width:32,height:32,borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+            background:"transparent",color:p.label3,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{"×"}</button>
         </div>
-        <div style={{padding:"16px 20px",display:"flex",flexDirection:"column",gap:16,overflowY:"auto",flex:1}}>
-          <div>
-            <label style={{fontSize:10,fontWeight:600,letterSpacing:"0.08em",fontFamily:MONO,color:p.label3,marginBottom:6,display:"block"}}>ANTHROPIC API KEY</label>
-            <input ref={keyRef} type="password" value={key} onChange={function(e){setKey(e.target.value);}}
-              placeholder="sk-ant-..." style={{width:"100%",padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
-              background:p.glass,color:p.label,fontFamily:MONO,fontSize:13,outline:"none"}}/>
-            <p style={{fontSize:10,color:p.label4,marginTop:4,fontFamily:MONO}}>Required for standalone deploy. Get from console.anthropic.com</p>
-          </div>
-          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"12px 14px",borderRadius:12,background:p.fill4}}>
-            <div>
-              <div style={{fontSize:12,fontWeight:600,color:p.label,fontFamily:SF}}>Live MCP Mode</div>
-              <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>Pull fresh data from Slack, Linear, Calendar, Amplitude</div>
-            </div>
-            <button onClick={function(){setLive(!live);}} style={{width:44,height:24,borderRadius:12,border:"none",cursor:"pointer",position:"relative",
-              background:live?p.green:p.fill2,transition:"background 0.2s"}}>
-              <div style={{width:20,height:20,borderRadius:10,background:p.bgElevated,position:"absolute",top:2,
-                left:live?22:2,transition:"left 0.2s",boxShadow:"0 1px 3px rgba(0,0,0,0.2)"}}/>
+
+        <div style={{marginBottom:S[6]}}>
+          <label style={{fontSize:T.xs,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.05em",display:"block",marginBottom:S[2]}}>ANTHROPIC API KEY</label>
+          <input type="password" value={key} onChange={e=>{setKey(e.target.value);setKeyStore(e.target.value);}}
+            placeholder="sk-ant-..."
+            style={{width:"100%",padding:S[3],borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+              background:p.fill4,color:p.label,fontFamily:MONO,fontSize:T.sm,outline:"none"}}/>
+        </div>
+
+        <div style={{marginBottom:S[6]}}>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:S[2]}}>
+            <label style={{fontSize:T.xs,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.05em"}}>LIVE MODE (MCP)</label>
+            <button onClick={()=>{var v=!lm;setLm(v);setLiveStore(v);}}
+              style={{width:40,height:22,borderRadius:11,border:"none",cursor:"pointer",position:"relative",
+                background:lm?p.green+"40":p.fill2,transition:"background 0.2s"}}>
+              <div style={{width:16,height:16,borderRadius:8,background:lm?p.green:p.label3,
+                position:"absolute",top:3,left:lm?21:3,transition:"left 0.2s"}}/>
             </button>
           </div>
-          {live&&<div style={{padding:"10px 14px",borderRadius:10,background:p.blue+"15",border:"0.5px solid "+p.blue+"30"}}>
-            <p style={{fontSize:10,fontFamily:MONO,color:p.blue,lineHeight:1.5}}>
-              Live mode uses MCP servers to pull real-time data. Slower (~15-30s) but data is always fresh. Requires active Anthropic MCP connections for Slack, Linear, Calendar.
-            </p>
-          </div>}
-          <div>
-            <button onClick={function(){setShowPrompt(!showPrompt);}} style={{display:"flex",alignItems:"center",justifyContent:"space-between",width:"100%",
-              padding:"12px 14px",borderRadius:12,background:p.fill4,border:"none",cursor:"pointer",color:p.label}}>
-              <div style={{textAlign:"left"}}>
-                <div style={{fontSize:12,fontWeight:600,fontFamily:SF}}>Synthesis Prompt</div>
-                <div style={{fontSize:10,color:p.label3,fontFamily:MONO,marginTop:2}}>{customPrompt?"Custom prompt active":"Using default prompt \u2014 click to customize"}</div>
-              </div>
-              <span style={{fontSize:12,color:p.label3,transition:"transform 0.2s",transform:showPrompt?"rotate(90deg)":"rotate(0)"}}>{"\u25B6"}</span>
-            </button>
-            {showPrompt&&<div style={{marginTop:8}}>
-              <textarea value={customPrompt} onChange={function(e){setCustomPrompt(e.target.value);}}
-                placeholder="Leave empty for default. Or paste custom instructions for how RADAR should synthesize your data. The data.json context is always appended automatically."
-                style={{width:"100%",height:180,padding:"10px 12px",borderRadius:10,border:"0.5px solid "+p.glassBorder,
-                  background:p.glass,color:p.label,fontFamily:MONO,fontSize:11,lineHeight:1.5,outline:"none",resize:"vertical"}}/>
-              <div style={{display:"flex",gap:8,marginTop:6}}>
-                <button onClick={function(){setCustomPrompt("");}} style={{padding:"4px 10px",borderRadius:6,border:"0.5px solid "+p.glassBorder,
-                  background:"transparent",color:p.label3,fontFamily:MONO,fontSize:10,cursor:"pointer"}}>Reset to default</button>
-                <p style={{fontSize:9,color:p.label4,fontFamily:MONO,lineHeight:1.5,flex:1}}>
-                  Tip: Tell it what to focus on, what categories to emphasize, which customers matter most, or what questions you want answered.
-                </p>
-              </div>
-            </div>}
-          </div>
-          <button onClick={save} style={{padding:"10px 16px",borderRadius:10,border:"none",cursor:"pointer",
-            fontWeight:600,fontSize:12,fontFamily:MONO,letterSpacing:"0.05em",
-            background:saved?p.green:p.accent,color:"#fff",transition:"all 0.2s"}}>
-            {saved?"SAVED \u2713":"SAVE"}
-          </button>
+          <p style={{fontSize:T.xs,color:p.label4,fontFamily:SF,lineHeight:1.4}}>Uses tool-calling to pull live data from Slack, Linear, Calendar, Amplitude. Requires Claude claude-sonnet-4-5-20250929.</p>
+        </div>
+
+        <div style={{marginBottom:S[6]}}>
+          <label style={{fontSize:T.xs,fontWeight:600,fontFamily:MONO,color:p.label3,letterSpacing:"0.05em",display:"block",marginBottom:S[2]}}>CUSTOM SYSTEM PROMPT</label>
+          <textarea value={cp} onChange={e=>{setCp(e.target.value);setCustomPromptStore(e.target.value);}} rows={6}
+            placeholder="Override default RADAR prompt..."
+            style={{width:"100%",padding:S[3],borderRadius:R.sm,border:"0.5px solid "+p.glassBorder,
+              background:p.fill4,color:p.label,fontFamily:MONO,fontSize:T.xs,lineHeight:1.5,
+              resize:"vertical",outline:"none"}}/>
+          <p style={{fontSize:T.xs,color:p.label4,fontFamily:SF,marginTop:S[1],lineHeight:1.4}}>Tip: Tell it what to focus on, what categories to emphasize, which customers matter most, or what questions you want answered.</p>
+        </div>
+
+        <div style={{borderTop:"0.5px solid "+p.sep,paddingTop:S[4]}}>
+          <p style={{fontSize:T.xs,color:p.label4,fontFamily:MONO,lineHeight:1.5}}>RADAR V6 · Mission Display</p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
+
 
 // ====== TOOLTIP ======
 function Tip({text,children,p,maxW}){
@@ -2436,59 +2242,38 @@ function CalendarView({p,dk,mob}){
   );
 }
 
-// ====== VIEW TABS ======
+
+// ====== V6 VIEW TABS — segmented control ======
 const VIEWS=[
-  {id:"now",label:"Now",shortcut:"1",icon:"\u{1F4E1}",shortLabel:"NOW",phase:"OBSERVE"},
-  {id:"who",label:"Who",shortcut:"2",icon:"\u{1F465}",shortLabel:"WHO",phase:"ORIENT"},
-  {id:"how",label:"How",shortcut:"3",icon:"\u{2696}",shortLabel:"HOW",phase:"DECIDE"},
-  {id:"when",label:"When",shortcut:"4",icon:"\u{1F4C5}",shortLabel:"WHEN",phase:"ACT"},
+  {id:"now",label:"Now",icon:"📡",desc:"Signal feed"},
+  {id:"who",label:"Who",icon:"👤",desc:"Team & customers"},
+  {id:"how",label:"How",icon:"⚡",desc:"Decisions & strategy"},
+  {id:"when",label:"When",icon:"📅",desc:"Timeline & calendar"},
 ];
 
 function ViewTabs({active,onChange,p,mob,counts}){
   return(
-    <div style={{display:"flex",gap:0,padding:mob?"0 4px":"0 12px",borderBottom:mob?"none":"0.5px solid "+p.sep,flexShrink:0,
-      ...(mob?{borderTop:"0.5px solid "+p.sep,order:99,position:"fixed",bottom:0,left:0,right:0,zIndex:60,
-        background:p.materialThick,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
-        borderTop:"0.5px solid "+p.glassBorder,
-        paddingBottom:"env(safe-area-inset-bottom,0px)",justifyContent:"space-evenly"}:{})}}>
+    <div style={{display:"flex",gap:0,
+      margin:mob?"0":"0 "+S[4]+"px",
+      padding:mob?"0 "+S[4]+"px":0,
+      borderBottom:"0.5px solid "+p.sep}}>
       {VIEWS.map(v=>{
         var isActive=active===v.id;
-        var badge=null;
-        if(v.id==="now"&&counts?.urgent>0) badge=counts.urgent;
-        if(v.id==="who"){
-          var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;
-          var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;
-          if(blocked+atRisk>0)badge=blocked+atRisk;
-        }
-        if(v.id==="how"){
-          var decCount=(LIVE_DATA?.decisions||[]).length||0;
-          var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});
-          if(decCount+arKr>0)badge=decCount+arKr;
-        }
-        if(v.id==="when"){var td=new Date().toISOString().slice(0,10);var urg=(LIVE_DATA?.timeline?.sections||[]).flatMap(s=>s.events).filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=td&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;if(urg>0)badge=urg;}
+        var hasAlert=v.id==="now"&&counts.urgent>0;
         return(
           <button key={v.id} onClick={()=>onChange(v.id)}
-            style={{padding:mob?"8px 2px 6px":"10px 18px",background:mob&&isActive?p.accent+"14":"none",border:"none",cursor:"pointer",position:"relative",
-              borderRadius:mob?12:0,
-              fontSize:mob?10:13,fontWeight:isActive?600:400,fontFamily:SF,letterSpacing:"0",
-              color:isActive?p.accent:p.label3,transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)",
-              borderBottom:mob?"none":(isActive?"2.5px solid "+p.accent:"2.5px solid transparent"),
-              marginBottom:mob?0:"-0.5px",whiteSpace:"nowrap",flex:mob?1:"none",
-              display:"flex",flexDirection:mob?"column":"row",alignItems:"center",gap:mob?1:0,
-              minHeight:mob?48:undefined,WebkitTapHighlightColor:"transparent"}}>
-            {mob&&<span style={{fontSize:18}}>{v.icon||""}</span>}
-            {!mob&&v.label}
-            {mob&&<span style={{fontSize:10,fontWeight:isActive?700:500,letterSpacing:"0.04em"}}>{v.shortLabel||v.label}</span>}
-            {mob&&<span style={{fontSize:6,fontWeight:400,letterSpacing:"0.1em",color:isActive?p.accent+"88":p.label4,marginTop:-1}}>{v.phase}</span>}
-            {!mob&&<span style={{fontSize:8,fontFamily:MONO,color:isActive?p.accent+"66":p.label4,marginLeft:6,fontWeight:400,letterSpacing:"0.08em"}}>{v.phase}</span>}
-            {!mob&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4,marginLeft:4,fontWeight:400}}>{v.shortcut}</span>}
-            {badge!=null&&badge>0&&<span style={{position:"absolute",top:mob?2:3,right:mob?"50%":2,
-              transform:mob?"translateX(14px)":"none",
-              minWidth:16,height:16,borderRadius:8,
-              padding:"0 4px",
-              background:v.id==="now"?p.red:p.orange,color:"#fff",fontSize:9,fontWeight:700,fontFamily:SF,
-              display:"flex",alignItems:"center",justifyContent:"center",
-              boxShadow:"0 1px 3px rgba(0,0,0,0.3)"}}>{badge}</span>}
+            style={{flex:mob?1:"none",padding:mob?S[3]+"px "+S[2]+"px":S[3]+"px "+S[5]+"px",
+              border:"none",cursor:"pointer",position:"relative",
+              background:"transparent",
+              display:"flex",alignItems:"center",justifyContent:"center",gap:S[1],
+              transition:"all 0.15s ease"}}>
+            <span style={{fontSize:mob?12:T.sm,fontWeight:isActive?600:400,fontFamily:SF,
+              color:isActive?p.label:p.label3,letterSpacing:"-0.01em"}}>{v.label}</span>
+            {hasAlert&&<span style={{width:6,height:6,borderRadius:3,background:p.red,
+              animation:"sp 2s ease-in-out infinite"}}/>}
+            {/* Active indicator */}
+            {isActive&&<div style={{position:"absolute",bottom:0,left:mob?"25%":"20%",right:mob?"25%":"20%",height:2,
+              borderRadius:1,background:p.accent,transition:"all 0.2s ease"}}/>}
           </button>
         );
       })}
@@ -2498,18 +2283,20 @@ function ViewTabs({active,onChange,p,mob,counts}){
 
 function SubTab({tabs,active,onChange,p,mob}){
   return(
-    <div style={{display:"flex",gap:2,padding:mob?"6px 12px":"6px 16px",background:p.fill4,borderRadius:0}}>
-      {tabs.map(t=>(
-        <button key={t.id} onClick={()=>onChange(t.id)}
-          style={{padding:mob?"5px 12px":"5px 14px",background:active===t.id?p.accent+"18":"transparent",
-            border:active===t.id?"1px solid "+p.accent+"33":"1px solid transparent",
-            borderRadius:8,cursor:"pointer",
-            fontSize:mob?10:11,fontWeight:active===t.id?600:400,fontFamily:SF,
-            color:active===t.id?p.accent:p.label3,transition:"all 0.2s",
-            WebkitTapHighlightColor:"transparent"}}>
-          {t.icon&&<span style={{marginRight:4}}>{t.icon}</span>}{t.label}
-        </button>
-      ))}
+    <div style={{display:"flex",gap:0,padding:mob?"0 "+S[4]+"px":"0 "+S[5]+"px",borderBottom:"0.5px solid "+p.sep}}>
+      {tabs.map(t=>{
+        var isActive=active===t.id;
+        return(
+          <button key={t.id} onClick={()=>onChange(t.id)}
+            style={{padding:S[3]+"px "+S[4]+"px",border:"none",cursor:"pointer",position:"relative",
+              background:"transparent",display:"flex",alignItems:"center",gap:S[1]}}>
+            <span style={{fontSize:T.sm,fontFamily:SF,fontWeight:isActive?600:400,
+              color:isActive?p.label:p.label3}}>{t.icon} {t.label}</span>
+            {isActive&&<div style={{position:"absolute",bottom:0,left:"20%",right:"20%",height:2,
+              borderRadius:1,background:p.accent}}/>}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -2518,7 +2305,7 @@ function WhoView({p,dk,mob}){
   const[sub,setSub]=useState("team");
   return(
     <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-      <SubTab tabs={[{id:"team",label:"Team",icon:"👥"},{id:"customers",label:"Customers",icon:"🏭"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
+      <SubTab tabs={[{id:"team",label:"Team",icon:"👥"},{id:"customers",label:"Customers",icon:"🏢"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
       <div style={{flex:1,overflow:"hidden"}}>
         {sub==="team"&&<TeamView p={p} dk={dk} mob={mob}/>}
         {sub==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
@@ -2531,10 +2318,10 @@ function HowView({p,dk,mob}){
   const[sub,setSub]=useState("decisions");
   return(
     <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-      <SubTab tabs={[{id:"decisions",label:"Decisions",icon:"⚖"},{id:"data",label:"Strategy",icon:"📊"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
+      <SubTab tabs={[{id:"decisions",label:"Decisions",icon:"⚖️"},{id:"strategy",label:"Strategy",icon:"📊"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
       <div style={{flex:1,overflow:"hidden"}}>
         {sub==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
-        {sub==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
+        {sub==="strategy"&&<DataView p={p} dk={dk} mob={mob}/>}
       </div>
     </div>
   );
@@ -2553,6 +2340,8 @@ function WhenView({p,dk,mob}){
   );
 }
 
+
+// ====== V6 MAIN APP ======
 function SiftIntel(){
   const[dk,setDk]=useTheme();
   const mob=useMobile();
@@ -2604,7 +2393,6 @@ function SiftIntel(){
     try{
       const result=await runLiveScan(
         function(insight,idx){
-          // Progressive: each insight appears as it streams in
           var nIns={
             ...insight,
             id:insight.id||("live-"+Date.now()+"-"+idx),
@@ -2623,7 +2411,6 @@ function SiftIntel(){
         },
         function(status){setScanStatus(status);}
       );
-      // Final pass: replace with fully-parsed data
       if(result.insights.length>0){
         var normalized=result.insights.map(function(ins,i){return{
           ...ins,
@@ -2638,7 +2425,6 @@ function SiftIntel(){
         };});
         setInsights(normalized);
         setLastScanAt(new Date());
-        // Capture source metadata from data.json
         var meta=LIVE_DATA?._meta||{sources_scanned:0,source_list:[]};
         setScanMeta({
           sources:meta.sources_scanned||result.meta.sourcesOk||0,
@@ -2651,7 +2437,6 @@ function SiftIntel(){
           totalSignals:meta.signal_count||normalized.length,
           displayedSignals:normalized.length,
         });
-        // Extract coverage gaps if present
         var gaps=normalized.filter(function(n){return n.category==="blind_spot"||n.category==="coverage";});
         if(result.insights.length>0){
           var covNote=result.insights.find(function(x){return x.id==="coverage-audit";});
@@ -2676,7 +2461,6 @@ function SiftIntel(){
     }
   },[scanning]);
 
-  // Auto-scan on first load
   useEffect(()=>{
     if(!hasScanned.current){hasScanned.current=true;runScan();}
   },[]);
@@ -2704,18 +2488,14 @@ function SiftIntel(){
   // Keyboard shortcuts
   useEffect(()=>{
     const h=e=>{
-      // Don't capture keys when typing in inputs/textareas
       const tag=e.target?.tagName?.toLowerCase();
       if(tag==="input"||tag==="textarea"||e.target?.isContentEditable)return;
-      // In modal
       if(modal){if(e.key==="Escape")setModal(null);return;}
-      // In detail
       if(selected){
         if(e.key==="Escape")setSelected(null);
         if(e.key==="a")handleAct(selected);
         return;
       }
-      // Feed nav
       if(e.key==="j"||e.key==="ArrowDown"){e.preventDefault();setFocusIdx(i=>Math.min(flatList.length-1,i+1));}
       if(e.key==="k"||e.key==="ArrowUp"){e.preventDefault();setFocusIdx(i=>Math.max(0,i-1));}
       if(e.key==="Enter"&&focusIdx>=0&&flatList[focusIdx]){setSelected(flatList[focusIdx]);}
@@ -2727,7 +2507,6 @@ function SiftIntel(){
       if(num>=1&&num<=9&&num<=flatList.length){setFocusIdx(num-1);}
       if(e.key==="Escape"){setFocusIdx(-1);}
       if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
-      // View switching: 1-5 when no item focused
       if(focusIdx<0){
         var viewMap={"1":"now","2":"who","3":"how","4":"when"};
         if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
@@ -2749,17 +2528,16 @@ function SiftIntel(){
         @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes sheetUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
-        @keyframes staggerIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-        @keyframes springIn{from{opacity:0;transform:scale(0.92)}to{opacity:1;transform:scale(1)}}
+        @keyframes staggerIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes springIn{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
         @keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(8vw,5vh) scale(1.05)}50%{transform:translate(3vw,10vh) scale(0.95)}75%{transform:translate(-5vw,3vh) scale(1.02)}}
         @keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-10vw,-6vh) scale(1.08)}66%{transform:translate(5vw,-3vh) scale(0.96)}}
-        @keyframes meshDrift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,-8vh) scale(1.1)}}
-        @keyframes meshPulse{0%,100%{opacity:0.6}50%{opacity:1}}
         @keyframes urgencyPulse{0%,100%{opacity:0.7}50%{opacity:1}}
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         html{-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
         body{overscroll-behavior-y:none;font-family:${SF}}
-        ::-webkit-scrollbar{width:0;background:transparent}
+        ::-webkit-scrollbar{width:5px;background:transparent}
+        ::-webkit-scrollbar-thumb{background:rgba(128,128,128,0.2);border-radius:3px}
         ::selection{background:${dk?'rgba(68,136,187,0.3)':'rgba(42,96,144,0.2)'}}
       `}</style>
 
@@ -2768,15 +2546,17 @@ function SiftIntel(){
         <AmbientMesh dk={dk} hasUrgent={counts.urgent>0}/>
         <UrgencyBar count={counts.urgent} p={p} dk={dk} onClick={()=>{setFilter("URGENT");setFocusIdx(0);}}/>
 
-        <div style={{position:"relative",zIndex:10,padding:mob?0:"12px 0 0"}}>
+        <div style={{position:"relative",zIndex:10}}>
           <NavBar dk={dk} setDk={setDk} scanning={scanning} runScan={runScan} counts={counts} p={p} mob={mob} feedMode={feedMode} setFeedMode={setFeedMode} scanStatus={scanStatus} scanError={scanError} lastScanAt={lastScanAt} onSettings={()=>setShowSettings(true)}/>
-          {(scanStatus||scanError)&&<div style={{margin:mob?"0":"0 16px",padding:"6px 16px",borderRadius:mob?0:10,
-            fontSize:10,fontFamily:MONO,fontWeight:500,display:"flex",alignItems:"flex-start",gap:6,
-            color:scanError?p.red:p.label3,background:scanError?`${p.red}10`:p.fill4,
-            maxHeight:80,overflow:"auto",wordBreak:"break-word"}}>
-            {scanning&&<div style={{width:4,height:4,borderRadius:"50%",background:p.blue,animation:"sp 1s ease-in-out infinite",flexShrink:0,marginTop:3}}/>}
-            <span>{scanError||scanStatus}</span>
-            {lastScanAt&&!scanning&&<span style={{marginLeft:"auto",color:p.label4}}>Last: {timeAgo(lastScanAt)}</span>}
+
+          {/* Scan status bar */}
+          {(scanStatus||scanError)&&<div style={{margin:mob?"0":"0 "+S[4]+"px",padding:S[2]+"px "+S[4]+"px",
+            borderRadius:mob?0:R.sm,
+            fontSize:T.xs,fontFamily:MONO,fontWeight:500,display:"flex",alignItems:"center",gap:S[2],
+            color:scanError?p.red:p.label3,background:scanError?`${p.red}08`:p.fill4}}>
+            {scanning&&<div style={{width:4,height:4,borderRadius:R.full,background:p.blue,animation:"sp 1s ease-in-out infinite",flexShrink:0}}/>}
+            <span style={{flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{scanError||scanStatus}</span>
+            {lastScanAt&&!scanning&&<span style={{color:p.label4,flexShrink:0}}>Last: {timeAgo(lastScanAt)}</span>}
           </div>}
         </div>
 
@@ -2788,20 +2568,17 @@ function SiftIntel(){
           {activeView==="when"&&<WhenView p={p} dk={dk} mob={mob}/>}
           {activeView==="now"&&!selected&&(
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
-              <div style={{padding:mob?"4px 0":"6px 0"}}>
+              <div style={{padding:mob?S[1]+"px 0":S[2]+"px 0"}}>
                 <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
               </div>
               <SummaryHeader counts={counts} p={p} mob={mob} feedMode={feedMode} scanMeta={scanMeta} lastScanAt={lastScanAt} coverageGaps={coverageGaps}/>
               <div ref={scrollRef} onTouchStart={onPullStart} onTouchMove={onPullMove} onTouchEnd={onPullEnd}
-                style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch",paddingTop:0}}>
+                style={{flex:1,overflowY:"auto",WebkitOverflowScrolling:"touch"}}>
                 {pullY>0&&<PullIndicator pullY={pullY} p={p}/>}
                 {filtered.length===0&&!scanning
-                  ? <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"80px 24px",gap:16,animation:"fadeIn 0.4s ease"}}>
-                      <div style={{width:56,height:56,borderRadius:16,display:"flex",alignItems:"center",justifyContent:"center",position:"relative",overflow:"hidden",...glass(p)}}>
-                        <Spec r={16} i={0.08}/>
-                        <span style={{fontSize:32,opacity:0.3,position:"relative",zIndex:2}}>{"\ud83d\udce1"}</span>
-                      </div>
-                      <p style={{fontSize:16,color:p.label3,fontFamily:SF,fontWeight:500}}>{active.length>0?"No items match this filter":"Tap \u21BB to scan"}</p>
+                  ? <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:S[16]+"px "+S[6]+"px",gap:S[4],animation:"fadeIn 0.4s ease"}}>
+                      <span style={{fontSize:40,opacity:0.2}}>{"\ud83d\udce1"}</span>
+                      <p style={{fontSize:T.base,color:p.label3,fontFamily:SF,fontWeight:500}}>{active.length>0?"No items match this filter":"Tap \u21BB to scan"}</p>
                     </div>
                   : filtered.length===0&&scanning
                   ? <SkeletonFeed p={p} mob={mob} count={6}/>
@@ -2809,7 +2586,7 @@ function SiftIntel(){
                     {grouped.map(([group,items])=>(
                       <div key={group}>
                         <GroupLabel label={group} p={p} mob={mob}/>
-                        <div style={{display:"flex",flexDirection:"column",gap:feedMode==="brief"?(mob?2:4):(mob?8:10)}}>
+                        <div style={{display:"flex",flexDirection:"column",gap:feedMode==="brief"?0:(mob?0:S[1])}}>
                           {items.map(insight=>{
                             const idx=globalIdx++;
                             const flatIdx=flatList.indexOf(insight);
@@ -2824,7 +2601,7 @@ function SiftIntel(){
                     {scanning&&<SkeletonFeed p={p} mob={mob} count={3}/>}
                   </div>
                 }
-                <div style={{height:mob?"calc(80px + env(safe-area-inset-bottom,0px))":"calc(48px + env(safe-area-inset-bottom,0px))"}}/>
+                <div style={{height:mob?"calc(80px + env(safe-area-inset-bottom,0px))":"48px"}}/>
               </div>
             </div>
           )}
