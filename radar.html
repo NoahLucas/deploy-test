@@ -148,7 +148,7 @@ const PAL = {
   // Color reserved ONLY for alarm/priority states — never decorative.
   // Green/amber/red follow ISA-18.2 alarm annunciation standard.
   dark: {
-    bg:"#0a0a0c", bgRaised:"#131416", bgElevated:"#1a1b1e",
+    bg:"#0a0a0c", bgRaised:"#131416", bgElevated:"#1a1b1e", bgCard:"rgba(200,205,210,0.035)",
     glass:"rgba(200,205,210,0.04)", glassHover:"rgba(200,205,210,0.08)",
     glassActive:"rgba(200,205,210,0.12)", glassBorder:"rgba(200,205,210,0.10)",
     glassHighlight:"rgba(200,205,210,0.14)",
@@ -173,7 +173,7 @@ const PAL = {
   // NOT white (glare). NOT cool gray (fatigue). Warm neutral.
   // Chromatic signals desaturated for bright-room legibility.
   light: {
-    bg:"#e5e4e1", bgRaised:"#edeceb", bgElevated:"#f4f3f1",
+    bg:"#e5e4e1", bgRaised:"#edeceb", bgElevated:"#f4f3f1", bgCard:"rgba(255,254,252,0.65)",
     glass:"rgba(255,254,252,0.55)", glassHover:"rgba(255,254,252,0.70)",
     glassActive:"rgba(255,254,252,0.82)", glassBorder:"rgba(90,88,82,0.15)",
     glassHighlight:"rgba(255,254,252,0.75)",
@@ -631,6 +631,17 @@ function glass(p,opts){
 };
 
 // Liquid Glass specular highlight overlay — simulates light refraction on curved glass
+// V6 Surface Level 1 — cards, panels. No glass, no blur. Just border + fill.
+function card(p,opts){
+  var o=opts||{};
+  return{
+    background:o.hover?p.glassHover:p.bgCard||p.glass,
+    border:"0.5px solid "+p.glassBorder,
+    borderRadius:R.md,
+    transition:"all 0.2s ease",
+  };
+}
+
 function Spec({r,i,direction}){
   var rr=r||16,ii=i||0.06;
   var dir=direction||135;
@@ -978,71 +989,54 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
         onTouchMove={mob?onTouchMove:undefined}
         onTouchEnd={mob?onTouchEnd:undefined}
         style={{
-          margin:mob?"0 12px":"0 16px",padding:mob?"14px 16px":"18px 22px",
-          borderRadius:24,cursor:"pointer",position:"relative",overflow:"hidden",
-          transition:swiping?"none":"all 0.4s cubic-bezier(0.34,1.56,0.64,1)",
-          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px) scale(1.003)":"translateY(0) scale(1)",
+          margin:mob?"0 12px":"0 16px",padding:mob?S[3]+"px "+S[4]+"px":S[4]+"px "+S[5]+"px",
+          borderRadius:R.md,cursor:"pointer",position:"relative",overflow:"hidden",
+          transition:swiping?"none":"all 0.3s cubic-bezier(0.34,1.56,0.64,1)",
+          transform:swiping?`translateX(${swipeX}px)`:h?"translateY(-1px)":"translateY(0)",
           opacity:isDone?0.5:Math.max(0,1-Math.abs(swipeX)/200),
           animation:`staggerIn 0.45s cubic-bezier(0.34,1.56,0.64,1) ${index*0.06}s both`,
           outline:focused?`2px solid ${p.blue}`:"none",outlineOffset:2,
-          ...glass(p,{hover:h,elevated:h}),WebkitTapHighlightColor:"transparent",
+          ...card(p,{hover:h}),WebkitTapHighlightColor:"transparent",
+          borderLeft:(insight.priority||"").toUpperCase()==="URGENT"?"2px solid "+p.red:(insight.priority||"").toUpperCase()==="HIGH"?"2px solid "+p.orange:"2px solid transparent",
         }}>
 
-        <Spec r={20} i={h?0.1:0.04}/>
-
         {}
-        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8,position:"relative",zIndex:2}}>
-          <Badge priority={insight.priority} p={p}/>
-          <CatTag category={insight.category} p={p}/>
-          <Srcs sources={insight.sources} p={p} compact dk={dk}/>
-          {isDone&&<StatePill state={itemState} p={p}/>}
-          <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:8}}>
-            {insight.sparkline&&!mob&&<Sparkline data={insight.sparkline} color={pr.c} width={48} height={16}/>}
-            <span style={{fontSize:12,color:p.label3,fontFamily:MONO,fontWeight:500,letterSpacing:"0.02em"}}>{timeAgo(insight.timestamp)}</span>
+        <div style={{display:"flex",alignItems:"flex-start",gap:S[2],marginBottom:S[2],position:"relative",zIndex:2}}>
+          <span style={{display:"inline-block",width:8,height:8,borderRadius:R.full,marginTop:7,flexShrink:0,
+            background:pr.c,opacity:(insight.priority||"").toUpperCase()==="URGENT"?1:0.7,
+            boxShadow:(insight.priority||"").toUpperCase()==="URGENT"?"0 0 6px "+pr.c+"80":"none"}} />
+          <div style={{flex:1,minWidth:0}}>
+            <h3 style={{fontSize:mob?T.lg:T.lg+2,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.3,
+              margin:0,fontFamily:SYNE,letterSpacing:"-0.01em",
+              textDecoration:isDone?"line-through":"none",
+              overflow:"hidden",textOverflow:"ellipsis",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{insight.headline}</h3>
           </div>
+          {isDone&&<StatePill state={itemState} p={p}/>}
         </div>
 
         {}
-        <h3 style={{fontSize:mob?T.lg:T.xl-3,fontWeight:600,color:isDone?p.label3:p.label,lineHeight:1.32,
-          margin:"0 0 6px",fontFamily:SYNE,letterSpacing:"-0.01em",position:"relative",zIndex:2,
-          textDecoration:isDone?"line-through":"none"}}>{insight.headline}</h3>
-
-        {}
-        <p style={{fontSize:14,color:p.label2,lineHeight:1.5,margin:"0 0 10px",fontFamily:SF,fontWeight:400,
+        <p style={{fontSize:T.sm,color:p.label2,lineHeight:1.55,margin:"0 0 "+S[3]+"px",fontFamily:SF,fontWeight:400,
           position:"relative",zIndex:2,display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical",overflow:"hidden"}}>{insight.body}</p>
 
         {}
-        {insight.context&&(
-          <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center",marginBottom:8,position:"relative",zIndex:2}}>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:p.label2,padding:"2px 8px",borderRadius:8,background:p.fill4}}>{insight.context.metric}</span>
-            <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:pr.c,padding:"2px 8px",borderRadius:8,background:pr.bg}}>{insight.context.delta}</span>
-            {insight.sparkline&&mob&&<Sparkline data={insight.sparkline} color={pr.c} width={44} height={14}/>}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:S[2],position:"relative",zIndex:2}}>
+          <div style={{display:"flex",alignItems:"center",gap:S[3],fontSize:T.xs,fontFamily:MONO,color:p.label3}}>
+            {insight.context?.metric&&<span>{insight.context.metric}{insight.context?.delta?" "+insight.context.delta:""}</span>}
+            {insight.sources?.length>0&&<span style={{display:"flex",gap:2,opacity:0.5}}>
+              {insight.sources.slice(0,3).map((s,i)=><span key={i} style={{fontSize:10}}>{SVC[s]?.icon||""}</span>)}
+            </span>}
           </div>
-        )}
-
-        {}
-        <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
-          {insight.evidence?.length>0&&(
-            <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
-              <span style={{display:"inline-flex",alignItems:"center",gap:6,flexWrap:"wrap",cursor:"pointer"}}>
-                {insight.evidence.slice(0,3).map((ev,i)=>(
-                  <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
-                    style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
-                      fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
-                    onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
-                    onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
-                    <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
-                    {(function(){var l=evLabel(ev);return l.length>22?l.slice(0,20)+"\u2026":l;})()}
-                    <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
-                  </span>
-                ))}
-                {insight.evidence.length>3&&(
-                  <span style={{fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label4,padding:"2px 6px"}}>+{insight.evidence.length-3}</span>
-                )}
+          <div style={{display:"flex",alignItems:"center",gap:S[2]}}>
+            {insight.evidence?.length>0&&<EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
+              <span style={{fontSize:T.xs,fontFamily:MONO,color:p.label4,padding:"2px 6px",borderRadius:R.sm,
+                background:p.fill4,cursor:"pointer",transition:"background 0.15s"}}
+                onMouseEnter={e=>{e.currentTarget.style.background=p.fill2;}}
+                onMouseLeave={e=>{e.currentTarget.style.background=p.fill4;}}>
+                {insight.evidence.length} ev
               </span>
-            </EvidenceTip>
-          )}
-          {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
+            </EvidenceTip>}
+            <span style={{fontSize:T.xs,color:p.label4,fontFamily:MONO}}>{timeAgo(insight.timestamp)}</span>
+          </div>
         </div>
       </article>
 
@@ -1341,7 +1335,7 @@ function Detail({insight,onBack,onAct,p,dk,mob}){
           fontFamily:SYNE,letterSpacing:"-0.02em",animation:"springIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>{insight.headline}</h1>
 
         {insight.sparkline&&(
-          <div style={{marginBottom:24,padding:16,borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
+          <div style={{marginBottom:24,padding:S[4],borderRadius:R.md,...card(p)}}>
             <Spec r={16} i={0.03}/>
             <div style={{position:"relative",zIndex:2}}>
               <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:8}}>TREND</div>
@@ -1356,7 +1350,7 @@ function Detail({insight,onBack,onAct,p,dk,mob}){
           <div style={{display:"grid",gridTemplateColumns:mob?"1fr 1fr":"repeat(4,1fr)",gap:10,marginBottom:28}}>
             {[{l:"METRIC",v:insight.context.metric},{l:"DELTA",v:insight.context.delta},
               {l:"BASELINE",v:insight.context.baseline},{l:"RISK",v:insight.context.risk}].map(x=>(
-              <div key={x.l} style={{padding:mob?"12px 14px":"14px 18px",borderRadius:16,position:"relative",overflow:"hidden",...glass(p)}}>
+              <div key={x.l} style={{padding:mob?S[3]+"px":S[4]+"px",borderRadius:R.md,...card(p)}}>
                 <Spec r={16} i={0.04}/>
                 <div style={{fontSize:9,fontWeight:600,letterSpacing:"0.1em",fontFamily:MONO,color:p.label4,marginBottom:6,position:"relative",zIndex:2}}>{x.l}</div>
                 <div style={{fontSize:13,fontWeight:600,fontFamily:MONO,color:p.label,lineHeight:1.4,position:"relative",zIndex:2}}>{x.v}</div>
@@ -1782,7 +1776,7 @@ function TeamView({p,dk,mob}){
         <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>COFOUNDERS</div>
         <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:10,marginBottom:24}}>
           {cofounders.map(cf=>(
-            <div key={cf.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+            <div key={cf.name} style={{padding:S[4]+"px",borderRadius:R.md,...card(p)}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
                 <div>
                   <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF}}>{cf.name}</span>
@@ -1807,7 +1801,7 @@ function TeamView({p,dk,mob}){
       <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>DIRECT REPORTS & KEY COLLABORATORS</div>
       <div style={{display:"flex",flexDirection:"column",gap:10}}>
         {team.map(person=>(
-          <div key={person.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+          <div key={person.name} style={{padding:S[4]+"px",borderRadius:R.md,...card(p),
             borderLeft:"3px solid "+statusColor(person.status)}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
               <div style={{display:"flex",alignItems:"center",gap:10}}>
@@ -1976,7 +1970,7 @@ function CustomersView({p,dk,mob}){
             {/* Theme cards */}
             <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:20}}>
               {(voc.themes||[]).map(theme=>(
-                <div key={theme.id} style={{padding:"12px 14px",borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+                <div key={theme.id} style={{padding:S[3]+"px "+S[4]+"px",borderRadius:R.md,...card(p)}}>
                   <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
                     <div style={{display:"flex",alignItems:"center",gap:8}}>
                       <span style={{fontSize:13,fontWeight:600,color:p.label,fontFamily:SF}}>{theme.name}</span>
@@ -2058,7 +2052,7 @@ function DecisionsView({p,dk,mob}){
         {decisions.map(d=>{
           var u=urgency(d);
           return(
-            <div key={d.id} style={{padding:"16px 18px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+            <div key={d.id} style={{padding:S[4]+"px "+S[5]+"px",borderRadius:R.md,...card(p),
               borderLeft:"3px solid "+u.color}}>
               <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
                 <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF,flex:1,lineHeight:1.3}}>{d.title}</span>
@@ -2115,7 +2109,7 @@ function TimeView({p,dk,mob}){
   return(
     <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%",paddingBottom:mob?100:16}}>
       <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr",gap:16,marginBottom:20}}>
-        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+        <div style={{padding:S[5]+"px",borderRadius:R.md,...card(p)}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>TODAY</div>
           <div style={{display:"flex",gap:20,marginBottom:14}}>
             <div>
@@ -2133,7 +2127,7 @@ function TimeView({p,dk,mob}){
           </div>
           <Bar pct={todayPct} color={todayPct>70?p.red:todayPct>50?p.orange:p.green} label="Meeting load today"/>
         </div>
-        <div style={{padding:"18px 20px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+        <div style={{padding:S[5]+"px",borderRadius:R.md,...card(p)}}>
           <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:14}}>THIS WEEK</div>
           <div style={{display:"flex",gap:20,marginBottom:14}}>
             <div>
@@ -2156,7 +2150,7 @@ function TimeView({p,dk,mob}){
         </div>
       </div>
 
-      {ta.today?.prepNeeded?.length>0&&<div style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,marginBottom:16}}>
+      {ta.today?.prepNeeded?.length>0&&<div style={{padding:S[4]+"px",borderRadius:R.md,...card(p),marginBottom:16}}>
         <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.orange,marginBottom:10}}>PREP NEEDED</div>
         {ta.today.prepNeeded.map((prep,i)=>(
           <div key={i} style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.6,paddingLeft:12,borderLeft:"2px solid "+p.orange+"40",marginBottom:6}}>{prep}</div>
@@ -2210,7 +2204,7 @@ function DataView({p,dk,mob}){
       <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>STRATEGIC PILLARS {"\u00b7"} SIGNAL \u2192 EVIDENCE \u2192 DECISION</div>
       <div style={{display:"flex",flexDirection:"column",gap:14,marginBottom:24}}>
         {(sm.pillars||[]).map(pillar=>(
-          <div key={pillar.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+          <div key={pillar.name} style={{padding:S[4]+"px",borderRadius:R.md,...card(p),
             borderLeft:"3px solid "+stColor(pillar.status)}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
               <div style={{display:"flex",alignItems:"center",gap:8}}>
@@ -2246,7 +2240,7 @@ function DataView({p,dk,mob}){
       <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>PRODUCT BETS {"\u00b7"} THREE-GATE SYSTEM</div>
       <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr 1fr",gap:10,marginBottom:24}}>
         {(sm.bets||[]).map(bet=>(
-          <div key={bet.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+          <div key={bet.name} style={{padding:S[4]+"px",borderRadius:R.md,...card(p),
             borderTop:"3px solid "+stColor(bet.status)}}>
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
               <span style={{fontSize:14,fontWeight:700,color:p.label,fontFamily:SF}}>{bet.name}</span>
