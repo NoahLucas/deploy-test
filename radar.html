@@ -573,27 +573,19 @@ async function synthesizeFresh(onInsight, onProgress){
 }
 
 async function runLiveScan(onInsight, onProgress){
-  var liveMode=false;
-  try{liveMode=window.__RADAR_LIVE_MODE===true;}catch(e){}
-  if(liveMode){
-    onProgress("LIVE: gathering from Slack, Linear, Calendar, Amplitude...");
-    return synthesizeLiveMCP(onProgress);
-  }
-  // Try fresh scan via web search (no stale data)
-  onProgress("Starting fresh scan...");
+  // Always try data.json + streaming first (fast, reliable)
+  onProgress("Loading data...");
   try{
-    return await synthesizeFresh(onInsight, onProgress);
-  }catch(freshErr){
-    console.warn("[radar] Fresh scan failed, falling back to data.json:",freshErr.message);
-    // Fallback to data.json + streaming synthesis
-    if(!LIVE_DATA){
-      onProgress("Loading cached data...");
-      await loadData();
-      if(!LIVE_DATA) throw new Error("No data available and fresh scan failed: "+freshErr.message);
-    }
-    onProgress("Using cached data (fresh scan unavailable)...");
+    await loadData();
+  }catch(e){
+    console.warn("[radar] loadData failed:",e.message);
+  }
+  if(LIVE_DATA){
     return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
   }
+  // No data.json available — try fresh scan via web search
+  onProgress("No cached data, researching...");
+  return synthesizeFresh(onInsight, onProgress);
 }
 
 function useTheme(){
