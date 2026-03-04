@@ -257,9 +257,77 @@ async function clip(text){
 
 var LIVE_DATA=null;
 var DATA_URL="./data.json";
+var SERVER_URL=null; // Set to "http://localhost:3001" when server is running
+var _ws=null;
+var _stateVersion=0;
+var _onPatch=null; // Set by React app to trigger re-renders
+
+// Detect if server is available
+async function _detectServer(){
+  if(SERVER_URL) return SERVER_URL;
+  // Try common local ports
+  for(var port of [3001,3000,8080]){
+    try{
+      var r=await fetch("http://localhost:"+port+"/api/health",{signal:AbortSignal.timeout(500)});
+      if(r.ok){SERVER_URL="http://localhost:"+port;console.log("[radar] Server found at "+SERVER_URL);return SERVER_URL;}
+    }catch(e){}
+  }
+  return null;
+}
+
+// WebSocket connection for live patches
+function _connectWS(){
+  if(!SERVER_URL||_ws)return;
+  var wsUrl=SERVER_URL.replace("http","ws")+"/ws";
+  try{
+    _ws=new WebSocket(wsUrl);
+    _ws.onmessage=function(e){
+      try{
+        var msg=JSON.parse(e.data);
+        if(msg.type==="connected"){
+          _stateVersion=msg.version;
+          console.log("[ws] Connected, version "+_stateVersion);
+        }else if(msg.path&&LIVE_DATA){
+          // Apply patch to LIVE_DATA
+          _applyPatch(LIVE_DATA,msg.path,msg.value);
+          _stateVersion=msg.version||_stateVersion+1;
+          if(_onPatch)_onPatch(msg);
+        }
+      }catch(err){console.warn("[ws] Parse error:",err);}
+    };
+    _ws.onclose=function(){_ws=null;setTimeout(_connectWS,5000);};
+    _ws.onerror=function(){_ws=null;};
+  }catch(e){console.warn("[ws]",e.message);}
+}
+
+function _applyPatch(obj,path,value){
+  var parts=path.split(".");
+  var target=obj;
+  for(var i=0;i<parts.length-1;i++){
+    var k=isNaN(parts[i])?parts[i]:parseInt(parts[i]);
+    if(!target[k])target[k]={};
+    target=target[k];
+  }
+  var last=isNaN(parts[parts.length-1])?parts[parts.length-1]:parseInt(parts[parts.length-1]);
+  target[last]=value;
+}
 
 async function loadData(){
   try{
+    // Try server first
+    var serverUrl=await _detectServer();
+    if(serverUrl){
+      var r=await fetch(serverUrl+"/api/state");
+      if(r.ok){
+        var resp=await r.json();
+        LIVE_DATA=resp.data;
+        _stateVersion=resp.version;
+        _connectWS();
+        console.log("[radar] Loaded from server, version "+_stateVersion);
+        return LIVE_DATA;
+      }
+    }
+    // Fallback to static data.json
     var r=await fetch(DATA_URL);
     if(!r.ok) throw new Error("HTTP "+r.status);
     LIVE_DATA=await r.json();
@@ -308,9 +376,10 @@ async function loadData(){
         }
       });
     }
+    console.log("[radar] Loaded from static data.json (server not available)");
     return LIVE_DATA;
   }catch(e){
-    console.error("Failed to load data.json:",e);
+    console.error("Failed to load data:",e);
     return null;
   }
 }
@@ -697,6 +766,7 @@ function EvChip({ev,p,dk}){
   const[h,setH]=useState(false);
   return(
     <a href={ev.url} target="_blank" rel="noopener noreferrer"
+      onClick={e=>e.stopPropagation()}
       onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
       style={{display:"inline-flex",alignItems:"center",gap:6,padding:"5px 12px",borderRadius:10,textDecoration:"none",
         fontSize:12,fontFamily:MONO,fontWeight:500,color:p.label2,
@@ -707,6 +777,70 @@ function EvChip({ev,p,dk}){
     </a>
   );
 }
+
+function EvidenceRow({ev,p,dk}){
+  const[h,setH]=useState(false);
+  return(
+    <a href={ev.url} target="_blank" rel="noopener noreferrer"
+      onClick={e=>e.stopPropagation()}
+      onMouseEnter={()=>setH(true)} onMouseLeave={()=>setH(false)}
+      style={{display:"flex",alignItems:"center",gap:8,padding:"6px 10px",borderRadius:8,textDecoration:"none",
+        background:h?p.fill4:"transparent",transition:"background 0.15s",cursor:"pointer"}}>
+      <span style={{fontSize:11,color:svcColor(ev.source,dk),flexShrink:0,width:16,textAlign:"center"}}>{SVC[ev.source]?.icon}</span>
+      <span style={{fontSize:11,fontFamily:MONO,fontWeight:500,color:h?p.label:p.label2,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.label}</span>
+      <span style={{fontSize:9,color:p.label4,flexShrink:0}}>{"\u2197"}</span>
+    </a>
+  );
+}
+
+function EvidenceTip({evidence,p,dk,children}){
+  const[show,setShow]=useState(false);
+  const[pos,setPos]=useState({x:0,y:0,w:0});
+  const ref=useRef(null);
+  const timerRef=useRef(null);
+  const TIP_W=280;
+  function enter(e){
+    var rect=e.currentTarget.getBoundingClientRect();
+    setPos({x:rect.left,y:rect.top,w:rect.width});
+    setShow(true);
+  }
+  function toggle(e){
+    e.stopPropagation();
+    if(show){setShow(false);return;}
+    var rect=e.currentTarget.getBoundingClientRect();
+    setPos({x:rect.left,y:rect.top,w:rect.width});
+    setShow(true);
+    clearTimeout(timerRef.current);
+    timerRef.current=setTimeout(()=>setShow(false),5000);
+  }
+  useEffect(()=>()=>clearTimeout(timerRef.current),[]);
+  if(!evidence||evidence.length===0)return children||null;
+  var tipLeft=Math.max(8,Math.min(pos.x,window.innerWidth-TIP_W-8));
+  return(
+    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)}
+      onClick={toggle} onTouchStart={toggle}
+      style={{position:"relative",WebkitTapHighlightColor:"transparent"}}>
+      {children}
+      {show&&ReactDOM.createPortal(
+        <div onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)}
+          onClick={e=>e.stopPropagation()}
+          style={{position:"fixed",left:tipLeft,top:Math.max(8,pos.y-8),
+          transform:"translateY(-100%)",
+          width:TIP_W,padding:"10px 6px",borderRadius:12,
+          background:p?.raised||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
+          fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
+          boxShadow:"0 12px 48px rgba(0,0,0,0.45), 0 0 0 0.5px "+(p?.glassBorder||"#333"),
+          animation:"fadeIn 0.15s ease"}}>
+          <div style={{position:"absolute",bottom:-12,left:0,right:0,height:12}} />
+          <div style={{fontSize:9,fontWeight:700,letterSpacing:"0.1em",color:p.label4,padding:"0 10px 6px",borderBottom:"0.5px solid "+p.glassBorder,marginBottom:4}}>EVIDENCE ({evidence.length})</div>
+          {evidence.map((ev,i)=><EvidenceRow key={i} ev={ev} p={p} dk={dk}/>)}
+        </div>,
+        document.body
+      )}
+    </span>
+  );
+}
+
 
 function StatePill({state,p}){
   const cfg={done:{icon:"\u2713",label:"Done",c:p.green},snoozed:{icon:"\u25F7",label:"Snoozed",c:p.orange},dismissed:{icon:"\u2014",label:"Dismissed",c:p.gray}}[state];
@@ -841,17 +975,26 @@ function FeedItem({insight,onClick,p,dk,mob,index,focused,itemState,onStateChang
 
         {}
         <div style={{display:"flex",alignItems:"center",gap:6,flexWrap:"wrap",position:"relative",zIndex:2}}>
-          {insight.evidence?.slice(0,2).map((ev,i)=>(
-            <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
-              style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
-                fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
-              onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
-              onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
-              <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
-              {ev.label.length>22?ev.label.slice(0,20)+"\u2026":ev.label}
-              <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
-            </span>
-          ))}
+          {insight.evidence?.length>0&&(
+            <EvidenceTip evidence={insight.evidence} p={p} dk={dk}>
+              <span style={{display:"inline-flex",alignItems:"center",gap:6,flexWrap:"wrap",cursor:"pointer"}}>
+                {insight.evidence.slice(0,3).map((ev,i)=>(
+                  <span key={i} onClick={e=>{e.stopPropagation();window.open(ev.url,"_blank");}}
+                    style={{display:"inline-flex",alignItems:"center",gap:4,padding:"2px 8px",borderRadius:6,
+                      fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label3,background:p.fill4,cursor:"pointer",transition:"color 0.15s"}}
+                    onMouseEnter={e=>{e.currentTarget.style.color=p.label2;}}
+                    onMouseLeave={e=>{e.currentTarget.style.color=p.label3;}}>
+                    <span style={{fontSize:9,color:SVC[ev.source]?.color}}>{SVC[ev.source]?.icon}</span>
+                    {ev.label.length>22?ev.label.slice(0,20)+"\u2026":ev.label}
+                    <span style={{fontSize:8,opacity:0.4}}>{"\u2197"}</span>
+                  </span>
+                ))}
+                {insight.evidence.length>3&&(
+                  <span style={{fontSize:10,fontFamily:MONO,fontWeight:500,color:p.label4,padding:"2px 6px"}}>+{insight.evidence.length-3}</span>
+                )}
+              </span>
+            </EvidenceTip>
+          )}
           {ch&&<span style={{fontSize:11,color:p.label3,fontFamily:SF,fontWeight:500,marginLeft:"auto"}}>{"\u2192"} {ch.label}</span>}
         </div>
       </article>
