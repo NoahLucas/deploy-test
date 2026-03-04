@@ -1923,6 +1923,199 @@ function DataView({p,dk,mob}){
   );
 }
 
+// ====== CALENDAR VIEW ======
+function CalendarView({p,dk,mob}){
+  const[tl,setTl]=useState(null);
+  const[activeSection,setActiveSection]=useState("all");
+  const[viewMode,setViewMode]=useState("timeline"); // timeline | month
+  const[monthOffset,setMonthOffset]=useState(0);
+  useEffect(()=>{if(LIVE_DATA?.timeline)setTl(LIVE_DATA.timeline);else loadData().then(()=>{if(LIVE_DATA?.timeline)setTl(LIVE_DATA.timeline);});},[]);
+  if(!tl)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading timeline...</div>;
+
+  const sections=tl.sections||[];
+  const allEvents=sections.flatMap(s=>s.events.map(e=>({...e,sectionId:s.id,sectionLabel:s.label,sectionIcon:s.icon})));
+  const filtered=activeSection==="all"?allEvents:allEvents.filter(e=>e.sectionId===activeSection);
+
+  // Group by date
+  const byDate={};
+  filtered.forEach(e=>{if(!byDate[e.date])byDate[e.date]=[];byDate[e.date].push(e);});
+  const sortedDates=Object.keys(byDate).sort();
+
+  const today=new Date().toISOString().slice(0,10);
+  const todayIdx=sortedDates.findIndex(d=>d>=today);
+
+  // Month view helpers
+  const now=new Date();
+  const viewMonth=new Date(now.getFullYear(),now.getMonth()+monthOffset,1);
+  const monthName=viewMonth.toLocaleDateString("en-US",{month:"long",year:"numeric"});
+  const daysInMonth=new Date(viewMonth.getFullYear(),viewMonth.getMonth()+1,0).getDate();
+  const firstDow=viewMonth.getDay();
+  const monthPrefix=viewMonth.toISOString().slice(0,7);
+
+  function stColor(s){return s==="achieved"||s==="shipped"?p.green:s==="at_risk"?p.red:s==="today"?p.blue:s==="upcoming"?p.label3:p.orange;}
+  function typeIcon(t){return t==="deadline"?"⚠":t==="gate"?"🚦":t==="shipped"?"✅":t==="milestone"?"◆":t==="meeting"?"📅":t==="recurring"?"🔄":t==="ritual"?"🔮":"•";}
+  function relDay(d){
+    var diff=Math.round((new Date(d+"T12:00:00")-new Date(today+"T12:00:00"))/(86400000));
+    if(diff===0)return "TODAY";if(diff===1)return "TOMORROW";if(diff===-1)return "YESTERDAY";
+    if(diff>0&&diff<=7)return "in "+diff+"d";if(diff>7)return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+    if(diff<0&&diff>=-7)return Math.abs(diff)+"d ago";
+    return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});
+  }
+  function fmtDate(d){return new Date(d+"T12:00:00").toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"});}
+  function isPast(d){return d<today;}
+  function isToday(d){return d===today;}
+
+  // Count upcoming deadlines & gates
+  var urgentCount=allEvents.filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=today&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;
+
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      {/* Header bar */}
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:16}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <span style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>TIMELINE</span>
+          {urgentCount>0&&<span style={{fontSize:9,fontFamily:MONO,fontWeight:700,padding:"2px 8px",borderRadius:4,background:p.orange+"14",color:p.orange}}>{urgentCount} due next 14d</span>}
+        </div>
+        <div style={{display:"flex",gap:4}}>
+          {["timeline","month"].map(m=>(
+            <button key={m} onClick={()=>setViewMode(m)} style={{padding:"4px 10px",borderRadius:6,border:"0.5px solid "+(viewMode===m?p.label3:p.sep),
+              background:viewMode===m?p.label+"0a":"transparent",color:viewMode===m?p.label:p.label4,
+              fontSize:10,fontFamily:MONO,fontWeight:viewMode===m?700:500,cursor:"pointer"}}>{m==="timeline"?"List":"Month"}</button>
+          ))}
+        </div>
+      </div>
+
+      {/* Section filter pills */}
+      <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
+        <button onClick={()=>setActiveSection("all")} style={{padding:"5px 12px",borderRadius:8,border:"0.5px solid "+(activeSection==="all"?p.label3:p.sep),
+          background:activeSection==="all"?p.label+"0a":"transparent",color:activeSection==="all"?p.label:p.label3,
+          fontSize:10,fontFamily:MONO,fontWeight:activeSection==="all"?700:500,cursor:"pointer"}}>All ({allEvents.length})</button>
+        {sections.map(s=>{
+          var ct=s.events.length;
+          return <button key={s.id} onClick={()=>setActiveSection(s.id)} style={{padding:"5px 12px",borderRadius:8,
+            border:"0.5px solid "+(activeSection===s.id?p.label3:p.sep),
+            background:activeSection===s.id?p.label+"0a":"transparent",
+            color:activeSection===s.id?p.label:p.label3,
+            fontSize:10,fontFamily:MONO,fontWeight:activeSection===s.id?700:500,cursor:"pointer"}}>{s.icon} {s.label} ({ct})</button>;
+        })}
+      </div>
+
+      {viewMode==="timeline"?(
+        <div style={{display:"flex",flexDirection:"column",gap:0}}>
+          {sortedDates.map((date,di)=>{
+            var events=byDate[date];
+            var past=isPast(date)&&!isToday(date);
+            var isTd=isToday(date);
+            return(
+              <div key={date} style={{position:"relative",paddingLeft:mob?24:40,paddingBottom:di<sortedDates.length-1?4:0,marginBottom:0}}>
+                {/* Timeline rail */}
+                <div style={{position:"absolute",left:mob?10:20,top:0,bottom:0,width:2,
+                  background:isTd?p.blue:past?p.sep:p.label+"18"}}/>
+                {/* Date node */}
+                <div style={{position:"absolute",left:mob?5:15,top:4,width:12,height:12,borderRadius:6,
+                  background:isTd?p.blue:past?p.label4:p.label3,border:"2px solid "+(dk?"#0c0d0e":"#f5f5f3"),
+                  zIndex:1}}/>
+                {/* Date header */}
+                <div style={{display:"flex",alignItems:"baseline",gap:8,marginBottom:6,paddingTop:2}}>
+                  <span style={{fontSize:12,fontWeight:700,fontFamily:MONO,color:isTd?p.blue:past?p.label4:p.label}}>{fmtDate(date)}</span>
+                  <span style={{fontSize:10,fontWeight:isTd?700:500,fontFamily:MONO,color:isTd?p.blue:past?p.label4:p.label3}}>{relDay(date)}</span>
+                </div>
+                {/* Events */}
+                <div style={{display:"flex",flexDirection:"column",gap:6,paddingBottom:12}}>
+                  {events.map((ev,ei)=>(
+                    <div key={ei} style={{padding:"10px 14px",borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,
+                      borderLeft:"3px solid "+stColor(ev.status),opacity:past&&!isTd?0.6:1,transition:"opacity 0.2s"}}>
+                      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:8,marginBottom:ev.context?4:0}}>
+                        <div style={{display:"flex",alignItems:"center",gap:8,flex:1,minWidth:0}}>
+                          <span style={{fontSize:13,flexShrink:0}}>{typeIcon(ev.type)}</span>
+                          <span style={{fontSize:13,fontWeight:600,fontFamily:SF,color:p.label,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.title}</span>
+                        </div>
+                        <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
+                          {ev.account&&<span style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.blue+"14",color:p.blue,fontWeight:600}}>{ev.account}</span>}
+                          {ev.url&&<a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"↗"}</a>}
+                        </div>
+                      </div>
+                      {ev.context&&<p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,margin:"2px 0 0 21px"}}>{ev.context}</p>}
+                      <div style={{display:"flex",alignItems:"center",gap:8,marginTop:ev.context?4:2,marginLeft:21}}>
+                        <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>{ev.sectionIcon} {ev.sectionLabel}</span>
+                        {ev.owner&&<span style={{fontSize:9,fontFamily:MONO,color:p.label3}}>→ {ev.owner}</span>}
+                        <span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>via {ev.source}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          {sortedDates.length===0&&<div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF,fontSize:12}}>No events in this category.</div>}
+        </div>
+      ):(
+        /* Month grid view */
+        <div>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
+            <button onClick={()=>setMonthOffset(o=>o-1)} style={{background:"none",border:"none",cursor:"pointer",fontSize:16,color:p.label3,padding:"4px 10px"}}>←</button>
+            <span style={{fontSize:14,fontWeight:700,fontFamily:SF,color:p.label}}>{monthName}</span>
+            <button onClick={()=>setMonthOffset(o=>o+1)} style={{background:"none",border:"none",cursor:"pointer",fontSize:16,color:p.label3,padding:"4px 10px"}}>→</button>
+          </div>
+          {/* Day headers */}
+          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2,marginBottom:4}}>
+            {["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(d=>(<div key={d} style={{textAlign:"center",fontSize:9,fontFamily:MONO,color:p.label4,padding:4}}>{d}</div>))}
+          </div>
+          {/* Calendar cells */}
+          <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
+            {Array.from({length:firstDow}).map((_,i)=>(<div key={"empty"+i}/>))}
+            {Array.from({length:daysInMonth}).map((_,i)=>{
+              var day=i+1;
+              var dateStr=monthPrefix+"-"+String(day).padStart(2,"0");
+              var dayEvents=filtered.filter(e=>e.date===dateStr);
+              var isTd=dateStr===today;
+              return(
+                <Tip key={day} text={dayEvents.length>0?dayEvents.map(e=>typeIcon(e.type)+" "+e.title).join("\n"):"No events"} p={p} maxW={280}>
+                  <div style={{minHeight:mob?44:56,padding:4,borderRadius:8,
+                    background:isTd?p.blue+"14":dayEvents.length>0?p.label+"06":"transparent",
+                    border:isTd?"1px solid "+p.blue+"40":"1px solid transparent",cursor:dayEvents.length>0?"pointer":"default"}}>
+                    <div style={{fontSize:11,fontWeight:isTd?700:500,fontFamily:MONO,color:isTd?p.blue:p.label,marginBottom:2}}>{day}</div>
+                    <div style={{display:"flex",flexDirection:"column",gap:1}}>
+                      {dayEvents.slice(0,3).map((ev,ei)=>(
+                        <div key={ei} style={{fontSize:8,fontFamily:MONO,color:"#fff",padding:"1px 3px",borderRadius:3,
+                          background:stColor(ev.status),overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
+                          {ev.title.length>12?ev.title.slice(0,11)+"…":ev.title}
+                        </div>
+                      ))}
+                      {dayEvents.length>3&&<div style={{fontSize:8,fontFamily:MONO,color:p.label3}}>+{dayEvents.length-3}</div>}
+                    </div>
+                  </div>
+                </Tip>
+              );
+            })}
+          </div>
+          {/* Events for selected month below grid */}
+          {(()=>{
+            var monthEvents=filtered.filter(e=>e.date.startsWith(monthPrefix)).sort((a,b)=>a.date.localeCompare(b.date));
+            if(monthEvents.length===0)return <div style={{padding:20,textAlign:"center",color:p.label3,fontFamily:SF,fontSize:11}}>No events this month</div>;
+            return(
+              <div style={{marginTop:16,display:"flex",flexDirection:"column",gap:6}}>
+                <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:4}}>{monthEvents.length} EVENTS IN {monthName.toUpperCase()}</div>
+                {monthEvents.map((ev,i)=>(
+                  <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 12px",borderRadius:10,...glass(p),border:"0.5px solid "+p.glassBorder,
+                    borderLeft:"3px solid "+stColor(ev.status)}}>
+                    <span style={{fontSize:12,flexShrink:0}}>{typeIcon(ev.type)}</span>
+                    <span style={{fontSize:10,fontFamily:MONO,color:p.label3,flexShrink:0,width:44}}>{ev.date.slice(5)}</span>
+                    <span style={{fontSize:12,fontWeight:600,fontFamily:SF,color:p.label,flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{ev.title}</span>
+                    {ev.account&&<span style={{fontSize:8,fontFamily:MONO,padding:"2px 5px",borderRadius:3,background:p.blue+"14",color:p.blue}}>{ev.account}</span>}
+                    {ev.owner&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4}}>{ev.owner}</span>}
+                    {ev.url&&<a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"↗"}</a>}
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ====== VIEW TABS ======
 const VIEWS=[
   {id:"signals",label:"Signals",shortcut:"1"},
@@ -1931,6 +2124,7 @@ const VIEWS=[
   {id:"decisions",label:"Decisions",shortcut:"4"},
   {id:"time",label:"Time",shortcut:"5"},
   {id:"data",label:"Data",shortcut:"6"},
+  {id:"calendar",label:"Calendar",shortcut:"7"},
 ];
 
 function ViewTabs({active,onChange,p,mob,counts}){
@@ -1944,6 +2138,7 @@ function ViewTabs({active,onChange,p,mob,counts}){
         if(v.id==="team"){var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;if(blocked>0)badge=blocked;}
         if(v.id==="customers"){var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;if(atRisk>0)badge=atRisk;}
         if(v.id==="data"){var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});if(arKr>0)badge=arKr;}
+        if(v.id==="calendar"){var td=new Date().toISOString().slice(0,10);var urg=(LIVE_DATA?.timeline?.sections||[]).flatMap(s=>s.events).filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=td&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;if(urg>0)badge=urg;}
         return(
           <button key={v.id} onClick={()=>onChange(v.id)}
             style={{padding:mob?"10px 12px":"10px 16px",background:"none",border:"none",cursor:"pointer",position:"relative",
@@ -2135,7 +2330,7 @@ function SiftIntel(){
       if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
       // View switching: 1-5 when no item focused
       if(focusIdx<0){
-        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time","6":"data"};
+        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time","6":"data","7":"calendar"};
         if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
       }
     };
@@ -2194,6 +2389,7 @@ function SiftIntel(){
           {activeView==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
           {activeView==="time"&&<TimeView p={p} dk={dk} mob={mob}/>}
           {activeView==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
+          {activeView==="calendar"&&<CalendarView p={p} dk={dk} mob={mob}/>}
           {activeView==="signals"&&!selected&&(
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
               <div style={{padding:mob?"4px 0":"6px 0"}}>
