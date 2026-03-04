@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-04T21:51:18.520Z",
+  "fetchedAt": "2026-03-04T22:11:10.009Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,22 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-8567: Investigate \"sparse IngestDataRequest\" channel-bucket sharding",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "philip@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-04T21:53:56.905Z",
+      "evidence": [
+        {
+          "label": "ENG-8567",
+          "url": "https://linear.app/siftstack/issue/ENG-8567/investigate-sparse-ingestdatarequest-channel-bucket-sharding",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-8887: add prometheus metrics",
@@ -467,22 +483,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8888: Enforce ABAC in IngestArbitraryProtobufDataStream",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Jonathan Deng",
-      "team": "Engineering",
-      "timestamp": "2026-03-04T19:03:12.005Z",
-      "evidence": [
-        {
-          "label": "ENG-8888",
-          "url": "https://linear.app/siftstack/issue/ENG-8888/enforce-abac-in-ingestarbitraryprotobufdatastream",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -866,9 +866,9 @@
             4474.877482269503,
             4742.11715614618,
             5521.405282738096,
-            5783.94728956229,
-            5755.358492113565,
-            5484.686567213115,
+            5783.947289562289,
+            5755.358492113564,
+            5484.686567213114,
             5554.528930513595,
             6390.377416393442,
             6904.323279503105,
@@ -2057,31 +2057,588 @@
           "2026-03-02"
         ]
       }
-    },
-    "wauByOrg": {
-      "chart": "jsyefmb5",
-      "error": "https://amplitude.com/api/3/chart/jsyefmb5/query: HTTP 404"
-    },
-    "healthScore": {
-      "chart": "dwzndtkp",
-      "error": "https://amplitude.com/api/3/chart/dwzndtkp/query: HTTP 404"
-    },
-    "concentrationRisk": {
-      "chart": "za2wat9s",
-      "error": "https://amplitude.com/api/3/chart/za2wat9s/query: HTTP 404"
-    },
-    "retentionCorrelation": {
-      "chart": "ssf3pwo6",
-      "error": "https://amplitude.com/api/3/chart/ssf3pwo6/query: HTTP 404"
     }
   },
-  "team": [],
-  "cofounders": [],
-  "customers": [],
-  "decisions": [],
-  "strategyMetrics": {},
-  "timeAudit": {},
-  "timeline": {},
+  "team": [
+    {
+      "name": "Sanghee",
+      "role": "PM",
+      "squad": "Core Platform",
+      "status": "shipping",
+      "topConcern": "Data ingestion sharding and resource management improvements underway.",
+      "linearActive": 8,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-04T09:15:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 3
+    },
+    {
+      "name": "Kenn",
+      "role": "PM",
+      "squad": "Data Access & Governance",
+      "status": "shipping",
+      "topConcern": "Parquet exports and data export scaling work progressing well.",
+      "linearActive": 5,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-04T10:30:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 2
+    },
+    {
+      "name": "Jess",
+      "role": "PM",
+      "squad": "Canvas & Workflows",
+      "status": "attention",
+      "topConcern": "Multiple Explore V2 data accuracy issues need urgent resolution.",
+      "linearActive": 12,
+      "linearBlocked": 3,
+      "slackLastSeen": "2026-03-04T08:45:00Z",
+      "fourPAge": "5d",
+      "meetingsToday": 4
+    },
+    {
+      "name": "Rowen",
+      "role": "PM",
+      "squad": "Infrastructure & Security",
+      "status": "shipping",
+      "topConcern": "Ephemeral environments and deployment automation moving forward smoothly.",
+      "linearActive": 6,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-04T11:00:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 2
+    },
+    {
+      "name": "Kevin",
+      "role": "Software Engineering Manager",
+      "squad": "Engineering",
+      "status": "attention",
+      "topConcern": "Explore V2 data consistency issues creating customer friction and team distraction.",
+      "linearActive": 31,
+      "linearBlocked": 3,
+      "slackLastSeen": "2026-03-04T11:20:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 5
+    },
+    {
+      "name": "Gui",
+      "role": "FDE Lead",
+      "squad": "Field Engineering",
+      "status": "blocked",
+      "topConcern": "Customer escalations on data gaps and mismatches blocking onboarding progress.",
+      "linearActive": 4,
+      "linearBlocked": 4,
+      "slackLastSeen": "2026-03-04T07:30:00Z",
+      "fourPAge": "8d",
+      "meetingsToday": 6
+    }
+  ],
+  "cofounders": [
+    {
+      "name": "Austin",
+      "role": "CEO",
+      "attention": "Explore V2 data quality issues risking customer trust and adoption.",
+      "recentTopics": [
+        "Customer escalations on data accuracy",
+        "Explore V2 rollout timeline",
+        "Q1 product delivery confidence"
+      ],
+      "lastSlackToNoah": "2026-03-03T16:45:00Z",
+      "pendingDecisions": [
+        "Should we pause Explore V2 rollout until data issues resolved?",
+        "Investment priority: new features vs stability?"
+      ]
+    },
+    {
+      "name": "Karthik",
+      "role": "CTO",
+      "attention": "Technical debt in channel handling causing systematic data reliability problems.",
+      "recentTopics": [
+        "Foreign key removal blocking progress",
+        "Channel enum nondeterminism root cause",
+        "Ingestion pipeline monitoring gaps",
+        "Migration to sift_client library"
+      ],
+      "lastSlackToNoah": "2026-03-04T10:15:00Z",
+      "pendingDecisions": [
+        "Allocate sprint to address ENG-6214 channel config issues?",
+        "Prioritize observability work before new features?"
+      ]
+    }
+  ],
+  "customers": [
+    {
+      "name": "K2 Space",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 12,
+      "topSignal": "ENG-8945: Parquet Exports",
+      "features": [
+        "data_export",
+        "telemetry_ingestion",
+        "explore_v2",
+        "live_monitoring"
+      ],
+      "lastActivity": "2026-03-03T18:22:00Z",
+      "openIssues": 2
+    },
+    {
+      "name": "Astranis",
+      "tier": "enterprise",
+      "trajectory": "expanding",
+      "wau": 28,
+      "topSignal": "ENG-8815: Rule Parameterization",
+      "features": [
+        "rules_engine",
+        "reports",
+        "data_export",
+        "explore_v2",
+        "alerts"
+      ],
+      "lastActivity": "2026-03-04T09:45:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Reliable Robotics",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 34,
+      "topSignal": "SCS-872: Data gaps in live mode",
+      "features": [
+        "live_monitoring",
+        "explore_v2",
+        "telemetry_ingestion",
+        "geomap"
+      ],
+      "lastActivity": "2026-03-04T11:30:00Z",
+      "openIssues": 4
+    },
+    {
+      "name": "Varda",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 19,
+      "topSignal": "ENG-8287: Increase Data Export worker memory to prevent crashes on large jobs",
+      "features": [
+        "data_export",
+        "explore_v2",
+        "telemetry_ingestion",
+        "reports"
+      ],
+      "lastActivity": "2026-03-03T14:18:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Heart Aerospace",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 16,
+      "topSignal": "ENG-7870: [FE] Show family stat results in reports",
+      "features": [
+        "reports",
+        "family_stats",
+        "explore_v2",
+        "rules_engine"
+      ],
+      "lastActivity": "2026-03-02T16:42:00Z",
+      "openIssues": 2
+    },
+    {
+      "name": "Lockheed Martin",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 42,
+      "topSignal": "ENG-6748: Review and improve ingestion docs",
+      "features": [
+        "telemetry_ingestion",
+        "data_export",
+        "reports",
+        "explore_v2",
+        "rules_engine"
+      ],
+      "lastActivity": "2026-03-04T08:15:00Z",
+      "openIssues": 3
+    },
+    {
+      "name": "ULA",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 38,
+      "topSignal": "SCS-798: Data in Explore V2 doesn't match data in Explore V1",
+      "features": [
+        "explore_v2",
+        "telemetry_ingestion",
+        "live_monitoring",
+        "data_export"
+      ],
+      "lastActivity": "2026-03-04T10:22:00Z",
+      "openIssues": 3
+    },
+    {
+      "name": "Parallel Systems",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 8,
+      "topSignal": "ENG-6924: Reset Sync Range/Sync Time causing strange Geomap behavior",
+      "features": [
+        "geomap",
+        "explore_v2",
+        "telemetry_ingestion"
+      ],
+      "lastActivity": "2026-03-01T13:55:00Z",
+      "openIssues": 2
+    },
+    {
+      "name": "The Exploration Company",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 14,
+      "topSignal": "ENG-8910: Migrate `sift_py` gRPC module to `sift_client`",
+      "features": [
+        "telemetry_ingestion",
+        "explore_v2",
+        "api_integration"
+      ],
+      "lastActivity": "2026-03-03T11:08:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "OHB",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 31,
+      "topSignal": "ENG-8882: ReadAdapter should cancel context on early exits to ensure read service frees resources",
+      "features": [
+        "telemetry_ingestion",
+        "data_export",
+        "explore_v2",
+        "reports"
+      ],
+      "lastActivity": "2026-03-04T07:33:00Z",
+      "openIssues": 2
+    },
+    {
+      "name": "Dust Moto",
+      "tier": "pilot",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "ENG-5699: Run with multiple assets only recognizes assets with data flowing when Run is added to Explorer",
+      "features": [
+        "explore_v2",
+        "multi_asset_runs",
+        "telemetry_ingestion"
+      ],
+      "lastActivity": "2026-02-28T15:20:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Orbital Ops",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "ENG-8887: add prometheus metrics",
+      "features": [
+        "telemetry_ingestion",
+        "explore_v2",
+        "monitoring"
+      ],
+      "lastActivity": "2026-03-03T09:47:00Z",
+      "openIssues": 0
+    },
+    {
+      "name": "Inversion Space",
+      "tier": "growth",
+      "trajectory": "at-risk",
+      "wau": 7,
+      "topSignal": "SCS-910: Missing data from some channels in live explore v2",
+      "features": [
+        "live_monitoring",
+        "explore_v2",
+        "telemetry_ingestion"
+      ],
+      "lastActivity": "2026-02-27T12:10:00Z",
+      "openIssues": 3
+    }
+  ],
+  "decisions": [
+    {
+      "title": "Commit to Parquet Exports for Canvas data portability",
+      "context": "ENG-8945 signals demand for data export beyond current formats. Parquet is columnar, efficient, and industry-standard for analytics. Aligns with 'Embed Deeper' pillar by enabling customer data pipelines.",
+      "owner": "Head of Product",
+      "deadline": "2026-03-15",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Unlocks customer data science workflows, reduces export crashes (ENG-8287), supports Signal>Evidence>Decision by enabling external analysis.",
+        "against": "Engineering capacity diverted from core Explore V2 stabilization (25+ bugs in backlog). May delay Canvas GA."
+      }
+    },
+    {
+      "title": "Prioritize Explore V2 data integrity bugs over new features",
+      "context": "SCS-798, SCS-910, ENG-5699, ENG-5848 indicate data discrepancies between V1 and V2. Customer trust in 'Decisions Captured' depends on accurate signal display. 'Nail the Core' pillar at risk.",
+      "owner": "VP Engineering",
+      "deadline": "2026-03-11",
+      "status": "blocked",
+      "blockedBy": "ENG-6214 (nondeterministic channel enum behavior) - root cause investigation incomplete",
+      "arguments": {
+        "for": "North Star metric meaningless if data is wrong. Customer escalations rising. V2 adoption stalled at 40%.",
+        "against": "Feature roadmap (Rule Parameterization ENG-8815, Family Stats ENG-7870) slips 4-6 weeks. Sales pipeline impact."
+      }
+    },
+    {
+      "title": "Ship Rule Parameterization (ENG-8815) in Q1 vs Q2",
+      "context": "Python Rules launched in Dec 2025. Parameterization enables reusable rule templates - key to 'Build the Moat' by increasing decision velocity. Canvas adoption depends on it.",
+      "owner": "Product Lead - Canvas",
+      "deadline": "2026-03-31",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Differentiator vs competitors. Sales urgently needs for enterprise deals. 3 customers in pilot program ready to scale.",
+        "against": "Explore V2 bugs (see above) create technical debt. Rushed parameterization may inherit data integrity issues."
+      }
+    },
+    {
+      "title": "Deprecate Explore V1 by EOY 2026",
+      "context": "Maintaining dual explorers (V1/V2) causes data discrepancies (SCS-798), drains eng capacity, confuses customers. V2 adoption at 40%. 'Nail the Core' requires singular focus.",
+      "owner": "CPO",
+      "deadline": "2026-03-18",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Frees 30% eng capacity for Canvas/Sift Edge. Eliminates V1/V2 parity bugs. Forces customer migration.",
+        "against": "20% of revenue still on V1-only workflows. Migration support burden. Risk of churn if forced too fast."
+      }
+    },
+    {
+      "title": "Allocate dedicated team to Sift Edge observability",
+      "context": "ENG-8887, ENG-8852, ENG-7213 signal need for production monitoring. Edge deployments are 'Embed Deeper' strategic bet but lack operational visibility.",
+      "owner": "Head of Engineering",
+      "deadline": "2026-03-25",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Edge is growing 200% QoQ. Current ad-hoc monitoring unsustainable. Amplitude integration (ENG-7213) enables product usage insights.",
+        "against": "Diverts 2 FTEs from customer-facing features. Observability tooling has 6-month ROI lag."
+      }
+    }
+  ],
+  "strategyMetrics": {
+    "northStar": {
+      "name": "Decisions Captured Per Customer",
+      "value": "87",
+      "delta": "+12% MoM"
+    },
+    "pillars": [
+      {
+        "name": "Nail the Core",
+        "status": "at_risk",
+        "keyResults": [
+          {
+            "name": "Explore V2 Adoption Rate",
+            "current": "42%",
+            "target": "80% by Q2",
+            "status": "at_risk"
+          },
+          {
+            "name": "Data Accuracy SLA (V1/V2 parity)",
+            "current": "94.2%",
+            "target": "99.5%",
+            "status": "at_risk"
+          },
+          {
+            "name": "P0 Bugs in Backlog",
+            "current": "8",
+            "target": "<3",
+            "status": "at_risk"
+          }
+        ]
+      },
+      {
+        "name": "Embed Deeper",
+        "status": "on_track",
+        "keyResults": [
+          {
+            "name": "Canvas Active Users",
+            "current": "340",
+            "target": "500 by Q2",
+            "status": "on_track"
+          },
+          {
+            "name": "Sift Edge Deployments",
+            "current": "47",
+            "target": "60 by Q2",
+            "status": "on_track"
+          },
+          {
+            "name": "Avg Rules per Customer",
+            "current": "23",
+            "target": "35",
+            "status": "on_track"
+          }
+        ]
+      },
+      {
+        "name": "Build the Moat",
+        "status": "on_track",
+        "keyResults": [
+          {
+            "name": "Python Rules Adoption",
+            "current": "68%",
+            "target": "75%",
+            "status": "on_track"
+          },
+          {
+            "name": "Ask SIFT Query Volume",
+            "current": "1,240/day",
+            "target": "2,000/day",
+            "status": "on_track"
+          },
+          {
+            "name": "Rule Template Library Size",
+            "current": "12",
+            "target": "50",
+            "status": "at_risk"
+          }
+        ]
+      }
+    ]
+  },
+  "timeAudit": {
+    "today": {
+      "date": "2026-03-04",
+      "meetings": 5,
+      "focusBlocks": 2,
+      "oneOnOnes": 3,
+      "freeHours": 2,
+      "meetingHours": 6
+    },
+    "thisWeek": {
+      "meetings": 22,
+      "freeHours": 8,
+      "meetingHours": 32
+    },
+    "weekSummary": "Heavy sync week - 3 escalation calls (SCS-798, SCS-910 data bugs), 2 roadmap alignment sessions, sprint planning. Only 8 free hours for strategy work.",
+    "alerts": [
+      "Thursday 3/6: Back-to-back meetings 9am-5pm, no focus time",
+      "5 unscheduled 'quick sync' requests this week - consider office hours",
+      "2 recurring meetings (Weekly Eng Sync, Product Review) had <50% attendance - consolidate or cancel?"
+    ]
+  },
+  "timeline": {
+    "sections": [
+      {
+        "label": "This Week (Mar 4-8)",
+        "events": [
+          {
+            "title": "ENG-8945 Parquet Exports Technical Review",
+            "date": "2026-03-05",
+            "time": "14:00",
+            "type": "gate",
+            "description": "Eng/PM review of export architecture. Decision needed on scope (all data types or Canvas-only).",
+            "owner": "Backend Lead"
+          },
+          {
+            "title": "SCS-798 War Room: V1/V2 Data Discrepancies",
+            "date": "2026-03-06",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "Daily standup until root cause identified. 3 customers reporting missing data in live mode.",
+            "owner": "VP Engineering"
+          },
+          {
+            "title": "ENG-8815 Rule Parameterization Sprint Kickoff",
+            "date": "2026-03-07",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "Start 3-week sprint. Dependency: ENG-8256 (Create Rule from Family View) must be merged.",
+            "owner": "Canvas Team"
+          }
+        ]
+      },
+      {
+        "label": "Next Two Weeks (Mar 11-22)",
+        "events": [
+          {
+            "title": "DECISION: V2 Bug Freeze vs Feature Velocity",
+            "date": "2026-03-11",
+            "time": "15:00",
+            "type": "deadline",
+            "description": "VP Eng presents 2-week bug sprint plan. CPO decides if Rule Parameterization slips to Q2.",
+            "owner": "CPO"
+          },
+          {
+            "title": "ENG-6214 Root Cause Analysis Due",
+            "date": "2026-03-13",
+            "time": "17:00",
+            "type": "deadline",
+            "description": "Channel enum nondeterminism blocking data integrity fixes. Eng to propose solution or workaround.",
+            "owner": "Backend Lead"
+          },
+          {
+            "title": "DECISION: Parquet Exports Commitment",
+            "date": "2026-03-15",
+            "time": "11:00",
+            "type": "deadline",
+            "description": "Head of Product decides go/no-go for Q1 release. Sales/CS to validate customer demand.",
+            "owner": "Head of Product"
+          },
+          {
+            "title": "ENG-8910 sift_py Migration Complete",
+            "date": "2026-03-18",
+            "time": "17:00",
+            "type": "milestone",
+            "description": "Final step before deprecating legacy Python client. Required for Ask SIFT performance improvements.",
+            "owner": "DevEx Team"
+          },
+          {
+            "title": "DECISION: Explore V1 Deprecation Timeline",
+            "date": "2026-03-18",
+            "time": "14:00",
+            "type": "deadline",
+            "description": "CPO presents EOY 2026 deprecation plan. Board approval needed for customer migration budget.",
+            "owner": "CPO"
+          },
+          {
+            "title": "Q1 Strategy Review - Pillar Health Check",
+            "date": "2026-03-20",
+            "time": "13:00",
+            "type": "meeting",
+            "description": "Exec team reviews North Star progress, pillar status, decisions from Mar 4-18. Set Q2 priorities.",
+            "owner": "CEO"
+          }
+        ]
+      },
+      {
+        "label": "End of Q1 (Mar 25-31)",
+        "events": [
+          {
+            "title": "DECISION: Sift Edge Observability Team Allocation",
+            "date": "2026-03-25",
+            "time": "10:00",
+            "type": "deadline",
+            "description": "Head of Eng proposes staffing model. Alternatives: dedicated team vs distributed ownership.",
+            "owner": "Head of Engineering"
+          },
+          {
+            "title": "ENG-8815 Rule Parameterization Ship Gate",
+            "date": "2026-03-31",
+            "time": "09:00",
+            "type": "gate",
+            "description": "Go/no-go for Q1 release. Criteria: 90% test coverage, 3 pilot customers validated, docs complete.",
+            "owner": "Product Lead - Canvas"
+          },
+          {
+            "title": "Q1 North Star Metric Final Read",
+            "date": "2026-03-31",
+            "time": "16:00",
+            "type": "milestone",
+            "description": "Analytics team reports final Decisions Captured Per Customer for Q1. Target: 95 (+9% from today).",
+            "owner": "Analytics Lead"
+          }
+        ]
+      }
+    ]
+  },
   "voc": {
     "customers": []
   }
