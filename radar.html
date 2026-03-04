@@ -233,12 +233,12 @@ async function slackDraft({message,target,channelKey}){
     : isCh ? `Find Slack channel "${ch.label.replace("#","")}",create draft. Do not modify.`
     : `Find Slack user "${target||ch.label}",create draft DM. Do not modify.`;
   const r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json"},
+    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
     body:JSON.stringify({
       model:"claude-sonnet-4-20250514",max_tokens:1000,
       system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
       messages:[{role:"user",content:`${inst}\n\nMessage:\n${message}`}],
-      mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp"}],
+      mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp",name:"slack"}],
     }),
   });
   if(!r.ok) throw new Error(`API ${r.status}`);
@@ -529,18 +529,18 @@ async function synthesizeLiveMCP(onProgress){
   var t0=Date.now();
   onProgress("LIVE \u2014 pulling fresh data from 6 sources...");
   var r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json"},
+    method:"POST",headers:{"Content-Type":"application/json","anthropic-beta":"mcp-client-2025-04-04"},
     body:JSON.stringify({
       model:"claude-sonnet-4-5-20250929",max_tokens:8000,
       system:"You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
       messages:[{role:"user",content:"Pull fresh data from all available sources and synthesize actionable items for me. Today is "+new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+" and it's "+new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})+". My timezone is "+Intl.DateTimeFormat().resolvedOptions().timeZone+".\n\nSpecific queries to run:\n1. Slack: search #product channel for messages from last 3 days. Also search for messages mentioning customers (Astranis, K2 Space, Reliable Robotics, Varda, Heart Aerospace, Lockheed)\n2. Linear: list my issues and any urgent/high priority issues across all teams\n3. Calendar: list events for today and tomorrow\n4. Amplitude: search for dashboards or charts related to WAU, retention, adoption\n5. Granola: list recent meetings from last 3 days\n\nIMPORTANT for evidence: Every evidence item MUST have a non-empty 'label' field describing what the link points to (e.g. 'Slack: Kevin on Astranis blockers', 'Linear: ENG-8732', 'GCal: Lockheed Resourcing 2pm'). Never leave label empty."}],
       mcp_servers:[
-        {type:"url",url:"https://mcp.slack.com/mcp"},
-        {type:"url",url:"https://mcp.linear.app/mcp"},
-        {type:"url",url:"https://gcal.mcp.claude.com/mcp"},
-        {type:"url",url:"https://mcp.amplitude.com/mcp"},
-        {type:"url",url:"https://mcp.granola.ai/mcp"},
-        {type:"url",url:"https://gmail.mcp.claude.com/mcp"},
+        {type:"url",url:"https://mcp.slack.com/mcp",name:"slack"},
+        {type:"url",url:"https://mcp.linear.app/mcp",name:"linear"},
+        {type:"url",url:"https://gcal.mcp.claude.com/mcp",name:"gcal"},
+        {type:"url",url:"https://mcp.amplitude.com/mcp",name:"amplitude"},
+        {type:"url",url:"https://mcp.granola.ai/mcp",name:"granola"},
+        {type:"url",url:"https://gmail.mcp.claude.com/mcp",name:"gmail"},
       ],
     }),
   });
