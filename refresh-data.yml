@@ -1,0 +1,41 @@
+name: Refresh RADAR Data
+
+on:
+  schedule:
+    # Every 4 hours during business hours (PT), skip nights/weekends
+    - cron: '0 15,19,23,3 * * 1-5'  # 7am,11am,3pm,7pm PT (Mon-Fri)
+  workflow_dispatch:  # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Generate fresh data.json
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AMPLITUDE_API_KEY: ${{ secrets.AMPLITUDE_API_KEY }}
+          AMPLITUDE_SECRET: ${{ secrets.AMPLITUDE_SECRET }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+        run: node scripts/generate-data.js data.json
+
+      - name: Commit if changed
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar@noahlucas.com"
+          git add data.json
+          if git diff --cached --quiet; then
+            echo "No changes to data.json"
+          else
+            git commit -m "chore: refresh data.json [$(date -u +%Y-%m-%dT%H:%M)]"
+            git push
+          fi
