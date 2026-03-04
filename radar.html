@@ -1063,8 +1063,20 @@ function RadarApp(){
 }
 
 // Wrap in AuthGate
+class ErrorBoundary extends React.Component{
+  constructor(props){super(props);this.state={error:null};}
+  static getDerivedStateFromError(error){return{error};}
+  render(){
+    if(this.state.error){
+      return React.createElement("div",{style:{padding:40,fontFamily:"-apple-system,system-ui,sans-serif",fontSize:14,color:"#FF453A",background:"#1C1C1E",minHeight:"100vh",whiteSpace:"pre-wrap"}},
+        "RADAR Error:\n\n"+this.state.error.toString()+"\n\n"+(this.state.error.stack||""));
+    }
+    return this.props.children;
+  }
+}
+
 var root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(AuthGate,null,React.createElement(RadarApp)));
+root.render(React.createElement(ErrorBoundary,null,React.createElement(AuthGate,null,React.createElement(RadarApp))));
 
 </script>
 </body>
