@@ -1429,6 +1429,36 @@ function SettingsPanel({show,onClose,p,mob}){
   );
 }
 
+// ====== TOOLTIP ======
+function Tip({text,children,p,maxW}){
+  const[show,setShow]=useState(false);
+  const[pos,setPos]=useState({x:0,y:0});
+  const ref=useRef(null);
+  function enter(e){
+    var rect=e.currentTarget.getBoundingClientRect();
+    setPos({x:rect.left+rect.width/2,y:rect.top});
+    setShow(true);
+  }
+  if(!text)return children;
+  return(
+    <span ref={ref} onMouseEnter={enter} onMouseLeave={()=>setShow(false)} style={{position:"relative",cursor:"help"}}>
+      {children}
+      {show&&ReactDOM.createPortal(
+        <div style={{position:"fixed",left:Math.min(pos.x,window.innerWidth-(maxW||260)-16),top:pos.y-8,
+          transform:"translateY(-100%)",
+          maxWidth:maxW||260,padding:"8px 12px",borderRadius:8,
+          background:p?.bg2||"#1a1a1e",color:p?.label||"#e8e8ea",border:"1px solid "+(p?.glassBorder||"#333"),
+          fontSize:11,fontFamily:MONO,lineHeight:1.5,zIndex:9999,
+          pointerEvents:"none",boxShadow:"0 8px 32px rgba(0,0,0,0.4)",
+          animation:"fadeIn 0.15s ease"}}>
+          {text}
+        </div>,
+        document.body
+      )}
+    </span>
+  );
+}
+
 // ====== VIEW: TEAM ======
 function TeamView({p,dk,mob}){
   const[team,setTeam]=useState([]);
@@ -1457,9 +1487,10 @@ function TeamView({p,dk,mob}){
                   <span key={i} style={{fontSize:10,fontFamily:MONO,padding:"2px 8px",borderRadius:6,background:p.fill4,color:p.label3}}>{t}</span>
                 ))}
               </div>
-              {cf.pendingDecisions?.length>0&&<div style={{marginTop:8,fontSize:10,fontFamily:MONO,color:p.orange}}>
+              {cf.pendingDecisions?.length>0&&<Tip text={"Open items between you and "+cf.name+" that need resolution. These decisions may have downstream dependencies."} p={p}>
+                <div style={{marginTop:8,fontSize:10,fontFamily:MONO,color:p.orange}}>
                 {"\u23F3"} Pending: {cf.pendingDecisions.join(", ")}
-              </div>}
+              </div></Tip>}
             </div>
           ))}
         </div>
@@ -1472,15 +1503,18 @@ function TeamView({p,dk,mob}){
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
               <div style={{display:"flex",alignItems:"center",gap:10}}>
                 <span style={{fontSize:12,color:statusColor(person.status)}}>{statusIcon(person.status)}</span>
-                <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF}}>{person.name}</span>
+                <Tip text={person.status==="shipping"?"Actively delivering. No blockers.":person.status==="attention"?"Needs VP attention. Check top concern.":person.status==="blocked"?"Blocked or stalled. Intervene.":"No recent signal."} p={p}>
+                  <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF}}>{person.name}</span>
+                </Tip>
                 <span style={{fontSize:11,color:p.label3,fontFamily:MONO}}>{person.role}</span>
                 {person.squad&&<span style={{fontSize:10,color:p.label4,fontFamily:MONO}}>{"\u00b7"} {person.squad}</span>}
               </div>
               <div style={{display:"flex",alignItems:"center",gap:12}}>
-                {person.fourPAge&&<span style={{fontSize:10,fontFamily:MONO,color:ageColor(person.fourPAge),cursor:person.fourPUrl?"pointer":"default"}}
+                {person.fourPAge&&<Tip text={"4 P's doc last updated "+person.fourPAge+" ago. Click to open. Stale threshold: >5 days."} p={p}>
+                  <span style={{fontSize:10,fontFamily:MONO,color:ageColor(person.fourPAge),cursor:person.fourPUrl?"pointer":"default"}}
                   onClick={()=>{if(person.fourPUrl)window.open(person.fourPUrl,"_blank");}}>
                   4P: {person.fourPAge}{" \u2197"}
-                </span>}
+                </span></Tip>}
                 <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>{person.meetingsToday}mtg today</span>
               </div>
             </div>
@@ -1523,11 +1557,15 @@ function CustomersView({p,dk,mob}){
             <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
               <div style={{display:"flex",alignItems:"center",gap:10}}>
                 <span style={{fontSize:14,fontWeight:600,color:p.label,fontFamily:SF}}>{c.name}</span>
-                <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:trajColor(c.trajectory)}}>{trajIcon(c.trajectory)} {c.trajectory}</span>
+                <Tip text={c.trajectory==="expanding"?"WAU growing steadily. Active expansion across teams/use cases.":c.trajectory==="stable"?"Flat usage. Not growing, not shrinking. May need proactive outreach.":c.trajectory==="contracting"?"WAU declining. Early churn signal. Check FDE touch recency.":"Multiple risk factors. Needs immediate VP attention."} p={p}>
+                  <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:trajColor(c.trajectory)}}>{trajIcon(c.trajectory)} {c.trajectory}</span>
+                </Tip>
               </div>
               <div style={{display:"flex",alignItems:"center",gap:12}}>
                 <MiniSparkline data={c.wauTrend} color={trajColor(c.trajectory)} w={48} h={16}/>
-                <span style={{fontSize:13,fontWeight:700,fontFamily:MONO,color:p.label}}>{c.wau}</span>
+                <Tip text={"Weekly Active Users. 7-week trend: "+JSON.stringify(c.wauTrend)+". Delta: "+c.wauDelta+". Share of external WAU: "+c.share+"."} p={p} maxW={300}>
+                  <span style={{fontSize:13,fontWeight:700,fontFamily:MONO,color:p.label}}>{c.wau}</span>
+                </Tip>
                 <span style={{fontSize:10,fontFamily:MONO,color:trajColor(c.trajectory)}}>{c.wauDelta}</span>
               </div>
             </div>
@@ -1546,6 +1584,88 @@ function CustomersView({p,dk,mob}){
           </div>
         ))}
       </div>
+
+      {/* Voice of the Customer */}
+      {(()=>{
+        var voc=LIVE_DATA?.voc;
+        if(!voc)return null;
+        function trendIcon(t){return t==="increasing"?"\u2191":t==="decreasing"?"\u2193":"\u2192";}
+        function trendColor(t){return t==="increasing"?p.red:t==="decreasing"?p.green:p.label3;}
+        function statusColor(s){return s==="In Progress"?p.blue:s==="Captured"?p.label3:s==="Under Review"?p.orange:s==="Candidate"?p.green:p.label4;}
+        return(
+          <div style={{marginTop:28}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
+              <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>
+                VOICE OF THE CUSTOMER {"\u00b7"} {voc.themes?.length||0} THEMES
+              </div>
+              <div style={{display:"flex",gap:8,alignItems:"center"}}>
+                <Tip text={"Two-loop VoC program: Loop 1 (Support breadth) + Loop 2 (FDE deployment depth). "+voc.coverage?.accountsWithRankedTop10+" of "+voc.coverage?.targetAccounts+" accounts with ranked Top 10. Freshness: "+voc.coverage?.avgFreshnessDays+"d avg (SLA: "+voc.coverage?.freshnessSLA+"d)."} p={p}>
+                  <span style={{fontSize:9,fontFamily:MONO,color:voc.programStatus==="pilot"?p.orange:p.green,padding:"2px 6px",borderRadius:4,background:(voc.programStatus==="pilot"?p.orange:p.green)+"14"}}>{voc.programStatus}</span>
+                </Tip>
+                {voc.docUrl&&<a href={voc.docUrl} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>VoC doc {"\u2197"}</a>}
+              </div>
+            </div>
+
+            {/* Theme cards */}
+            <div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:20}}>
+              {(voc.themes||[]).map(theme=>(
+                <div key={theme.id} style={{padding:"12px 14px",borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      <span style={{fontSize:13,fontWeight:600,color:p.label,fontFamily:SF}}>{theme.name}</span>
+                      <Tip text={"Frequency: "+theme.frequency+" requests across "+theme.accounts?.length+" accounts. Trend: "+theme.trend+". Product area: "+theme.productArea+"."} p={p}>
+                        <span style={{fontSize:10,fontFamily:MONO,color:theme.severity==="high"?p.red:p.orange}}>{theme.severity}</span>
+                      </Tip>
+                    </div>
+                    <div style={{display:"flex",alignItems:"center",gap:8}}>
+                      <span style={{fontSize:11,fontFamily:MONO,fontWeight:600,color:trendColor(theme.trend)}}>{trendIcon(theme.trend)} {theme.frequency}</span>
+                      <Tip text={"Mapped to "+theme.productArea+" theme. Owner: "+(theme.productArea==="Core Platform"?"Rowen":theme.productArea==="Engagement"?"Sanghee":"Kenn")+"."} p={p}>
+                        <span style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.fill4,color:p.label3}}>{theme.productArea}</span>
+                      </Tip>
+                    </div>
+                  </div>
+                  <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:6}}>{theme.summary}</p>
+                  <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
+                    {(theme.evidence||[]).map((ev,i)=>(
+                      <Tip key={i} text={ev.label} p={p}>
+                        <a href={ev.url} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none",padding:"2px 6px",borderRadius:4,background:p.blue+"10"}}>{ev.label.length>40?ev.label.slice(0,37)+"...":ev.label} {"\u2197"}</a>
+                      </Tip>
+                    ))}
+                    {(theme.accounts||[]).map((a,i)=>(
+                      <span key={"a"+i} style={{fontSize:9,fontFamily:MONO,padding:"2px 6px",borderRadius:4,background:p.fill4,color:p.label3}}>{a}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Top Customer Requests */}
+            <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>
+              TOP CUSTOMER REQUESTS {"\u00b7"} CROSS-ACCOUNT PRIORITY
+            </div>
+            <div style={{borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,overflow:"hidden"}}>
+              {(voc.topCustomerRequests||[]).map((req,i)=>(
+                <div key={req.id} style={{padding:"10px 14px",display:"flex",alignItems:"center",gap:10,
+                  borderBottom:i<(voc.topCustomerRequests||[]).length-1?"0.5px solid "+p.sep:"none"}}>
+                  <span style={{fontSize:12,fontWeight:700,fontFamily:MONO,color:i<3?p.red:p.label3,width:20,textAlign:"center"}}>{req.rank}</span>
+                  <div style={{flex:1,minWidth:0}}>
+                    <Tip text={"Account: "+req.account+". Age: "+req.age+"d. Criticality: "+req.criticality+". Status: "+req.status+"."} p={p}>
+                      <a href={req.url} target="_blank" rel="noopener" style={{fontSize:12,color:p.label,fontFamily:SF,textDecoration:"none",fontWeight:500}}>{req.title} <span style={{color:p.blue}}>{"\u2197"}</span></a>
+                    </Tip>
+                    <div style={{fontSize:10,fontFamily:MONO,color:p.label3,marginTop:2}}>{req.account} {"\u00b7"} {req.id}</div>
+                  </div>
+                  <Tip text={req.status+". Created "+req.age+" days ago."} p={p}>
+                    <span style={{fontSize:9,fontFamily:MONO,padding:"2px 8px",borderRadius:4,background:statusColor(req.status)+"14",color:statusColor(req.status)}}>{req.status}</span>
+                  </Tip>
+                  {req.criticality!=="None"&&<Tip text={req.criticality+" for "+req.account} p={p}>
+                    <span style={{fontSize:9,fontFamily:MONO,color:req.criticality==="Hard blocker"?p.red:p.orange}}>{req.criticality==="Hard blocker"?"\u26D4":"\u26A0"}</span>
+                  </Tip>}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
@@ -1575,7 +1695,9 @@ function DecisionsView({p,dk,mob}){
               borderLeft:"3px solid "+u.color}}>
               <div style={{display:"flex",alignItems:"flex-start",justifyContent:"space-between",marginBottom:8}}>
                 <span style={{fontSize:15,fontWeight:600,color:p.label,fontFamily:SF,flex:1,lineHeight:1.3}}>{d.title}</span>
-                <span style={{fontSize:10,fontWeight:700,fontFamily:MONO,color:u.color,padding:"2px 8px",borderRadius:6,background:u.color+"14",flexShrink:0,marginLeft:12}}>{u.label}</span>
+                <Tip text={u.label==="STALE"?"This decision has been waiting "+d.staleDays+" days without progress. Risk of context decay.":u.label==="OVERDUE"?"Past deadline. Blocking downstream work.":"Deadline: "+new Date(d.deadline).toLocaleDateString("en-US",{month:"long",day:"numeric"})+". Evidence may shift before then."} p={p}>
+                  <span style={{fontSize:10,fontWeight:700,fontFamily:MONO,color:u.color,padding:"2px 8px",borderRadius:6,background:u.color+"14",flexShrink:0,marginLeft:12}}>{u.label}</span>
+                </Tip>
               </div>
               <p style={{fontSize:12,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:12}}>{d.context}</p>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:12}}>
@@ -1694,6 +1816,113 @@ function TimeView({p,dk,mob}){
   );
 }
 
+// ====== VIEW: DATA (Strategy Metrics) ======
+function DataView({p,dk,mob}){
+  const[sm,setSm]=useState(null);
+  useEffect(()=>{if(LIVE_DATA?.strategyMetrics)setSm(LIVE_DATA.strategyMetrics);else loadData().then(()=>{if(LIVE_DATA?.strategyMetrics)setSm(LIVE_DATA.strategyMetrics);});},[]);
+  if(!sm)return <div style={{padding:40,textAlign:"center",color:p.label3,fontFamily:SF}}>Loading strategy data...</div>;
+  function stColor(s){return s==="on_track"||s==="achieved"?p.green:s==="at_risk"?p.red:s==="attention"?p.orange:s==="not_measurable"?p.red:p.label3;}
+  function stLabel(s){return s==="on_track"?"On Track":s==="at_risk"?"At Risk":s==="achieved"?"Achieved":s==="attention"?"Needs Attention":s==="not_measurable"?"Not Measurable":s;}
+  return(
+    <div style={{padding:mob?"12px 16px":"16px 24px",overflowY:"auto",height:"100%"}}>
+      {/* North Star */}
+      <div style={{padding:"16px 18px",borderRadius:14,background:sm.northStar?.status==="not_measurable"?p.red+"08":p.green+"08",
+        border:"0.5px solid "+(sm.northStar?.status==="not_measurable"?p.red:p.green)+"20",marginBottom:20}}>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:8}}>
+          <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3}}>NORTH STAR METRIC</div>
+          <Tip text={sm.northStar?.note||""} p={p}>
+            <span style={{fontSize:10,fontFamily:MONO,fontWeight:700,color:stColor(sm.northStar?.status),padding:"2px 8px",borderRadius:4,background:stColor(sm.northStar?.status)+"14"}}>{stLabel(sm.northStar?.status)}</span>
+          </Tip>
+        </div>
+        <div style={{fontSize:16,fontWeight:700,fontFamily:SF,color:p.label,marginBottom:4}}>{sm.northStar?.metric}</div>
+        <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5}}>{sm.northStar?.note}</p>
+        {sm.northStar?.amplitudeChart&&<a href={sm.northStar.amplitudeChart} target="_blank" rel="noopener" style={{fontSize:9,fontFamily:MONO,color:p.blue,textDecoration:"none",marginTop:6,display:"inline-block"}}>View in Amplitude {"\u2197"}</a>}
+      </div>
+
+      {/* Strategy Pillars */}
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>STRATEGIC PILLARS {"\u00b7"} SIGNAL \u2192 EVIDENCE \u2192 DECISION</div>
+      <div style={{display:"flex",flexDirection:"column",gap:14,marginBottom:24}}>
+        {(sm.pillars||[]).map(pillar=>(
+          <div key={pillar.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+            borderLeft:"3px solid "+stColor(pillar.status)}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
+              <div style={{display:"flex",alignItems:"center",gap:8}}>
+                <span style={{fontSize:14,fontWeight:700,color:p.label,fontFamily:SF}}>{pillar.name}</span>
+                <Tip text={"Theme: "+pillar.theme+". Owner: "+pillar.owner+". This pillar maps to the "+pillar.theme+" product area."} p={p}>
+                  <span style={{fontSize:10,fontFamily:MONO,color:p.label3}}>{pillar.owner}</span>
+                </Tip>
+              </div>
+              <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,color:stColor(pillar.status)}}>{stLabel(pillar.status)}</span>
+            </div>
+            <div style={{display:"flex",flexDirection:"column",gap:6}}>
+              {(pillar.keyResults||[]).map((kr,i)=>(
+                <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"6px 0",borderTop:i>0?"0.5px solid "+p.sep:"none"}}>
+                  <span style={{width:8,height:8,borderRadius:4,background:stColor(kr.status),flexShrink:0}}/>
+                  <Tip text={kr.tooltip||kr.kr} p={p} maxW={300}>
+                    <span style={{fontSize:12,fontFamily:SF,color:p.label,flex:1,cursor:"help"}}>{kr.kr}</span>
+                  </Tip>
+                  <div style={{display:"flex",alignItems:"center",gap:6,flexShrink:0}}>
+                    <span style={{fontSize:12,fontWeight:600,fontFamily:MONO,color:p.label}}>{kr.current}</span>
+                    <span style={{fontSize:10,fontFamily:MONO,color:p.label4}}>/ {kr.target}</span>
+                  </div>
+                  {kr.chartId&&<Tip text={"View chart "+kr.chartId+" in Amplitude"} p={p}>
+                    <a href={"https://app.amplitude.com/analytics/sift-stack/chart/"+kr.chartId} target="_blank" rel="noopener" style={{fontSize:9,color:p.blue,textDecoration:"none"}}>{"\u2197"}</a>
+                  </Tip>}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Product Bets */}
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:12}}>PRODUCT BETS {"\u00b7"} THREE-GATE SYSTEM</div>
+      <div style={{display:"grid",gridTemplateColumns:mob?"1fr":"1fr 1fr 1fr",gap:10,marginBottom:24}}>
+        {(sm.bets||[]).map(bet=>(
+          <div key={bet.name} style={{padding:"14px 16px",borderRadius:14,...glass(p),border:"0.5px solid "+p.glassBorder,
+            borderTop:"3px solid "+stColor(bet.status)}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:6}}>
+              <span style={{fontSize:14,fontWeight:700,color:p.label,fontFamily:SF}}>{bet.name}</span>
+              <span style={{fontSize:10,fontFamily:MONO,fontWeight:600,color:stColor(bet.status)}}>{stLabel(bet.status)}</span>
+            </div>
+            <Tip text={bet.gate} p={p}>
+              <div style={{fontSize:9,fontFamily:MONO,color:p.label3,marginBottom:8,cursor:"help"}}>{bet.gate}</div>
+            </Tip>
+            <p style={{fontSize:11,color:p.label2,fontFamily:SF,lineHeight:1.5,marginBottom:6}}>{bet.evidence}</p>
+            <Tip text={bet.killCriteria} p={p} maxW={300}>
+              <div style={{fontSize:10,fontFamily:MONO,color:p.orange,padding:"4px 8px",borderRadius:6,background:p.orange+"10",cursor:"help"}}>{"\u2620"} {bet.killCriteria?.length>80?bet.killCriteria.slice(0,77)+"...":bet.killCriteria}</div>
+            </Tip>
+            <div style={{fontSize:10,fontFamily:MONO,color:p.label4,marginTop:6}}>Owner: {bet.owner}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Squad Status */}
+      <div style={{fontSize:10,fontWeight:700,letterSpacing:"0.1em",fontFamily:MONO,color:p.label3,marginBottom:10}}>SQUAD STATUS {"\u00b7"} Q1 PRIORITIES</div>
+      <div style={{borderRadius:12,...glass(p),border:"0.5px solid "+p.glassBorder,overflow:"hidden"}}>
+        {(sm.squads||[]).map((sq,i)=>(
+          <div key={sq.name} style={{padding:"10px 14px",display:"flex",alignItems:"center",gap:10,
+            borderBottom:i<(sm.squads||[]).length-1?"0.5px solid "+p.sep:"none"}}>
+            <span style={{width:8,height:8,borderRadius:4,background:stColor(sq.status),flexShrink:0}}/>
+            <span style={{fontSize:12,fontWeight:600,fontFamily:SF,color:p.label,width:mob?100:150}}>{sq.name}</span>
+            <Tip text={sq.q1} p={p} maxW={340}>
+              <span style={{fontSize:11,fontFamily:SF,color:p.label2,flex:1,cursor:"help",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{sq.q1}</span>
+            </Tip>
+            <span style={{fontSize:9,fontFamily:MONO,color:stColor(sq.status),flexShrink:0}}>{stLabel(sq.status)}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Doc links */}
+      <div style={{display:"flex",gap:12,marginTop:16,flexWrap:"wrap"}}>
+        {sm.strategyDocUrl&&<a href={sm.strategyDocUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>2026 Strategy {"\u2197"}</a>}
+        {sm.q1PlanUrl&&<a href={sm.q1PlanUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>Q1 Plan {"\u2197"}</a>}
+        {sm.metricsSheetUrl&&<a href={sm.metricsSheetUrl} target="_blank" rel="noopener" style={{fontSize:10,fontFamily:MONO,color:p.blue,textDecoration:"none"}}>Metrics Sheet {"\u2197"}</a>}
+      </div>
+    </div>
+  );
+}
+
 // ====== VIEW TABS ======
 const VIEWS=[
   {id:"signals",label:"Signals",shortcut:"1"},
@@ -1701,6 +1930,7 @@ const VIEWS=[
   {id:"customers",label:"Customers",shortcut:"3"},
   {id:"decisions",label:"Decisions",shortcut:"4"},
   {id:"time",label:"Time",shortcut:"5"},
+  {id:"data",label:"Data",shortcut:"6"},
 ];
 
 function ViewTabs({active,onChange,p,mob,counts}){
@@ -1713,6 +1943,7 @@ function ViewTabs({active,onChange,p,mob,counts}){
         if(v.id==="decisions") badge=(LIVE_DATA?.decisions||[]).length||null;
         if(v.id==="team"){var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;if(blocked>0)badge=blocked;}
         if(v.id==="customers"){var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;if(atRisk>0)badge=atRisk;}
+        if(v.id==="data"){var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});if(arKr>0)badge=arKr;}
         return(
           <button key={v.id} onClick={()=>onChange(v.id)}
             style={{padding:mob?"10px 12px":"10px 16px",background:"none",border:"none",cursor:"pointer",position:"relative",
@@ -1904,7 +2135,7 @@ function SiftIntel(){
       if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
       // View switching: 1-5 when no item focused
       if(focusIdx<0){
-        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time"};
+        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time","6":"data"};
         if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
       }
     };
@@ -1962,6 +2193,7 @@ function SiftIntel(){
           {activeView==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
           {activeView==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
           {activeView==="time"&&<TimeView p={p} dk={dk} mob={mob}/>}
+          {activeView==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
           {activeView==="signals"&&!selected&&(
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
               <div style={{padding:mob?"4px 0":"6px 0"}}>
