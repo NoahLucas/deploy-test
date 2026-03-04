@@ -302,6 +302,7 @@ function extractInsightsFromPartial(text){
 
 function robustParseFinal(text){
   var clean=text.replace(/```json\s*/g,"").replace(/```\s*/g,"").trim();
+  if(!clean||clean.length===0) return{insights:[]};
   var parsed=tryParse(clean);
   if(parsed) return parsed;
   var fixed=clean.replace(/,\s*([}\]])/g,"$1");
@@ -2236,56 +2237,117 @@ function CalendarView({p,dk,mob}){
 
 // ====== VIEW TABS ======
 const VIEWS=[
-  {id:"signals",label:"Signals",shortcut:"1",icon:"\u{1F4E1}",shortLabel:"SIG"},
-  {id:"team",label:"Team",shortcut:"2",icon:"\u{1F465}",shortLabel:"TEAM"},
-  {id:"customers",label:"Customers",shortcut:"3",icon:"\u{1F3ED}",shortLabel:"CUST"},
-  {id:"decisions",label:"Decisions",shortcut:"4",icon:"\u{2696}",shortLabel:"DEC"},
-  {id:"time",label:"Time",shortcut:"5",icon:"\u{23F1}",shortLabel:"TIME"},
-  {id:"data",label:"Data",shortcut:"6",icon:"\u{1F4CA}",shortLabel:"DATA"},
-  {id:"calendar",label:"Calendar",shortcut:"7",icon:"\u{1F4C5}",shortLabel:"CAL"},
+  {id:"now",label:"Now",shortcut:"1",icon:"\u{1F4E1}",shortLabel:"NOW",phase:"OBSERVE"},
+  {id:"who",label:"Who",shortcut:"2",icon:"\u{1F465}",shortLabel:"WHO",phase:"ORIENT"},
+  {id:"how",label:"How",shortcut:"3",icon:"\u{2696}",shortLabel:"HOW",phase:"DECIDE"},
+  {id:"when",label:"When",shortcut:"4",icon:"\u{1F4C5}",shortLabel:"WHEN",phase:"ACT"},
 ];
 
 function ViewTabs({active,onChange,p,mob,counts}){
   return(
     <div style={{display:"flex",gap:0,padding:mob?"0 4px":"0 12px",borderBottom:mob?"none":"0.5px solid "+p.sep,flexShrink:0,
-      overflowX:"auto",WebkitOverflowScrolling:"touch",scrollbarWidth:"none",
       ...(mob?{borderTop:"0.5px solid "+p.sep,order:99,position:"fixed",bottom:0,left:0,right:0,zIndex:60,
         background:p.materialThick,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
         borderTop:"0.5px solid "+p.glassBorder,
-        paddingBottom:"env(safe-area-inset-bottom,0px)",justifyContent:"space-around"}:{})}}>
+        paddingBottom:"env(safe-area-inset-bottom,0px)",justifyContent:"space-evenly"}:{})}}>
       {VIEWS.map(v=>{
         var isActive=active===v.id;
         var badge=null;
-        if(v.id==="signals"&&counts?.urgent>0) badge=counts.urgent;
-        if(v.id==="decisions") badge=(LIVE_DATA?.decisions||[]).length||null;
-        if(v.id==="team"){var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;if(blocked>0)badge=blocked;}
-        if(v.id==="customers"){var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;if(atRisk>0)badge=atRisk;}
-        if(v.id==="data"){var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});if(arKr>0)badge=arKr;}
-        if(v.id==="calendar"){var td=new Date().toISOString().slice(0,10);var urg=(LIVE_DATA?.timeline?.sections||[]).flatMap(s=>s.events).filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=td&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;if(urg>0)badge=urg;}
+        if(v.id==="now"&&counts?.urgent>0) badge=counts.urgent;
+        if(v.id==="who"){
+          var blocked=(LIVE_DATA?.team||[]).filter(t=>t.status==="blocked"||t.status==="attention").length;
+          var atRisk=(LIVE_DATA?.customers||[]).filter(c=>c.trajectory==="at-risk"||c.trajectory==="contracting").length;
+          if(blocked+atRisk>0)badge=blocked+atRisk;
+        }
+        if(v.id==="how"){
+          var decCount=(LIVE_DATA?.decisions||[]).length||0;
+          var arKr=0;(LIVE_DATA?.strategyMetrics?.pillars||[]).forEach(pil=>{(pil.keyResults||[]).forEach(kr=>{if(kr.status==="at_risk")arKr++;});});
+          if(decCount+arKr>0)badge=decCount+arKr;
+        }
+        if(v.id==="when"){var td=new Date().toISOString().slice(0,10);var urg=(LIVE_DATA?.timeline?.sections||[]).flatMap(s=>s.events).filter(e=>(e.type==="deadline"||e.type==="gate")&&e.date>=td&&e.date<=new Date(Date.now()+14*86400000).toISOString().slice(0,10)).length;if(urg>0)badge=urg;}
         return(
           <button key={v.id} onClick={()=>onChange(v.id)}
-            style={{padding:mob?"8px 2px 6px":"10px 14px",background:"none",border:"none",cursor:"pointer",position:"relative",
+            style={{padding:mob?"8px 2px 6px":"10px 18px",background:mob&&isActive?p.accent+"14":"none",border:"none",cursor:"pointer",position:"relative",
+              borderRadius:mob?12:0,
               fontSize:mob?10:13,fontWeight:isActive?600:400,fontFamily:SF,letterSpacing:"0",
               color:isActive?p.accent:p.label3,transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)",
               borderBottom:mob?"none":(isActive?"2.5px solid "+p.accent:"2.5px solid transparent"),
-              borderTop:mob?(isActive?"2px solid "+p.accent:"2px solid transparent"):"none",
               marginBottom:mob?0:"-0.5px",whiteSpace:"nowrap",flex:mob?1:"none",
-              display:"flex",flexDirection:mob?"column":"row",alignItems:"center",gap:mob?2:0,
-              minHeight:mob?44:undefined,WebkitTapHighlightColor:"transparent"}}>
-            {mob&&<span style={{fontSize:16}}>{v.icon||""}</span>}
+              display:"flex",flexDirection:mob?"column":"row",alignItems:"center",gap:mob?1:0,
+              minHeight:mob?48:undefined,WebkitTapHighlightColor:"transparent"}}>
+            {mob&&<span style={{fontSize:18}}>{v.icon||""}</span>}
             {!mob&&v.label}
-            {mob&&<span style={{fontSize:9}}>{v.shortLabel||v.label.slice(0,3)}</span>}
+            {mob&&<span style={{fontSize:10,fontWeight:isActive?700:500,letterSpacing:"0.04em"}}>{v.shortLabel||v.label}</span>}
+            {mob&&<span style={{fontSize:6,fontWeight:400,letterSpacing:"0.1em",color:isActive?p.accent+"88":p.label4,marginTop:-1}}>{v.phase}</span>}
+            {!mob&&<span style={{fontSize:8,fontFamily:MONO,color:isActive?p.accent+"66":p.label4,marginLeft:6,fontWeight:400,letterSpacing:"0.08em"}}>{v.phase}</span>}
             {!mob&&<span style={{fontSize:9,fontFamily:MONO,color:p.label4,marginLeft:4,fontWeight:400}}>{v.shortcut}</span>}
             {badge!=null&&badge>0&&<span style={{position:"absolute",top:mob?2:3,right:mob?"50%":2,
-              transform:mob?"translateX(12px)":"none",
-              minWidth:15,height:15,borderRadius:8,
+              transform:mob?"translateX(14px)":"none",
+              minWidth:16,height:16,borderRadius:8,
               padding:"0 4px",
-              background:v.id==="signals"?p.red:p.orange,color:"#fff",fontSize:9,fontWeight:700,fontFamily:SF,
+              background:v.id==="now"?p.red:p.orange,color:"#fff",fontSize:9,fontWeight:700,fontFamily:SF,
               display:"flex",alignItems:"center",justifyContent:"center",
               boxShadow:"0 1px 3px rgba(0,0,0,0.3)"}}>{badge}</span>}
           </button>
         );
       })}
+    </div>
+  );
+}
+
+function SubTab({tabs,active,onChange,p,mob}){
+  return(
+    <div style={{display:"flex",gap:2,padding:mob?"6px 12px":"6px 16px",background:p.fill4,borderRadius:0}}>
+      {tabs.map(t=>(
+        <button key={t.id} onClick={()=>onChange(t.id)}
+          style={{padding:mob?"5px 12px":"5px 14px",background:active===t.id?p.accent+"18":"transparent",
+            border:active===t.id?"1px solid "+p.accent+"33":"1px solid transparent",
+            borderRadius:8,cursor:"pointer",
+            fontSize:mob?10:11,fontWeight:active===t.id?600:400,fontFamily:SF,
+            color:active===t.id?p.accent:p.label3,transition:"all 0.2s",
+            WebkitTapHighlightColor:"transparent"}}>
+          {t.icon&&<span style={{marginRight:4}}>{t.icon}</span>}{t.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function WhoView({p,dk,mob}){
+  const[sub,setSub]=useState("team");
+  return(
+    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
+      <SubTab tabs={[{id:"team",label:"Team",icon:"👥"},{id:"customers",label:"Customers",icon:"🏭"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
+      <div style={{flex:1,overflow:"hidden"}}>
+        {sub==="team"&&<TeamView p={p} dk={dk} mob={mob}/>}
+        {sub==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
+      </div>
+    </div>
+  );
+}
+
+function HowView({p,dk,mob}){
+  const[sub,setSub]=useState("decisions");
+  return(
+    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
+      <SubTab tabs={[{id:"decisions",label:"Decisions",icon:"⚖"},{id:"data",label:"Strategy",icon:"📊"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
+      <div style={{flex:1,overflow:"hidden"}}>
+        {sub==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
+        {sub==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
+      </div>
+    </div>
+  );
+}
+
+function WhenView({p,dk,mob}){
+  const[sub,setSub]=useState("timeline");
+  return(
+    <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
+      <SubTab tabs={[{id:"timeline",label:"Timeline",icon:"⏱"},{id:"calendar",label:"Calendar",icon:"📅"}]} active={sub} onChange={setSub} p={p} mob={mob}/>
+      <div style={{flex:1,overflow:"hidden"}}>
+        {sub==="timeline"&&<TimeView p={p} dk={dk} mob={mob}/>}
+        {sub==="calendar"&&<CalendarView p={p} dk={dk} mob={mob}/>}
+      </div>
     </div>
   );
 }
@@ -2313,7 +2375,7 @@ function SiftIntel(){
   const hasScanned=useRef(false);
   const[scanMeta,setScanMeta]=useState(null);
   const[coverageGaps,setCoverageGaps]=useState(null);
-  const[activeView,setActiveView]=useState("signals");
+  const[activeView,setActiveView]=useState("now");
 
   const active=insights.filter(i=>itemStates[i.id]!=="dismissed");
   const filtered=filter==="all"?active:active.filter(i=>i.priority===filter);
@@ -2463,7 +2525,7 @@ function SiftIntel(){
       if(e.key==="v"){setFeedMode(m=>m==="cards"?"brief":"cards");}
       // View switching: 1-5 when no item focused
       if(focusIdx<0){
-        var viewMap={"1":"signals","2":"team","3":"customers","4":"decisions","5":"time","6":"data","7":"calendar"};
+        var viewMap={"1":"now","2":"who","3":"how","4":"when"};
         if(viewMap[e.key]){setActiveView(viewMap[e.key]);return;}
       }
     };
@@ -2517,13 +2579,10 @@ function SiftIntel(){
         <ViewTabs active={activeView} onChange={setActiveView} p={p} mob={mob} counts={counts}/>
 
         <div style={{flex:1,position:"relative",overflow:"hidden",zIndex:1}}>
-          {activeView==="team"&&<TeamView p={p} dk={dk} mob={mob}/>}
-          {activeView==="customers"&&<CustomersView p={p} dk={dk} mob={mob}/>}
-          {activeView==="decisions"&&<DecisionsView p={p} dk={dk} mob={mob}/>}
-          {activeView==="time"&&<TimeView p={p} dk={dk} mob={mob}/>}
-          {activeView==="data"&&<DataView p={p} dk={dk} mob={mob}/>}
-          {activeView==="calendar"&&<CalendarView p={p} dk={dk} mob={mob}/>}
-          {activeView==="signals"&&!selected&&(
+          {activeView==="who"&&<WhoView p={p} dk={dk} mob={mob}/>}
+          {activeView==="how"&&<HowView p={p} dk={dk} mob={mob}/>}
+          {activeView==="when"&&<WhenView p={p} dk={dk} mob={mob}/>}
+          {activeView==="now"&&!selected&&(
             <div style={{position:"absolute",inset:0,display:"flex",flexDirection:"column"}}>
               <div style={{padding:mob?"4px 0":"6px 0"}}>
                 <FilterBar active={filter} onChange={f=>{setFilter(f);setFocusIdx(-1);}} counts={counts} p={p} mob={mob}/>
@@ -2566,7 +2625,7 @@ function SiftIntel(){
             </div>
           )}
 
-          {activeView==="signals"&&selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
+          {activeView==="now"&&selected&&!modal&&<Detail insight={selected} onBack={()=>setSelected(null)} onAct={handleAct} p={p} dk={dk} mob={mob}/>}
         </div>
 
         {modal&&<ActModal insight={modal} onClose={()=>setModal(null)} onDone={handleDone} p={p} mob={mob}/>}
