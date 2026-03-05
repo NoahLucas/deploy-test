@@ -254,7 +254,7 @@ var _stateVersion=0;
 var _onPatch=null; // Set by React app to trigger re-renders
 
 // Detect if server is available
-async function _detectServer(){
+async function _detectServer(){return null; /* skip localhost detection */
   if(SERVER_URL) return SERVER_URL;
   // Try common local ports
   for(var port of [3001,3000,8080]){
@@ -458,14 +458,14 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   var r=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-sonnet-4-5-20250929",max_tokens:16000,stream:true,
+      model:"claude-sonnet-4-5-20250929",max_tokens:8192,stream:true,
       system:systemPrompt,
       messages:[{role:"user",content:"Synthesize ALL signals into 12-15 actionable items. You MUST produce at least 12 items. There are "+((data.signals||[]).length)+" input signals. Every signal should be represented. Do NOT stop at 4-5 items.\n\nData:\n"+JSON.stringify(compact)}],
     }),
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
   }
   var reader=r.body.getReader();
   var decoder=new TextDecoder();
@@ -528,7 +528,7 @@ async function synthesizeLiveMCP(onProgress){
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
   }
   var d=await r.json();
   if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
@@ -557,7 +557,7 @@ async function synthesizeFresh(onInsight, onProgress){
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    throw new Error("API "+r.status+": "+errBody.slice(0,200));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
   }
   onProgress("Analyzing results...");
   var d=await r.json();
