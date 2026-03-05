@@ -473,7 +473,7 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
   }
   var reader=r.body.getReader();
   var decoder=new TextDecoder();
@@ -536,7 +536,7 @@ async function synthesizeLiveMCP(onProgress){
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
   }
   var d=await r.json();
   if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
@@ -573,7 +573,7 @@ async function synthesizeFresh(onInsight, onProgress){
   });
   if(!r.ok){
     var errBody=await r.text().catch(function(){return"";});
-    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody.slice(0,500));
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
   }
   onProgress("Analyzing results...");
   var d=await r.json();
@@ -710,13 +710,13 @@ function meshColors(dk,hour){
     };
   }
   // Dark mode — richer, more atmospheric
-  var c1=dawn?"140,90,40":morning?"100,80,50":afternoon?"50,80,130":golden?"160,80,30":night?"20,30,80":"60,90,140";
-  var c2=dawn?"120,60,80":morning?"130,80,50":afternoon?"100,60,140":golden?"140,50,60":night?"40,20,90":"120,80,160";
-  var c3=dawn?"80,100,60":morning?"90,110,50":afternoon?"60,120,100":golden?"120,100,30":night?"10,40,70":"80,140,120";
+  var c1=dawn?"160,110,50":morning?"120,100,60":afternoon?"60,100,160":golden?"180,100,40":night?"30,50,120":"70,100,160";
+  var c2=dawn?"140,70,90":morning?"150,100,60":afternoon?"120,70,170":golden?"160,60,70":night?"60,30,130":"130,90,180";
+  var c3=dawn?"100,130,70":morning?"110,130,60":afternoon?"70,140,120":golden?"140,120,40":night?"20,60,100":"90,160,140";
   // Night gets more intensity to feel alive
-  var o1=night?0.30:golden?0.28:dawn?0.26:0.24;
-  var o2=night?0.22:golden?0.20:dawn?0.18:0.16;
-  var o3=night?0.16:golden?0.14:dawn?0.12:0.10;
+  var o1=night?0.38:golden?0.34:dawn?0.32:0.28;
+  var o2=night?0.28:golden?0.24:dawn?0.22:0.20;
+  var o3=night?0.20:golden?0.18:dawn?0.16:0.14;
   return{
     m1:"radial-gradient(ellipse 80% 60% at 20% 30%, rgba("+c1+","+o1+") 0%, transparent 70%)",
     m2:"radial-gradient(ellipse 60% 70% at 75% 65%, rgba("+c2+","+o2+") 0%, transparent 70%)",
@@ -726,7 +726,7 @@ function meshColors(dk,hour){
 
 var CP={
   dark:{
-    bg:"#050507",
+    bg:"#0B0E1A",
     glass:"rgba(56,56,62,0.44)",glassH:"rgba(66,66,72,0.56)",glassThin:"rgba(56,56,62,0.28)",
     border:"rgba(255,255,255,0.11)",borderH:"rgba(255,255,255,0.20)",
     highlight:"rgba(255,255,255,0.06)",highlightH:"rgba(255,255,255,0.10)",
@@ -1031,7 +1031,7 @@ function RadarApp(){
   });
 
   return(
-    <div style={{minHeight:"100vh",background:c.bg,position:"relative",overflow:"hidden",
+    <div style={{minHeight:"100vh",background:dk?"linear-gradient(170deg, #0B0E1A 0%, #0D1117 25%, #111827 50%, #0F172A 75%, #0B0E1A 100%)":"linear-gradient(170deg, #EEF0F6 0%, #F0EDF5 25%, #F4F4F9 50%, #EDF2F7 75%, #F0EFF6 100%)",position:"relative",overflow:"hidden",
       transition:"background 0.6s cubic-bezier(0.25,1,0.5,1)",
       opacity:transitioning?0.92:1}}>
       <style>{"::selection{background:"+(dk?"rgba(10,132,255,0.40)":"rgba(0,122,255,0.20)")+"}"}</style>
@@ -1143,7 +1143,7 @@ class ErrorBoundary extends React.Component{
   static getDerivedStateFromError(error){return{error};}
   render(){
     if(this.state.error){
-      return React.createElement("div",{style:{padding:40,fontFamily:"-apple-system,system-ui,sans-serif",fontSize:14,color:"#FF453A",background:"#1C1C1E",minHeight:"100vh",whiteSpace:"pre-wrap"}},
+      return React.createElement("div",{style:{padding:40,fontFamily:"-apple-system,system-ui,sans-serif",fontSize:14,color:"#FF453A",background:"#1C1C1E",minHeight:"100vh",whiteSpace:"pre-wrap",wordBreak:"break-all",overflow:"auto"}},
         "RADAR Error:\n\n"+this.state.error.toString()+"\n\n"+(this.state.error.stack||""));
     }
     return this.props.children;
