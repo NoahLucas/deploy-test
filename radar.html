@@ -455,8 +455,16 @@ async function synthesizeStreaming(data, onInsight, onProgress){
   try{customPrompt=window.__RADAR_CUSTOM_PROMPT||getCustomPrompt()||"";}catch(e){}
   // Uses DEFAULT_PROMPT defined above
   var systemPrompt=customPrompt||DEFAULT_PROMPT;
+  var apiKey=getKey();
+  if(!apiKey)throw new Error("No API key. Open Settings and add your Anthropic key.");
   var r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json"},
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key":apiKey,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
     body:JSON.stringify({
       model:"claude-sonnet-4-5-20250929",max_tokens:8192,stream:true,
       system:systemPrompt,
@@ -546,8 +554,16 @@ async function synthesizeFresh(onInsight, onProgress){
   onProgress("Researching current state...");
   var today=new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
   var time=new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  var freshKey=getKey();
+  if(!freshKey)throw new Error("No API key.");
   var r=await fetch("https://api.anthropic.com/v1/messages",{
-    method:"POST",headers:{"Content-Type":"application/json"},
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key":freshKey,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
     body:JSON.stringify({
       model:"claude-sonnet-4-5-20250929",max_tokens:8000,
       tools:[{type:"web_search_20250305",name:"web_search",max_uses:8}],
