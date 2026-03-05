@@ -215,7 +215,7 @@ async function slackDraft({message,target,channelKey}){
   const r=await fetch("https://api.anthropic.com/v1/messages",{
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      model:"claude-sonnet-4-20250514",max_tokens:1000,
+      model:"claude-haiku-4-5-20251001",max_tokens:1000,
       system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
       messages:[{role:"user",content:`${inst}\n\nMessage:\n${message}`}],
       mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp",name:"slack"}],
