@@ -10,9 +10,10 @@ from fastapi.staticfiles import StaticFiles
 from app.core.config import get_settings
 from app.core.endpoint_registry import ADMIN_BYPASS_PREFIXES, MANAGED_ENDPOINTS
 from app.core.storage import SignalStore
-from app.routes import admin, apple, ingest, lab, openai, public, squarespace
+from app.routes import admin, agents, apple, ingest, lab, openai, public, squarespace
 from app.services.apple_attest_service import AppleAppAttestService
 from app.services.apple_identity_service import AppleIdentityService
+from app.services.chief_of_staff_service import ChiefOfStaffService
 from app.services.openai_service import OpenAIService
 
 settings = get_settings()
@@ -20,6 +21,7 @@ store = SignalStore(settings.database_path)
 openai_service = OpenAIService(settings)
 apple_identity_service = AppleIdentityService(settings)
 apple_app_attest_service = AppleAppAttestService(settings)
+chief_service = ChiefOfStaffService()
 
 app = FastAPI(
     title="Noah Lucas Signal Stack",
@@ -32,6 +34,7 @@ app.state.store = store
 app.state.openai_service = openai_service
 app.state.apple_identity_service = apple_identity_service
 app.state.apple_app_attest_service = apple_app_attest_service
+app.state.chief_service = chief_service
 
 app.add_middleware(
     CORSMiddleware,
@@ -85,6 +88,7 @@ app.include_router(apple.router, prefix="/api/v1", tags=["apple"])
 app.include_router(openai.router, prefix="/api/v1", tags=["openai"])
 app.include_router(lab.router, prefix="/api/v1", tags=["lab"])
 app.include_router(squarespace.router, prefix="/api/v1", tags=["squarespace"])
+app.include_router(agents.router, prefix="/api/v1", tags=["agents"])
 
 site_dir = settings.project_root / "site"
 if site_dir.exists():

@@ -328,6 +328,13 @@ textarea {
   font-family: "Space Grotesk", sans-serif;
 }
 
+input[type="checkbox"] {
+  width: auto;
+  min-width: 1rem;
+  height: 1rem;
+  accent-color: var(--accent);
+}
+
 .codebox {
   margin-top: 1rem;
   border: 1px solid var(--line);

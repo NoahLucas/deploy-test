@@ -41,7 +41,7 @@
 - [x] Implement Apple relay context hardening foundation (phase C)
 - [ ] Implement AI-native content engine UI/workflow integration (phase B)
 - [ ] Implement personal signal intelligence production hardening (phase C)
-- [ ] Implement agentic workflows (phase D)
+- [x] Implement agentic workflow foundation (phase D: chief dispatch, run/task ledger, status controls)
 - [ ] Implement Squarespace webhook event handlers and content sync actions
 - [ ] Expand native app to Apple auth + App Attest + notes pipeline
 - [ ] QA + SEO + analytics validation

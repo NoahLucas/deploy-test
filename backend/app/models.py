@@ -282,3 +282,60 @@ class SquarespaceEventItem(BaseModel):
 
 class SquarespaceEventsResponse(BaseModel):
     items: List[SquarespaceEventItem]
+
+
+class AgentTaskSpec(BaseModel):
+    role: str = Field(min_length=2, max_length=80)
+    objective: str = Field(min_length=6, max_length=2000)
+    priority: int = Field(default=2, ge=0, le=3)
+
+
+class ChiefDispatchRequest(BaseModel):
+    mission: str = Field(min_length=10, max_length=4000)
+    context: str = Field(default="", max_length=12000)
+    tasks: List[AgentTaskSpec] = Field(default_factory=list, max_length=16)
+    auto_execute: bool = False
+
+
+class AgentTaskItem(BaseModel):
+    id: int
+    run_id: int
+    role: str
+    objective: str
+    status: str
+    priority: int
+    output: Optional[str] = None
+    created_at: datetime
+    updated_at: datetime
+
+
+class ChiefDispatchResponse(BaseModel):
+    run_id: int
+    mission: str
+    status: str
+    planner_summary: str
+    tasks: List[AgentTaskItem]
+    created_at: datetime
+
+
+class AgentRunItem(BaseModel):
+    id: int
+    mission: str
+    status: str
+    planner_summary: str
+    created_at: datetime
+    updated_at: datetime
+
+
+class AgentRunsResponse(BaseModel):
+    items: List[AgentRunItem]
+
+
+class AgentRunDetailResponse(BaseModel):
+    run: AgentRunItem
+    tasks: List[AgentTaskItem]
+
+
+class AgentTaskUpdateRequest(BaseModel):
+    status: str = Field(min_length=3, max_length=24)
+    output: str = Field(default="", max_length=16000)

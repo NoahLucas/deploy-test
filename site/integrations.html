@@ -87,6 +87,32 @@
         <div id="toggle-list" class="toggle-list"></div>
       </section>
 
+      <section class="panel reveal">
+        <div class="panel-head">
+          <h2>Chief of Staff</h2>
+          <p>Mission dispatch and multi-agent run control</p>
+        </div>
+        <div class="lab-form-grid">
+          <label class="full">
+            <span class="label">Mission</span>
+            <textarea id="chief-mission" rows="3" placeholder="Build my AI-native brand and private operator stack."></textarea>
+          </label>
+          <label class="full">
+            <span class="label">Context</span>
+            <textarea id="chief-context" rows="4" placeholder="Current priorities, constraints, and success metrics."></textarea>
+          </label>
+          <label>
+            <span class="label">Auto Execute</span>
+            <input id="chief-auto-execute" type="checkbox" />
+          </label>
+          <button id="dispatch-chief" class="btn btn-solid" type="button">Dispatch Mission</button>
+        </div>
+        <div class="actions">
+          <button id="refresh-agent-runs" class="btn btn-ghost" type="button">Refresh Runs</button>
+        </div>
+        <pre id="agent-runs-output" class="codebox">No runs loaded.</pre>
+      </section>
+
 
       <section class="panel reveal">
         <div class="panel-head">

@@ -292,6 +292,55 @@ class OpenAIService:
             return None
         return parsed
 
+    def generate_chief_plan(
+        self,
+        *,
+        mission: str,
+        context: str,
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": (
+                                "You are a chief-of-staff orchestrator for an AI-native product operation. "
+                                "Return strict JSON with keys planner_summary and tasks. "
+                                "tasks must be an array of objects: role, objective, priority (0-3). "
+                                "Create 3-8 tasks with practical sequencing."
+                            ),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps({"mission": mission, "context": context}),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
     @staticmethod
     def _extract_text(payload: Dict[str, Any]) -> str:
         output_text = payload.get("output_text")

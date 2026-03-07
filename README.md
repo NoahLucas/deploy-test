@@ -103,6 +103,18 @@ Open:
 - `POST /api/v1/admin/openai/connect`
   - Requires `X-Admin-Token`
   - Configures and validates OpenAI runtime connectivity.
+- `POST /api/v1/agents/chief/dispatch`
+  - Requires `X-Admin-Token`
+  - Creates a Chief-of-Staff run and task graph from a mission/context.
+- `GET /api/v1/agents/runs`
+  - Requires `X-Admin-Token`
+  - Lists recent orchestration runs.
+- `GET /api/v1/agents/runs/{run_id}`
+  - Requires `X-Admin-Token`
+  - Returns one run and its task list.
+- `POST /api/v1/agents/tasks/{task_id}`
+  - Requires `X-Admin-Token`
+  - Updates task status/output and auto-closes run when all tasks complete.
 
 ## Security posture
 
@@ -114,6 +126,7 @@ Open:
 - Optional strict Apple context checks can enforce allowlisted bundle IDs and attestation token presence.
 - Sign in with Apple identity token verification is available through Apple JWKS and audience/issuer checks.
 - Endpoint-level activation toggles are available through admin routes and enforced by middleware.
+- Agent run/task records are persisted for orchestration auditability.
 
 ## Deployment notes
 

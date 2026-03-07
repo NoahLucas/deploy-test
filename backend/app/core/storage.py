@@ -124,6 +124,35 @@ class SignalStore:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS agent_runs (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    mission TEXT NOT NULL,
+                    context TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    planner_summary TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS agent_tasks (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    run_id INTEGER NOT NULL,
+                    role TEXT NOT NULL,
+                    objective TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    priority INTEGER NOT NULL,
+                    output TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY(run_id) REFERENCES agent_runs(id)
+                )
+                """
+            )
 
     def insert_sanitized_signals(
         self,
@@ -459,6 +488,141 @@ class SignalStore:
                 "website_id": str(row["website_id"]),
                 "created_at": str(row["created_at"]),
                 "received_at": str(row["received_at"]),
+            }
+            for row in rows
+        ]
+
+    def create_agent_run(
+        self,
+        *,
+        mission: str,
+        context: str,
+        status: str,
+        planner_summary: str,
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO agent_runs(mission, context, status, planner_summary, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (mission, context, status, planner_summary, now, now),
+            )
+            return int(cursor.lastrowid)
+
+    def add_agent_task(
+        self,
+        *,
+        run_id: int,
+        role: str,
+        objective: str,
+        status: str,
+        priority: int,
+        output: str = "",
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO agent_tasks(run_id, role, objective, status, priority, output, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (run_id, role, objective, status, priority, output, now, now),
+            )
+            return int(cursor.lastrowid)
+
+    def update_agent_task(self, *, task_id: int, status: str, output: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE agent_tasks
+                SET status = ?, output = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (status, output, now, task_id),
+            )
+
+    def update_agent_run_status(self, *, run_id: int, status: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE agent_runs
+                SET status = ?, updated_at = ?
+                WHERE id = ?
+                """,
+                (status, now, run_id),
+            )
+
+    def list_agent_runs(self, limit: int = 50) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 200))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, mission, status, planner_summary, created_at, updated_at
+                FROM agent_runs
+                ORDER BY updated_at DESC, id DESC
+                LIMIT ?
+                """,
+                (safe_limit,),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "mission": str(row["mission"]),
+                "status": str(row["status"]),
+                "planner_summary": str(row["planner_summary"]),
+                "created_at": str(row["created_at"]),
+                "updated_at": str(row["updated_at"]),
+            }
+            for row in rows
+        ]
+
+    def get_agent_run(self, run_id: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, mission, status, planner_summary, created_at, updated_at
+                FROM agent_runs
+                WHERE id = ?
+                """,
+                (run_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "mission": str(row["mission"]),
+            "status": str(row["status"]),
+            "planner_summary": str(row["planner_summary"]),
+            "created_at": str(row["created_at"]),
+            "updated_at": str(row["updated_at"]),
+        }
+
+    def list_agent_tasks(self, *, run_id: int) -> List[Dict[str, str]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, run_id, role, objective, status, priority, output, created_at, updated_at
+                FROM agent_tasks
+                WHERE run_id = ?
+                ORDER BY priority DESC, id ASC
+                """,
+                (run_id,),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "run_id": int(row["run_id"]),
+                "role": str(row["role"]),
+                "objective": str(row["objective"]),
+                "status": str(row["status"]),
+                "priority": int(row["priority"]),
+                "output": str(row["output"]) if row["output"] is not None else "",
+                "created_at": str(row["created_at"]),
+                "updated_at": str(row["updated_at"]),
             }
             for row in rows
         ]

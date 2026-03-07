@@ -106,6 +106,50 @@ async function refreshToggles() {
   }
 }
 
+async function dispatchChief() {
+  const mission = $("chief-mission")?.value?.trim() || "";
+  const context = $("chief-context")?.value?.trim() || "";
+  const autoExecute = Boolean($("chief-auto-execute")?.checked);
+
+  if (mission.length < 10) {
+    output({ error: "Mission is required (min 10 chars)." });
+    return;
+  }
+
+  try {
+    const data = await call("/api/v1/agents/chief/dispatch", "POST", {
+      mission,
+      context,
+      auto_execute: autoExecute,
+      tasks: []
+    });
+    output(data);
+    await refreshAgentRuns();
+  } catch (err) {
+    output({ error: String(err) });
+  }
+}
+
+async function refreshAgentRuns() {
+  const host = $("agent-runs-output");
+  if (!host) return;
+  try {
+    const runs = await call("/api/v1/agents/runs", "GET", null);
+    const items = runs.items || [];
+    if (!items.length) {
+      host.textContent = "No runs yet.";
+      return;
+    }
+    const detail = await call(`/api/v1/agents/runs/${items[0].id}`, "GET", null);
+    host.textContent = JSON.stringify({
+      runs: items.slice(0, 8),
+      latest: detail
+    }, null, 2);
+  } catch (err) {
+    host.textContent = JSON.stringify({ error: String(err) }, null, 2);
+  }
+}
+
 const adminTokenInput = $("admin-token");
 if (adminTokenInput) {
   adminTokenInput.value = token();
@@ -114,8 +158,11 @@ $("save-admin-token")?.addEventListener("click", saveToken);
 $("connect-apple")?.addEventListener("click", connectApple);
 $("connect-openai")?.addEventListener("click", connectOpenAI);
 $("refresh-toggles")?.addEventListener("click", refreshToggles);
+$("dispatch-chief")?.addEventListener("click", dispatchChief);
+$("refresh-agent-runs")?.addEventListener("click", refreshAgentRuns);
 
 refreshToggles();
+refreshAgentRuns();
 
 
 async function refreshSquarespaceEvents() {
