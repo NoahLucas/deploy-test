@@ -1,0 +1,162 @@
+:root {
+  --bg: #f6f4ef;
+  --text: #1f1d1a;
+  --muted: #5d5548;
+  --line: #d4ccbd;
+  --paper: #fffdf7;
+  --accent: #1f3a5b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Bitter', serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(246, 244, 239, 0.95);
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(8px);
+}
+
+.header-inner {
+  width: min(1160px, calc(100% - 2rem));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 0;
+}
+
+.brand {
+  font-family: 'Young Serif', serif;
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--text);
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.95rem;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.2rem;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--text);
+  border-color: var(--text);
+}
+
+main {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.hero-title,
+.page-title {
+  margin: 0;
+  font-family: 'Young Serif', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+}
+
+.hero-copy,
+.page-copy {
+  margin-top: 0.9rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 72ch;
+}
+
+.section-card {
+  margin-top: 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper);
+  padding: 1rem;
+}
+
+.section-card h2 {
+  margin: 0;
+  font-family: 'Young Serif', serif;
+  font-size: 1.25rem;
+}
+
+.section-card p {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+
+.fusion-engine-metrics {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.fusion-engine-metrics article {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: #fff;
+}
+
+.metric-k {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.metric-v {
+  display: block;
+  margin-top: 0.35rem;
+  font-family: 'Young Serif', serif;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+footer {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 0 0 2rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 860px) {
+  .header-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .fusion-engine-metrics {
+    grid-template-columns: 1fr;
+  }
+}

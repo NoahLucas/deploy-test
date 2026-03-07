@@ -1,0 +1,101 @@
+<section class="fusion-engine-shell">
+  <h1 class="fusion-engine-title">Fusion Engine</h1>
+  <p class="fusion-engine-lead">
+    A privacy-safe intelligence layer that combines Apple device signals with OpenAI analysis to produce strategic operating insights.
+  </p>
+
+  <div class="fusion-engine-grid">
+    <article class="fusion-engine-card">
+      <h3>On-Device Distillation</h3>
+      <p>
+        Raw device data stays local. Only high-level aggregates are relayed.
+      </p>
+    </article>
+    <article class="fusion-engine-card">
+      <h3>Trusted Relay</h3>
+      <p>
+        Signed payloads and strict allowlists prevent unauthorized ingestion.
+      </p>
+    </article>
+    <article class="fusion-engine-card">
+      <h3>AI Intelligence Layer</h3>
+      <p>
+        OpenAI generates concise strategic summaries from sanitized inputs.
+      </p>
+    </article>
+    <article class="fusion-engine-card">
+      <h3>Public-Safe Output</h3>
+      <p>
+        Website cards show high-level operating signals, never sensitive raw telemetry.
+      </p>
+    </article>
+  </div>
+
+  <section class="fusion-engine-signal">
+    <h2>Live Signal Brief</h2>
+    <p id="fusion-headline">Loading...</p>
+
+    <div class="fusion-engine-metrics">
+      <div>
+        <span class="fusion-engine-k">Recovery</span>
+        <span id="fusion-recovery" class="fusion-engine-v">--</span>
+      </div>
+      <div>
+        <span class="fusion-engine-k">Focus</span>
+        <span id="fusion-focus" class="fusion-engine-v">--</span>
+      </div>
+      <div>
+        <span class="fusion-engine-k">Balance</span>
+        <span id="fusion-balance" class="fusion-engine-v">--</span>
+      </div>
+      <div>
+        <span class="fusion-engine-k">Action</span>
+        <span id="fusion-action" class="fusion-engine-v">--</span>
+      </div>
+    </div>
+  </section>
+</section>
+
+<script>
+  (function () {
+    var fallback = {
+      headline: 'Current operating signal: strong momentum with room to reduce context switching.',
+      metrics: {
+        recovery: '84/100',
+        focus: '91/100',
+        balance: '76/100',
+        action: 'Protect two 90-minute deep-work windows before noon.'
+      }
+    };
+
+    function apply(data) {
+      document.getElementById('fusion-headline').textContent = data.headline;
+      document.getElementById('fusion-recovery').textContent = data.metrics.recovery;
+      document.getElementById('fusion-focus').textContent = data.metrics.focus;
+      document.getElementById('fusion-balance').textContent = data.metrics.balance;
+      document.getElementById('fusion-action').textContent = data.metrics.action;
+    }
+
+    fetch('/api/v1/public/feed', { headers: { Accept: 'application/json' } })
+      .then(function (res) {
+        if (!res.ok) {
+          throw new Error('feed unavailable');
+        }
+        return res.json();
+      })
+      .then(function (data) {
+        apply({
+          headline: data.headline,
+          metrics: {
+            recovery: data.metrics.recovery,
+            focus: data.metrics.focus,
+            balance: data.metrics.balance,
+            action: data.metrics.action
+          }
+        });
+      })
+      .catch(function () {
+        apply(fallback);
+      });
+  })();
+</script>

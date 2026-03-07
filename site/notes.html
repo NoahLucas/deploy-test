@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Noah Lucas notes and field essays." />
+    <title>Noah Lucas | Notes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="/">Noah Lucas</a>
+      <nav>
+        <a href="/work.html">Work</a>
+        <a href="/notes.html">Notes</a>
+        <a href="/lab.html">Lab</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">NOTES</p>
+        <h1>Essays, teardowns, and playbooks from the <span>operator edge.</span></h1>
+      </section>
+
+      <section class="panel reveal">
+        <div class="panel-head"><h2>Latest Drafts</h2><p>Generated pipeline feed + manual editorial picks.</p></div>
+        <div id="notes-list" class="grid notes-grid">
+          <article class="note"><p class="note-type">LOADING</p><h3>Fetching drafts...</h3><p>Pipeline-generated notes will appear here.</p></article>
+        </div>
+      </section>
+
+      <section class="panel reveal">
+        <div class="panel-head"><h2>Editorial Queue</h2><p>Stub rail for upcoming publish schedule.</p></div>
+        <div class="grid">
+          <article class="card"><h3>Queue Item A</h3><p>Stub: publish target and distribution angle.</p></article>
+          <article class="card"><h3>Queue Item B</h3><p>Stub: thesis and supporting proof points.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>© <span id="year"></span> Noah Lucas</p></footer>
+    <script src="./ui.js"></script>
+    <script src="./notes.js"></script>
+  </body>
+</html>

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Noah Lucas private AI-native operator lab." />
+    <title>Noah Lucas | Private Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/">Noah Lucas</a>
+      <nav>
+        <a href="/">Public Site</a>
+        <a href="/integrations.html">Integrations</a>
+        <a href="#brief">Daily Brief</a>
+        <a href="#journal">Decision Journal</a>
+        <a href="#apple">Apple Verify</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">PRIVATE LAB</p>
+        <h1>AI-native operator console for <span>daily leverage.</span></h1>
+        <p class="lede">Admin token is stored locally in your browser to call secured lab endpoints.</p>
+      </section>
+
+      <section class="panel reveal" id="auth">
+        <div class="panel-head">
+          <h2>Auth</h2>
+          <p>Local only</p>
+        </div>
+        <div class="lab-form-grid">
+          <label>
+            <span class="label">Admin Token</span>
+            <input id="admin-token" type="password" placeholder="Paste admin token" />
+          </label>
+          <button id="save-token" class="btn btn-solid" type="button">Save Token</button>
+        </div>
+      </section>
+
+      <section class="panel reveal" id="brief">
+        <div class="panel-head">
+          <h2>Daily Brief</h2>
+          <p>OpenAI-generated operator guidance</p>
+        </div>
+        <form id="daily-brief-form" class="lab-form-grid">
+          <label>
+            <span class="label">Priorities (one per line)</span>
+            <textarea id="priorities" rows="5" required></textarea>
+          </label>
+          <label>
+            <span class="label">Risks (one per line)</span>
+            <textarea id="risks" rows="5"></textarea>
+          </label>
+          <label class="full">
+            <span class="label">Context</span>
+            <textarea id="brief-context" rows="4"></textarea>
+          </label>
+          <button class="btn btn-solid" type="submit">Generate Daily Brief</button>
+        </form>
+        <pre id="daily-brief-output" class="codebox">No brief generated yet.</pre>
+      </section>
+
+      <section class="panel reveal" id="journal">
+        <div class="panel-head">
+          <h2>Decision Journal</h2>
+          <p>Persistent decision memory</p>
+        </div>
+        <form id="decision-form" class="lab-form-grid">
+          <label>
+            <span class="label">Title</span>
+            <input id="decision-title" required />
+          </label>
+          <label>
+            <span class="label">Follow-up Date</span>
+            <input id="decision-follow-up" placeholder="YYYY-MM-DD (optional)" />
+          </label>
+          <label class="full">
+            <span class="label">Context</span>
+            <textarea id="decision-context" rows="4" required></textarea>
+          </label>
+          <label class="full">
+            <span class="label">Options (one per line)</span>
+            <textarea id="decision-options" rows="4" required></textarea>
+          </label>
+          <label>
+            <span class="label">Chosen Option</span>
+            <input id="decision-chosen" required />
+          </label>
+          <label>
+            <span class="label">Rationale</span>
+            <textarea id="decision-rationale" rows="3" required></textarea>
+          </label>
+          <button class="btn btn-solid" type="submit">Save Decision</button>
+          <button id="load-decisions" class="btn btn-ghost" type="button">Refresh Decisions</button>
+        </form>
+        <pre id="decision-output" class="codebox">No decisions loaded.</pre>
+      </section>
+
+      <section class="panel reveal" id="apple">
+        <div class="panel-head">
+          <h2>Apple Identity + App Attest</h2>
+          <p>Platform verification tools</p>
+        </div>
+        <div class="lab-form-grid">
+          <label class="full">
+            <span class="label">Identity Token</span>
+            <textarea id="apple-identity-token" rows="4"></textarea>
+          </label>
+          <label>
+            <span class="label">Nonce</span>
+            <input id="apple-identity-nonce" />
+          </label>
+          <button id="verify-identity" class="btn btn-solid" type="button">Verify Apple Identity</button>
+        </div>
+
+        <div class="lab-form-grid">
+          <label>
+            <span class="label">Device ID</span>
+            <input id="attest-device-id" />
+          </label>
+          <button id="attest-challenge" class="btn btn-ghost" type="button">Issue Challenge</button>
+          <label>
+            <span class="label">Challenge</span>
+            <input id="attest-challenge-value" />
+          </label>
+          <label>
+            <span class="label">Key ID</span>
+            <input id="attest-key-id" />
+          </label>
+          <label>
+            <span class="label">Bundle ID</span>
+            <input id="attest-bundle-id" placeholder="com.noahlucas.relay" />
+          </label>
+          <label class="full">
+            <span class="label">Attestation Object (base64)</span>
+            <textarea id="attest-object" rows="3"></textarea>
+          </label>
+          <label class="full">
+            <span class="label">Client Data Hash (base64)</span>
+            <textarea id="attest-client-hash" rows="2"></textarea>
+          </label>
+          <button id="verify-attestation" class="btn btn-solid" type="button">Verify App Attest</button>
+        </div>
+
+        <pre id="apple-output" class="codebox">No Apple verification run yet.</pre>
+      </section>
+    </main>
+
+    <script src="./lab.js"></script>
+  </body>
+</html>
