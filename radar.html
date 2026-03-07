@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover,user-scalable=no">
+<title>RADAR — Rapid Decision And Response</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📡</text></svg>">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+html{scroll-behavior:smooth;}
+body{overscroll-behavior:none;font-family:-apple-system,'SF Pro Text','Helvetica Neue',system-ui,sans-serif;}
+::-webkit-scrollbar{display:none;}
+@keyframes glassIn{from{opacity:0;transform:translateY(20px) scale(0.97);filter:blur(6px);}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0);}}
+@keyframes headerIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+@keyframes meshDrift1{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(30px,-20px) scale(1.05);}66%{transform:translate(-20px,15px) scale(0.97);}}
+@keyframes meshDrift2{0%,100%{transform:translate(0,0) scale(1);}33%{transform:translate(-25px,30px) scale(1.03);}66%{transform:translate(20px,-25px) scale(0.98);}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes shimmer{0%{border-color:rgba(10,132,255,0.15);}25%{border-color:rgba(10,132,255,0.5);}50%{border-color:rgba(48,209,88,0.4);}75%{border-color:rgba(10,132,255,0.5);}100%{border-color:rgba(10,132,255,0.15);}}
+@keyframes shimmerLight{0%{border-color:rgba(0,122,255,0.12);}25%{border-color:rgba(0,122,255,0.45);}50%{border-color:rgba(52,199,89,0.35);}75%{border-color:rgba(0,122,255,0.45);}100%{border-color:rgba(0,122,255,0.12);}}
+@keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel" data-type="module">
+const {useState,useEffect,useRef,useCallback,useMemo} = React;
+
+// ============================================================
+// ENGINE — Auth, Data, Parsing, Synthesis (from V5 production)
+// ============================================================
+const PASS_HASH="f226a9d29cdb97d342436fe240a05ca06bb3cb037025874347b5ae06f1bf963b";
+async function sha256(str){
+  const buf=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function getAuth(){try{return sessionStorage.getItem("radar_auth")==="1";}catch(e){return false;}}
+function setAuth(){try{sessionStorage.setItem("radar_auth","1");}catch(e){}}
+
+function AuthGate({children}){
+  const[ok,setOk]=useState(getAuth);
+  const[pw,setPw]=useState("");
+  const[err,setErr]=useState(false);
+  const[checking,setChecking]=useState(false);
+  const inputRef=useRef(null);
+  useEffect(()=>{if(!ok&&inputRef.current)inputRef.current.focus();},[ok]);
+  async function check(){
+    setChecking(true);setErr(false);
+    const h=await sha256(pw);
+    if(h===PASS_HASH){setAuth();setOk(true);}
+    else{setErr(true);setPw("");setTimeout(()=>setErr(false),2000);}
+    setChecking(false);
+  }
+  if(ok)return children;
+  const dk=typeof window!=="undefined"&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+  const bg=dk?"#0a0a0c":"#e5e4e1";
+  const fg=dk?"#e8e6e2":"#121210";
+  const fg2=dk?"rgba(210,208,204,0.68)":"rgba(30,28,24,0.62)";
+  const fg3=dk?"rgba(170,168,164,0.45)":"rgba(60,58,52,0.36)";
+  const accent=dk?"#4488bb":"#2a6090";
+  const fill=dk?"rgba(150,148,144,0.18)":"rgba(80,78,72,0.12)";
+  const border=dk?"rgba(150,148,144,0.12)":"rgba(80,78,72,0.14)";
+  const red=dk?"#e03020":"#c00000";
+  const mono="'IBM Plex Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
+  const sf="'IBM Plex Sans',-apple-system,system-ui,sans-serif";
+  return(
+    <div style={{width:"100vw",height:"100dvh",background:bg,display:"flex",alignItems:"center",justifyContent:"center",fontFamily:sf}}>
+      <div style={{width:320,display:"flex",flexDirection:"column",alignItems:"center",gap:24}}>
+        <div style={{display:"flex",alignItems:"center",gap:10}}>
+          <span style={{fontSize:28}}>{"📡"}</span>
+          <span style={{fontSize:15,fontWeight:700,letterSpacing:"0.15em",fontFamily:mono,color:fg}}>RADAR</span>
+        </div>
+        <p style={{fontSize:12,color:fg2,textAlign:"center",fontFamily:sf}}>Rapid Decision And Response</p>
+        <div style={{width:"100%",display:"flex",gap:8}}>
+          <input ref={inputRef} type="password" value={pw} onChange={e=>setPw(e.target.value)}
+            onKeyDown={e=>{if(e.key==="Enter"&&pw)check();}}
+            placeholder="Password"
+            style={{flex:1,padding:"12px 14px",borderRadius:12,border:"0.5px solid "+(err?red:border),
+              background:fill,color:fg,fontFamily:mono,fontSize:13,outline:"none",
+              transition:"border-color 0.2s"}}/>
+          <button onClick={check} disabled={!pw||checking}
+            style={{padding:"12px 20px",borderRadius:12,border:"none",cursor:pw?"pointer":"default",
+              fontWeight:600,fontSize:12,fontFamily:mono,letterSpacing:"0.05em",
+              background:pw?accent:fill,color:pw?"#fff":fg3,
+              opacity:checking?0.6:1,transition:"all 0.2s"}}>
+            {checking?"...":"\u2192"}
+          </button>
+        </div>
+        {err&&<p style={{fontSize:11,color:red,fontFamily:mono,animation:"fadeIn 0.2s ease"}}>Wrong password</p>}
+      </div>
+    </div>
+  );
+}
+// --- END AUTH GATE ---
+
+function SiftIcon(props){
+  var size=props.size||22,color=props.color||"#1a1917",opacity=props.opacity===undefined?1:props.opacity,style=props.style||{};
+  return(
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{display:"block",flexShrink:0,opacity,...style}}>
+    <rect x="2" y="2" width="28" height="28" rx="6" fill={color} fillOpacity="0.9"/>
+    <path d="M9 22V10h3v12H9zm5.5-4V10H18v8h-3.5zm5.5 4V10h3v12h-3z" fill="white" fillOpacity="0.95"/>
+  </svg>
+  );
+}
+const SF = "'IBM Plex Sans',-apple-system,system-ui,sans-serif";
+const MONO = "'IBM Plex Mono','JetBrains Mono','Fira Code',ui-monospace,monospace";
+const SYNE = "'IBM Plex Serif','Georgia',serif";
+const FONT_URL = "https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
+const T={xs:11,sm:13,base:15,lg:19,xl:24,xxl:32};
+const S={1:4,2:8,3:12,4:16,5:20,6:24,8:32,10:40,12:48};
+const R={sm:6,md:12,lg:16,full:100};
+
+// RADAR = Rapid Decision And Response
+const RADAR_ACRONYM = {
+  R: "Realtime",
+  A1: "Awareness",
+  D: "Decisions",
+  A2: "Actions",
+  R2: "Risks"
+};
+
+const PAL = {
+  // DARK — MIL-STD-1472H / ISA-101 high-performance HMI.
+  // Deep neutral at 5% luminance — no pure black (CRT bloom avoidance).
+  // High contrast ratios: primary text ≥ 12:1, secondary ≥ 7:1.
+  // Color reserved ONLY for alarm/priority states — never decorative.
+  // Green/amber/red follow ISA-18.2 alarm annunciation standard.
+  dark: {
+    bg:"#0a0a0c", bgRaised:"#131416", bgElevated:"#1a1b1e",
+    glass:"rgba(200,205,210,0.04)", glassHover:"rgba(200,205,210,0.08)",
+    glassActive:"rgba(200,205,210,0.12)", glassBorder:"rgba(200,205,210,0.10)",
+    glassHighlight:"rgba(200,205,210,0.14)",
+    // MIL-STD label hierarchy — high luminance contrast
+    label:"#e8e6e2", label2:"rgba(210,208,204,0.68)",
+    label3:"rgba(170,168,164,0.45)", label4:"rgba(140,138,134,0.25)",
+    // Fill hierarchy
+    fill1:"rgba(150,148,144,0.18)", fill2:"rgba(150,148,144,0.13)",
+    fill3:"rgba(150,148,144,0.08)", fill4:"rgba(150,148,144,0.05)",
+    sep:"rgba(150,148,144,0.12)", sepOpaque:"#1f2023",
+    // ISA-18.2 alarm colors — saturated for dark backgrounds
+    red:"#e03020",orange:"#e08020",blue:"#4488bb",green:"#28a028",
+    yellow:"#d0a020",purple:"#8070b0",gray:"#707274",
+    teal:"#40a0b8",indigo:"#6060b0",pink:"#d04060",mint:"#40b0a0",
+    specular:"rgba(220,218,214,0.05)", specularEdge:"rgba(220,218,214,0.10)",
+    accent:"#4488bb",
+    skeleton:"rgba(150,148,144,0.10)", skeletonShine:"rgba(150,148,144,0.18)",
+    materialThin:"rgba(20,22,24,0.65)", materialRegular:"rgba(20,22,24,0.80)",
+    materialThick:"rgba(20,22,24,0.92)",
+  },
+  // LIGHT — MIL-STD high-ambient HMI. Neutral warm gray paper (#E6E5E2).
+  // NOT white (glare). NOT cool gray (fatigue). Warm neutral.
+  // Chromatic signals desaturated for bright-room legibility.
+  light: {
+    bg:"#e5e4e1", bgRaised:"#edeceb", bgElevated:"#f4f3f1",
+    glass:"rgba(255,254,252,0.55)", glassHover:"rgba(255,254,252,0.70)",
+    glassActive:"rgba(255,254,252,0.82)", glassBorder:"rgba(90,88,82,0.15)",
+    glassHighlight:"rgba(255,254,252,0.75)",
+    label:"#121210", label2:"rgba(30,28,24,0.62)",
+    label3:"rgba(60,58,52,0.36)", label4:"rgba(80,78,72,0.20)",
+    fill1:"rgba(80,78,72,0.12)", fill2:"rgba(80,78,72,0.08)",
+    fill3:"rgba(80,78,72,0.05)", fill4:"rgba(80,78,72,0.03)",
+    sep:"rgba(80,78,72,0.14)", sepOpaque:"#cccbc8",
+    red:"#c00000",orange:"#b86000",blue:"#2a6090",green:"#287028",
+    yellow:"#a88000",purple:"#604888",gray:"#787878",
+    teal:"#287888",indigo:"#484880",pink:"#b03050",mint:"#288878",
+    specular:"rgba(255,254,252,0.50)", specularEdge:"rgba(255,254,252,0.65)",
+    accent:"#2a6090",
+    skeleton:"rgba(80,78,72,0.07)", skeletonShine:"rgba(80,78,72,0.13)",
+    materialThin:"rgba(255,254,252,0.62)", materialRegular:"rgba(255,254,252,0.80)",
+    materialThick:"rgba(255,254,252,0.93)",
+  },
+};
+
+const PRI = {
+  URGENT:{label:"ACT NOW",  color:p=>p.red,   bgA:"14",pulse:true},
+  HIGH:  {label:"TODAY",    color:p=>p.orange, bgA:"0f"},
+  MEDIUM:{label:"THIS WEEK",color:p=>p.blue,   bgA:"0f"},
+  LOW:   {label:"FYI",      color:p=>p.gray,   bgA:"0a"},
+};
+
+const SVC = {
+  amplitude:{icon:"\u{1F4CA}",colorDk:"#5088a8",colorLt:"#336688",label:"Amplitude"},
+  calendar: {icon:"\u{1F4C5}",colorDk:"#5088a8",colorLt:"#336688",label:"Calendar"},
+  linear:   {icon:"\u25C6", colorDk:"#7868a8",colorLt:"#5c4d8a",label:"Linear"},
+  slack:    {icon:"\u{1F4AC}",colorDk:"#d08030",colorLt:"#cc6600",label:"Slack"},
+  hubspot:  {icon:"\u{1F91D}",colorDk:"#d0a020",colorLt:"#b89000",label:"HubSpot"},
+  notion:   {icon:"\u{1F4DD}",colorDk:"#6b6e6f",colorLt:"#8a857c",label:"Notion"},
+  gmail:    {icon:"\u2709\uFE0F",colorDk:"#c27058",colorLt:"#9e5a48",label:"Gmail"},
+  granola:  {icon:"\u{1F399}\uFE0F",colorDk:"#6b6e6f",colorLt:"#8a857c",label:"Granola"},
+};
+const svcColor=(s,dk)=>dk?SVC[s]?.colorDk:SVC[s]?.colorLt;
+
+const CH = {
+  gui:           {label:"Gui Cavalcanti",dm:true},
+  "account-owner":{label:"Account Owner",dm:true},
+  shiproom:      {label:"#shiproom",dm:false},
+  jared:         {label:"Jared Borner",dm:true},
+  "fde-heart":   {label:"FDE (Heart)",dm:true},
+  benji:         {label:"Benji",dm:true},
+  "all-hands":   {label:"#all-hands",dm:false},
+  product:       {label:"#product",dm:false,sid:"C0A779UAY8P"},
+};
+
+const ACT_L = {message:"Send Message",escalate:"Escalate",celebrate:"Share Win",delegate:"Delegate",prep:"Prep Brief"};
+
+async function slackDraft({message,target,channelKey}){
+  const ch=CH[channelKey]; if(!ch) throw new Error("Unknown channel");
+  const isCh=ch.label.startsWith("#");
+  const inst=ch.sid
+    ? `Create a Slack draft in channel ${ch.sid}. Do not modify the message.`
+    : isCh ? `Find Slack channel "${ch.label.replace("#","")}",create draft. Do not modify.`
+    : `Find Slack user "${target||ch.label}",create draft DM. Do not modify.`;
+  const r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-haiku-4-5-20251001",max_tokens:1000,
+      system:'You are a Slack routing agent. Find target, create draft. Never modify message. Respond ONLY: {"success":true,"channel_link":"<url>"} or {"success":false,"error":"<reason>"}',
+      messages:[{role:"user",content:`${inst}\n\nMessage:\n${message}`}],
+      mcp_servers:[{type:"url",url:"https://mcp.slack.com/mcp",name:"slack"}],
+    }),
+  });
+  if(!r.ok) throw new Error(`API ${r.status}`);
+  return parseSlack(await r.json());
+}
+
+function parseSlack(d){
+  const txts=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n");
+  const fUrl=s=>s.match(/https:\/\/app\.slack\.com\/[^\s"')\\]+/)?.[0]||null;
+  try{const m=txts.match(/\{[\s\S]*?"success"[\s\S]*?\}/);
+    if(m){const r=JSON.parse(m[0]);return{ok:r.success!==false,link:r.channel_link||null,err:r.error||null};}
+  }catch{}
+  const tools=(d.content||[]).filter(b=>b.type==="mcp_tool_result");
+  if(tools.length)return{ok:true,link:fUrl(JSON.stringify(tools)),err:null};
+  if(txts&&!/error|failed/i.test(txts))return{ok:true,link:fUrl(txts),err:null};
+  return{ok:false,link:null,err:txts||"Unknown"};
+}
+
+async function clip(text){
+  try{await navigator.clipboard.writeText(text);return true;}catch{
+    const t=document.createElement("textarea");t.value=text;t.style.cssText="position:fixed;opacity:0";
+    document.body.appendChild(t);t.select();
+    try{document.execCommand("copy");document.body.removeChild(t);return true;}
+    catch{document.body.removeChild(t);return false;}
+  }
+}
+
+var LIVE_DATA=null;
+var DATA_URL="./data.json";
+var SERVER_URL=null; // Set to "http://localhost:3001" when server is running
+var _ws=null;
+var _stateVersion=0;
+var _onPatch=null; // Set by React app to trigger re-renders
+
+// Detect if server is available
+async function _detectServer(){return null; /* skip localhost detection */
+  if(SERVER_URL) return SERVER_URL;
+  // Try common local ports
+  for(var port of [3001,3000,8080]){
+    try{
+      var r=await fetch("http://localhost:"+port+"/api/health",{signal:AbortSignal.timeout(500)});
+      if(r.ok){SERVER_URL="http://localhost:"+port;console.log("[radar] Server found at "+SERVER_URL);return SERVER_URL;}
+    }catch(e){}
+  }
+  return null;
+}
+
+// WebSocket connection for live patches
+function _connectWS(){
+  if(!SERVER_URL||_ws)return;
+  var wsUrl=SERVER_URL.replace("http","ws")+"/ws";
+  try{
+    _ws=new WebSocket(wsUrl);
+    _ws.onmessage=function(e){
+      try{
+        var msg=JSON.parse(e.data);
+        if(msg.type==="connected"){
+          _stateVersion=msg.version;
+          console.log("[ws] Connected, version "+_stateVersion);
+        }else if(msg.path&&LIVE_DATA){
+          // Apply patch to LIVE_DATA
+          _applyPatch(LIVE_DATA,msg.path,msg.value);
+          _stateVersion=msg.version||_stateVersion+1;
+          if(_onPatch)_onPatch(msg);
+        }
+      }catch(err){console.warn("[ws] Parse error:",err);}
+    };
+    _ws.onclose=function(){_ws=null;setTimeout(_connectWS,5000);};
+    _ws.onerror=function(){_ws=null;};
+  }catch(e){console.warn("[ws]",e.message);}
+}
+
+function _applyPatch(obj,path,value){
+  var parts=path.split(".");
+  var target=obj;
+  for(var i=0;i<parts.length-1;i++){
+    var k=isNaN(parts[i])?parts[i]:parseInt(parts[i]);
+    if(!target[k])target[k]={};
+    target=target[k];
+  }
+  var last=isNaN(parts[parts.length-1])?parts[parts.length-1]:parseInt(parts[parts.length-1]);
+  target[last]=value;
+}
+
+async function loadData(){
+  try{
+    // Try server first
+    var serverUrl=await _detectServer();
+    if(serverUrl){
+      var r=await fetch(serverUrl+"/api/state");
+      if(r.ok){
+        var resp=await r.json();
+        LIVE_DATA=resp.data;
+        _stateVersion=resp.version;
+        _connectWS();
+        console.log("[radar] Loaded from server, version "+_stateVersion);
+        return LIVE_DATA;
+      }
+    }
+    // Fallback to static data.json
+    var r=await fetch(DATA_URL);
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    LIVE_DATA=await r.json();
+    // Post-process: make timeAudit relative to today
+    if(LIVE_DATA.timeAudit&&LIVE_DATA.timeAudit.today){
+      LIVE_DATA.timeAudit.today.date=new Date().toISOString().slice(0,10);
+    }
+    // Post-process: make timeline event dates relative to today
+    if(LIVE_DATA.timeline&&LIVE_DATA.timeline.sections){
+      var dataDate=new Date("2026-03-03T12:00:00");
+      var realToday=new Date();realToday.setHours(12,0,0,0);
+      var offsetMs=realToday.getTime()-dataDate.getTime();
+      var offsetDays=Math.round(offsetMs/86400000);
+      if(offsetDays!==0){
+        LIVE_DATA.timeline.sections.forEach(function(sec){
+          if(sec.events)sec.events.forEach(function(ev){
+            if(ev.date){
+              var d=new Date(ev.date+"T12:00:00");
+              d.setDate(d.getDate()+offsetDays);
+              ev.date=d.toISOString().slice(0,10);
+            }
+          });
+        });
+      }
+    }
+    // Post-process: make Slack timestamps relative
+    if(LIVE_DATA.team){
+      var slackBase=new Date("2026-03-03T12:00:00").getTime();
+      var nowMs=Date.now();
+      var slackOff=nowMs-slackBase;
+      LIVE_DATA.team.forEach(function(person){
+        if(person.slackLastSeen){
+          var t=new Date(person.slackLastSeen).getTime()+slackOff;
+          person.slackLastSeen=new Date(t).toISOString();
+        }
+      });
+    }
+    // Post-process: make cofounder timestamps relative
+    if(LIVE_DATA.cofounders){
+      var cfBase=new Date("2026-03-03T12:00:00").getTime();
+      var cfOff=Date.now()-cfBase;
+      LIVE_DATA.cofounders.forEach(function(cf){
+        if(cf.lastSlackToNoah){
+          var t=new Date(cf.lastSlackToNoah).getTime()+cfOff;
+          cf.lastSlackToNoah=new Date(t).toISOString();
+        }
+      });
+    }
+    console.log("[radar] Loaded from static data.json (server not available)");
+    return LIVE_DATA;
+  }catch(e){
+    console.error("Failed to load data:",e);
+    return null;
+  }
+}
+
+// Preload data immediately on script init
+var _dataPreload=loadData();
+
+const SEED=[];
+
+function tryParse(s){
+  try{return JSON.parse(s);}catch(e){return null;}
+}
+
+function extractInsightsFromPartial(text){
+  var clean=text.replace(/```json\s*/g,"").replace(/```\s*/g,"").trim();
+  var fixed=clean.replace(/,\s*([}\]])/g,"$1");
+  // Try extracting individual insight objects using balanced brace matching
+  var results=[];
+  var inArr=fixed.indexOf("[");
+  if(inArr<0) return results;
+  var sub=fixed.slice(inArr+1);
+  var depth=0; var start=-1;
+  for(var ci=0;ci<sub.length;ci++){
+    if(sub[ci]==="{"){if(depth===0)start=ci;depth++;}
+    if(sub[ci]==="}"){depth--;if(depth===0&&start>=0){
+      var chunk=sub.slice(start,ci+1);
+      var obj=tryParse(chunk);
+      if(obj&&obj.headline) results.push(obj);
+      start=-1;
+    }}
+  }
+  return results;
+}
+
+function robustParseFinal(text){
+  var clean=text.replace(/```json\s*/g,"").replace(/```\s*/g,"").trim();
+  if(!clean||clean.length===0) return{insights:[]};
+  var parsed=tryParse(clean);
+  if(parsed) return parsed;
+  var fixed=clean.replace(/,\s*([}\]])/g,"$1");
+  parsed=tryParse(fixed);
+  if(parsed) return parsed;
+  var m=fixed.match(/\{[\s\S]*"insights"\s*:\s*\[[\s\S]*\]\s*\}/);
+  if(m){parsed=tryParse(m[0]);if(parsed)return parsed;}
+  m=fixed.match(/"insights"\s*:\s*(\[[\s\S]*\])/);
+  if(m){var arr=tryParse(m[1]);if(arr)return{insights:arr};}
+  m=fixed.match(/\[[\s\S]*\]/);
+  if(m){var arr2=tryParse(m[0]);if(arr2)return{insights:arr2};}
+  var fixed2=fixed.replace(/":\s*"[^"]*\n/g,function(m){return m.replace(/\n/g,"\\n");});
+  parsed=tryParse(fixed2);
+  if(parsed) return parsed;
+  // Last resort: extract whatever individual objects we can
+  var partial=extractInsightsFromPartial(text);
+  if(partial.length>0) return{insights:partial};
+  throw new Error("Parse failed (len="+clean.length+"): "+clean.slice(0,200));
+}
+
+function compactData(data){
+  var c=JSON.parse(JSON.stringify(data));
+  function tail(arr,n){if(!arr)return arr;return arr.slice(-(n||7));}
+  if(c.amplitude){
+    var a=c.amplitude;
+    if(a.dau){a.dau.dates=tail(a.dau.dates);a.dau.values=tail(a.dau.values);delete a.dau.chart;}
+    if(a.newUsers){a.newUsers.weeks=tail(a.newUsers.weeks);a.newUsers.values=tail(a.newUsers.values);delete a.newUsers.chart;}
+    if(a.sessionDuration){a.sessionDuration.weeks=tail(a.sessionDuration.weeks);a.sessionDuration.values=tail(a.sessionDuration.values);delete a.sessionDuration.chart;}
+    if(a.featureAdoption){a.featureAdoption.weeks=tail(a.featureAdoption.weeks);a.featureAdoption.explore=tail(a.featureAdoption.explore);a.featureAdoption.rules=tail(a.featureAdoption.rules);a.featureAdoption.reports=tail(a.featureAdoption.reports);a.featureAdoption.runs=tail(a.featureAdoption.runs);delete a.featureAdoption.chart;}
+    if(a.collaboration){a.collaboration.weeks=tail(a.collaboration.weeks);a.collaboration.shareIcon=tail(a.collaboration.shareIcon);a.collaboration.annotationCreate=tail(a.collaboration.annotationCreate);a.collaboration.shareLinkViewed=tail(a.collaboration.shareLinkViewed);delete a.collaboration.chart;}
+    if(a.engagement){a.engagement.weeks=tail(a.engagement.weeks);a.engagement.annotationCreate=tail(a.engagement.annotationCreate);a.engagement.calcChannel=tail(a.engagement.calcChannel);a.engagement.chartShare=tail(a.engagement.chartShare);delete a.engagement.chart;}
+    if(a.keyActions)delete a.keyActions.chart;
+    if(a.retention)delete a.retention.chart;
+  }
+  return c;
+}
+
+var DEFAULT_PROMPT="You are RADAR, a product intelligence engine that creates superhuman leverage for a VP of Product at an aerospace\/defense telemetry observability platform (Sift).\nYou are given data.json containing signals from multiple sources (Amplitude, Slack, Linear, Calendar, Google Docs). Synthesize ALL signals into a single prioritized feed. Connect the dots across sources.\n\nRULES:\n1. SURFACE at least 10-15 items. Every signal deserves evaluation. Do NOT over-filter.\n2. WRITE COMPLETE THOUGHTS. Each item should be a full synthesis paragraph \u2014 not a headline + body, but a single narrative that explains what is happening, why it matters, and what to do. Write as a chief of staff briefing the VP of Product.\n3. RANK BY LEVERAGE. Highest-impact action first. The user scrolls down = less urgent.\n4. PRESERVE EVIDENCE. Copy evidence arrays with real URLs exactly from input.\n5. INCLUDE ACTIONS. Each item should have a ready-to-execute action string (a message to send, a meeting to schedule, a decision to make).\n6. ASK WHAT RADAR CAN\u2019T SEE. Final item should surface 2-3 questions the data doesn\u2019t answer.\n\nCategories: insight, prep, nudge, leverage, blind_spot, momentum\n\nCustomers: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, Lockheed Martin, ULA, Parallel Systems, The Exploration Company, OHB, Dust Moto, Orbital Operations, Inversion Space, Revel, Arbor Energy, Synnax, Zipline, First Resonance, AstroForge.\n\nTeam: Sanghee (Core Platform PM), Kenn (Growth PM), Jess (Engagement PM), Rowen (Infra PM), Kevin (Eng Manager), Gui (FDE Lead). Cofounders: Austin (CEO), Karthik (CTO).\n\nImportant artifacts to reference in Google Drive: 2026 Annual Product Strategy, 2026 Q1 Plan, 2026 Squads, 2026 Product Metrics, 4P\u2019s: Sanghee, 4P\u2019s: Rowen, 4P\u2019s: Kenn, 4P\u2019s: Jess, Copy of VP of Product - 30\/60\/90 Plan.\n\nRESPOND WITH ONLY VALID JSON:\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"<cat>\",\"headline\":\"<max 60 chars>\",\"body\":\"<2-3 sentence synthesis \u2014 the complete thought>\",\"action\":\"<ready-to-paste next step>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"evidence\":[{\"label\":\"<descriptive>\",\"url\":\"<real URL>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\"}}]}\n\nPriority: URGENT=revenue\/security\/customer blocked, HIGH=act today, MEDIUM=this week, LOW=FYI";
+
+async function synthesizeStreaming(data, onInsight, onProgress){
+  var t0=Date.now();
+  onProgress("Connecting to synthesis engine...");
+  var compact=compactData(data);
+  var customPrompt="";
+  try{customPrompt=window.__RADAR_CUSTOM_PROMPT||getCustomPrompt()||"";}catch(e){}
+  // Uses DEFAULT_PROMPT defined above
+  var systemPrompt=customPrompt||DEFAULT_PROMPT;
+  var apiKey=getKey();
+  if(!apiKey)throw new Error("No API key. Open Settings and add your Anthropic key.");
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key":apiKey,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
+    body:JSON.stringify({
+      model:"claude-sonnet-4-5-20250929",max_tokens:8192,stream:true,
+      system:systemPrompt,
+      messages:[{role:"user",content:"Synthesize ALL signals into 12-15 actionable items. You MUST produce at least 12 items. There are "+((data.signals||[]).length)+" input signals. Every signal should be represented. Do NOT stop at 4-5 items.\n\nData:\n"+JSON.stringify(compact)}],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
+  }
+  var reader=r.body.getReader();
+  var decoder=new TextDecoder();
+  var fullText="";
+  var lastYielded=0;
+  var buffer="";
+  onProgress("Scanning sources...");
+  while(true){
+    var chunk=reader.read();
+    var result=await chunk;
+    if(result.done) break;
+    buffer+=decoder.decode(result.value,{stream:true});
+    var evts=buffer.split("\n");
+    buffer=evts.pop()||"";
+    for(var ei=0;ei<evts.length;ei++){
+      var line=evts[ei];
+      if(!line.startsWith("data: "))continue;
+      var payload=line.slice(6);
+      if(payload==="[DONE]")continue;
+      var evt=tryParse(payload);
+      if(!evt)continue;
+      if(evt.type==="content_block_delta"&&evt.delta&&evt.delta.text){
+        fullText+=evt.delta.text;
+        var partial=extractInsightsFromPartial(fullText);
+        if(partial.length>lastYielded){
+          for(var ni=lastYielded;ni<partial.length;ni++){
+            onInsight(partial[ni],ni);
+          }
+          lastYielded=partial.length;
+          onProgress(lastYielded+" item"+(lastYielded>1?"s":"")+" found...");
+        }
+      }
+    }
+  }
+  var dur=((Date.now()-t0)/1000).toFixed(0);
+  // Final parse for complete data
+  var final=robustParseFinal(fullText);
+  onProgress("Done \u2014 "+dur+"s");
+  return{insights:final.insights||[],meta:{duration:dur,errors:[],sourcesOk:3}};
+}
+
+async function synthesizeLiveMCP(onProgress){
+  var t0=Date.now();
+  onProgress("LIVE \u2014 pulling fresh data from 6 sources...");
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      model:"claude-sonnet-4-5-20250929",max_tokens:8000,
+      system:"You are RADAR, a proactive product intelligence engine for an aerospace/defense telemetry observability platform. The user is Noah, VP of Product.\n\nYou have access to live tools. Use them to gather current data, then synthesize 6-10 actionable items.\n\nSTEP 1 \u2014 GATHER DATA using your tools:\n\u2022 Search Slack for recent messages in product, engineering, and customer channels (last 3 days)\n\u2022 Search Linear for urgent/high priority issues in progress\n\u2022 Check Google Calendar for today and tomorrow's meetings\n\u2022 Search Amplitude for recent usage patterns if available\n\nSTEP 2 \u2014 SYNTHESIZE into 6-10 items across these categories:\n\u2022 INSIGHT \u2014 data anomaly or pattern\n\u2022 PREP \u2014 upcoming meeting needing briefing\n\u2022 NUDGE \u2014 person to message, thank, or unblock\n\u2022 LEVERAGE \u2014 force multiplier: delegate, automate, connect dots\n\u2022 BLIND SPOT \u2014 stale issues, silent customers, forgotten commitments\n\u2022 MOMENTUM \u2014 wins to celebrate\n\nAfter gathering data, respond with ONLY valid JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence summary>\",\"action\":\"<ready-to-paste next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <TARGET>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"amplitude\",\"slack\",\"linear\",\"calendar\"],\"actionType\":\"message|escalate|celebrate|delegate|prep\",\"actionTarget\":\"<person or channel>\",\"channelKey\":\"<gui|account-owner|shiproom|jared|fde-heart|benji|all-hands|product>\",\"sparkline\":[7 numbers 0-100],\"evidence\":[{\"label\":\"<what>\",\"url\":\"<url>\",\"source\":\"<src>\"}],\"context\":{\"metric\":\"<number>\",\"delta\":\"<change>\",\"baseline\":\"<comparison>\",\"risk\":\"<level>\"},\"feeds\":[]}]}\n\nPriority: URGENT=revenue at risk/security hole/customer blocked, HIGH=action today, MEDIUM=this week, LOW=positive/FYI",
+      messages:[{role:"user",content:"Pull fresh data from all available sources and synthesize actionable items for me. Today is "+new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"})+" and it's "+new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"})+". My timezone is "+Intl.DateTimeFormat().resolvedOptions().timeZone+".\n\nSpecific queries to run:\n1. Slack: search #product channel for messages from last 3 days. Also search for messages mentioning customers (Astranis, K2 Space, Reliable Robotics, Varda, Heart Aerospace, Lockheed)\n2. Linear: list my issues and any urgent/high priority issues across all teams\n3. Calendar: list events for today and tomorrow\n4. Amplitude: search for dashboards or charts related to WAU, retention, adoption\n5. Granola: list recent meetings from last 3 days\n\nIMPORTANT for evidence: Every evidence item MUST have a non-empty 'label' field describing what the link points to (e.g. 'Slack: Kevin on Astranis blockers', 'Linear: ENG-8732', 'GCal: Lockheed Resourcing 2pm'). Never leave label empty."}],
+      mcp_servers:[
+        {type:"url",url:"https://mcp.slack.com/mcp",name:"slack"},
+        {type:"url",url:"https://mcp.linear.app/mcp",name:"linear"},
+        {type:"url",url:"https://gcal.mcp.claude.com/mcp",name:"gcal"},
+        {type:"url",url:"https://mcp.amplitude.com/mcp",name:"amplitude"},
+        {type:"url",url:"https://mcp.granola.ai/mcp",name:"granola"},
+        {type:"url",url:"https://gmail.mcp.claude.com/mcp",name:"gmail"},
+      ],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
+  }
+  var d=await r.json();
+  if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
+  // Extract text content (skip tool use/result blocks)
+  var texts=(d.content||[]).filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("\n");
+  if(!texts) throw new Error("No text in response after MCP tool use");
+  var dur=((Date.now()-t0)/1000).toFixed(0);
+  onProgress("Done \u2014 "+dur+"s (live)");
+  var parsed=robustParseFinal(texts);
+  return{insights:parsed.insights||[],meta:{duration:dur,errors:[],sourcesOk:5,live:true}};
+}
+
+async function synthesizeFresh(onInsight, onProgress){
+  var t0=Date.now();
+  onProgress("Researching current state...");
+  var today=new Date().toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric",year:"numeric"});
+  var time=new Date().toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  var freshKey=getKey();
+  if(!freshKey)throw new Error("No API key.");
+  var r=await fetch("https://api.anthropic.com/v1/messages",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json",
+      "x-api-key":freshKey,
+      "anthropic-version":"2023-06-01",
+      "anthropic-dangerous-direct-browser-access":"true"
+    },
+    body:JSON.stringify({
+      model:"claude-sonnet-4-5-20250929",max_tokens:8000,
+      tools:[{type:"web_search_20250305",name:"web_search",max_uses:8}],
+      system:"You are RADAR, a product intelligence engine for Sift (siftstack.com), a unified telemetry observability platform for aerospace, defense, and robotics. The user is Noah Lucas, VP of Product at Sift.\n\nSift customers include: K2 Space, Astranis, Reliable Robotics, Varda, Heart Aerospace, ULA, Lockheed Martin, Parallel Systems, The Exploration Company, OHB, Dust Moto.\nKey team: Kenn (vertical discovery PM), Sanghee (core platform PM), Jess (canvas PM), Rowen (infra PM), Kevin (eng manager), Gui (FDE lead). Cofounders: Austin (CEO), Karthik (CTO).\n2026 strategy: Signal > Evidence > Decision. Three pillars: Nail the Core, Embed Deeper, Build the Moat. North Star metric: Decisions Captured Per Customer.\nKey products: Explore V2, Canvas, Python Rules, Sift Edge, Ask SIFT (AI).\n\nUse web search to find:\n1. Recent news about Sift or siftstack.com\n2. Recent developments at key customers (launches, funding, contracts)\n3. Industry trends in aerospace/defense telemetry, observability\n4. Any competitor activity (Grafana, Datadog in hardware/aerospace)\n\nThen synthesize 8-12 actionable intelligence items.\n\nRESPOND WITH ONLY VALID JSON (no markdown fences):\n{\"insights\":[{\"id\":\"<unique>\",\"category\":\"insight|prep|nudge|leverage|blind_spot|momentum\",\"headline\":\"<sharp, max 60 chars>\",\"body\":\"<2-3 sentence analysis>\",\"action\":\"<specific next step>\",\"situation\":\"<what is happening>\",\"whyItMatters\":\"<consequence if ignored>\",\"recommendation\":\"<specific next move>\",\"recTarget\":\"-> <person or team>\",\"priority\":\"URGENT|HIGH|MEDIUM|LOW\",\"sources\":[\"web\"],\"evidence\":[{\"label\":\"<descriptive title>\",\"url\":\"<real URL from search>\",\"source\":\"web\"}],\"context\":{\"metric\":\"<if available>\",\"delta\":\"<if available>\"},\"sparkline\":[]}]}\n\nPriority: URGENT=immediate business impact, HIGH=act today, MEDIUM=this week, LOW=FYI/positive",
+      messages:[{role:"user",content:"Today is "+today+" at "+time+". Research fresh intelligence for Sift and synthesize actionable items. Focus on customer developments, industry trends, and competitive dynamics that affect our product strategy."}],
+    }),
+  });
+  if(!r.ok){
+    var errBody=await r.text().catch(function(){return"";});
+    console.error("[radar] API error:",errBody);throw new Error("API "+r.status+": "+errBody);
+  }
+  onProgress("Analyzing results...");
+  var d=await r.json();
+  if(d.error) throw new Error("API error: "+(d.error.message||JSON.stringify(d.error)).slice(0,200));
+  var texts=(d.content||[]).filter(function(b){return b.type==="text";}).map(function(b){return b.text;}).join("\n");
+  if(!texts) throw new Error("No text in response");
+  var parsed=robustParseFinal(texts);
+  var dur=((Date.now()-t0)/1000).toFixed(1);
+  if(parsed&&parsed.insights){
+    parsed.meta={duration:dur,live:false,fresh:true,sources_scanned:1};
+    parsed.insights.forEach(function(ins,i){if(onInsight)onInsight(ins,i);});
+    return parsed;
+  }
+  throw new Error("Could not parse fresh scan results");
+}
+
+async function runLiveScan(onInsight, onProgress){
+  // Always try data.json + streaming first (fast, reliable)
+  onProgress("Loading data...");
+  try{
+    await loadData();
+  }catch(e){
+    console.warn("[radar] loadData failed:",e.message);
+  }
+  if(LIVE_DATA){
+    return synthesizeStreaming(LIVE_DATA, onInsight, onProgress);
+  }
+  // No data.json available — try fresh scan via web search
+  onProgress("No cached data, researching...");
+  return synthesizeFresh(onInsight, onProgress);
+}
+
+function useTheme(){
+  const[dk,setDk]=useState(()=>typeof window!=="undefined"?window.matchMedia("(prefers-color-scheme:dark)").matches:true);
+  useEffect(()=>{const mq=window.matchMedia("(prefers-color-scheme:dark)");const h=e=>setDk(e.matches);mq.addEventListener("change",h);return()=>mq.removeEventListener("change",h);},[]);
+  return[dk,setDk];
+}
+
+function useMobile(){
+  const[m,s]=useState(()=>typeof window!=="undefined"?window.innerWidth<768:false);
+  useEffect(()=>{const h=()=>s(window.innerWidth<768);window.addEventListener("resize",h);return()=>window.removeEventListener("resize",h);},[]);
+  return m;
+}
+
+
+
+// ============================================================
+// API KEY + FETCH INTERCEPTOR
+// ============================================================
+function getKey(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}}
+function setKeyStore(k){try{localStorage.setItem("radar_api_key",k);}catch(e){}}
+function getLive(){try{var v=localStorage.getItem("radar_live_mode");return v===null?false:v==="true";}catch(e){return false;}}
+function setLiveStore(v){try{localStorage.setItem("radar_live_mode",v?"true":"false");window.__RADAR_LIVE_MODE=v;}catch(e){}}
+function getCustomPrompt(){try{return localStorage.getItem("radar_custom_prompt")||"";}catch(e){return"";}}
+function setCustomPromptStore(v){try{localStorage.setItem("radar_custom_prompt",v);}catch(e){}}
+try{window.__RADAR_LIVE_MODE=getLive();}catch(e){}
+try{window.__RADAR_CUSTOM_PROMPT=getCustomPrompt();}catch(e){}
+
+// Patch fetch to inject API key for Anthropic calls
+var _origFetch=window.fetch;
+window.fetch=function(url,opts){
+  if(typeof url==="string"&&url.indexOf("api.anthropic.com")>-1){
+    var key=getKey();
+    if(key){
+      opts=opts||{};
+      opts.headers=opts.headers||{};
+      if(typeof opts.headers==="object"&&!Array.isArray(opts.headers)){
+        opts.headers["x-api-key"]=key;
+        opts.headers["anthropic-version"]="2023-06-01";
+        opts.headers["anthropic-dangerous-direct-browser-access"]="true";
+      }
+    }
+  }
+  return _origFetch.call(window,url,opts);
+};
+
+// ============================================================
+
+function evLabel(ev){
+  if(ev.label&&ev.label.trim())return ev.label.trim();
+  var srcName=SVC[ev.source]?.label||ev.source||"";
+  if(!ev.url)return srcName||"Link";
+  try{
+    var u=new URL(ev.url);
+    var host=u.hostname.replace(/^www\./,"");
+    var path=u.pathname.split("/").filter(Boolean);
+    if(host.includes("amplitude")){
+      if(path.includes("chart"))return srcName+": Chart "+path.slice(-1)[0];
+      if(path.includes("dashboard"))return srcName+": Dashboard";
+      return srcName+(path.length>2?": "+path.slice(-1)[0]:"");
+    }
+    if(host.includes("linear")){
+      var last=path.slice(-1)[0]||"";
+      if(/^[A-Z]+-\d+$/.test(last))return last;
+      return srcName+(last?": "+last:"");
+    }
+    if(host.includes("slack"))return srcName+": thread";
+    if(host.includes("docs.google"))return "Google Doc";
+    if(host.includes("calendar.google"))return srcName+": event";
+    if(host.includes("granola"))return srcName+": meeting notes";
+    if(host.includes("gmail"))return "Gmail: message";
+    if(path.length>0){
+      var seg=decodeURIComponent(path.slice(-1)[0]).replace(/[-_]/g," ");
+      return seg.length>30?seg.slice(0,28)+"\u2026":seg;
+    }
+    return srcName||host.replace(/\.com$|\.io$|\.app$/,"")||"Link";
+  }catch(e){return srcName||"Link";}
+}
+
+// V7 UI — Liquid Glass, Single Feed
+// ============================================================
+
+const FD = "-apple-system,'SF Pro Display','Helvetica Neue',system-ui,sans-serif";
+const FT = "-apple-system,'SF Pro Text','Helvetica Neue',system-ui,sans-serif";
+const FM = "'SF Mono','Menlo',monospace";
+
+function meshColors(dk,hour){
+  // Time periods
+  var dawn=hour>=5&&hour<7;
+  var morning=hour>=7&&hour<12;
+  var afternoon=hour>=12&&hour<17;
+  var golden=hour>=17&&hour<20;
+  var night=hour>=20||hour<5;
+
+  if(!dk){
+    // Light mode — warm washes that shift through the day
+    var c1=dawn?"180,140,100":morning?"140,170,220":afternoon?"160,150,200":golden?"200,150,100":"140,150,180";
+    var c2=dawn?"200,160,80":morning?"180,140,210":afternoon?"140,170,190":golden?"190,120,80":"120,130,170";
+    var c3=dawn?"160,180,120":morning?"120,200,170":afternoon?"170,160,200":golden?"180,170,100":"100,120,160";
+    return{
+      m1:"radial-gradient(ellipse 80% 60% at 25% 25%, rgba("+c1+",0.22) 0%, transparent 70%)",
+      m2:"radial-gradient(ellipse 60% 70% at 70% 70%, rgba("+c2+",0.14) 0%, transparent 70%)",
+      m3:"radial-gradient(ellipse 50% 50% at 50% 15%, rgba("+c3+",0.10) 0%, transparent 60%)",
+    };
+  }
+  // Dark mode — richer, more atmospheric
+  var c1=dawn?"160,110,50":morning?"120,100,60":afternoon?"60,100,160":golden?"180,100,40":night?"30,50,120":"70,100,160";
+  var c2=dawn?"140,70,90":morning?"150,100,60":afternoon?"120,70,170":golden?"160,60,70":night?"60,30,130":"130,90,180";
+  var c3=dawn?"100,130,70":morning?"110,130,60":afternoon?"70,140,120":golden?"140,120,40":night?"20,60,100":"90,160,140";
+  // Night gets more intensity to feel alive
+  var o1=night?0.38:golden?0.34:dawn?0.32:0.28;
+  var o2=night?0.28:golden?0.24:dawn?0.22:0.20;
+  var o3=night?0.20:golden?0.18:dawn?0.16:0.14;
+  return{
+    m1:"radial-gradient(ellipse 80% 60% at 20% 30%, rgba("+c1+","+o1+") 0%, transparent 70%)",
+    m2:"radial-gradient(ellipse 60% 70% at 75% 65%, rgba("+c2+","+o2+") 0%, transparent 70%)",
+    m3:"radial-gradient(ellipse 50% 50% at 50% 20%, rgba("+c3+","+o3+") 0%, transparent 60%)",
+  };
+}
+
+var CP={
+  dark:{
+    bg:"#0B0E1A",
+    glass:"rgba(56,56,62,0.44)",glassH:"rgba(66,66,72,0.56)",glassThin:"rgba(56,56,62,0.28)",
+    border:"rgba(255,255,255,0.11)",borderH:"rgba(255,255,255,0.20)",
+    highlight:"rgba(255,255,255,0.06)",highlightH:"rgba(255,255,255,0.10)",
+    l1:"#FFFFFF",l2:"rgba(235,235,245,0.60)",l3:"rgba(235,235,245,0.30)",l4:"rgba(235,235,245,0.16)",
+    f3:"rgba(118,118,128,0.24)",f4:"rgba(118,118,128,0.16)",
+    blue:"#0A84FF",green:"#30D158",red:"#FF453A",orange:"#FF9F0A",
+    blueTint:"rgba(10,132,255,0.18)",greenTint:"rgba(48,209,88,0.16)",redTint:"rgba(255,69,58,0.16)",
+  },
+  light:{
+    bg:"#F4F4F9",
+    glass:"rgba(255,255,255,0.58)",glassH:"rgba(255,255,255,0.76)",glassThin:"rgba(255,255,255,0.36)",
+    border:"rgba(255,255,255,0.55)",borderH:"rgba(255,255,255,0.80)",
+    highlight:"rgba(255,255,255,0.65)",highlightH:"rgba(255,255,255,0.85)",
+    l1:"#000000",l2:"rgba(60,60,67,0.58)",l3:"rgba(60,60,67,0.30)",l4:"rgba(60,60,67,0.16)",
+    f3:"rgba(118,118,128,0.12)",f4:"rgba(116,116,128,0.08)",
+    blue:"#007AFF",green:"#34C759",red:"#FF3B30",orange:"#FF9500",
+    blueTint:"rgba(0,122,255,0.12)",greenTint:"rgba(52,199,89,0.12)",redTint:"rgba(255,59,48,0.12)",
+  },
+};
+
+var SRCICON={amplitude:"\u{1F4CA}",slack:"\u{1F4AC}",linear:"\u25C6",calendar:"\u{1F4C5}",web:"\u{1F310}",granola:"\u{1F399}",gmail:"\u2709"};
+
+// Animated counter
+function AnimNum({value,dur}){
+  var duration=dur||800;
+  var[display,setDisplay]=useState(0);
+  var ref=useRef();
+  useEffect(function(){
+    var target=parseInt(value)||0;
+    if(target===0){setDisplay(value);return;}
+    var start=null;
+    function tick(ts){
+      if(!start)start=ts;
+      var p=Math.min((ts-start)/duration,1);
+      var ease=1-Math.pow(1-p,4);
+      setDisplay(Math.round(target*ease));
+      if(p<1)ref.current=requestAnimationFrame(tick);
+    }
+    ref.current=requestAnimationFrame(tick);
+    return function(){cancelAnimationFrame(ref.current);};
+  },[value,duration]);
+  return <span>{display}</span>;
+}
+
+// Glass Card
+function GlassCard({item,index,c,dk,onAction}){
+  var[h,setH]=useState(false);
+  var[actH,setActH]=useState(false);
+  var[actP,setActP]=useState(false);
+  var[evEx,setEvEx]=useState(false);
+  var[specPos,setSpecPos]=useState({x:50,y:0});
+  var cardRef=useRef(null);
+
+  var onMove=useCallback(function(e){
+    if(!cardRef.current)return;
+    var rect=cardRef.current.getBoundingClientRect();
+    setSpecPos({x:((e.clientX-rect.left)/rect.width)*100,y:((e.clientY-rect.top)/rect.height)*100});
+  },[]);
+
+  var ev=item.evidence||[];
+  var maxEv=3;
+  var visEv=evEx?ev:ev.slice(0,maxEv);
+  var hasMore=ev.length>maxEv;
+  var pr=item.priority?PRI[(item.priority||"").toUpperCase()]:null;
+
+  return(
+    <article ref={cardRef}
+      onMouseEnter={function(){setH(true);}}
+      onMouseLeave={function(){setH(false);setSpecPos({x:50,y:0});}}
+      onMouseMove={h?onMove:undefined}
+      style={{
+        position:"relative",borderRadius:22,padding:"24px 26px 22px",cursor:"default",
+        background:h?c.glassH:c.glass,
+        backdropFilter:"blur(40px) saturate(180%) brightness(1.02)",
+        WebkitBackdropFilter:"blur(40px) saturate(180%) brightness(1.02)",
+        border:"0.5px solid "+(h?c.borderH:c.border),
+        boxShadow:[
+          h?"0 12px 48px rgba(0,0,0,"+(dk?"0.35":"0.10")+")":"0 1px 8px rgba(0,0,0,"+(dk?"0.12":"0.04")+")",
+          "inset 0 1px 0 "+(h?c.highlightH:c.highlight),
+          "inset 0 0 0 0.5px "+c.border,
+        ].join(","),
+        transition:"all 0.45s cubic-bezier(0.25,1,0.5,1)",
+        transform:h?"translateY(-3px) scale(1.004)":"translateY(0) scale(1)",
+        animation:"glassIn 0.6s cubic-bezier(0.16,1,0.3,1) "+(0.05+index*0.045)+"s both",
+        overflow:"hidden",
+      }}>
+      {/* Cursor-reactive specular */}
+      <div style={{position:"absolute",inset:0,borderRadius:22,pointerEvents:"none",
+        background:"radial-gradient(ellipse 60% 50% at "+specPos.x+"% "+specPos.y+"%, "+(h?c.highlightH:c.highlight)+" 0%, transparent 70%)",
+        opacity:h?1:0.5,transition:"opacity 0.4s ease"}} />
+      {/* Top specular edge */}
+      <div style={{position:"absolute",top:0,left:0,right:0,height:1,borderRadius:"22px 22px 0 0",
+        background:"linear-gradient(90deg, transparent 10%, "+c.highlight+" 50%, transparent 90%)",
+        opacity:h?1:0.6,transition:"opacity 0.3s ease"}} />
+
+      <div style={{position:"relative",zIndex:1}}>
+        {/* Synthesis text */}
+        <p style={{fontSize:16.5,lineHeight:1.62,color:c.l1,fontFamily:FT,fontWeight:400,margin:0,
+          letterSpacing:"-0.012em"}}>{item.headline||item.body||item.text||""}</p>
+
+        {/* Metric */}
+        {item.context&&item.context.metric&&(
+          <div style={{display:"flex",alignItems:"baseline",gap:8,marginTop:18}}>
+            <span style={{fontSize:36,fontWeight:700,fontFamily:FD,letterSpacing:"-0.04em",color:c.l1,lineHeight:1,
+              fontFeatureSettings:"'tnum'"}}>{item.context.metric}</span>
+            {item.context.delta&&(
+              <span style={{fontSize:14,fontWeight:600,fontFamily:FT,
+                color:item.context.delta.indexOf("+")===0?c.green:item.context.delta.indexOf("-")===0?c.red:c.l3,
+                background:item.context.delta.indexOf("+")===0?c.greenTint:item.context.delta.indexOf("-")===0?c.redTint:"transparent",
+                padding:"3px 10px",borderRadius:8}}>{item.context.delta}</span>
+            )}
+          </div>
+        )}
+
+        {/* Action */}
+        {item.action&&(
+          <button
+            onMouseEnter={function(){setActH(true);}}
+            onMouseLeave={function(){setActH(false);setActP(false);}}
+            onMouseDown={function(){setActP(true);}}
+            onMouseUp={function(){setActP(false);if(onAction)onAction(item);}}
+            style={{marginTop:18,padding:"11px 24px",borderRadius:14,border:"none",
+              background:actP?c.f3:actH?c.blueTint:c.f4,
+              color:actH?c.blue:c.l2,
+              fontSize:15,fontFamily:FT,fontWeight:500,cursor:"pointer",letterSpacing:"-0.01em",
+              transition:"all 0.2s cubic-bezier(0.25,1,0.5,1)",
+              transform:actP?"scale(0.96)":"scale(1)",
+              WebkitTapHighlightColor:"transparent"}}>
+            {item.action}
+          </button>
+        )}
+
+        {/* Evidence */}
+        {ev.length>0&&(
+          <div style={{display:"flex",gap:5,flexWrap:"wrap",marginTop:16,alignItems:"center"}}>
+            {visEv.map(function(e,i){
+              var icon=SRCICON[e.source]||"\u{1F517}";
+              var label=evLabel?evLabel(e):(e.label||e.source||"Link");
+              return(
+                <a key={i} href={e.url||"#"} target="_blank" rel="noopener"
+                  onClick={function(ev){ev.stopPropagation();}}
+                  style={{display:"inline-flex",alignItems:"center",gap:5,
+                    padding:"5px 12px",borderRadius:10,
+                    fontSize:13,fontFamily:FT,fontWeight:400,
+                    color:c.l2,textDecoration:"none",
+                    background:c.glassThin,
+                    backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
+                    border:"0.5px solid "+(dk?"rgba(255,255,255,0.06)":"rgba(255,255,255,0.30)"),
+                    transition:"all 0.2s ease",letterSpacing:"-0.01em",
+                    animation:evEx&&i>=maxEv?"glassIn 0.3s ease "+((i-maxEv)*0.05)+"s both":"none"}}
+                  onMouseEnter={function(ev){ev.currentTarget.style.color=c.l1;ev.currentTarget.style.borderColor=dk?"rgba(255,255,255,0.14)":"rgba(255,255,255,0.50)";}}
+                  onMouseLeave={function(ev){ev.currentTarget.style.color=c.l2;ev.currentTarget.style.borderColor=dk?"rgba(255,255,255,0.06)":"rgba(255,255,255,0.30)";}}>
+                  <span style={{fontSize:12,lineHeight:1}}>{icon}</span>
+                  {label.length>28?label.slice(0,26)+"\u2026":label}
+                </a>
+              );
+            })}
+            {hasMore&&!evEx&&(
+              <button onClick={function(e){e.stopPropagation();setEvEx(true);}}
+                style={{padding:"5px 12px",borderRadius:10,border:"none",background:"transparent",
+                  color:c.l3,fontSize:13,fontFamily:FT,cursor:"pointer",transition:"color 0.2s"}}
+                onMouseEnter={function(e){e.currentTarget.style.color=c.l1;}}
+                onMouseLeave={function(e){e.currentTarget.style.color=c.l3;}}>
+                +{ev.length-maxEv} more
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
+// Settings modal
+function SettingsModal({c,dk,onClose}){
+  var[key,setKey]=useState(function(){try{return localStorage.getItem("radar_api_key")||"";}catch(e){return"";}});
+  var[prompt,setPrompt]=useState(function(){try{return localStorage.getItem("radar_custom_prompt")||DEFAULT_PROMPT||"";}catch(e){return"";}});
+  var[showKey,setShowKey]=useState(false);
+  function save(){
+    try{localStorage.setItem("radar_api_key",key);}catch(e){}
+    try{localStorage.setItem("radar_custom_prompt",prompt);window.__RADAR_CUSTOM_PROMPT=prompt;}catch(e){}
+    onClose();
+  }
+  function resetPrompt(){setPrompt("");try{localStorage.removeItem("radar_custom_prompt");window.__RADAR_CUSTOM_PROMPT="";}catch(e){}}
+  var iStyle={width:"100%",padding:"10px 14px",borderRadius:10,border:"0.5px solid "+c.border,
+    background:c.glassThin,backdropFilter:"blur(12px)",WebkitBackdropFilter:"blur(12px)",
+    color:c.l1,outline:"none"};
+  return(
+    <div style={{position:"fixed",inset:0,zIndex:9000,display:"flex",alignItems:"center",justifyContent:"center",
+      background:"rgba(0,0,0,"+(dk?"0.6":"0.3")+")",backdropFilter:"blur(8px)",WebkitBackdropFilter:"blur(8px)"}}
+      onClick={onClose}>
+      <div onClick={function(e){e.stopPropagation();}}
+        style={{width:Math.min(520,window.innerWidth-32),maxHeight:"85vh",overflowY:"auto",padding:28,borderRadius:22,
+          background:dk?c.glass:c.glassH,backdropFilter:"blur(40px) saturate(180%)",WebkitBackdropFilter:"blur(40px) saturate(180%)",
+          border:"0.5px solid "+c.border,
+          boxShadow:"0 24px 80px rgba(0,0,0,"+(dk?"0.5":"0.15")+"), inset 0 1px 0 "+c.highlight}}>
+        <h2 style={{fontSize:20,fontWeight:700,fontFamily:FD,color:c.l1,marginBottom:24,letterSpacing:"-0.02em"}}>Settings</h2>
+
+        <label style={{fontSize:11,fontFamily:FT,color:c.l3,display:"block",marginBottom:6,fontWeight:600,letterSpacing:"0.06em",textTransform:"uppercase"}}>API Key</label>
+        <div style={{display:"flex",gap:8,marginBottom:24}}>
+          <input value={key} onChange={function(e){setKey(e.target.value);}} type={showKey?"text":"password"} placeholder="sk-ant-..."
+            style={Object.assign({},iStyle,{flex:1,fontSize:14,fontFamily:FM})} />
+          <button onClick={function(){setShowKey(!showKey);}} style={{padding:"0 14px",borderRadius:10,border:"0.5px solid "+c.border,
+            background:c.glassThin,color:c.l3,fontSize:13,fontFamily:FT,cursor:"pointer",transition:"color 0.2s"}}
+            onMouseEnter={function(e){e.currentTarget.style.color=c.l1;}}
+            onMouseLeave={function(e){e.currentTarget.style.color=c.l3;}}>
+            {showKey?"Hide":"Show"}
+          </button>
+        </div>
+
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:6}}>
+          <label style={{fontSize:11,fontFamily:FT,color:c.l3,fontWeight:600,letterSpacing:"0.06em",textTransform:"uppercase"}}>Synthesis Prompt</label>
+          {prompt&&<button onClick={resetPrompt} style={{fontSize:12,fontFamily:FT,color:c.blue,background:"none",border:"none",cursor:"pointer"}}>Reset</button>}
+        </div>
+        <p style={{fontSize:13,fontFamily:FT,color:c.l4,marginBottom:8,lineHeight:1.5}}>
+          This prompt tells Claude how to synthesize your data. Edit to change what RADAR looks for and how it writes.
+        </p>
+        <textarea value={prompt} onChange={function(e){setPrompt(e.target.value);}}
+          placeholder="Enter your synthesis prompt..."
+          rows={10}
+          style={Object.assign({},iStyle,{resize:"vertical",lineHeight:1.55,fontSize:13,fontFamily:FT,minHeight:160})} />
+
+        <div style={{display:"flex",gap:8,marginTop:24}}>
+          <button onClick={save} style={{flex:1,padding:"12px 0",borderRadius:12,border:"none",
+            background:c.blue,color:"#fff",fontSize:15,fontFamily:FT,fontWeight:600,cursor:"pointer",
+            transition:"transform 0.15s"}}
+            onMouseDown={function(e){e.currentTarget.style.transform="scale(0.97)";}}
+            onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+            onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>Save</button>
+          <button onClick={onClose} style={{padding:"12px 20px",borderRadius:12,border:"none",
+            background:c.f4,color:c.l2,fontSize:15,fontFamily:FT,fontWeight:500,cursor:"pointer"}}>Cancel</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+// ============================================================
+// MAIN APP
+// ============================================================
+function RadarApp(){
+  var sysDark=typeof window!=="undefined"&&window.matchMedia&&window.matchMedia("(prefers-color-scheme:dark)").matches;
+  var[dk,setDk]=useState(sysDark!==false);
+  var[ready,setReady]=useState(false);
+  var[scanning,setScanning]=useState(false);
+  var[progress,setProgress]=useState("");
+  var[items,setItems]=useState([]);
+  var[settings,setSettings]=useState(false);
+  var[transitioning,setTransitioning]=useState(false);
+  var[scanError,setScanError]=useState("");
+  var c=dk?CP.dark:CP.light;
+  var hour=new Date().getHours();
+  var mesh=meshColors(dk,hour);
+
+  useEffect(function(){requestAnimationFrame(function(){setReady(true);});},[]);
+
+  // Auto-scan on mount
+  useEffect(function(){
+    var hasKey=!!getKey();
+    var t=hasKey?setTimeout(function(){scan();},400):null;
+    return function(){if(t)clearTimeout(t);};
+  },[]);
+
+  function toggleTheme(){
+    setTransitioning(true);
+    setTimeout(function(){setDk(!dk);setTimeout(function(){setTransitioning(false);},500);},50);
+  }
+
+  async function scan(){
+    if(scanning)return;
+    setScanning(true);setProgress("Starting scan...");setItems([]);setScanError("");
+    try{
+      // 90 second timeout for scan
+      var result=await runLiveScan(
+        function(ins,idx){setItems(function(prev){var n=[].concat(prev);n[idx]=ins;return n;});},
+        function(msg){setProgress(msg);}
+      );
+      if(result&&result.insights)setItems(result.insights);
+      setProgress("");
+    }catch(e){
+      setScanError("Error: "+e.message.slice(0,80));setProgress("");
+    }
+    setScanning(false);
+  }
+
+  function handleAction(item){
+    if(item.action){
+      try{navigator.clipboard.writeText(item.action);}catch(e){}
+    }
+  }
+
+  var now=new Date();
+  var greeting=hour<12?"Good morning":hour<17?"Good afternoon":"Good evening";
+  var dateStr=now.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+
+  // Combine headline+body into synthesis text for display
+  var feedItems=items.map(function(item){
+    var text=item.body||item.headline||"";
+    if(item.headline&&item.body&&item.headline!==item.body){
+      text=item.body;
+    }
+    return Object.assign({},item,{text:text});
+  });
+
+  return(
+    <div style={{minHeight:"100vh",background:dk?"linear-gradient(170deg, #0B0E1A 0%, #0D1117 25%, #111827 50%, #0F172A 75%, #0B0E1A 100%)":"linear-gradient(170deg, #EEF0F6 0%, #F0EDF5 25%, #F4F4F9 50%, #EDF2F7 75%, #F0EFF6 100%)",position:"relative",overflow:"hidden",
+      transition:"background 0.6s cubic-bezier(0.25,1,0.5,1)",
+      opacity:transitioning?0.92:1}}>
+      <style>{"::selection{background:"+(dk?"rgba(10,132,255,0.40)":"rgba(0,122,255,0.20)")+"}"}</style>
+
+      {/* Ambient mesh */}
+      <div style={{position:"fixed",inset:0,pointerEvents:"none",zIndex:0,transition:"opacity 0.8s ease",opacity:transitioning?0:1}}>
+        <div style={{position:"absolute",inset:"-25%",background:mesh.m1,animation:"meshDrift1 28s ease-in-out infinite",willChange:"transform"}} />
+        <div style={{position:"absolute",inset:"-15%",background:mesh.m2,animation:"meshDrift2 22s ease-in-out infinite",willChange:"transform"}} />
+        <div style={{position:"absolute",inset:"-20%",background:mesh.m3,animation:"meshDrift1 32s ease-in-out infinite reverse",willChange:"transform"}} />
+      </div>
+
+      <div style={{position:"relative",zIndex:1,maxWidth:700,margin:"0 auto",padding:"0 24px"}}>
+
+        {/* Header */}
+        <header style={{paddingTop:64,paddingBottom:28,animation:"headerIn 0.9s cubic-bezier(0.16,1,0.3,1) both"}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start"}}>
+            <div>
+              <div style={{fontSize:11,fontFamily:FM,fontWeight:500,color:c.l4,letterSpacing:"0.12em",textTransform:"uppercase",marginBottom:14}}>RADAR</div>
+              <h1 style={{fontSize:42,fontWeight:700,fontFamily:FD,color:c.l1,letterSpacing:"-0.025em",lineHeight:1.04}}>{greeting}</h1>
+              <p style={{fontSize:20,fontFamily:FT,color:c.l3,fontWeight:400,marginTop:6,letterSpacing:"-0.01em"}}>{dateStr}</p>
+            </div>
+            <div style={{display:"flex",gap:10,paddingTop:30}}>
+              <button onClick={function(){setSettings(true);}} aria-label="Settings" style={{
+                width:44,height:44,borderRadius:22,
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:"0.5px solid "+c.border,color:c.l2,fontSize:16,cursor:"pointer",
+                display:"grid",placeItems:"center",transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}
+                onMouseDown={function(e){e.currentTarget.style.transform="scale(0.88)";}}
+                onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+                onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>
+                {"⚙"}
+              </button>
+              <button onClick={toggleTheme} aria-label="Toggle theme" style={{
+                width:44,height:44,borderRadius:22,
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:"0.5px solid "+c.border,color:c.l2,fontSize:18,cursor:"pointer",
+                display:"grid",placeItems:"center",transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}
+                onMouseDown={function(e){e.currentTarget.style.transform="scale(0.88)";}}
+                onMouseUp={function(e){e.currentTarget.style.transform="scale(1)";}}
+                onMouseLeave={function(e){e.currentTarget.style.transform="scale(1)";}}>
+                {dk?"\u2600\uFE0F":"\u{1F319}"}
+              </button>
+              <button onClick={scan} style={{
+                height:44,borderRadius:22,padding:"0 22px",
+                background:c.glassThin,backdropFilter:"blur(24px) saturate(150%)",WebkitBackdropFilter:"blur(24px) saturate(150%)",
+                border:scanning?"1.5px solid "+c.blue:"0.5px solid "+c.border,color:scanning?c.blue:c.l2,
+                fontSize:14.5,fontFamily:FT,fontWeight:500,cursor:"pointer",
+                display:"flex",alignItems:"center",gap:0,
+                animation:scanning?(dk?"shimmer 2s ease-in-out infinite":"shimmerLight 2s ease-in-out infinite"):"none",
+                transition:"all 0.3s cubic-bezier(0.25,1,0.5,1)",letterSpacing:"-0.01em",
+                boxShadow:"inset 0 1px 0 "+c.highlight+", 0 1px 4px rgba(0,0,0,"+(dk?"0.15":"0.04")+")",
+                WebkitTapHighlightColor:"transparent"}}>
+  {scanning?"Scanning\u2026":"Scan"}
+              </button>
+            </div>
+          </div>
+
+          {/* Meta */}
+          <div style={{marginTop:28,display:"flex",alignItems:"baseline",gap:6,animation:"headerIn 0.9s cubic-bezier(0.16,1,0.3,1) 0.12s both"}}>
+            {items.length>0&&<>
+              <span style={{fontSize:14,fontFamily:FT,fontWeight:600,color:c.l2}}><AnimNum value={items.length} /></span>
+              <span style={{fontSize:14,fontFamily:FT,color:c.l3}}>items</span>
+              <span style={{color:c.l4,margin:"0 4px"}}>{"·"}</span>
+            </>}
+            <span style={{fontSize:14,fontFamily:FT,color:c.l4}}>
+              {scanning?progress:scanError?scanError:items.length>0?"Just now":"Enter API key in \u2699 to scan"}
+            </span>
+          </div>
+        </header>
+
+        {/* Scanning skeleton */}
+        {scanning&&items.length===0&&(
+          <div style={{display:"flex",flexDirection:"column",gap:12,paddingBottom:40}}>
+            {[0,1,2,3].map(function(i){return(
+              <div key={i} style={{borderRadius:22,padding:"24px 26px",
+                background:c.glass,backdropFilter:"blur(40px)",WebkitBackdropFilter:"blur(40px)",
+                border:"0.5px solid "+c.border,animation:"pulse 1.5s ease infinite",animationDelay:(i*0.2)+"s"}}>
+                <div style={{height:16,width:"75%",background:c.f4,borderRadius:8,marginBottom:12}} />
+                <div style={{height:14,width:"90%",background:c.f4,borderRadius:8,marginBottom:8,opacity:0.6}} />
+                <div style={{height:14,width:"50%",background:c.f4,borderRadius:8,opacity:0.4}} />
+              </div>
+            );})}
+          </div>
+        )}
+
+        {/* Feed */}
+        {ready&&(
+          <div style={{display:"flex",flexDirection:"column",gap:12,paddingBottom:120}}>
+            {feedItems.map(function(item,i){return(
+              <GlassCard key={item.id||i} item={item} index={i} c={c} dk={dk} onAction={handleAction} />
+            );})}
+          </div>
+        )}
+      </div>
+
+      {/* Settings */}
+      {settings&&<SettingsModal c={c} dk={dk} onClose={function(){setSettings(false);}} />}
+    </div>
+  );
+}
+
+// Wrap in AuthGate
+class ErrorBoundary extends React.Component{
+  constructor(props){super(props);this.state={error:null};}
+  static getDerivedStateFromError(error){return{error};}
+  render(){
+    if(this.state.error){
+      return React.createElement("div",{style:{padding:40,fontFamily:"-apple-system,system-ui,sans-serif",fontSize:14,color:"#FF453A",background:"#1C1C1E",minHeight:"100vh",whiteSpace:"pre-wrap",wordBreak:"break-all",overflow:"auto"}},
+        "RADAR Error:\n\n"+this.state.error.toString()+"\n\n"+(this.state.error.stack||""));
+    }
+    return this.props.children;
+  }
+}
+
+var root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(React.createElement(ErrorBoundary,null,React.createElement(AuthGate,null,React.createElement(RadarApp))));
+
+</script>
+</body>
+</html>
