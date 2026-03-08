@@ -3,155 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Noah Lucas - VP Product, entrepreneur, and AI-native systems builder." />
-    <title>Noah Lucas | VP Product + Entrepreneur</title>
+    <meta name="description" content="Noah Lucas terminal interface - AI-native product operating studio." />
+    <title>Noah Lucas | Terminal</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="terminal-theme">
     <div class="atmosphere" aria-hidden="true"></div>
-
-    <header class="topbar">
-      <a class="brand" href="#top">Noah Lucas</a>
-      <nav>
-        <a href="#work">Work</a>
-        <a href="#notes">Notes</a>
-        <a href="/lab.html">Private Lab</a>
-        <a href="/integrations.html">Integrations</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
-
-    <main id="top">
-      <section class="hero reveal">
-        <p class="eyebrow">VP PRODUCT + ENTREPRENEUR</p>
-        <h1>Building products that turn <span>ambiguity into advantage.</span></h1>
-        <p class="lede">
-          This site is an active studio for product strategy, applied AI, and leadership systems. It is intentionally
-          alive: built to ship ideas, test narratives, and publish operator-grade notes in public.
-        </p>
-        <div class="ascii-hero-shell" aria-label="ASCII signal animation">
-          <pre id="ascii-hero" class="ascii-hero"></pre>
-        </div>
-        <div class="actions">
-          <a class="btn btn-solid" href="#notes">Read Notes</a>
-          <a class="btn btn-ghost" href="/lab.html">Enter Private Lab</a>
-          <a class="btn btn-ghost" href="/prototype-cinematic.html">Prototype A</a>
-          <a class="btn btn-ghost" href="/prototype-editorial.html">Prototype B</a>
-          <a class="btn btn-ghost" href="/prototype-hybrid.html">Prototype C</a>
-        </div>
+    <main class="terminal-shell">
+      <header class="terminal-bar">
+        <p>NOAHLUCAS // PRODUCT AS PLATFORM</p>
+        <p id="terminal-clock">--:--:--</p>
+      </header>
+      <section class="terminal-screen">
+        <pre id="boot-log" class="terminal-log" aria-live="polite"></pre>
+        <pre id="ascii-hero" class="ascii-hero terminal-ascii"></pre>
+        <div id="terminal-output" class="terminal-output"></div>
+        <form id="terminal-form" class="terminal-form" autocomplete="off">
+          <label for="terminal-input" class="terminal-prompt">noah@studio:~$</label>
+          <input id="terminal-input" type="text" placeholder="type help" />
+        </form>
       </section>
-
-      <section class="signal reveal" aria-label="Current focus areas">
-        <article>
-          <p class="label">Current Mission</p>
-          <p class="value">Brand as Product</p>
-        </article>
-        <article>
-          <p class="label">Core Domains</p>
-          <p class="value">AI Systems + Org Velocity</p>
-        </article>
-        <article>
-          <p class="label">Operating Mode</p>
-          <p class="value">Ship Weekly</p>
-        </article>
-      </section>
-
-      <section id="work" class="panel reveal">
-        <div class="panel-head">
-          <h2>Selected Work Themes</h2>
-          <p>Strategic throughline across leadership roles.</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <h3>AI-Native Product Strategy</h3>
-            <p>Translate frontier capability into focused roadmaps, leverage, and adoption.</p>
-          </article>
-          <article class="card">
-            <h3>High-Stakes Platform Building</h3>
-            <p>Turn complex systems into reliable products with measurable customer outcomes.</p>
-          </article>
-          <article class="card">
-            <h3>Org Design for Speed</h3>
-            <p>Structure teams, rituals, and decision flows that increase learning velocity.</p>
-          </article>
-          <article class="card">
-            <h3>Operator Communication</h3>
-            <p>Create decision narratives that align executives, teams, and execution cadence.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="notes" class="panel reveal">
-        <div class="panel-head">
-          <h2>Notes</h2>
-          <p>Field notes, contrarian takes, and tactical playbooks.</p>
-        </div>
-        <div id="notes-list" class="grid notes-grid">
-          <article class="note">
-            <p class="note-type">LIVE FEED</p>
-            <h3>Loading latest notes...</h3>
-            <p>Generated artifacts from the OpenAI pipeline will render here automatically.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="lab" class="panel lab reveal">
-        <div class="panel-head">
-          <h2>Private Lab</h2>
-          <p>AI-native professional superpower workspace.</p>
-        </div>
-        <p class="lab-copy">
-          The private lab runs on a separate subdomain and houses decision journals, prompt libraries, and operator
-          workflows for work contexts.
-        </p>
-        <div class="lab-tiles">
-          <article>
-            <p class="label">Daily Brief</p>
-            <p class="value">Priorities, risks, and actions</p>
-          </article>
-          <article>
-            <p class="label">Decision Journal</p>
-            <p class="value">Context, tradeoffs, outcomes</p>
-          </article>
-          <article>
-            <p class="label">Prompt Library</p>
-            <p class="value">Reusable strategic workflows</p>
-          </article>
-        </div>
-        <a class="btn btn-solid" href="/lab.html">Go to Lab</a>
-      </section>
-
-      <section id="fusion" class="panel reveal">
-        <div class="panel-head">
-          <h2>Fusion Signal</h2>
-          <p>Privacy-safe intelligence feed.</p>
-        </div>
-        <p id="fusion-headline" class="headline">Loading intelligence stream...</p>
-        <div class="metrics">
-          <article><p class="label">Recovery</p><p id="m-recovery" class="value">--</p></article>
-          <article><p class="label">Focus</p><p id="m-focus" class="value">--</p></article>
-          <article><p class="label">Balance</p><p id="m-balance" class="value">--</p></article>
-          <article><p class="label">Action</p><p id="m-action" class="value body">--</p></article>
-        </div>
-      </section>
-
-      <section id="contact" class="panel contact reveal">
-        <h2>Connect</h2>
-        <p>For collaboration, advisory, and product leadership opportunities:</p>
-        <a href="mailto:noah@noahlucas.com">noah@noahlucas.com</a>
-      </section>
+      <footer class="terminal-footer">
+        <a href="/integrations.html">integrations</a>
+        <a href="/lab.html">lab</a>
+        <a href="/notes.html">notes</a>
+        <a href="/work.html">work</a>
+        <a href="/contact.html">contact</a>
+      </footer>
     </main>
-
-    <footer>
-      <p>© <span id="year"></span> Noah Lucas</p>
-    </footer>
-
-    <script src="./app.js"></script>
+    <script src="./terminal-home.js"></script>
   </body>
 </html>
