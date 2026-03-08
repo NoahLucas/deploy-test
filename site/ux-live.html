@@ -49,26 +49,22 @@
       .role-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
       .role-meta a { color: var(--ink); text-decoration: underline; font-size: 0.75rem; }
       .kicker { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.74rem; line-height: 1.45; }
+      .jtbd { margin-top: 0.55rem; display: grid; gap: 0.4rem; }
+      .jtbd-item { border: 1px solid var(--line); background: #fbfaf8; padding: 0.45rem; }
+      .jtbd-item strong { display: block; font-size: 0.78rem; margin-bottom: 0.15rem; }
+      .jtbd-item span { color: var(--muted); font-size: 0.75rem; line-height: 1.4; }
       .inline-links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.7rem; }
       .inline-links a { color: var(--ink); text-decoration: underline; font-size: 0.78rem; }
       .image-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
       .image-strip img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--line); background: #eee; }
-      .feedback-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
-      .feedback-grid label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.7rem; color: var(--muted); }
-      .feedback-grid textarea { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.76rem; min-height: 5rem; padding: 0.45rem; }
-      .feedback-actions { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.45rem; }
-      .feedback-actions button { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.72rem; padding: 0.24rem 0.5rem; cursor: pointer; }
       .badge { border: 1px solid var(--line); padding: 0.1rem 0.32rem; font-size: 0.65rem; color: var(--muted); display: inline-block; }
-      .private-view { display: none; }
       .page { display: none; }
       .page.active { display: block; }
-      .mode-private .public-view { display: none; }
-      .mode-private .private-view { display: block; }
-      @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } .rail { border-right: 0; border-bottom: 1px solid var(--line); } .grid2, .grid3, .feedback-grid, .signal-grid { grid-template-columns: 1fr; } }
+      @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } .rail { border-right: 0; border-bottom: 1px solid var(--line); } .grid2, .grid3, .signal-grid, .image-strip { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
-    <main class="app mode-public" id="app">
+    <main class="app" id="app">
       <header class="top">
         <span>UX LIVE PREVIEW // PERSONAL PORTFOLIO OUTPUT + LAB PRODUCTION VIEW</span>
         <span id="stamp">refreshing...</span>
@@ -76,15 +72,14 @@
       <div class="head">
         <h1>NoahLucas.com Direction Review</h1>
         <div class="view-toggle">
-          <button id="view-public" class="active" type="button">Public Portfolio View</button>
-          <button id="view-private" type="button">Private Lab Production View</button>
+          <button class="active" type="button">Public Portfolio View</button>
         </div>
       </div>
       <section class="layout">
         <aside class="rail">
           <p class="name">🐺 Noah Lucas</p>
-          <p class="sub">Public Portfolio + Private Lab</p>
-          <nav class="menu public-view" id="public-nav">
+          <p class="sub">Public Portfolio</p>
+          <nav class="menu" id="public-nav">
             <button class="active" data-public-view="home" type="button">Home</button>
             <button data-public-view="bio" type="button">Bio</button>
             <button data-public-view="career" type="button">Career</button>
@@ -92,13 +87,9 @@
             <button data-public-view="holocron" type="button">Holocron</button>
             <button data-public-view="linkedin" type="button">LinkedIn</button>
           </nav>
-          <nav class="menu private-view" id="private-nav">
-            <button class="active" data-private-view="pipeline" type="button">Pipeline</button>
-            <button data-private-view="memory" type="button">Memory Loop</button>
-          </nav>
         </aside>
         <section class="main">
-          <div class="public-view page active" data-page="home">
+          <div class="page active" data-page="home">
             <article class="panel hero">
               <p class="title">Home</p>
               <h2>🐺 Noah Lucas</h2>
@@ -148,16 +139,15 @@
               </div>
             </article>
           </div>
-          <div class="public-view page" data-page="bio">
+          <div class="page" data-page="bio">
             <article class="panel">
               <p class="title">Bio</p>
               <p>Noah Lucas is a product leader and entrepreneur currently serving as VP of Product at Sift. Raised in the Midwest, educated in New York, and now building in California, he brings a cross-disciplinary operating style shaped by company-building, platform strategy, and real-world execution. He lives in Ojai with Sara, Willa, and Bruce.</p>
             </article>
           </div>
-          <div class="public-view page" data-page="career">
+          <div class="page" data-page="career">
             <article class="panel">
               <p class="title">Career Roles</p>
-              <p class="kicker">Current draft is populated from your live bio structure and role titles; next pass will enrich with resume/job-description specifics.</p>
               <div class="role-grid">
                 <article class="panel card">
                   <div class="role-meta">
@@ -165,11 +155,12 @@
                     <a href="https://www.siftstack.com" target="_blank" rel="noopener">siftstack.com</a>
                   </div>
                   <p class="kicker">Build the product intelligence layer that makes hardware telemetry observable, interpretable, and actionable for aerospace, defense, and robotics teams.</p>
-                  <ul class="list">
-                    <li>Drive product velocity: ship ABAC, Canvas MVP, and E2 GA while improving execution quality.</li>
-                    <li>Translate customer signals (Lockheed, Astranis, Varda, K2) into concrete product decisions.</li>
-                    <li>Own strategy framework: Signal -> Evidence -> Decision across product bets and roadmap.</li>
-                  </ul>
+                  <div class="jtbd">
+                    <div class="jtbd-item"><strong>Drive product velocity</strong><span>Ship ABAC, Canvas, and E2 priorities on cadence while improving quality and predictability.</span></div>
+                    <div class="jtbd-item"><strong>Be the customer bridge</strong><span>Translate strategic account signals into clear product bets and roadmap sequencing.</span></div>
+                    <div class="jtbd-item"><strong>Own the strategy</strong><span>Run Signal -> Evidence -> Decision as an operating system for portfolio-level prioritization.</span></div>
+                    <div class="jtbd-item"><strong>Scale team leverage</strong><span>Coach PMs, align with founders and engineering leaders, and increase decision velocity.</span></div>
+                  </div>
                 </article>
                 <article class="panel card">
                   <div class="role-meta">
@@ -177,11 +168,12 @@
                     <a href="https://www.anduril.com" target="_blank" rel="noopener">anduril.com</a>
                   </div>
                   <p class="kicker">Led platform-level product work for high-stakes defense software and operational systems.</p>
-                  <ul class="list">
-                    <li>Connected mission outcomes to product roadmaps under operational constraints.</li>
-                    <li>Partnered tightly with engineering and operators on reliability, speed, and clarity.</li>
-                    <li>Scaled decision-making across technical and cross-functional stakeholders.</li>
-                  </ul>
+                  <div class="jtbd">
+                    <div class="jtbd-item"><strong>Operationalize mission constraints</strong><span>Convert real-world defense requirements into product specs, milestones, and launch criteria.</span></div>
+                    <div class="jtbd-item"><strong>Ship under high stakes</strong><span>Balance speed, reliability, and safety across platform releases and cross-functional dependencies.</span></div>
+                    <div class="jtbd-item"><strong>Unify operators and builders</strong><span>Create a common language between field users, engineering teams, and executive stakeholders.</span></div>
+                    <div class="jtbd-item"><strong>Improve decision quality</strong><span>Prioritize based on mission impact, technical risk, and deployment readiness.</span></div>
+                  </div>
                 </article>
                 <article class="panel card">
                   <div class="role-meta">
@@ -189,11 +181,12 @@
                     <a href="https://www.pendulum.global" target="_blank" rel="noopener">pendulum.global</a>
                   </div>
                   <p class="kicker">Focused on applied AI systems for defense-adjacent contexts where trust, speed, and interpretability matter.</p>
-                  <ul class="list">
-                    <li>Translated AI capability into practical operator workflows.</li>
-                    <li>Balanced research ambition with deployment realities.</li>
-                    <li>Shaped product direction through rapid experimentation and field context.</li>
-                  </ul>
+                  <div class="jtbd">
+                    <div class="jtbd-item"><strong>Make AI operational</strong><span>Translate model capability into operator-ready workflows with clear human oversight.</span></div>
+                    <div class="jtbd-item"><strong>Bridge research and product</strong><span>Turn experiments into deployable features with measurable performance criteria.</span></div>
+                    <div class="jtbd-item"><strong>Raise trust and interpretability</strong><span>Design outputs and decision support flows that users can audit and act on confidently.</span></div>
+                    <div class="jtbd-item"><strong>Accelerate iteration loops</strong><span>Use field feedback to refine data pipelines, prompts, and UX rapidly.</span></div>
+                  </div>
                 </article>
                 <article class="panel card">
                   <div class="role-meta">
@@ -201,11 +194,12 @@
                     <a href="https://www.serverobotics.com" target="_blank" rel="noopener">serverobotics.com</a>
                   </div>
                   <p class="kicker">Owned product direction for autonomous delivery systems spanning software, operations, and customer experience.</p>
-                  <ul class="list">
-                    <li>Unified hardware, autonomy, and fleet operations into coherent product loops.</li>
-                    <li>Drove roadmap decisions tied to reliability and delivery outcomes.</li>
-                    <li>Built cross-functional execution cadence across product, eng, and ops teams.</li>
-                  </ul>
+                  <div class="jtbd">
+                    <div class="jtbd-item"><strong>Unify robotics + operations</strong><span>Connect autonomy, fleet tooling, and logistics workflows into one delivery system.</span></div>
+                    <div class="jtbd-item"><strong>Increase reliability at scale</strong><span>Prioritize roadmap work that improves uptime, completion rate, and operational consistency.</span></div>
+                    <div class="jtbd-item"><strong>Coordinate cross-functional execution</strong><span>Align product, engineering, and operations around weekly delivery targets.</span></div>
+                    <div class="jtbd-item"><strong>Balance growth and control</strong><span>Support market expansion while preserving quality and service economics.</span></div>
+                  </div>
                 </article>
                 <article class="panel card">
                   <div class="role-meta">
@@ -213,53 +207,32 @@
                     <a href="https://postmates.com" target="_blank" rel="noopener">postmates.com</a>
                   </div>
                   <p class="kicker">Led product initiatives at marketplace scale, improving customer value while balancing courier, merchant, and platform needs.</p>
-                  <ul class="list">
-                    <li>Built and shipped product bets across consumer and logistics surfaces.</li>
-                    <li>Used data and experimentation to prioritize impact and reduce execution risk.</li>
-                    <li>Aligned teams around clear outcomes in fast-moving operating environments.</li>
-                  </ul>
+                  <div class="jtbd">
+                    <div class="jtbd-item"><strong>Optimize a three-sided marketplace</strong><span>Balance customer experience, courier efficiency, and merchant outcomes in one product system.</span></div>
+                    <div class="jtbd-item"><strong>Drive growth with discipline</strong><span>Use experiments and funnel insights to improve conversion, retention, and order quality.</span></div>
+                    <div class="jtbd-item"><strong>Improve logistics UX</strong><span>Reduce friction in dispatch, tracking, and fulfillment across mobile and ops surfaces.</span></div>
+                    <div class="jtbd-item"><strong>Align fast-moving teams</strong><span>Create clarity across engineering, operations, and business stakeholders for high-tempo execution.</span></div>
+                  </div>
                 </article>
               </div>
             </article>
           </div>
-          <div class="public-view page" data-page="notes">
+          <div class="page" data-page="notes">
             <article class="panel">
               <p class="title">Notes</p>
               <p>Published notes and essays.</p>
             </article>
           </div>
-          <div class="public-view page" data-page="holocron">
+          <div class="page" data-page="holocron">
             <article class="panel">
               <p class="title">Holocron</p>
               <p>Living archive.</p>
             </article>
           </div>
-          <div class="public-view page" data-page="linkedin">
+          <div class="page" data-page="linkedin">
             <article class="panel">
               <p class="title">LinkedIn</p>
               <p>External profile link and public career history.</p>
-            </article>
-          </div>
-
-          <div class="private-view page active" data-page="pipeline">
-            <article class="panel">
-              <p class="title">Private Pipeline</p>
-              <ul class="list">
-                <li>Chief-of-staff runs produce draft direction and tasks.</li>
-                <li>Notes pipeline generates and stores draft artifacts.</li>
-                <li>Autobiographer loop captures private memory events.</li>
-                <li>Only approved outputs are promoted to public site.</li>
-              </ul>
-            </article>
-          </div>
-          <div class="private-view page" data-page="memory">
-            <article class="panel">
-              <p class="title">Memory Loop</p>
-              <ul class="list">
-                <li>2026 chapter draft: in progress</li>
-                <li>Events ingested this week: 23</li>
-                <li>Tagged themes: leadership, product bets, founder energy</li>
-              </ul>
             </article>
           </div>
         </section>
@@ -267,40 +240,17 @@
     </main>
     <script>
       const app = document.getElementById("app");
-      const publicBtn = document.getElementById("view-public");
-      const privateBtn = document.getElementById("view-private");
       const publicNav = document.getElementById("public-nav");
-      const privateNav = document.getElementById("private-nav");
       document.getElementById("stamp").textContent = `updated ${new Date().toLocaleString()}`;
-
-      function setMode(mode) {
-        if (!app || !publicBtn || !privateBtn) return;
-        const isPrivate = mode === "private";
-        app.classList.toggle("mode-private", isPrivate);
-        publicBtn.classList.toggle("active", !isPrivate);
-        privateBtn.classList.toggle("active", isPrivate);
-      }
       function setPublicPage(name) {
-        document.querySelectorAll('.public-view.page').forEach((el) => el.classList.toggle('active', el.dataset.page === name));
+        document.querySelectorAll('.page').forEach((el) => el.classList.toggle('active', el.dataset.page === name));
         publicNav?.querySelectorAll('button').forEach((btn) => btn.classList.toggle('active', btn.dataset.publicView === name));
       }
-      function setPrivatePage(name) {
-        document.querySelectorAll('.private-view.page').forEach((el) => el.classList.toggle('active', el.dataset.page === name));
-        privateNav?.querySelectorAll('button').forEach((btn) => btn.classList.toggle('active', btn.dataset.privateView === name));
-      }
-      publicBtn?.addEventListener("click", () => setMode("public"));
-      privateBtn?.addEventListener("click", () => setMode("private"));
       publicNav?.addEventListener("click", (e) => {
         const t = e.target;
         if (t instanceof HTMLButtonElement && t.dataset.publicView) setPublicPage(t.dataset.publicView);
       });
-      privateNav?.addEventListener("click", (e) => {
-        const t = e.target;
-        if (t instanceof HTMLButtonElement && t.dataset.privateView) setPrivatePage(t.dataset.privateView);
-      });
-      setMode("public");
       setPublicPage("home");
-      setPrivatePage("pipeline");
     </script>
   </body>
 </html>
