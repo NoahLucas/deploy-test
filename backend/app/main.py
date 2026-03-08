@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -93,6 +94,24 @@ app.include_router(lab.router, prefix="/api/v1", tags=["lab"])
 app.include_router(squarespace.router, prefix="/api/v1", tags=["squarespace"])
 app.include_router(agents.router, prefix="/api/v1", tags=["agents"])
 
-site_dir = settings.project_root / "site"
-if site_dir.exists():
+def resolve_site_dir() -> Path | None:
+    """Find the frontend site directory across local/dev and Render monorepo layouts."""
+    candidates = [
+        settings.project_root / "site",
+        settings.project_root.parent / "site",
+        Path(__file__).resolve().parents[3] / "site",
+        Path(__file__).resolve().parents[2] / "site",
+    ]
+    seen: set[Path] = set()
+    for candidate in candidates:
+        if candidate in seen:
+            continue
+        seen.add(candidate)
+        if candidate.exists() and candidate.is_dir():
+            return candidate
+    return None
+
+
+site_dir = resolve_site_dir()
+if site_dir is not None:
     app.mount("/", StaticFiles(directory=str(site_dir), html=True), name="site")
