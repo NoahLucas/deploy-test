@@ -54,6 +54,60 @@ function setupReveal() {
   });
 }
 
+function renderAsciiFrame(tick) {
+  const width = 58;
+  const height = 14;
+  const lines = [];
+  const centerY = Math.floor(height / 2);
+  const centerX = Math.floor(width / 2);
+
+  for (let y = 0; y < height; y += 1) {
+    let row = "";
+    for (let x = 0; x < width; x += 1) {
+      const dx = x - centerX;
+      const dy = y - centerY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const wave = Math.sin(dist * 0.42 - tick * 0.23);
+      const sweep = Math.sin((x * 0.19) + (tick * 0.18));
+      if (Math.abs(dy) < 1 && x > 5 && x < width - 6 && sweep > 0.66) {
+        row += ">";
+      } else if (wave > 0.72) {
+        row += "#";
+      } else if (wave > 0.42) {
+        row += "*";
+      } else if (wave > 0.14) {
+        row += "+";
+      } else if (wave > -0.2) {
+        row += ".";
+      } else {
+        row += " ";
+      }
+    }
+    lines.push(row);
+  }
+
+  const label = "NOAH LUCAS // PRODUCT AS PLATFORM // LIVE SIGNAL";
+  const labelStart = Math.max(0, Math.floor((width - label.length) / 2));
+  const mid = lines[Math.max(1, centerY - 1)].split("");
+  for (let i = 0; i < label.length && labelStart + i < mid.length; i += 1) {
+    mid[labelStart + i] = label[i];
+  }
+  lines[Math.max(1, centerY - 1)] = mid.join("");
+  return lines.join("\n");
+}
+
+function setupAsciiHero() {
+  const host = document.getElementById("ascii-hero");
+  if (!host) return;
+  let tick = 0;
+  const draw = () => {
+    host.textContent = renderAsciiFrame(tick);
+    tick += 1;
+  };
+  draw();
+  setInterval(draw, 220);
+}
+
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -99,5 +153,6 @@ async function loadNotes() {
 
 setText("year", new Date().getFullYear().toString());
 setupReveal();
+setupAsciiHero();
 loadFeed();
 loadNotes();

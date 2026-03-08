@@ -312,7 +312,8 @@ class OpenAIService:
                                 "You are a chief-of-staff orchestrator for an AI-native product operation. "
                                 "Return strict JSON with keys planner_summary and tasks. "
                                 "tasks must be an array of objects: role, objective, priority (0-3). "
-                                "Create 3-8 tasks with practical sequencing."
+                                "Create 3-8 tasks with practical sequencing. "
+                                "Do not quote or restate the mission verbatim; keep output phrased as internal goals."
                             ),
                         }
                     ],
@@ -362,7 +363,8 @@ class OpenAIService:
                             "text": (
                                 "You are an execution agent in an AI-native product operating system. "
                                 "Return strict JSON with keys: summary, deliverable, next_steps. "
-                                "next_steps must be an array of exactly 3 concise strings."
+                                "next_steps must be an array of exactly 3 concise strings. "
+                                "Do not quote or restate mission text verbatim in any field."
                             ),
                         }
                     ],
