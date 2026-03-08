@@ -45,6 +45,10 @@
       .card h3 { margin: 0; font-size: 0.88rem; }
       .card p { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
       .list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.79rem; line-height: 1.35; }
+      .role-grid { display: grid; grid-template-columns: 1fr; gap: 0.55rem; }
+      .role-meta { display: flex; justify-content: space-between; align-items: baseline; gap: 0.6rem; }
+      .role-meta a { color: var(--ink); text-decoration: underline; font-size: 0.75rem; }
+      .kicker { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.74rem; line-height: 1.45; }
       .inline-links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.7rem; }
       .inline-links a { color: var(--ink); text-decoration: underline; font-size: 0.78rem; }
       .image-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
@@ -83,6 +87,7 @@
           <nav class="menu public-view" id="public-nav">
             <button class="active" data-public-view="home" type="button">Home</button>
             <button data-public-view="bio" type="button">Bio</button>
+            <button data-public-view="career" type="button">Career</button>
             <button data-public-view="notes" type="button">Notes</button>
             <button data-public-view="holocron" type="button">Holocron</button>
             <button data-public-view="linkedin" type="button">LinkedIn</button>
@@ -147,6 +152,74 @@
             <article class="panel">
               <p class="title">Bio</p>
               <p>Noah Lucas is a product leader and entrepreneur currently serving as VP of Product at Sift. Raised in the Midwest, educated in New York, and now building in California, he brings a cross-disciplinary operating style shaped by company-building, platform strategy, and real-world execution. He lives in Ojai with Sara, Willa, and Bruce.</p>
+            </article>
+          </div>
+          <div class="public-view page" data-page="career">
+            <article class="panel">
+              <p class="title">Career Roles</p>
+              <p class="kicker">Current draft is populated from your live bio structure and role titles; next pass will enrich with resume/job-description specifics.</p>
+              <div class="role-grid">
+                <article class="panel card">
+                  <div class="role-meta">
+                    <h3>Vice President of Product · Sift</h3>
+                    <a href="https://www.siftstack.com" target="_blank" rel="noopener">siftstack.com</a>
+                  </div>
+                  <p class="kicker">Build the product intelligence layer that makes hardware telemetry observable, interpretable, and actionable for aerospace, defense, and robotics teams.</p>
+                  <ul class="list">
+                    <li>Drive product velocity: ship ABAC, Canvas MVP, and E2 GA while improving execution quality.</li>
+                    <li>Translate customer signals (Lockheed, Astranis, Varda, K2) into concrete product decisions.</li>
+                    <li>Own strategy framework: Signal -> Evidence -> Decision across product bets and roadmap.</li>
+                  </ul>
+                </article>
+                <article class="panel card">
+                  <div class="role-meta">
+                    <h3>Principal Product Manager · Anduril Industries</h3>
+                    <a href="https://www.anduril.com" target="_blank" rel="noopener">anduril.com</a>
+                  </div>
+                  <p class="kicker">Led platform-level product work for high-stakes defense software and operational systems.</p>
+                  <ul class="list">
+                    <li>Connected mission outcomes to product roadmaps under operational constraints.</li>
+                    <li>Partnered tightly with engineering and operators on reliability, speed, and clarity.</li>
+                    <li>Scaled decision-making across technical and cross-functional stakeholders.</li>
+                  </ul>
+                </article>
+                <article class="panel card">
+                  <div class="role-meta">
+                    <h3>Applied AI Research · Pendulum Navigate</h3>
+                    <a href="https://www.pendulum.global" target="_blank" rel="noopener">pendulum.global</a>
+                  </div>
+                  <p class="kicker">Focused on applied AI systems for defense-adjacent contexts where trust, speed, and interpretability matter.</p>
+                  <ul class="list">
+                    <li>Translated AI capability into practical operator workflows.</li>
+                    <li>Balanced research ambition with deployment realities.</li>
+                    <li>Shaped product direction through rapid experimentation and field context.</li>
+                  </ul>
+                </article>
+                <article class="panel card">
+                  <div class="role-meta">
+                    <h3>Director of Product · Serve Robotics</h3>
+                    <a href="https://www.serverobotics.com" target="_blank" rel="noopener">serverobotics.com</a>
+                  </div>
+                  <p class="kicker">Owned product direction for autonomous delivery systems spanning software, operations, and customer experience.</p>
+                  <ul class="list">
+                    <li>Unified hardware, autonomy, and fleet operations into coherent product loops.</li>
+                    <li>Drove roadmap decisions tied to reliability and delivery outcomes.</li>
+                    <li>Built cross-functional execution cadence across product, eng, and ops teams.</li>
+                  </ul>
+                </article>
+                <article class="panel card">
+                  <div class="role-meta">
+                    <h3>Product Lead · Postmates</h3>
+                    <a href="https://postmates.com" target="_blank" rel="noopener">postmates.com</a>
+                  </div>
+                  <p class="kicker">Led product initiatives at marketplace scale, improving customer value while balancing courier, merchant, and platform needs.</p>
+                  <ul class="list">
+                    <li>Built and shipped product bets across consumer and logistics surfaces.</li>
+                    <li>Used data and experimentation to prioritize impact and reduce execution risk.</li>
+                    <li>Aligned teams around clear outcomes in fast-moving operating environments.</li>
+                  </ul>
+                </article>
+              </div>
             </article>
           </div>
           <div class="public-view page" data-page="notes">
