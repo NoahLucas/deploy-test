@@ -150,6 +150,51 @@ async function refreshAgentRuns() {
   }
 }
 
+async function executeLatestRun() {
+  try {
+    const runs = await call("/api/v1/agents/runs", "GET", null);
+    const latest = (runs.items || [])[0];
+    if (!latest) {
+      output({ error: "No runs available to execute." });
+      return;
+    }
+    const executed = await call(`/api/v1/agents/runs/${latest.id}/execute`, "POST", {});
+    output(executed);
+    await refreshAgentRuns();
+  } catch (err) {
+    output({ error: String(err) });
+  }
+}
+
+async function runNotesPipeline() {
+  const host = $("notes-pipeline-output");
+  if (!host) return;
+  const context = $("notes-context")?.value?.trim() || "";
+  const count = Number($("notes-count")?.value || 5);
+  const draftIndex = Number($("notes-index")?.value || 0);
+  const targetWords = Number($("notes-words")?.value || 1000);
+  const saveToDisk = Boolean($("notes-save")?.checked);
+
+  if (context.length < 8) {
+    host.textContent = JSON.stringify({ error: "Context must be at least 8 characters." }, null, 2);
+    return;
+  }
+
+  try {
+    const data = await call("/api/v1/openai/notes/pipeline", "POST", {
+      context,
+      count,
+      draft_idea_index: draftIndex,
+      target_words: targetWords,
+      save_to_disk: saveToDisk
+    });
+    host.textContent = JSON.stringify(data, null, 2);
+    output({ notes_pipeline: "completed", title: data?.draft?.title || "draft ready" });
+  } catch (err) {
+    host.textContent = JSON.stringify({ error: String(err) }, null, 2);
+  }
+}
+
 const adminTokenInput = $("admin-token");
 if (adminTokenInput) {
   adminTokenInput.value = token();
@@ -159,7 +204,9 @@ $("connect-apple")?.addEventListener("click", connectApple);
 $("connect-openai")?.addEventListener("click", connectOpenAI);
 $("refresh-toggles")?.addEventListener("click", refreshToggles);
 $("dispatch-chief")?.addEventListener("click", dispatchChief);
+$("execute-latest-run")?.addEventListener("click", executeLatestRun);
 $("refresh-agent-runs")?.addEventListener("click", refreshAgentRuns);
+$("run-notes-pipeline")?.addEventListener("click", runNotesPipeline);
 
 refreshToggles();
 refreshAgentRuns();

@@ -115,6 +115,12 @@ Open:
 - `POST /api/v1/agents/tasks/{task_id}`
   - Requires `X-Admin-Token`
   - Updates task status/output and auto-closes run when all tasks complete.
+- `POST /api/v1/agents/runs/{run_id}/execute`
+  - Requires `X-Admin-Token`
+  - Executes queued/draft tasks server-side and persists outputs.
+- `GET /api/v1/lab/weekly-snapshot`
+  - Requires `X-Admin-Token`
+  - Returns 7-day execution + content + signal snapshot for operator review.
 
 ## Security posture
 

@@ -18,6 +18,7 @@ MANAGED_ENDPOINTS: Dict[str, str] = {
     "/api/v1/openai/notes/pipeline": "openai",
     "/api/v1/lab/daily-brief": "openai",
     "/api/v1/lab/decision-journal": "openai",
+    "/api/v1/lab/weekly-snapshot": "openai",
     "/api/v1/agents/chief/dispatch": "openai",
     "/api/v1/agents/runs": "openai",
 }

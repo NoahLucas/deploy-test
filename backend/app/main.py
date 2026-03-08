@@ -13,6 +13,7 @@ from app.core.storage import SignalStore
 from app.routes import admin, agents, apple, ingest, lab, openai, public, squarespace
 from app.services.apple_attest_service import AppleAppAttestService
 from app.services.apple_identity_service import AppleIdentityService
+from app.services.agent_executor_service import AgentExecutorService
 from app.services.chief_of_staff_service import ChiefOfStaffService
 from app.services.openai_service import OpenAIService
 
@@ -22,6 +23,7 @@ openai_service = OpenAIService(settings)
 apple_identity_service = AppleIdentityService(settings)
 apple_app_attest_service = AppleAppAttestService(settings)
 chief_service = ChiefOfStaffService()
+agent_executor_service = AgentExecutorService()
 
 app = FastAPI(
     title="Noah Lucas Signal Stack",
@@ -35,6 +37,7 @@ app.state.openai_service = openai_service
 app.state.apple_identity_service = apple_identity_service
 app.state.apple_app_attest_service = apple_app_attest_service
 app.state.chief_service = chief_service
+app.state.agent_executor_service = agent_executor_service
 
 app.add_middleware(
     CORSMiddleware,

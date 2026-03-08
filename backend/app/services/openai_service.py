@@ -341,6 +341,63 @@ class OpenAIService:
             return None
         return parsed
 
+    def generate_agent_task_output(
+        self,
+        *,
+        mission: str,
+        role: str,
+        objective: str,
+        context: str,
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": (
+                                "You are an execution agent in an AI-native product operating system. "
+                                "Return strict JSON with keys: summary, deliverable, next_steps. "
+                                "next_steps must be an array of exactly 3 concise strings."
+                            ),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(
+                                {
+                                    "mission": mission,
+                                    "role": role,
+                                    "objective": objective,
+                                    "context": context,
+                                }
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
     @staticmethod
     def _extract_text(payload: Dict[str, Any]) -> str:
         output_text = payload.get("output_text")

@@ -561,7 +561,7 @@ class SignalStore:
         with self._connect() as conn:
             rows = conn.execute(
                 """
-                SELECT id, mission, status, planner_summary, created_at, updated_at
+                SELECT id, mission, context, status, planner_summary, created_at, updated_at
                 FROM agent_runs
                 ORDER BY updated_at DESC, id DESC
                 LIMIT ?
@@ -572,6 +572,7 @@ class SignalStore:
             {
                 "id": int(row["id"]),
                 "mission": str(row["mission"]),
+                "context": str(row["context"]),
                 "status": str(row["status"]),
                 "planner_summary": str(row["planner_summary"]),
                 "created_at": str(row["created_at"]),
@@ -584,7 +585,7 @@ class SignalStore:
         with self._connect() as conn:
             row = conn.execute(
                 """
-                SELECT id, mission, status, planner_summary, created_at, updated_at
+                SELECT id, mission, context, status, planner_summary, created_at, updated_at
                 FROM agent_runs
                 WHERE id = ?
                 """,
@@ -595,6 +596,7 @@ class SignalStore:
         return {
             "id": int(row["id"]),
             "mission": str(row["mission"]),
+            "context": str(row["context"]),
             "status": str(row["status"]),
             "planner_summary": str(row["planner_summary"]),
             "created_at": str(row["created_at"]),
@@ -626,3 +628,49 @@ class SignalStore:
             }
             for row in rows
         ]
+
+    def count_decision_journal_entries_since(self, *, since_iso: str) -> int:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT COUNT(*) AS count_value
+                FROM decision_journal
+                WHERE created_at >= ?
+                """,
+                (since_iso,),
+            ).fetchone()
+        return int(row["count_value"]) if row else 0
+
+    def count_squarespace_events_since(self, *, since_iso: str) -> int:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT COUNT(*) AS count_value
+                FROM squarespace_events
+                WHERE received_at >= ?
+                """,
+                (since_iso,),
+            ).fetchone()
+        return int(row["count_value"]) if row else 0
+
+    def count_agent_runs_since(self, *, since_iso: str, status: Optional[str] = None) -> int:
+        with self._connect() as conn:
+            if status:
+                row = conn.execute(
+                    """
+                    SELECT COUNT(*) AS count_value
+                    FROM agent_runs
+                    WHERE created_at >= ? AND status = ?
+                    """,
+                    (since_iso, status),
+                ).fetchone()
+            else:
+                row = conn.execute(
+                    """
+                    SELECT COUNT(*) AS count_value
+                    FROM agent_runs
+                    WHERE created_at >= ?
+                    """,
+                    (since_iso,),
+                ).fetchone()
+        return int(row["count_value"]) if row else 0

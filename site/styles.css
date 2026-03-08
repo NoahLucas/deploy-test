@@ -373,12 +373,17 @@ footer {
 }
 
 .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js-reveal .reveal {
   opacity: 0;
   transform: translateY(16px);
   transition: 0.55s ease;
 }
 
-.reveal.in {
+.js-reveal .reveal.in {
   opacity: 1;
   transform: translateY(0);
 }
