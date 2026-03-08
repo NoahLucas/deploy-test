@@ -57,6 +57,19 @@ class PublicNoteDetailResponse(BaseModel):
     generated_at: datetime
 
 
+class SquarespaceNoteSummary(BaseModel):
+    title: str
+    url: str
+    summary: str
+    published_at: datetime
+
+
+class SquarespaceNotesResponse(BaseModel):
+    source: str
+    updated_at: datetime
+    items: List[SquarespaceNoteSummary]
+
+
 class RealtimeSessionRequest(BaseModel):
     model: Optional[str] = None
     voice: Optional[str] = None
