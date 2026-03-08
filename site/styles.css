@@ -37,6 +37,66 @@ body.radar-theme {
   font-family: "IBM Plex Sans", sans-serif;
 }
 
+.terminal-theme {
+  --bg: #020703;
+  --paper: #b8ffbf;
+  --ink: #021503;
+  --text: #b8ffbf;
+  --muted: #72c57a;
+  --line: rgba(114, 197, 122, 0.35);
+  --accent: #8cff98;
+  --accent-2: #5ced6d;
+  --panel: rgba(4, 20, 7, 0.88);
+  font-family: "IBM Plex Mono", monospace;
+  background:
+    radial-gradient(circle at 80% 10%, rgba(44, 142, 55, 0.15), transparent 40%),
+    linear-gradient(180deg, #010401 0%, #031106 60%, #04140a 100%);
+}
+
+.terminal-theme .atmosphere {
+  opacity: 0.48;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(140, 255, 152, 0.05) 0,
+      rgba(140, 255, 152, 0.05) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+}
+
+.terminal-theme .brand,
+.terminal-theme .hero h1,
+.terminal-theme .panel h2,
+.terminal-theme .value {
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.terminal-theme .topbar,
+.terminal-theme .panel,
+.terminal-theme .signal article,
+.terminal-theme .card,
+.terminal-theme .note,
+.terminal-theme .metrics article,
+.terminal-theme .lab-tiles article {
+  border-radius: 4px;
+}
+
+.terminal-theme .btn {
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", monospace;
+}
+
+.terminal-theme .btn-solid {
+  color: #021503;
+  background: linear-gradient(180deg, #8cff98, #5ced6d);
+}
+
+.terminal-theme .ascii-hero {
+  color: #8cff98;
+  text-shadow: 0 0 8px rgba(92, 237, 109, 0.32);
+}
+
 .radar-theme .label,
 .radar-theme .eyebrow {
   font-family: "IBM Plex Mono", monospace;
