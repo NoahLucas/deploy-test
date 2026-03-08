@@ -45,6 +45,10 @@
       .card h3 { margin: 0; font-size: 0.88rem; }
       .card p { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
       .list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.79rem; line-height: 1.35; }
+      .inline-links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.7rem; }
+      .inline-links a { color: var(--ink); text-decoration: underline; font-size: 0.78rem; }
+      .image-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+      .image-strip img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--line); background: #eee; }
       .feedback-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
       .feedback-grid label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.7rem; color: var(--muted); }
       .feedback-grid textarea { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.76rem; min-height: 5rem; padding: 0.45rem; }
@@ -84,11 +88,8 @@
             <button data-public-view="linkedin" type="button">LinkedIn</button>
           </nav>
           <nav class="menu private-view" id="private-nav">
-            <button class="active" data-private-view="studio" type="button">Studio Brief</button>
-            <button data-private-view="drafts" type="button">Draft Queue</button>
-            <button data-private-view="runs" type="button">Agent Runs</button>
+            <button class="active" data-private-view="pipeline" type="button">Pipeline</button>
             <button data-private-view="memory" type="button">Memory Loop</button>
-            <button data-private-view="approvals" type="button">Publish Approvals</button>
           </nav>
         </aside>
         <section class="main">
@@ -110,7 +111,7 @@
             </article>
             <article class="panel card">
               <p class="title">Bio</p>
-              <p>Short bio and role history from NoahLucas.com.</p>
+              <p>Midwest raised, New York educated, and California building. Noah lives in Ojai with Sara, Willa, and Bruce, and leads product at Sift as VP of Product.</p>
             </article>
             <article class="panel card">
               <p class="title">Request CV</p>
@@ -118,13 +119,34 @@
             </article>
             <article class="panel card">
               <p class="title">Spotify Playlists</p>
-              <p>2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 Noah's Orbit</p>
+              <div class="inline-links">
+                <a href="https://open.spotify.com/playlist/78YOLwcGvs5gQKIrCnJrkY?si=231680b5cf5648bc" target="_blank" rel="noopener">2025</a>
+                <a href="https://open.spotify.com/playlist/1WohnY8ziS7pB08iy8o7Sj?si=36a9a84f00984b1e" target="_blank" rel="noopener">2024</a>
+                <a href="https://open.spotify.com/playlist/2hnHXL0eGraHNAk361KEFi?si=6e1659cca1a64aff" target="_blank" rel="noopener">2023</a>
+                <a href="https://open.spotify.com/playlist/6bsSR5eFTt9zJLNISThg15?si=ab427ec39f4e492e" target="_blank" rel="noopener">2022</a>
+                <a href="https://open.spotify.com/playlist/7GHkqjhqeApiY0YEJi13lr?si=84c969fb35e54de1" target="_blank" rel="noopener">2021</a>
+                <a href="https://open.spotify.com/playlist/22RINs0qakMd492v9lXJFc?si=f58e9d24093d40d6" target="_blank" rel="noopener">2020</a>
+                <a href="https://open.spotify.com/playlist/2qA4RbMSC7Uyl8oVkE8hBm?si=0feb25df4e5d411a" target="_blank" rel="noopener">2019</a>
+                <a href="https://open.spotify.com/playlist/1aPxb1bCSiJVse6CQFhUlV?si=8be1cc29a6674a43" target="_blank" rel="noopener">2018</a>
+                <a href="https://open.spotify.com/playlist/0bI5vIvejd6M37F5fjTpzI?si=d14f818491eb4ee4" target="_blank" rel="noopener">2017</a>
+                <a href="https://open.spotify.com/playlist/2OFbNwkl68v3pxpHwbIfvY?si=c350f8af95ef48b4" target="_blank" rel="noopener">2016</a>
+                <a href="https://open.spotify.com/playlist/2GroiqjSXrFkeozIggXVnV?si=6a29158c2cd848ee" target="_blank" rel="noopener">2015</a>
+                <a href="https://open.spotify.com/playlist/2uF52eBGbO4dAhzwJScWUD?si=803e9d41a98c4ea4" target="_blank" rel="noopener">Noah's Orbit</a>
+              </div>
+            </article>
+            <article class="panel card">
+              <p class="title">Imported Images</p>
+              <div class="image-strip">
+                <img src="/assets/imported/A7R05738.jpeg" alt="Noah Lucas visual 1" />
+                <img src="/assets/imported/postmates.png" alt="Noah Lucas visual 2" />
+                <img src="/assets/imported/IMG_1898.jpeg" alt="Noah Lucas visual 3" />
+              </div>
             </article>
           </div>
           <div class="public-view page" data-page="bio">
             <article class="panel">
               <p class="title">Bio</p>
-              <p>Operator profile and background narrative.</p>
+              <p>Noah Lucas is a product leader and entrepreneur currently serving as VP of Product at Sift. Raised in the Midwest, educated in New York, and now building in California, he brings a cross-disciplinary operating style shaped by company-building, platform strategy, and real-world execution. He lives in Ojai with Sara, Willa, and Bruce.</p>
             </article>
           </div>
           <div class="public-view page" data-page="notes">
@@ -146,52 +168,14 @@
             </article>
           </div>
 
-          <div class="private-view page active" data-page="studio">
+          <div class="private-view page active" data-page="pipeline">
             <article class="panel">
-              <p class="title">Studio Brief (Private)</p>
+              <p class="title">Private Pipeline</p>
               <ul class="list">
                 <li>Chief-of-staff runs produce draft direction and tasks.</li>
                 <li>Notes pipeline generates and stores draft artifacts.</li>
                 <li>Autobiographer loop captures private memory events.</li>
                 <li>Only approved outputs are promoted to public site.</li>
-              </ul>
-            </article>
-            <div class="grid3">
-              <article class="panel"><p class="title">Runs Completed</p><p class="badge">1/1</p></article>
-              <article class="panel"><p class="title">Drafts</p><p class="badge">3 pending</p></article>
-              <article class="panel"><p class="title">Approval Queue</p><p class="badge">1 ready</p></article>
-            </div>
-            <article class="panel">
-              <p class="title">Interview Feedback (Direct to Codex)</p>
-              <div class="feedback-grid">
-                <label>more<textarea id="fb-more" placeholder="What to amplify"></textarea></label>
-                <label>less<textarea id="fb-less" placeholder="What to reduce"></textarea></label>
-                <label>keep<textarea id="fb-keep" placeholder="What to keep"></textarea></label>
-              </div>
-              <div class="feedback-actions">
-                <button id="copy-feedback" type="button">Copy Feedback for Codex</button>
-                <button id="clear-feedback" type="button">Clear</button>
-                <span id="fb-status" class="badge">ready</span>
-              </div>
-            </article>
-          </div>
-          <div class="private-view page" data-page="drafts">
-            <article class="panel">
-              <p class="title">Draft Queue</p>
-              <ul class="list">
-                <li>Product as Platform systems essay — pending review</li>
-                <li>Decision Craft playbook — in edit</li>
-                <li>Founder Energy field note — approved</li>
-              </ul>
-            </article>
-          </div>
-          <div class="private-view page" data-page="runs">
-            <article class="panel">
-              <p class="title">Agent Runs</p>
-              <ul class="list">
-                <li>Run #18: completed (4 tasks)</li>
-                <li>Run #17: completed (3 tasks)</li>
-                <li>Run #16: completed (5 tasks)</li>
               </ul>
             </article>
           </div>
@@ -205,16 +189,6 @@
               </ul>
             </article>
           </div>
-          <div class="private-view page" data-page="approvals">
-            <article class="panel">
-              <p class="title">Publish Approvals</p>
-              <ul class="list">
-                <li>Approved: Founder Energy field note</li>
-                <li>Pending: Product as Platform systems essay</li>
-                <li>Rejected: Raw strategy memo (internal-only)</li>
-              </ul>
-            </article>
-          </div>
         </section>
       </section>
     </main>
@@ -224,12 +198,6 @@
       const privateBtn = document.getElementById("view-private");
       const publicNav = document.getElementById("public-nav");
       const privateNav = document.getElementById("private-nav");
-      const more = document.getElementById("fb-more");
-      const less = document.getElementById("fb-less");
-      const keep = document.getElementById("fb-keep");
-      const copyBtn = document.getElementById("copy-feedback");
-      const clearBtn = document.getElementById("clear-feedback");
-      const status = document.getElementById("fb-status");
       document.getElementById("stamp").textContent = `updated ${new Date().toLocaleString()}`;
 
       function setMode(mode) {
@@ -259,28 +227,7 @@
       });
       setMode("public");
       setPublicPage("home");
-      setPrivatePage("studio");
-
-      copyBtn?.addEventListener("click", async () => {
-        const payload = [
-          "UX feedback",
-          `more: ${(more?.value || "").trim() || "-"}`,
-          `less: ${(less?.value || "").trim() || "-"}`,
-          `keep: ${(keep?.value || "").trim() || "-"}`,
-        ].join("\n");
-        try {
-          await navigator.clipboard.writeText(payload);
-          if (status) status.textContent = "copied";
-        } catch {
-          if (status) status.textContent = "copy failed";
-        }
-      });
-      clearBtn?.addEventListener("click", () => {
-        if (more) more.value = "";
-        if (less) less.value = "";
-        if (keep) keep.value = "";
-        if (status) status.textContent = "ready";
-      });
+      setPrivatePage("pipeline");
     </script>
   </body>
 </html>
