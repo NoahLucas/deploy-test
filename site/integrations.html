@@ -7,10 +7,10 @@
     <title>Noah Lucas | Integration Control</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body class="radar-theme">
     <div class="atmosphere" aria-hidden="true"></div>
     <header class="topbar">
       <a class="brand" href="/">Noah Lucas</a>
@@ -26,6 +26,20 @@
         <p class="eyebrow">INTEGRATION CONTROL</p>
         <h1>Apple + OpenAI platform control <span>in one place.</span></h1>
         <p class="lede">Connect Apple identity, connect OpenAI runtime, and toggle endpoint activation per platform.</p>
+      </section>
+      <section class="signal reveal radar-strip" aria-label="Control status">
+        <article>
+          <p class="label">Mode</p>
+          <p class="value">Operator Console</p>
+        </article>
+        <article>
+          <p class="label">Security</p>
+          <p class="value">Admin-Scoped APIs</p>
+        </article>
+        <article>
+          <p class="label">Execution</p>
+          <p class="value">Chief + Notes Pipeline</p>
+        </article>
       </section>
 
       <section class="panel reveal">
@@ -164,6 +178,7 @@
     </main>
 
     <script src="./ui.js"></script>
+    <script src="./radar-intel.js"></script>
     <script src="./integrations.js"></script>
   </body>
 </html>

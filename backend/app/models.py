@@ -311,7 +311,6 @@ class AgentTaskItem(BaseModel):
 
 class ChiefDispatchResponse(BaseModel):
     run_id: int
-    mission: str
     status: str
     planner_summary: str
     tasks: List[AgentTaskItem]
@@ -320,7 +319,6 @@ class ChiefDispatchResponse(BaseModel):
 
 class AgentRunItem(BaseModel):
     id: int
-    mission: str
     status: str
     planner_summary: str
     created_at: datetime
@@ -361,3 +359,55 @@ class LabWeeklySnapshotResponse(BaseModel):
     signal_balance_avg: float
     signal_action_avg: float
     generated_at: datetime
+
+
+class AutobiographerMemoryEventCreateRequest(BaseModel):
+    source: str = Field(min_length=2, max_length=80)
+    title: str = Field(min_length=4, max_length=200)
+    detail: str = Field(min_length=6, max_length=8000)
+    tags: List[str] = Field(default_factory=list, max_length=20)
+    event_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+
+class AutobiographerMemoryEventItem(BaseModel):
+    id: int
+    source: str
+    title: str
+    detail: str
+    tags: List[str]
+    event_at: datetime
+    created_at: datetime
+
+
+class AutobiographerMemoryEventsResponse(BaseModel):
+    items: List[AutobiographerMemoryEventItem]
+
+
+class AutobiographerChapterGenerateRequest(BaseModel):
+    year: int = Field(ge=2000, le=2100)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        min_length=12,
+        max_length=1200,
+    )
+    include_private_context: bool = True
+
+
+class AutobiographerChapterItem(BaseModel):
+    id: int
+    year: int
+    persona_label: str
+    style_brief: str
+    summary: str
+    chapter_markdown: str
+    generated_at: datetime
+    updated_at: datetime
+
+
+class AutobiographerChapterResponse(BaseModel):
+    chapter: AutobiographerChapterItem
+
+
+class AutobiographerChaptersResponse(BaseModel):
+    items: List[AutobiographerChapterItem]

@@ -39,17 +39,17 @@ class ChiefOfStaffService:
 
         return {
             "planner_summary": (
-                "Chief of Staff initialized mission with baseline distributed plan across strategy, content, systems, and metrics."
+                "Chief of Staff initialized a baseline distributed plan across strategy, content, systems, and metrics."
             ),
             "tasks": [
                 {
                     "role": "strategy-agent",
-                    "objective": f"Decompose mission into weekly outcomes and decision gates: {mission}",
+                    "objective": "Decompose internal mission into weekly outcomes and decision gates.",
                     "priority": 3,
                 },
                 {
                     "role": "content-agent",
-                    "objective": "Generate notes backlog and one publish-ready draft aligned to current mission.",
+                    "objective": "Generate notes backlog and one publish-ready draft aligned to internal operating goals.",
                     "priority": 2,
                 },
                 {

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from typing import Any, Dict
 
 
@@ -79,7 +80,10 @@ class AgentExecutorService:
                     "Update metrics dashboard with outcome.",
                 ],
             }
-            return json.dumps(payload, indent=2)
+            return AgentExecutorService._scrub_internal_mission_text(
+                json.dumps(payload, indent=2),
+                mission=mission,
+            )
 
         fallback = {
             "summary": f"Execution completed for {role}.",
@@ -90,4 +94,19 @@ class AgentExecutorService:
                 "Track impact in weekly snapshot.",
             ],
         }
-        return json.dumps(fallback, indent=2)
+        return AgentExecutorService._scrub_internal_mission_text(
+            json.dumps(fallback, indent=2),
+            mission=mission,
+        )
+
+    @staticmethod
+    def _scrub_internal_mission_text(text: str, *, mission: str) -> str:
+        cleaned = str(text)
+        m = mission.strip()
+        if m:
+            cleaned = cleaned.replace(m, "[internal mission]")
+            try:
+                cleaned = re.sub(re.escape(m), "[internal mission]", cleaned, flags=re.IGNORECASE)
+            except Exception:
+                pass
+        return cleaned

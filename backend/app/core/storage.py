@@ -153,6 +153,39 @@ class SignalStore:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_memory_events (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    source TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    detail TEXT NOT NULL,
+                    tags_json TEXT NOT NULL,
+                    event_at TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_events_event_at
+                ON autobiographer_memory_events(event_at DESC)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_chapters (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL UNIQUE,
+                    persona_label TEXT NOT NULL,
+                    style_brief TEXT NOT NULL,
+                    summary TEXT NOT NULL,
+                    chapter_markdown TEXT NOT NULL,
+                    generated_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                )
+                """
+            )
 
     def insert_sanitized_signals(
         self,
@@ -674,3 +707,152 @@ class SignalStore:
                     (since_iso,),
                 ).fetchone()
         return int(row["count_value"]) if row else 0
+
+    def create_autobiographer_memory_event(
+        self,
+        *,
+        source: str,
+        title: str,
+        detail: str,
+        tags_json: str,
+        event_at: str,
+    ) -> int:
+        created_at = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO autobiographer_memory_events(source, title, detail, tags_json, event_at, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (source, title, detail, tags_json, event_at, created_at),
+            )
+            return int(cursor.lastrowid)
+
+    def list_autobiographer_memory_events(
+        self,
+        *,
+        limit: int = 120,
+        year: Optional[int] = None,
+    ) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 500))
+        with self._connect() as conn:
+            if year is None:
+                rows = conn.execute(
+                    """
+                    SELECT id, source, title, detail, tags_json, event_at, created_at
+                    FROM autobiographer_memory_events
+                    ORDER BY event_at DESC, id DESC
+                    LIMIT ?
+                    """,
+                    (safe_limit,),
+                ).fetchall()
+            else:
+                start = f"{year:04d}-01-01T00:00:00"
+                end = f"{year + 1:04d}-01-01T00:00:00"
+                rows = conn.execute(
+                    """
+                    SELECT id, source, title, detail, tags_json, event_at, created_at
+                    FROM autobiographer_memory_events
+                    WHERE event_at >= ? AND event_at < ?
+                    ORDER BY event_at DESC, id DESC
+                    LIMIT ?
+                    """,
+                    (start, end, safe_limit),
+                ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "source": str(row["source"]),
+                "title": str(row["title"]),
+                "detail": str(row["detail"]),
+                "tags_json": str(row["tags_json"]),
+                "event_at": str(row["event_at"]),
+                "created_at": str(row["created_at"]),
+            }
+            for row in rows
+        ]
+
+    def upsert_autobiographer_chapter(
+        self,
+        *,
+        year: int,
+        persona_label: str,
+        style_brief: str,
+        summary: str,
+        chapter_markdown: str,
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO autobiographer_chapters(
+                    year, persona_label, style_brief, summary, chapter_markdown, generated_at, updated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(year) DO UPDATE SET
+                    persona_label = excluded.persona_label,
+                    style_brief = excluded.style_brief,
+                    summary = excluded.summary,
+                    chapter_markdown = excluded.chapter_markdown,
+                    updated_at = excluded.updated_at
+                """,
+                (year, persona_label, style_brief, summary, chapter_markdown, now, now),
+            )
+            row = conn.execute(
+                """
+                SELECT id
+                FROM autobiographer_chapters
+                WHERE year = ?
+                """,
+                (year,),
+            ).fetchone()
+            return int(row["id"]) if row else 0
+
+    def get_autobiographer_chapter_by_year(self, *, year: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, year, persona_label, style_brief, summary, chapter_markdown, generated_at, updated_at
+                FROM autobiographer_chapters
+                WHERE year = ?
+                """,
+                (year,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "year": int(row["year"]),
+            "persona_label": str(row["persona_label"]),
+            "style_brief": str(row["style_brief"]),
+            "summary": str(row["summary"]),
+            "chapter_markdown": str(row["chapter_markdown"]),
+            "generated_at": str(row["generated_at"]),
+            "updated_at": str(row["updated_at"]),
+        }
+
+    def list_autobiographer_chapters(self, *, limit: int = 20) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 100))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, year, persona_label, style_brief, summary, chapter_markdown, generated_at, updated_at
+                FROM autobiographer_chapters
+                ORDER BY year DESC
+                LIMIT ?
+                """,
+                (safe_limit,),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "year": int(row["year"]),
+                "persona_label": str(row["persona_label"]),
+                "style_brief": str(row["style_brief"]),
+                "summary": str(row["summary"]),
+                "chapter_markdown": str(row["chapter_markdown"]),
+                "generated_at": str(row["generated_at"]),
+                "updated_at": str(row["updated_at"]),
+            }
+            for row in rows
+        ]

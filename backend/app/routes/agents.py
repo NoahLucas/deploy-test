@@ -19,6 +19,15 @@ from app.routes.deps import require_admin
 router = APIRouter()
 
 
+def _redact_internal_text(text: str, *, mission: str, context: str) -> str:
+    output = str(text or "")
+    for raw in (mission, context):
+        secret = str(raw or "").strip()
+        if secret:
+            output = output.replace(secret, "[internal strategy]")
+    return output
+
+
 def _to_task_item(row: dict) -> AgentTaskItem:
     return AgentTaskItem(
         id=row["id"],
@@ -43,6 +52,11 @@ def dispatch_chief(payload: ChiefDispatchRequest, request: Request) -> ChiefDisp
         requested_tasks=payload.tasks,
         openai_service=request.app.state.openai_service,
     )
+    planner_summary = _redact_internal_text(
+        plan["planner_summary"],
+        mission=payload.mission,
+        context=payload.context,
+    )
 
     store = request.app.state.store
     run_status = "queued" if payload.auto_execute else "awaiting_approval"
@@ -50,7 +64,7 @@ def dispatch_chief(payload: ChiefDispatchRequest, request: Request) -> ChiefDisp
         mission=payload.mission,
         context=payload.context,
         status=run_status,
-        planner_summary=plan["planner_summary"],
+        planner_summary=planner_summary,
     )
 
     created_task_ids: list[int] = []
@@ -58,7 +72,11 @@ def dispatch_chief(payload: ChiefDispatchRequest, request: Request) -> ChiefDisp
         task_id = store.add_agent_task(
             run_id=run_id,
             role=task["role"],
-            objective=task["objective"],
+            objective=_redact_internal_text(
+                task["objective"],
+                mission=payload.mission,
+                context=payload.context,
+            ),
             status="queued" if payload.auto_execute else "draft",
             priority=int(task["priority"]),
         )
@@ -84,9 +102,8 @@ def dispatch_chief(payload: ChiefDispatchRequest, request: Request) -> ChiefDisp
 
     return ChiefDispatchResponse(
         run_id=run_id,
-        mission=payload.mission,
         status=run_status,
-        planner_summary=plan["planner_summary"],
+        planner_summary=planner_summary,
         tasks=task_items,
         created_at=datetime.now(timezone.utc),
     )
@@ -100,7 +117,6 @@ def list_agent_runs(request: Request) -> AgentRunsResponse:
         items=[
             AgentRunItem(
                 id=row["id"],
-                mission=row["mission"],
                 status=row["status"],
                 planner_summary=row["planner_summary"],
                 created_at=datetime.fromisoformat(row["created_at"]),
@@ -122,7 +138,6 @@ def get_agent_run(run_id: int, request: Request) -> AgentRunDetailResponse:
     return AgentRunDetailResponse(
         run=AgentRunItem(
             id=run["id"],
-            mission=run["mission"],
             status=run["status"],
             planner_summary=run["planner_summary"],
             created_at=datetime.fromisoformat(run["created_at"]),
@@ -178,7 +193,6 @@ def execute_agent_run(run_id: int, request: Request) -> AgentRunExecuteResponse:
     return AgentRunExecuteResponse(
         run=AgentRunItem(
             id=refreshed_run["id"],
-            mission=refreshed_run["mission"],
             status=refreshed_run["status"],
             planner_summary=refreshed_run["planner_summary"],
             created_at=datetime.fromisoformat(refreshed_run["created_at"]),
