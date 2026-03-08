@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noah UX Mock | RADAR Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #020703;
+        --panel: #04140a;
+        --line: rgba(120, 255, 140, 0.28);
+        --ink: #c1ffca;
+        --muted: #77c684;
+        --accent: #8cff98;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: "IBM Plex Mono", monospace; }
+      .shell { width: min(1240px, calc(100% - 1.2rem)); margin: 0.6rem auto; border: 1px solid var(--line); background: var(--panel); }
+      .bar { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding: 0.45rem 0.65rem; color: var(--muted); font-size: 0.74rem; }
+      .grid { display: grid; grid-template-columns: 1.4fr 1fr; min-height: 88vh; }
+      .left { border-right: 1px solid var(--line); padding: 0.7rem; }
+      .right { padding: 0.7rem; display: grid; grid-template-rows: auto auto 1fr auto; gap: 0.6rem; }
+      .panel { border: 1px solid var(--line); background: rgba(3, 17, 8, 0.84); padding: 0.6rem; }
+      .title { margin: 0 0 0.5rem; font-size: 0.76rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+      #out { min-height: 20rem; max-height: 56vh; overflow: auto; font-size: 0.82rem; line-height: 1.33; }
+      #ascii { margin: 0; min-height: 12rem; white-space: pre; color: var(--accent); text-shadow: 0 0 8px rgba(140,255,152,0.25); font-size: 0.74rem; }
+      .prompt { display: grid; grid-template-columns: auto 1fr; gap: 0.55rem; align-items: center; margin-top: 0.6rem; }
+      .prompt input { width: 100%; border: 1px solid var(--line); background: #020d04; color: var(--ink); padding: 0.5rem; font-family: inherit; }
+      .chips { display: flex; gap: 0.45rem; flex-wrap: wrap; }
+      .chip { border: 1px solid var(--line); padding: 0.3rem 0.45rem; font-size: 0.72rem; color: var(--muted); }
+      .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+      .kpi .panel p { margin: 0.2rem 0 0; font-size: 0.9rem; color: var(--accent); }
+      .list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
+      .cta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+      .cta button { border: 1px solid var(--line); background: #05200d; color: var(--accent); padding: 0.42rem 0.62rem; font-family: inherit; cursor: pointer; }
+      @media (max-width: 980px) { .grid { grid-template-columns: 1fr; } .left { border-right: 0; border-bottom: 1px solid var(--line);} }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <div class="bar">
+        <span>RADAR MODE // UX MOCK</span>
+        <span id="clock">--:--:--</span>
+      </div>
+      <section class="grid">
+        <section class="left">
+          <div class="panel">
+            <p class="title">Signal Surface</p>
+            <pre id="ascii"></pre>
+          </div>
+          <div class="panel" style="margin-top:0.6rem;">
+            <p class="title">Command Console</p>
+            <div id="out"></div>
+            <form id="cmd" class="prompt">
+              <label>noah@radar:$</label>
+              <input id="in" placeholder="help | mission | runs | draft | open lab" />
+            </form>
+          </div>
+        </section>
+        <aside class="right">
+          <div class="panel">
+            <p class="title">Mood Board Tags</p>
+            <div class="chips">
+              <span class="chip">dense-not-chaotic</span>
+              <span class="chip">operator-calm</span>
+              <span class="chip">high-signal</span>
+              <span class="chip">terminal-poetry</span>
+            </div>
+          </div>
+          <div class="kpi">
+            <div class="panel"><p class="title">weekly runs</p><p>12</p></div>
+            <div class="panel"><p class="title">notes shipped</p><p>4</p></div>
+            <div class="panel"><p class="title">decisions</p><p>7</p></div>
+            <div class="panel"><p class="title">brand reach</p><p>+18%</p></div>
+          </div>
+          <div class="panel">
+            <p class="title">Today’s Storyline</p>
+            <ul class="list">
+              <li>Move one bold idea from draft to publication.</li>
+              <li>Codify one decision into a reusable framework.</li>
+              <li>Capture one personal memory as chapter material.</li>
+              <li>Convert one insight into a product experiment.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <p class="title">Feedback Toggles (for you)</p>
+            <div class="cta">
+              <button type="button">More Minimal</button>
+              <button type="button">More Editorial</button>
+              <button type="button">More Data-Dense</button>
+              <button type="button">More Experimental</button>
+            </div>
+          </div>
+        </aside>
+      </section>
+    </main>
+    <script>
+      const out = document.getElementById("out");
+      const cmd = document.getElementById("cmd");
+      const input = document.getElementById("in");
+      const ascii = document.getElementById("ascii");
+      const clock = document.getElementById("clock");
+      function log(t, cls) {
+        const d = document.createElement("div");
+        if (cls) d.style.color = cls;
+        d.textContent = t;
+        out.appendChild(d);
+        out.scrollTop = out.scrollHeight;
+      }
+      function run(v) {
+        const q = (v || "").trim().toLowerCase();
+        if (!q) return;
+        log("noah@radar:$ " + q, "#8cff98");
+        if (q === "help") log("commands: help, mission, runs, draft, open lab");
+        else if (q === "mission") log("internal mission registered. outputs stay private by design.");
+        else if (q === "runs") log("latest: 1 run completed, 4 tasks closed.");
+        else if (q === "draft") log("notes pipeline ready. one publishable draft in queue.");
+        else if (q === "open lab") window.location.href = "/lab.html";
+        else log("unknown command. type help.");
+      }
+      cmd.addEventListener("submit", (e) => { e.preventDefault(); run(input.value); input.value = ""; });
+      log("radar terminal online.", "#8cff98");
+      log("type help");
+      let t = 0;
+      setInterval(() => {
+        const rows = [];
+        for (let y = 0; y < 12; y++) {
+          let row = "";
+          for (let x = 0; x < 66; x++) {
+            const v = Math.sin(x * 0.2 + t * 0.22) + Math.cos(y * 0.7 - t * 0.2);
+            row += v > 1.1 ? "#" : v > 0.48 ? "*" : v > 0.05 ? "+" : v > -0.3 ? "." : " ";
+          }
+          rows.push(row);
+        }
+        const s = "NOAH // LIVING SOFTWARE // SIGNAL > NOISE";
+        const mid = rows[5].split("");
+        const start = Math.floor((66 - s.length) / 2);
+        for (let i = 0; i < s.length; i++) mid[start + i] = s[i];
+        rows[5] = mid.join("");
+        ascii.textContent = rows.join("\n");
+        t += 1;
+      }, 220);
+      setInterval(() => { clock.textContent = new Date().toLocaleTimeString(); }, 1000);
+      clock.textContent = new Date().toLocaleTimeString();
+    </script>
+  </body>
+</html>

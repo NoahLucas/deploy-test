@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Noah UX Live Preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --bg: #f2f1ee;
+        --panel: #ffffff;
+        --line: #d7d2ca;
+        --ink: #181715;
+        --muted: #68645e;
+        --accent: #2a6a3b;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: "IBM Plex Mono", monospace; }
+      .app { width: min(1260px, calc(100% - 1.2rem)); margin: 0.6rem auto; border: 1px solid var(--line); background: #f8f7f4; }
+      .top { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding: 0.45rem 0.7rem; font-size: 0.74rem; color: var(--muted); }
+      .head { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; padding: 0.7rem; border-bottom: 1px solid var(--line); }
+      .head h1 { margin: 0; font-size: 1rem; color: var(--muted); }
+      .view-toggle { display: flex; gap: 0.42rem; }
+      .view-toggle button { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.72rem; padding: 0.25rem 0.5rem; cursor: pointer; }
+      .view-toggle button.active { border-color: #b8d6be; color: var(--accent); background: #edf8ef; }
+      .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 82vh; }
+      .rail { border-right: 1px solid var(--line); background: #efeeea; padding: 0.72rem; }
+      .name { margin: 0; font-size: 1rem; }
+      .sub { margin: 0.45rem 0 1rem; color: var(--muted); font-size: 0.75rem; }
+      .menu { display: grid; gap: 0.32rem; }
+      .menu button { text-align: left; text-decoration: none; color: var(--ink); font-size: 0.77rem; border: 1px solid transparent; padding: 0.35rem 0.42rem; background: transparent; font-family: inherit; cursor: pointer; }
+      .menu button.active { border-color: var(--line); background: #fff; }
+      .main { padding: 0.72rem; }
+      .panel { border: 1px solid var(--line); background: var(--panel); padding: 0.68rem; margin-bottom: 0.58rem; }
+      .title { margin: 0 0 0.45rem; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+      .hero h2 { margin: 0; font-family: "Instrument Serif", serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400; line-height: 0.94; max-width: 14ch; }
+      .hero p { margin: 0.7rem 0 0; color: var(--muted); max-width: 70ch; line-height: 1.45; font-size: 0.86rem; }
+      .chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.7rem; }
+      .chip { border: 1px solid var(--line); background: #faf9f6; padding: 0.2rem 0.4rem; font-size: 0.68rem; color: var(--muted); }
+      .signal-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0.55rem; margin-bottom: 0.58rem; }
+      .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.55rem; }
+      .grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
+      .card h3 { margin: 0; font-size: 0.88rem; }
+      .card p { margin: 0.45rem 0 0; color: var(--muted); font-size: 0.8rem; line-height: 1.4; }
+      .list { margin: 0; padding-left: 1.1rem; color: var(--muted); font-size: 0.79rem; line-height: 1.35; }
+      .feedback-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+      .feedback-grid label { display: flex; flex-direction: column; gap: 0.3rem; font-size: 0.7rem; color: var(--muted); }
+      .feedback-grid textarea { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.76rem; min-height: 5rem; padding: 0.45rem; }
+      .feedback-actions { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 0.45rem; }
+      .feedback-actions button { border: 1px solid var(--line); background: #fff; color: var(--ink); font: inherit; font-size: 0.72rem; padding: 0.24rem 0.5rem; cursor: pointer; }
+      .badge { border: 1px solid var(--line); padding: 0.1rem 0.32rem; font-size: 0.65rem; color: var(--muted); display: inline-block; }
+      .private-view { display: none; }
+      .page { display: none; }
+      .page.active { display: block; }
+      .mode-private .public-view { display: none; }
+      .mode-private .private-view { display: block; }
+      @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } .rail { border-right: 0; border-bottom: 1px solid var(--line); } .grid2, .grid3, .feedback-grid, .signal-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main class="app mode-public" id="app">
+      <header class="top">
+        <span>UX LIVE PREVIEW // PERSONAL PORTFOLIO OUTPUT + LAB PRODUCTION VIEW</span>
+        <span id="stamp">refreshing...</span>
+      </header>
+      <div class="head">
+        <h1>NoahLucas.com Direction Review</h1>
+        <div class="view-toggle">
+          <button id="view-public" class="active" type="button">Public Portfolio View</button>
+          <button id="view-private" type="button">Private Lab Production View</button>
+        </div>
+      </div>
+      <section class="layout">
+        <aside class="rail">
+          <p class="name">🐺 Noah Lucas</p>
+          <p class="sub">Public Portfolio + Private Lab</p>
+          <nav class="menu public-view" id="public-nav">
+            <button class="active" data-public-view="home" type="button">Home</button>
+            <button data-public-view="bio" type="button">Bio</button>
+            <button data-public-view="notes" type="button">Notes</button>
+            <button data-public-view="holocron" type="button">Holocron</button>
+            <button data-public-view="linkedin" type="button">LinkedIn</button>
+          </nav>
+          <nav class="menu private-view" id="private-nav">
+            <button class="active" data-private-view="studio" type="button">Studio Brief</button>
+            <button data-private-view="drafts" type="button">Draft Queue</button>
+            <button data-private-view="runs" type="button">Agent Runs</button>
+            <button data-private-view="memory" type="button">Memory Loop</button>
+            <button data-private-view="approvals" type="button">Publish Approvals</button>
+          </nav>
+        </aside>
+        <section class="main">
+          <div class="public-view page active" data-page="home">
+            <article class="panel hero">
+              <p class="title">Home</p>
+              <h2>🐺 Noah Lucas</h2>
+              <p>Public portfolio surface.</p>
+            </article>
+            <article class="panel card">
+              <p class="title">Career</p>
+              <ul class="list">
+                <li>Sift</li>
+                <li>Anduril</li>
+                <li>Pendulum</li>
+                <li>Serve</li>
+                <li>Postmates</li>
+              </ul>
+            </article>
+            <article class="panel card">
+              <p class="title">Bio</p>
+              <p>Short bio and role history from NoahLucas.com.</p>
+            </article>
+            <article class="panel card">
+              <p class="title">Request CV</p>
+              <p>Request full CV.</p>
+            </article>
+            <article class="panel card">
+              <p class="title">Spotify Playlists</p>
+              <p>2025 2024 2023 2022 2021 2020 2019 2018 2017 2016 2015 Noah's Orbit</p>
+            </article>
+          </div>
+          <div class="public-view page" data-page="bio">
+            <article class="panel">
+              <p class="title">Bio</p>
+              <p>Operator profile and background narrative.</p>
+            </article>
+          </div>
+          <div class="public-view page" data-page="notes">
+            <article class="panel">
+              <p class="title">Notes</p>
+              <p>Published notes and essays.</p>
+            </article>
+          </div>
+          <div class="public-view page" data-page="holocron">
+            <article class="panel">
+              <p class="title">Holocron</p>
+              <p>Living archive.</p>
+            </article>
+          </div>
+          <div class="public-view page" data-page="linkedin">
+            <article class="panel">
+              <p class="title">LinkedIn</p>
+              <p>External profile link and public career history.</p>
+            </article>
+          </div>
+
+          <div class="private-view page active" data-page="studio">
+            <article class="panel">
+              <p class="title">Studio Brief (Private)</p>
+              <ul class="list">
+                <li>Chief-of-staff runs produce draft direction and tasks.</li>
+                <li>Notes pipeline generates and stores draft artifacts.</li>
+                <li>Autobiographer loop captures private memory events.</li>
+                <li>Only approved outputs are promoted to public site.</li>
+              </ul>
+            </article>
+            <div class="grid3">
+              <article class="panel"><p class="title">Runs Completed</p><p class="badge">1/1</p></article>
+              <article class="panel"><p class="title">Drafts</p><p class="badge">3 pending</p></article>
+              <article class="panel"><p class="title">Approval Queue</p><p class="badge">1 ready</p></article>
+            </div>
+            <article class="panel">
+              <p class="title">Interview Feedback (Direct to Codex)</p>
+              <div class="feedback-grid">
+                <label>more<textarea id="fb-more" placeholder="What to amplify"></textarea></label>
+                <label>less<textarea id="fb-less" placeholder="What to reduce"></textarea></label>
+                <label>keep<textarea id="fb-keep" placeholder="What to keep"></textarea></label>
+              </div>
+              <div class="feedback-actions">
+                <button id="copy-feedback" type="button">Copy Feedback for Codex</button>
+                <button id="clear-feedback" type="button">Clear</button>
+                <span id="fb-status" class="badge">ready</span>
+              </div>
+            </article>
+          </div>
+          <div class="private-view page" data-page="drafts">
+            <article class="panel">
+              <p class="title">Draft Queue</p>
+              <ul class="list">
+                <li>Product as Platform systems essay — pending review</li>
+                <li>Decision Craft playbook — in edit</li>
+                <li>Founder Energy field note — approved</li>
+              </ul>
+            </article>
+          </div>
+          <div class="private-view page" data-page="runs">
+            <article class="panel">
+              <p class="title">Agent Runs</p>
+              <ul class="list">
+                <li>Run #18: completed (4 tasks)</li>
+                <li>Run #17: completed (3 tasks)</li>
+                <li>Run #16: completed (5 tasks)</li>
+              </ul>
+            </article>
+          </div>
+          <div class="private-view page" data-page="memory">
+            <article class="panel">
+              <p class="title">Memory Loop</p>
+              <ul class="list">
+                <li>2026 chapter draft: in progress</li>
+                <li>Events ingested this week: 23</li>
+                <li>Tagged themes: leadership, product bets, founder energy</li>
+              </ul>
+            </article>
+          </div>
+          <div class="private-view page" data-page="approvals">
+            <article class="panel">
+              <p class="title">Publish Approvals</p>
+              <ul class="list">
+                <li>Approved: Founder Energy field note</li>
+                <li>Pending: Product as Platform systems essay</li>
+                <li>Rejected: Raw strategy memo (internal-only)</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script>
+      const app = document.getElementById("app");
+      const publicBtn = document.getElementById("view-public");
+      const privateBtn = document.getElementById("view-private");
+      const publicNav = document.getElementById("public-nav");
+      const privateNav = document.getElementById("private-nav");
+      const more = document.getElementById("fb-more");
+      const less = document.getElementById("fb-less");
+      const keep = document.getElementById("fb-keep");
+      const copyBtn = document.getElementById("copy-feedback");
+      const clearBtn = document.getElementById("clear-feedback");
+      const status = document.getElementById("fb-status");
+      document.getElementById("stamp").textContent = `updated ${new Date().toLocaleString()}`;
+
+      function setMode(mode) {
+        if (!app || !publicBtn || !privateBtn) return;
+        const isPrivate = mode === "private";
+        app.classList.toggle("mode-private", isPrivate);
+        publicBtn.classList.toggle("active", !isPrivate);
+        privateBtn.classList.toggle("active", isPrivate);
+      }
+      function setPublicPage(name) {
+        document.querySelectorAll('.public-view.page').forEach((el) => el.classList.toggle('active', el.dataset.page === name));
+        publicNav?.querySelectorAll('button').forEach((btn) => btn.classList.toggle('active', btn.dataset.publicView === name));
+      }
+      function setPrivatePage(name) {
+        document.querySelectorAll('.private-view.page').forEach((el) => el.classList.toggle('active', el.dataset.page === name));
+        privateNav?.querySelectorAll('button').forEach((btn) => btn.classList.toggle('active', btn.dataset.privateView === name));
+      }
+      publicBtn?.addEventListener("click", () => setMode("public"));
+      privateBtn?.addEventListener("click", () => setMode("private"));
+      publicNav?.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t instanceof HTMLButtonElement && t.dataset.publicView) setPublicPage(t.dataset.publicView);
+      });
+      privateNav?.addEventListener("click", (e) => {
+        const t = e.target;
+        if (t instanceof HTMLButtonElement && t.dataset.privateView) setPrivatePage(t.dataset.privateView);
+      });
+      setMode("public");
+      setPublicPage("home");
+      setPrivatePage("studio");
+
+      copyBtn?.addEventListener("click", async () => {
+        const payload = [
+          "UX feedback",
+          `more: ${(more?.value || "").trim() || "-"}`,
+          `less: ${(less?.value || "").trim() || "-"}`,
+          `keep: ${(keep?.value || "").trim() || "-"}`,
+        ].join("\n");
+        try {
+          await navigator.clipboard.writeText(payload);
+          if (status) status.textContent = "copied";
+        } catch {
+          if (status) status.textContent = "copy failed";
+        }
+      });
+      clearBtn?.addEventListener("click", () => {
+        if (more) more.value = "";
+        if (less) less.value = "";
+        if (keep) keep.value = "";
+        if (status) status.textContent = "ready";
+      });
+    </script>
+  </body>
+</html>
