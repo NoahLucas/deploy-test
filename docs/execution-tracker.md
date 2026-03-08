@@ -31,17 +31,18 @@
 - [x] Refactor backend routes into modular domain files with shared deps/errors
 - [x] Build Squarespace webhook ingest + event visibility scaffold
 - [x] Build native app Control Center v1 (iOS tab + backend operations)
-- [ ] Configure staging subdomain in Squarespace
-- [ ] Configure private lab subdomain + access control
+- [x] Configure staging subdomain in Squarespace
+- [x] Configure private lab subdomain + access control
 - [ ] Implement v1 design system on staging
 - [ ] Build Home v1
 - [x] Build Notes template v1 (local stubs + API hooks)
 - [x] Build Work/About/Contact v1 (local stubs)
 - [x] Implement AI-native content engine backend foundation (phase B)
 - [x] Implement Apple relay context hardening foundation (phase C)
-- [ ] Implement AI-native content engine UI/workflow integration (phase B)
+- [x] Implement AI-native content engine UI/workflow integration (phase B: integrations notes pipeline controls)
 - [ ] Implement personal signal intelligence production hardening (phase C)
 - [x] Implement agentic workflow foundation (phase D: chief dispatch, run/task ledger, status controls)
+- [x] Implement agentic workflow execution foundation (phase D: server-side run execution + task outputs)
 - [ ] Implement Squarespace webhook event handlers and content sync actions
 - [ ] Expand native app to Apple auth + App Attest + notes pipeline
 - [ ] QA + SEO + analytics validation
@@ -49,7 +50,7 @@
 
 ## Blockers
 
-- Squarespace account-level configuration access required for subdomains and access controls.
+- None critical; staging domains verified and cert issuance in progress/active.
 
 ## Next 3 actions
 

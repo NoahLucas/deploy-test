@@ -134,6 +134,24 @@ function bindDecisionJournal() {
   refresh.addEventListener("click", load);
 }
 
+function bindWeeklySnapshot() {
+  const refresh = $("refresh-weekly");
+  const output = $("weekly-output");
+  if (!refresh || !output) return;
+
+  const load = async () => {
+    try {
+      const data = await getJson("/api/v1/lab/weekly-snapshot", true);
+      pretty(output, data);
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  };
+
+  refresh.addEventListener("click", load);
+  load();
+}
+
 function bindAppleTools() {
   const verifyIdentityBtn = $("verify-identity");
   const challengeBtn = $("attest-challenge");
@@ -187,5 +205,6 @@ function bindAppleTools() {
 
 bindToken();
 bindDailyBrief();
+bindWeeklySnapshot();
 bindDecisionJournal();
 bindAppleTools();

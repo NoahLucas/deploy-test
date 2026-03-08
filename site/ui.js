@@ -6,6 +6,7 @@ function setYear() {
 function setupReveal() {
   const nodes = Array.from(document.querySelectorAll(".reveal"));
   if (!nodes.length || !("IntersectionObserver" in window)) return;
+  document.documentElement.classList.add("js-reveal");
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add("in");

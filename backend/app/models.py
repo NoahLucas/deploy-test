@@ -339,3 +339,25 @@ class AgentRunDetailResponse(BaseModel):
 class AgentTaskUpdateRequest(BaseModel):
     status: str = Field(min_length=3, max_length=24)
     output: str = Field(default="", max_length=16000)
+
+
+class AgentRunExecuteResponse(BaseModel):
+    run: AgentRunItem
+    tasks: List[AgentTaskItem]
+    executed_tasks: int
+    mode: str
+
+
+class LabWeeklySnapshotResponse(BaseModel):
+    window_days: int
+    summary: str
+    notes_drafts_generated: int
+    decision_entries_created: int
+    squarespace_events_received: int
+    agent_runs_created: int
+    agent_runs_completed: int
+    signal_recovery_avg: float
+    signal_focus_avg: float
+    signal_balance_avg: float
+    signal_action_avg: float
+    generated_at: datetime

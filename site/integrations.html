@@ -108,9 +108,41 @@
           <button id="dispatch-chief" class="btn btn-solid" type="button">Dispatch Mission</button>
         </div>
         <div class="actions">
+          <button id="execute-latest-run" class="btn btn-solid" type="button">Execute Latest Run</button>
           <button id="refresh-agent-runs" class="btn btn-ghost" type="button">Refresh Runs</button>
         </div>
         <pre id="agent-runs-output" class="codebox">No runs loaded.</pre>
+      </section>
+
+      <section class="panel reveal">
+        <div class="panel-head">
+          <h2>Notes Pipeline</h2>
+          <p>Idea to draft generation and save</p>
+        </div>
+        <div class="lab-form-grid">
+          <label class="full">
+            <span class="label">Context</span>
+            <textarea id="notes-context" rows="4" placeholder="What themes should this week's notes cover?"></textarea>
+          </label>
+          <label>
+            <span class="label">Ideas Count</span>
+            <input id="notes-count" type="number" min="3" max="12" value="5" />
+          </label>
+          <label>
+            <span class="label">Draft Index</span>
+            <input id="notes-index" type="number" min="0" max="10" value="0" />
+          </label>
+          <label>
+            <span class="label">Target Words</span>
+            <input id="notes-words" type="number" min="500" max="1800" value="1000" />
+          </label>
+          <label>
+            <span class="label">Save to Disk</span>
+            <input id="notes-save" type="checkbox" checked />
+          </label>
+          <button id="run-notes-pipeline" class="btn btn-solid" type="button">Run Notes Pipeline</button>
+        </div>
+        <pre id="notes-pipeline-output" class="codebox">No notes pipeline run yet.</pre>
       </section>
 
 
@@ -131,6 +163,7 @@
       </section>
     </main>
 
+    <script src="./ui.js"></script>
     <script src="./integrations.js"></script>
   </body>
 </html>

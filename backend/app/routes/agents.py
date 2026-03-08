@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException, Request, status
 
 from app.models import (
     AgentRunDetailResponse,
+    AgentRunExecuteResponse,
     AgentRunItem,
     AgentRunsResponse,
     AgentTaskItem,
@@ -68,6 +69,18 @@ def dispatch_chief(payload: ChiefDispatchRequest, request: Request) -> ChiefDisp
     for row in rows:
         if row["id"] in created_task_ids:
             task_items.append(_to_task_item(row))
+
+    if payload.auto_execute:
+        run = store.get_agent_run(run_id)
+        if run:
+            request.app.state.agent_executor_service.execute_run(
+                run=run,
+                store=store,
+                openai_service=request.app.state.openai_service,
+            )
+            refreshed = store.list_agent_tasks(run_id=run_id)
+            task_items = [_to_task_item(row) for row in refreshed]
+            run_status = "completed"
 
     return ChiefDispatchResponse(
         run_id=run_id,
@@ -142,3 +155,36 @@ def update_agent_task(task_id: int, payload: AgentTaskUpdateRequest, request: Re
                 return _to_task_item(updated)
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent task not found.")
+
+
+@router.post("/agents/runs/{run_id}/execute", response_model=AgentRunExecuteResponse)
+def execute_agent_run(run_id: int, request: Request) -> AgentRunExecuteResponse:
+    require_admin(request)
+    store = request.app.state.store
+    run = store.get_agent_run(run_id)
+    if run is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Agent run not found.")
+
+    executed = request.app.state.agent_executor_service.execute_run(
+        run=run,
+        store=store,
+        openai_service=request.app.state.openai_service,
+    )
+    refreshed_run = store.get_agent_run(run_id)
+    tasks = store.list_agent_tasks(run_id=run_id)
+    if refreshed_run is None:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Run disappeared after execute.")
+
+    return AgentRunExecuteResponse(
+        run=AgentRunItem(
+            id=refreshed_run["id"],
+            mission=refreshed_run["mission"],
+            status=refreshed_run["status"],
+            planner_summary=refreshed_run["planner_summary"],
+            created_at=datetime.fromisoformat(refreshed_run["created_at"]),
+            updated_at=datetime.fromisoformat(refreshed_run["updated_at"]),
+        ),
+        tasks=[_to_task_item(row) for row in tasks],
+        executed_tasks=executed,
+        mode="server-sync",
+    )
