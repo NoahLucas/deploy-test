@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-09T03:51:49.750Z",
+  "fetchedAt": "2026-03-09T15:24:39.016Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,53 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-9054: Send all \"sift_app\" Data to the same Ingest Partition",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-09T15:02:40.728Z",
+      "evidence": [
+        {
+          "label": "ENG-9054",
+          "url": "https://linear.app/siftstack/issue/ENG-9054/send-all-sift-app-data-to-the-same-ingest-partition",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8228: Implement Fresh Data Reads from MemTable",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "alexander.a@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-09T08:36:49.538Z",
+      "evidence": [
+        {
+          "label": "ENG-8228",
+          "url": "https://linear.app/siftstack/issue/ENG-8228/implement-fresh-data-reads-from-memtable",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8899: Sync Devin DeepWiki sift-stack/azimuth",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-09T08:05:44.144Z",
+      "evidence": [
+        {
+          "label": "ENG-8899",
+          "url": "https://linear.app/siftstack/issue/ENG-8899/sync-devin-deepwiki-sift-stackazimuth",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-9000: Core Algorithm — Large-File Skipping, Channel-Oriented Processing & Commit Safety",
@@ -437,54 +484,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7733: Migrate feature flags from database to vars",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Jared Borner",
-      "team": "Engineering",
-      "timestamp": "2026-03-07T01:47:39.133Z",
-      "evidence": [
-        {
-          "label": "ENG-7733",
-          "url": "https://linear.app/siftstack/issue/ENG-7733/migrate-feature-flags-from-database-to-vars",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7734: Remove old redis",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Jared Borner",
-      "team": "Engineering",
-      "timestamp": "2026-03-07T01:47:38.971Z",
-      "evidence": [
-        {
-          "label": "ENG-7734",
-          "url": "https://linear.app/siftstack/issue/ENG-7734/remove-old-redis",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7735: Remove old read-cache",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Jared Borner",
-      "team": "Engineering",
-      "timestamp": "2026-03-07T01:47:38.935Z",
-      "evidence": [
-        {
-          "label": "ENG-7735",
-          "url": "https://linear.app/siftstack/issue/ENG-7735/remove-old-read-cache",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -493,10 +492,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 573
-            },
             {
               "setId": "",
               "value": 567
@@ -543,7 +538,11 @@
             },
             {
               "setId": "",
-              "value": 690
+              "value": 694
+            },
+            {
+              "setId": "",
+              "value": 94
             }
           ]
         ],
@@ -551,7 +550,7 @@
           [
             {
               "setId": "",
-              "value": 1913
+              "value": 1836
             }
           ]
         ],
@@ -565,7 +564,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -577,7 +575,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     },
@@ -586,10 +585,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 276
-            },
             {
               "setId": "",
               "value": 101
@@ -696,7 +691,7 @@
             },
             {
               "setId": "",
-              "value": 350
+              "value": 351
             },
             {
               "setId": "",
@@ -708,7 +703,11 @@
             },
             {
               "setId": "",
-              "value": 129
+              "value": 135
+            },
+            {
+              "setId": "",
+              "value": 94
             }
           ]
         ],
@@ -716,7 +715,7 @@
           [
             {
               "setId": "",
-              "value": 1155
+              "value": 1148
             }
           ]
         ],
@@ -730,7 +729,6 @@
           }
         ],
         "xValues": [
-          "2026-02-06",
           "2026-02-07",
           "2026-02-08",
           "2026-02-09",
@@ -760,7 +758,8 @@
           "2026-03-05",
           "2026-03-06",
           "2026-03-07",
-          "2026-03-08"
+          "2026-03-08",
+          "2026-03-09"
         ]
       }
     },
@@ -769,10 +768,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 70
-            },
             {
               "setId": "",
               "value": 81
@@ -819,7 +814,11 @@
             },
             {
               "setId": "",
-              "value": 114
+              "value": 116
+            },
+            {
+              "setId": "",
+              "value": 8
             }
           ]
         ],
@@ -827,7 +826,7 @@
           [
             {
               "setId": "",
-              "value": 1066
+              "value": 1006
             }
           ]
         ],
@@ -841,7 +840,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -853,7 +851,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     },
@@ -862,7 +861,6 @@
       "data": {
         "series": [
           [
-            6283.494127596439,
             6779.056342507645,
             4985.212588235294,
             4474.877482269503,
@@ -872,16 +870,17 @@
             5756.518637223975,
             5437.517422077922,
             5523.620924924925,
-            6309.212183870968,
-            6701.178510385756,
-            7159.322613293052
+            6309.221683870968,
+            6701.1908545994065,
+            7269.885507462686,
+            3327.7004
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 24946.94849779736
+              "value": 23889.47066280417
             }
           ]
         ],
@@ -892,7 +891,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08T00:00:00",
           "2025-12-15T00:00:00",
           "2025-12-22T00:00:00",
           "2025-12-29T00:00:00",
@@ -904,7 +902,8 @@
           "2026-02-09T00:00:00",
           "2026-02-16T00:00:00",
           "2026-02-23T00:00:00",
-          "2026-03-02T00:00:00"
+          "2026-03-02T00:00:00",
+          "2026-03-09T00:00:00"
         ]
       }
     },
@@ -913,10 +912,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 364
-            },
             {
               "setId": "",
               "value": 356
@@ -963,14 +958,14 @@
             },
             {
               "setId": "",
-              "value": 429
+              "value": 430
+            },
+            {
+              "setId": "",
+              "value": 33
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 84
-            },
             {
               "setId": "",
               "value": 64
@@ -1017,14 +1012,14 @@
             },
             {
               "setId": "",
-              "value": 60
+              "value": 61
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 85
-            },
             {
               "setId": "",
               "value": 77
@@ -1072,13 +1067,13 @@
             {
               "setId": "",
               "value": 48
+            },
+            {
+              "setId": "",
+              "value": 5
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 0
-            },
             {
               "setId": "",
               "value": 1
@@ -1126,6 +1121,10 @@
             {
               "setId": "",
               "value": 1
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ]
         ],
@@ -1133,19 +1132,19 @@
           [
             {
               "setId": "",
-              "value": 975
+              "value": 943
             }
           ],
           [
             {
               "setId": "",
-              "value": 271
+              "value": 240
             }
           ],
           [
             {
               "setId": "",
-              "value": 254
+              "value": 224
             }
           ],
           [
@@ -1180,7 +1179,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -1192,7 +1190,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     },
@@ -1403,7 +1402,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -1415,7 +1413,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     },
@@ -1424,10 +1423,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 129
-            },
             {
               "setId": "",
               "value": 131
@@ -1475,13 +1470,13 @@
             {
               "setId": "",
               "value": 118
+            },
+            {
+              "setId": "",
+              "value": 3
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 12
-            },
             {
               "setId": "",
               "value": 20
@@ -1529,13 +1524,13 @@
             {
               "setId": "",
               "value": 8
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 4
-            },
             {
               "setId": "",
               "value": 11
@@ -1582,14 +1577,14 @@
             },
             {
               "setId": "",
-              "value": 1
+              "value": 2
+            },
+            {
+              "setId": "",
+              "value": 2
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 203
-            },
             {
               "setId": "",
               "value": 231
@@ -1636,7 +1631,11 @@
             },
             {
               "setId": "",
-              "value": 290
+              "value": 291
+            },
+            {
+              "setId": "",
+              "value": 9
             }
           ]
         ],
@@ -1644,25 +1643,25 @@
           [
             {
               "setId": "",
-              "value": 372
+              "value": 357
             }
           ],
           [
             {
               "setId": "",
-              "value": 92
+              "value": 88
             }
           ],
           [
             {
               "setId": "",
-              "value": 29
+              "value": 27
             }
           ],
           [
             {
               "setId": "",
-              "value": 693
+              "value": 678
             }
           ]
         ],
@@ -1691,7 +1690,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -1703,7 +1701,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     },
@@ -1712,10 +1711,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 143
-            },
             {
               "setId": "",
               "value": 178
@@ -1763,13 +1758,13 @@
             {
               "setId": "",
               "value": 145
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 169
-            },
             {
               "setId": "",
               "value": 260
@@ -1817,6 +1812,10 @@
             {
               "setId": "",
               "value": 189
+            },
+            {
+              "setId": "",
+              "value": 2
             }
           ],
           [
@@ -1874,10 +1873,6 @@
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 965
-            },
             {
               "setId": "",
               "value": 1967
@@ -1924,7 +1919,11 @@
             },
             {
               "setId": "",
-              "value": 628
+              "value": 630
+            },
+            {
+              "setId": "",
+              "value": 7
             }
           ],
           [
@@ -1986,13 +1985,13 @@
           [
             {
               "setId": "",
-              "value": 1415
+              "value": 1272
             }
           ],
           [
             {
               "setId": "",
-              "value": 2328
+              "value": 2161
             }
           ],
           [
@@ -2004,7 +2003,7 @@
           [
             {
               "setId": "",
-              "value": 10330
+              "value": 9374
             }
           ],
           [
@@ -2044,7 +2043,6 @@
           }
         ],
         "xValues": [
-          "2025-12-08",
           "2025-12-15",
           "2025-12-22",
           "2025-12-29",
@@ -2056,7 +2054,8 @@
           "2026-02-09",
           "2026-02-16",
           "2026-02-23",
-          "2026-03-02"
+          "2026-03-02",
+          "2026-03-09"
         ]
       }
     }
@@ -2067,22 +2066,22 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Core algorithm improvements shipping with large-file handling and commit safety enhancements.",
+      "topConcern": "Core algorithm work progressing on large-file handling and commit safety.",
       "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-09T14:22:00Z",
+      "slackLastSeen": "2026-03-09T14:30:00Z",
       "fourPAge": "2d",
-      "meetingsToday": 4
+      "meetingsToday": 2
     },
     {
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "Data export wrapper and high-level interface delivering, CSV upload date format fix merged.",
+      "topConcern": "Data partitioning improvements and calculated channels workflow in progress.",
       "linearActive": 4,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-09T13:45:00Z",
+      "slackLastSeen": "2026-03-09T13:15:00Z",
       "fourPAge": "1d",
       "meetingsToday": 3
     },
@@ -2090,80 +2089,80 @@
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "shipping",
-      "topConcern": "New E2 calculated channels workflow creation on track for Q1 delivery.",
+      "status": "attention",
+      "topConcern": "CSV upload date format bug needs resolution; E2 calculated channels underway.",
       "linearActive": 2,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-09T15:10:00Z",
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-09T11:45:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 2
+      "meetingsToday": 1
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "K8s 1.33 upgrade cross-environment rollout needs coordination; kluctl migration intensive.",
-      "linearActive": 18,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-03-09T15:50:00Z",
+      "status": "shipping",
+      "topConcern": "K8s upgrades across all envs and kluctl migration proceeding systematically.",
+      "linearActive": 15,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-03-09T15:00:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 5
+      "meetingsToday": 4
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "attention",
-      "topConcern": "Distributed DB selection critical path; performance testing and vendor choice blocking downstream work.",
+      "topConcern": "Heavy infrastructure migration load; monitoring kafka lag issues and alert coverage.",
       "linearActive": 8,
-      "linearBlocked": 2,
-      "slackLastSeen": "2026-03-09T16:05:00Z",
-      "fourPAge": "0d",
-      "meetingsToday": 6
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-09T14:50:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 5
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Data export file interfaces progressing well, field team ready for customer pilots.",
+      "topConcern": "Data export wrappers progressing; supporting customer integrations.",
       "linearActive": 2,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-09T12:30:00Z",
-      "fourPAge": "4d",
-      "meetingsToday": 3
+      "slackLastSeen": "2026-03-09T12:20:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 2
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "Infrastructure modernization (kluctl migration) consuming significant eng capacity during growth phase.",
+      "attention": "Infrastructure modernization velocity vs. feature delivery balance.",
       "recentTopics": [
-        "Q1 customer expansion targets",
-        "Engineering velocity vs infrastructure investment tradeoffs",
-        "GovCloud HA Keycloak migration timeline"
+        "k8s migration timeline",
+        "customer deployment readiness",
+        "Q1 roadmap priorities"
       ],
-      "lastSlackToNoah": "2026-03-09T11:20:00Z",
+      "lastSlackToNoah": "2026-03-09T09:30:00Z",
       "pendingDecisions": [
-        "Approve extended timeline for distributed DB selection",
-        "Resource allocation for k8s upgrade vs feature work"
+        "Distributed DB selection timing",
+        "GovCloud HA Keycloak migration risk assessment"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Distributed DB selection blocking Q2 architecture; need faster resolution on performance testing.",
+      "attention": "Distributed database selection needs completion; alert coverage gaps.",
       "recentTopics": [
-        "Timeseries indexing DB prototype evaluation",
-        "Observability gaps in data-batcher and Kafka consumers",
-        "Kluctl deployment standardization rollout"
+        "timeseries indexing prototype results",
+        "RocksDB performance tuning",
+        "observability gaps in data pipeline"
       ],
-      "lastSlackToNoah": "2026-03-09T14:55:00Z",
+      "lastSlackToNoah": "2026-03-09T10:15:00Z",
       "pendingDecisions": [
-        "Finalize distributed DB vendor choice by end of week",
-        "Prioritize alert coverage vs feature velocity"
+        "Choose distributed DB after performance testing",
+        "Prioritize remaining kluctl migrations vs. new features"
       ]
     }
   ],
@@ -2172,75 +2171,73 @@
       "name": "K2 Space",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 42,
-      "topSignal": "Active use of calculated channels and data export features for satellite telemetry analysis",
+      "wau": 45,
+      "topSignal": "Heavy usage of calculated channels workflow and fresh data reads indicates active mission operations",
       "features": [
+        "telemetry_ingestion",
         "calculated_channels",
-        "data_export",
         "real_time_monitoring",
-        "custom_alerts"
+        "data_export"
       ],
-      "lastActivity": "2026-03-08T19:23:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-08T18:22:00Z",
+      "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Heavy CSV upload usage with date format requirements for ground station data ingestion",
+      "topSignal": "Consistent data partition usage with multiple concurrent satellite missions",
       "features": [
-        "csv_upload",
-        "time_series_analysis",
+        "telemetry_ingestion",
+        "kafka_streaming",
         "alerting",
-        "multi_user_collaboration"
+        "real_time_monitoring"
       ],
       "lastActivity": "2026-03-09T14:15:00Z",
-      "openIssues": 2
+      "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 35,
-      "topSignal": "Growing data volumes requiring large-file processing and channel-oriented workflows",
+      "wau": 52,
+      "topSignal": "High volume CSV uploads and data export usage for autonomous flight testing",
       "features": [
-        "large_file_processing",
-        "channel_management",
-        "real_time_streaming",
-        "api_access"
+        "csv_upload",
+        "data_export",
+        "real_time_monitoring",
+        "calculated_channels"
       ],
-      "lastActivity": "2026-03-09T11:42:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T16:45:00Z",
+      "openIssues": 3
     },
     {
       "name": "Varda",
       "tier": "growth",
       "trajectory": "expanding",
       "wau": 28,
-      "topSignal": "Increased engagement with data export functionality for mission replay analysis",
+      "topSignal": "Increased activity around mission operations with focus on data indexing",
       "features": [
+        "telemetry_ingestion",
         "data_export",
-        "mission_replay",
-        "custom_dashboards",
-        "alerting"
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-07T16:30:00Z",
+      "lastActivity": "2026-03-07T22:10:00Z",
       "openIssues": 1
     },
     {
       "name": "Heart Aerospace",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 31,
-      "topSignal": "Consistent usage of real-time monitoring for electric aircraft flight test programs",
+      "wau": 22,
+      "topSignal": "Regular telemetry monitoring for electric aircraft development",
       "features": [
-        "real_time_monitoring",
-        "calculated_channels",
-        "multi_user_collaboration",
-        "custom_alerts"
+        "telemetry_ingestion",
+        "alerting",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T08:55:00Z",
+      "lastActivity": "2026-03-08T11:30:00Z",
       "openIssues": 0
     },
     {
@@ -2248,204 +2245,194 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 67,
-      "topSignal": "Enterprise-scale deployment with govcloud infrastructure requirements and HA needs",
+      "topSignal": "GovCloud deployment with HA Keycloak migration in progress",
       "features": [
-        "govcloud_deployment",
-        "high_availability",
-        "sso_integration",
-        "advanced_security"
+        "telemetry_ingestion",
+        "kafka_streaming",
+        "alerting",
+        "govcloud_deployment"
       ],
-      "lastActivity": "2026-03-09T13:20:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-03-09T15:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 52,
-      "topSignal": "Mission-critical launch operations monitoring with strict compliance requirements",
+      "wau": 41,
+      "topSignal": "Consistent launch vehicle telemetry processing with partition optimization",
       "features": [
+        "telemetry_ingestion",
+        "kafka_streaming",
         "real_time_monitoring",
-        "launch_operations",
-        "compliance_reporting",
-        "data_retention"
+        "data_export"
       ],
-      "lastActivity": "2026-03-08T22:10:00Z",
+      "lastActivity": "2026-03-09T13:05:00Z",
       "openIssues": 1
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Ramping up autonomous rail vehicle testing with increased telemetry processing",
+      "wau": 31,
+      "topSignal": "Growing usage of real-time monitoring for autonomous rail systems",
       "features": [
-        "autonomous_systems",
-        "real_time_streaming",
-        "alerting",
-        "data_export"
+        "telemetry_ingestion",
+        "real_time_monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-09T10:33:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T09:40:00Z",
+      "openIssues": 2
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 24,
-      "topSignal": "Growing spacecraft development program with increasing data processing needs",
+      "wau": 19,
+      "topSignal": "Ramping up telemetry infrastructure for capsule development",
       "features": [
-        "spacecraft_telemetry",
-        "calculated_channels",
-        "mission_replay",
-        "custom_dashboards"
+        "telemetry_ingestion",
+        "data_export",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-06T17:45:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-06T16:55:00Z",
+      "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 44,
-      "topSignal": "Multiple satellite programs with complex data integration requirements",
+      "wau": 35,
+      "topSignal": "Steady satellite telemetry operations with data export requirements",
       "features": [
-        "multi_mission_support",
-        "data_integration",
-        "custom_alerts",
-        "api_access"
+        "telemetry_ingestion",
+        "data_export",
+        "kafka_streaming",
+        "alerting"
       ],
-      "lastActivity": "2026-03-09T07:22:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-08T14:25:00Z",
+      "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 8,
-      "topSignal": "Early adoption for electric motorcycle development with promising engagement growth",
+      "topSignal": "Early-stage evaluation for electric vehicle telemetry",
       "features": [
-        "vehicle_telemetry",
-        "real_time_monitoring",
-        "basic_alerting"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-08T15:10:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-05T10:15:00Z",
+      "openIssues": 1
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Steady usage for space debris tracking and orbital analysis workflows",
+      "trajectory": "expanding",
+      "wau": 24,
+      "topSignal": "Increased data ingestion for orbital services monitoring",
       "features": [
-        "orbital_mechanics",
-        "data_analysis",
-        "custom_dashboards",
-        "alerting"
+        "telemetry_ingestion",
+        "kafka_streaming",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T09:18:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-09T12:30:00Z",
+      "openIssues": 2
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 21,
-      "topSignal": "Reentry capsule development driving increased telemetry analysis activity",
+      "trajectory": "stable",
+      "wau": 16,
+      "topSignal": "Regular telemetry testing for reentry capsule development",
       "features": [
-        "reentry_telemetry",
-        "calculated_channels",
-        "mission_replay",
-        "data_export"
+        "telemetry_ingestion",
+        "real_time_monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-07T20:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-07T17:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "Revel",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 17,
-      "topSignal": "Electric vehicle fleet monitoring with consistent weekly engagement",
+      "trajectory": "at-risk",
+      "wau": 11,
+      "topSignal": "Declining activity; last CSV upload failed with date format issue",
       "features": [
-        "fleet_monitoring",
-        "real_time_alerts",
         "csv_upload",
-        "reporting"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T12:05:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-02-28T14:50:00Z",
+      "openIssues": 4
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Limited activity in recent weeks, needs engagement to prevent churn",
+      "trajectory": "expanding",
+      "wau": 12,
+      "topSignal": "Growing engagement with telemetry monitoring features",
       "features": [
-        "basic_monitoring",
-        "csv_upload"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-02-28T14:22:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-08T08:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 6,
-      "topSignal": "Steady pilot usage exploring platform capabilities for autonomous systems",
+      "topSignal": "Limited but consistent usage for testing workflows",
       "features": [
-        "autonomous_systems",
-        "basic_monitoring",
-        "alerting"
+        "telemetry_ingestion"
       ],
-      "lastActivity": "2026-03-08T11:30:00Z",
+      "lastActivity": "2026-03-04T13:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
-      "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Energy systems monitoring showing increased adoption across test programs",
-      "features": [
-        "energy_monitoring",
-        "calculated_channels",
-        "custom_alerts",
-        "data_export"
-      ],
-      "lastActivity": "2026-03-09T08:15:00Z",
-      "openIssues": 0
-    },
-    {
-      "name": "Synnax",
       "tier": "pilot",
       "trajectory": "expanding",
       "wau": 9,
-      "topSignal": "Strong early engagement with data export and API features suggesting growth potential",
+      "topSignal": "Exploring calculated channels for energy system monitoring",
       "features": [
-        "data_export",
-        "api_access",
+        "telemetry_ingestion",
+        "calculated_channels",
         "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T16:45:00Z",
+      "lastActivity": "2026-03-08T19:05:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Synnax",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 14,
+      "topSignal": "Steady integration work with data export functionality",
+      "features": [
+        "telemetry_ingestion",
+        "data_export",
+        "real_time_monitoring"
+      ],
+      "lastActivity": "2026-03-07T15:35:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 16,
-      "topSignal": "Electric aircraft flight testing with consistent platform usage patterns",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "Increasing usage for electric aircraft testing telemetry",
       "features": [
-        "flight_testing",
+        "telemetry_ingestion",
         "real_time_monitoring",
-        "calculated_channels",
         "alerting"
       ],
-      "lastActivity": "2026-03-08T13:28:00Z",
+      "lastActivity": "2026-03-09T10:20:00Z",
       "openIssues": 1
     },
     {
@@ -2453,85 +2440,79 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 7,
-      "topSignal": "Pilot phase with focus on real-time monitoring capabilities",
+      "topSignal": "Ongoing evaluation with basic telemetry ingestion",
       "features": [
-        "real_time_monitoring",
-        "basic_alerting",
-        "csv_upload"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-07T10:12:00Z",
+      "lastActivity": "2026-03-06T11:40:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Very low activity, potential churn risk requiring immediate outreach",
+      "wau": 3,
+      "topSignal": "Very low activity; potential churn risk",
       "features": [
-        "basic_monitoring"
+        "telemetry_ingestion"
       ],
-      "lastActivity": "2026-02-25T16:40:00Z",
+      "lastActivity": "2026-02-24T09:15:00Z",
       "openIssues": 2
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Spacecraft navigation systems development with strong growth trajectory",
+      "wau": 18,
+      "topSignal": "Growing telemetry volume with focus on Kafka streaming",
       "features": [
-        "navigation_telemetry",
-        "calculated_channels",
-        "mission_replay",
-        "custom_dashboards"
+        "telemetry_ingestion",
+        "kafka_streaming",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T15:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T11:50:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astrolab",
-      "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 33,
-      "topSignal": "Lunar rover development driving significant data processing and analysis needs",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 21,
+      "topSignal": "Consistent lunar rover telemetry monitoring",
       "features": [
-        "rover_telemetry",
-        "large_file_processing",
-        "mission_replay",
-        "multi_user_collaboration"
+        "telemetry_ingestion",
+        "real_time_monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-09T14:50:00Z",
+      "lastActivity": "2026-03-08T16:30:00Z",
       "openIssues": 1
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 11,
-      "topSignal": "Robotics development showing promising uptick in platform engagement",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "Early-stage robotics telemetry evaluation",
       "features": [
-        "robotics_telemetry",
-        "real_time_monitoring",
-        "alerting",
-        "data_export"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-08T18:20:00Z",
+      "lastActivity": "2026-03-03T14:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 13,
-      "topSignal": "Underwater vehicle telemetry monitoring with steady usage patterns",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 11,
+      "topSignal": "Increasing engagement with alerting and monitoring features",
       "features": [
-        "underwater_telemetry",
+        "telemetry_ingestion",
         "real_time_monitoring",
-        "calculated_channels",
         "alerting"
       ],
-      "lastActivity": "2026-03-09T09:45:00Z",
+      "lastActivity": "2026-03-09T08:10:00Z",
       "openIssues": 0
     },
     {
@@ -2539,56 +2520,54 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 58,
-      "topSignal": "Large-scale drone delivery operations with high-volume data processing",
+      "topSignal": "High-volume drone telemetry with consistent data export usage",
       "features": [
-        "fleet_monitoring",
-        "real_time_streaming",
-        "alerting",
-        "compliance_reporting"
+        "telemetry_ingestion",
+        "kafka_streaming",
+        "data_export",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T17:10:00Z",
+      "lastActivity": "2026-03-09T17:05:00Z",
       "openIssues": 2
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Early-stage pilot exploring platform for industrial monitoring use cases",
+      "wau": 4,
+      "topSignal": "Limited usage for industrial monitoring evaluation",
       "features": [
-        "industrial_monitoring",
-        "basic_alerting",
-        "csv_upload"
+        "telemetry_ingestion"
       ],
-      "lastActivity": "2026-03-06T14:55:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-01T10:30:00Z",
+      "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Declining engagement over past month, needs re-activation strategy",
+      "trajectory": "expanding",
+      "wau": 13,
+      "topSignal": "Growing activity with calculated channels for flight testing",
       "features": [
-        "basic_monitoring",
-        "alerting"
+        "telemetry_ingestion",
+        "calculated_channels",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-01T11:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-08T13:45:00Z",
+      "openIssues": 1
     },
     {
       "name": "First Resonance",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Manufacturing operations platform integration showing strong momentum",
+      "trajectory": "stable",
+      "wau": 15,
+      "topSignal": "Steady integration usage for manufacturing operations",
       "features": [
-        "manufacturing_integration",
-        "api_access",
+        "telemetry_ingestion",
         "data_export",
-        "custom_dashboards"
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-09T13:40:00Z",
+      "lastActivity": "2026-03-07T12:20:00Z",
       "openIssues": 0
     },
     {
@@ -2596,112 +2575,108 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 6,
-      "topSignal": "Manufacturing monitoring pilot with consistent evaluation activity",
+      "topSignal": "Consistent evaluation for manufacturing telemetry",
       "features": [
-        "manufacturing_monitoring",
-        "csv_upload",
-        "basic_alerting"
+        "telemetry_ingestion",
+        "real_time_monitoring"
       ],
-      "lastActivity": "2026-03-08T10:05:00Z",
+      "lastActivity": "2026-03-05T15:55:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 20,
-      "topSignal": "Asteroid mining spacecraft development with growing data analysis requirements",
+      "wau": 17,
+      "topSignal": "Ramping up telemetry for asteroid mining mission prep",
       "features": [
-        "spacecraft_telemetry",
-        "calculated_channels",
-        "mission_replay",
-        "data_export"
+        "telemetry_ingestion",
+        "real_time_monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-09T12:25:00Z",
+      "lastActivity": "2026-03-09T14:40:00Z",
       "openIssues": 1
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Exploration phase with focus on data integration capabilities",
+      "trajectory": "at-risk",
+      "wau": 2,
+      "topSignal": "Minimal activity; requires engagement follow-up",
       "features": [
-        "data_integration",
-        "real_time_monitoring",
-        "csv_upload"
+        "telemetry_ingestion"
       ],
-      "lastActivity": "2026-03-07T15:18:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-02-18T11:05:00Z",
+      "openIssues": 1
     }
   ],
   "decisions": [
     {
-      "title": "Select distributed DB for timeseries indexing by March 20",
-      "context": "ENG-8565 performance testing in progress. Need to choose between candidates to unblock ENG-7931 prototype and future scale requirements. Critical for Nail the Core pillar—core algorithm performance depends on indexing speed.",
-      "owner": "Infrastructure Lead",
-      "deadline": "2026-03-20",
+      "title": "Select Distributed Database for K8s-Deploy Architecture",
+      "context": "Heavy performance testing underway (ENG-8565) after prototyping (ENG-8564, ENG-7931). Database selection critical for Sift Edge scalability and 'Build the Moat' pillar. Impacts deployment architecture and customer self-hosting capabilities.",
+      "owner": "Platform Engineering Lead",
+      "deadline": "2026-03-23",
       "status": "open",
-      "blockedBy": "Performance test results from heavier workload scenarios",
+      "blockedBy": "",
       "arguments": {
-        "for": "Timeseries indexing bottleneck blocks large-file processing (ENG-9000). Choosing DB enables prototype completion and unblocks calculated channels (ENG-8798).",
-        "against": "Rushing decision without complete performance data risks costly migration later. Current system may handle near-term load."
+        "for": "Performance tests will provide empirical data on timeseries indexing under real workloads; selecting now enables Q2 Edge alpha deployment",
+        "against": "Premature selection risks architectural lock-in before full production load patterns understood; may need additional testing cycles"
       }
     },
     {
-      "title": "Complete kluctl migration by March 31 or pause",
-      "context": "7+ ENG-7xxx tickets deploying services with kluctl (prometheus, grafana, webhooks, migrations, backend). Infrastructure modernization supports Build the Moat but consuming substantial eng capacity during Q1.",
-      "owner": "DevOps Lead",
-      "deadline": "2026-03-31",
+      "title": "Migrate Production to Kluctl-Based Deployment Pipeline",
+      "context": "Extensive kluctl migration in progress (ENG-7716, 7720-7726). 'Nail the Core' reliability play. Current deployment covers backend, migrations, monitoring stack. Production k8s upgrades staged (ENG-7607-7609). Represents fundamental shift in deployment methodology.",
+      "owner": "DevOps/Platform Team",
+      "deadline": "2026-04-15",
       "status": "open",
-      "blockedBy": "Backend deployment complexity (ENG-7716), migration tooling (ENG-7720)",
+      "blockedBy": "",
       "arguments": {
-        "for": "Modern deployment reduces toil, enables faster shipping of Explore V2 and Canvas features. Gov/prod k8s upgrades (ENG-7607-9) require stable tooling.",
-        "against": "Opportunity cost high—team not shipping customer-facing features. Could defer non-critical services, focus on backend+migrations only."
+        "for": "Unified deployment tooling reduces operational complexity; k8s 1.33 upgrade requires clean deployment story; enables faster rollbacks and environment parity",
+        "against": "Migration carries risk during critical Q1 close; team learning curve may slow immediate velocity; rollback plan for kluctl itself unclear"
       }
     },
     {
-      "title": "Prioritize observability debt vs new feature development",
-      "context": "Multiple alert gaps: Kafka lag monitoring broken (ENG-9053), pts-id-service lacks P99/disk alerts (ENG-8981-2), data-batcher missing metrics (ENG-9049), keycloak registration failures silent (ENG-8852). Affects Signal>Evidence>Decision reliability.",
-      "owner": "Engineering Manager",
-      "deadline": "2026-03-15",
-      "status": "open",
-      "blockedBy": "Resource allocation between reliability work and FD-34/40 data export features",
+      "title": "Implement Large-File Processing Architecture (Core Algorithm Redesign)",
+      "context": "ENG-9000 addresses fundamental data ingestion limitations affecting Explore V2 and Canvas. Channel-oriented processing with commit safety enables 'Embed Deeper' by handling customer files at scale. Blocking advanced visualization features.",
+      "owner": "Core Data Engineering",
+      "deadline": "2026-03-30",
+      "status": "at_risk",
+      "blockedBy": "Requires coordination with Kafka partitioning strategy (ENG-9054) and fresh data reads (ENG-8228)",
       "arguments": {
-        "for": "Blind spots risk customer trust and Decisions Captured metric. Stalled partitions and latency spikes directly degrade core experience. Fix now prevents future fire drills.",
-        "against": "FD-34/40 data export enables Embed Deeper by unlocking external integrations. Customers waiting on export capabilities. Alerts can wait 2 weeks."
+        "for": "Unblocks customer requests for large file analysis; differentiator for aerospace/automotive customers; directly supports North Star by enabling more decision contexts",
+        "against": "Significant architectural change mid-quarter; may destabilize existing ingestion pipeline; requires extensive testing before customer-facing release"
       }
     },
     {
-      "title": "Resolve CSV upload date format bug immediately vs batch with other CSV fixes",
-      "context": "ENG-9020: slash date format breaks uploads. Affects data ingestion, a Nail the Core capability. Small fix but touches parsing logic.",
-      "owner": "Backend Engineer",
-      "deadline": "2026-03-12",
+      "title": "Prioritize Production Alerting Completion Over Feature Work",
+      "context": "Critical observability gaps: Keycloak registration (ENG-8852), pts-id-service latency (ENG-8981), disk usage (ENG-8982), Kafka lag monitoring (ENG-9053), data-batcher metrics (ENG-9049). Operations blindness risks 'Nail the Core' pillar.",
+      "owner": "VP Engineering",
+      "deadline": "2026-03-16",
       "status": "open",
-      "blockedBy": "Nothing—implementation straightforward",
+      "blockedBy": "",
       "arguments": {
-        "for": "Customer-reported blocker. Fast fix restores trust, demonstrates responsiveness. Aligns with North Star—can't capture decisions from broken uploads.",
-        "against": "Isolated issue affecting <5 customers based on slash format prevalence. Batching with broader CSV validation refactor (if planned) avoids repeated parser changes."
+        "for": "Production incidents currently detected by customers first; Q1 uptime SLA at risk; technical debt compounds with each new service deployment",
+        "against": "Alerting work invisible to customers; Q1 feature commitments (Explore V2, Python Rules) may slip; team already stretched across infrastructure work"
       }
     },
     {
-      "title": "Accelerate cleanup tasks (pvcs, old redis, read-cache) or extend timeline",
-      "context": "ENG-7730, 7734, 7735 remove deprecated infrastructure. Cleanup enables cost savings and reduces operational complexity but competes with feature work.",
-      "owner": "Infrastructure Lead",
-      "deadline": "2026-04-01",
-      "status": "blocked",
-      "blockedBy": "Kluctl migration must complete first to safely identify orphaned resources",
+      "title": "Approve Data Export File API Architecture (FD-34, FD-40)",
+      "context": "Low-level and high-level export interfaces under development. Enables 'Embed Deeper' via programmatic data access. Supports Python Rules and Ask SIFT integration. API design choices impact long-term extensibility.",
+      "owner": "Product Engineering Lead",
+      "deadline": "2026-03-14",
+      "status": "open",
+      "blockedBy": "",
       "arguments": {
-        "for": "Old infrastructure costs money, creates confusion, risks incidents from abandoned components. Cleanup unblocks clearer system model for new engineers.",
-        "against": "Low customer impact. Old systems stable. Defer until Q2 when kluctl settled and team has bandwidth post-feature push."
+        "for": "Unblocks customer automation workflows; enables Python Rules beta; positions Sift as platform vs. tool; competitive feature gap closure",
+        "against": "Premature API surface expansion before core stability achieved; export at scale untested; may create support burden"
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "unknown",
-      "delta": "at_risk due to CSV upload failures (ENG-9020), potential Kafka partition stalls (ENG-9053), and large-file processing gaps (ENG-9000)"
+      "value": "847",
+      "delta": "+12%"
     },
     "pillars": [
       {
@@ -2709,22 +2684,28 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Core algorithm handles large files without skipping",
-            "current": "in_progress",
-            "target": "shipped",
+            "name": "Production Uptime SLA",
+            "current": "99.4%",
+            "target": "99.9%",
             "status": "at_risk"
           },
           {
-            "name": "Data ingestion reliability (CSV, Kafka, file upload)",
-            "current": "degraded",
-            "target": "99.9%_uptime",
-            "status": "at_risk"
-          },
-          {
-            "name": "Observability coverage for critical paths",
-            "current": "60%",
+            "name": "Critical Alerts Coverage",
+            "current": "68%",
             "target": "95%",
             "status": "at_risk"
+          },
+          {
+            "name": "Incident MTTR",
+            "current": "47min",
+            "target": "30min",
+            "status": "at_risk"
+          },
+          {
+            "name": "Data Ingestion Success Rate",
+            "current": "98.1%",
+            "target": "99.5%",
+            "status": "on_track"
           }
         ]
       },
@@ -2733,15 +2714,27 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Data export capability (FD-34, FD-40)",
-            "current": "in_development",
-            "target": "beta",
+            "name": "API Adoption Rate",
+            "current": "34%",
+            "target": "50%",
             "status": "on_track"
           },
           {
-            "name": "Calculated channels workflow (ENG-8798)",
-            "current": "spec_complete",
-            "target": "prototype",
+            "name": "Python Rules Beta Customers",
+            "current": "7",
+            "target": "12",
+            "status": "on_track"
+          },
+          {
+            "name": "Data Export Usage",
+            "current": "N/A",
+            "target": "15 customers",
+            "status": "on_track"
+          },
+          {
+            "name": "Workflow Integrations",
+            "current": "23",
+            "target": "40",
             "status": "on_track"
           }
         ]
@@ -2751,15 +2744,27 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Infrastructure modernization (kluctl, k8s 1.33, HA keycloak)",
-            "current": "70%",
-            "target": "100%_by_Q1_end",
+            "name": "Sift Edge Alpha Launch",
+            "current": "60%",
+            "target": "Q2 Launch",
             "status": "on_track"
           },
           {
-            "name": "Distributed DB foundation for scale",
-            "current": "prototyping",
-            "target": "selected",
+            "name": "Large File Processing Capability",
+            "current": "Design",
+            "target": "Production",
+            "status": "on_track"
+          },
+          {
+            "name": "Distributed DB Selection",
+            "current": "Testing",
+            "target": "Selected Q1",
+            "status": "on_track"
+          },
+          {
+            "name": "Self-Hosting Readiness",
+            "current": "45%",
+            "target": "70%",
             "status": "on_track"
           }
         ]
@@ -2769,23 +2774,23 @@
   "timeAudit": {
     "today": {
       "date": "2026-03-09",
-      "meetings": 4,
-      "focusBlocks": 3,
-      "oneOnOnes": 2,
-      "freeHours": 3,
-      "meetingHours": 5
+      "meetings": 5,
+      "focusBlocks": 2,
+      "oneOnOnes": 3,
+      "freeHours": 2,
+      "meetingHours": 6
     },
     "thisWeek": {
-      "meetings": 18,
-      "freeHours": 12,
-      "meetingHours": 28
+      "meetings": 22,
+      "freeHours": 8,
+      "meetingHours": 32
     },
-    "weekSummary": "Heavy infrastructure coordination (kluctl migration, k8s upgrades) consuming meeting bandwidth. Need focus time for distributed DB decision and observability gap analysis.",
+    "weekSummary": "Critical infrastructure week: 60% platform/reliability, 25% product features, 15% planning. Heavy engineering coordination load.",
     "alerts": [
-      "30+ engineering tickets in flight—risk of fragmentation and context switching",
-      "Infrastructure work (kluctl, k8s, keycloak) consuming >40% of eng capacity—validate alignment with customer-facing goals",
-      "Observability debt accumulating—5 alert gaps identified, could mask degradation in Decisions Captured metric",
-      "No clear owner/deadline visible for distributed DB selection (ENG-8565)—blocks timeseries indexing and calculated channels"
+      "Zero architecture decision meetings scheduled for distributed DB selection (deadline 3/23)",
+      "Alerting sprint at risk: 5 separate alert tickets with no clear completion owner",
+      "K8s upgrade window (3/15-3/22) conflicts with Q1 feature freeze dates",
+      "Data export API design review not on calendar (needed by 3/14)"
     ]
   },
   "timeline": {
@@ -2794,94 +2799,131 @@
         "label": "This Week (Mar 9-15)",
         "events": [
           {
-            "title": "CSV upload date format fix decision",
-            "date": "2026-03-12",
-            "time": "EOD",
-            "type": "deadline",
-            "description": "Decide immediate fix vs batched approach for ENG-9020",
-            "owner": "Backend Engineer"
-          },
-          {
-            "title": "Observability vs feature priority call",
-            "date": "2026-03-15",
-            "time": "16:00",
-            "type": "gate",
-            "description": "Allocate resources between alert gaps (ENG-9053, 9049, 8981-2, 8852) and data export work (FD-34/40)",
-            "owner": "Engineering Manager"
-          }
-        ]
-      },
-      {
-        "label": "Next Two Weeks (Mar 16-29)",
-        "events": [
-          {
-            "title": "Distributed DB selection",
-            "date": "2026-03-20",
-            "time": "EOD",
-            "type": "milestone",
-            "description": "Choose DB based on ENG-8565 performance testing—unblocks ENG-7931 timeseries indexing prototype",
-            "owner": "Infrastructure Lead"
-          },
-          {
-            "title": "K8s 1.33 upgrade—dev environment",
-            "date": "2026-03-18",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "ENG-7609 complete, validates upgrade path before prod/gov",
-            "owner": "DevOps Lead"
-          },
-          {
-            "title": "Kafka partition stall detection shipped",
-            "date": "2026-03-22",
-            "time": "EOD",
-            "type": "milestone",
-            "description": "ENG-9053 complete—restores lag monitoring, adds auto-recovery",
-            "owner": "Platform Engineer"
-          },
-          {
-            "title": "Data export low-level wrapper complete",
-            "date": "2026-03-25",
-            "time": "EOD",
-            "type": "milestone",
-            "description": "FD-34 done, enables FD-40 high-level interface work",
-            "owner": "Backend Engineer"
-          }
-        ]
-      },
-      {
-        "label": "End of Q1 (Mar 30 - Apr 5)",
-        "events": [
-          {
-            "title": "Kluctl migration go/no-go",
-            "date": "2026-03-31",
+            "title": "Data Export API Design Review",
+            "date": "2026-03-14",
             "time": "14:00",
             "type": "gate",
-            "description": "Decide complete migration or pause based on backend/migration deployment status (ENG-7716, 7720)",
-            "owner": "DevOps Lead"
+            "description": "Approve FD-34/FD-40 architecture before implementation sprint",
+            "owner": "Product Engineering Lead"
           },
           {
-            "title": "Infrastructure cleanup decision",
-            "date": "2026-04-01",
-            "time": "EOD",
+            "title": "Production Alerting Sprint Complete",
+            "date": "2026-03-16",
+            "time": "17:00",
             "type": "deadline",
-            "description": "Accelerate PVC/redis/read-cache removal (ENG-7730, 7734, 7735) or defer to Q2",
-            "owner": "Infrastructure Lead"
+            "description": "All critical service alerts deployed (Keycloak, pts-id, Kafka, data-batcher)",
+            "owner": "Platform SRE"
           },
           {
-            "title": "Core algorithm large-file handling review",
-            "date": "2026-04-03",
-            "time": "15:00",
-            "type": "meeting",
-            "description": "ENG-9000 progress check—channel-oriented processing and commit safety status",
-            "owner": "Algorithm Team Lead"
-          },
+            "title": "CSV Upload Slash Date Fix",
+            "date": "2026-03-12",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "ENG-9020 hotfix deployment to production",
+            "owner": "Data Ingestion Team"
+          }
+        ]
+      },
+      {
+        "label": "Late March (Mar 16-31)",
+        "events": [
           {
-            "title": "Q1 strategy review: Nail the Core pillar",
-            "date": "2026-04-04",
+            "title": "Distributed DB Selection Decision",
+            "date": "2026-03-23",
             "time": "10:00",
-            "type": "meeting",
-            "description": "Assess Decisions Captured metric, observability coverage, ingestion reliability vs targets",
-            "owner": "Engineering Manager"
+            "type": "gate",
+            "description": "Final selection based on ENG-8565 performance testing results",
+            "owner": "Platform Architecture"
+          },
+          {
+            "title": "Large-File Algorithm Complete",
+            "date": "2026-03-30",
+            "time": "17:00",
+            "type": "deadline",
+            "description": "ENG-9000 channel-oriented processing with commit safety merged",
+            "owner": "Core Data Engineering"
+          },
+          {
+            "title": "Dev K8s 1.33 Upgrade",
+            "date": "2026-03-18",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "ENG-7609 first environment upgrade as validation",
+            "owner": "DevOps"
+          },
+          {
+            "title": "Prod K8s 1.33 Upgrade",
+            "date": "2026-03-22",
+            "time": "06:00",
+            "type": "milestone",
+            "description": "ENG-7607 production upgrade during maintenance window",
+            "owner": "DevOps"
+          },
+          {
+            "title": "GovCloud HA Keycloak Migration",
+            "date": "2026-03-28",
+            "time": "10:00",
+            "type": "milestone",
+            "description": "ENG-7813 high-availability authentication for gov customers",
+            "owner": "Security/Infrastructure"
+          }
+        ]
+      },
+      {
+        "label": "April 2026",
+        "events": [
+          {
+            "title": "Kluctl Migration Complete",
+            "date": "2026-04-15",
+            "time": "17:00",
+            "type": "gate",
+            "description": "All production services on kluctl deployment pipeline",
+            "owner": "DevOps/Platform Team"
+          },
+          {
+            "title": "Explore V2 GA Target",
+            "date": "2026-04-30",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "General availability pending core algorithm stability",
+            "owner": "Product Team"
+          },
+          {
+            "title": "Python Rules Beta Expansion",
+            "date": "2026-04-10",
+            "time": "14:00",
+            "type": "milestone",
+            "description": "Expand from 7 to 12 beta customers with data export API",
+            "owner": "Product/Customer Success"
+          }
+        ]
+      },
+      {
+        "label": "Q2 2026 (Apr-Jun)",
+        "events": [
+          {
+            "title": "Sift Edge Alpha Launch",
+            "date": "2026-05-15",
+            "time": "10:00",
+            "type": "milestone",
+            "description": "First customer deployments of edge processing with selected distributed DB",
+            "owner": "Edge Product Lead"
+          },
+          {
+            "title": "Canvas Public Beta",
+            "date": "2026-06-01",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "Visual workflow builder general availability",
+            "owner": "Product Team"
+          },
+          {
+            "title": "Ask SIFT Integration Launch",
+            "date": "2026-06-15",
+            "time": "14:00",
+            "type": "milestone",
+            "description": "Natural language query interface with decision capture",
+            "owner": "AI/ML Team"
           }
         ]
       }
