@@ -9,76 +9,373 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --bg: #ece9e2;
-        --panel: #fcfbf8;
-        --line: #d4cec2;
-        --line-strong: #b9b09f;
-        --ink: #171512;
-        --muted: #6a6358;
-        --accent: #2e6d44;
-        --elev: 0 10px 24px rgba(22, 18, 10, 0.08);
+        --bg: #ede9e1;
+        --panel: #fbf9f4;
+        --line: #d7d0c3;
+        --line-strong: #b9af9e;
+        --ink: #171511;
+        --muted: #655f54;
+        --accent: #2f6b44;
+        --accent-soft: #eaf5ee;
+        --elev: 0 12px 26px rgba(22, 18, 10, 0.08);
         --elev-soft: 0 3px 10px rgba(22, 18, 10, 0.06);
       }
       * { box-sizing: border-box; }
-      html, body { margin: 0; padding: 0; background: radial-gradient(1200px 600px at 18% 5%, #f8f6f0 0%, var(--bg) 45%, #e8e4da 100%); color: var(--ink); font-family: "IBM Plex Mono", monospace; -webkit-text-size-adjust: 100%; }
-      html { scroll-behavior: smooth; }
-      a { color: inherit; }
-      .app { width: min(1280px, calc(100% - 1.4rem)); margin: 0.7rem auto; border: 1px solid var(--line); background: linear-gradient(180deg, #f9f7f1 0%, #f3f0e8 100%); box-shadow: var(--elev); overflow: clip; }
-      .top { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding: 0.5rem 0.8rem; font-size: 0.74rem; color: var(--muted); background: rgba(252, 251, 248, 0.9); backdrop-filter: blur(6px); }
-      .head { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; padding: 0.86rem 0.9rem; border-bottom: 1px solid var(--line); background: linear-gradient(90deg, #fff 0%, #f9f7f2 100%); }
-      .head h1 { margin: 0; font-size: 0.95rem; color: var(--muted); letter-spacing: 0.02em; }
-      .layout { display: grid; grid-template-columns: 280px 1fr; min-height: 82vh; }
-      .rail { border-right: 1px solid var(--line); background: linear-gradient(180deg, #efebe3 0%, #ece8df 100%); padding: 0.8rem; }
-      .name { margin: 0; font-size: 1rem; letter-spacing: 0.01em; }
-      .sub { margin: 0.45rem 0 0.75rem; color: var(--muted); font-size: 0.75rem; }
-      .profile-card { border: 1px solid var(--line); background: rgba(255,255,255,0.75); border-radius: 8px; padding: 0.58rem; margin-bottom: 0.65rem; box-shadow: var(--elev-soft); }
-      .menu { display: grid; gap: 0.32rem; }
-      .menu button { text-align: left; color: var(--ink); font-size: 0.77rem; border: 1px solid transparent; padding: 0.44rem 0.52rem; background: transparent; font-family: inherit; cursor: pointer; border-radius: 6px; transition: background 140ms ease, border-color 140ms ease, transform 140ms ease; }
-      .menu button:hover { background: #f9f7f2; border-color: var(--line); transform: translateX(2px); }
-      .menu button.active { border-color: var(--line-strong); background: #fff; box-shadow: inset 2px 0 0 var(--accent); }
-      .main { padding: 0.84rem; }
-      .panel { border: 1px solid var(--line); background: var(--panel); padding: 0.78rem; margin-bottom: 0.66rem; border-radius: 10px; box-shadow: var(--elev-soft); }
-      .title { margin: 0 0 0.45rem; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
-      .hero h2 { margin: 0; font-family: "Instrument Serif", serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 400; line-height: 0.92; letter-spacing: -0.01em; }
-      .hero p { margin: 0.7rem 0 0; color: var(--muted); max-width: 70ch; line-height: 1.45; font-size: 0.86rem; }
-      .hero { background: linear-gradient(120deg, #fefdfb 0%, #f6f2ea 68%, #efe9dc 100%); border-color: #cdc3af; }
-      .kicker { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.74rem; line-height: 1.45; }
-      .inline-links { display: flex; flex-wrap: wrap; gap: 0.4rem 0.7rem; }
-      .inline-links a { color: var(--ink); text-decoration: none; font-size: 0.78rem; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 0.16rem 0.42rem; transition: border-color 140ms ease, transform 140ms ease; }
-      .inline-links a:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-      .link-chip { display: inline-flex; align-items: center; min-height: 36px; color: var(--ink); text-decoration: none; font-size: 0.78rem; border: 1px solid var(--line); background: #fff; border-radius: 999px; padding: 0.16rem 0.58rem; transition: border-color 140ms ease, transform 140ms ease; }
-      .link-chip:hover { border-color: var(--line-strong); transform: translateY(-1px); }
-      .image-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.55rem; }
-      .image-strip img { width: 100%; height: 180px; object-fit: cover; border: 1px solid var(--line); background: #eee; border-radius: 8px; }
-      .live { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--line); padding: 0.12rem 0.38rem; border-radius: 999px; background: #fff; }
-      .live-dot { width: 8px; height: 8px; border-radius: 50%; background: #b24343; }
-      .live-dot.ok { background: #2a6a3b; animation: pulse 1.8s infinite; }
-      .live-dot.warn { background: #b27a2f; }
-      @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(42, 106, 59, 0.42); }
-        70% { box-shadow: 0 0 0 7px rgba(42, 106, 59, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(42, 106, 59, 0); }
+      html, body {
+        margin: 0;
+        padding: 0;
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--ink);
+        background: radial-gradient(1200px 620px at 20% 0%, #f8f6f0 0%, var(--bg) 42%, #e8e3d8 100%);
+        -webkit-text-size-adjust: 100%;
       }
-      .notes-list { display: grid; gap: 0.45rem; margin-top: 0.4rem; }
-      .notes-item { border: 1px solid var(--line); background: #fbfaf8; padding: 0.62rem; border-radius: 8px; transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease; }
-      .notes-item:hover { transform: translateY(-1px); border-color: var(--line-strong); box-shadow: var(--elev-soft); }
-      .notes-item h4 { margin: 0; font-size: 0.84rem; }
-      .notes-item p { margin: 0.35rem 0 0; color: var(--muted); font-size: 0.76rem; line-height: 1.4; }
-      .notes-item .meta { margin-top: 0.35rem; font-size: 0.7rem; color: var(--muted); }
-      .stack { display: grid; gap: 0.5rem; }
+      a { color: inherit; }
+
+      .app {
+        width: min(1280px, calc(100% - 1.4rem));
+        margin: 0.7rem auto;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, #faf8f3 0%, #f2efe6 100%);
+        box-shadow: var(--elev);
+        overflow: clip;
+      }
+
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 8;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.8rem;
+        border-bottom: 1px solid var(--line);
+        padding: 0.48rem 0.78rem;
+        font-size: 0.73rem;
+        color: var(--muted);
+        background: rgba(251, 249, 244, 0.92);
+        backdrop-filter: blur(5px);
+      }
+
+      .top-utilities {
+        display: inline-flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .utility-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        text-decoration: none;
+        font-size: 0.69rem;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.1rem 0.46rem;
+        background: #fff;
+        transition: border-color 140ms ease, color 140ms ease;
+      }
+      .utility-link:hover { border-color: var(--line-strong); color: var(--ink); }
+
+      .head {
+        border-bottom: 1px solid var(--line);
+        padding: 0.86rem 0.9rem;
+        background: linear-gradient(90deg, #fff 0%, #f8f5ee 100%);
+      }
+      .head h1 {
+        margin: 0;
+        font-size: 0.9rem;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        min-height: 82vh;
+      }
+
+      .rail {
+        border-right: 1px solid var(--line);
+        background: linear-gradient(180deg, #efebe2 0%, #ece7dd 100%);
+        padding: 0.75rem;
+      }
+
+      .profile-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0.58rem;
+        background: rgba(255, 255, 255, 0.75);
+        box-shadow: var(--elev-soft);
+        margin-bottom: 0.65rem;
+      }
+      .profile-name {
+        margin: 0;
+        font-size: 0.99rem;
+      }
+      .profile-sub {
+        margin: 0.4rem 0 0;
+        font-size: 0.73rem;
+        color: var(--muted);
+        line-height: 1.45;
+      }
+
+      .nav {
+        display: grid;
+        gap: 0.34rem;
+      }
+      .nav button {
+        text-align: left;
+        font: inherit;
+        font-size: 0.77rem;
+        color: var(--ink);
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background: transparent;
+        padding: 0.44rem 0.52rem;
+        cursor: pointer;
+        transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+      }
+      .nav button:hover {
+        background: #f8f5ee;
+        border-color: var(--line);
+        transform: translateX(2px);
+      }
+      .nav button.active {
+        background: #fff;
+        border-color: var(--line-strong);
+        box-shadow: inset 2px 0 0 var(--accent);
+      }
+
+      .main {
+        padding: 0.85rem;
+      }
+
       .page { display: none; }
-      .page.active { display: block; animation: reveal 220ms ease-out; }
-      [data-ix-reveal] { opacity: 0; transform: translateY(8px); transition: opacity 280ms ease, transform 280ms ease; }
-      [data-ix-reveal].in { opacity: 1; transform: translateY(0); }
-      @keyframes reveal { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+      .page.active {
+        display: block;
+        animation: reveal 220ms ease-out;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--panel);
+        box-shadow: var(--elev-soft);
+        padding: 0.78rem;
+        margin-bottom: 0.66rem;
+      }
+
+      .title {
+        margin: 0 0 0.45rem;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .hero {
+        background: linear-gradient(120deg, #fefcf8 0%, #f6f1e8 72%, #efe7d9 100%);
+        border-color: #cec3af;
+      }
+      .hero h2 {
+        margin: 0;
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(2.25rem, 5vw, 3.9rem);
+        line-height: 0.91;
+        letter-spacing: -0.012em;
+        font-weight: 400;
+        max-width: 14ch;
+      }
+      .hero p {
+        margin: 0.74rem 0 0;
+        color: var(--muted);
+        max-width: 72ch;
+        font-size: 0.86rem;
+        line-height: 1.45;
+      }
+
+      .status-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
+      }
+
+      .state-chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.35rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .state-chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        color: var(--muted);
+        font-size: 0.68rem;
+        padding: 0.14rem 0.42rem;
+      }
+
+      .live {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: #fff;
+        padding: 0.13rem 0.4rem;
+      }
+      .live-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #b24343;
+      }
+      .live-dot.ok { background: #2f6b44; animation: pulse 1.8s infinite; }
+      .live-dot.warn { background: #b27a2f; }
+
+      .kicker {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        font-size: 0.74rem;
+        line-height: 1.45;
+      }
+
+      .triad {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+
+      .inline-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.7rem;
+      }
+      .inline-links a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 0.78rem;
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 0.16rem 0.42rem;
+        transition: border-color 140ms ease, transform 140ms ease;
+      }
+      .inline-links a:hover {
+        border-color: var(--line-strong);
+        transform: translateY(-1px);
+      }
+
+      .image-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.55rem;
+      }
+      .image-strip img {
+        width: 100%;
+        height: 178px;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #eee;
+      }
+
+      .work-rail {
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .work-card h3 {
+        margin: 0;
+        font-size: 0.88rem;
+      }
+      .work-card p {
+        margin: 0.4rem 0 0;
+        color: var(--muted);
+        font-size: 0.79rem;
+        line-height: 1.45;
+      }
+      .work-card ul {
+        margin: 0.45rem 0 0;
+        padding-left: 1.04rem;
+        color: var(--muted);
+        font-size: 0.75rem;
+        line-height: 1.37;
+      }
+
+      .notes-list {
+        display: grid;
+        gap: 0.45rem;
+        margin-top: 0.45rem;
+      }
+      .notes-item {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fbfaf8;
+        padding: 0.62rem;
+        transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+      }
+      .notes-item:hover {
+        transform: translateY(-1px);
+        border-color: var(--line-strong);
+        box-shadow: var(--elev-soft);
+      }
+      .notes-item h4 {
+        margin: 0;
+        font-size: 0.84rem;
+      }
+      .notes-item p {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        font-size: 0.76rem;
+        line-height: 1.4;
+      }
+      .notes-item .meta {
+        margin-top: 0.35rem;
+        color: var(--muted);
+        font-size: 0.7rem;
+      }
+
+      [data-ix-reveal] {
+        opacity: 0;
+        transform: translateY(8px);
+        transition: opacity 280ms ease, transform 280ms ease;
+      }
+      [data-ix-reveal].in {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @keyframes reveal {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(47, 107, 68, 0.42); }
+        70% { box-shadow: 0 0 0 7px rgba(47, 107, 68, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(47, 107, 68, 0); }
+      }
+
       @media (max-width: 1100px) {
         .layout { grid-template-columns: 1fr; }
         .rail { border-right: 0; border-bottom: 1px solid var(--line); }
-        .image-strip { grid-template-columns: 1fr; }
-        .head { padding: 0.7rem; }
-        .menu { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 0.44rem; padding-bottom: 0.2rem; }
-        .menu button { min-height: 40px; white-space: nowrap; padding: 0.48rem 0.65rem; }
+        .status-grid, .triad, .image-strip { grid-template-columns: 1fr; }
+        .nav {
+          grid-auto-flow: column;
+          grid-auto-columns: max-content;
+          overflow-x: auto;
+          gap: 0.44rem;
+          padding-bottom: 0.18rem;
+        }
+        .nav button {
+          min-height: 40px;
+          white-space: nowrap;
+          padding: 0.48rem 0.65rem;
+        }
       }
+
       @media (max-width: 720px) {
         .app { width: calc(100% - 0.6rem); margin: 0.3rem auto; }
         .top { font-size: 0.66rem; padding: 0.44rem 0.5rem; }
@@ -86,9 +383,8 @@
         .head h1 { font-size: 0.8rem; line-height: 1.3; }
         .rail, .main { padding: 0.55rem; }
         .panel { padding: 0.6rem; border-radius: 8px; }
-        .hero h2 { font-size: clamp(1.86rem, 8.4vw, 2.5rem); line-height: 0.95; }
-        .image-strip img { height: 150px; }
-        .inline-links a { min-height: 36px; display: inline-flex; align-items: center; }
+        .hero h2 { font-size: clamp(1.86rem, 8.4vw, 2.55rem); line-height: 0.95; }
+        .image-strip img { height: 148px; }
       }
     </style>
   </head>
@@ -96,45 +392,82 @@
     <main class="app" id="app">
       <header class="top">
         <span>NOAHLUCAS.COM // STAGING</span>
-        <span id="stamp">sync idle</span>
+        <div class="top-utilities">
+          <a class="utility-link" href="https://www.linkedin.com/in/noahlucas/" target="_blank" rel="noopener">LinkedIn</a>
+          <span id="stamp">sync idle</span>
+        </div>
       </header>
+
       <div class="head">
-        <h1>NoahLucas.com · realtime public surface</h1>
+        <h1>Live personal intelligence surface</h1>
       </div>
+
       <section class="layout">
         <aside class="rail">
           <div class="profile-card" data-ix-reveal>
-            <p class="name">Noah Lucas</p>
-            <p class="sub">VP of Product at Sift · Ojai, California</p>
-            <a class="link-chip" href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas" target="_blank" rel="noopener">Request CV</a>
+            <p class="profile-name">Noah Lucas</p>
+            <p class="profile-sub">VP of Product at Sift · Ojai, California</p>
           </div>
-          <nav class="menu" id="public-nav">
-            <button class="active" data-public-view="home" type="button">Home</button>
-            <button data-public-view="bio" type="button">Bio</button>
-            <button data-public-view="notes" type="button">Notes</button>
-            <button data-public-view="holocron" type="button">Holocron</button>
-            <button data-public-view="linkedin" type="button">LinkedIn</button>
+
+          <nav class="nav" id="public-nav">
+            <button class="active" data-page="home" type="button">Home</button>
+            <button data-page="work" type="button">Work</button>
+            <button data-page="notes" type="button">Notes</button>
           </nav>
         </aside>
+
         <section class="main">
-          <div class="page active" data-page="home">
+          <div class="page active" data-view="home">
             <article class="panel hero" data-ix-reveal>
               <p class="title">Home</p>
               <h2>Noah Lucas</h2>
-              <p>Product leader and entrepreneur building AI-native systems for real-world execution.</p>
+              <p>A live intelligence surface for work, memory, and context.</p>
+              <p>Built as a dogfooded prototype for how people, machines, and missions may one day remember their full lives.</p>
             </article>
-            <article class="panel card" data-ix-reveal>
-              <p class="title">Realtime Connection</p>
-              <p class="live"><span id="live-dot" class="live-dot"></span><span id="live-label">connecting</span></p>
-              <p id="realtime-summary">Establishing connection to Squarespace notes feed...</p>
-              <p class="kicker" id="realtime-sync">Last sync: --</p>
-            </article>
-            <article class="panel card" data-ix-reveal>
-              <p class="title">Bio</p>
-              <p>Noah Lucas is VP of Product at Sift, where he leads AI-native product systems for aerospace, defense, and robotics. Raised in the Midwest, educated in New York, and building in California, he blends strategy, execution, and narrative into durable product outcomes. He lives in Ojai with Sara, Willa, and Bruce.</p>
-            </article>
-            <article class="panel card" data-ix-reveal>
-              <p class="title">Spotify Playlists</p>
+
+            <div class="status-grid" data-ix-reveal>
+              <article class="panel">
+                <p class="title">System State</p>
+                <div class="state-chip-row">
+                  <span class="state-chip">Live intelligence surface</span>
+                  <span class="state-chip">Connected sources</span>
+                  <span class="state-chip">Active memory</span>
+                </div>
+                <p class="live"><span id="live-dot" class="live-dot"></span><span id="live-label">connecting</span></p>
+                <p class="kicker" id="realtime-summary">Synthesized context calibrating.</p>
+                <p class="kicker" id="realtime-sync">System state: initializing</p>
+              </article>
+
+              <article class="panel">
+                <p class="title">Active Reconstruction</p>
+                <p class="kicker"><strong>Current focus:</strong> product strategy, intelligence systems, and high-stakes execution.</p>
+                <p class="kicker"><strong>Reconstructed scene:</strong> weekly operator cadence across product, customers, and writing.</p>
+                <p class="kicker"><strong>Linked evidence:</strong> notes, role history, and published context nodes.</p>
+                <div class="panel" style="margin-top:0.55rem; margin-bottom:0; background:#fff;">
+                  <p class="title">Scene Graph</p>
+                  <p class="kicker">[Sift execution] -> [operator notes] -> [synthesized context] -> [public narrative]</p>
+                  <p class="kicker">[memory events] -> [reconstructed scene] -> [active decisions]</p>
+                </div>
+              </article>
+            </div>
+
+            <div class="triad" data-ix-reveal>
+              <article class="panel">
+                <p class="title">Personal Autobiography</p>
+                <p class="kicker">Moments, choices, and identity over time.</p>
+              </article>
+              <article class="panel">
+                <p class="title">System Autobiography</p>
+                <p class="kicker">How tools, prompts, and workflows evolve with use.</p>
+              </article>
+              <article class="panel">
+                <p class="title">Intelligence Layer</p>
+                <p class="kicker">Synthesis that connects lived context with actionable clarity.</p>
+              </article>
+            </div>
+
+            <article class="panel" data-ix-reveal>
+              <p class="title">Spotify Orbit</p>
               <div class="inline-links">
                 <a href="https://open.spotify.com/playlist/78YOLwcGvs5gQKIrCnJrkY?si=231680b5cf5648bc" target="_blank" rel="noopener">2025</a>
                 <a href="https://open.spotify.com/playlist/1WohnY8ziS7pB08iy8o7Sj?si=36a9a84f00984b1e" target="_blank" rel="noopener">2024</a>
@@ -150,50 +483,46 @@
                 <a href="https://open.spotify.com/playlist/2uF52eBGbO4dAhzwJScWUD?si=803e9d41a98c4ea4" target="_blank" rel="noopener">Noah's Orbit</a>
               </div>
             </article>
-            <article class="panel card" data-ix-reveal>
-              <p class="title">Imported Images</p>
-              <div class="image-strip">
-                <img src="/assets/imported/A7R05738.jpeg" alt="Noah Lucas visual 1" />
-                <img src="/assets/imported/postmates.png" alt="Noah Lucas visual 2" />
-                <img src="/assets/imported/IMG_1898.jpeg" alt="Noah Lucas visual 3" />
-              </div>
-            </article>
           </div>
 
-          <div class="page" data-page="bio">
+          <div class="page" data-view="work">
             <article class="panel" data-ix-reveal>
-              <p class="title">Bio</p>
-              <div class="stack">
-                <p>Noah Lucas is VP of Product at Sift, leading AI-native product strategy and execution for mission-critical telemetry and decision systems used across aerospace, defense, and robotics.</p>
-                <p>His career spans platform products, robotics, applied AI, and marketplace systems, with leadership roles at Sift, Anduril, Pendulum, Serve Robotics, and Postmates.</p>
-                <p>Raised in the Midwest, educated in New York, and now building in California, Noah lives in Ojai with Sara, Willa, and Bruce.</p>
+              <p class="title">Work</p>
+              <div class="work-rail">
+                <article class="panel work-card">
+                  <h3>Sift · VP of Product</h3>
+                  <p>Leading AI-native product strategy and execution for mission-critical telemetry and decision systems in aerospace, defense, and robotics.</p>
+                  <ul>
+                    <li>Owns portfolio direction from signal capture to decision quality.</li>
+                    <li>Builds cross-functional operating cadence across product, engineering, and leadership.</li>
+                  </ul>
+                </article>
+                <article class="panel work-card">
+                  <h3>Anduril, Pendulum, Serve, Postmates</h3>
+                  <p>Built products across defense platforms, applied AI systems, robotics operations, and marketplace logistics.</p>
+                  <ul>
+                    <li>Common thread: translate ambiguity into high-leverage execution.</li>
+                    <li>Focus: real users, measurable outcomes, durable systems.</li>
+                  </ul>
+                </article>
+                <article class="panel work-card">
+                  <h3>Biography</h3>
+                  <p>Raised in the Midwest, educated in New York, and building in California. Living in Ojai with Sara, Willa, and Bruce.</p>
+                  <p><a class="utility-link" href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a></p>
+                </article>
               </div>
             </article>
           </div>
 
-          <div class="page" data-page="notes">
+          <div class="page" data-view="notes">
             <article class="panel" data-ix-reveal>
               <p class="title">Notes</p>
-              <p>Live from Squarespace.</p>
-              <p class="kicker" id="notes-source">Source: connecting...</p>
+              <p>Operator notebook. Curated from live writing and surfaced as context-ready entries.</p>
               <div class="notes-list" id="notes-list">
-                <article class="notes-item"><h4>Loading notes…</h4></article>
+                <article class="notes-item"><h4>How VP Product systems become company leverage.</h4><p>Synthesis on execution architecture, operating cadence, and organizational compounding.</p><div class="meta">Curated note</div></article>
+                <article class="notes-item"><h4>The decision architecture behind shipping speed.</h4><p>Framing ambiguity reduction as a product discipline with evidence-linked decision loops.</p><div class="meta">Curated note</div></article>
+                <article class="notes-item"><h4>Building AI-native teams without hype cycles.</h4><p>Practical operating model for integrating intelligence systems into day-to-day product work.</p><div class="meta">Curated note</div></article>
               </div>
-            </article>
-          </div>
-
-          <div class="page" data-page="holocron">
-            <article class="panel" data-ix-reveal>
-              <p class="title">Holocron</p>
-              <p>Living archive.</p>
-            </article>
-          </div>
-
-          <div class="page" data-page="linkedin">
-            <article class="panel" data-ix-reveal>
-              <p class="title">LinkedIn</p>
-              <p><a class="link-chip" href="https://www.linkedin.com/in/noahlucas/" target="_blank" rel="noopener">Open LinkedIn</a></p>
-              <p class="kicker">External profile and public career history.</p>
             </article>
           </div>
         </section>
@@ -201,82 +530,107 @@
     </main>
 
     <script>
-      const publicNav = document.getElementById("public-nav");
+      const nav = document.getElementById("public-nav");
       const liveDot = document.getElementById("live-dot");
       const liveLabel = document.getElementById("live-label");
       const notesList = document.getElementById("notes-list");
-      const notesSource = document.getElementById("notes-source");
       const realtimeSummary = document.getElementById("realtime-summary");
       const realtimeSync = document.getElementById("realtime-sync");
-      const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
       const stamp = document.getElementById("stamp");
+      const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
       let notesPollTimer = null;
 
-      function setPublicPage(name) {
-        document.querySelectorAll(".page").forEach((el) => el.classList.toggle("active", el.dataset.page === name));
-        publicNav?.querySelectorAll("button").forEach((btn) => btn.classList.toggle("active", btn.dataset.publicView === name));
+      function setPage(name) {
+        document.querySelectorAll(".page").forEach((el) => {
+          el.classList.toggle("active", el.dataset.view === name);
+        });
+        nav?.querySelectorAll("button").forEach((btn) => {
+          btn.classList.toggle("active", btn.dataset.page === name);
+        });
         if (location.hash !== `#${name}`) location.hash = name;
       }
 
-      publicNav?.addEventListener("click", (e) => {
+      nav?.addEventListener("click", (e) => {
         const t = e.target;
-        if (t instanceof HTMLButtonElement && t.dataset.publicView) setPublicPage(t.dataset.publicView);
+        if (t instanceof HTMLButtonElement && t.dataset.page) setPage(t.dataset.page);
       });
 
       function fmt(ts) {
         return new Date(ts).toLocaleString();
       }
 
-      function setLive(state, msg) {
+      function setLive(state, label) {
         if (!liveDot || !liveLabel) return;
         liveDot.classList.remove("ok", "warn");
         if (state === "ok") liveDot.classList.add("ok");
         else if (state === "warn") liveDot.classList.add("warn");
-        liveLabel.textContent = msg;
+        liveLabel.textContent = label;
       }
 
       function renderNotes(items) {
         if (!notesList) return;
         if (!items.length) {
-          notesList.innerHTML = `<article class="notes-item"><h4>No notes published yet.</h4></article>`;
+          notesList.innerHTML = `<article class="notes-item"><h4>No entries published yet.</h4><p>New writing will surface here.</p></article>`;
           return;
         }
         notesList.innerHTML = items
+          .slice(0, 5)
           .map((item) => {
             const summary = (item.summary || "").replace(/<[^>]*>/g, "").slice(0, 220);
             return `
-            <article class="notes-item">
-              <h4><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h4>
-              <p>${summary || "Open note for full text."}</p>
-              <div class="meta">Published ${fmt(item.published_at)}</div>
-            </article>
-          `;
+              <article class="notes-item">
+                <h4><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h4>
+                <p>${summary || "Open note for full context."}</p>
+                <div class="meta">${fmt(item.published_at)}</div>
+              </article>
+            `;
           })
           .join("");
       }
 
-      async function refreshSquarespaceNotes() {
+      async function refreshPublishedNotes() {
         try {
-          setLive("warn", "syncing");
+          setLive("warn", "synthesizing");
           const res = await fetch("/api/v1/public/squarespace-notes", { cache: "no-store" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
-          renderNotes(Array.isArray(data.items) ? data.items : []);
-          if (notesSource) notesSource.textContent = `Source: ${data.source}`;
-          if (realtimeSummary) realtimeSummary.textContent = `Squarespace feed live: ${data.items?.length ?? 0} notes available.`;
-          if (realtimeSync) realtimeSync.textContent = `Last sync: ${fmt(data.updated_at)}`;
+          const items = Array.isArray(data.items) ? data.items : [];
+          renderNotes(items);
+
+          if (realtimeSummary) {
+            const latest = items[0]?.title ? `Latest note: ${items[0].title}` : "Synthesized context ready.";
+            realtimeSummary.textContent = latest;
+          }
+          if (realtimeSync) realtimeSync.textContent = `System state: synchronized ${fmt(data.updated_at)}`;
           if (stamp) stamp.textContent = `live · ${fmt(data.updated_at)}`;
           setLive("ok", "live");
-        } catch (err) {
-          setLive("warn", "degraded");
-          if (realtimeSummary) realtimeSummary.textContent = "Realtime feed temporarily unavailable.";
-          if (realtimeSync) realtimeSync.textContent = `Last check: ${new Date().toLocaleString()}`;
-          if (stamp) stamp.textContent = `degraded · ${new Date().toLocaleTimeString()}`;
-          if (notesList) {
-            notesList.innerHTML = `<article class="notes-item"><h4>Feed unavailable right now.</h4><p>Retrying automatically.</p></article>`;
-          }
+        } catch {
+          setLive("warn", "recalibrating");
+          if (realtimeSummary) realtimeSummary.textContent = "Synthesized context is recalibrating.";
+          if (realtimeSync) realtimeSync.textContent = `System state: retrying`;
+          if (stamp) stamp.textContent = `recalibrating · ${new Date().toLocaleTimeString()}`;
         }
       }
+
+      function startNotesPolling() {
+        if (notesPollTimer) return;
+        notesPollTimer = window.setInterval(refreshPublishedNotes, 60000);
+      }
+
+      function stopNotesPolling() {
+        if (!notesPollTimer) return;
+        window.clearInterval(notesPollTimer);
+        notesPollTimer = null;
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopNotesPolling();
+        } else {
+          refreshPublishedNotes();
+          startNotesPolling();
+        }
+      });
 
       function initReveal() {
         if (!("IntersectionObserver" in window)) {
@@ -293,36 +647,16 @@
 
       document.addEventListener("keydown", (e) => {
         if (e.metaKey || e.ctrlKey || e.altKey) return;
-        const keyMap = { "1": "home", "2": "bio", "3": "notes", "4": "holocron", "5": "linkedin" };
+        const keyMap = { "1": "home", "2": "work", "3": "notes" };
         const target = keyMap[e.key];
-        if (target) setPublicPage(target);
+        if (target) setPage(target);
       });
 
       const initial = (location.hash || "").replace("#", "").trim().toLowerCase();
-      const valid = new Set(["home", "bio", "notes", "holocron", "linkedin"]);
-      setPublicPage(valid.has(initial) ? initial : "home");
+      const valid = new Set(["home", "work", "notes"]);
+      setPage(valid.has(initial) ? initial : "home");
       initReveal();
-      function startNotesPolling() {
-        if (notesPollTimer) return;
-        notesPollTimer = window.setInterval(refreshSquarespaceNotes, 60000);
-      }
-
-      function stopNotesPolling() {
-        if (!notesPollTimer) return;
-        window.clearInterval(notesPollTimer);
-        notesPollTimer = null;
-      }
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          stopNotesPolling();
-        } else {
-          refreshSquarespaceNotes();
-          startNotesPolling();
-        }
-      });
-
-      refreshSquarespaceNotes();
+      refreshPublishedNotes();
       startNotesPolling();
     </script>
   </body>
