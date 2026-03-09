@@ -424,3 +424,50 @@ class AutobiographerChapterResponse(BaseModel):
 
 class AutobiographerChaptersResponse(BaseModel):
     items: List[AutobiographerChapterItem]
+
+
+class AutobiographerMonthlyChapterGenerateRequest(BaseModel):
+    year: int = Field(ge=2000, le=2100)
+    month: int = Field(ge=1, le=12)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        min_length=12,
+        max_length=1200,
+    )
+    include_private_context: bool = True
+    force_regenerate: bool = False
+
+
+class AutobiographerMonthlyChaptersInitializeRequest(BaseModel):
+    year: int = Field(ge=2000, le=2100)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        min_length=12,
+        max_length=1200,
+    )
+
+
+class AutobiographerMonthlyChapterItem(BaseModel):
+    id: int
+    year: int
+    month: int
+    month_label: str
+    persona_label: str
+    style_brief: str
+    summary: str
+    chapter_markdown: str
+    status: str
+    locked_at: Optional[datetime] = None
+    generated_at: datetime
+    updated_at: datetime
+
+
+class AutobiographerMonthlyChapterResponse(BaseModel):
+    chapter: AutobiographerMonthlyChapterItem
+
+
+class AutobiographerMonthlyChaptersResponse(BaseModel):
+    year: int
+    items: List[AutobiographerMonthlyChapterItem]

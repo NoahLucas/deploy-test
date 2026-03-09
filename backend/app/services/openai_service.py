@@ -400,6 +400,71 @@ class OpenAIService:
             return None
         return parsed
 
+    def generate_autobiographer_month_chapter(
+        self,
+        *,
+        year: int,
+        month: int,
+        month_label: str,
+        persona_label: str,
+        style_brief: str,
+        memory_events: list[Dict[str, Any]],
+        include_private_context: bool,
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": (
+                                "You are an autobiographer agent creating one monthly chapter for a living life journal. "
+                                "Return strict JSON with keys: summary, chapter_markdown. "
+                                "summary must be <= 45 words. "
+                                "chapter_markdown should include: title, narrative arc, key moments, reflections, and open threads. "
+                                "Write in grounded nonfiction style, emotionally intelligent, specific, and personal."
+                            ),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": json.dumps(
+                                {
+                                    "year": year,
+                                    "month": month,
+                                    "month_label": month_label,
+                                    "persona_label": persona_label,
+                                    "style_brief": style_brief,
+                                    "include_private_context": include_private_context,
+                                    "memory_events": memory_events,
+                                }
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
     @staticmethod
     def _extract_text(payload: Dict[str, Any]) -> str:
         output_text = payload.get("output_text")

@@ -186,6 +186,30 @@ class SignalStore:
                 )
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_monthly_chapters (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL,
+                    month INTEGER NOT NULL,
+                    persona_label TEXT NOT NULL,
+                    style_brief TEXT NOT NULL,
+                    summary TEXT NOT NULL,
+                    chapter_markdown TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    locked_at TEXT,
+                    generated_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    UNIQUE(year, month)
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_monthly_year_month
+                ON autobiographer_monthly_chapters(year, month)
+                """
+            )
 
     def insert_sanitized_signals(
         self,
@@ -851,6 +875,129 @@ class SignalStore:
                 "style_brief": str(row["style_brief"]),
                 "summary": str(row["summary"]),
                 "chapter_markdown": str(row["chapter_markdown"]),
+                "generated_at": str(row["generated_at"]),
+                "updated_at": str(row["updated_at"]),
+            }
+            for row in rows
+        ]
+
+    def upsert_autobiographer_month_chapter(
+        self,
+        *,
+        year: int,
+        month: int,
+        persona_label: str,
+        style_brief: str,
+        summary: str,
+        chapter_markdown: str,
+        status: str,
+        locked_at: Optional[str],
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO autobiographer_monthly_chapters(
+                    year, month, persona_label, style_brief, summary, chapter_markdown,
+                    status, locked_at, generated_at, updated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON CONFLICT(year, month) DO UPDATE SET
+                    persona_label = excluded.persona_label,
+                    style_brief = excluded.style_brief,
+                    summary = excluded.summary,
+                    chapter_markdown = excluded.chapter_markdown,
+                    status = excluded.status,
+                    locked_at = excluded.locked_at,
+                    updated_at = excluded.updated_at
+                """,
+                (
+                    year,
+                    month,
+                    persona_label,
+                    style_brief,
+                    summary,
+                    chapter_markdown,
+                    status,
+                    locked_at,
+                    now,
+                    now,
+                ),
+            )
+            row = conn.execute(
+                """
+                SELECT id
+                FROM autobiographer_monthly_chapters
+                WHERE year = ? AND month = ?
+                """,
+                (year, month),
+            ).fetchone()
+            return int(row["id"]) if row else 0
+
+    def get_autobiographer_month_chapter(self, *, year: int, month: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, year, month, persona_label, style_brief, summary, chapter_markdown,
+                       status, locked_at, generated_at, updated_at
+                FROM autobiographer_monthly_chapters
+                WHERE year = ? AND month = ?
+                """,
+                (year, month),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "year": int(row["year"]),
+            "month": int(row["month"]),
+            "persona_label": str(row["persona_label"]),
+            "style_brief": str(row["style_brief"]),
+            "summary": str(row["summary"]),
+            "chapter_markdown": str(row["chapter_markdown"]),
+            "status": str(row["status"]),
+            "locked_at": str(row["locked_at"]) if row["locked_at"] is not None else "",
+            "generated_at": str(row["generated_at"]),
+            "updated_at": str(row["updated_at"]),
+        }
+
+    def list_autobiographer_month_chapters(self, *, year: Optional[int] = None, limit: int = 240) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 500))
+        with self._connect() as conn:
+            if year is None:
+                rows = conn.execute(
+                    """
+                    SELECT id, year, month, persona_label, style_brief, summary, chapter_markdown,
+                           status, locked_at, generated_at, updated_at
+                    FROM autobiographer_monthly_chapters
+                    ORDER BY year DESC, month DESC
+                    LIMIT ?
+                    """,
+                    (safe_limit,),
+                ).fetchall()
+            else:
+                rows = conn.execute(
+                    """
+                    SELECT id, year, month, persona_label, style_brief, summary, chapter_markdown,
+                           status, locked_at, generated_at, updated_at
+                    FROM autobiographer_monthly_chapters
+                    WHERE year = ?
+                    ORDER BY month ASC
+                    LIMIT ?
+                    """,
+                    (year, safe_limit),
+                ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "year": int(row["year"]),
+                "month": int(row["month"]),
+                "persona_label": str(row["persona_label"]),
+                "style_brief": str(row["style_brief"]),
+                "summary": str(row["summary"]),
+                "chapter_markdown": str(row["chapter_markdown"]),
+                "status": str(row["status"]),
+                "locked_at": str(row["locked_at"]) if row["locked_at"] is not None else "",
                 "generated_at": str(row["generated_at"]),
                 "updated_at": str(row["updated_at"]),
             }
