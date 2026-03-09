@@ -210,6 +210,7 @@
       const realtimeSync = document.getElementById("realtime-sync");
       const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
       const stamp = document.getElementById("stamp");
+      let notesPollTimer = null;
 
       function setPublicPage(name) {
         document.querySelectorAll(".page").forEach((el) => el.classList.toggle("active", el.dataset.page === name));
@@ -301,8 +302,28 @@
       const valid = new Set(["home", "bio", "notes", "holocron", "linkedin"]);
       setPublicPage(valid.has(initial) ? initial : "home");
       initReveal();
+      function startNotesPolling() {
+        if (notesPollTimer) return;
+        notesPollTimer = window.setInterval(refreshSquarespaceNotes, 60000);
+      }
+
+      function stopNotesPolling() {
+        if (!notesPollTimer) return;
+        window.clearInterval(notesPollTimer);
+        notesPollTimer = null;
+      }
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          stopNotesPolling();
+        } else {
+          refreshSquarespaceNotes();
+          startNotesPolling();
+        }
+      });
+
       refreshSquarespaceNotes();
-      setInterval(refreshSquarespaceNotes, 45000);
+      startNotesPolling();
     </script>
   </body>
 </html>

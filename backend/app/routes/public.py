@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import re
+from html import unescape
 from datetime import datetime, timezone
 from pathlib import Path
 from xml.etree import ElementTree
@@ -21,6 +23,8 @@ from app.models import (
 
 router = APIRouter()
 SQUARESPACE_NOTES_RSS_URL = "https://noahlucas.com/notes?format=rss"
+SQUARESPACE_NOTES_CACHE_TTL_SECONDS = 90
+_SQUARESPACE_NOTES_CACHE: dict[str, object] = {"fetched_at": None, "payload": None}
 
 
 def _draft_files(project_root: Path, limit: int = 24) -> list[Path]:
@@ -38,6 +42,15 @@ def _read_draft(path: Path) -> dict:
 def _rss_text(parent: ElementTree.Element, tag: str) -> str:
     value = parent.findtext(tag)
     return (value or "").strip()
+
+
+def _clean_rss_html(value: str) -> str:
+    if not value:
+        return ""
+    text = re.sub(r"<[^>]+>", " ", value)
+    text = unescape(text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 
 def _parse_rfc2822_utc(value: str) -> datetime:
@@ -135,6 +148,14 @@ def get_public_note_draft_detail(slug: str, request: Request) -> PublicNoteDetai
 
 @router.get("/squarespace-notes", response_model=SquarespaceNotesResponse)
 def get_squarespace_notes() -> SquarespaceNotesResponse:
+    now = datetime.now(timezone.utc)
+    cached_at = _SQUARESPACE_NOTES_CACHE.get("fetched_at")
+    cached_payload = _SQUARESPACE_NOTES_CACHE.get("payload")
+    if isinstance(cached_at, datetime) and isinstance(cached_payload, SquarespaceNotesResponse):
+        age_seconds = (now - cached_at).total_seconds()
+        if age_seconds < SQUARESPACE_NOTES_CACHE_TTL_SECONDS:
+            return cached_payload
+
     try:
         response = httpx.get(SQUARESPACE_NOTES_RSS_URL, timeout=12.0)
         response.raise_for_status()
@@ -156,7 +177,9 @@ def get_squarespace_notes() -> SquarespaceNotesResponse:
     for node in root.findall("./channel/item"):
         title = _rss_text(node, "title")
         url = _rss_text(node, "link")
-        summary = _rss_text(node, "description")
+        summary = _clean_rss_html(_rss_text(node, "description"))
+        if not summary:
+            summary = _clean_rss_html(_rss_text(node, "content:encoded"))
         published = _parse_rfc2822_utc(_rss_text(node, "pubDate"))
         if not title or not url:
             continue
@@ -171,8 +194,11 @@ def get_squarespace_notes() -> SquarespaceNotesResponse:
         if len(items) >= 12:
             break
 
-    return SquarespaceNotesResponse(
+    payload = SquarespaceNotesResponse(
         source=SQUARESPACE_NOTES_RSS_URL,
-        updated_at=datetime.now(timezone.utc),
+        updated_at=now,
         items=items,
     )
+    _SQUARESPACE_NOTES_CACHE["fetched_at"] = now
+    _SQUARESPACE_NOTES_CACHE["payload"] = payload
+    return payload
