@@ -291,6 +291,21 @@
         margin: 0;
         font-size: 0.88rem;
       }
+      .work-media {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 0.55rem;
+        background: #ece9e2;
+      }
+      .work-meta {
+        margin: 0.35rem 0 0.1rem;
+        color: var(--muted);
+        font-size: 0.72rem;
+        line-height: 1.42;
+      }
       .work-card p {
         margin: 0.4rem 0 0;
         color: var(--muted);
@@ -419,35 +434,30 @@
         <section class="main">
           <div class="page active" data-view="home">
             <article class="panel hero" data-ix-reveal>
-              <p class="title">Home</p>
               <h2>Noah Lucas</h2>
-              <p>A live intelligence surface for work, memory, and context.</p>
-              <p>Built as a dogfooded prototype for how people, machines, and missions may one day remember their full lives.</p>
+              <p>AI-native intelligence platform for fusing hardware, software, and machine reasoning into realtime product context.</p>
+              <p>Built as a live personal system for turning raw signal into decisions, narratives, and durable execution loops.</p>
             </article>
 
             <div class="status-grid" data-ix-reveal>
               <article class="panel">
                 <p class="title">System State</p>
                 <div class="state-chip-row">
-                  <span class="state-chip">Live intelligence surface</span>
+                  <span class="state-chip">AI-native intelligence platform</span>
                   <span class="state-chip">Connected sources</span>
                   <span class="state-chip">Active memory</span>
                 </div>
                 <p class="live"><span id="live-dot" class="live-dot"></span><span id="live-label">connecting</span></p>
-                <p class="kicker" id="realtime-summary">Synthesized context calibrating.</p>
+                <p class="kicker" id="realtime-summary">Data fusion engine calibrating across notes, work context, and memory traces.</p>
                 <p class="kicker" id="realtime-sync">System state: initializing</p>
               </article>
 
               <article class="panel">
-                <p class="title">Active Reconstruction</p>
-                <p class="kicker"><strong>Current focus:</strong> product strategy, intelligence systems, and high-stakes execution.</p>
-                <p class="kicker"><strong>Reconstructed scene:</strong> weekly operator cadence across product, customers, and writing.</p>
-                <p class="kicker"><strong>Linked evidence:</strong> notes, role history, and published context nodes.</p>
-                <div class="panel" style="margin-top:0.55rem; margin-bottom:0; background:#fff;">
-                  <p class="title">Scene Graph</p>
-                  <p class="kicker">[Sift execution] -> [operator notes] -> [synthesized context] -> [public narrative]</p>
-                  <p class="kicker">[memory events] -> [reconstructed scene] -> [active decisions]</p>
-                </div>
+                <p class="title">Biography</p>
+                <p class="kicker">Noah is a product leader and systems operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.</p>
+                <p class="kicker">Raised in the Midwest, shaped in New York, and building in California, he works at the intersection of applied AI, product strategy, and execution architecture.</p>
+                <p class="kicker">Based in Ojai with Sara, Willa, and Bruce.</p>
+                <p class="kicker"><a class="utility-link" href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a></p>
               </article>
             </div>
 
@@ -465,6 +475,15 @@
                 <p class="kicker">Synthesis that connects lived context with actionable clarity.</p>
               </article>
             </div>
+
+            <article class="panel" data-ix-reveal>
+              <p class="title">Personal Frames</p>
+              <div class="image-strip">
+                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/791f750f-7bb0-4ff8-aa35-88c11016eea0/IMG_1898.jpeg" alt="Noah personal image one" loading="lazy" />
+                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/4b7eac04-5f2b-4ed9-8fce-a53cba6f7eb8/DSCF1991_Original.jpeg" alt="Noah personal image two" loading="lazy" />
+                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/e6bffe4a-f75a-4b65-b7b3-aea3e9d87be8/DSCF2140_Original.jpeg" alt="Noah personal image three" loading="lazy" />
+              </div>
+            </article>
 
             <article class="panel" data-ix-reveal>
               <p class="title">Spotify Orbit</p>
@@ -490,8 +509,11 @@
               <p class="title">Work</p>
               <div class="work-rail">
                 <article class="panel work-card">
-                  <h3>Sift · VP of Product (Current)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/f8006cc7-c7d4-4116-9a9f-3d4926ab4e5f/Screenshot+2025-12-13+at+4.26.09%E2%80%AFPM.png" alt="Sift" loading="lazy" />
+                  <h3>Sift · VP of Product</h3>
+                  <p class="work-meta">Industry: AI-native hardware intelligence software · ICP: aerospace, defense, and robotics engineering leaders · Capital profile: venture-backed frontier systems company.</p>
                   <p>Building the product intelligence layer that makes hardware telemetry observable, interpretable, and actionable for aerospace, defense, and robotics operators.</p>
+                  <p class="work-meta"><a href="https://www.siftstack.com" target="_blank" rel="noopener">siftstack.com</a></p>
                   <ul>
                     <li><strong>Drive product velocity:</strong> ship core platform bets while improving decision quality and execution cadence.</li>
                     <li><strong>Be the customer bridge:</strong> translate field signal into concrete roadmap and product decisions.</li>
@@ -499,61 +521,86 @@
                     <li><strong>Grow the team:</strong> strengthen PM/design operating rhythm and raise product craft quality.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>Anduril Industries · Product Lead (2024 - Current on resume)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/3406d3e0-c018-4a41-b374-85ce1794e8e5/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg" alt="Anduril" loading="lazy" />
+                  <h3>Anduril Industries · Product Lead</h3>
+                  <p class="work-meta">Industry: defense technology · ICP: government and national security operators · Capital profile: multi-billion-dollar defense prime challenger.</p>
                   <p>Owned vertically integrated AI infrastructure for autonomous navigation, mapping, simulation, digital twins, and mixed reality across a heterogeneous fleet.</p>
+                  <p class="work-meta"><a href="https://www.anduril.com" target="_blank" rel="noopener">anduril.com</a></p>
                   <ul>
                     <li><strong>World model systems:</strong> deployed global offline navigation infrastructure across air, land, sea, subsea, and mixed-reality contexts.</li>
                     <li><strong>GPS-denied navigation:</strong> drove re-architecture toward vision-based navigation and planet-scale product operations.</li>
-                    <li><strong>Data architecture:</strong> designed multi-hop Internet → Cloud → Edge-Cloud → Edge fusion pipelines from petabyte-scale inputs to GB-scale on-device outputs.</li>
+                    <li><strong>Data architecture:</strong> designed multi-hop Internet -> Cloud -> Edge-Cloud -> Edge fusion pipelines from petabyte-scale inputs to GB-scale on-device outputs.</li>
                     <li><strong>Commercial leverage:</strong> integrated strategic data partnerships and licensing governance that delivered major efficiency gains.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>Pendulum Systems · Applied Product Research (2024 Contract)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/ebbce438-d6d8-446e-8d47-dd7bf0c36dd5/6613e9514442dfd1346a32ad_Pendulum+Navigate+awarded+with+2+new+contracts.jpg" alt="Pendulum" loading="lazy" />
+                  <h3>Pendulum Systems · Applied Product Research</h3>
+                  <p class="work-meta">Industry: applied AI and geospatial intelligence · ICP: defense and mission teams in contested environments · Capital profile: dual-use government-contracted systems builder.</p>
                   <p>Led early product development for a next-generation geolocation system designed to work in GPS-jammed or denied environments.</p>
+                  <p class="work-meta"><a href="https://www.pendulum.global" target="_blank" rel="noopener">pendulum.global</a></p>
                   <ul>
                     <li><strong>Field validation:</strong> advanced the system from prototype toward mission-ready performance through high-stress live exercises.</li>
                     <li><strong>Defense collaboration:</strong> worked directly with Army and Air Force innovation partners on adoption pathways and program direction.</li>
                     <li><strong>Embodied intelligence demos:</strong> shipped functional demonstrations across smartphones, wearables, and small drones.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>Serve Robotics · Director of Product Management (2021 - 2022)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/2939c081-99da-4d0f-a281-0d4a8b6da58e/Serve_robot_05%2B1.jpg" alt="Serve Robotics" loading="lazy" />
+                  <h3>Serve Robotics · Director of Product Management</h3>
+                  <p class="work-meta">Industry: robotics and autonomous delivery · ICP: enterprise delivery networks and logistics operators · Capital profile: public robotics company.</p>
                   <p>Commercialized L4 sidewalk autonomy with responsibility spanning revenue, GTM, and autonomy optimization.</p>
+                  <p class="work-meta"><a href="https://www.serverobotics.com" target="_blank" rel="noopener">serverobotics.com</a></p>
                   <ul>
                     <li><strong>Scale event:</strong> unlocked a purchase order path for 2,000+ robots through strategic platform integration.</li>
                     <li><strong>Core systems:</strong> delivered partner/API surfaces, C2 operations systems, and degraded-GPS localization workflows.</li>
                     <li><strong>Portfolio ownership:</strong> drove roadmap across autonomy, navigation, mapping, hardware, and operations.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>Postmates · Product Lead (2016 - 2021)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/3c4687c3-db22-4219-bcc4-87b97d807b96/postmates.png" alt="Postmates" loading="lazy" />
+                  <h3>Postmates · Product Lead</h3>
+                  <p class="work-meta">Industry: on-demand logistics and marketplace platforms · ICP: consumers, merchants, and enterprise delivery partners · Capital profile: late-stage venture-backed marketplace acquired by Uber.</p>
                   <p>Built core product and launched B2B/developer platform systems that scaled from 0 to meaningful revenue share.</p>
+                  <p class="work-meta"><a href="https://postmates.com" target="_blank" rel="noopener">postmates.com</a></p>
                   <ul>
                     <li><strong>Platform growth:</strong> built enterprise integrations with Apple, Walmart, Square, Shopify, Instacart, and others.</li>
                     <li><strong>Operational scale:</strong> supported consumer, merchant, and courier systems for millions of monthly deliveries.</li>
                     <li><strong>Market expansion:</strong> helped launch first non-U.S. market and modernized support/financial automation flows.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>Expedia Group · Senior Global Product Manager, Mobile (2013 - 2016)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/1b46e5ac-eb86-48b6-b9f6-720f5d64ab46/Expedia-Reveals-When-to-Book-Flights-for-the-2019-Holiday-Season.jpg" alt="Expedia" loading="lazy" />
+                  <h3>Expedia Group · Senior Global Product Manager, Mobile</h3>
+                  <p class="work-meta">Industry: global travel marketplace · ICP: international travelers and travel shoppers · Capital profile: public online travel platform.</p>
                   <p>Led global mobile travel product initiatives spanning flights, itineraries, and category expansion.</p>
+                  <p class="work-meta"><a href="https://www.expediagroup.com" target="_blank" rel="noopener">expediagroup.com</a></p>
                   <ul>
                     <li><strong>Category build:</strong> launched rental cars as a global mobile line of business.</li>
                     <li><strong>Core ownership:</strong> owned flights and itineraries in mobile product surfaces.</li>
                     <li><strong>International growth:</strong> expanded product outcomes across APAC and EMEA markets.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
-                  <h3>S&amp;P Global Market Intelligence · Data Platform Product Manager (2008 - 2013)</h3>
+                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/dd5e1eac-1a80-4ee6-b6f6-7080ed214df3/SwPuHxNdPVbdE1bCkrNlBGiY5rKIiAnK.jpg" alt="S&P Global Market Intelligence" loading="lazy" />
+                  <h3>S&amp;P Global Market Intelligence · Data Platform Product Manager</h3>
+                  <p class="work-meta">Industry: financial intelligence data platforms · ICP: institutional analysts and enterprise finance teams · Capital profile: public market data infrastructure provider.</p>
                   <p>Defined product UX and requirements for near-real-time financial data collection systems and platform pipelines.</p>
+                  <p class="work-meta"><a href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">spglobal.com/marketintelligence</a></p>
                   <ul>
                     <li><strong>Data platform foundations:</strong> built systems enabling high-trust downstream intelligence products.</li>
                     <li><strong>Reliability and speed:</strong> improved collection and pipeline behavior for near-real-time use cases.</li>
                     <li><strong>Early systems craft:</strong> established product management patterns for complex data infrastructure.</li>
                   </ul>
                 </article>
+
                 <article class="panel work-card">
                   <h3>Investor</h3>
                   <p>Active investor in companies building frontier capability across hardware, software, and consumer systems.</p>
@@ -565,11 +612,6 @@
                     <li>Capiche</li>
                     <li>Clotheshorse</li>
                   </ul>
-                </article>
-                <article class="panel work-card">
-                  <h3>Biography</h3>
-                  <p>Raised in the Midwest, educated in New York, and building in California. Living in Ojai with Sara, Willa, and Bruce.</p>
-                  <p><a class="utility-link" href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a></p>
                 </article>
               </div>
             </article>
@@ -658,10 +700,7 @@
           const items = Array.isArray(data.items) ? data.items : [];
           renderNotes(items);
 
-          if (realtimeSummary) {
-            const latest = items[0]?.title ? `Latest note: ${items[0].title}` : "Synthesized context ready.";
-            realtimeSummary.textContent = latest;
-          }
+          if (realtimeSummary) realtimeSummary.textContent = "Data fusion online across published notes and operating context.";
           if (realtimeSync) realtimeSync.textContent = `System state: synchronized ${fmt(data.updated_at)}`;
           if (stamp) stamp.textContent = `live · ${fmt(data.updated_at)}`;
           setLive("ok", "live");
