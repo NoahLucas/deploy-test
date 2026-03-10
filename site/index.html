@@ -8,6 +8,7 @@
       :root {
         --bg: #000000;
         --fg: #d9d9d9;
+        --muted: #9c9c9c;
       }
 
       * { box-sizing: border-box; }
@@ -37,6 +38,20 @@
         color: var(--fg);
       }
 
+      .muted {
+        color: var(--muted);
+      }
+
+      .cursor {
+        display: inline-block;
+        width: 1ch;
+        animation: blink 1s steps(1, end) infinite;
+      }
+
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
       @media (max-width: 720px) {
         main {
           width: calc(100% - 1rem);
@@ -47,12 +62,43 @@
   </head>
   <body>
     <main>
-<pre>NOAH LUCAS
+      <pre id="boot" aria-live="polite"></pre>
+      <pre id="response" hidden>
+NOAH LUCAS
 ----------
 Living in Ojai, California, with my wife Sara, our daughter Willa,
 and our cat Bruce. Vice President of Product at <a href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>. <a href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>,
 <a href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>, and <a href="https://postmates.com" target="_blank" rel="noopener">Postmates</a> before that.
 </pre>
     </main>
+
+    <script>
+      const boot = document.getElementById("boot");
+      const response = document.getElementById("response");
+
+      const frames = [
+        { delay: 420, text: "+--------------------------------------------------+\n| EOS TERMINAL // PUBLIC SURFACE BOOT            |\n+--------------------------------------------------+\n" },
+        { delay: 520, text: "[01] initiating contact with ai surface... ok\n" },
+        { delay: 540, text: "[02] scanning sources: memory, work, writing... ok\n" },
+        { delay: 560, text: "[03] synthesizing public-safe response... ok\n" },
+        { delay: 500, text: "[04] rendering operator profile...\n\n" },
+      ];
+
+      const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      async function runBoot() {
+        boot.textContent = "";
+        for (const frame of frames) {
+          boot.textContent += frame.text;
+          await pause(frame.delay);
+        }
+        boot.innerHTML += '<span class="muted">response ready</span> <span class="cursor">_</span>';
+        await pause(700);
+        boot.hidden = true;
+        response.hidden = false;
+      }
+
+      runBoot();
+    </script>
   </body>
 </html>
