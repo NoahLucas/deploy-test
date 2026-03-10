@@ -406,15 +406,16 @@
   <body>
     <main class="app" id="app">
       <header class="top">
-        <span>NOAHLUCAS.COM // STAGING</span>
+        <span>Realtime intelligence platform</span>
         <div class="top-utilities">
-          <a class="utility-link" href="https://www.linkedin.com/in/noahlucas/" target="_blank" rel="noopener">LinkedIn</a>
-          <span id="stamp">sync idle</span>
+          <span id="system-state">system state: recalibrating</span>
+          <span>Connected sources: Squarespace Notes · Spotify · LinkedIn · OpenAI · Apple Relay · Render</span>
+          <span id="stamp">--:--:--</span>
         </div>
       </header>
 
       <div class="head">
-        <h1>Live personal intelligence surface</h1>
+        <h1>NoahLucas.com · realtime public surface</h1>
       </div>
 
       <section class="layout">
@@ -439,42 +440,19 @@
               <p>Built as a live personal system for turning raw signal into decisions, narratives, and durable execution loops.</p>
             </article>
 
-            <div class="status-grid" data-ix-reveal>
-              <article class="panel">
-                <p class="title">System State</p>
-                <div class="state-chip-row">
-                  <span class="state-chip">AI-native intelligence platform</span>
-                  <span class="state-chip">Connected sources</span>
-                  <span class="state-chip">Active memory</span>
-                </div>
-                <p class="live"><span id="live-dot" class="live-dot"></span><span id="live-label">connecting</span></p>
-                <p class="kicker" id="realtime-summary">Data fusion engine calibrating across notes, work context, and memory traces.</p>
-                <p class="kicker" id="realtime-sync">System state: initializing</p>
-              </article>
+            <article class="panel" data-ix-reveal>
+              <p class="title">Work</p>
+              <p class="kicker">Product builder and system operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.</p>
+              <div class="inline-links">
+                <a href="https://www.linkedin.com/in/noahlucas/" target="_blank" rel="noopener">LinkedIn</a>
+                <a href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a>
+              </div>
+            </article>
 
-              <article class="panel">
-                <p class="title">Biography</p>
-                <p class="kicker">Noah is a product leader and systems operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.</p>
-                <p class="kicker">Raised in the Midwest, shaped in New York, and building in California, he works at the intersection of applied AI, product strategy, and execution architecture.</p>
-                <p class="kicker">Based in Ojai with Sara, Willa, and Bruce.</p>
-                <p class="kicker"><a class="utility-link" href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a></p>
-              </article>
-            </div>
-
-            <div class="triad" data-ix-reveal>
-              <article class="panel">
-                <p class="title">Personal Autobiography</p>
-                <p class="kicker">Moments, choices, and identity over time.</p>
-              </article>
-              <article class="panel">
-                <p class="title">System Autobiography</p>
-                <p class="kicker">How tools, prompts, and workflows evolve with use.</p>
-              </article>
-              <article class="panel">
-                <p class="title">Intelligence Layer</p>
-                <p class="kicker">Synthesis that connects lived context with actionable clarity.</p>
-              </article>
-            </div>
+            <article class="panel" data-ix-reveal>
+              <p class="title">Biography</p>
+              <p class="kicker">Raised in the Midwest, educated in New York, and building in California at the intersection of AI, hardware, and software. Based in Ojai, California with wife &amp; daughter.</p>
+            </article>
 
             <article class="panel" data-ix-reveal>
               <p class="title">Personal Frames</p>
@@ -486,7 +464,7 @@
             </article>
 
             <article class="panel" data-ix-reveal>
-              <p class="title">Spotify Orbit</p>
+              <p class="title">Life as a Soundtrack</p>
               <div class="inline-links">
                 <a href="https://open.spotify.com/playlist/78YOLwcGvs5gQKIrCnJrkY?si=231680b5cf5648bc" target="_blank" rel="noopener">2025</a>
                 <a href="https://open.spotify.com/playlist/1WohnY8ziS7pB08iy8o7Sj?si=36a9a84f00984b1e" target="_blank" rel="noopener">2024</a>
@@ -639,6 +617,7 @@
       const notesList = document.getElementById("notes-list");
       const realtimeSummary = document.getElementById("realtime-summary");
       const realtimeSync = document.getElementById("realtime-sync");
+      const systemState = document.getElementById("system-state");
       const stamp = document.getElementById("stamp");
       const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
       let notesPollTimer = null;
@@ -694,6 +673,7 @@
       async function refreshPublishedNotes() {
         try {
           setLive("warn", "synthesizing");
+          if (systemState) systemState.textContent = "system state: recalibrating";
           const res = await fetch("/api/v1/public/squarespace-notes", { cache: "no-store" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
@@ -702,14 +682,23 @@
 
           if (realtimeSummary) realtimeSummary.textContent = "Data fusion online across published notes and operating context.";
           if (realtimeSync) realtimeSync.textContent = `System state: synchronized ${fmt(data.updated_at)}`;
-          if (stamp) stamp.textContent = `live · ${fmt(data.updated_at)}`;
+          if (systemState) systemState.textContent = "system state: live";
           setLive("ok", "live");
         } catch {
           setLive("warn", "recalibrating");
           if (realtimeSummary) realtimeSummary.textContent = "Synthesized context is recalibrating.";
           if (realtimeSync) realtimeSync.textContent = `System state: retrying`;
-          if (stamp) stamp.textContent = `recalibrating · ${new Date().toLocaleTimeString()}`;
+          if (systemState) systemState.textContent = "system state: recalibrating";
         }
+      }
+
+      function tickClock() {
+        if (!stamp) return;
+        stamp.textContent = new Date().toLocaleTimeString([], {
+          hour: "numeric",
+          minute: "2-digit",
+          second: "2-digit"
+        });
       }
 
       function startNotesPolling() {
@@ -756,6 +745,8 @@
       const valid = new Set(["home", "work", "notes"]);
       setPage(valid.has(initial) ? initial : "home");
       initReveal();
+      tickClock();
+      window.setInterval(tickClock, 1000);
       refreshPublishedNotes();
       startNotesPolling();
     </script>
