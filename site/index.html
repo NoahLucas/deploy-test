@@ -52,12 +52,31 @@
         gap: 0.28rem;
       }
 
+      .logo-wrap {
+        width: 18px;
+        height: 18px;
+        position: relative;
+      }
+
       .logo {
         width: 18px;
         height: 18px;
         object-fit: contain;
         display: block;
         filter: grayscale(1) contrast(1.2) brightness(0.15);
+      }
+
+      .logo-fallback {
+        width: 18px;
+        height: 18px;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: #111;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1;
       }
 
       .name,
@@ -96,25 +115,37 @@
 
         <div class="companies" aria-label="Company experience">
           <article class="company">
-            <img class="logo" src="https://logo.clearbit.com/siftstack.com" alt="Sift logo" loading="lazy" />
+            <div class="logo-wrap">
+              <img class="logo" src="https://logo.clearbit.com/siftstack.com" alt="Sift logo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+              <span class="logo-fallback" aria-hidden="true">S</span>
+            </div>
             <div class="role">Vice President of Product</div>
             <a class="name" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
           </article>
 
           <article class="company">
-            <img class="logo" src="https://logo.clearbit.com/anduril.com" alt="Anduril logo" loading="lazy" />
+            <div class="logo-wrap">
+              <img class="logo" src="https://logo.clearbit.com/anduril.com" alt="Anduril logo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+              <span class="logo-fallback" aria-hidden="true">A</span>
+            </div>
             <div class="role">Principal Product Manager</div>
             <a class="name" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
           </article>
 
           <article class="company">
-            <img class="logo" src="https://logo.clearbit.com/serverobotics.com" alt="Serve Robotics logo" loading="lazy" />
+            <div class="logo-wrap">
+              <img class="logo" src="https://logo.clearbit.com/serverobotics.com" alt="Serve Robotics logo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+              <span class="logo-fallback" aria-hidden="true">SR</span>
+            </div>
             <div class="role">Director of Product Management</div>
             <a class="name" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
           </article>
 
           <article class="company">
-            <img class="logo" src="https://logo.clearbit.com/postmates.com" alt="Postmates logo" loading="lazy" />
+            <div class="logo-wrap">
+              <img class="logo" src="https://logo.clearbit.com/postmates.com" alt="Postmates logo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+              <span class="logo-fallback" aria-hidden="true">P</span>
+            </div>
             <div class="role">Product Lead</div>
             <a class="name" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
           </article>
