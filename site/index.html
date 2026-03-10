@@ -40,43 +40,6 @@
         overflow: clip;
       }
 
-      .top {
-        position: sticky;
-        top: 0;
-        z-index: 8;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0.8rem;
-        border-bottom: 1px solid var(--line);
-        padding: 0.48rem 0.78rem;
-        font-size: 0.73rem;
-        color: var(--muted);
-        background: rgba(251, 249, 244, 0.92);
-        backdrop-filter: blur(5px);
-      }
-
-      .top-utilities {
-        display: inline-flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-
-      .utility-link {
-        display: inline-flex;
-        align-items: center;
-        min-height: 28px;
-        text-decoration: none;
-        font-size: 0.69rem;
-        color: var(--muted);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 0.1rem 0.46rem;
-        background: #fff;
-        transition: border-color 140ms ease, color 140ms ease;
-      }
-      .utility-link:hover { border-color: var(--line-strong); color: var(--ink); }
-
       .layout {
         display: grid;
         grid-template-columns: 250px 1fr;
@@ -87,6 +50,9 @@
         border-right: 1px solid var(--line);
         background: linear-gradient(180deg, #efebe2 0%, #ece7dd 100%);
         padding: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
       }
 
       .profile-card {
@@ -95,7 +61,6 @@
         padding: 0.58rem;
         background: rgba(255, 255, 255, 0.75);
         box-shadow: var(--elev-soft);
-        margin-bottom: 0.65rem;
       }
       .profile-name {
         margin: 0;
@@ -133,6 +98,78 @@
         background: #fff;
         border-color: var(--line-strong);
         box-shadow: inset 2px 0 0 var(--accent);
+      }
+
+      .status-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f8f4eb;
+        padding: 0.55rem;
+        box-shadow: var(--elev-soft);
+      }
+      .status-card .title {
+        margin-bottom: 0.35rem;
+      }
+      .status-row {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.73rem;
+      }
+      .system-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #b27a2f;
+      }
+      .system-dot.live {
+        background: #2f6b44;
+        animation: pulse 1.8s infinite;
+      }
+      .status-meta {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        font-size: 0.7rem;
+      }
+
+      .source-dock {
+        margin-top: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f8f4eb;
+        padding: 0.55rem;
+      }
+      .source-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+      .source-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.7rem;
+      }
+      .source-name {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.32rem;
+      }
+      .source-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #2f6b44;
+      }
+      .source-dot.warn {
+        background: #b27a2f;
+      }
+      .source-age {
+        color: var(--muted);
+        font-size: 0.67rem;
       }
 
       .main {
@@ -183,39 +220,11 @@
         line-height: 1.45;
       }
 
-      .status-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.55rem;
-      }
-
-      .state-chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .state-chip {
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: #fff;
-        color: var(--muted);
-        font-size: 0.68rem;
-        padding: 0.14rem 0.42rem;
-      }
-
       .kicker {
         margin: 0.35rem 0 0;
         color: var(--muted);
         font-size: 0.74rem;
         line-height: 1.45;
-      }
-
-      .triad {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.55rem;
       }
 
       .inline-links {
@@ -347,6 +356,11 @@
         .layout { grid-template-columns: 1fr; }
         .rail { border-right: 0; border-bottom: 1px solid var(--line); }
         .image-strip { grid-template-columns: 1fr; }
+        .source-dock { margin-top: 0; }
+        .source-list {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          column-gap: 0.65rem;
+        }
         .nav {
           grid-auto-flow: column;
           grid-auto-columns: max-content;
@@ -363,25 +377,16 @@
 
       @media (max-width: 720px) {
         .app { width: calc(100% - 0.6rem); margin: 0.3rem auto; }
-        .top { font-size: 0.66rem; padding: 0.44rem 0.5rem; }
         .rail, .main { padding: 0.55rem; }
         .panel { padding: 0.6rem; border-radius: 8px; }
         .hero h2 { font-size: clamp(1.86rem, 8.4vw, 2.55rem); line-height: 0.95; }
         .image-strip img { height: 148px; }
+        .source-list { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
     <main class="app" id="app">
-      <header class="top">
-        <span>Realtime intelligence platform</span>
-        <div class="top-utilities">
-          <span id="system-state">system state: recalibrating</span>
-          <span>Connected sources: Squarespace Notes · Spotify · LinkedIn · OpenAI · Apple Relay · Render</span>
-          <span id="stamp">--:--:--</span>
-        </div>
-      </header>
-
       <section class="layout">
         <aside class="rail">
           <div class="profile-card" data-ix-reveal>
@@ -389,11 +394,31 @@
             <p class="profile-sub">VP of Product at Sift · Ojai, California</p>
           </div>
 
+          <div class="status-card" data-ix-reveal>
+            <p class="title">Realtime intelligence platform</p>
+            <div class="status-row">
+              <span id="system-dot" class="system-dot"></span>
+              <span>system state: <strong id="system-state">recalibrating</strong></span>
+            </div>
+            <p class="status-meta">last scan: <span id="last-scan">pending</span></p>
+          </div>
+
           <nav class="nav" id="public-nav">
             <button class="active" data-page="home" type="button">Home</button>
             <button data-page="work" type="button">Work</button>
             <button data-page="notes" type="button">Notes</button>
           </nav>
+
+          <aside class="source-dock" data-ix-reveal>
+            <p class="title">Connected Sources</p>
+            <ul class="source-list">
+              <li class="source-row"><span class="source-name"><span id="dot-squarespace" class="source-dot warn"></span>Squarespace</span><span id="age-squarespace" class="source-age">pending</span></li>
+              <li class="source-row"><span class="source-name"><span id="dot-spotify" class="source-dot"></span>Spotify</span><span id="age-spotify" class="source-age">pending</span></li>
+              <li class="source-row"><span class="source-name"><span id="dot-linkedin" class="source-dot"></span>LinkedIn</span><span id="age-linkedin" class="source-age">pending</span></li>
+              <li class="source-row"><span class="source-name"><span id="dot-openai" class="source-dot"></span>OpenAI</span><span id="age-openai" class="source-age">pending</span></li>
+              <li class="source-row"><span class="source-name"><span id="dot-apple" class="source-dot"></span>Apple</span><span id="age-apple" class="source-age">pending</span></li>
+            </ul>
+          </aside>
         </aside>
 
         <section class="main">
@@ -573,10 +598,26 @@
     <script>
       const nav = document.getElementById("public-nav");
       const notesList = document.getElementById("notes-list");
+      const systemDot = document.getElementById("system-dot");
       const systemState = document.getElementById("system-state");
-      const stamp = document.getElementById("stamp");
+      const lastScan = document.getElementById("last-scan");
       const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
+      const sourceAges = {
+        squarespace: document.getElementById("age-squarespace"),
+        spotify: document.getElementById("age-spotify"),
+        linkedin: document.getElementById("age-linkedin"),
+        openai: document.getElementById("age-openai"),
+        apple: document.getElementById("age-apple"),
+      };
+      const sourceDots = {
+        squarespace: document.getElementById("dot-squarespace"),
+        spotify: document.getElementById("dot-spotify"),
+        linkedin: document.getElementById("dot-linkedin"),
+        openai: document.getElementById("dot-openai"),
+        apple: document.getElementById("dot-apple"),
+      };
       let notesPollTimer = null;
+      let lastScanAt = null;
 
       function setPage(name) {
         document.querySelectorAll(".page").forEach((el) => {
@@ -595,6 +636,32 @@
 
       function fmt(ts) {
         return new Date(ts).toLocaleString();
+      }
+
+      function since(ts) {
+        if (!ts) return "pending";
+        const delta = Math.max(0, Math.floor((Date.now() - ts) / 1000));
+        if (delta < 60) return `${delta}s ago`;
+        const min = Math.floor(delta / 60);
+        if (min < 60) return `${min}m ago`;
+        const hr = Math.floor(min / 60);
+        return `${hr}h ago`;
+      }
+
+      function setSystemState(state) {
+        if (systemState) systemState.textContent = state;
+        if (!systemDot) return;
+        systemDot.classList.toggle("live", state === "live");
+      }
+
+      function refreshSourceAges() {
+        const age = since(lastScanAt);
+        Object.values(sourceAges).forEach((el) => {
+          if (el) el.textContent = age;
+        });
+        if (lastScan) {
+          lastScan.textContent = lastScanAt ? `${new Date(lastScanAt).toLocaleTimeString()} (${age})` : "pending";
+        }
       }
 
       function renderNotes(items) {
@@ -620,26 +687,26 @@
 
       async function refreshPublishedNotes() {
         try {
-          if (systemState) systemState.textContent = "system state: recalibrating";
+          setSystemState("recalibrating");
+          if (sourceDots.squarespace) sourceDots.squarespace.classList.add("warn");
           const res = await fetch("/api/v1/public/squarespace-notes", { cache: "no-store" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const data = await res.json();
           const items = Array.isArray(data.items) ? data.items : [];
           renderNotes(items);
-
-          if (systemState) systemState.textContent = "system state: live";
+          lastScanAt = Date.now();
+          refreshSourceAges();
+          setSystemState("live");
+          if (sourceDots.squarespace) sourceDots.squarespace.classList.remove("warn");
         } catch {
-          if (systemState) systemState.textContent = "system state: recalibrating";
+          setSystemState("recalibrating");
+          if (sourceDots.squarespace) sourceDots.squarespace.classList.add("warn");
+          refreshSourceAges();
         }
       }
 
-      function tickClock() {
-        if (!stamp) return;
-        stamp.textContent = new Date().toLocaleTimeString([], {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit"
-        });
+      function tick() {
+        refreshSourceAges();
       }
 
       function startNotesPolling() {
@@ -686,8 +753,8 @@
       const valid = new Set(["home", "work", "notes"]);
       setPage(valid.has(initial) ? initial : "home");
       initReveal();
-      tickClock();
-      window.setInterval(tickClock, 1000);
+      tick();
+      window.setInterval(tick, 1000);
       refreshPublishedNotes();
       startNotesPolling();
     </script>
