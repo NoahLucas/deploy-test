@@ -1,762 +1,115 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Noah Lucas | Staging</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noah Lucas</title>
     <style>
       :root {
-        --bg: #ede9e1;
-        --panel: #fbf9f4;
-        --line: #d7d0c3;
-        --line-strong: #b9af9e;
-        --ink: #171511;
-        --muted: #655f54;
-        --accent: #2f6b44;
-        --accent-soft: #eaf5ee;
-        --elev: 0 12px 26px rgba(22, 18, 10, 0.08);
-        --elev-soft: 0 3px 10px rgba(22, 18, 10, 0.06);
+        --bg: #0a0a0a;
+        --text: #f5f5f5;
+        --muted: #cfcfcf;
       }
+
       * { box-sizing: border-box; }
-      html, body {
+
+      body {
         margin: 0;
-        padding: 0;
-        font-family: "IBM Plex Mono", monospace;
-        color: var(--ink);
-        background: radial-gradient(1200px 620px at 20% 0%, #f8f6f0 0%, var(--bg) 42%, #e8e3d8 100%);
-        -webkit-text-size-adjust: 100%;
-      }
-      a { color: inherit; }
-
-      .app {
-        width: min(1280px, calc(100% - 1.4rem));
-        margin: 0.7rem auto;
-        border: 1px solid var(--line);
-        background: linear-gradient(180deg, #faf8f3 0%, #f2efe6 100%);
-        box-shadow: var(--elev);
-        overflow: clip;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       }
 
-      .layout {
-        display: grid;
-        grid-template-columns: 250px 1fr;
-        min-height: 82vh;
+      main {
+        width: min(960px, calc(100% - 2rem));
+        margin: 3.2rem auto 4rem;
       }
 
-      .rail {
-        border-right: 1px solid var(--line);
-        background: linear-gradient(180deg, #efebe2 0%, #ece7dd 100%);
-        padding: 0.75rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.6rem;
+      h1 {
+        margin: 0 0 1.2rem;
+        font-weight: 500;
+        font-size: clamp(2rem, 6vw, 3.8rem);
+        letter-spacing: 0.01em;
       }
 
-      .profile-card {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 0.58rem;
-        background: rgba(255, 255, 255, 0.75);
-        box-shadow: var(--elev-soft);
-      }
-      .profile-name {
+      .copy {
         margin: 0;
-        font-size: 0.99rem;
-      }
-      .profile-sub {
-        margin: 0.4rem 0 0;
-        font-size: 0.73rem;
-        color: var(--muted);
-        line-height: 1.45;
-      }
-
-      .nav {
-        display: grid;
-        gap: 0.34rem;
-      }
-      .nav button {
-        text-align: left;
-        font: inherit;
-        font-size: 0.77rem;
-        color: var(--ink);
-        border: 1px solid transparent;
-        border-radius: 6px;
-        background: transparent;
-        padding: 0.44rem 0.52rem;
-        cursor: pointer;
-        transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
-      }
-      .nav button:hover {
-        background: #f8f5ee;
-        border-color: var(--line);
-        transform: translateX(2px);
-      }
-      .nav button.active {
-        background: #fff;
-        border-color: var(--line-strong);
-        box-shadow: inset 2px 0 0 var(--accent);
-      }
-
-      .status-card {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #f8f4eb;
-        padding: 0.55rem;
-        box-shadow: var(--elev-soft);
-      }
-      .status-card .title {
-        margin-bottom: 0.35rem;
-      }
-      .status-row {
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        font-size: 0.73rem;
-      }
-      .system-dot {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: #b27a2f;
-      }
-      .system-dot.live {
-        background: #2f6b44;
-        animation: pulse 1.8s infinite;
-      }
-      .status-meta {
-        margin: 0.35rem 0 0;
-        color: var(--muted);
-        font-size: 0.7rem;
-      }
-
-      .source-dock {
-        margin-top: auto;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #f8f4eb;
-        padding: 0.55rem;
-      }
-      .source-list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 0.35rem;
-      }
-      .source-row {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        gap: 0.45rem;
-        font-size: 0.7rem;
-      }
-      .source-name {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.32rem;
-      }
-      .source-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #2f6b44;
-      }
-      .source-dot.warn {
-        background: #b27a2f;
-      }
-      .source-age {
-        color: var(--muted);
-        font-size: 0.67rem;
-      }
-
-      .main {
-        padding: 0.85rem;
-      }
-
-      .page { display: none; }
-      .page.active {
-        display: block;
-        animation: reveal 220ms ease-out;
-      }
-
-      .panel {
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        background: var(--panel);
-        box-shadow: var(--elev-soft);
-        padding: 0.78rem;
-        margin-bottom: 0.66rem;
-      }
-
-      .title {
-        margin: 0 0 0.45rem;
-        font-size: 0.7rem;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      .hero {
-        background: linear-gradient(120deg, #fefcf8 0%, #f6f1e8 72%, #efe7d9 100%);
-        border-color: #cec3af;
-      }
-      .hero h2 {
-        margin: 0;
-        font-family: "Instrument Serif", serif;
-        font-size: clamp(2.25rem, 5vw, 3.9rem);
-        line-height: 0.91;
-        letter-spacing: -0.012em;
-        font-weight: 400;
-        max-width: 14ch;
-      }
-      .hero p {
-        margin: 0.74rem 0 0;
-        color: var(--muted);
         max-width: 72ch;
-        font-size: 0.86rem;
-        line-height: 1.45;
-      }
-
-      .kicker {
-        margin: 0.35rem 0 0;
         color: var(--muted);
-        font-size: 0.74rem;
-        line-height: 1.45;
+        font-size: clamp(1rem, 1.35vw, 1.2rem);
+        line-height: 1.65;
+        white-space: pre-wrap;
       }
 
-      .inline-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem 0.7rem;
-      }
-      .inline-links a {
-        color: var(--ink);
-        text-decoration: none;
-        font-size: 0.78rem;
-        border: 1px solid var(--line);
-        background: #fff;
-        border-radius: 999px;
-        padding: 0.16rem 0.42rem;
-        transition: border-color 140ms ease, transform 140ms ease;
-      }
-      .inline-links a:hover {
-        border-color: var(--line-strong);
-        transform: translateY(-1px);
+      .cursor {
+        display: inline-block;
+        width: 0.6ch;
+        animation: blink 1s steps(1, end) infinite;
       }
 
-      .image-strip {
+      @keyframes blink {
+        50% { opacity: 0; }
+      }
+
+      .images {
+        margin-top: 2.2rem;
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.55rem;
+        gap: 0.85rem;
       }
-      .image-strip img {
+
+      .images img {
+        display: block;
         width: 100%;
-        height: 178px;
+        height: auto;
         object-fit: cover;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #eee;
-      }
-
-      .work-rail {
-        display: grid;
-        gap: 0.55rem;
-      }
-
-      .work-card h3 {
-        margin: 0;
-        font-size: 0.88rem;
-      }
-      .work-media {
-        width: 100%;
-        height: 190px;
-        object-fit: cover;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        margin-bottom: 0.55rem;
-        background: #ece9e2;
-      }
-      .work-meta {
-        margin: 0.35rem 0 0.1rem;
-        color: var(--muted);
-        font-size: 0.72rem;
-        line-height: 1.42;
-      }
-      .work-card p {
-        margin: 0.4rem 0 0;
-        color: var(--muted);
-        font-size: 0.79rem;
-        line-height: 1.45;
-      }
-      .work-card ul {
-        margin: 0.45rem 0 0;
-        padding-left: 1.04rem;
-        color: var(--muted);
-        font-size: 0.75rem;
-        line-height: 1.37;
-      }
-
-      .notes-list {
-        display: grid;
-        gap: 0.45rem;
-        margin-top: 0.45rem;
-      }
-      .notes-item {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: #fbfaf8;
-        padding: 0.62rem;
-        transition: transform 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
-      }
-      .notes-item:hover {
-        transform: translateY(-1px);
-        border-color: var(--line-strong);
-        box-shadow: var(--elev-soft);
-      }
-      .notes-item h4 {
-        margin: 0;
-        font-size: 0.84rem;
-      }
-      .notes-item p {
-        margin: 0.35rem 0 0;
-        color: var(--muted);
-        font-size: 0.76rem;
-        line-height: 1.4;
-      }
-      .notes-item .meta {
-        margin-top: 0.35rem;
-        color: var(--muted);
-        font-size: 0.7rem;
-      }
-
-      [data-ix-reveal] {
-        opacity: 0;
-        transform: translateY(8px);
-        transition: opacity 280ms ease, transform 280ms ease;
-      }
-      [data-ix-reveal].in {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      @keyframes reveal {
-        from { opacity: 0; transform: translateY(4px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 rgba(47, 107, 68, 0.42); }
-        70% { box-shadow: 0 0 0 7px rgba(47, 107, 68, 0); }
-        100% { box-shadow: 0 0 0 0 rgba(47, 107, 68, 0); }
-      }
-
-      @media (max-width: 1100px) {
-        .layout { grid-template-columns: 1fr; }
-        .rail { border-right: 0; border-bottom: 1px solid var(--line); }
-        .image-strip { grid-template-columns: 1fr; }
-        .source-dock { margin-top: 0; }
-        .source-list {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          column-gap: 0.65rem;
-        }
-        .nav {
-          grid-auto-flow: column;
-          grid-auto-columns: max-content;
-          overflow-x: auto;
-          gap: 0.44rem;
-          padding-bottom: 0.18rem;
-        }
-        .nav button {
-          min-height: 40px;
-          white-space: nowrap;
-          padding: 0.48rem 0.65rem;
-        }
       }
 
       @media (max-width: 720px) {
-        .app { width: calc(100% - 0.6rem); margin: 0.3rem auto; }
-        .rail, .main { padding: 0.55rem; }
-        .panel { padding: 0.6rem; border-radius: 8px; }
-        .hero h2 { font-size: clamp(1.86rem, 8.4vw, 2.55rem); line-height: 0.95; }
-        .image-strip img { height: 148px; }
-        .source-list { grid-template-columns: 1fr; }
+        main {
+          width: calc(100% - 1rem);
+          margin: 2rem auto 2.4rem;
+        }
+
+        .images {
+          margin-top: 1.4rem;
+          gap: 0.55rem;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="app" id="app">
-      <section class="layout">
-        <aside class="rail">
-          <div class="profile-card" data-ix-reveal>
-            <p class="profile-name">Noah Lucas</p>
-            <p class="profile-sub">VP of Product at Sift · Ojai, California</p>
-          </div>
-
-          <div class="status-card" data-ix-reveal>
-            <p class="title">Realtime intelligence platform</p>
-            <div class="status-row">
-              <span id="system-dot" class="system-dot"></span>
-              <span>system state: <strong id="system-state">recalibrating</strong></span>
-            </div>
-            <p class="status-meta">last scan: <span id="last-scan">pending</span></p>
-          </div>
-
-          <nav class="nav" id="public-nav">
-            <button class="active" data-page="home" type="button">Home</button>
-            <button data-page="work" type="button">Work</button>
-            <button data-page="notes" type="button">Notes</button>
-          </nav>
-
-          <aside class="source-dock" data-ix-reveal>
-            <p class="title">Connected Sources</p>
-            <ul class="source-list">
-              <li class="source-row"><span class="source-name"><span id="dot-squarespace" class="source-dot warn"></span>Squarespace</span><span id="age-squarespace" class="source-age">pending</span></li>
-              <li class="source-row"><span class="source-name"><span id="dot-spotify" class="source-dot"></span>Spotify</span><span id="age-spotify" class="source-age">pending</span></li>
-              <li class="source-row"><span class="source-name"><span id="dot-linkedin" class="source-dot"></span>LinkedIn</span><span id="age-linkedin" class="source-age">pending</span></li>
-              <li class="source-row"><span class="source-name"><span id="dot-openai" class="source-dot"></span>OpenAI</span><span id="age-openai" class="source-age">pending</span></li>
-              <li class="source-row"><span class="source-name"><span id="dot-apple" class="source-dot"></span>Apple</span><span id="age-apple" class="source-age">pending</span></li>
-            </ul>
-          </aside>
-        </aside>
-
-        <section class="main">
-          <div class="page active" data-view="home">
-            <article class="panel hero" data-ix-reveal>
-              <h2>Noah Lucas</h2>
-              <p>AI-native intelligence platform for fusing hardware, software, and machine reasoning into realtime product context.</p>
-              <p>Built as a live personal system for turning raw signal into decisions, narratives, and durable execution loops.</p>
-            </article>
-
-            <article class="panel" data-ix-reveal>
-              <p class="title">Work</p>
-              <p class="kicker">Product builder and system operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.</p>
-              <div class="inline-links">
-                <a href="https://www.linkedin.com/in/noahlucas/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="mailto:Noahbanetlucas@gmail.com?subject=Request%20CV%20-%20Noah%20Lucas">Request CV</a>
-              </div>
-            </article>
-
-            <article class="panel" data-ix-reveal>
-              <p class="title">Biography</p>
-              <p class="kicker">Raised in the Midwest, educated in New York, and building in California at the intersection of AI, hardware, and software. Based in Ojai, California with wife &amp; daughter.</p>
-              <div class="image-strip">
-                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/791f750f-7bb0-4ff8-aa35-88c11016eea0/IMG_1898.jpeg" alt="Noah personal image one" loading="lazy" />
-                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/4b7eac04-5f2b-4ed9-8fce-a53cba6f7eb8/DSCF1991_Original.jpeg" alt="Noah personal image two" loading="lazy" />
-                <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/e6bffe4a-f75a-4b65-b7b3-aea3e9d87be8/DSCF2140_Original.jpeg" alt="Noah personal image three" loading="lazy" />
-              </div>
-            </article>
-
-            <article class="panel" data-ix-reveal>
-              <p class="title">Life as a Soundtrack</p>
-              <div class="inline-links">
-                <a href="https://open.spotify.com/playlist/78YOLwcGvs5gQKIrCnJrkY?si=231680b5cf5648bc" target="_blank" rel="noopener">2025</a>
-                <a href="https://open.spotify.com/playlist/1WohnY8ziS7pB08iy8o7Sj?si=36a9a84f00984b1e" target="_blank" rel="noopener">2024</a>
-                <a href="https://open.spotify.com/playlist/2hnHXL0eGraHNAk361KEFi?si=6e1659cca1a64aff" target="_blank" rel="noopener">2023</a>
-                <a href="https://open.spotify.com/playlist/6bsSR5eFTt9zJLNISThg15?si=ab427ec39f4e492e" target="_blank" rel="noopener">2022</a>
-                <a href="https://open.spotify.com/playlist/7GHkqjhqeApiY0YEJi13lr?si=84c969fb35e54de1" target="_blank" rel="noopener">2021</a>
-                <a href="https://open.spotify.com/playlist/22RINs0qakMd492v9lXJFc?si=f58e9d24093d40d6" target="_blank" rel="noopener">2020</a>
-                <a href="https://open.spotify.com/playlist/2qA4RbMSC7Uyl8oVkE8hBm?si=0feb25df4e5d411a" target="_blank" rel="noopener">2019</a>
-                <a href="https://open.spotify.com/playlist/1aPxb1bCSiJVse6CQFhUlV?si=8be1cc29a6674a43" target="_blank" rel="noopener">2018</a>
-                <a href="https://open.spotify.com/playlist/0bI5vIvejd6M37F5fjTpzI?si=d14f818491eb4ee4" target="_blank" rel="noopener">2017</a>
-                <a href="https://open.spotify.com/playlist/2OFbNwkl68v3pxpHwbIfvY?si=c350f8af95ef48b4" target="_blank" rel="noopener">2016</a>
-                <a href="https://open.spotify.com/playlist/2GroiqjSXrFkeozIggXVnV?si=6a29158c2cd848ee" target="_blank" rel="noopener">2015</a>
-                <a href="https://open.spotify.com/playlist/2uF52eBGbO4dAhzwJScWUD?si=803e9d41a98c4ea4" target="_blank" rel="noopener">Noah's Orbit</a>
-              </div>
-            </article>
-          </div>
-
-          <div class="page" data-view="work">
-            <article class="panel" data-ix-reveal>
-              <p class="title">Work</p>
-              <div class="work-rail">
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/f8006cc7-c7d4-4116-9a9f-3d4926ab4e5f/Screenshot+2025-12-13+at+4.26.09%E2%80%AFPM.png" alt="Sift" loading="lazy" />
-                  <h3>Sift · VP of Product</h3>
-                  <p class="work-meta">Industry: AI-native hardware intelligence software · ICP: aerospace, defense, and robotics engineering leaders · Capital profile: venture-backed frontier systems company.</p>
-                  <p>Building the product intelligence layer that makes hardware telemetry observable, interpretable, and actionable for aerospace, defense, and robotics operators.</p>
-                  <p class="work-meta"><a href="https://www.siftstack.com" target="_blank" rel="noopener">siftstack.com</a></p>
-                  <ul>
-                    <li><strong>Drive product velocity:</strong> ship core platform bets while improving decision quality and execution cadence.</li>
-                    <li><strong>Be the customer bridge:</strong> translate field signal into concrete roadmap and product decisions.</li>
-                    <li><strong>Own the strategy:</strong> run signal-to-evidence-to-decision loops that connect day-to-day execution to long-horizon moat.</li>
-                    <li><strong>Grow the team:</strong> strengthen PM/design operating rhythm and raise product craft quality.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/3406d3e0-c018-4a41-b374-85ce1794e8e5/759cf3b1631ac09f8787809500212d9914788964-4064x2286.jpg" alt="Anduril" loading="lazy" />
-                  <h3>Anduril Industries · Product Lead</h3>
-                  <p class="work-meta">Industry: defense technology · ICP: government and national security operators · Capital profile: multi-billion-dollar defense prime challenger.</p>
-                  <p>Owned vertically integrated AI infrastructure for autonomous navigation, mapping, simulation, digital twins, and mixed reality across a heterogeneous fleet.</p>
-                  <p class="work-meta"><a href="https://www.anduril.com" target="_blank" rel="noopener">anduril.com</a></p>
-                  <ul>
-                    <li><strong>World model systems:</strong> deployed global offline navigation infrastructure across air, land, sea, subsea, and mixed-reality contexts.</li>
-                    <li><strong>GPS-denied navigation:</strong> drove re-architecture toward vision-based navigation and planet-scale product operations.</li>
-                    <li><strong>Data architecture:</strong> designed multi-hop Internet -> Cloud -> Edge-Cloud -> Edge fusion pipelines from petabyte-scale inputs to GB-scale on-device outputs.</li>
-                    <li><strong>Commercial leverage:</strong> integrated strategic data partnerships and licensing governance that delivered major efficiency gains.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/ebbce438-d6d8-446e-8d47-dd7bf0c36dd5/6613e9514442dfd1346a32ad_Pendulum+Navigate+awarded+with+2+new+contracts.jpg" alt="Pendulum" loading="lazy" />
-                  <h3>Pendulum Systems · Applied Product Research</h3>
-                  <p class="work-meta">Industry: applied AI and geospatial intelligence · ICP: defense and mission teams in contested environments · Capital profile: dual-use government-contracted systems builder.</p>
-                  <p>Led early product development for a next-generation geolocation system designed to work in GPS-jammed or denied environments.</p>
-                  <p class="work-meta"><a href="https://www.pendulum.global" target="_blank" rel="noopener">pendulum.global</a></p>
-                  <ul>
-                    <li><strong>Field validation:</strong> advanced the system from prototype toward mission-ready performance through high-stress live exercises.</li>
-                    <li><strong>Defense collaboration:</strong> worked directly with Army and Air Force innovation partners on adoption pathways and program direction.</li>
-                    <li><strong>Embodied intelligence demos:</strong> shipped functional demonstrations across smartphones, wearables, and small drones.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/2939c081-99da-4d0f-a281-0d4a8b6da58e/Serve_robot_05%2B1.jpg" alt="Serve Robotics" loading="lazy" />
-                  <h3>Serve Robotics · Director of Product Management</h3>
-                  <p class="work-meta">Industry: robotics and autonomous delivery · ICP: enterprise delivery networks and logistics operators · Capital profile: public robotics company.</p>
-                  <p>Commercialized L4 sidewalk autonomy with responsibility spanning revenue, GTM, and autonomy optimization.</p>
-                  <p class="work-meta"><a href="https://www.serverobotics.com" target="_blank" rel="noopener">serverobotics.com</a></p>
-                  <ul>
-                    <li><strong>Scale event:</strong> unlocked a purchase order path for 2,000+ robots through strategic platform integration.</li>
-                    <li><strong>Core systems:</strong> delivered partner/API surfaces, C2 operations systems, and degraded-GPS localization workflows.</li>
-                    <li><strong>Portfolio ownership:</strong> drove roadmap across autonomy, navigation, mapping, hardware, and operations.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/3c4687c3-db22-4219-bcc4-87b97d807b96/postmates.png" alt="Postmates" loading="lazy" />
-                  <h3>Postmates · Product Lead</h3>
-                  <p class="work-meta">Industry: on-demand logistics and marketplace platforms · ICP: consumers, merchants, and enterprise delivery partners · Capital profile: late-stage venture-backed marketplace acquired by Uber.</p>
-                  <p>Built core product and launched B2B/developer platform systems that scaled from 0 to meaningful revenue share.</p>
-                  <p class="work-meta"><a href="https://postmates.com" target="_blank" rel="noopener">postmates.com</a></p>
-                  <ul>
-                    <li><strong>Platform growth:</strong> built enterprise integrations with Apple, Walmart, Square, Shopify, Instacart, and others.</li>
-                    <li><strong>Operational scale:</strong> supported consumer, merchant, and courier systems for millions of monthly deliveries.</li>
-                    <li><strong>Market expansion:</strong> helped launch first non-U.S. market and modernized support/financial automation flows.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/1b46e5ac-eb86-48b6-b9f6-720f5d64ab46/Expedia-Reveals-When-to-Book-Flights-for-the-2019-Holiday-Season.jpg" alt="Expedia" loading="lazy" />
-                  <h3>Expedia Group · Senior Global Product Manager, Mobile</h3>
-                  <p class="work-meta">Industry: global travel marketplace · ICP: international travelers and travel shoppers · Capital profile: public online travel platform.</p>
-                  <p>Led global mobile travel product initiatives spanning flights, itineraries, and category expansion.</p>
-                  <p class="work-meta"><a href="https://www.expediagroup.com" target="_blank" rel="noopener">expediagroup.com</a></p>
-                  <ul>
-                    <li><strong>Category build:</strong> launched rental cars as a global mobile line of business.</li>
-                    <li><strong>Core ownership:</strong> owned flights and itineraries in mobile product surfaces.</li>
-                    <li><strong>International growth:</strong> expanded product outcomes across APAC and EMEA markets.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <img class="work-media" src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/dd5e1eac-1a80-4ee6-b6f6-7080ed214df3/SwPuHxNdPVbdE1bCkrNlBGiY5rKIiAnK.jpg" alt="S&P Global Market Intelligence" loading="lazy" />
-                  <h3>S&amp;P Global Market Intelligence · Data Platform Product Manager</h3>
-                  <p class="work-meta">Industry: financial intelligence data platforms · ICP: institutional analysts and enterprise finance teams · Capital profile: public market data infrastructure provider.</p>
-                  <p>Defined product UX and requirements for near-real-time financial data collection systems and platform pipelines.</p>
-                  <p class="work-meta"><a href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">spglobal.com/marketintelligence</a></p>
-                  <ul>
-                    <li><strong>Data platform foundations:</strong> built systems enabling high-trust downstream intelligence products.</li>
-                    <li><strong>Reliability and speed:</strong> improved collection and pipeline behavior for near-real-time use cases.</li>
-                    <li><strong>Early systems craft:</strong> established product management patterns for complex data infrastructure.</li>
-                  </ul>
-                </article>
-
-                <article class="panel work-card">
-                  <h3>Investor</h3>
-                  <p>Active investor in companies building frontier capability across hardware, software, and consumer systems.</p>
-                  <ul>
-                    <li>Array Labs</li>
-                    <li>Sift</li>
-                    <li>Runway</li>
-                    <li>Public Goods</li>
-                    <li>Capiche</li>
-                    <li>Clotheshorse</li>
-                  </ul>
-                </article>
-              </div>
-            </article>
-          </div>
-
-          <div class="page" data-view="notes">
-            <article class="panel" data-ix-reveal>
-              <p class="title">Notes</p>
-              <p>Operator notebook. Curated from live writing and surfaced as context-ready entries.</p>
-              <div class="notes-list" id="notes-list">
-                <article class="notes-item"><h4>How VP Product systems become company leverage.</h4><p>Synthesis on execution architecture, operating cadence, and organizational compounding.</p><div class="meta">Curated note</div></article>
-                <article class="notes-item"><h4>The decision architecture behind shipping speed.</h4><p>Framing ambiguity reduction as a product discipline with evidence-linked decision loops.</p><div class="meta">Curated note</div></article>
-                <article class="notes-item"><h4>Building AI-native teams without hype cycles.</h4><p>Practical operating model for integrating intelligence systems into day-to-day product work.</p><div class="meta">Curated note</div></article>
-              </div>
-            </article>
-          </div>
-        </section>
-      </section>
+    <main>
+      <h1>Noah Lucas</h1>
+      <p class="copy" id="type-target"></p>
+      <div class="images">
+        <img src="/assets/imported/A7R05738.jpeg" alt="Noah Lucas sunset" loading="lazy" />
+        <img src="/assets/imported/IMG_1898.jpeg" alt="Noah Lucas family" loading="lazy" />
+        <img src="/assets/imported/postmates.png" alt="Noah Lucas portrait" loading="lazy" />
+      </div>
     </main>
 
     <script>
-      const nav = document.getElementById("public-nav");
-      const notesList = document.getElementById("notes-list");
-      const systemDot = document.getElementById("system-dot");
-      const systemState = document.getElementById("system-state");
-      const lastScan = document.getElementById("last-scan");
-      const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
-      const sourceAges = {
-        squarespace: document.getElementById("age-squarespace"),
-        spotify: document.getElementById("age-spotify"),
-        linkedin: document.getElementById("age-linkedin"),
-        openai: document.getElementById("age-openai"),
-        apple: document.getElementById("age-apple"),
-      };
-      const sourceDots = {
-        squarespace: document.getElementById("dot-squarespace"),
-        spotify: document.getElementById("dot-spotify"),
-        linkedin: document.getElementById("dot-linkedin"),
-        openai: document.getElementById("dot-openai"),
-        apple: document.getElementById("dot-apple"),
-      };
-      let notesPollTimer = null;
-      let lastScanAt = null;
+      const text = "Raised in the Midwest, educated in New York, and building in California at the intersection of AI, hardware, and software. Based in Ojai, California with wife & daughter. Product builder and system operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.";
+      const target = document.getElementById("type-target");
+      const speed = 24;
+      let index = 0;
 
-      function setPage(name) {
-        document.querySelectorAll(".page").forEach((el) => {
-          el.classList.toggle("active", el.dataset.view === name);
-        });
-        nav?.querySelectorAll("button").forEach((btn) => {
-          btn.classList.toggle("active", btn.dataset.page === name);
-        });
-        if (location.hash !== `#${name}`) location.hash = name;
-      }
+      function render() {
+        const done = index >= text.length;
+        target.textContent = text.slice(0, index);
 
-      nav?.addEventListener("click", (e) => {
-        const t = e.target;
-        if (t instanceof HTMLButtonElement && t.dataset.page) setPage(t.dataset.page);
-      });
+        const cursor = document.createElement("span");
+        cursor.className = "cursor";
+        cursor.textContent = done ? "" : "_";
+        target.appendChild(cursor);
 
-      function fmt(ts) {
-        return new Date(ts).toLocaleString();
-      }
-
-      function since(ts) {
-        if (!ts) return "pending";
-        const delta = Math.max(0, Math.floor((Date.now() - ts) / 1000));
-        if (delta < 60) return `${delta}s ago`;
-        const min = Math.floor(delta / 60);
-        if (min < 60) return `${min}m ago`;
-        const hr = Math.floor(min / 60);
-        return `${hr}h ago`;
-      }
-
-      function setSystemState(state) {
-        if (systemState) systemState.textContent = state;
-        if (!systemDot) return;
-        systemDot.classList.toggle("live", state === "live");
-      }
-
-      function refreshSourceAges() {
-        const age = since(lastScanAt);
-        Object.values(sourceAges).forEach((el) => {
-          if (el) el.textContent = age;
-        });
-        if (lastScan) {
-          lastScan.textContent = lastScanAt ? `${new Date(lastScanAt).toLocaleTimeString()} (${age})` : "pending";
+        if (!done) {
+          index += 1;
+          setTimeout(render, speed);
         }
       }
 
-      function renderNotes(items) {
-        if (!notesList) return;
-        if (!items.length) {
-          notesList.innerHTML = `<article class="notes-item"><h4>No entries published yet.</h4><p>New writing will surface here.</p></article>`;
-          return;
-        }
-        notesList.innerHTML = items
-          .slice(0, 5)
-          .map((item) => {
-            const summary = (item.summary || "").replace(/<[^>]*>/g, "").slice(0, 220);
-            return `
-              <article class="notes-item">
-                <h4><a href="${item.url}" target="_blank" rel="noopener">${item.title}</a></h4>
-                <p>${summary || "Open note for full context."}</p>
-                <div class="meta">${fmt(item.published_at)}</div>
-              </article>
-            `;
-          })
-          .join("");
-      }
-
-      async function refreshPublishedNotes() {
-        try {
-          setSystemState("recalibrating");
-          if (sourceDots.squarespace) sourceDots.squarespace.classList.add("warn");
-          const res = await fetch("/api/v1/public/squarespace-notes", { cache: "no-store" });
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          const items = Array.isArray(data.items) ? data.items : [];
-          renderNotes(items);
-          lastScanAt = Date.now();
-          refreshSourceAges();
-          setSystemState("live");
-          if (sourceDots.squarespace) sourceDots.squarespace.classList.remove("warn");
-        } catch {
-          setSystemState("recalibrating");
-          if (sourceDots.squarespace) sourceDots.squarespace.classList.add("warn");
-          refreshSourceAges();
-        }
-      }
-
-      function tick() {
-        refreshSourceAges();
-      }
-
-      function startNotesPolling() {
-        if (notesPollTimer) return;
-        notesPollTimer = window.setInterval(refreshPublishedNotes, 60000);
-      }
-
-      function stopNotesPolling() {
-        if (!notesPollTimer) return;
-        window.clearInterval(notesPollTimer);
-        notesPollTimer = null;
-      }
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) {
-          stopNotesPolling();
-        } else {
-          refreshPublishedNotes();
-          startNotesPolling();
-        }
-      });
-
-      function initReveal() {
-        if (!("IntersectionObserver" in window)) {
-          revealItems.forEach((el) => el.classList.add("in"));
-          return;
-        }
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("in");
-          });
-        }, { rootMargin: "0px 0px -10% 0px", threshold: 0.08 });
-        revealItems.forEach((el) => io.observe(el));
-      }
-
-      document.addEventListener("keydown", (e) => {
-        if (e.metaKey || e.ctrlKey || e.altKey) return;
-        const keyMap = { "1": "home", "2": "work", "3": "notes" };
-        const target = keyMap[e.key];
-        if (target) setPage(target);
-      });
-
-      const initial = (location.hash || "").replace("#", "").trim().toLowerCase();
-      const valid = new Set(["home", "work", "notes"]);
-      setPage(valid.has(initial) ? initial : "home");
-      initReveal();
-      tick();
-      window.setInterval(tick, 1000);
-      refreshPublishedNotes();
-      startNotesPolling();
+      render();
     </script>
   </body>
 </html>
