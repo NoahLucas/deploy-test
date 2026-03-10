@@ -77,18 +77,6 @@
       }
       .utility-link:hover { border-color: var(--line-strong); color: var(--ink); }
 
-      .head {
-        border-bottom: 1px solid var(--line);
-        padding: 0.86rem 0.9rem;
-        background: linear-gradient(90deg, #fff 0%, #f8f5ee 100%);
-      }
-      .head h1 {
-        margin: 0;
-        font-size: 0.9rem;
-        letter-spacing: 0.02em;
-        color: var(--muted);
-      }
-
       .layout {
         display: grid;
         grid-template-columns: 250px 1fr;
@@ -216,24 +204,6 @@
         font-size: 0.68rem;
         padding: 0.14rem 0.42rem;
       }
-
-      .live {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: #fff;
-        padding: 0.13rem 0.4rem;
-      }
-      .live-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #b24343;
-      }
-      .live-dot.ok { background: #2f6b44; animation: pulse 1.8s infinite; }
-      .live-dot.warn { background: #b27a2f; }
 
       .kicker {
         margin: 0.35rem 0 0;
@@ -376,7 +346,7 @@
       @media (max-width: 1100px) {
         .layout { grid-template-columns: 1fr; }
         .rail { border-right: 0; border-bottom: 1px solid var(--line); }
-        .status-grid, .triad, .image-strip { grid-template-columns: 1fr; }
+        .image-strip { grid-template-columns: 1fr; }
         .nav {
           grid-auto-flow: column;
           grid-auto-columns: max-content;
@@ -394,8 +364,6 @@
       @media (max-width: 720px) {
         .app { width: calc(100% - 0.6rem); margin: 0.3rem auto; }
         .top { font-size: 0.66rem; padding: 0.44rem 0.5rem; }
-        .head { padding: 0.58rem; }
-        .head h1 { font-size: 0.8rem; line-height: 1.3; }
         .rail, .main { padding: 0.55rem; }
         .panel { padding: 0.6rem; border-radius: 8px; }
         .hero h2 { font-size: clamp(1.86rem, 8.4vw, 2.55rem); line-height: 0.95; }
@@ -413,10 +381,6 @@
           <span id="stamp">--:--:--</span>
         </div>
       </header>
-
-      <div class="head">
-        <h1>NoahLucas.com · realtime public surface</h1>
-      </div>
 
       <section class="layout">
         <aside class="rail">
@@ -452,10 +416,6 @@
             <article class="panel" data-ix-reveal>
               <p class="title">Biography</p>
               <p class="kicker">Raised in the Midwest, educated in New York, and building in California at the intersection of AI, hardware, and software. Based in Ojai, California with wife &amp; daughter.</p>
-            </article>
-
-            <article class="panel" data-ix-reveal>
-              <p class="title">Personal Frames</p>
               <div class="image-strip">
                 <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/791f750f-7bb0-4ff8-aa35-88c11016eea0/IMG_1898.jpeg" alt="Noah personal image one" loading="lazy" />
                 <img src="https://images.squarespace-cdn.com/content/v1/689009976de9606dcbc26ec2/4b7eac04-5f2b-4ed9-8fce-a53cba6f7eb8/DSCF1991_Original.jpeg" alt="Noah personal image two" loading="lazy" />
@@ -612,11 +572,7 @@
 
     <script>
       const nav = document.getElementById("public-nav");
-      const liveDot = document.getElementById("live-dot");
-      const liveLabel = document.getElementById("live-label");
       const notesList = document.getElementById("notes-list");
-      const realtimeSummary = document.getElementById("realtime-summary");
-      const realtimeSync = document.getElementById("realtime-sync");
       const systemState = document.getElementById("system-state");
       const stamp = document.getElementById("stamp");
       const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
@@ -639,14 +595,6 @@
 
       function fmt(ts) {
         return new Date(ts).toLocaleString();
-      }
-
-      function setLive(state, label) {
-        if (!liveDot || !liveLabel) return;
-        liveDot.classList.remove("ok", "warn");
-        if (state === "ok") liveDot.classList.add("ok");
-        else if (state === "warn") liveDot.classList.add("warn");
-        liveLabel.textContent = label;
       }
 
       function renderNotes(items) {
@@ -672,7 +620,6 @@
 
       async function refreshPublishedNotes() {
         try {
-          setLive("warn", "synthesizing");
           if (systemState) systemState.textContent = "system state: recalibrating";
           const res = await fetch("/api/v1/public/squarespace-notes", { cache: "no-store" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -680,14 +627,8 @@
           const items = Array.isArray(data.items) ? data.items : [];
           renderNotes(items);
 
-          if (realtimeSummary) realtimeSummary.textContent = "Data fusion online across published notes and operating context.";
-          if (realtimeSync) realtimeSync.textContent = `System state: synchronized ${fmt(data.updated_at)}`;
           if (systemState) systemState.textContent = "system state: live";
-          setLive("ok", "live");
         } catch {
-          setLive("warn", "recalibrating");
-          if (realtimeSummary) realtimeSummary.textContent = "Synthesized context is recalibrating.";
-          if (realtimeSync) realtimeSync.textContent = `System state: retrying`;
           if (systemState) systemState.textContent = "system state: recalibrating";
         }
       }
