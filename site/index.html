@@ -6,10 +6,10 @@
     <title>Noah Lucas</title>
     <style>
       :root {
-        --bg: #f4f4f1;
-        --fg: #171717;
-        --muted: #5b5b5b;
-        --line: #d9d9d2;
+        --bg: #f6f6f3;
+        --fg: #181818;
+        --muted: #5f5f5f;
+        --line: #ddddd7;
       }
 
       * { box-sizing: border-box; }
@@ -19,47 +19,47 @@
         background: var(--bg);
         color: var(--fg);
         font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-        line-height: 1.6;
+        font-size: 14px;
+        line-height: 1.48;
       }
 
       main {
-        width: min(980px, calc(100% - 2rem));
+        width: min(940px, calc(100% - 1.2rem));
         margin: 0 auto;
-        padding: 2rem 0 3rem;
+        padding: 1.2rem 0 2.4rem;
       }
 
       .intro {
-        margin-bottom: 1.8rem;
-        font-size: clamp(1rem, 1.5vw, 1.1rem);
-      }
-
-      h1 {
-        margin: 0 0 1rem;
-        font-size: clamp(1.2rem, 2.4vw, 1.45rem);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+        margin-bottom: 1.2rem;
+        font-size: 14px;
       }
 
       .role {
         border-top: 1px solid var(--line);
-        padding: 1.1rem 0 1.25rem;
+        padding: 0.9rem 0 1rem;
       }
 
       .company {
         margin: 0;
-        font-size: clamp(1.05rem, 2vw, 1.2rem);
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .company a,
+      .company a:visited {
+        color: var(--fg);
       }
 
       .title {
-        margin: 0.1rem 0 0.65rem;
+        margin: 0.18rem 0 0.5rem;
         color: var(--muted);
       }
 
       .label {
-        margin: 0.6rem 0 0.15rem;
-        font-size: 0.78rem;
+        margin: 0.48rem 0 0.12rem;
+        font-size: 11px;
+        letter-spacing: 0.06em;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
         color: var(--muted);
       }
 
@@ -68,25 +68,16 @@
       }
 
       ul {
-        margin: 0.35rem 0 0;
-        padding-left: 1.1rem;
+        margin: 0.3rem 0 0;
+        padding-left: 1rem;
       }
 
-      li { margin: 0.22rem 0; }
+      li { margin: 0.2rem 0; }
 
       @media (max-width: 720px) {
-        main {
-          width: calc(100% - 1rem);
-          padding: 1.2rem 0 1.8rem;
-        }
-
-        .intro {
-          margin-bottom: 1.2rem;
-        }
-
-        .role {
-          padding: 0.9rem 0 1rem;
-        }
+        body { font-size: 13px; }
+        .intro { font-size: 13px; }
+        .company { font-size: 14px; }
       }
     </style>
   </head>
@@ -97,139 +88,136 @@
         <p>Building a telemetry platform for advanced machines at Sift.</p>
       </section>
 
-      <h1>Work Experience</h1>
-
       <article class="role">
-        <h2 class="company">Sift</h2>
+        <h2 class="company"><a href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a></h2>
         <p class="title">Vice President of Product</p>
         <p class="label">Company Summary</p>
-        <p>AI-native software platform for telemetry, decision systems, and mission-critical operations in aerospace, defense, and robotics.</p>
-        <p class="label">Capital Raised / Stage</p>
-        <p>Venture-backed growth-stage company (private).</p>
+        <p>AI-native telemetry and machine observability platform for mission-critical engineering systems.</p>
+        <p class="label">Capital / Stage</p>
+        <p>$25M total raised; Series A announced June 2024; private company.</p>
         <p class="label">ICP</p>
-        <p>Aerospace, defense, and robotics engineering + operations leaders running high-stakes systems.</p>
+        <p>Aerospace, defense, and robotics teams building advanced machines with high reliability requirements.</p>
         <p class="label">Role JD</p>
-        <p>Lead product strategy and execution across core platform bets, decision loops, and operator-facing product surfaces.</p>
+        <p>Own product strategy and execution for platform capabilities that turn raw machine signal into actionable decisions.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Drive product velocity without sacrificing quality.</li>
-          <li>Translate customer signal into concrete roadmap decisions.</li>
-          <li>Build signal -&gt; evidence -&gt; decision operating cadence.</li>
-          <li>Align product, engineering, and leadership execution.</li>
+          <li>Define and ship product systems that improve decision quality for hardware/software teams.</li>
+          <li>Run cross-functional operating cadence across product, engineering, and leadership.</li>
+          <li>Translate customer telemetry pain into roadmap, prioritization, and measurable outcomes.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">Anduril</h2>
+        <h2 class="company"><a href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a></h2>
         <p class="title">Principal Product Manager</p>
         <p class="label">Company Summary</p>
-        <p>Defense technology company building autonomy, sensing, and software-defined mission systems.</p>
-        <p class="label">Capital Raised / Stage</p>
-        <p>Late-stage venture-backed defense company (private).</p>
+        <p>Defense technology company delivering autonomy, sensing, and software-defined mission systems.</p>
+        <p class="label">Capital / Stage</p>
+        <p>$2.5B Series G raised (2025); private, late-stage venture-backed defense tech company.</p>
         <p class="label">ICP</p>
-        <p>National security and defense operators requiring mission-ready autonomous and software systems.</p>
+        <p>Defense and national security operators deploying autonomous systems in contested environments.</p>
         <p class="label">Role JD</p>
-        <p>Own product direction for complex platform systems under high reliability and deployment constraints.</p>
+        <p>Product owner for vertically integrated AI infrastructure across navigation, mapping, simulation, digital twins, and mixed reality.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Convert mission constraints into clear product priorities.</li>
-          <li>Ship under high-stakes reliability requirements.</li>
-          <li>Align operators, engineers, and executives around roadmap tradeoffs.</li>
+          <li>Convert mission constraints into product priorities and delivery plans.</li>
+          <li>Drive world-model and GPS-denied navigation capabilities from concept to deployment.</li>
+          <li>Design data fusion systems from internet/cloud inputs to edge deliverables.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">Serve Robotics</h2>
+        <h2 class="company"><a href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a></h2>
         <p class="title">Director of Product Management</p>
         <p class="label">Company Summary</p>
-        <p>Autonomous delivery robotics company commercializing sidewalk autonomy for urban logistics.</p>
-        <p class="label">Capital Raised / Stage</p>
-        <p>Growth/public-market robotics company.</p>
+        <p>Autonomous sidewalk delivery robotics company focused on scalable last-mile logistics.</p>
+        <p class="label">Capital / Stage</p>
+        <p>Public company (Nasdaq: SERV); approximately $220M total funding disclosed since spinout.</p>
         <p class="label">ICP</p>
-        <p>Enterprise logistics and delivery partners needing reliable autonomous last-mile systems.</p>
+        <p>Enterprise delivery partners and logistics operators requiring reliable autonomous fulfillment.</p>
         <p class="label">Role JD</p>
-        <p>Lead product strategy across autonomy, operations software, and commercial platform scaling.</p>
+        <p>Led commercialization of L4 autonomy across revenue, GTM, autonomy optimization, and partner/platform surfaces.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Scale autonomy products from pilot to repeatable operations.</li>
-          <li>Connect product decisions to commercial and operational outcomes.</li>
-          <li>Prioritize reliability, deployment speed, and partner value.</li>
+          <li>Scale pilot robotics programs into repeatable commercial deployments.</li>
+          <li>Ship partner/API and operations systems for national rollout.</li>
+          <li>Close field-data-to-requirements loops across autonomy, navigation, mapping, hardware, and ops.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">Postmates</h2>
+        <h2 class="company"><a href="https://postmates.com" target="_blank" rel="noopener">Postmates</a></h2>
         <p class="title">Product Lead</p>
         <p class="label">Company Summary</p>
-        <p>On-demand delivery and logistics marketplace platform.</p>
-        <p class="label">Capital Raised / Stage</p>
-        <p>Late-stage venture-backed company (acquired by Uber).</p>
+        <p>On-demand delivery and logistics marketplace platform across consumer, merchant, and courier networks.</p>
+        <p class="label">Capital / Stage</p>
+        <p>Late-stage venture-backed company; acquired by Uber for $2.65B (2020).</p>
         <p class="label">ICP</p>
-        <p>Consumers, merchants, and enterprise partners requiring fast, reliable local delivery.</p>
+        <p>Consumers, merchants, and enterprise partners using local fulfillment and delivery infrastructure.</p>
         <p class="label">Role JD</p>
-        <p>Lead product for platform and partner capabilities across logistics and commerce.</p>
+        <p>Built core marketplace product and launched B2B/developer platform from 0 to meaningful revenue contribution.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Build scalable product systems for marketplace growth.</li>
-          <li>Launch and optimize partner/platform integrations.</li>
-          <li>Improve delivery experience across demand, supply, and merchant surfaces.</li>
+          <li>Build platform capabilities that drive merchant and enterprise growth.</li>
+          <li>Scale product experiences across consumer, merchant, and courier surfaces.</li>
+          <li>Improve operational reliability through automation in payouts, refunds, credits, and support tooling.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">Pendulum</h2>
-        <p class="title">Applied AI Research</p>
+        <h2 class="company"><a href="https://www.pendulum.global" target="_blank" rel="noopener">Pendulum</a></h2>
+        <p class="title">Applied Product Research</p>
         <p class="label">Company Summary</p>
-        <p>Applied AI and mission systems work focused on geospatial and defense-adjacent contexts.</p>
-        <p class="label">Capital Raised / Stage</p>
-        <p>Early-to-growth stage applied AI systems company.</p>
+        <p>Applied AI systems work focused on resilient geolocation and mission support under degraded conditions.</p>
+        <p class="label">Capital / Stage</p>
+        <p>DoD-funded program work (contract stage).</p>
         <p class="label">ICP</p>
-        <p>Mission teams requiring AI-assisted situational awareness and resilient operating workflows.</p>
+        <p>Defense and mission teams operating where GPS and communications reliability cannot be assumed.</p>
         <p class="label">Role JD</p>
-        <p>Bridge research and product by turning experimental capability into deployable workflows.</p>
+        <p>Led early product development for next-generation geolocation capability combining device sensors and geospatial cues.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Move AI from prototype to operator-ready utility.</li>
-          <li>Improve trust and interpretability in decision support outputs.</li>
-          <li>Tighten field feedback loops into product iteration.</li>
+          <li>Move prototype systems to field-validated mission readiness.</li>
+          <li>Bridge innovation stakeholders with practical product direction.</li>
+          <li>Create testing loops that improve model and system behavior under real-world stress.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">Expedia Group</h2>
+        <h2 class="company"><a href="https://www.expediagroup.com" target="_blank" rel="noopener">Expedia Group</a></h2>
         <p class="title">Senior Global Product Manager, Mobile</p>
         <p class="label">Company Summary</p>
-        <p>Global travel platform serving flight, lodging, and trip management demand at scale.</p>
-        <p class="label">Capital Raised / Stage</p>
+        <p>Global travel platform serving flights, lodging, and trip management at scale.</p>
+        <p class="label">Capital / Stage</p>
         <p>Public company.</p>
         <p class="label">ICP</p>
-        <p>Global travelers and travel shoppers across consumer and partner channels.</p>
+        <p>Global travelers and travel shoppers across mobile-first experiences.</p>
         <p class="label">Role JD</p>
-        <p>Own key mobile product lines and drive growth across major international markets.</p>
+        <p>Owned core mobile travel lines and drove growth across international markets.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Ship high-quality mobile travel experiences.</li>
-          <li>Expand product performance across regions and user segments.</li>
-          <li>Balance conversion, usability, and trip reliability.</li>
+          <li>Ship mobile products that improve trip planning, booking, and itinerary confidence.</li>
+          <li>Launch and scale new mobile lines of business globally.</li>
+          <li>Balance conversion performance with end-to-end travel UX quality.</li>
         </ul>
       </article>
 
       <article class="role">
-        <h2 class="company">S&amp;P Global Market Intelligence</h2>
+        <h2 class="company"><a href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Global Market Intelligence</a></h2>
         <p class="title">Data Platform Product Manager</p>
         <p class="label">Company Summary</p>
-        <p>Enterprise financial intelligence and market data platform business.</p>
-        <p class="label">Capital Raised / Stage</p>
+        <p>Financial intelligence and market data platform business for institutional decision-making.</p>
+        <p class="label">Capital / Stage</p>
         <p>Public company.</p>
         <p class="label">ICP</p>
-        <p>Institutional analysts, enterprise finance teams, and data-intensive decision makers.</p>
+        <p>Institutional analysts and enterprise finance teams depending on reliable data pipelines.</p>
         <p class="label">Role JD</p>
-        <p>Define platform requirements and UX for near-real-time financial data systems.</p>
+        <p>Defined UX and requirements for near-real-time financial data collection and pipeline systems.</p>
         <p class="label">JTBD</p>
         <ul>
-          <li>Improve data pipeline reliability and timeliness.</li>
-          <li>Translate analyst workflows into platform product requirements.</li>
-          <li>Increase trust and usability for data-driven decision surfaces.</li>
+          <li>Improve data timeliness, reliability, and trust for downstream analysis.</li>
+          <li>Translate analyst workflows into platform requirements.</li>
+          <li>Increase usability of high-volume, high-velocity financial data products.</li>
         </ul>
       </article>
     </main>
