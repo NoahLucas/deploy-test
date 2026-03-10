@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 
+import httpx
 from fastapi import APIRouter, HTTPException, Request, status
 
 from app.core.endpoint_registry import MANAGED_ENDPOINTS
@@ -13,6 +14,8 @@ from app.models import (
     EndpointToggleUpdateRequest,
     OpenAIConnectRequest,
     OpenAIConnectResponse,
+    ProdDeployRequest,
+    ProdDeployResponse,
 )
 from app.routes.deps import require_admin
 from app.routes.errors import bad_gateway
@@ -97,4 +100,42 @@ def connect_apple(payload: AppleConnectRequest, request: Request) -> AppleConnec
         subject=str(claims.get("sub", "")),
         audience=str(claims.get("aud", "")),
         expires_at=expires_at,
+    )
+
+
+@router.post("/admin/deploy/prod", response_model=ProdDeployResponse)
+async def deploy_prod(payload: ProdDeployRequest, request: Request) -> ProdDeployResponse:
+    require_admin(request)
+    settings = request.app.state.settings
+
+    hook_url = (settings.render_prod_deploy_hook_url or "").strip()
+    if not hook_url:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="RENDER_PROD_DEPLOY_HOOK_URL is not configured.",
+        )
+
+    headers = {"Content-Type": "application/json"}
+    token = (settings.render_prod_deploy_hook_token or "").strip()
+    if token:
+        headers["X-Deploy-Token"] = token
+
+    body = {"trigger": "staging-ui", "note": payload.note or ""}
+    try:
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            response = await client.post(hook_url, json=body, headers=headers)
+    except Exception as exc:
+        raise bad_gateway("Render deploy hook call failed", exc) from exc
+
+    if response.status_code >= 400:
+        detail = response.text.strip() or f"Render deploy hook returned {response.status_code}."
+        raise HTTPException(status_code=status.HTTP_502_BAD_GATEWAY, detail=detail)
+
+    return ProdDeployResponse(
+        queued=True,
+        provider="render",
+        target="production",
+        status_code=response.status_code,
+        note=payload.note,
+        message="Production deploy hook accepted.",
     )

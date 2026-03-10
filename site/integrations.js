@@ -67,6 +67,16 @@ async function connectOpenAI() {
   }
 }
 
+async function pushProd() {
+  try {
+    const note = $("prod-deploy-note")?.value?.trim() || null;
+    const data = await call("/api/v1/admin/deploy/prod", "POST", { note });
+    output(data);
+  } catch (err) {
+    output({ error: String(err) });
+  }
+}
+
 async function refreshToggles() {
   const host = $("toggle-list");
   if (!host) return;
@@ -200,6 +210,7 @@ if (adminTokenInput) {
   adminTokenInput.value = token();
 }
 $("save-admin-token")?.addEventListener("click", saveToken);
+$("push-prod")?.addEventListener("click", pushProd);
 $("connect-apple")?.addEventListener("click", connectApple);
 $("connect-openai")?.addEventListener("click", connectOpenAI);
 $("refresh-toggles")?.addEventListener("click", refreshToggles);

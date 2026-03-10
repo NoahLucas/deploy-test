@@ -31,6 +31,8 @@ class Settings:
     app_attest_challenge_ttl_seconds: int
     squarespace_webhook_secret: str
     squarespace_webhook_enforce_signature: bool
+    render_prod_deploy_hook_url: str
+    render_prod_deploy_hook_token: str
 
 
 def _split_csv(value: str) -> List[str]:
@@ -83,4 +85,6 @@ def get_settings() -> Settings:
         app_attest_challenge_ttl_seconds=_to_int(os.getenv("APP_ATTEST_CHALLENGE_TTL_SECONDS", "300"), 300),
         squarespace_webhook_secret=os.getenv("SQUARESPACE_WEBHOOK_SECRET", ""),
         squarespace_webhook_enforce_signature=_to_bool(os.getenv("SQUARESPACE_WEBHOOK_ENFORCE_SIGNATURE", "true"), True),
+        render_prod_deploy_hook_url=os.getenv("RENDER_PROD_DEPLOY_HOOK_URL", ""),
+        render_prod_deploy_hook_token=os.getenv("RENDER_PROD_DEPLOY_HOOK_TOKEN", ""),
     )

@@ -297,6 +297,19 @@ class SquarespaceEventsResponse(BaseModel):
     items: List[SquarespaceEventItem]
 
 
+class ProdDeployRequest(BaseModel):
+    note: Optional[str] = Field(default=None, max_length=240)
+
+
+class ProdDeployResponse(BaseModel):
+    queued: bool
+    provider: str
+    target: str
+    status_code: int
+    note: Optional[str] = None
+    message: str
+
+
 class AgentTaskSpec(BaseModel):
     role: str = Field(min_length=2, max_length=80)
     objective: str = Field(min_length=6, max_length=2000)
