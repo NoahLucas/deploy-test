@@ -6,9 +6,8 @@
     <title>Noah Lucas</title>
     <style>
       :root {
-        --bg: #0a0a0a;
-        --text: #f5f5f5;
-        --muted: #cfcfcf;
+        --bg: #000000;
+        --fg: #d9d9d9;
       }
 
       * { box-sizing: border-box; }
@@ -16,111 +15,44 @@
       body {
         margin: 0;
         background: var(--bg);
-        color: var(--text);
+        color: var(--fg);
         font-family: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       }
 
       main {
-        width: min(960px, calc(100% - 2rem));
-        margin: 3.2rem auto 4rem;
+        width: min(980px, calc(100% - 2rem));
+        margin: 2rem auto;
       }
 
-      h1 {
-        margin: 0 0 1.2rem;
-        font-weight: 500;
-        font-size: clamp(2rem, 6vw, 3.8rem);
-        letter-spacing: 0.01em;
-      }
-
-      .copy {
+      pre {
         margin: 0;
-        max-width: 72ch;
-        color: var(--muted);
-        font-size: clamp(1rem, 1.35vw, 1.2rem);
-        line-height: 1.65;
         white-space: pre-wrap;
-      }
-
-      .cursor {
-        display: inline-block;
-        width: 0.6ch;
-        animation: blink 1s steps(1, end) infinite;
-      }
-
-      @keyframes blink {
-        50% { opacity: 0; }
-      }
-
-
-      .signature {
-        margin-top: 1.7rem;
-        text-align: right;
-        color: #e6dcc7;
-        font-family: "Snell Roundhand", "Bradley Hand", "Apple Chancery", cursive;
-        font-size: clamp(1.5rem, 4vw, 2.2rem);
-        letter-spacing: 0.02em;
-      }
-
-      .images {
-        margin-top: 2.2rem;
-        display: grid;
-        gap: 0.85rem;
-      }
-
-      .images img {
-        display: block;
-        width: 100%;
-        height: auto;
-        object-fit: cover;
+        word-break: break-word;
+        line-height: 1.45;
+        font-size: clamp(0.9rem, 1.4vw, 1.05rem);
       }
 
       @media (max-width: 720px) {
         main {
           width: calc(100% - 1rem);
-          margin: 2rem auto 2.4rem;
-        }
-
-        .images {
-          margin-top: 1.4rem;
-          gap: 0.55rem;
+          margin: 1rem auto;
         }
       }
     </style>
   </head>
   <body>
     <main>
-      <h1>Noah Lucas</h1>
-      <p class="copy" id="type-target"></p>
-      <div class="images">
-        <img src="/assets/imported/A7R05738.jpeg" alt="Noah Lucas sunset" loading="lazy" />
-        <img src="/assets/imported/IMG_1898.jpeg" alt="Noah Lucas family" loading="lazy" />
-        <img src="/assets/imported/postmates.png" alt="Noah Lucas portrait" loading="lazy" />
-      </div>
-      <p class="signature">Noah Lucas</p>
+<pre>+--------------------------------------------------------------+
+|                        NOAH LUCAS                            |
++--------------------------------------------------------------+
+
+Raised in the Midwest, educated in New York, and building in
+California at the intersection of AI, hardware, and software.
+Based in Ojai, California with wife & daughter. Product builder
+and system operator currently serving as VP of Product at Sift,
+focused on frontier software for aerospace, defense, robotics,
+and autonomy.
+</pre>
     </main>
-
-    <script>
-      const text = "Raised in the Midwest, educated in New York, and building in California at the intersection of AI, hardware, and software. Based in Ojai, California with wife & daughter. Product builder and system operator currently serving as VP of Product at Sift, focused on frontier software for aerospace, defense, robotics, and autonomy.";
-      const target = document.getElementById("type-target");
-      const speed = 24;
-      let index = 0;
-
-      function render() {
-        const done = index >= text.length;
-        target.textContent = text.slice(0, index);
-
-        const cursor = document.createElement("span");
-        cursor.className = "cursor";
-        cursor.textContent = done ? "" : "_";
-        target.appendChild(cursor);
-
-        if (!done) {
-          index += 1;
-          setTimeout(render, speed);
-        }
-      }
-
-      render();
-    </script>
   </body>
 </html>
