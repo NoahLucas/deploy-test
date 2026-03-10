@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-10T15:23:04.752Z",
+  "fetchedAt": "2026-03-10T23:09:53.913Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -11,349 +11,48 @@
   "signals": [
     {
       "source": "linear",
-      "title": "ENG-9078: Sync Devin DeepWiki sift-stack/azimuth",
+      "title": "ENG-9113: [BE] Skip and not error for rules with invalid configs per run",
       "priority": "URGENT",
       "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
       "team": "Engineering",
-      "timestamp": "2026-03-10T08:05:44.497Z",
+      "timestamp": "2026-03-10T23:07:45.890Z",
       "evidence": [
         {
-          "label": "ENG-9078",
-          "url": "https://linear.app/siftstack/issue/ENG-9078/sync-devin-deepwiki-sift-stackazimuth",
+          "label": "ENG-9113",
+          "url": "https://linear.app/siftstack/issue/ENG-9113/be-skip-and-not-error-for-rules-with-invalid-configs-per-run",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-7716: Deploy backend with kluctl",
-      "priority": "URGENT",
+      "title": "ENG-8377: Can we support Set intersection cases in the Policy Creation UI",
+      "priority": "HIGH",
       "state": "In Verification",
-      "assignee": "Jared Borner",
+      "assignee": "Jonathan Deng",
       "team": "Engineering",
-      "timestamp": "2026-03-10T05:57:37.575Z",
+      "timestamp": "2026-03-10T22:53:05.137Z",
       "evidence": [
         {
-          "label": "ENG-7716",
-          "url": "https://linear.app/siftstack/issue/ENG-7716/deploy-backend-with-kluctl",
+          "label": "ENG-8377",
+          "url": "https://linear.app/siftstack/issue/ENG-8377/can-we-support-set-intersection-cases-in-the-policy-creation-ui",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9077: Channel list v2",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T04:40:54.441Z",
-      "evidence": [
-        {
-          "label": "ENG-9077",
-          "url": "https://linear.app/siftstack/issue/ENG-9077/channel-list-v2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7813: migrate govcloud to ha keycloak",
+      "title": "ENG-8309: Implement local data only mode in data-batcher",
       "priority": "URGENT",
       "state": "In Review",
-      "assignee": "Felix Wong",
+      "assignee": "nick.bowman@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-10T02:47:47.611Z",
+      "timestamp": "2026-03-10T22:48:07.526Z",
       "evidence": [
         {
-          "label": "ENG-7813",
-          "url": "https://linear.app/siftstack/issue/ENG-7813/migrate-govcloud-to-ha-keycloak",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9073: add warning to metrics calls where value surpasses max safe int",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "leo@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T02:38:42.608Z",
-      "evidence": [
-        {
-          "label": "ENG-9073",
-          "url": "https://linear.app/siftstack/issue/ENG-9073/add-warning-to-metrics-calls-where-value-surpasses-max-safe-int",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9058: Configure DLv3 alerts to land in the dlv3-<env>-alerts slack channel",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "pramod@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:35:42.305Z",
-      "evidence": [
-        {
-          "label": "ENG-9058",
-          "url": "https://linear.app/siftstack/issue/ENG-9058/configure-dlv3-alerts-to-land-in-the-dlv3-env-alerts-slack-channel",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9071: E1 - Excessive calls to channel list",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "brandon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:33:02.579Z",
-      "evidence": [
-        {
-          "label": "ENG-9071",
-          "url": "https://linear.app/siftstack/issue/ENG-9071/e1-excessive-calls-to-channel-list",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9021: E2 - Excessive calls to channel search",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "brandon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:32:32.868Z",
-      "evidence": [
-        {
-          "label": "ENG-9021",
-          "url": "https://linear.app/siftstack/issue/ENG-9021/e2-excessive-calls-to-channel-search",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8965: Surface resolver errors when calculated channel refs don't exist on a given asset",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "david@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:29:54.013Z",
-      "evidence": [
-        {
-          "label": "ENG-8965",
-          "url": "https://linear.app/siftstack/issue/ENG-8965/surface-resolver-errors-when-calculated-channel-refs-dont-exist-on-a",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8898: UpdateRunBoundsIfNeeded Improvements",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "andrew@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:24:50.668Z",
-      "evidence": [
-        {
-          "label": "ENG-8898",
-          "url": "https://linear.app/siftstack/issue/ENG-8898/updaterunboundsifneeded-improvements",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9050: Update dashboards to accommodate multiple data-batcher pods",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "anna@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:02:46.859Z",
-      "evidence": [
-        {
-          "label": "ENG-9050",
-          "url": "https://linear.app/siftstack/issue/ENG-9050/update-dashboards-to-accommodate-multiple-data-batcher-pods",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8856: Sift Edge Simulator",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:00:44.891Z",
-      "evidence": [
-        {
-          "label": "ENG-8856",
-          "url": "https://linear.app/siftstack/issue/ENG-8856/sift-edge-simulator",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8858: Sift Edge Metrics",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "taylor@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T01:00:44.843Z",
-      "evidence": [
-        {
-          "label": "ENG-8858",
-          "url": "https://linear.app/siftstack/issue/ENG-8858/sift-edge-metrics",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8149: Update Edge PRD",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Kenn Zamora",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:54:37.377Z",
-      "evidence": [
-        {
-          "label": "ENG-8149",
-          "url": "https://linear.app/siftstack/issue/ENG-8149/update-edge-prd",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9074: Send RFC & Capture Feedback",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "benjamin@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:54:30.593Z",
-      "evidence": [
-        {
-          "label": "ENG-9074",
-          "url": "https://linear.app/siftstack/issue/ENG-9074/send-rfc-and-capture-feedback",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8857: Add enum + bitfield support to Sift Edge",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:50:43.069Z",
-      "evidence": [
-        {
-          "label": "ENG-8857",
-          "url": "https://linear.app/siftstack/issue/ENG-8857/add-enum-bitfield-support-to-sift-edge",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8859: WAL crash recovery",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "benjamin@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:49:35.105Z",
-      "evidence": [
-        {
-          "label": "ENG-8859",
-          "url": "https://linear.app/siftstack/issue/ENG-8859/wal-crash-recovery",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8855: Sift-Edge Sync-to-Sift Prototype",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "taylor@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:49:09.389Z",
-      "evidence": [
-        {
-          "label": "ENG-8855",
-          "url": "https://linear.app/siftstack/issue/ENG-8855/sift-edge-sync-to-sift-prototype",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9069: Gracefully handle expression validation errors on calculated channels",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "david@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:15:09.079Z",
-      "evidence": [
-        {
-          "label": "ENG-9069",
-          "url": "https://linear.app/siftstack/issue/ENG-9069/gracefully-handle-expression-validation-errors-on-calculated-channels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8398: CVE-2024-47561 apache-avro: Schema parsing may trigger Remote Code Execution (RCE)",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Jack Konyan",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:05:46.539Z",
-      "evidence": [
-        {
-          "label": "ENG-8398",
-          "url": "https://linear.app/siftstack/issue/ENG-8398/cve-2024-47561-apache-avro-schema-parsing-may-trigger-remote-code",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8406: CVE-2023-44981 zookeeper: Authorization Bypass in Apache ZooKeeper",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Jack Konyan",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:04:51.993Z",
-      "evidence": [
-        {
-          "label": "ENG-8406",
-          "url": "https://linear.app/siftstack/issue/ENG-8406/cve-2023-44981-zookeeper-authorization-bypass-in-apache-zookeeper",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8408: CVE-2025-68121 During session resumption in crypto/tls, if the underlying Config has ...",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Jack Konyan",
-      "team": "Engineering",
-      "timestamp": "2026-03-10T00:02:54.125Z",
-      "evidence": [
-        {
-          "label": "ENG-8408",
-          "url": "https://linear.app/siftstack/issue/ENG-8408/cve-2025-68121-during-session-resumption-in-cryptotls-if-the",
+          "label": "ENG-8309",
+          "url": "https://linear.app/siftstack/issue/ENG-8309/implement-local-data-only-mode-in-data-batcher",
           "source": "linear"
         }
       ]
@@ -365,7 +64,7 @@
       "state": "In Verification",
       "assignee": "Bryce Turley",
       "team": "Engineering",
-      "timestamp": "2026-03-09T23:52:09.077Z",
+      "timestamp": "2026-03-10T22:45:29.599Z",
       "evidence": [
         {
           "label": "ENG-8874",
@@ -376,12 +75,28 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9055: [FE] Support duplicating family stat",
+      "title": "ENG-9068: Evaluate AWS savings plans",
       "priority": "URGENT",
       "state": "In Progress",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T22:35:57.022Z",
+      "evidence": [
+        {
+          "label": "ENG-9068",
+          "url": "https://linear.app/siftstack/issue/ENG-9068/evaluate-aws-savings-plans",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9055: [FE] Support duplicating family stat",
+      "priority": "URGENT",
+      "state": "In Verification",
       "assignee": "Adrienne Chang",
       "team": "Engineering",
-      "timestamp": "2026-03-09T23:47:00.752Z",
+      "timestamp": "2026-03-10T22:31:06.564Z",
       "evidence": [
         {
           "label": "ENG-9055",
@@ -392,96 +107,376 @@
     },
     {
       "source": "linear",
-      "title": "ENG-8952: Family Config Polish",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-03-09T23:46:43.239Z",
-      "evidence": [
-        {
-          "label": "ENG-8952",
-          "url": "https://linear.app/siftstack/issue/ENG-8952/family-config-polish",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8807: [FE] create single channel select component",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-03-09T23:36:02.236Z",
-      "evidence": [
-        {
-          "label": "ENG-8807",
-          "url": "https://linear.app/siftstack/issue/ENG-8807/fe-create-single-channel-select-component",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9011: Error: Request failed with status code 400. No retries remaining.",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Yue Shen",
-      "team": "Engineering",
-      "timestamp": "2026-03-09T23:28:46.365Z",
-      "evidence": [
-        {
-          "label": "ENG-9011",
-          "url": "https://linear.app/siftstack/issue/ENG-9011/error-request-failed-with-status-code-400-no-retries-remaining",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8228: Implement Fresh Data Reads from MemTable",
+      "title": "ENG-9110: [FE] add family stat side panel",
       "priority": "URGENT",
       "state": "In Progress",
-      "assignee": "alexander.a@siftstack.com",
+      "assignee": "Adrienne Chang",
       "team": "Engineering",
-      "timestamp": "2026-03-09T22:47:39.921Z",
+      "timestamp": "2026-03-10T22:30:58.615Z",
       "evidence": [
         {
-          "label": "ENG-8228",
-          "url": "https://linear.app/siftstack/issue/ENG-8228/implement-fresh-data-reads-from-memtable",
+          "label": "ENG-9110",
+          "url": "https://linear.app/siftstack/issue/ENG-9110/fe-add-family-stat-side-panel",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-8921: [FE] Add Agg Review Alignment Step to Run Create Report",
+      "title": "ENG-9046: Create EC2 instances for misc dev initiatives",
       "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Alexa Agnew",
+      "state": "In Review",
+      "assignee": "Jack Konyan",
       "team": "Engineering",
-      "timestamp": "2026-03-09T22:37:36.759Z",
+      "timestamp": "2026-03-10T22:26:58.902Z",
       "evidence": [
         {
-          "label": "ENG-8921",
-          "url": "https://linear.app/siftstack/issue/ENG-8921/fe-add-agg-review-alignment-step-to-run-create-report",
+          "label": "ENG-9046",
+          "url": "https://linear.app/siftstack/issue/ENG-9046/create-ec2-instances-for-misc-dev-initiatives",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-8816: xE2 Annotations: Add Annotations context menu interactions",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "broch@siftstack.com",
+      "title": "ENG-8291: [FE] Review family changes summary page",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Adrienne Chang",
       "team": "Engineering",
-      "timestamp": "2026-03-09T22:12:58.589Z",
+      "timestamp": "2026-03-10T22:25:56.991Z",
       "evidence": [
         {
-          "label": "ENG-8816",
-          "url": "https://linear.app/siftstack/issue/ENG-8816/xe2-annotations-add-annotations-context-menu-interactions",
+          "label": "ENG-8291",
+          "url": "https://linear.app/siftstack/issue/ENG-8291/fe-review-family-changes-summary-page",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8512: E2 Channel List: Nest channels with the same name",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T22:18:12.938Z",
+      "evidence": [
+        {
+          "label": "ENG-8512",
+          "url": "https://linear.app/siftstack/issue/ENG-8512/e2-channel-list-nest-channels-with-the-same-name",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9109: Saved Panel Configs with Calculated Channels fail to load with unclear error",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T22:18:11.116Z",
+      "evidence": [
+        {
+          "label": "ENG-9109",
+          "url": "https://linear.app/siftstack/issue/ENG-9109/saved-panel-configs-with-calculated-channels-fail-to-load-with-unclear",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8879: Enable vector on runsc nodes",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Felix Wong",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T21:54:36.332Z",
+      "evidence": [
+        {
+          "label": "ENG-8879",
+          "url": "https://linear.app/siftstack/issue/ENG-8879/enable-vector-on-runsc-nodes",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9106: Attributes assign UX polish",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T21:29:25.150Z",
+      "evidence": [
+        {
+          "label": "ENG-9106",
+          "url": "https://linear.app/siftstack/issue/ENG-9106/attributes-assign-ux-polish",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8992: Add validation for user input/backend of Hz to be even milliseconds",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Alex Luck",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T21:08:03.766Z",
+      "evidence": [
+        {
+          "label": "ENG-8992",
+          "url": "https://linear.app/siftstack/issue/ENG-8992/add-validation-for-user-inputbackend-of-hz-to-be-even-milliseconds",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8819: Add e2e test that ensures fresh data is merged with historical data",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "nick.bowman@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:37:43.742Z",
+      "evidence": [
+        {
+          "label": "ENG-8819",
+          "url": "https://linear.app/siftstack/issue/ENG-8819/add-e2e-test-that-ensures-fresh-data-is-merged-with-historical-data",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9045: Add TTL for local catalog partitions",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "nick.bowman@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:37:41.411Z",
+      "evidence": [
+        {
+          "label": "ENG-9045",
+          "url": "https://linear.app/siftstack/issue/ENG-9045/add-ttl-for-local-catalog-partitions",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9091: ENG-0000: Fix the ordering of alerts so that dlv3 alerts terminate",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "pramod@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:33:37.664Z",
+      "evidence": [
+        {
+          "label": "ENG-9091",
+          "url": "https://linear.app/siftstack/issue/ENG-9091/eng-0000-fix-the-ordering-of-alerts-so-that-dlv3-alerts-terminate",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-6462: Rename column config in parquet channel-per-row DetectConfig response",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:14:57.516Z",
+      "evidence": [
+        {
+          "label": "ENG-6462",
+          "url": "https://linear.app/siftstack/issue/ENG-6462/rename-column-config-in-parquet-channel-per-row-detectconfig-response",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-5458: Gaurdrails against potential misconfigurations",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:14:18.691Z",
+      "evidence": [
+        {
+          "label": "ENG-5458",
+          "url": "https://linear.app/siftstack/issue/ENG-5458/gaurdrails-against-potential-misconfigurations",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-5724: Parallelize Parquet imports",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:14:18.669Z",
+      "evidence": [
+        {
+          "label": "ENG-5724",
+          "url": "https://linear.app/siftstack/issue/ENG-5724/parallelize-parquet-imports",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-6364: Parquet benchmarks + documentation - single channel per row",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:14:18.642Z",
+      "evidence": [
+        {
+          "label": "ENG-6364",
+          "url": "https://linear.app/siftstack/issue/ENG-6364/parquet-benchmarks-documentation-single-channel-per-row",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-6460: Add channel-per-row parquet to sift-cli",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T20:14:18.618Z",
+      "evidence": [
+        {
+          "label": "ENG-6460",
+          "url": "https://linear.app/siftstack/issue/ENG-6460/add-channel-per-row-parquet-to-sift-cli",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9104: Implement a data pipeline for K2 Mission",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "adhi@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:51:57.711Z",
+      "evidence": [
+        {
+          "label": "ENG-9104",
+          "url": "https://linear.app/siftstack/issue/ENG-9104/implement-a-data-pipeline-for-k2-mission",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9103: [FE] Warning on Precision Loss",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:51:43.573Z",
+      "evidence": [
+        {
+          "label": "ENG-9103",
+          "url": "https://linear.app/siftstack/issue/ENG-9103/fe-warning-on-precision-loss",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9102: Hard Rollout",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:49:20.587Z",
+      "evidence": [
+        {
+          "label": "ENG-9102",
+          "url": "https://linear.app/siftstack/issue/ENG-9102/hard-rollout",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9101: Deploy \"soft\" solution with metrics",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:48:46.292Z",
+      "evidence": [
+        {
+          "label": "ENG-9101",
+          "url": "https://linear.app/siftstack/issue/ENG-9101/deploy-soft-solution-with-metrics",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9100: Test and finalize solution in local environment",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:47:46.685Z",
+      "evidence": [
+        {
+          "label": "ENG-9100",
+          "url": "https://linear.app/siftstack/issue/ENG-9100/test-and-finalize-solution-in-local-environment",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8201: Migrate `CommentEditor` from `playground` to `playground-2`",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:40:29.645Z",
+      "evidence": [
+        {
+          "label": "ENG-8201",
+          "url": "https://linear.app/siftstack/issue/ENG-8201/migrate-commenteditor-from-playground-to-playground-2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8070: Migrate `playground` to `playground-2`",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:40:29.644Z",
+      "evidence": [
+        {
+          "label": "ENG-8070",
+          "url": "https://linear.app/siftstack/issue/ENG-8070/migrate-playground-to-playground-2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9098: Policy form support for user group attribute conditions",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-10T19:36:42.869Z",
+      "evidence": [
+        {
+          "label": "ENG-9098",
+          "url": "https://linear.app/siftstack/issue/ENG-9098/policy-form-support-for-user-group-attribute-conditions",
           "source": "linear"
         }
       ]
@@ -539,11 +534,11 @@
             },
             {
               "setId": "",
-              "value": 699
+              "value": 701
             },
             {
               "setId": "",
-              "value": 322
+              "value": 386
             }
           ]
         ],
@@ -551,7 +546,7 @@
           [
             {
               "setId": "",
-              "value": 1847
+              "value": 1863
             }
           ]
         ],
@@ -628,7 +623,7 @@
             },
             {
               "setId": "",
-              "value": 301
+              "value": 302
             },
             {
               "setId": "",
@@ -656,7 +651,7 @@
             },
             {
               "setId": "",
-              "value": 322
+              "value": 323
             },
             {
               "setId": "",
@@ -680,7 +675,7 @@
             },
             {
               "setId": "",
-              "value": 378
+              "value": 379
             },
             {
               "setId": "",
@@ -688,7 +683,7 @@
             },
             {
               "setId": "",
-              "value": 351
+              "value": 353
             },
             {
               "setId": "",
@@ -704,11 +699,11 @@
             },
             {
               "setId": "",
-              "value": 328
+              "value": 333
             },
             {
               "setId": "",
-              "value": 93
+              "value": 297
             }
           ]
         ],
@@ -716,7 +711,7 @@
           [
             {
               "setId": "",
-              "value": 1168
+              "value": 1191
             }
           ]
         ],
@@ -815,11 +810,11 @@
             },
             {
               "setId": "",
-              "value": 117
+              "value": 118
             },
             {
               "setId": "",
-              "value": 16
+              "value": 28
             }
           ]
         ],
@@ -827,7 +822,7 @@
           [
             {
               "setId": "",
-              "value": 1015
+              "value": 1028
             }
           ]
         ],
@@ -868,20 +863,20 @@
             4742.11715614618,
             5521.405282738096,
             5766.608520134228,
-            5721.278934169279,
-            5437.517422077922,
-            5510.211113772455,
-            6278.949153846153,
-            6651.869223529411,
-            7423.062658892129,
-            2447.12246
+            5722.767043887147,
+            5444.957155844156,
+            5493.79347761194,
+            6259.389677316294,
+            6638.279686217009,
+            7399.7891149425295,
+            3710.1260555555555
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 24151.163273041475
+              "value": 24390.73631724138
             }
           ]
         ],
@@ -963,7 +958,7 @@
             },
             {
               "setId": "",
-              "value": 209
+              "value": 247
             }
           ],
           [
@@ -1017,7 +1012,7 @@
             },
             {
               "setId": "",
-              "value": 29
+              "value": 33
             }
           ],
           [
@@ -1071,7 +1066,7 @@
             },
             {
               "setId": "",
-              "value": 24
+              "value": 32
             }
           ],
           [
@@ -1133,19 +1128,19 @@
           [
             {
               "setId": "",
-              "value": 952
+              "value": 957
             }
           ],
           [
             {
               "setId": "",
-              "value": 244
+              "value": 246
             }
           ],
           [
             {
               "setId": "",
-              "value": 229
+              "value": 230
             }
           ],
           [
@@ -1474,7 +1469,7 @@
             },
             {
               "setId": "",
-              "value": 46
+              "value": 64
             }
           ],
           [
@@ -1528,7 +1523,7 @@
             },
             {
               "setId": "",
-              "value": 1
+              "value": 2
             }
           ],
           [
@@ -1636,7 +1631,7 @@
             },
             {
               "setId": "",
-              "value": 103
+              "value": 124
             }
           ]
         ],
@@ -1662,7 +1657,7 @@
           [
             {
               "setId": "",
-              "value": 682
+              "value": 684
             }
           ]
         ],
@@ -1762,7 +1757,7 @@
             },
             {
               "setId": "",
-              "value": 4
+              "value": 6
             }
           ],
           [
@@ -1816,7 +1811,7 @@
             },
             {
               "setId": "",
-              "value": 85
+              "value": 117
             }
           ],
           [
@@ -1924,7 +1919,7 @@
             },
             {
               "setId": "",
-              "value": 162
+              "value": 556
             }
           ],
           [
@@ -1986,13 +1981,13 @@
           [
             {
               "setId": "",
-              "value": 1276
+              "value": 1278
             }
           ],
           [
             {
               "setId": "",
-              "value": 2244
+              "value": 2276
             }
           ],
           [
@@ -2004,7 +1999,7 @@
           [
             {
               "setId": "",
-              "value": 9529
+              "value": 9923
             }
           ],
           [
@@ -2067,8 +2062,8 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Channel list v2 and performance optimization (E1/E2 excessive calls).",
-      "linearActive": 6,
+      "topConcern": "Data pipeline quality and parquet performance optimization in focus.",
+      "linearActive": 8,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-10T09:15:00Z",
       "fourPAge": "2d",
@@ -2078,34 +2073,34 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "shipping",
-      "topConcern": "Data-batcher pod scaling and metrics dashboard updates in progress.",
+      "status": "attention",
+      "topConcern": "Policy UI complexity with Set intersection and user group attributes.",
       "linearActive": 4,
-      "linearBlocked": 0,
+      "linearBlocked": 1,
       "slackLastSeen": "2026-03-10T08:45:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 2
+      "meetingsToday": 4
     },
     {
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Family config polish and run create report alignment step shipping this week.",
-      "linearActive": 5,
+      "topConcern": "Panel config errors and channel nesting UX improvements shipping well.",
+      "linearActive": 6,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-10T10:30:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 4
+      "meetingsToday": 2
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "GovCloud HA Keycloak migration and multiple CVE remediations need prioritization.",
-      "linearActive": 7,
-      "linearBlocked": 1,
+      "status": "shipping",
+      "topConcern": "AWS savings plans evaluation and vector enablement on track.",
+      "linearActive": 5,
+      "linearBlocked": 0,
       "slackLastSeen": "2026-03-10T07:20:00Z",
       "fourPAge": "3d",
       "meetingsToday": 2
@@ -2114,12 +2109,12 @@
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
-      "status": "shipping",
-      "topConcern": "Sift Edge prototype progressing well; coordinating across multiple workstreams.",
+      "status": "attention",
+      "topConcern": "Hard rollout sequencing and precision loss warnings need coordination.",
       "linearActive": 12,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-10T09:50:00Z",
-      "fourPAge": "1d",
+      "linearBlocked": 2,
+      "slackLastSeen": "2026-03-10T10:00:00Z",
+      "fourPAge": "0d",
       "meetingsToday": 5
     },
     {
@@ -2127,10 +2122,10 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Edge PRD updates and customer-facing simulator work on track.",
+      "topConcern": "K2 Mission data pipeline implementation progressing smoothly.",
       "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-10T11:00:00Z",
+      "slackLastSeen": "2026-03-10T09:50:00Z",
       "fourPAge": "1d",
       "meetingsToday": 3
     }
@@ -2139,31 +2134,33 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "Security vulnerabilities need rapid resolution timeline; GovCloud migration critical.",
+      "attention": "Infrastructure cost optimization with AWS savings plans needs decision.",
       "recentTopics": [
-        "GovCloud compliance timeline",
-        "CVE remediation priorities",
-        "Edge product roadmap alignment"
+        "AWS cost reduction strategy",
+        "K2 Mission customer pipeline",
+        "Governance feature adoption"
       ],
-      "lastSlackToNoah": "2026-03-09T16:30:00Z",
+      "lastSlackToNoah": "2026-03-09T16:45:00Z",
       "pendingDecisions": [
-        "GovCloud migration go-live date",
-        "Security CVE response communication plan"
+        "AWS savings plan commitment level",
+        "Hard rollout go/no-go timing"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Sift Edge architecture progressing; need clarity on WAL recovery and sync priorities.",
+      "attention": "Rollout sequencing and precision loss handling require technical review.",
       "recentTopics": [
-        "Sift Edge sync-to-Sift architecture",
-        "Channel list performance optimization",
-        "MemTable fresh data reads implementation"
+        "Hard rollout architecture review",
+        "Parquet performance benchmarks",
+        "Data-batcher local mode design",
+        "GetPhaseAnnotations latency investigation"
       ],
-      "lastSlackToNoah": "2026-03-10T08:00:00Z",
+      "lastSlackToNoah": "2026-03-10T08:30:00Z",
       "pendingDecisions": [
-        "Edge RFC approval timing",
-        "Data-batcher scaling strategy finalization"
+        "Precision loss warning implementation approach",
+        "Playground-2 migration timeline",
+        "Vector on runsc rollout scope"
       ]
     }
   ],
@@ -2173,533 +2170,517 @@
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 45,
-      "topSignal": "Heavy engagement with Sift Edge deployment and simulator testing for spacecraft telemetry infrastructure",
+      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission",
       "features": [
-        "Sift Edge",
-        "Real-time telemetry",
-        "Calculated channels",
-        "Custom dashboards"
+        "data-pipeline",
+        "mission-telemetry",
+        "real-time-monitoring"
       ],
-      "lastActivity": "2026-03-09T18:23:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-10T14:22:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Consistent usage of annotation features and phase analysis for satellite constellation monitoring",
+      "topSignal": "ENG-8874: GetPhaseAnnotations API Latency",
       "features": [
-        "Annotations",
-        "Phase analysis",
-        "Multi-asset monitoring",
-        "GovCloud deployment"
+        "phase-annotations",
+        "satellite-ops",
+        "telemetry-analysis"
       ],
-      "lastActivity": "2026-03-09T22:14:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-09T16:45:00Z",
+      "openIssues": 2
     },
     {
       "name": "Reliable Robotics",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 52,
-      "topSignal": "Scaling data ingestion with data-batcher optimizations for autonomous flight systems",
+      "wau": 32,
+      "topSignal": "ENG-8992: Add validation for user input/backend of Hz to be even milliseconds",
       "features": [
-        "High-frequency telemetry",
-        "Real-time alerts",
-        "Run reports",
-        "Custom metrics"
+        "calculated-channels",
+        "flight-data",
+        "autopilot-monitoring"
       ],
-      "lastActivity": "2026-03-10T03:45:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-03-10T11:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Varda",
-      "tier": "growth",
-      "trajectory": "expanding",
+      "tier": "enterprise",
+      "trajectory": "stable",
       "wau": 29,
-      "topSignal": "Active development of calculated channels for manufacturing process monitoring in microgravity",
+      "topSignal": "ENG-9109: Saved Panel Configs with Calculated Channels fail to load with unclear error",
       "features": [
-        "Calculated channels",
-        "Expression validation",
-        "Run bounds analysis",
-        "Dashboards"
+        "panel-configs",
+        "calculated-channels",
+        "mission-replay"
       ],
-      "lastActivity": "2026-03-08T16:30:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-10T09:15:00Z",
+      "openIssues": 3
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Regular use of family configuration and channel management for electric aircraft testing",
+      "trajectory": "expanding",
+      "wau": 27,
+      "topSignal": "ENG-8512: E2 Channel List: Nest channels with the same name",
       "features": [
-        "Family config",
-        "Channel search",
-        "Run reports",
-        "Telemetry analysis"
+        "channel-organization",
+        "electric-propulsion",
+        "battery-monitoring"
       ],
-      "lastActivity": "2026-03-09T11:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-10T13:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "GovCloud HA Keycloak migration in progress for enhanced security and compliance",
+      "wau": 52,
+      "topSignal": "ENG-9098: Policy form support for user group attribute conditions",
       "features": [
-        "GovCloud",
-        "HA deployment",
-        "Enterprise SSO",
-        "Multi-tenant",
-        "Advanced security"
+        "access-control",
+        "enterprise-policies",
+        "compliance"
       ],
-      "lastActivity": "2026-03-09T20:55:00Z",
-      "openIssues": 4
+      "lastActivity": "2026-03-10T10:20:00Z",
+      "openIssues": 2
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 71,
-      "topSignal": "High-volume telemetry processing with focus on alert configuration and DLv3 integration",
+      "wau": 41,
+      "topSignal": "ENG-8309: Implement local data only mode in data-batcher",
       "features": [
-        "DLv3 alerts",
-        "Slack integration",
-        "High-volume ingestion",
-        "Custom dashboards"
+        "data-batcher",
+        "launch-telemetry",
+        "offline-mode"
       ],
-      "lastActivity": "2026-03-10T01:12:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-09T14:35:00Z",
+      "openIssues": 1
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 31,
-      "topSignal": "Implementing bitfield and enum support for autonomous rail vehicle sensor data",
+      "wau": 19,
+      "topSignal": "ENG-9055: [FE] Support duplicating family stat",
       "features": [
-        "Bitfield support",
-        "Enum channels",
-        "Real-time monitoring",
-        "Edge deployment"
+        "family-stats",
+        "rail-monitoring",
+        "fleet-analytics"
       ],
-      "lastActivity": "2026-03-09T14:38:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-10T08:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 26,
-      "topSignal": "Testing Sift Edge sync prototype for spacecraft data collection and transmission",
+      "wau": 24,
+      "topSignal": "ENG-6460: Add channel-per-row parquet to sift-cli",
       "features": [
-        "Sift Edge",
-        "Sync-to-Sift",
-        "WAL recovery",
-        "Telemetry buffering"
+        "parquet-import",
+        "cli-tools",
+        "spacecraft-data"
       ],
-      "lastActivity": "2026-03-08T19:47:00Z",
+      "lastActivity": "2026-03-10T12:10:00Z",
       "openIssues": 2
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 43,
-      "topSignal": "Focused on annotation workflows and phase analysis for satellite mission operations",
+      "wau": 35,
+      "topSignal": "ENG-5724: Parallelize Parquet imports",
       "features": [
-        "Annotations",
-        "Phase analysis",
-        "Run reports",
-        "Multi-asset views"
+        "bulk-import",
+        "satellite-integration",
+        "data-ingestion"
       ],
-      "lastActivity": "2026-03-09T09:25:00Z",
+      "lastActivity": "2026-03-08T15:20:00Z",
       "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 8,
-      "topSignal": "Early adoption with channel configuration for electric motorcycle telemetry",
+      "topSignal": "ENG-9106: Attributes assign UX polish",
       "features": [
-        "Channel management",
-        "Basic dashboards",
-        "Run analysis"
+        "attributes",
+        "vehicle-telemetry",
+        "basic-monitoring"
       ],
-      "lastActivity": "2026-03-07T15:22:00Z",
+      "lastActivity": "2026-03-09T10:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 19,
-      "topSignal": "Utilizing family statistics and duplication features for satellite fleet management",
+      "trajectory": "expanding",
+      "wau": 22,
+      "topSignal": "ENG-9091: Fix the ordering of alerts so that dlv3 alerts terminate",
       "features": [
-        "Family stats",
-        "Channel duplication",
-        "Fleet monitoring",
-        "Custom metrics"
+        "alerting",
+        "orbital-tracking",
+        "anomaly-detection"
       ],
-      "lastActivity": "2026-03-09T12:50:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-10T15:30:00Z",
+      "openIssues": 2
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Active use of calculated channels and expression validation for reentry vehicle analysis",
+      "trajectory": "stable",
+      "wau": 18,
+      "topSignal": "ENG-9045: Add TTL for local catalog partitions",
       "features": [
-        "Calculated channels",
-        "Expression validation",
-        "Real-time telemetry",
-        "Annotations"
+        "data-retention",
+        "reentry-monitoring",
+        "catalog-management"
       ],
-      "lastActivity": "2026-03-09T17:33:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T11:40:00Z",
+      "openIssues": 1
     },
     {
       "name": "Revel",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Establishing baseline telemetry ingestion for electric rideshare fleet",
+      "trajectory": "at-risk",
+      "wau": 5,
+      "topSignal": "ENG-8291: [FE] Review family changes summary page",
       "features": [
-        "Basic telemetry",
-        "Channel search",
-        "Dashboards"
+        "dashboard",
+        "ev-charging",
+        "basic-analytics"
       ],
-      "lastActivity": "2026-03-08T10:14:00Z",
+      "lastActivity": "2026-03-05T09:15:00Z",
       "openIssues": 1
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Exploring Sift Edge capabilities for distributed sensor network deployment",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "ENG-9110: [FE] add family stat side panel",
       "features": [
-        "Sift Edge evaluation",
-        "Metrics collection",
-        "Basic monitoring"
+        "family-stats",
+        "flight-test",
+        "ui-tools"
       ],
-      "lastActivity": "2026-03-08T14:05:00Z",
+      "lastActivity": "2026-03-10T07:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Low engagement following initial pilot setup, minimal feature exploration",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "ENG-8070: Migrate playground to playground-2",
       "features": [
-        "Basic ingestion",
-        "Channel viewing"
+        "experimental",
+        "data-exploration",
+        "testing"
       ],
-      "lastActivity": "2026-03-03T11:28:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-08T13:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Steady usage of channel management for energy system monitoring",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "ENG-9046: Create EC2 instances for misc dev initiatives",
       "features": [
-        "Channel management",
-        "Run reports",
-        "Basic alerts"
+        "infrastructure",
+        "energy-monitoring",
+        "development"
       ],
-      "lastActivity": "2026-03-07T16:42:00Z",
+      "lastActivity": "2026-03-09T16:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
-      "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 12,
-      "topSignal": "Growing interest in annotation features and context menu interactions for test data",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 15,
+      "topSignal": "ENG-8819: Add e2e test that ensures fresh data is merged with historical data",
       "features": [
-        "Annotations",
-        "Context menus",
-        "Channel search",
-        "Run analysis"
+        "data-integration",
+        "testing",
+        "aerospace-platform"
       ],
-      "lastActivity": "2026-03-09T13:18:00Z",
+      "lastActivity": "2026-03-10T14:00:00Z",
       "openIssues": 1
     },
     {
       "name": "OdysAviation",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 27,
-      "topSignal": "Implementing run report aggregation and alignment features for flight test analysis",
+      "wau": 21,
+      "topSignal": "ENG-9103: [FE] Warning on Precision Loss",
       "features": [
-        "Run reports",
-        "Agg review",
-        "Alignment steps",
-        "Phase annotations"
+        "data-quality",
+        "aircraft-monitoring",
+        "precision-alerts"
       ],
-      "lastActivity": "2026-03-09T15:55:00Z",
+      "lastActivity": "2026-03-10T11:15:00Z",
       "openIssues": 1
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Consistent but limited usage focused on basic telemetry viewing",
+      "wau": 4,
+      "topSignal": "ENG-8879: Enable vector on runsc nodes",
       "features": [
-        "Telemetry viewing",
-        "Channel list"
+        "infrastructure",
+        "observability",
+        "drone-ops"
       ],
-      "lastActivity": "2026-03-06T09:37:00Z",
+      "lastActivity": "2026-03-07T10:30:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Minimal activity with API errors indicating potential integration challenges",
+      "wau": 3,
+      "topSignal": "ENG-5458: Guardrails against potential misconfigurations",
       "features": [
-        "API integration attempts"
+        "safety",
+        "configuration",
+        "basic-monitoring"
       ],
-      "lastActivity": "2026-02-28T14:22:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-03-04T14:20:00Z",
+      "openIssues": 2
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 33,
-      "topSignal": "Heavy use of channel selection component and family config for constellation management",
+      "wau": 17,
+      "topSignal": "ENG-8377: Can we support Set intersection cases in the Policy Creation UI",
       "features": [
-        "Channel selection",
-        "Family config",
-        "Multi-asset",
-        "Custom dashboards"
+        "policy-engine",
+        "satellite-ops",
+        "access-control"
       ],
-      "lastActivity": "2026-03-09T21:10:00Z",
+      "lastActivity": "2026-03-10T13:45:00Z",
       "openIssues": 1
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 21,
-      "topSignal": "Regular engagement with calculated channels for lunar rover telemetry analysis",
+      "wau": 20,
+      "topSignal": "ENG-6364: Parquet benchmarks + documentation - single channel per row",
       "features": [
-        "Calculated channels",
-        "Run bounds",
-        "Telemetry analysis",
-        "Annotations"
+        "parquet-optimization",
+        "rover-telemetry",
+        "performance"
       ],
-      "lastActivity": "2026-03-09T08:44:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T15:10:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Building out dashboard infrastructure for robotic system monitoring",
+      "wau": 6,
+      "topSignal": "ENG-6462: Rename column config in parquet channel-per-row DetectConfig response",
       "features": [
-        "Dashboards",
-        "Channel management",
-        "Basic alerts"
+        "parquet",
+        "robotics",
+        "data-import"
       ],
-      "lastActivity": "2026-03-08T12:19:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-08T09:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 13,
-      "topSignal": "Increasing usage with focus on MemTable reads for high-frequency data access",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "ENG-9100: Test and finalize solution in local environment",
       "features": [
-        "Fresh data reads",
-        "MemTable",
-        "Real-time queries",
-        "Channel search"
+        "local-testing",
+        "maritime-robotics",
+        "development"
       ],
-      "lastActivity": "2026-03-09T19:28:00Z",
+      "lastActivity": "2026-03-09T12:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 28,
-      "topSignal": "Consistent use of alert configuration and Slack integration for drone fleet monitoring",
+      "wau": 48,
+      "topSignal": "ENG-9113: [BE] Skip and not error for rules with invalid configs per run",
       "features": [
-        "Alerts",
-        "Slack integration",
-        "Fleet monitoring",
-        "Run reports"
+        "rules-engine",
+        "drone-fleet",
+        "error-handling"
       ],
-      "lastActivity": "2026-03-09T16:05:00Z",
+      "lastActivity": "2026-03-10T16:00:00Z",
       "openIssues": 2
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Limited engagement focused on basic channel configuration",
+      "wau": 4,
+      "topSignal": "ENG-9101: Deploy soft solution with metrics",
       "features": [
-        "Channel config",
-        "Basic telemetry"
+        "deployment",
+        "metrics",
+        "agriculture-drones"
       ],
-      "lastActivity": "2026-03-05T13:52:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-09T08:00:00Z",
+      "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Growing adoption with exploration of annotation and phase analysis features",
+      "wau": 8,
+      "topSignal": "ENG-9102: Hard Rollout",
       "features": [
-        "Annotations",
-        "Phase analysis",
-        "Channel management",
-        "Run reports"
+        "deployment",
+        "satellite-constellation",
+        "production"
       ],
-      "lastActivity": "2026-03-08T17:33:00Z",
+      "lastActivity": "2026-03-10T10:00:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 25,
-      "topSignal": "Leveraging family config polish and channel duplication for manufacturing operations",
+      "trajectory": "stable",
+      "wau": 14,
+      "topSignal": "ENG-9068: Evaluate AWS savings plans",
       "features": [
-        "Family config",
-        "Channel duplication",
-        "Custom metrics",
-        "Dashboards"
+        "infrastructure",
+        "manufacturing-ops",
+        "cost-optimization"
       ],
-      "lastActivity": "2026-03-09T10:48:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-09T13:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Steady usage of basic telemetry features for production line monitoring",
+      "wau": 5,
+      "topSignal": "ENG-8201: Migrate CommentEditor from playground to playground-2",
       "features": [
-        "Telemetry ingestion",
-        "Basic dashboards",
-        "Channel search"
+        "collaboration",
+        "manufacturing",
+        "ui-migration"
       ],
-      "lastActivity": "2026-03-07T14:20:00Z",
+      "lastActivity": "2026-03-08T11:00:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 23,
-      "topSignal": "Active development with Sift Edge metrics for asteroid mining mission data collection",
+      "wau": 16,
+      "topSignal": "ENG-9045: Add TTL for local catalog partitions",
       "features": [
-        "Sift Edge",
-        "Edge metrics",
-        "Calculated channels",
-        "Run analysis"
+        "catalog-management",
+        "asteroid-mining",
+        "data-lifecycle"
       ],
-      "lastActivity": "2026-03-09T20:15:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-10T12:45:00Z",
+      "openIssues": 1
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Declining engagement with unresolved channel list performance issues",
+      "trajectory": "stable",
+      "wau": 3,
+      "topSignal": "ENG-8070: Migrate playground to playground-2",
       "features": [
-        "Channel list",
-        "Basic viewing"
+        "experimental",
+        "aerospace-testing",
+        "platform-evaluation"
       ],
-      "lastActivity": "2026-03-01T16:44:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-06T15:30:00Z",
+      "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize Sift Edge production readiness over feature expansion",
-      "context": "Multiple Edge tickets (simulator, metrics, enum/bitfield support, WAL recovery, sync prototype) signal readiness push. Edge is a 2026 moat-builder. Need to decide: ship minimal viable Edge Q2 or wait for full feature set Q3.",
-      "owner": "Head of Engineering",
+      "title": "Prioritize Parquet performance optimization vs new Python Rules features",
+      "context": "Multiple Parquet tickets (ENG-5724, ENG-6364, ENG-6460) show ongoing investment in data ingestion performance. Need to decide if this accelerates 'Decisions Captured Per Customer' more than expanding Python Rules capabilities.",
+      "owner": "Engineering Leadership",
       "deadline": "2026-03-17",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Early Edge deployment captures telemetry decisions at source (North Star metric), validates moat thesis with real customers, faster feedback loop for Embed Deeper pillar",
-        "against": "Incomplete feature set (enum/bitfield, WAL recovery) risks customer trust, support burden increases, may need to rebuild if architecture assumptions fail"
+        "for": "Faster data ingestion directly enables more decisions per customer by reducing time-to-insight. Parquet optimization is foundational infrastructure.",
+        "against": "Python Rules expansion is more visible to customers and directly addresses 'Embed Deeper' pillar. Parquet work is invisible to end users."
       }
     },
     {
-      "title": "Resolve performance bottleneck strategy: optimize existing APIs vs. API redesign",
-      "context": "E1/E2 excessive calls to channel list/search + GetPhaseAnnotations latency issues. Channel list v2 in flight. Pattern suggests API design issue, not just implementation. Affects Explore V2 performance.",
-      "owner": "API Platform Lead",
-      "deadline": "2026-03-20",
-      "status": "blocked",
-      "blockedBy": "Need profiling data from production to quantify v1 vs v2 improvement and inform breaking change decision",
-      "arguments": {
-        "for": "V2 APIs with batching/pagination solve root cause, cleaner long-term architecture, aligns with 'Nail the Core' pillar for Explore performance",
-        "against": "Breaking changes slow customer adoption, engineering cost of dual API support, incremental optimization of v1 may be sufficient for 80% of cases"
-      }
-    },
-    {
-      "title": "Establish calculated channel error handling policy",
-      "context": "Two tickets (ENG-8965, ENG-9069) address different error scenarios for calculated channels. No consistent strategy: surface errors vs. graceful degradation vs. fail-fast. Python Rules reliability depends on this.",
-      "owner": "Product Manager - Canvas",
-      "deadline": "2026-03-15",
+      "title": "Resolve policy creation UX limitations blocking Canvas adoption",
+      "context": "ENG-8377 (Set intersection in Policy UI), ENG-9098 (user group attribute conditions), and ENG-9106 (Attributes assign UX) indicate policy creation experience gaps that may limit Canvas effectiveness.",
+      "owner": "Product - Canvas",
+      "deadline": "2026-03-24",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Surfacing errors increases transparency for rule authors (Signal>Evidence>Decision), enables self-service debugging, reduces support tickets",
-        "against": "Error noise overwhelms users if not contextualized, graceful degradation maintains system availability, partial data better than no data for decisions"
+        "for": "Canvas is a 2026 flagship product. Policy creation friction directly reduces decisions captured. These are table-stakes features.",
+        "against": "Core stability issues (GetPhaseAnnotations latency ENG-8874, Saved Panel errors ENG-9109) may be more urgent. Feature expansion can wait."
       }
     },
     {
-      "title": "Deploy HA Keycloak to GovCloud now or wait for commercial cloud validation",
-      "context": "ENG-7813 migrating GovCloud to HA Keycloak. GovCloud customers are high-value but small user base. Risk/reward calculation different than commercial. Auth downtime = zero decisions captured.",
-      "owner": "Infrastructure Lead",
+      "title": "Address GetPhaseAnnotations API latency before Q2 customer expansion",
+      "context": "ENG-8874 shows API performance issues. With 'Nail the Core' as pillar #1, need to decide if performance work blocks new customer onboarding.",
+      "owner": "Engineering - Backend",
+      "deadline": "2026-03-14",
+      "status": "blocked",
+      "blockedBy": "Root cause analysis incomplete, no SLO baseline established",
+      "arguments": {
+        "for": "Performance degradation will compound with customer growth. Fix now before scaling. Aligns with 'Nail the Core'.",
+        "against": "May be isolated edge case. Customer acquisition velocity shouldn't wait for performance optimization that affects <5% of queries."
+      }
+    },
+    {
+      "title": "Commit to K2 Mission data pipeline or defer custom integrations",
+      "context": "ENG-9104 represents custom pipeline work for specific customer. Decision needed: is this 'Embed Deeper' validation or distraction from platform work?",
+      "owner": "Product Strategy",
       "deadline": "2026-03-12",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "GovCloud customers expect higher availability SLAs, HA Keycloak already validated in staging, delay risks competitive displacement in government contracts",
-        "against": "Small user base means lower validation, GovCloud-specific issues hard to debug, wait 2 weeks for commercial cloud deployment learnings"
+        "for": "Deep customer embedding validates product-market fit and generates reference architecture. Could unlock aerospace vertical.",
+        "against": "Custom pipelines don't scale. Resources better spent on self-service data connectors (Sift Edge expansion) that serve all customers."
       }
     },
     {
-      "title": "CVE remediation scope: patch immediately vs. bundled security release",
-      "context": "Three CVEs identified (apache-avro RCE, zookeeper auth bypass, crypto/tls). RCE is critical but requires specific attack scenario. Patching breaks kluctl deployment workflow currently in progress.",
-      "owner": "Security + DevOps",
-      "deadline": "2026-03-11",
-      "status": "blocked",
-      "blockedBy": "Risk assessment incomplete - need exploitability analysis for Sift's specific deployment architecture",
+      "title": "Finalize AWS savings plan commitment vs spot instance strategy",
+      "context": "ENG-9068 evaluating AWS savings plans. Need to decide infrastructure cost strategy as data volumes grow.",
+      "owner": "Engineering - Infrastructure",
+      "deadline": "2026-03-20",
+      "status": "open",
+      "blockedBy": null,
       "arguments": {
-        "for": "RCE vulnerability requires immediate patch regardless of exploitability likelihood, demonstrates security-first culture, regulatory compliance for GovCloud",
-        "against": "Disrupts active deployment work (kluctl), no evidence of active exploitation, bundled release in 5 days allows proper testing and rollback plan"
+        "for": "Savings plans lock in 30-40% cost reduction, improving unit economics. Predictable costs enable aggressive customer acquisition.",
+        "against": "Commitment reduces flexibility as architecture evolves. Spot instances + autoscaling may be more cost-effective for variable workloads."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "847",
-      "delta": "+12%"
+      "value": "127",
+      "delta": "+8%"
     },
     "pillars": [
       {
@@ -2707,21 +2688,21 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 Performance: P95 query latency <2s",
-            "current": "3.4s",
-            "target": "2.0s",
+            "name": "API p95 latency <500ms",
+            "current": "740ms",
+            "target": "500ms",
             "status": "at_risk"
           },
           {
-            "name": "Channel API redesign shipped",
-            "current": "Design phase",
-            "target": "Production Q2",
-            "status": "on_track"
+            "name": "Data pipeline reliability >99.5%",
+            "current": "99.2%",
+            "target": "99.5%",
+            "status": "at_risk"
           },
           {
-            "name": "Calculated channel error rate <0.5%",
-            "current": "1.2%",
-            "target": "0.5%",
+            "name": "Zero critical UX errors in saved configs",
+            "current": "3 active",
+            "target": "0",
             "status": "at_risk"
           }
         ]
@@ -2731,21 +2712,21 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Edge devices in production",
-            "current": "0",
-            "target": "5 pilot customers",
-            "status": "on_track"
-          },
-          {
-            "name": "Canvas adoption: % customers w/ 5+ rules",
+            "name": "Python Rules adoption (% of customers)",
             "current": "34%",
             "target": "50%",
             "status": "on_track"
           },
           {
-            "name": "Python Rules in production workloads",
-            "current": "12 customers",
-            "target": "25 customers",
+            "name": "Canvas MAU growth",
+            "current": "+22% MoM",
+            "target": "+20% MoM",
+            "status": "on_track"
+          },
+          {
+            "name": "Custom data pipelines deployed",
+            "current": "2",
+            "target": "5",
             "status": "on_track"
           }
         ]
@@ -2755,22 +2736,22 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Edge sync architecture validated",
-            "current": "Prototype",
-            "target": "Production-ready",
+            "name": "Sift Edge beta customers",
+            "current": "8",
+            "target": "10",
             "status": "on_track"
           },
           {
-            "name": "Ask SIFT query success rate",
-            "current": "78%",
-            "target": "85%",
+            "name": "Ask SIFT query accuracy",
+            "current": "87%",
+            "target": "90%",
             "status": "on_track"
           },
           {
-            "name": "DeepWiki sync operational",
-            "current": "In progress",
-            "target": "Automated",
-            "status": "on_track"
+            "name": "Parquet ingestion throughput (GB/min)",
+            "current": "4.2",
+            "target": "8.0",
+            "status": "at_risk"
           }
         ]
       }
@@ -2790,12 +2771,11 @@
       "freeHours": 8,
       "meetingHours": 32
     },
-    "weekSummary": "Engineering team fragmented across 30+ active tickets spanning Edge (moat), performance (core), security (hygiene). No clear sequencing signal. Edge has 8 parallel workstreams—risk of shipping nothing complete.",
+    "weekSummary": "38% of week in meetings. Engineering weighted toward reactive bug fixes (9 stability tickets) vs proactive feature work (7 tickets). Policy UX and Parquet work show coordinated efforts.",
     "alerts": [
-      "Zero focus time scheduled Thu/Fri - all-hands and sprint planning collision",
-      "5 critical decisions pending with <1 week runway - decision debt accumulating",
-      "Performance work (E1, E2, GetPhaseAnnotations) has no unified owner - diffusion of responsibility",
-      "Security CVEs aging 3+ weeks - need dedicated remediation sprint or accept risk explicitly"
+      "Only 2 focus blocks today - insufficient for deep technical decisions on API latency and AWS savings plans",
+      "3 one-on-ones today may indicate brewing people/process issues - follow up on team velocity concerns",
+      "20% of Linear tickets are infrastructure/dev tooling (EC2, vector, local data mode) - check if platform tech debt is accumulating"
     ]
   },
   "timeline": {
@@ -2804,28 +2784,28 @@
         "label": "This Week (Mar 10-14)",
         "events": [
           {
-            "title": "CVE Remediation Decision Gate",
-            "date": "2026-03-11",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Go/no-go on immediate patching vs bundled release. Blocks kluctl deployment work.",
-            "owner": "Security Lead"
-          },
-          {
-            "title": "GovCloud HA Keycloak Deploy",
-            "date": "2026-03-12",
+            "title": "GetPhaseAnnotations latency decision gate",
+            "date": "2026-03-14",
             "time": "14:00",
-            "type": "deadline",
-            "description": "Migration window for GovCloud Keycloak. Rollback plan required.",
-            "owner": "Infrastructure"
+            "type": "gate",
+            "description": "Go/no-go on blocking Q2 customer onboarding until API performance resolved",
+            "owner": "Engineering - Backend"
           },
           {
-            "title": "Calculated Channel Error Policy Review",
-            "date": "2026-03-15",
-            "time": "13:00",
-            "type": "meeting",
-            "description": "Decide error handling strategy for Canvas/Python Rules. Impacts Q2 reliability roadmap.",
-            "owner": "PM - Canvas"
+            "title": "K2 Mission pipeline commitment deadline",
+            "date": "2026-03-12",
+            "time": "09:00",
+            "type": "deadline",
+            "description": "Decide whether to allocate resources to custom data pipeline or defer to platform work",
+            "owner": "Product Strategy"
+          },
+          {
+            "title": "Hard rollout deployment (ENG-9102)",
+            "date": "2026-03-13",
+            "time": "16:00",
+            "type": "milestone",
+            "description": "Production deployment of soft solution after metrics validation",
+            "owner": "Engineering - Infrastructure"
           }
         ]
       },
@@ -2833,65 +2813,57 @@
         "label": "Next Week (Mar 17-21)",
         "events": [
           {
-            "title": "Edge Production Readiness Decision",
+            "title": "Parquet vs Python Rules prioritization",
             "date": "2026-03-17",
-            "time": "09:00",
-            "type": "gate",
-            "description": "Ship minimal Edge Q2 vs wait for full feature set Q3. 5 pilot customers waiting.",
-            "owner": "Head of Engineering"
+            "time": "10:00",
+            "type": "deadline",
+            "description": "Finalize Q2 roadmap allocation between data ingestion performance and rule authoring features",
+            "owner": "Engineering Leadership"
           },
           {
-            "title": "Channel API V2 Architecture Review",
+            "title": "AWS savings plan commitment",
             "date": "2026-03-20",
             "time": "15:00",
-            "type": "milestone",
-            "description": "Finalize v2 API design. Determines Explore V2 performance trajectory.",
-            "owner": "API Platform Lead"
+            "type": "deadline",
+            "description": "Lock in infrastructure cost strategy before end of quarter budget cycle",
+            "owner": "Engineering - Infrastructure"
           },
           {
-            "title": "Sprint Planning - Q2 Sequencing",
-            "date": "2026-03-21",
-            "time": "10:00",
-            "type": "meeting",
-            "description": "Lock Q2 sprint allocation across Edge, performance, Canvas. Address fragmentation.",
-            "owner": "Engineering Leadership"
+            "title": "Parquet benchmarking complete (ENG-6364)",
+            "date": "2026-03-19",
+            "time": "17:00",
+            "type": "milestone",
+            "description": "Documentation and performance baseline for single channel per row implementation",
+            "owner": "Engineering - Data"
           }
         ]
       },
       {
-        "label": "Month Ahead (Mar 24-Apr 10)",
+        "label": "End of Month (Mar 24-31)",
         "events": [
           {
-            "title": "Edge Simulator + Metrics Validation",
-            "date": "2026-03-28",
+            "title": "Canvas policy UX decision bundle",
+            "date": "2026-03-24",
             "time": "11:00",
-            "type": "milestone",
-            "description": "Internal testing complete for Edge monitoring infrastructure.",
-            "owner": "Edge Team"
-          },
-          {
-            "title": "Explore V2 Performance Checkpoint",
-            "date": "2026-04-03",
-            "time": "14:00",
             "type": "gate",
-            "description": "Assess P95 latency progress. If still >3s, escalate API redesign prioritization.",
-            "owner": "Product - Explore"
+            "description": "Review ENG-8377, ENG-9098, ENG-9106 together for coordinated UX improvement decision",
+            "owner": "Product - Canvas"
           },
           {
-            "title": "Python Rules Customer Showcase",
-            "date": "2026-04-08",
+            "title": "Playground migration completion (ENG-8070)",
+            "date": "2026-03-28",
             "time": "16:00",
             "type": "milestone",
-            "description": "3 customers present rules in production. Validate Embed Deeper thesis.",
-            "owner": "Customer Success"
+            "description": "Finish playground-2 migration to unblock future UI framework upgrades",
+            "owner": "Engineering - Frontend"
           },
           {
-            "title": "Q2 Strategy Sync",
-            "date": "2026-04-10",
-            "time": "09:00",
+            "title": "Q1 Strategy Review: Signal→Evidence→Decision Framework",
+            "date": "2026-03-31",
+            "time": "13:00",
             "type": "meeting",
-            "description": "Review North Star trajectory, pillar health, adjust resource allocation.",
-            "owner": "CPO + VP Eng"
+            "description": "Assess Q1 execution against North Star metric and adjust Q2 pillar priorities",
+            "owner": "Executive Team"
           }
         ]
       }
