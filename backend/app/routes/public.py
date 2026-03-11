@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import base64
 import json
 import re
+import secrets
 from html import unescape
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from xml.etree import ElementTree
 
 import httpx
-from fastapi import APIRouter, HTTPException, Request, status
+from fastapi import APIRouter, Cookie, HTTPException, Request, Response, status
 
+from app.core.security import assert_admin_token
 from app.core.sanitizer import default_action, default_headline, derive_public_scores
 from app.models import (
     FeedMetrics,
@@ -25,6 +28,11 @@ router = APIRouter()
 SQUARESPACE_NOTES_RSS_URL = "https://noahlucas.com/notes?format=rss"
 SQUARESPACE_NOTES_CACHE_TTL_SECONDS = 90
 _SQUARESPACE_NOTES_CACHE: dict[str, object] = {"fetched_at": None, "payload": None}
+_ADMIN_AUTH_COOKIE_NAME = "nl_admin_session"
+
+
+def _b64url_encode(raw: bytes) -> str:
+    return base64.urlsafe_b64encode(raw).decode("ascii").rstrip("=")
 
 
 def _draft_files(project_root: Path, limit: int = 24) -> list[Path]:
@@ -59,6 +67,13 @@ def _parse_rfc2822_utc(value: str) -> datetime:
         return parsed.astimezone(timezone.utc)
     except Exception:
         return datetime.now(timezone.utc)
+
+
+def _is_secure_request(request: Request) -> bool:
+    proto = request.headers.get("x-forwarded-proto", "").strip().lower()
+    if proto:
+        return proto == "https"
+    return request.url.scheme == "https"
 
 
 @router.get("/feed", response_model=PublicFeedResponse)
@@ -202,3 +217,122 @@ def get_squarespace_notes() -> SquarespaceNotesResponse:
     _SQUARESPACE_NOTES_CACHE["fetched_at"] = now
     _SQUARESPACE_NOTES_CACHE["payload"] = payload
     return payload
+
+
+@router.get("/admin-auth/session")
+def get_admin_auth_session(
+    request: Request,
+    admin_session: str | None = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
+) -> dict[str, object]:
+    if not admin_session:
+        return {"authorized": False}
+    session = request.app.state.store.get_admin_auth_session(session_id=admin_session)
+    if not session:
+        return {"authorized": False}
+    request.app.state.store.touch_admin_auth_session(session_id=admin_session)
+    return {"authorized": True, "expires_at": session["expires_at"]}
+
+
+@router.post("/admin-auth/logout")
+def logout_admin_auth(
+    request: Request,
+    response: Response,
+    admin_session: str | None = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
+) -> dict[str, bool]:
+    if admin_session:
+        request.app.state.store.revoke_admin_auth_session(session_id=admin_session)
+    response.delete_cookie(_ADMIN_AUTH_COOKIE_NAME, path="/")
+    return {"logged_out": True}
+
+
+@router.post("/admin-auth/webauthn/register/challenge")
+def start_admin_register_challenge(request: Request) -> dict[str, object]:
+    assert_admin_token(request.headers.get("x-admin-token", ""), request.app.state.settings.admin_token)
+    challenge_id = secrets.token_urlsafe(24)
+    challenge = _b64url_encode(secrets.token_bytes(32))
+    user_id = _b64url_encode(secrets.token_bytes(16))
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=5)
+    request.app.state.store.create_admin_auth_challenge(
+        challenge_id=challenge_id,
+        kind="register",
+        challenge_b64=challenge,
+        expires_at=expires_at.isoformat(),
+    )
+    return {
+        "challenge_id": challenge_id,
+        "challenge": challenge,
+        "rp": {"id": request.url.hostname or "", "name": "Noah Lucas Owner Access"},
+        "user": {"id": user_id, "name": "owner@noahlucas.com", "displayName": "Noah Lucas"},
+        "timeout": 60000,
+    }
+
+
+@router.post("/admin-auth/webauthn/register/complete")
+def complete_admin_register_challenge(request: Request, payload: dict[str, object]) -> dict[str, object]:
+    assert_admin_token(request.headers.get("x-admin-token", ""), request.app.state.settings.admin_token)
+    challenge_id = str(payload.get("challenge_id", "")).strip()
+    credential_id = str(payload.get("credential_id", "")).strip()
+    label = str(payload.get("label", "Owner device")).strip() or "Owner device"
+    if not challenge_id or not credential_id:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential_id.")
+    challenge = request.app.state.store.consume_admin_auth_challenge(challenge_id=challenge_id, kind="register")
+    if not challenge:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Registration challenge invalid or expired.")
+    request.app.state.store.save_admin_webauthn_credential(credential_id=credential_id, label=label)
+    return {"registered": True, "credential_count": len(request.app.state.store.list_admin_webauthn_credentials())}
+
+
+@router.post("/admin-auth/webauthn/challenge")
+def start_admin_auth_challenge(request: Request) -> dict[str, object]:
+    credentials = request.app.state.store.list_admin_webauthn_credentials()
+    if not credentials:
+        raise HTTPException(
+            status_code=status.HTTP_428_PRECONDITION_REQUIRED,
+            detail="No owner credential enrolled. Complete owner enrollment first.",
+        )
+    challenge_id = secrets.token_urlsafe(24)
+    challenge = _b64url_encode(secrets.token_bytes(32))
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=5)
+    request.app.state.store.create_admin_auth_challenge(
+        challenge_id=challenge_id,
+        kind="auth",
+        challenge_b64=challenge,
+        expires_at=expires_at.isoformat(),
+    )
+    return {
+        "challenge_id": challenge_id,
+        "challenge": challenge,
+        "rp_id": request.url.hostname or "",
+        "timeout": 60000,
+        "allow_credentials": [item["credential_id"] for item in credentials],
+    }
+
+
+@router.post("/admin-auth/webauthn/verify")
+def verify_admin_auth_challenge(request: Request, response: Response, payload: dict[str, object]) -> dict[str, object]:
+    challenge_id = str(payload.get("challenge_id", "")).strip()
+    credential_id = str(payload.get("credential_id", "")).strip()
+    if not challenge_id or not credential_id:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential_id.")
+
+    challenge = request.app.state.store.consume_admin_auth_challenge(challenge_id=challenge_id, kind="auth")
+    if not challenge:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Auth challenge invalid or expired.")
+    if not request.app.state.store.has_admin_webauthn_credential(credential_id=credential_id):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Credential is not enrolled for owner access.")
+
+    now = datetime.now(timezone.utc)
+    expires_at = now + timedelta(hours=8)
+    session_id = secrets.token_urlsafe(32)
+    request.app.state.store.create_admin_auth_session(session_id=session_id, expires_at=expires_at.isoformat())
+    request.app.state.store.mark_admin_webauthn_credential_used(credential_id=credential_id)
+    response.set_cookie(
+        key=_ADMIN_AUTH_COOKIE_NAME,
+        value=session_id,
+        httponly=True,
+        secure=_is_secure_request(request),
+        samesite="lax",
+        max_age=int(timedelta(hours=8).total_seconds()),
+        path="/",
+    )
+    return {"authorized": True, "expires_at": expires_at.isoformat()}

@@ -210,6 +210,40 @@ class SignalStore:
                 ON autobiographer_monthly_chapters(year, month)
                 """
             )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS admin_webauthn_credentials (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    credential_id TEXT NOT NULL UNIQUE,
+                    label TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    last_used_at TEXT
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS admin_auth_challenges (
+                    challenge_id TEXT PRIMARY KEY,
+                    kind TEXT NOT NULL,
+                    challenge_b64 TEXT NOT NULL,
+                    expires_at TEXT NOT NULL,
+                    used_at TEXT,
+                    created_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS admin_auth_sessions (
+                    session_id TEXT PRIMARY KEY,
+                    expires_at TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    last_seen_at TEXT NOT NULL,
+                    revoked_at TEXT
+                )
+                """
+            )
 
     def insert_sanitized_signals(
         self,
@@ -1003,3 +1037,177 @@ class SignalStore:
             }
             for row in rows
         ]
+
+    def save_admin_webauthn_credential(self, *, credential_id: str, label: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO admin_webauthn_credentials(credential_id, label, created_at, last_used_at)
+                VALUES (?, ?, ?, ?)
+                ON CONFLICT(credential_id) DO UPDATE SET
+                    label = excluded.label
+                """,
+                (credential_id, label, now, now),
+            )
+
+    def list_admin_webauthn_credentials(self) -> List[Dict[str, str]]:
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT credential_id, label, created_at, last_used_at
+                FROM admin_webauthn_credentials
+                ORDER BY id ASC
+                """
+            ).fetchall()
+        return [
+            {
+                "credential_id": str(row["credential_id"]),
+                "label": str(row["label"]),
+                "created_at": str(row["created_at"]),
+                "last_used_at": str(row["last_used_at"]) if row["last_used_at"] is not None else "",
+            }
+            for row in rows
+        ]
+
+    def has_admin_webauthn_credential(self, *, credential_id: str) -> bool:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT 1
+                FROM admin_webauthn_credentials
+                WHERE credential_id = ?
+                """,
+                (credential_id,),
+            ).fetchone()
+        return row is not None
+
+    def mark_admin_webauthn_credential_used(self, *, credential_id: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE admin_webauthn_credentials
+                SET last_used_at = ?
+                WHERE credential_id = ?
+                """,
+                (now, credential_id),
+            )
+
+    def create_admin_auth_challenge(
+        self,
+        *,
+        challenge_id: str,
+        kind: str,
+        challenge_b64: str,
+        expires_at: str,
+    ) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO admin_auth_challenges(challenge_id, kind, challenge_b64, expires_at, used_at, created_at)
+                VALUES (?, ?, ?, ?, NULL, ?)
+                """,
+                (challenge_id, kind, challenge_b64, expires_at, now),
+            )
+
+    def consume_admin_auth_challenge(self, *, challenge_id: str, kind: str) -> Optional[Dict[str, str]]:
+        now = datetime.now(timezone.utc)
+        now_iso = now.isoformat()
+        with self._lock, self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT challenge_id, kind, challenge_b64, expires_at, used_at
+                FROM admin_auth_challenges
+                WHERE challenge_id = ? AND kind = ?
+                """,
+                (challenge_id, kind),
+            ).fetchone()
+            if row is None:
+                return None
+            if row["used_at"] is not None:
+                return None
+            try:
+                expires_at = datetime.fromisoformat(str(row["expires_at"]))
+            except Exception:
+                return None
+            if expires_at < now:
+                return None
+            conn.execute(
+                """
+                UPDATE admin_auth_challenges
+                SET used_at = ?
+                WHERE challenge_id = ? AND kind = ?
+                """,
+                (now_iso, challenge_id, kind),
+            )
+        return {
+            "challenge_id": str(row["challenge_id"]),
+            "kind": str(row["kind"]),
+            "challenge_b64": str(row["challenge_b64"]),
+            "expires_at": str(row["expires_at"]),
+        }
+
+    def create_admin_auth_session(self, *, session_id: str, expires_at: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                INSERT INTO admin_auth_sessions(session_id, expires_at, created_at, last_seen_at, revoked_at)
+                VALUES (?, ?, ?, ?, NULL)
+                """,
+                (session_id, expires_at, now, now),
+            )
+
+    def get_admin_auth_session(self, *, session_id: str) -> Optional[Dict[str, str]]:
+        now = datetime.now(timezone.utc)
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT session_id, expires_at, created_at, last_seen_at, revoked_at
+                FROM admin_auth_sessions
+                WHERE session_id = ?
+                """,
+                (session_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        if row["revoked_at"] is not None:
+            return None
+        try:
+            expires_at = datetime.fromisoformat(str(row["expires_at"]))
+        except Exception:
+            return None
+        if expires_at < now:
+            return None
+        return {
+            "session_id": str(row["session_id"]),
+            "expires_at": str(row["expires_at"]),
+            "created_at": str(row["created_at"]),
+            "last_seen_at": str(row["last_seen_at"]),
+        }
+
+    def touch_admin_auth_session(self, *, session_id: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE admin_auth_sessions
+                SET last_seen_at = ?
+                WHERE session_id = ? AND revoked_at IS NULL
+                """,
+                (now, session_id),
+            )
+
+    def revoke_admin_auth_session(self, *, session_id: str) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE admin_auth_sessions
+                SET revoked_at = ?
+                WHERE session_id = ?
+                """,
+                (now, session_id),
+            )
