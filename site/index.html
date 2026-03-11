@@ -144,123 +144,10 @@
         color: var(--text);
       }
 
-      .presence {
-        margin: 0 auto 1.3rem;
-        width: min(320px, 100%);
-        border: 1px solid var(--line);
-        background: var(--surface);
-        padding: 0.8rem 0.6rem 0.7rem;
-        transition: border-color 200ms ease, box-shadow 200ms ease;
-      }
-
-      .presence[data-state="listening"],
-      .presence[data-state="thinking"],
-      .presence[data-state="speaking"] {
-        border-color: color-mix(in srgb, var(--ring-a) 40%, var(--line));
-        box-shadow: 0 0 0 1px color-mix(in srgb, var(--ring-b) 20%, transparent);
-      }
-
-      .presence-core {
-        position: relative;
-        width: 28px;
-        height: 28px;
-        margin: 0 auto 0.45rem;
-        border-radius: 999px;
-        background: radial-gradient(circle at 30% 30%, #ffffff, var(--ring-a));
-      }
-
-      .presence-core::before,
-      .presence-core::after {
-        content: "";
-        position: absolute;
-        inset: -6px;
-        border-radius: inherit;
-        background: conic-gradient(from 0deg, var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a));
-        opacity: 0;
-        transition: opacity 220ms ease;
-      }
-
-      .presence-core::before {
-        filter: blur(7px);
-      }
-
-      .presence-core::after {
-        filter: blur(14px);
-        inset: -11px;
-      }
-
-      .presence[data-state="listening"] .presence-core::before,
-      .presence[data-state="listening"] .presence-core::after,
-      .presence[data-state="thinking"] .presence-core::before,
-      .presence[data-state="thinking"] .presence-core::after,
-      .presence[data-state="speaking"] .presence-core::before,
-      .presence[data-state="speaking"] .presence-core::after {
-        opacity: 0.7;
-      }
-
-      .presence[data-state="listening"] .presence-core {
-        animation: breathe 2.4s ease-in-out infinite;
-      }
-
-      .presence[data-state="thinking"] .presence-core {
-        animation: pulse 1.15s ease-in-out infinite;
-      }
-
-      .presence[data-state="thinking"] .presence-core::before,
-      .presence[data-state="thinking"] .presence-core::after {
-        animation: spin 2.2s linear infinite;
-      }
-
-      .presence[data-state="speaking"] .presence-core {
-        animation: pulse-fast 0.72s ease-in-out infinite;
-      }
-
-      .presence[data-state="speaking"] .presence-core::before,
-      .presence[data-state="speaking"] .presence-core::after {
-        animation: spin 1.1s linear infinite;
-      }
-
-      .presence-status {
-        margin: 0;
-        font-size: 11px;
-        color: var(--text);
-      }
-
-      .presence-detail {
-        margin: 0.22rem 0 0;
-        color: var(--muted);
-        font-size: 10px;
-        letter-spacing: 0.02em;
-      }
-
-      .presence-controls {
-        margin-top: 0.55rem;
-        display: flex;
-        justify-content: center;
-        gap: 0.25rem;
-        flex-wrap: wrap;
-      }
-
-      .state-btn {
-        border: 1px solid var(--line);
-        background: transparent;
-        color: var(--muted);
-        padding: 0.22rem 0.38rem;
-        font-size: 9px;
-        cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      .state-btn.active {
-        color: var(--text);
-        background: var(--surface);
-      }
-
       .intro {
         margin: 0 auto;
         max-width: 68ch;
-        margin-bottom: 2.4rem;
+        margin-bottom: 2.1rem;
         color: var(--text);
       }
 
@@ -316,29 +203,6 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 1.1rem 0.6rem;
         }
-
-        .presence {
-          margin-bottom: 1rem;
-        }
-      }
-
-      @keyframes spin {
-        to { transform: rotate(360deg); }
-      }
-
-      @keyframes breathe {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-      }
-
-      @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.15); }
-      }
-
-      @keyframes pulse-fast {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.18); }
       }
     </style>
   </head>
@@ -346,18 +210,6 @@
     <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle theme mode">Theme: System</button>
     <main>
       <section class="wrap">
-        <section class="presence" id="presence" data-state="idle" aria-live="polite">
-          <div class="presence-core" aria-hidden="true"></div>
-          <p class="presence-status" id="presence-status">Presence: Idle</p>
-          <p class="presence-detail" id="presence-detail">Channel ready.</p>
-          <div class="presence-controls" role="group" aria-label="Presence state">
-            <button class="state-btn active" data-state="idle" type="button">Idle</button>
-            <button class="state-btn" data-state="listening" type="button">Listening</button>
-            <button class="state-btn" data-state="thinking" type="button">Reasoning</button>
-            <button class="state-btn" data-state="speaking" type="button">Speaking</button>
-          </div>
-        </section>
-
         <p class="intro">Noah Lucas: Living in Ojai, California with Sara, Willa, and Bruce the cat. Building a telemetry platform for advanced machines at Sift.</p>
 
         <div class="companies" aria-label="Company experience">
@@ -426,29 +278,7 @@
           applyTheme(currentTheme);
         });
 
-        const presence = document.getElementById("presence");
-        const status = document.getElementById("presence-status");
-        const detail = document.getElementById("presence-detail");
-        const stateButtons = Array.from(document.querySelectorAll(".state-btn"));
-        const stateDetail = {
-          idle: "Channel ready.",
-          listening: "Listening for intent.",
-          thinking: "Synthesizing context.",
-          speaking: "Delivering response."
-        };
-
-        function setState(state) {
-          presence.setAttribute("data-state", state);
-          document.body.setAttribute("data-presence", state);
-          const label = state === "thinking" ? "Reasoning" : `${state.charAt(0).toUpperCase()}${state.slice(1)}`;
-          status.textContent = `Presence: ${label}`;
-          detail.textContent = stateDetail[state] || stateDetail.idle;
-          stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
-        }
-
-        stateButtons.forEach((btn) => {
-          btn.addEventListener("click", () => setState(btn.dataset.state));
-        });
+        document.body.removeAttribute("data-presence");
       })();
     </script>
   </body>
