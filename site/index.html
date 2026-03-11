@@ -134,9 +134,9 @@
       .timeline {
         width: min(360px, 34vw);
         position: fixed;
-        right: clamp(0.9rem, 2.8vw, 2.1rem);
+        right: 0;
         top: clamp(8rem, 17vh, 11rem);
-        padding-right: 2.2rem;
+        padding-right: 1.35rem;
         display: grid;
         gap: 1.06rem;
         text-align: right;
@@ -148,7 +148,7 @@
         position: absolute;
         top: 0.2rem;
         bottom: 0.2rem;
-        right: 0.8rem;
+        right: 0;
         width: 1px;
         background: color-mix(in srgb, var(--text) 20%, transparent);
       }
@@ -161,7 +161,7 @@
         content: "";
         position: absolute;
         top: 0.62rem;
-        right: -1.73rem;
+        right: -5px;
         width: 9px;
         height: 9px;
         border-radius: 999px;
@@ -214,16 +214,16 @@
           position: relative;
           right: auto;
           top: auto;
-          padding-right: 1.9rem;
+          padding-right: 1.35rem;
           gap: 1rem;
         }
 
         .timeline::after {
-          right: 0.56rem;
+          right: 0;
         }
 
         .experience::after {
-          right: -1.48rem;
+          right: -5px;
           width: 8px;
           height: 8px;
         }
