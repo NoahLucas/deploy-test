@@ -74,11 +74,11 @@
         border: 0;
         background: transparent;
         color: var(--muted);
-        font-size: 10px;
-        letter-spacing: 0.05em;
-        padding: 0.12rem 0.2rem;
+        font-size: 14px;
+        line-height: 1;
+        padding: 0.08rem 0.14rem;
         cursor: pointer;
-        opacity: 0.62;
+        opacity: 0.56;
         transition: opacity 160ms ease, color 160ms ease;
       }
 
@@ -148,7 +148,7 @@
     </style>
   </head>
   <body>
-    <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle theme mode">Theme: System</button>
+    <button id="theme-toggle" class="theme-btn" type="button" aria-label="Theme mode: system" title="Theme mode: system">◐</button>
     <main>
       <section class="wrap">
         <p class="intro">Noah Lucas<br />Living in Ojai, California with Sara, Willa, and Bruce the cat.</p>
@@ -209,7 +209,11 @@
           } else {
             root.setAttribute("data-theme", theme);
           }
-          themeButton.textContent = `Theme: ${theme.charAt(0).toUpperCase()}${theme.slice(1)}`;
+          const iconMap = { system: "◐", light: "○", dark: "●" };
+          const label = `Theme mode: ${theme}`;
+          themeButton.textContent = iconMap[theme] || "◐";
+          themeButton.setAttribute("aria-label", label);
+          themeButton.setAttribute("title", label);
         }
 
         let currentTheme = getStoredTheme();
