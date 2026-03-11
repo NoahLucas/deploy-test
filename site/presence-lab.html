@@ -118,6 +118,14 @@
         letter-spacing: 0.03em;
       }
 
+      .ghost-link {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
       .active {
         border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
         background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -218,6 +226,8 @@
       <div class="hud-top">
         <div class="title">EOS Presence Lab</div>
         <div class="controls">
+          <a class="ghost-link" href="/">Home</a>
+          <button id="autoBtn" type="button">Auto: Off</button>
           <button id="themeBtn" type="button">Theme: System</button>
           <select id="animalSelect" aria-label="Animal form">
             <option value="none">No Form</option>
@@ -262,7 +272,17 @@
 
     <script>
       (() => {
+        const VALID_STATES = ["idle", "listening", "synthesizing", "advising", "acting"];
+        const VALID_ANIMALS = ["none", "wolf", "owl", "octopus", "raven"];
+        const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        const params = new URLSearchParams(window.location.search);
+        const initialStateParam = (params.get("state") || "").toLowerCase();
+        const initialAnimalParam = (params.get("form") || params.get("animal") || "").toLowerCase();
+        const initialAutoParam = (params.get("auto") || "").toLowerCase();
+
         const themeBtn = document.getElementById("themeBtn");
+        const autoBtn = document.getElementById("autoBtn");
         const commandInput = document.getElementById("commandInput");
         const commandForm = document.getElementById("commandForm");
         const stateButtons = Array.from(document.querySelectorAll("#stateButtons button"));
@@ -283,6 +303,7 @@
           if (theme === "system") root.removeAttribute("data-theme");
           else root.setAttribute("data-theme", theme);
           themeBtn.textContent = `Theme: ${theme.charAt(0).toUpperCase()}${theme.slice(1)}`;
+          refreshThemeCache();
         }
 
         applyTheme(currentTheme);
@@ -294,11 +315,11 @@
         });
 
         const stateConfig = {
-          idle: { pull: 0.035, jitter: 0.06, glow: 0.18, speed: 0.95, signal: "Quiet" },
-          listening: { pull: 0.07, jitter: 0.1, glow: 0.34, speed: 1.25, signal: "Attentive" },
-          synthesizing: { pull: 0.11, jitter: 0.16, glow: 0.46, speed: 1.56, signal: "Integrating" },
-          advising: { pull: 0.085, jitter: 0.085, glow: 0.42, speed: 1.35, signal: "Guiding" },
-          acting: { pull: 0.13, jitter: 0.2, glow: 0.58, speed: 1.9, signal: "Executing" }
+          idle: { pull: 0.03, jitter: 0.045, glow: 0.16, speed: 0.9, signal: "Quiet" },
+          listening: { pull: 0.065, jitter: 0.08, glow: 0.32, speed: 1.16, signal: "Attentive" },
+          synthesizing: { pull: 0.1, jitter: 0.13, glow: 0.45, speed: 1.48, signal: "Integrating" },
+          advising: { pull: 0.078, jitter: 0.075, glow: 0.4, speed: 1.28, signal: "Guiding" },
+          acting: { pull: 0.122, jitter: 0.16, glow: 0.56, speed: 1.76, signal: "Executing" }
         };
 
         const animalConfig = {
@@ -311,9 +332,40 @@
 
         const surfaces = ["Web Focus", "iPhone Context", "Watch Pulse", "Voice Relay", "Ambient Room"];
 
-        let state = "idle";
-        let animal = "none";
+        let state = VALID_STATES.includes(initialStateParam) ? initialStateParam : "idle";
+        let animal = VALID_ANIMALS.includes(initialAnimalParam) ? initialAnimalParam : "none";
         let surfaceIndex = 0;
+        let autopilot = initialAutoParam === "1" || initialAutoParam === "true";
+        if (reducedMotion) autopilot = false;
+        let currentAccentRGB = [163, 176, 209];
+        let currentBackground = "#06080d";
+
+        function cssColorToRGB(value) {
+          const color = value.trim();
+          if (color.startsWith("#")) {
+            const hex = color.slice(1);
+            const full = hex.length === 3 ? hex.split("").map((c) => c + c).join("") : hex;
+            const n = Number.parseInt(full, 16);
+            if (!Number.isNaN(n)) {
+              return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+            }
+          }
+          const match = color.match(/rgb[a]?\(([^)]+)\)/i);
+          if (match) {
+            const parts = match[1].split(",").map((v) => Number.parseFloat(v.trim()));
+            if (parts.length >= 3 && parts.every((n) => Number.isFinite(n))) {
+              return [parts[0], parts[1], parts[2]];
+            }
+          }
+          return [163, 176, 209];
+        }
+
+        function refreshThemeCache() {
+          const styles = getComputedStyle(root);
+          const accent = styles.getPropertyValue("--accent");
+          currentBackground = styles.getPropertyValue("--bg").trim() || currentBackground;
+          currentAccentRGB = cssColorToRGB(accent);
+        }
 
         function capitalize(value) {
           return value.charAt(0).toUpperCase() + value.slice(1);
@@ -326,13 +378,14 @@
           mSignal.textContent = stateConfig[state].signal;
           stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
           animalSelect.value = animal;
+          autoBtn.classList.toggle("active", autopilot);
+          autoBtn.textContent = `Auto: ${autopilot ? "On" : "Off"}`;
           metaLabel.textContent = `${capitalize(state)} / ${animalConfig[animal].label} / ${surfaces[surfaceIndex]}`;
         }
 
         stateButtons.forEach((btn) => {
           btn.addEventListener("click", () => {
-            state = btn.dataset.state;
-            syncUI();
+            setState(btn.dataset.state);
           });
         });
 
@@ -341,20 +394,54 @@
           syncUI();
         });
 
+        autoBtn.addEventListener("click", () => {
+          autopilot = !autopilot;
+          syncUI();
+        });
+
+        function setState(next) {
+          if (!VALID_STATES.includes(next)) return;
+          state = next;
+          syncUI();
+        }
+
+        function setAnimal(next) {
+          if (!VALID_ANIMALS.includes(next)) return;
+          animal = next;
+          syncUI();
+        }
+
+        function setSurface(next) {
+          if (typeof next === "number" && Number.isFinite(next)) {
+            surfaceIndex = ((Math.floor(next) % surfaces.length) + surfaces.length) % surfaces.length;
+            syncUI();
+            return;
+          }
+          if (typeof next === "string") {
+            const idx = surfaces.findIndex((label) => label.toLowerCase() === next.toLowerCase());
+            if (idx >= 0) {
+              surfaceIndex = idx;
+              syncUI();
+            }
+          }
+        }
+
         commandForm.addEventListener("submit", (event) => {
           event.preventDefault();
           const text = commandInput.value.trim().toLowerCase();
           if (!text) return;
-          if (text.includes("idle") || text.includes("rest")) state = "idle";
-          if (text.includes("listen")) state = "listening";
-          if (text.includes("synth")) state = "synthesizing";
-          if (text.includes("advis")) state = "advising";
-          if (text.includes("act")) state = "acting";
-          if (text.includes("wolf")) animal = "wolf";
-          if (text.includes("owl")) animal = "owl";
-          if (text.includes("octo")) animal = "octopus";
-          if (text.includes("raven")) animal = "raven";
-          if (text.includes("none") || text.includes("clear")) animal = "none";
+          if (text.includes("idle") || text.includes("rest")) setState("idle");
+          if (text.includes("listen")) setState("listening");
+          if (text.includes("synth")) setState("synthesizing");
+          if (text.includes("advis")) setState("advising");
+          if (text.includes("act")) setState("acting");
+          if (text.includes("wolf")) setAnimal("wolf");
+          if (text.includes("owl")) setAnimal("owl");
+          if (text.includes("octo")) setAnimal("octopus");
+          if (text.includes("raven")) setAnimal("raven");
+          if (text.includes("none") || text.includes("clear")) setAnimal("none");
+          if (text.includes("auto")) autopilot = true;
+          if (text.includes("manual")) autopilot = false;
           if (text.includes("next surface")) surfaceIndex = (surfaceIndex + 1) % surfaces.length;
           syncUI();
           commandInput.value = "";
@@ -363,11 +450,29 @@
         setInterval(() => {
           surfaceIndex = (surfaceIndex + 1) % surfaces.length;
           mSurface.textContent = surfaces[surfaceIndex];
-        }, 6400);
+          if (!autopilot) return;
+          const loop = (Date.now() / 1000) % 20;
+          if (loop < 4) {
+            setState("idle");
+            setAnimal("none");
+          } else if (loop < 8) {
+            setState("listening");
+            setAnimal("owl");
+          } else if (loop < 12) {
+            setState("synthesizing");
+            setAnimal("octopus");
+          } else if (loop < 16) {
+            setState("advising");
+            setAnimal("raven");
+          } else {
+            setState("acting");
+            setAnimal("wolf");
+          }
+        }, 5200);
 
         const canvas = document.getElementById("field");
         const ctx = canvas.getContext("2d");
-        const particleCount = 460;
+        const particleCount = reducedMotion ? 170 : 460;
         const particles = [];
 
         function resize() {
@@ -392,10 +497,6 @@
           }
         }
 
-        function readVar(name) {
-          return getComputedStyle(root).getPropertyValue(name).trim();
-        }
-
         function draw(nowMs) {
           const t = nowMs * 0.001;
           const cfg = stateConfig[state];
@@ -406,14 +507,14 @@
           const cy = h * 0.5 + Math.cos(t * 0.16) * h * 0.03;
 
           ctx.clearRect(0, 0, w, h);
-          ctx.fillStyle = readVar("--bg");
+          ctx.fillStyle = currentBackground;
           ctx.globalAlpha = 0.98;
           ctx.fillRect(0, 0, w, h);
 
           const g1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.62);
-          g1.addColorStop(0, `color-mix(in srgb, ${readVar("--accent")} ${22 + cfg.glow * 40}%, transparent)`);
+          g1.addColorStop(0, `rgba(${currentAccentRGB[0]}, ${currentAccentRGB[1]}, ${currentAccentRGB[2]}, ${0.22 + cfg.glow * 0.38})`);
           g1.addColorStop(1, "transparent");
-          ctx.globalAlpha = 0.38 + cfg.glow * 0.45;
+          ctx.globalAlpha = 0.32 + cfg.glow * 0.42;
           ctx.fillStyle = g1;
           ctx.fillRect(0, 0, w, h);
 
@@ -428,8 +529,8 @@
             p.vx += ((dx / d) * cfg.pull * form.spread + (dy / d) * orbit * 0.055);
             p.vy += ((dy / d) * cfg.pull * form.spread - (dx / d) * orbit * 0.055);
 
-            p.vx += (Math.random() - 0.5) * cfg.jitter * 0.028;
-            p.vy += (Math.random() - 0.5) * cfg.jitter * 0.028;
+            p.vx += (Math.random() - 0.5) * cfg.jitter * (reducedMotion ? 0.018 : 0.028);
+            p.vy += (Math.random() - 0.5) * cfg.jitter * (reducedMotion ? 0.018 : 0.028);
 
             p.vx *= 0.972;
             p.vy *= 0.972;
@@ -442,15 +543,15 @@
             if (p.y < -20) p.y = h + 20;
             if (p.y > h + 20) p.y = -20;
 
-            const alpha = Math.min(0.9, 0.2 + (220 / (d + 80)) * 0.42 + cfg.glow * 0.3);
+            const alpha = Math.min(0.85, 0.16 + (220 / (d + 80)) * 0.38 + cfg.glow * 0.27);
             ctx.fillStyle = `rgba(220, 228, 245, ${alpha})`;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fill();
           }
 
-          const ringR = Math.min(w, h) * (0.13 + cfg.glow * 0.085);
-          ctx.strokeStyle = readVar("--accent");
+          const ringR = Math.min(w, h) * (0.13 + cfg.glow * 0.08);
+          ctx.strokeStyle = `rgba(${currentAccentRGB[0]}, ${currentAccentRGB[1]}, ${currentAccentRGB[2]}, 0.95)`;
           ctx.globalAlpha = 0.2 + cfg.glow * 0.34;
           ctx.lineWidth = 1.1;
           ctx.beginPath();
@@ -460,6 +561,46 @@
 
           requestAnimationFrame(draw);
         }
+
+        window.addEventListener("message", (event) => {
+          const payload = event && event.data;
+          if (!payload || payload.type !== "presence") return;
+          if (typeof payload.state === "string") setState(payload.state.toLowerCase());
+          if (typeof payload.animal === "string") setAnimal(payload.animal.toLowerCase());
+          if (typeof payload.surface === "string" || typeof payload.surface === "number") setSurface(payload.surface);
+          if (typeof payload.auto === "boolean") {
+            autopilot = payload.auto;
+            syncUI();
+          }
+        });
+
+        window.addEventListener("eos:presence", (event) => {
+          const detail = event && event.detail ? event.detail : {};
+          if (typeof detail.state === "string") setState(detail.state.toLowerCase());
+          if (typeof detail.animal === "string") setAnimal(detail.animal.toLowerCase());
+          if (typeof detail.surface === "string" || typeof detail.surface === "number") setSurface(detail.surface);
+        });
+
+        window.presenceLab = {
+          getState: () => ({ state, animal, surface: surfaces[surfaceIndex], auto: autopilot }),
+          setState: (next) => setState(String(next || "").toLowerCase()),
+          setAnimal: (next) => setAnimal(String(next || "").toLowerCase()),
+          setSurface: (next) => setSurface(next),
+          setAuto: (next) => {
+            autopilot = Boolean(next);
+            syncUI();
+          },
+          dispatch: (payload) => {
+            if (!payload || typeof payload !== "object") return;
+            if (payload.state) setState(String(payload.state).toLowerCase());
+            if (payload.animal) setAnimal(String(payload.animal).toLowerCase());
+            if (payload.surface !== undefined) setSurface(payload.surface);
+            if (typeof payload.auto === "boolean") {
+              autopilot = payload.auto;
+              syncUI();
+            }
+          }
+        };
 
         window.addEventListener("resize", () => {
           resize();
