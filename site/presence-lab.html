@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Presence Lab</title>
+    <style>
+      :root {
+        --bg: #f7f6f3;
+        --surface: rgba(255, 255, 255, 0.72);
+        --line: rgba(18, 18, 18, 0.16);
+        --text: #101010;
+        --muted: #595959;
+        --accent: #7f8aa8;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #06080d;
+          --surface: rgba(14, 18, 26, 0.56);
+          --line: rgba(222, 227, 241, 0.15);
+          --text: #e7eaf2;
+          --muted: #9ba5ba;
+          --accent: #a3b0d1;
+        }
+      }
+
+      :root[data-theme="light"] {
+        --bg: #f7f6f3;
+        --surface: rgba(255, 255, 255, 0.72);
+        --line: rgba(18, 18, 18, 0.16);
+        --text: #101010;
+        --muted: #595959;
+        --accent: #7f8aa8;
+      }
+
+      :root[data-theme="dark"] {
+        --bg: #06080d;
+        --surface: rgba(14, 18, 26, 0.56);
+        --line: rgba(222, 227, 241, 0.15);
+        --text: #e7eaf2;
+        --muted: #9ba5ba;
+        --accent: #a3b0d1;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--text);
+        font: 13px/1.35 -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      }
+
+      canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .hud {
+        position: fixed;
+        z-index: 2;
+        width: min(880px, calc(100% - 2rem));
+        left: 1rem;
+        right: 1rem;
+        top: 1rem;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 0.75rem 0.8rem;
+        display: grid;
+        gap: 0.65rem;
+      }
+
+      .hud-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .title {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .controls {
+        display: flex;
+        gap: 0.35rem;
+        flex-wrap: wrap;
+      }
+
+      button,
+      select,
+      input {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        font: inherit;
+      }
+
+      button,
+      select {
+        padding: 0.25rem 0.42rem;
+        border-radius: 8px;
+        font-size: 11px;
+        letter-spacing: 0.03em;
+      }
+
+      .active {
+        border-color: color-mix(in srgb, var(--accent) 68%, var(--line));
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.45rem;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0.4rem 0.45rem;
+      }
+
+      .metric-k {
+        font-size: 10px;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .metric-v {
+        font-size: 12px;
+        margin-top: 0.08rem;
+      }
+
+      .command {
+        position: fixed;
+        z-index: 2;
+        width: min(860px, calc(100% - 2rem));
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        margin: 0 auto;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        padding: 0.6rem;
+      }
+
+      .command form {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .prompt {
+        color: var(--accent);
+        font-size: 12px;
+      }
+
+      .command input {
+        flex: 1;
+        min-width: 0;
+        border-radius: 8px;
+        padding: 0.45rem 0.55rem;
+      }
+
+      .hint {
+        margin-top: 0.35rem;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .meta {
+        position: fixed;
+        right: 1.1rem;
+        bottom: 5.8rem;
+        z-index: 2;
+        color: var(--muted);
+        font-size: 11px;
+        text-align: right;
+      }
+
+      @media (max-width: 760px) {
+        .metrics {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .hud {
+          border-radius: 12px;
+        }
+
+        .command {
+          border-radius: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="field"></canvas>
+
+    <section class="hud" aria-label="Presence controls">
+      <div class="hud-top">
+        <div class="title">EOS Presence Lab</div>
+        <div class="controls">
+          <button id="themeBtn" type="button">Theme: System</button>
+          <select id="animalSelect" aria-label="Animal form">
+            <option value="none">No Form</option>
+            <option value="wolf">Wolf</option>
+            <option value="owl">Owl</option>
+            <option value="octopus">Octopus</option>
+            <option value="raven">Raven</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="controls" id="stateButtons" role="group" aria-label="Presence states">
+        <button data-state="idle" type="button" class="active">Idle</button>
+        <button data-state="listening" type="button">Listening</button>
+        <button data-state="synthesizing" type="button">Synthesizing</button>
+        <button data-state="advising" type="button">Advising</button>
+        <button data-state="acting" type="button">Acting</button>
+      </div>
+
+      <div class="metrics" id="metrics">
+        <article class="metric"><div class="metric-k">State</div><div class="metric-v" id="mState">Idle</div></article>
+        <article class="metric"><div class="metric-k">Form</div><div class="metric-v" id="mForm">No Form</div></article>
+        <article class="metric"><div class="metric-k">Surface</div><div class="metric-v" id="mSurface">Web Focus</div></article>
+        <article class="metric"><div class="metric-k">Signal</div><div class="metric-v" id="mSignal">Quiet</div></article>
+      </div>
+    </section>
+
+    <section class="command" aria-label="Presence command">
+      <form id="commandForm">
+        <span class="prompt">></span>
+        <input
+          id="commandInput"
+          type="text"
+          autocomplete="off"
+          placeholder="Try: listen, wolf mode, synthesize, act, return to idle"
+        />
+      </form>
+      <div class="hint">Command channel maps intent to state + form. Future-ready for OpenAI Realtime control.</div>
+    </section>
+
+    <div class="meta" id="metaLabel">Render loop live</div>
+
+    <script>
+      (() => {
+        const themeBtn = document.getElementById("themeBtn");
+        const commandInput = document.getElementById("commandInput");
+        const commandForm = document.getElementById("commandForm");
+        const stateButtons = Array.from(document.querySelectorAll("#stateButtons button"));
+        const animalSelect = document.getElementById("animalSelect");
+        const mState = document.getElementById("mState");
+        const mForm = document.getElementById("mForm");
+        const mSurface = document.getElementById("mSurface");
+        const mSignal = document.getElementById("mSignal");
+        const metaLabel = document.getElementById("metaLabel");
+        const root = document.documentElement;
+
+        const themeOptions = ["system", "light", "dark"];
+        let currentTheme = "system";
+        const savedTheme = localStorage.getItem("nl-theme");
+        if (themeOptions.includes(savedTheme)) currentTheme = savedTheme;
+
+        function applyTheme(theme) {
+          if (theme === "system") root.removeAttribute("data-theme");
+          else root.setAttribute("data-theme", theme);
+          themeBtn.textContent = `Theme: ${theme.charAt(0).toUpperCase()}${theme.slice(1)}`;
+        }
+
+        applyTheme(currentTheme);
+        themeBtn.addEventListener("click", () => {
+          const idx = themeOptions.indexOf(currentTheme);
+          currentTheme = themeOptions[(idx + 1) % themeOptions.length];
+          localStorage.setItem("nl-theme", currentTheme);
+          applyTheme(currentTheme);
+        });
+
+        const stateConfig = {
+          idle: { pull: 0.035, jitter: 0.06, glow: 0.18, speed: 0.95, signal: "Quiet" },
+          listening: { pull: 0.07, jitter: 0.1, glow: 0.34, speed: 1.25, signal: "Attentive" },
+          synthesizing: { pull: 0.11, jitter: 0.16, glow: 0.46, speed: 1.56, signal: "Integrating" },
+          advising: { pull: 0.085, jitter: 0.085, glow: 0.42, speed: 1.35, signal: "Guiding" },
+          acting: { pull: 0.13, jitter: 0.2, glow: 0.58, speed: 1.9, signal: "Executing" }
+        };
+
+        const animalConfig = {
+          none: { spread: 1.0, trails: 0.18, morph: 0.1, label: "No Form" },
+          wolf: { spread: 1.4, trails: 0.24, morph: 0.62, label: "Wolf" },
+          owl: { spread: 0.9, trails: 0.15, morph: 0.56, label: "Owl" },
+          octopus: { spread: 1.55, trails: 0.27, morph: 0.74, label: "Octopus" },
+          raven: { spread: 1.2, trails: 0.22, morph: 0.68, label: "Raven" }
+        };
+
+        const surfaces = ["Web Focus", "iPhone Context", "Watch Pulse", "Voice Relay", "Ambient Room"];
+
+        let state = "idle";
+        let animal = "none";
+        let surfaceIndex = 0;
+
+        function capitalize(value) {
+          return value.charAt(0).toUpperCase() + value.slice(1);
+        }
+
+        function syncUI() {
+          mState.textContent = capitalize(state);
+          mForm.textContent = animalConfig[animal].label;
+          mSurface.textContent = surfaces[surfaceIndex];
+          mSignal.textContent = stateConfig[state].signal;
+          stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
+          animalSelect.value = animal;
+          metaLabel.textContent = `${capitalize(state)} / ${animalConfig[animal].label} / ${surfaces[surfaceIndex]}`;
+        }
+
+        stateButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            state = btn.dataset.state;
+            syncUI();
+          });
+        });
+
+        animalSelect.addEventListener("change", () => {
+          animal = animalSelect.value;
+          syncUI();
+        });
+
+        commandForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const text = commandInput.value.trim().toLowerCase();
+          if (!text) return;
+          if (text.includes("idle") || text.includes("rest")) state = "idle";
+          if (text.includes("listen")) state = "listening";
+          if (text.includes("synth")) state = "synthesizing";
+          if (text.includes("advis")) state = "advising";
+          if (text.includes("act")) state = "acting";
+          if (text.includes("wolf")) animal = "wolf";
+          if (text.includes("owl")) animal = "owl";
+          if (text.includes("octo")) animal = "octopus";
+          if (text.includes("raven")) animal = "raven";
+          if (text.includes("none") || text.includes("clear")) animal = "none";
+          if (text.includes("next surface")) surfaceIndex = (surfaceIndex + 1) % surfaces.length;
+          syncUI();
+          commandInput.value = "";
+        });
+
+        setInterval(() => {
+          surfaceIndex = (surfaceIndex + 1) % surfaces.length;
+          mSurface.textContent = surfaces[surfaceIndex];
+        }, 6400);
+
+        const canvas = document.getElementById("field");
+        const ctx = canvas.getContext("2d");
+        const particleCount = 460;
+        const particles = [];
+
+        function resize() {
+          canvas.width = window.innerWidth * devicePixelRatio;
+          canvas.height = window.innerHeight * devicePixelRatio;
+          canvas.style.width = `${window.innerWidth}px`;
+          canvas.style.height = `${window.innerHeight}px`;
+          ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+        }
+
+        function spawn() {
+          particles.length = 0;
+          for (let i = 0; i < particleCount; i += 1) {
+            particles.push({
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+              vx: (Math.random() - 0.5) * 0.3,
+              vy: (Math.random() - 0.5) * 0.3,
+              size: Math.random() * 1.5 + 0.6,
+              seed: Math.random() * Math.PI * 2
+            });
+          }
+        }
+
+        function readVar(name) {
+          return getComputedStyle(root).getPropertyValue(name).trim();
+        }
+
+        function draw(nowMs) {
+          const t = nowMs * 0.001;
+          const cfg = stateConfig[state];
+          const form = animalConfig[animal];
+          const w = window.innerWidth;
+          const h = window.innerHeight;
+          const cx = w * 0.5 + Math.sin(t * 0.12) * w * 0.04;
+          const cy = h * 0.5 + Math.cos(t * 0.16) * h * 0.03;
+
+          ctx.clearRect(0, 0, w, h);
+          ctx.fillStyle = readVar("--bg");
+          ctx.globalAlpha = 0.98;
+          ctx.fillRect(0, 0, w, h);
+
+          const g1 = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.max(w, h) * 0.62);
+          g1.addColorStop(0, `color-mix(in srgb, ${readVar("--accent")} ${22 + cfg.glow * 40}%, transparent)`);
+          g1.addColorStop(1, "transparent");
+          ctx.globalAlpha = 0.38 + cfg.glow * 0.45;
+          ctx.fillStyle = g1;
+          ctx.fillRect(0, 0, w, h);
+
+          ctx.globalAlpha = 1;
+          for (let i = 0; i < particles.length; i += 1) {
+            const p = particles[i];
+            const dx = cx - p.x;
+            const dy = cy - p.y;
+            const d = Math.max(24, Math.hypot(dx, dy));
+
+            const orbit = Math.sin(t * 0.8 + p.seed) * form.morph;
+            p.vx += ((dx / d) * cfg.pull * form.spread + (dy / d) * orbit * 0.055);
+            p.vy += ((dy / d) * cfg.pull * form.spread - (dx / d) * orbit * 0.055);
+
+            p.vx += (Math.random() - 0.5) * cfg.jitter * 0.028;
+            p.vy += (Math.random() - 0.5) * cfg.jitter * 0.028;
+
+            p.vx *= 0.972;
+            p.vy *= 0.972;
+
+            p.x += p.vx * cfg.speed;
+            p.y += p.vy * cfg.speed;
+
+            if (p.x < -20) p.x = w + 20;
+            if (p.x > w + 20) p.x = -20;
+            if (p.y < -20) p.y = h + 20;
+            if (p.y > h + 20) p.y = -20;
+
+            const alpha = Math.min(0.9, 0.2 + (220 / (d + 80)) * 0.42 + cfg.glow * 0.3);
+            ctx.fillStyle = `rgba(220, 228, 245, ${alpha})`;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          const ringR = Math.min(w, h) * (0.13 + cfg.glow * 0.085);
+          ctx.strokeStyle = readVar("--accent");
+          ctx.globalAlpha = 0.2 + cfg.glow * 0.34;
+          ctx.lineWidth = 1.1;
+          ctx.beginPath();
+          ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
+          ctx.stroke();
+          ctx.globalAlpha = 1;
+
+          requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", () => {
+          resize();
+          spawn();
+        });
+
+        resize();
+        spawn();
+        syncUI();
+        requestAnimationFrame(draw);
+      })();
+    </script>
+  </body>
+</html>
