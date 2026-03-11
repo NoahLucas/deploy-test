@@ -155,19 +155,34 @@
 
       .experience {
         position: relative;
+        transition: transform 180ms ease, opacity 180ms ease;
       }
 
       .experience::after {
         content: "";
         position: absolute;
-        top: 0.62rem;
-        right: -5px;
-        width: 9px;
-        height: 9px;
-        border-radius: 999px;
-        border: 1px solid color-mix(in srgb, var(--text) 42%, transparent);
-        background: var(--bg);
-        box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 5%, transparent);
+        top: 0.68rem;
+        right: 0;
+        width: 10px;
+        height: 1.6px;
+        background: color-mix(in srgb, var(--text) 42%, transparent);
+        transform-origin: right center;
+        transition: width 180ms ease, height 180ms ease, background-color 180ms ease;
+      }
+
+      .timeline:hover .experience {
+        opacity: 0.72;
+      }
+
+      .timeline:hover .experience:hover {
+        opacity: 1;
+        transform: scale(1.028);
+      }
+
+      .timeline:hover .experience:hover::after {
+        width: 16px;
+        height: 2.2px;
+        background: color-mix(in srgb, var(--text) 70%, transparent);
       }
 
       .role {
@@ -191,6 +206,29 @@
         text-decoration: none;
         line-height: 1.2;
         letter-spacing: 0.02em;
+      }
+
+      .company-row {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .company-icon-wrap {
+        width: 14px;
+        height: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .company-icon {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
+        display: block;
+        filter: grayscale(1) contrast(1.05) opacity(0.72);
       }
 
       @media (max-width: 680px) {
@@ -223,9 +261,9 @@
         }
 
         .experience::after {
-          right: -5px;
-          width: 8px;
-          height: 8px;
+          right: 0;
+          width: 9px;
+          height: 1.4px;
         }
       }
     </style>
@@ -240,22 +278,42 @@
         <section class="timeline" aria-label="Work timeline">
           <article class="experience">
             <div class="role">Vice President of Product</div>
-            <a class="company" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
+            <div class="company-row">
+              <span class="company-icon-wrap">
+                <img class="company-icon" src="/assets/logos/sift.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
+              </span>
+              <a class="company" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
+            </div>
           </article>
 
           <article class="experience">
             <div class="role">Principal Product Manager</div>
-            <a class="company" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
+            <div class="company-row">
+              <span class="company-icon-wrap">
+                <img class="company-icon" src="/assets/logos/anduril.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
+              </span>
+              <a class="company" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
+            </div>
           </article>
 
           <article class="experience">
             <div class="role">Director of Product Management</div>
-            <a class="company" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
+            <div class="company-row">
+              <span class="company-icon-wrap">
+                <img class="company-icon" src="/assets/logos/serve-robotics.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
+              </span>
+              <a class="company" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
+            </div>
           </article>
 
           <article class="experience">
             <div class="role">Product Lead</div>
-            <a class="company" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
+            <div class="company-row">
+              <span class="company-icon-wrap">
+                <img class="company-icon" src="/assets/logos/postmates.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
+              </span>
+              <a class="company" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
+            </div>
           </article>
 
           <article class="experience">
