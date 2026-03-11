@@ -6,8 +6,52 @@
     <title>Noah Lucas</title>
     <style>
       :root {
+        --bg: #f7f7f4;
         --text: #111111;
+        --muted: #676767;
+        --surface: #ffffff;
+        --line: #d9d9d2;
+        --ring-a: #5a8dff;
+        --ring-b: #49dbc8;
+        --ring-c: #a16bff;
       }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1014;
+          --text: #e8ebf2;
+          --muted: #9ba4b7;
+          --surface: #151923;
+          --line: #2a3040;
+          --ring-a: #6c98ff;
+          --ring-b: #43e0ce;
+          --ring-c: #b17dff;
+        }
+      }
+
+      :root[data-theme="light"] {
+        --bg: #f7f7f4;
+        --text: #111111;
+        --muted: #676767;
+        --surface: #ffffff;
+        --line: #d9d9d2;
+        --ring-a: #5a8dff;
+        --ring-b: #49dbc8;
+        --ring-c: #a16bff;
+      }
+
+      :root[data-theme="dark"] {
+        --bg: #0e1014;
+        --text: #e8ebf2;
+        --muted: #9ba4b7;
+        --surface: #151923;
+        --line: #2a3040;
+        --ring-a: #6c98ff;
+        --ring-b: #43e0ce;
+        --ring-c: #b17dff;
+      }
+
+      * { box-sizing: border-box; }
 
       html,
       body {
@@ -16,9 +60,10 @@
 
       body {
         margin: 0;
-        background: #ffffff;
+        background: var(--bg);
         color: var(--text);
         font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        transition: background-color 220ms ease, color 220ms ease;
       }
 
       main {
@@ -29,15 +74,137 @@
       }
 
       .wrap {
-        width: min(740px, 100%);
+        width: min(760px, 100%);
         text-align: center;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 1.1rem;
+      }
+
+      .label {
+        color: var(--muted);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-size: 10px;
+      }
+
+      .theme-btn {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--text);
+        font-size: 11px;
+        padding: 0.28rem 0.5rem;
+        cursor: pointer;
+      }
+
+      .presence {
+        margin: 0 auto 1.3rem;
+        width: min(320px, 100%);
+        border: 1px solid var(--line);
+        background: var(--surface);
+        padding: 0.8rem 0.6rem 0.7rem;
+      }
+
+      .presence-core {
+        position: relative;
+        width: 28px;
+        height: 28px;
+        margin: 0 auto 0.45rem;
+        border-radius: 999px;
+        background: radial-gradient(circle at 30% 30%, #ffffff, var(--ring-a));
+      }
+
+      .presence-core::before,
+      .presence-core::after {
+        content: "";
+        position: absolute;
+        inset: -6px;
+        border-radius: inherit;
+        background: conic-gradient(from 0deg, var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a));
+        opacity: 0;
+        transition: opacity 220ms ease;
+      }
+
+      .presence-core::before {
+        filter: blur(7px);
+      }
+
+      .presence-core::after {
+        filter: blur(14px);
+        inset: -11px;
+      }
+
+      .presence[data-state="listening"] .presence-core::before,
+      .presence[data-state="listening"] .presence-core::after,
+      .presence[data-state="thinking"] .presence-core::before,
+      .presence[data-state="thinking"] .presence-core::after,
+      .presence[data-state="speaking"] .presence-core::before,
+      .presence[data-state="speaking"] .presence-core::after {
+        opacity: 0.7;
+      }
+
+      .presence[data-state="listening"] .presence-core {
+        animation: breathe 2.4s ease-in-out infinite;
+      }
+
+      .presence[data-state="thinking"] .presence-core {
+        animation: pulse 1.15s ease-in-out infinite;
+      }
+
+      .presence[data-state="thinking"] .presence-core::before,
+      .presence[data-state="thinking"] .presence-core::after {
+        animation: spin 2.2s linear infinite;
+      }
+
+      .presence[data-state="speaking"] .presence-core {
+        animation: pulse-fast 0.72s ease-in-out infinite;
+      }
+
+      .presence[data-state="speaking"] .presence-core::before,
+      .presence[data-state="speaking"] .presence-core::after {
+        animation: spin 1.1s linear infinite;
+      }
+
+      .presence-status {
+        margin: 0;
+        font-size: 11px;
+        color: var(--text);
+      }
+
+      .presence-controls {
+        margin-top: 0.55rem;
+        display: flex;
+        justify-content: center;
+        gap: 0.25rem;
+        flex-wrap: wrap;
+      }
+
+      .state-btn {
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        padding: 0.22rem 0.38rem;
+        font-size: 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      .state-btn.active {
+        color: var(--text);
+        background: var(--surface);
       }
 
       .intro {
         margin: 0 auto;
         max-width: 68ch;
         margin-bottom: 2.4rem;
-        color: #1f1f1f;
+        color: var(--text);
       }
 
       .companies {
@@ -70,7 +237,7 @@
       .name:visited,
       .name:hover,
       .name:active {
-        color: #707070;
+        color: var(--muted);
       }
 
       .name {
@@ -92,12 +259,55 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
           gap: 1.1rem 0.6rem;
         }
+
+        .topbar {
+          margin-bottom: 0.9rem;
+        }
+
+        .presence {
+          margin-bottom: 1rem;
+        }
+      }
+
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes breathe {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.18); }
+      }
+
+      @keyframes pulse-fast {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.25); }
       }
     </style>
   </head>
   <body>
     <main>
       <section class="wrap">
+        <div class="topbar">
+          <span class="label">Presence language prototype</span>
+          <button id="theme-toggle" class="theme-btn" type="button">Theme: System</button>
+        </div>
+
+        <section class="presence" id="presence" data-state="idle" aria-live="polite">
+          <div class="presence-core" aria-hidden="true"></div>
+          <p class="presence-status" id="presence-status">Presence: Idle</p>
+          <div class="presence-controls" role="group" aria-label="Presence state">
+            <button class="state-btn active" data-state="idle" type="button">Idle</button>
+            <button class="state-btn" data-state="listening" type="button">Listening</button>
+            <button class="state-btn" data-state="thinking" type="button">Thinking</button>
+            <button class="state-btn" data-state="speaking" type="button">Speaking</button>
+          </div>
+        </section>
+
         <p class="intro">Noah Lucas: Living in Ojai, California with Sara, Willa, and Bruce the cat. Building a telemetry platform for advanced machines at Sift.</p>
 
         <div class="companies" aria-label="Company experience">
@@ -135,5 +345,51 @@
         </div>
       </section>
     </main>
+
+    <script>
+      (function () {
+        const root = document.documentElement;
+        const themeButton = document.getElementById("theme-toggle");
+        const themeOptions = ["system", "light", "dark"];
+
+        function getStoredTheme() {
+          const saved = localStorage.getItem("nl-theme");
+          return themeOptions.includes(saved) ? saved : "system";
+        }
+
+        function applyTheme(theme) {
+          if (theme === "system") {
+            root.removeAttribute("data-theme");
+          } else {
+            root.setAttribute("data-theme", theme);
+          }
+          themeButton.textContent = `Theme: ${theme.charAt(0).toUpperCase()}${theme.slice(1)}`;
+        }
+
+        let currentTheme = getStoredTheme();
+        applyTheme(currentTheme);
+
+        themeButton.addEventListener("click", () => {
+          const idx = themeOptions.indexOf(currentTheme);
+          currentTheme = themeOptions[(idx + 1) % themeOptions.length];
+          localStorage.setItem("nl-theme", currentTheme);
+          applyTheme(currentTheme);
+        });
+
+        const presence = document.getElementById("presence");
+        const status = document.getElementById("presence-status");
+        const stateButtons = Array.from(document.querySelectorAll(".state-btn"));
+
+        function setState(state) {
+          presence.setAttribute("data-state", state);
+          status.textContent = `Presence: ${state.charAt(0).toUpperCase()}${state.slice(1)}`;
+          stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
+        }
+
+        stateButtons.forEach((btn) => {
+          btn.addEventListener("click", () => setState(btn.dataset.state));
+        });
+      })();
+    </script>
   </body>
 </html>
