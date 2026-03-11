@@ -133,7 +133,7 @@
 
       .metrics {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
         gap: 0.45rem;
       }
 
@@ -153,6 +153,22 @@
       .metric-v {
         font-size: 12px;
         margin-top: 0.08rem;
+      }
+
+      .metric-bar {
+        margin-top: 0.22rem;
+        height: 4px;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--text) 12%, transparent);
+        overflow: hidden;
+      }
+
+      .metric-bar > span {
+        display: block;
+        height: 100%;
+        width: 0%;
+        background: color-mix(in srgb, var(--accent) 78%, var(--text));
+        transition: width 260ms ease;
       }
 
       .command {
@@ -229,6 +245,7 @@
           <a class="ghost-link" href="/">Home</a>
           <button id="autoBtn" type="button">Auto: Off</button>
           <button id="themeBtn" type="button">Theme: System</button>
+          <select id="surfaceSelect" aria-label="Surface mode"></select>
           <select id="animalSelect" aria-label="Animal form">
             <option value="none">No Form</option>
             <option value="wolf">Wolf</option>
@@ -252,6 +269,8 @@
         <article class="metric"><div class="metric-k">Form</div><div class="metric-v" id="mForm">No Form</div></article>
         <article class="metric"><div class="metric-k">Surface</div><div class="metric-v" id="mSurface">Web Focus</div></article>
         <article class="metric"><div class="metric-k">Signal</div><div class="metric-v" id="mSignal">Quiet</div></article>
+        <article class="metric"><div class="metric-k">Energy</div><div class="metric-v" id="mEnergy">18%</div><div class="metric-bar"><span id="mEnergyBar"></span></div></article>
+        <article class="metric"><div class="metric-k">Coherence</div><div class="metric-v" id="mCoherence">62%</div><div class="metric-bar"><span id="mCoherenceBar"></span></div></article>
       </div>
     </section>
 
@@ -287,10 +306,15 @@
         const commandForm = document.getElementById("commandForm");
         const stateButtons = Array.from(document.querySelectorAll("#stateButtons button"));
         const animalSelect = document.getElementById("animalSelect");
+        const surfaceSelect = document.getElementById("surfaceSelect");
         const mState = document.getElementById("mState");
         const mForm = document.getElementById("mForm");
         const mSurface = document.getElementById("mSurface");
         const mSignal = document.getElementById("mSignal");
+        const mEnergy = document.getElementById("mEnergy");
+        const mCoherence = document.getElementById("mCoherence");
+        const mEnergyBar = document.getElementById("mEnergyBar");
+        const mCoherenceBar = document.getElementById("mCoherenceBar");
         const metaLabel = document.getElementById("metaLabel");
         const root = document.documentElement;
 
@@ -315,11 +339,11 @@
         });
 
         const stateConfig = {
-          idle: { pull: 0.03, jitter: 0.045, glow: 0.16, speed: 0.9, signal: "Quiet" },
-          listening: { pull: 0.065, jitter: 0.08, glow: 0.32, speed: 1.16, signal: "Attentive" },
-          synthesizing: { pull: 0.1, jitter: 0.13, glow: 0.45, speed: 1.48, signal: "Integrating" },
-          advising: { pull: 0.078, jitter: 0.075, glow: 0.4, speed: 1.28, signal: "Guiding" },
-          acting: { pull: 0.122, jitter: 0.16, glow: 0.56, speed: 1.76, signal: "Executing" }
+          idle: { pull: 0.03, jitter: 0.045, glow: 0.16, speed: 0.9, signal: "Quiet", energy: 0.18, coherence: 0.74 },
+          listening: { pull: 0.065, jitter: 0.08, glow: 0.32, speed: 1.16, signal: "Attentive", energy: 0.42, coherence: 0.7 },
+          synthesizing: { pull: 0.1, jitter: 0.13, glow: 0.45, speed: 1.48, signal: "Integrating", energy: 0.64, coherence: 0.83 },
+          advising: { pull: 0.078, jitter: 0.075, glow: 0.4, speed: 1.28, signal: "Guiding", energy: 0.52, coherence: 0.91 },
+          acting: { pull: 0.122, jitter: 0.16, glow: 0.56, speed: 1.76, signal: "Executing", energy: 0.86, coherence: 0.67 }
         };
 
         const animalConfig = {
@@ -331,6 +355,13 @@
         };
 
         const surfaces = ["Web Focus", "iPhone Context", "Watch Pulse", "Voice Relay", "Ambient Room"];
+        const surfaceProfiles = {
+          "Web Focus": { driftX: 0.5, driftY: 0.2, turbulence: 0.8, bias: 0.08 },
+          "iPhone Context": { driftX: 0.2, driftY: 0.8, turbulence: 1.1, bias: 0.03 },
+          "Watch Pulse": { driftX: 0.0, driftY: 0.0, turbulence: 0.6, bias: 0.16 },
+          "Voice Relay": { driftX: -0.6, driftY: 0.25, turbulence: 1.25, bias: 0.06 },
+          "Ambient Room": { driftX: 0.35, driftY: -0.42, turbulence: 0.5, bias: 0.12 }
+        };
 
         let state = VALID_STATES.includes(initialStateParam) ? initialStateParam : "idle";
         let animal = VALID_ANIMALS.includes(initialAnimalParam) ? initialAnimalParam : "none";
@@ -339,6 +370,14 @@
         if (reducedMotion) autopilot = false;
         let currentAccentRGB = [163, 176, 209];
         let currentBackground = "#06080d";
+        let impulse = 0;
+
+        surfaces.forEach((surface) => {
+          const option = document.createElement("option");
+          option.value = surface;
+          option.textContent = surface;
+          surfaceSelect.appendChild(option);
+        });
 
         function cssColorToRGB(value) {
           const color = value.trim();
@@ -376,8 +415,15 @@
           mForm.textContent = animalConfig[animal].label;
           mSurface.textContent = surfaces[surfaceIndex];
           mSignal.textContent = stateConfig[state].signal;
+          const energyPct = Math.round(stateConfig[state].energy * 100);
+          const coherencePct = Math.round(stateConfig[state].coherence * 100);
+          mEnergy.textContent = `${energyPct}%`;
+          mCoherence.textContent = `${coherencePct}%`;
+          mEnergyBar.style.width = `${energyPct}%`;
+          mCoherenceBar.style.width = `${coherencePct}%`;
           stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
           animalSelect.value = animal;
+          surfaceSelect.value = surfaces[surfaceIndex];
           autoBtn.classList.toggle("active", autopilot);
           autoBtn.textContent = `Auto: ${autopilot ? "On" : "Off"}`;
           metaLabel.textContent = `${capitalize(state)} / ${animalConfig[animal].label} / ${surfaces[surfaceIndex]}`;
@@ -401,12 +447,14 @@
 
         function setState(next) {
           if (!VALID_STATES.includes(next)) return;
+          if (state !== next) impulse = 1;
           state = next;
           syncUI();
         }
 
         function setAnimal(next) {
           if (!VALID_ANIMALS.includes(next)) return;
+          if (animal !== next) impulse = 0.85;
           animal = next;
           syncUI();
         }
@@ -425,6 +473,11 @@
             }
           }
         }
+
+        surfaceSelect.addEventListener("change", () => {
+          setSurface(surfaceSelect.value);
+          impulse = 0.72;
+        });
 
         commandForm.addEventListener("submit", (event) => {
           event.preventDefault();
@@ -497,14 +550,61 @@
           }
         }
 
+        function drawAnimalGlyph(cx, cy, t, form, cfg) {
+          if (animal === "none") return;
+          const pulse = 1 + Math.sin(t * 2.1) * 0.07 + impulse * 0.16;
+          const r = Math.min(window.innerWidth, window.innerHeight) * 0.035 * pulse;
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.lineWidth = 1.1 + cfg.glow * 0.75;
+          ctx.strokeStyle = `rgba(${currentAccentRGB[0]}, ${currentAccentRGB[1]}, ${currentAccentRGB[2]}, ${0.46 + cfg.glow * 0.42})`;
+          ctx.beginPath();
+          if (animal === "wolf") {
+            ctx.moveTo(-r * 1.0, r * 0.45);
+            ctx.lineTo(-r * 0.35, -r * 0.7);
+            ctx.lineTo(0, -r * 0.12);
+            ctx.lineTo(r * 0.35, -r * 0.7);
+            ctx.lineTo(r * 1.0, r * 0.45);
+            ctx.lineTo(0, r * 0.95);
+            ctx.closePath();
+          } else if (animal === "owl") {
+            ctx.arc(-r * 0.42, -r * 0.1, r * 0.43, 0, Math.PI * 2);
+            ctx.moveTo(r * 0.85, -r * 0.1);
+            ctx.arc(r * 0.42, -r * 0.1, r * 0.43, 0, Math.PI * 2);
+            ctx.moveTo(-r * 0.55, r * 0.6);
+            ctx.lineTo(0, r * 0.18);
+            ctx.lineTo(r * 0.55, r * 0.6);
+          } else if (animal === "octopus") {
+            ctx.arc(0, -r * 0.2, r * 0.75, Math.PI, Math.PI * 2);
+            for (let i = -2; i <= 2; i += 1) {
+              ctx.moveTo(i * r * 0.36, r * 0.02);
+              ctx.quadraticCurveTo(i * r * 0.5, r * 0.8, i * r * 0.22, r * 1.18);
+            }
+          } else if (animal === "raven") {
+            ctx.moveTo(-r * 1.1, 0);
+            ctx.lineTo(0, -r * 0.78);
+            ctx.lineTo(r * 1.08, 0);
+            ctx.lineTo(0, r * 0.75);
+            ctx.closePath();
+            ctx.moveTo(r * 1.08, 0);
+            ctx.lineTo(r * 1.48, r * 0.1);
+          }
+          ctx.stroke();
+          ctx.restore();
+        }
+
         function draw(nowMs) {
           const t = nowMs * 0.001;
           const cfg = stateConfig[state];
           const form = animalConfig[animal];
+          const surface = surfaceProfiles[surfaces[surfaceIndex]];
           const w = window.innerWidth;
           const h = window.innerHeight;
-          const cx = w * 0.5 + Math.sin(t * 0.12) * w * 0.04;
-          const cy = h * 0.5 + Math.cos(t * 0.16) * h * 0.03;
+          const cx = w * 0.5 + Math.sin(t * 0.12 + surface.driftX * 0.7) * w * (0.03 + surface.bias * 0.07);
+          const cy = h * 0.5 + Math.cos(t * 0.16 + surface.driftY * 0.7) * h * (0.02 + surface.bias * 0.06);
+
+          impulse *= 0.92;
+          if (impulse < 0.002) impulse = 0;
 
           ctx.clearRect(0, 0, w, h);
           ctx.fillStyle = currentBackground;
@@ -519,18 +619,24 @@
           ctx.fillRect(0, 0, w, h);
 
           ctx.globalAlpha = 1;
-          for (let i = 0; i < particles.length; i += 1) {
+          const activeParticles = Math.min(
+            particles.length,
+            Math.max(60, Math.floor(particleCount * (0.54 + cfg.energy * 0.46 + impulse * 0.18)))
+          );
+          for (let i = 0; i < activeParticles; i += 1) {
             const p = particles[i];
             const dx = cx - p.x;
             const dy = cy - p.y;
             const d = Math.max(24, Math.hypot(dx, dy));
 
-            const orbit = Math.sin(t * 0.8 + p.seed) * form.morph;
-            p.vx += ((dx / d) * cfg.pull * form.spread + (dy / d) * orbit * 0.055);
-            p.vy += ((dy / d) * cfg.pull * form.spread - (dx / d) * orbit * 0.055);
+            const orbit = Math.sin(t * (0.8 + surface.turbulence * 0.08) + p.seed) * form.morph;
+            const directionalX = surface.driftX * surface.bias * 0.03;
+            const directionalY = surface.driftY * surface.bias * 0.03;
+            p.vx += ((dx / d) * cfg.pull * form.spread + (dy / d) * orbit * 0.055 + directionalX);
+            p.vy += ((dy / d) * cfg.pull * form.spread - (dx / d) * orbit * 0.055 + directionalY);
 
-            p.vx += (Math.random() - 0.5) * cfg.jitter * (reducedMotion ? 0.018 : 0.028);
-            p.vy += (Math.random() - 0.5) * cfg.jitter * (reducedMotion ? 0.018 : 0.028);
+            p.vx += (Math.random() - 0.5) * cfg.jitter * surface.turbulence * (reducedMotion ? 0.018 : 0.028);
+            p.vy += (Math.random() - 0.5) * cfg.jitter * surface.turbulence * (reducedMotion ? 0.018 : 0.028);
 
             p.vx *= 0.972;
             p.vy *= 0.972;
@@ -543,20 +649,21 @@
             if (p.y < -20) p.y = h + 20;
             if (p.y > h + 20) p.y = -20;
 
-            const alpha = Math.min(0.85, 0.16 + (220 / (d + 80)) * 0.38 + cfg.glow * 0.27);
+            const alpha = Math.min(0.9, 0.14 + (220 / (d + 80)) * 0.38 + cfg.glow * 0.27 + impulse * 0.22);
             ctx.fillStyle = `rgba(220, 228, 245, ${alpha})`;
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
             ctx.fill();
           }
 
-          const ringR = Math.min(w, h) * (0.13 + cfg.glow * 0.08);
+          const ringR = Math.min(w, h) * (0.13 + cfg.glow * 0.08 + impulse * 0.06);
           ctx.strokeStyle = `rgba(${currentAccentRGB[0]}, ${currentAccentRGB[1]}, ${currentAccentRGB[2]}, 0.95)`;
           ctx.globalAlpha = 0.2 + cfg.glow * 0.34;
-          ctx.lineWidth = 1.1;
+          ctx.lineWidth = 1.1 + impulse * 1.15;
           ctx.beginPath();
           ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
           ctx.stroke();
+          drawAnimalGlyph(cx, cy, t, form, cfg);
           ctx.globalAlpha = 1;
 
           requestAnimationFrame(draw);
