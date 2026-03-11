@@ -11,9 +11,12 @@
         --muted: #676767;
         --surface: #ffffff;
         --line: #d9d9d2;
-        --ring-a: #5a8dff;
-        --ring-b: #49dbc8;
-        --ring-c: #a16bff;
+        --ring-a: #6f7fa4;
+        --ring-b: #7d9c97;
+        --ring-c: #7f7898;
+        --aura-a: rgba(111, 127, 164, 0.09);
+        --aura-b: rgba(125, 156, 151, 0.08);
+        --aura-c: rgba(127, 120, 152, 0.07);
       }
 
       @media (prefers-color-scheme: dark) {
@@ -23,9 +26,12 @@
           --muted: #9ba4b7;
           --surface: #151923;
           --line: #2a3040;
-          --ring-a: #6c98ff;
-          --ring-b: #43e0ce;
-          --ring-c: #b17dff;
+          --ring-a: #97a8cf;
+          --ring-b: #95bcb4;
+          --ring-c: #aaa2c8;
+          --aura-a: rgba(151, 168, 207, 0.15);
+          --aura-b: rgba(149, 188, 180, 0.13);
+          --aura-c: rgba(170, 162, 200, 0.12);
         }
       }
 
@@ -35,9 +41,12 @@
         --muted: #676767;
         --surface: #ffffff;
         --line: #d9d9d2;
-        --ring-a: #5a8dff;
-        --ring-b: #49dbc8;
-        --ring-c: #a16bff;
+        --ring-a: #6f7fa4;
+        --ring-b: #7d9c97;
+        --ring-c: #7f7898;
+        --aura-a: rgba(111, 127, 164, 0.09);
+        --aura-b: rgba(125, 156, 151, 0.08);
+        --aura-c: rgba(127, 120, 152, 0.07);
       }
 
       :root[data-theme="dark"] {
@@ -46,9 +55,12 @@
         --muted: #9ba4b7;
         --surface: #151923;
         --line: #2a3040;
-        --ring-a: #6c98ff;
-        --ring-b: #43e0ce;
-        --ring-c: #b17dff;
+        --ring-a: #97a8cf;
+        --ring-b: #95bcb4;
+        --ring-c: #aaa2c8;
+        --aura-a: rgba(151, 168, 207, 0.15);
+        --aura-b: rgba(149, 188, 180, 0.13);
+        --aura-c: rgba(170, 162, 200, 0.12);
       }
 
       * { box-sizing: border-box; }
@@ -64,6 +76,39 @@
         color: var(--text);
         font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         transition: background-color 220ms ease, color 220ms ease;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -35vmax;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 420ms ease;
+      }
+
+      body::before {
+        background:
+          radial-gradient(44vmax 44vmax at 50% 42%, var(--aura-a), transparent 70%),
+          radial-gradient(32vmax 32vmax at 35% 50%, var(--aura-b), transparent 72%);
+      }
+
+      body::after {
+        background: radial-gradient(38vmax 38vmax at 65% 54%, var(--aura-c), transparent 70%);
+      }
+
+      body[data-presence="listening"]::before,
+      body[data-presence="thinking"]::before,
+      body[data-presence="speaking"]::before {
+        opacity: 0.95;
+      }
+
+      body[data-presence="thinking"]::after,
+      body[data-presence="speaking"]::after {
+        opacity: 0.8;
       }
 
       main {
@@ -88,7 +133,7 @@
 
       .label {
         color: var(--muted);
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         font-size: 10px;
       }
@@ -108,6 +153,14 @@
         border: 1px solid var(--line);
         background: var(--surface);
         padding: 0.8rem 0.6rem 0.7rem;
+        transition: border-color 200ms ease, box-shadow 200ms ease;
+      }
+
+      .presence[data-state="listening"],
+      .presence[data-state="thinking"],
+      .presence[data-state="speaking"] {
+        border-color: color-mix(in srgb, var(--ring-a) 40%, var(--line));
+        box-shadow: 0 0 0 1px color-mix(in srgb, var(--ring-b) 20%, transparent);
       }
 
       .presence-core {
@@ -176,6 +229,13 @@
         color: var(--text);
       }
 
+      .presence-detail {
+        margin: 0.22rem 0 0;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.02em;
+      }
+
       .presence-controls {
         margin-top: 0.55rem;
         display: flex;
@@ -189,10 +249,10 @@
         background: transparent;
         color: var(--muted);
         padding: 0.22rem 0.38rem;
-        font-size: 10px;
+        font-size: 9px;
         cursor: pointer;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.08em;
       }
 
       .state-btn.active {
@@ -242,7 +302,7 @@
 
       .name {
         font-size: 11px;
-        text-decoration: underline;
+        text-decoration: none;
         line-height: 1.2;
       }
 
@@ -280,12 +340,12 @@
 
       @keyframes pulse {
         0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.18); }
+        50% { transform: scale(1.15); }
       }
 
       @keyframes pulse-fast {
         0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.25); }
+        50% { transform: scale(1.18); }
       }
     </style>
   </head>
@@ -293,17 +353,18 @@
     <main>
       <section class="wrap">
         <div class="topbar">
-          <span class="label">Presence language prototype</span>
+          <span class="label">Device Presence</span>
           <button id="theme-toggle" class="theme-btn" type="button">Theme: System</button>
         </div>
 
         <section class="presence" id="presence" data-state="idle" aria-live="polite">
           <div class="presence-core" aria-hidden="true"></div>
           <p class="presence-status" id="presence-status">Presence: Idle</p>
+          <p class="presence-detail" id="presence-detail">Channel ready.</p>
           <div class="presence-controls" role="group" aria-label="Presence state">
             <button class="state-btn active" data-state="idle" type="button">Idle</button>
             <button class="state-btn" data-state="listening" type="button">Listening</button>
-            <button class="state-btn" data-state="thinking" type="button">Thinking</button>
+            <button class="state-btn" data-state="thinking" type="button">Reasoning</button>
             <button class="state-btn" data-state="speaking" type="button">Speaking</button>
           </div>
         </section>
@@ -378,11 +439,21 @@
 
         const presence = document.getElementById("presence");
         const status = document.getElementById("presence-status");
+        const detail = document.getElementById("presence-detail");
         const stateButtons = Array.from(document.querySelectorAll(".state-btn"));
+        const stateDetail = {
+          idle: "Channel ready.",
+          listening: "Listening for intent.",
+          thinking: "Synthesizing context.",
+          speaking: "Delivering response."
+        };
 
         function setState(state) {
           presence.setAttribute("data-state", state);
-          status.textContent = `Presence: ${state.charAt(0).toUpperCase()}${state.slice(1)}`;
+          document.body.setAttribute("data-presence", state);
+          const label = state === "thinking" ? "Reasoning" : `${state.charAt(0).toUpperCase()}${state.slice(1)}`;
+          status.textContent = `Presence: ${label}`;
+          detail.textContent = stateDetail[state] || stateDetail.idle;
           stateButtons.forEach((btn) => btn.classList.toggle("active", btn.dataset.state === state));
         }
 
