@@ -52,18 +52,28 @@
         color: var(--text);
         font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         transition: background-color 220ms ease, color 220ms ease;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(72vmax 72vmax at 82% 18%, color-mix(in srgb, var(--text) 5%, transparent), transparent 74%),
+          radial-gradient(80vmax 80vmax at 12% 84%, color-mix(in srgb, var(--text) 4%, transparent), transparent 78%);
       }
 
       main {
         min-height: 100%;
-        display: grid;
-        place-items: center;
-        padding: 1rem;
+        padding: 5.4rem 1rem 3rem;
       }
 
       .wrap {
-        width: min(760px, 100%);
-        text-align: center;
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        position: relative;
       }
 
       .theme-btn {
@@ -111,24 +121,26 @@
       }
 
       .intro {
-        margin: 0 0 4rem;
-        width: 100%;
-        max-width: none;
+        margin: 0;
+        max-width: min(690px, calc(100% - 390px));
         color: var(--text);
-        font-size: 13px;
-        line-height: 1.52;
-        letter-spacing: 0.002em;
+        font-size: 16px;
+        line-height: 1.42;
+        letter-spacing: 0.01em;
+        font-weight: 430;
+        text-wrap: balance;
       }
 
       .timeline {
-        width: min(640px, 100%);
-        margin-left: auto;
-        margin-right: 0;
-        padding-right: 2.35rem;
-        position: relative;
+        width: min(360px, 34vw);
+        position: fixed;
+        right: clamp(0.9rem, 2.8vw, 2.1rem);
+        top: clamp(8rem, 17vh, 11rem);
+        padding-right: 2.2rem;
         display: grid;
-        gap: 1.15rem;
+        gap: 1.06rem;
         text-align: right;
+        backdrop-filter: blur(1px);
       }
 
       .timeline::after {
@@ -153,15 +165,16 @@
         width: 9px;
         height: 9px;
         border-radius: 999px;
-        border: 1px solid color-mix(in srgb, var(--text) 35%, transparent);
+        border: 1px solid color-mix(in srgb, var(--text) 42%, transparent);
         background: var(--bg);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--text) 5%, transparent);
       }
 
       .role {
         color: var(--text);
-        font-weight: 500;
-        font-size: 12px;
-        line-height: 1.28;
+        font-weight: 520;
+        font-size: 13px;
+        line-height: 1.22;
       }
 
       .company,
@@ -173,21 +186,34 @@
 
       .company {
         display: inline-block;
-        margin-top: 0.16rem;
-        font-size: 10px;
+        margin-top: 0.18rem;
+        font-size: 11px;
         text-decoration: none;
         line-height: 1.2;
+        letter-spacing: 0.02em;
       }
 
       @media (max-width: 680px) {
+        body::before {
+          background: radial-gradient(60vmax 60vmax at 50% 10%, color-mix(in srgb, var(--text) 6%, transparent), transparent 82%);
+        }
+
+        main {
+          padding-top: 4.4rem;
+        }
+
         .intro {
-          margin-bottom: 2.9rem;
+          margin: 0 0 2.35rem;
+          max-width: none;
           font-size: 12px;
           line-height: 1.5;
         }
 
         .timeline {
           width: min(520px, 100%);
+          position: relative;
+          right: auto;
+          top: auto;
           padding-right: 1.9rem;
           gap: 1rem;
         }
