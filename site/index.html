@@ -120,40 +120,63 @@
         letter-spacing: 0.002em;
       }
 
-      .companies {
-        margin-top: 0;
+      .timeline {
+        width: min(640px, 100%);
+        margin-left: auto;
+        margin-right: 0;
+        padding-right: 2.35rem;
+        position: relative;
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 1.35rem 1rem;
+        gap: 1.15rem;
+        text-align: right;
       }
 
-      .company {
-        display: grid;
-        justify-items: center;
-        align-content: start;
-        gap: 0.28rem;
+      .timeline::after {
+        content: "";
+        position: absolute;
+        top: 0.2rem;
+        bottom: 0.2rem;
+        right: 0.8rem;
+        width: 1px;
+        background: color-mix(in srgb, var(--text) 20%, transparent);
       }
 
-      .name,
-      .name:visited,
-      .name:hover,
-      .name:active {
-        color: var(--muted);
+      .experience {
+        position: relative;
       }
 
-      .name {
-        font-size: 10px;
-        text-decoration: none;
-        line-height: 1.25;
+      .experience::after {
+        content: "";
+        position: absolute;
+        top: 0.62rem;
+        right: -1.73rem;
+        width: 9px;
+        height: 9px;
+        border-radius: 999px;
+        border: 1px solid color-mix(in srgb, var(--text) 35%, transparent);
+        background: var(--bg);
       }
 
       .role {
         color: var(--text);
-        font-weight: 400;
+        font-weight: 500;
         font-size: 12px;
-        line-height: 1.3;
-        max-width: 15ch;
-        min-height: 2.6em;
+        line-height: 1.28;
+      }
+
+      .company,
+      .company:visited,
+      .company:hover,
+      .company:active {
+        color: var(--muted);
+      }
+
+      .company {
+        display: inline-block;
+        margin-top: 0.16rem;
+        font-size: 10px;
+        text-decoration: none;
+        line-height: 1.2;
       }
 
       @media (max-width: 680px) {
@@ -163,9 +186,20 @@
           line-height: 1.5;
         }
 
-        .companies {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 1.25rem 0.9rem;
+        .timeline {
+          width: min(520px, 100%);
+          padding-right: 1.9rem;
+          gap: 1rem;
+        }
+
+        .timeline::after {
+          right: 0.56rem;
+        }
+
+        .experience::after {
+          right: -1.48rem;
+          width: 8px;
+          height: 8px;
         }
       }
     </style>
@@ -177,42 +211,42 @@
       <section class="wrap">
         <p class="intro">Noah Lucas<br />Living in Ojai, California with Sara, Willa, and Bruce the cat.</p>
 
-        <div class="companies" aria-label="Company experience">
-          <article class="company">
+        <section class="timeline" aria-label="Work timeline">
+          <article class="experience">
             <div class="role">Vice President of Product</div>
-            <a class="name" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
+            <a class="company" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Principal Product Manager</div>
-            <a class="name" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
+            <a class="company" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Director of Product Management</div>
-            <a class="name" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
+            <a class="company" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Product Lead</div>
-            <a class="name" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
+            <a class="company" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Product</div>
-            <a class="name" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
+            <a class="company" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Product</div>
-            <a class="name" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
+            <a class="company" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
           </article>
 
-          <article class="company">
+          <article class="experience">
             <div class="role">Product</div>
-            <a class="name" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
+            <a class="company" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
           </article>
-        </div>
+        </section>
       </section>
     </main>
 
