@@ -18,7 +18,7 @@
         margin: 0;
         background: #ffffff;
         color: var(--text);
-        font: 12px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       }
 
       main {
@@ -29,21 +29,22 @@
       }
 
       .wrap {
-        width: min(760px, 100%);
+        width: min(740px, 100%);
         text-align: center;
       }
 
       .intro {
         margin: 0 auto;
-        max-width: 72ch;
-        margin-bottom: 2rem;
+        max-width: 68ch;
+        margin-bottom: 2.4rem;
+        color: #1f1f1f;
       }
 
       .companies {
-        margin-top: 1.2rem;
+        margin-top: 0;
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 0.8rem;
+        gap: 1.15rem 0.8rem;
       }
 
       .company {
@@ -54,17 +55,15 @@
       }
 
       .logo-wrap {
-        width: 18px;
-        height: 18px;
-        position: relative;
+        width: 20px;
+        height: 20px;
       }
 
       .logo {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
         object-fit: contain;
         display: block;
-        filter: grayscale(1) contrast(1.2) brightness(0.15);
       }
 
       .name,
@@ -91,7 +90,7 @@
       @media (max-width: 680px) {
         .companies {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 0.9rem 0.6rem;
+          gap: 1.1rem 0.6rem;
         }
       }
     </style>
@@ -104,7 +103,7 @@
         <div class="companies" aria-label="Company experience">
           <article class="company">
             <div class="logo-wrap">
-              <img class="logo" src="https://www.google.com/s2/favicons?domain=siftstack.com&sz=64" alt="Sift logo" loading="lazy" onerror="this.style.display='none';" />
+              <img class="logo" src="/assets/logos/sift.svg" alt="Sift logo" loading="lazy" onerror="this.style.display='none';" />
             </div>
             <div class="role">Vice President of Product</div>
             <a class="name" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
@@ -112,7 +111,7 @@
 
           <article class="company">
             <div class="logo-wrap">
-              <img class="logo" src="https://www.google.com/s2/favicons?domain=anduril.com&sz=64" alt="Anduril logo" loading="lazy" onerror="this.style.display='none';" />
+              <img class="logo" src="/assets/logos/anduril.svg" alt="Anduril logo" loading="lazy" onerror="this.style.display='none';" />
             </div>
             <div class="role">Principal Product Manager</div>
             <a class="name" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
@@ -120,7 +119,7 @@
 
           <article class="company">
             <div class="logo-wrap">
-              <img class="logo" src="https://www.google.com/s2/favicons?domain=serverobotics.com&sz=64" alt="Serve Robotics logo" loading="lazy" onerror="this.style.display='none';" />
+              <img class="logo" src="/assets/logos/serve-robotics.svg" alt="Serve Robotics logo" loading="lazy" onerror="this.style.display='none';" />
             </div>
             <div class="role">Director of Product Management</div>
             <a class="name" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
@@ -128,7 +127,7 @@
 
           <article class="company">
             <div class="logo-wrap">
-              <img class="logo" src="https://www.google.com/s2/favicons?domain=postmates.com&sz=64" alt="Postmates logo" loading="lazy" onerror="this.style.display='none';" />
+              <img class="logo" src="/assets/logos/postmates.svg" alt="Postmates logo" loading="lazy" onerror="this.style.display='none';" />
             </div>
             <div class="role">Product Lead</div>
             <a class="name" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
