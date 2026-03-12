@@ -73,10 +73,9 @@
       .wrap {
         width: min(1320px, 100%);
         margin: 0 auto;
-        min-height: calc(100vh - 8.4rem);
         display: grid;
-        grid-template-columns: minmax(240px, 1fr) minmax(180px, 240px) minmax(240px, 1fr);
-        column-gap: min(9vw, 140px);
+        grid-template-columns: minmax(200px, 1fr) minmax(150px, 220px) minmax(200px, 1fr);
+        column-gap: clamp(2.25rem, 6vw, 8rem);
         align-items: start;
       }
 
@@ -199,15 +198,39 @@
       }
 
       .core-column {
-        min-height: calc(100vh - 8.4rem);
-        display: grid;
-        place-items: start center;
+        align-self: start;
+        display: flex;
+        justify-content: center;
         padding: 0.1rem 0 2rem;
       }
 
       .core-block {
         width: min(280px, 100%);
         text-align: center;
+      }
+
+      @media (max-width: 980px) {
+        main {
+          padding: 5rem 2rem 2.6rem;
+        }
+
+        .wrap {
+          grid-template-columns: minmax(170px, 1fr) minmax(120px, 180px) minmax(170px, 1fr);
+          column-gap: clamp(1.4rem, 4vw, 3.2rem);
+        }
+
+        .places-rail {
+          padding-left: 1rem;
+        }
+
+        .timeline {
+          padding-right: 1rem;
+        }
+
+        .place-title,
+        .experience-title {
+          font-size: 12.5px;
+        }
       }
 
       .core-name {
