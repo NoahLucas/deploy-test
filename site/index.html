@@ -172,22 +172,32 @@
 
       .place-detail {
         position: absolute;
-        left: calc(100% + 1.1rem);
-        top: -0.12rem;
+        left: calc(100% + 0.75rem);
+        top: 50%;
         width: 220px;
-        padding: 0.62rem 0.72rem;
-        border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
-        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        padding: 0.54rem 0.68rem;
+        border: 1px solid color-mix(in srgb, var(--line) 92%, transparent);
+        background: color-mix(in srgb, var(--bg) 82%, var(--surface));
         color: var(--muted);
         font-size: 11px;
         line-height: 1.28;
         opacity: 0;
-        transform: scaleX(0.84) scaleY(0.94);
+        transform: translateY(-50%) scaleX(0.84) scaleY(0.96);
         transform-origin: left center;
         transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
         pointer-events: none;
         z-index: 2;
-        backdrop-filter: blur(8px);
+      }
+
+      .place-detail::before {
+        content: "";
+        position: absolute;
+        left: -0.76rem;
+        top: 50%;
+        width: 0.76rem;
+        height: 1px;
+        background: color-mix(in srgb, var(--text) 18%, transparent);
+        transform: translateY(-50%);
       }
 
       .core-column {
@@ -287,23 +297,33 @@
 
       .experience-detail {
         position: absolute;
-        right: calc(100% + 1.1rem);
-        top: -0.12rem;
+        right: calc(100% + 0.75rem);
+        top: 50%;
         width: 250px;
-        padding: 0.62rem 0.72rem;
-        border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
-        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        padding: 0.54rem 0.68rem;
+        border: 1px solid color-mix(in srgb, var(--line) 92%, transparent);
+        background: color-mix(in srgb, var(--bg) 82%, var(--surface));
         color: var(--muted);
         font-size: 11px;
         line-height: 1.28;
         text-align: right;
         opacity: 0;
-        transform: scaleX(0.84) scaleY(0.94);
+        transform: translateY(-50%) scaleX(0.84) scaleY(0.96);
         transform-origin: right center;
         transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
         pointer-events: none;
         z-index: 2;
-        backdrop-filter: blur(8px);
+      }
+
+      .experience-detail::before {
+        content: "";
+        position: absolute;
+        right: -0.76rem;
+        top: 50%;
+        width: 0.76rem;
+        height: 1px;
+        background: color-mix(in srgb, var(--text) 18%, transparent);
+        transform: translateY(-50%);
       }
 
       .place:hover,
@@ -321,7 +341,7 @@
       .experience:hover .experience-detail,
       .experience:focus-within .experience-detail {
         opacity: 1;
-        transform: scaleX(1) scaleY(1);
+        transform: translateY(-50%) scaleX(1) scaleY(1);
       }
 
       @media (max-width: 680px) {
