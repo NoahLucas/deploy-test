@@ -67,13 +67,17 @@
 
       main {
         min-height: 100%;
-        padding: 5.4rem calc(min(360px, 34vw) + 2rem) 3rem;
+        padding: 5.4rem 4.5rem 3rem;
       }
 
       .wrap {
-        width: min(1200px, 100%);
+        width: min(1320px, 100%);
         margin: 0 auto;
-        position: relative;
+        min-height: calc(100vh - 8.4rem);
+        display: grid;
+        grid-template-columns: minmax(240px, 1fr) minmax(180px, 240px) minmax(240px, 1fr);
+        column-gap: min(9vw, 140px);
+        align-items: start;
       }
 
       .theme-btn {
@@ -121,10 +125,8 @@
       }
 
       .places-rail {
-        width: min(360px, 34vw);
-        position: fixed;
-        left: 0;
-        top: 5.4rem;
+        width: 100%;
+        position: relative;
         padding-left: 1.35rem;
         display: grid;
         gap: 0.88rem;
@@ -144,16 +146,7 @@
       .place {
         position: relative;
         max-width: 300px;
-      }
-
-      .place::after {
-        content: "";
-        position: absolute;
-        top: 0.68rem;
-        left: 0;
-        width: 10px;
-        height: 1.6px;
-        background: color-mix(in srgb, var(--text) 42%, transparent);
+        transition: transform 220ms ease, opacity 220ms ease;
         transform-origin: left center;
       }
 
@@ -177,11 +170,31 @@
         letter-spacing: 0.02em;
       }
 
+      .place-detail {
+        position: absolute;
+        left: calc(100% + 1.1rem);
+        top: -0.12rem;
+        width: 220px;
+        padding: 0.62rem 0.72rem;
+        border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.28;
+        opacity: 0;
+        transform: scaleX(0.84) scaleY(0.94);
+        transform-origin: left center;
+        transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+        z-index: 2;
+        backdrop-filter: blur(8px);
+      }
+
       .core-column {
         min-height: calc(100vh - 8.4rem);
         display: grid;
-        place-items: center;
-        padding: 2rem 0;
+        place-items: start center;
+        padding: 0.1rem 0 2rem;
       }
 
       .core-block {
@@ -223,15 +236,12 @@
       }
 
       .timeline {
-        width: min(360px, 34vw);
-        position: fixed;
-        right: 0;
-        top: 5.4rem;
+        width: 100%;
+        position: relative;
         padding-right: 1.35rem;
         display: grid;
         gap: 0.88rem;
         text-align: right;
-        backdrop-filter: blur(1px);
       }
 
       .timeline::after {
@@ -247,18 +257,7 @@
       .experience {
         position: relative;
         transition: transform 180ms ease, opacity 180ms ease;
-      }
-
-      .experience::after {
-        content: "";
-        position: absolute;
-        top: 0.68rem;
-        right: 0;
-        width: 10px;
-        height: 1.6px;
-        background: color-mix(in srgb, var(--text) 42%, transparent);
         transform-origin: right center;
-        transition: width 180ms ease, height 180ms ease, background-color 180ms ease;
       }
 
       .experience-title,
@@ -286,6 +285,45 @@
         margin-top: 0.14rem;
       }
 
+      .experience-detail {
+        position: absolute;
+        right: calc(100% + 1.1rem);
+        top: -0.12rem;
+        width: 250px;
+        padding: 0.62rem 0.72rem;
+        border: 1px solid color-mix(in srgb, var(--line) 88%, transparent);
+        background: color-mix(in srgb, var(--surface) 94%, transparent);
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.28;
+        text-align: right;
+        opacity: 0;
+        transform: scaleX(0.84) scaleY(0.94);
+        transform-origin: right center;
+        transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        pointer-events: none;
+        z-index: 2;
+        backdrop-filter: blur(8px);
+      }
+
+      .place:hover,
+      .place:focus-within {
+        transform: translateX(8px) scale(1.03);
+      }
+
+      .experience:hover,
+      .experience:focus-within {
+        transform: translateX(-8px) scale(1.03);
+      }
+
+      .place:hover .place-detail,
+      .place:focus-within .place-detail,
+      .experience:hover .experience-detail,
+      .experience:focus-within .experience-detail {
+        opacity: 1;
+        transform: scaleX(1) scaleY(1);
+      }
+
       @media (max-width: 680px) {
         body::before {
           background: radial-gradient(60vmax 60vmax at 50% 10%, color-mix(in srgb, var(--text) 6%, transparent), transparent 82%);
@@ -295,20 +333,17 @@
           padding: 4.4rem 1rem 2rem;
         }
 
+        .wrap {
+          min-height: auto;
+          grid-template-columns: 1fr;
+          row-gap: 1.6rem;
+        }
+
         .places-rail {
-          width: min(520px, 100%);
-          position: relative;
-          left: auto;
-          top: auto;
           padding-left: 1.35rem;
-          margin-bottom: 1.5rem;
         }
 
         .timeline {
-          width: min(520px, 100%);
-          position: relative;
-          right: auto;
-          top: auto;
           padding-right: 1.35rem;
           gap: 1rem;
         }
@@ -317,21 +352,21 @@
           right: 0;
         }
 
-        .experience::after {
-          right: 0;
-          width: 9px;
-          height: 1.4px;
+        .place:hover,
+        .place:focus-within,
+        .experience:hover,
+        .experience:focus-within {
+          transform: none;
         }
 
-        .place::after {
-          left: 0;
-          width: 9px;
-          height: 1.4px;
+        .place-detail,
+        .experience-detail {
+          display: none;
         }
 
         .core-column {
           min-height: auto;
-          padding: 0 0 1.75rem;
+          padding: 0;
         }
       }
     </style>
@@ -345,46 +380,55 @@
           <article class="place">
             <span class="place-title">Ojai</span>
             <span class="place-subtitle">California</span>
+            <span class="place-detail">Current home base. Family life, quiet hills, and the clearest operating rhythm.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Costa Mesa</span>
             <span class="place-subtitle">California</span>
+            <span class="place-detail">Southern California years. Close to the coast, startups, and a faster cadence.</span>
           </article>
 
           <article class="place">
             <span class="place-title">UWS</span>
             <span class="place-subtitle">NYC</span>
+            <span class="place-detail">Upper West Side chapter. Dense city energy with a more editorial pace.</span>
           </article>
 
           <article class="place">
             <span class="place-title">SF</span>
             <span class="place-subtitle">California</span>
+            <span class="place-detail">Bay Area build years. Product, systems, and frontier software in close orbit.</span>
           </article>
 
           <article class="place">
             <span class="place-title">NYC</span>
             <span class="place-subtitle">New York</span>
+            <span class="place-detail">Operator years in New York. Hard edges, fast loops, and a stronger point of view.</span>
           </article>
 
           <article class="place">
             <span class="place-title">RPI</span>
             <span class="place-subtitle">Troy, New York</span>
+            <span class="place-detail">Formation years. Engineering rigor, systems thinking, and early technical foundations.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Indiana</span>
             <span class="place-subtitle">Midwest</span>
+            <span class="place-detail">Family roots and early texture. A practical lens on work, people, and loyalty.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Illinois</span>
             <span class="place-subtitle">Midwest</span>
+            <span class="place-detail">Another Midwest anchor in the story. Grounding, family, and continuity.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Connecticut</span>
             <span class="place-subtitle">Born</span>
+            <span class="place-detail">Where the timeline begins.</span>
           </article>
         </section>
 
@@ -402,36 +446,43 @@
           <article class="experience">
             <a class="experience-title" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
             <div class="experience-subtitle">Vice President of Product</div>
+            <span class="experience-detail">Building a telemetry platform for advanced machines across aerospace, defense, and robotics.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
             <div class="experience-subtitle">Principal Product Manager</div>
+            <span class="experience-detail">Defense product systems shaped around autonomy, decision support, and operator clarity.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
             <div class="experience-subtitle">Product</div>
+            <span class="experience-detail">Applied sensing and geolocation work in GPS-denied and mission-critical contexts.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
             <div class="experience-subtitle">Director of Product Management</div>
+            <span class="experience-detail">Autonomous delivery systems, commercial robotics, and operational product surfaces.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
             <div class="experience-subtitle">Product Lead</div>
+            <span class="experience-detail">Marketplace and platform products across delivery, enterprise workflows, and scale operations.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
             <div class="experience-subtitle">Product</div>
+            <span class="experience-detail">Travel product systems with global scale, consumer behavior loops, and mobile growth mechanics.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
             <div class="experience-subtitle">Product</div>
+            <span class="experience-detail">Financial data products and the early foundations of structured information systems thinking.</span>
           </article>
         </section>
       </section>
