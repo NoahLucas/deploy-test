@@ -66,6 +66,28 @@
         letter-spacing: 0.05em;
       }
 
+      .top-meta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+
+      .secure-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.34rem;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .secure-indicator-dot {
+        width: 0.42rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        background: #5d7a5f;
+        box-shadow: 0 0 0 1px rgba(93, 122, 95, 0.16);
+      }
+
       .layout {
         display: grid;
         grid-template-columns: 220px 1fr;
@@ -274,7 +296,13 @@
     <main class="shell">
       <header class="top">
         <span>UX Live Preview</span>
-        <span>Direction: Living Dossier</span>
+        <span class="top-meta">
+          <span class="secure-indicator" aria-label="Secure connection active" title="Secure connection active">
+            <span class="secure-indicator-dot" aria-hidden="true"></span>
+            <span>Secure</span>
+          </span>
+          <span>Direction: Living Dossier</span>
+        </span>
       </header>
 
       <section class="layout">

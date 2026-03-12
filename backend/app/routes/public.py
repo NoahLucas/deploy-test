@@ -11,6 +11,8 @@ from xml.etree import ElementTree
 
 import httpx
 from fastapi import APIRouter, Cookie, HTTPException, Request, Response, status
+from webauthn import verify_authentication_response, verify_registration_response
+from webauthn.helpers import base64url_to_bytes
 
 from app.core.security import assert_admin_token
 from app.core.sanitizer import default_action, default_headline, derive_public_scores
@@ -74,6 +76,18 @@ def _is_secure_request(request: Request) -> bool:
     if proto:
         return proto == "https"
     return request.url.scheme == "https"
+
+
+def _expected_rp_id(request: Request) -> str:
+    configured = request.app.state.settings.webauthn_rp_id
+    return configured or (request.url.hostname or "")
+
+
+def _expected_origin(request: Request) -> str:
+    configured = request.app.state.settings.webauthn_origin
+    if configured:
+        return configured
+    return f"{'https' if _is_secure_request(request) else 'http'}://{request.url.hostname or ''}"
 
 
 @router.get("/feed", response_model=PublicFeedResponse)
@@ -261,7 +275,7 @@ def start_admin_register_challenge(request: Request) -> dict[str, object]:
     return {
         "challenge_id": challenge_id,
         "challenge": challenge,
-        "rp": {"id": request.url.hostname or "", "name": "Noah Lucas Owner Access"},
+        "rp": {"id": _expected_rp_id(request), "name": request.app.state.settings.webauthn_rp_name},
         "user": {"id": user_id, "name": "owner@noahlucas.com", "displayName": "Noah Lucas"},
         "timeout": 60000,
     }
@@ -271,14 +285,31 @@ def start_admin_register_challenge(request: Request) -> dict[str, object]:
 def complete_admin_register_challenge(request: Request, payload: dict[str, object]) -> dict[str, object]:
     assert_admin_token(request.headers.get("x-admin-token", ""), request.app.state.settings.admin_token)
     challenge_id = str(payload.get("challenge_id", "")).strip()
-    credential_id = str(payload.get("credential_id", "")).strip()
+    credential = payload.get("credential")
     label = str(payload.get("label", "Owner device")).strip() or "Owner device"
-    if not challenge_id or not credential_id:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential_id.")
+    if not challenge_id or not isinstance(credential, dict):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential.")
     challenge = request.app.state.store.consume_admin_auth_challenge(challenge_id=challenge_id, kind="register")
     if not challenge:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Registration challenge invalid or expired.")
-    request.app.state.store.save_admin_webauthn_credential(credential_id=credential_id, label=label)
+
+    try:
+        verification = verify_registration_response(
+            credential=credential,
+            expected_challenge=base64url_to_bytes(challenge["challenge_b64"]),
+            expected_rp_id=_expected_rp_id(request),
+            expected_origin=_expected_origin(request),
+            require_user_verification=True,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Registration verification failed: {exc}") from exc
+
+    request.app.state.store.save_admin_webauthn_credential(
+        credential_id=str(verification.credential_id),
+        label=label,
+        public_key_b64=_b64url_encode(verification.credential_public_key),
+        sign_count=int(verification.sign_count),
+    )
     return {"registered": True, "credential_count": len(request.app.state.store.list_admin_webauthn_credentials())}
 
 
@@ -302,7 +333,7 @@ def start_admin_auth_challenge(request: Request) -> dict[str, object]:
     return {
         "challenge_id": challenge_id,
         "challenge": challenge,
-        "rp_id": request.url.hostname or "",
+        "rp_id": _expected_rp_id(request),
         "timeout": 60000,
         "allow_credentials": [item["credential_id"] for item in credentials],
     }
@@ -311,21 +342,40 @@ def start_admin_auth_challenge(request: Request) -> dict[str, object]:
 @router.post("/admin-auth/webauthn/verify")
 def verify_admin_auth_challenge(request: Request, response: Response, payload: dict[str, object]) -> dict[str, object]:
     challenge_id = str(payload.get("challenge_id", "")).strip()
-    credential_id = str(payload.get("credential_id", "")).strip()
-    if not challenge_id or not credential_id:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential_id.")
+    credential = payload.get("credential")
+    credential_id = str((credential or {}).get("id", "")).strip() if isinstance(credential, dict) else ""
+    if not challenge_id or not credential_id or not isinstance(credential, dict):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing challenge_id or credential.")
 
     challenge = request.app.state.store.consume_admin_auth_challenge(challenge_id=challenge_id, kind="auth")
     if not challenge:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Auth challenge invalid or expired.")
-    if not request.app.state.store.has_admin_webauthn_credential(credential_id=credential_id):
+    stored = request.app.state.store.get_admin_webauthn_credential(credential_id=credential_id)
+    if not stored:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Credential is not enrolled for owner access.")
+
+    try:
+        verification = verify_authentication_response(
+            credential=credential,
+            expected_challenge=base64url_to_bytes(challenge["challenge_b64"]),
+            expected_rp_id=_expected_rp_id(request),
+            expected_origin=_expected_origin(request),
+            credential_public_key=base64url_to_bytes(str(stored["public_key_b64"])),
+            credential_current_sign_count=int(stored["sign_count"]),
+            require_user_verification=True,
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Authentication verification failed: {exc}") from exc
 
     now = datetime.now(timezone.utc)
     expires_at = now + timedelta(hours=8)
     session_id = secrets.token_urlsafe(32)
     request.app.state.store.create_admin_auth_session(session_id=session_id, expires_at=expires_at.isoformat())
     request.app.state.store.mark_admin_webauthn_credential_used(credential_id=credential_id)
+    request.app.state.store.update_admin_webauthn_sign_count(
+        credential_id=credential_id,
+        sign_count=int(verification.new_sign_count),
+    )
     response.set_cookie(
         key=_ADMIN_AUTH_COOKIE_NAME,
         value=session_id,

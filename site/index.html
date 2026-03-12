@@ -67,7 +67,7 @@
 
       main {
         min-height: 100%;
-        padding: 5.4rem 1rem 3rem;
+        padding: 5.4rem calc(min(360px, 34vw) + 2rem) 3rem;
       }
 
       .wrap {
@@ -120,15 +120,106 @@
         color: var(--text);
       }
 
-      .intro {
-        margin: 0;
-        max-width: min(690px, calc(100% - 390px));
+      .places-rail {
+        width: min(360px, 34vw);
+        position: fixed;
+        left: 0;
+        top: 5.4rem;
+        padding-left: 1.35rem;
+        display: grid;
+        gap: 0.88rem;
+        text-align: left;
+      }
+
+      .places-rail::after {
+        content: "";
+        position: absolute;
+        top: 0.2rem;
+        bottom: 0.2rem;
+        left: 0;
+        width: 1px;
+        background: color-mix(in srgb, var(--text) 20%, transparent);
+      }
+
+      .place {
+        position: relative;
+        max-width: 300px;
+      }
+
+      .place::after {
+        content: "";
+        position: absolute;
+        top: 0.68rem;
+        left: 0;
+        width: 10px;
+        height: 1.6px;
+        background: color-mix(in srgb, var(--text) 42%, transparent);
+        transform-origin: left center;
+      }
+
+      .place-title {
+        display: block;
+        margin-left: 1.1rem;
         color: var(--text);
-        font-size: 16px;
-        line-height: 1.42;
-        letter-spacing: 0.01em;
-        font-weight: 430;
-        text-wrap: balance;
+        font-size: 13px;
+        font-weight: 520;
+        line-height: 1.22;
+        letter-spacing: 0.02em;
+      }
+
+      .place-subtitle {
+        display: block;
+        margin-left: 1.1rem;
+        margin-top: 0.14rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.18;
+        letter-spacing: 0.02em;
+      }
+
+      .core-column {
+        min-height: calc(100vh - 8.4rem);
+        display: grid;
+        place-items: center;
+        padding: 2rem 0;
+      }
+
+      .core-block {
+        width: min(280px, 100%);
+        text-align: center;
+      }
+
+      .core-name {
+        display: block;
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 520;
+        line-height: 1.22;
+        letter-spacing: 0.02em;
+      }
+
+      .core-line {
+        display: block;
+        margin-top: 0.28rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+      }
+
+      .core-link,
+      .core-link:visited,
+      .core-link:hover,
+      .core-link:active {
+        color: var(--muted);
+      }
+
+      .core-link {
+        display: inline-block;
+        margin-top: 0.9rem;
+        font-size: 11px;
+        text-decoration: none;
+        line-height: 1.2;
       }
 
       .timeline {
@@ -138,7 +229,7 @@
         top: 5.4rem;
         padding-right: 1.35rem;
         display: grid;
-        gap: 1.06rem;
+        gap: 0.88rem;
         text-align: right;
         backdrop-filter: blur(1px);
       }
@@ -170,65 +261,29 @@
         transition: width 180ms ease, height 180ms ease, background-color 180ms ease;
       }
 
-      .timeline:hover .experience {
-        opacity: 0.72;
-      }
-
-      .timeline:hover .experience:hover {
-        opacity: 1;
-        transform: scale(1.028);
-      }
-
-      .timeline:hover .experience:hover::after {
-        width: 16px;
-        height: 2.2px;
-        background: color-mix(in srgb, var(--text) 70%, transparent);
-      }
-
-      .role {
+      .experience-title,
+      .experience-title:visited,
+      .experience-title:hover,
+      .experience-title:active {
         color: var(--text);
-        font-weight: 520;
-        font-size: 13px;
-        line-height: 1.22;
       }
 
-      .company,
-      .company:visited,
-      .company:hover,
-      .company:active {
-        color: var(--muted);
-      }
-
-      .company {
+      .experience-title {
         display: inline-block;
-        margin-top: 0.18rem;
-        font-size: 11px;
+        margin-top: 0;
+        font-size: 13px;
+        font-weight: 520;
         text-decoration: none;
-        line-height: 1.2;
+        line-height: 1.22;
         letter-spacing: 0.02em;
       }
 
-      .company-row {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0.4rem;
-      }
-
-      .company-icon-wrap {
-        width: 14px;
-        height: 14px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .company-icon {
-        width: 14px;
-        height: 14px;
-        object-fit: contain;
-        display: block;
-        filter: grayscale(1) contrast(1.05) opacity(0.72);
+      .experience-subtitle {
+        color: var(--muted);
+        font-weight: 430;
+        font-size: 11px;
+        line-height: 1.2;
+        margin-top: 0.14rem;
       }
 
       @media (max-width: 680px) {
@@ -237,14 +292,16 @@
         }
 
         main {
-          padding-top: 4.4rem;
+          padding: 4.4rem 1rem 2rem;
         }
 
-        .intro {
-          margin: 0 0 2.35rem;
-          max-width: none;
-          font-size: 12px;
-          line-height: 1.5;
+        .places-rail {
+          width: min(520px, 100%);
+          position: relative;
+          left: auto;
+          top: auto;
+          padding-left: 1.35rem;
+          margin-bottom: 1.5rem;
         }
 
         .timeline {
@@ -265,6 +322,17 @@
           width: 9px;
           height: 1.4px;
         }
+
+        .place::after {
+          left: 0;
+          width: 9px;
+          height: 1.4px;
+        }
+
+        .core-column {
+          min-height: auto;
+          padding: 0 0 1.75rem;
+        }
       }
     </style>
   </head>
@@ -273,62 +341,97 @@
     <button id="owner-gate" class="owner-gate" type="button" aria-label="Owner access">◎</button>
     <main>
       <section class="wrap">
-        <p class="intro">Noah Lucas<br />Living in Ojai, California with Sara, Willa, and Bruce the cat.</p>
+        <section class="places-rail" aria-label="Places">
+          <article class="place">
+            <span class="place-title">Ojai</span>
+            <span class="place-subtitle">California</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">Costa Mesa</span>
+            <span class="place-subtitle">California</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">UWS</span>
+            <span class="place-subtitle">NYC</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">SF</span>
+            <span class="place-subtitle">California</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">NYC</span>
+            <span class="place-subtitle">New York</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">RPI</span>
+            <span class="place-subtitle">Troy, New York</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">Indiana</span>
+            <span class="place-subtitle">Midwest</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">Illinois</span>
+            <span class="place-subtitle">Midwest</span>
+          </article>
+
+          <article class="place">
+            <span class="place-title">Connecticut</span>
+            <span class="place-subtitle">Born</span>
+          </article>
+        </section>
+
+        <section class="core-column" aria-label="Core">
+          <div class="core-block">
+            <span class="core-name">Noah</span>
+            <span class="core-line">Sara</span>
+            <span class="core-line">Willa</span>
+            <span class="core-line">Bruce</span>
+            <a class="core-link" id="notes-link" href="https://noahlucas.com/notes" target="_blank" rel="noopener">Notes</a>
+          </div>
+        </section>
 
         <section class="timeline" aria-label="Work timeline">
           <article class="experience">
-            <div class="role">Vice President of Product</div>
-            <div class="company-row">
-              <span class="company-icon-wrap">
-                <img class="company-icon" src="/assets/logos/sift.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
-              </span>
-              <a class="company" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
-            </div>
+            <a class="experience-title" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
+            <div class="experience-subtitle">Vice President of Product</div>
           </article>
 
           <article class="experience">
-            <div class="role">Principal Product Manager</div>
-            <div class="company-row">
-              <span class="company-icon-wrap">
-                <img class="company-icon" src="/assets/logos/anduril.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
-              </span>
-              <a class="company" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
-            </div>
+            <a class="experience-title" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
+            <div class="experience-subtitle">Principal Product Manager</div>
           </article>
 
           <article class="experience">
-            <div class="role">Director of Product Management</div>
-            <div class="company-row">
-              <span class="company-icon-wrap">
-                <img class="company-icon" src="/assets/logos/serve-robotics.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
-              </span>
-              <a class="company" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
-            </div>
+            <a class="experience-title" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
+            <div class="experience-subtitle">Product</div>
           </article>
 
           <article class="experience">
-            <div class="role">Product Lead</div>
-            <div class="company-row">
-              <span class="company-icon-wrap">
-                <img class="company-icon" src="/assets/logos/postmates.svg" alt="" loading="lazy" onerror="this.parentElement.style.display='none';" />
-              </span>
-              <a class="company" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
-            </div>
+            <a class="experience-title" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
+            <div class="experience-subtitle">Director of Product Management</div>
           </article>
 
           <article class="experience">
-            <div class="role">Product</div>
-            <a class="company" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
+            <a class="experience-title" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
+            <div class="experience-subtitle">Product Lead</div>
           </article>
 
           <article class="experience">
-            <div class="role">Product</div>
-            <a class="company" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
+            <a class="experience-title" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
+            <div class="experience-subtitle">Product</div>
           </article>
 
           <article class="experience">
-            <div class="role">Product</div>
-            <a class="company" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
+            <a class="experience-title" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
+            <div class="experience-subtitle">Product</div>
           </article>
         </section>
       </section>
@@ -340,6 +443,7 @@
         const themeButton = document.getElementById("theme-toggle");
         const ownerGate = document.getElementById("owner-gate");
         const themeOptions = ["system", "light", "dark"];
+        let ownerSessionActive = false;
 
         function getStoredTheme() {
           const saved = localStorage.getItem("nl-theme");
@@ -359,8 +463,50 @@
           themeButton.setAttribute("title", label);
         }
 
+        function renderOwnerGate() {
+          if (ownerSessionActive) {
+            ownerGate.textContent = "lock";
+            ownerGate.setAttribute("aria-label", "Owner access secured");
+            ownerGate.setAttribute("title", "Owner access secured");
+            ownerGate.style.opacity = "0.34";
+            return;
+          }
+
+          ownerGate.textContent = "◎";
+          ownerGate.setAttribute("aria-label", "Owner access");
+          ownerGate.setAttribute("title", "Owner access");
+          ownerGate.style.opacity = "";
+        }
+
+        async function syncOwnerSessionState() {
+          try {
+            const response = await fetch("/api/v1/public/admin-auth/session", {
+              credentials: "include",
+              cache: "no-store"
+            });
+            const data = await response.json();
+            ownerSessionActive = Boolean(response.ok && data && data.authorized === true);
+          } catch (_) {
+            ownerSessionActive = false;
+          }
+          renderOwnerGate();
+        }
+
         let currentTheme = getStoredTheme();
         applyTheme(currentTheme);
+        renderOwnerGate();
+        syncOwnerSessionState();
+
+        fetch("/api/v1/public/squarespace-notes", { cache: "no-store" })
+          .then((response) => (response.ok ? response.json() : null))
+          .then((data) => {
+            if (!data || !Array.isArray(data.items) || !data.items.length) return;
+            const link = document.getElementById("notes-link");
+            if (!link) return;
+            link.href = data.items[0].url || "https://noahlucas.com/notes";
+            link.textContent = data.items[0].title || "Notes";
+          })
+          .catch(() => {});
 
         themeButton.addEventListener("click", () => {
           const idx = themeOptions.indexOf(currentTheme);
@@ -376,6 +522,39 @@
           const bytes = new Uint8Array(raw.length);
           for (let i = 0; i < raw.length; i += 1) bytes[i] = raw.charCodeAt(i);
           return bytes;
+        }
+
+        function bytesToB64url(buffer) {
+          const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
+          let binary = "";
+          for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
+          return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+        }
+
+        function serializeRegistrationCredential(credential) {
+          return {
+            id: credential.id,
+            rawId: bytesToB64url(credential.rawId),
+            type: credential.type,
+            response: {
+              clientDataJSON: bytesToB64url(credential.response.clientDataJSON),
+              attestationObject: bytesToB64url(credential.response.attestationObject)
+            }
+          };
+        }
+
+        function serializeAuthenticationCredential(credential) {
+          return {
+            id: credential.id,
+            rawId: bytesToB64url(credential.rawId),
+            type: credential.type,
+            response: {
+              clientDataJSON: bytesToB64url(credential.response.clientDataJSON),
+              authenticatorData: bytesToB64url(credential.response.authenticatorData),
+              signature: bytesToB64url(credential.response.signature),
+              userHandle: credential.response.userHandle ? bytesToB64url(credential.response.userHandle) : null
+            }
+          };
         }
 
         async function postJSON(path, body, headers = {}) {
@@ -423,7 +602,11 @@
           });
           await postJSON(
             "/api/v1/public/admin-auth/webauthn/register/complete",
-            { challenge_id: start.challenge_id, credential_id: credential.id, label: "Owner Passkey" },
+            {
+              challenge_id: start.challenge_id,
+              credential: serializeRegistrationCredential(credential),
+              label: "Owner Passkey"
+            },
             { "X-Admin-Token": token }
           );
           return true;
@@ -458,12 +641,16 @@
 
           await postJSON("/api/v1/public/admin-auth/webauthn/verify", {
             challenge_id: start.challenge_id,
-            credential_id: assertion.id
+            credential: serializeAuthenticationCredential(assertion)
           });
           window.location.href = "/ux-live.html";
         }
 
         ownerGate.addEventListener("click", async () => {
+          if (ownerSessionActive) {
+            window.location.href = "/ux-live.html";
+            return;
+          }
           if (!window.PublicKeyCredential || !navigator.credentials) {
             window.alert("Biometric auth is not available on this device/browser.");
             return;
@@ -476,7 +663,8 @@
             window.alert(error && error.message ? error.message : "Owner auth failed.");
           } finally {
             ownerGate.disabled = false;
-            ownerGate.style.opacity = "";
+            renderOwnerGate();
+            syncOwnerSessionState();
           }
         });
 

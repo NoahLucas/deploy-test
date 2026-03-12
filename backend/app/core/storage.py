@@ -216,11 +216,21 @@ class SignalStore:
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     credential_id TEXT NOT NULL UNIQUE,
                     label TEXT NOT NULL,
+                    public_key_b64 TEXT NOT NULL DEFAULT '',
+                    sign_count INTEGER NOT NULL DEFAULT 0,
                     created_at TEXT NOT NULL,
                     last_used_at TEXT
                 )
                 """
             )
+            for statement in (
+                "ALTER TABLE admin_webauthn_credentials ADD COLUMN public_key_b64 TEXT NOT NULL DEFAULT ''",
+                "ALTER TABLE admin_webauthn_credentials ADD COLUMN sign_count INTEGER NOT NULL DEFAULT 0",
+            ):
+                try:
+                    conn.execute(statement)
+                except sqlite3.OperationalError:
+                    pass
             conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS admin_auth_challenges (
@@ -1038,24 +1048,35 @@ class SignalStore:
             for row in rows
         ]
 
-    def save_admin_webauthn_credential(self, *, credential_id: str, label: str) -> None:
+    def save_admin_webauthn_credential(
+        self,
+        *,
+        credential_id: str,
+        label: str,
+        public_key_b64: str,
+        sign_count: int,
+    ) -> None:
         now = datetime.now(timezone.utc).isoformat()
         with self._lock, self._connect() as conn:
             conn.execute(
                 """
-                INSERT INTO admin_webauthn_credentials(credential_id, label, created_at, last_used_at)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO admin_webauthn_credentials(
+                    credential_id, label, public_key_b64, sign_count, created_at, last_used_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?)
                 ON CONFLICT(credential_id) DO UPDATE SET
-                    label = excluded.label
+                    label = excluded.label,
+                    public_key_b64 = excluded.public_key_b64,
+                    sign_count = excluded.sign_count
                 """,
-                (credential_id, label, now, now),
+                (credential_id, label, public_key_b64, int(sign_count), now, now),
             )
 
     def list_admin_webauthn_credentials(self) -> List[Dict[str, str]]:
         with self._connect() as conn:
             rows = conn.execute(
                 """
-                SELECT credential_id, label, created_at, last_used_at
+                SELECT credential_id, label, public_key_b64, sign_count, created_at, last_used_at
                 FROM admin_webauthn_credentials
                 ORDER BY id ASC
                 """
@@ -1064,11 +1085,34 @@ class SignalStore:
             {
                 "credential_id": str(row["credential_id"]),
                 "label": str(row["label"]),
+                "public_key_b64": str(row["public_key_b64"]),
+                "sign_count": int(row["sign_count"]),
                 "created_at": str(row["created_at"]),
                 "last_used_at": str(row["last_used_at"]) if row["last_used_at"] is not None else "",
             }
             for row in rows
         ]
+
+    def get_admin_webauthn_credential(self, *, credential_id: str) -> Optional[Dict[str, str | int]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT credential_id, label, public_key_b64, sign_count, created_at, last_used_at
+                FROM admin_webauthn_credentials
+                WHERE credential_id = ?
+                """,
+                (credential_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "credential_id": str(row["credential_id"]),
+            "label": str(row["label"]),
+            "public_key_b64": str(row["public_key_b64"]),
+            "sign_count": int(row["sign_count"]),
+            "created_at": str(row["created_at"]),
+            "last_used_at": str(row["last_used_at"]) if row["last_used_at"] is not None else "",
+        }
 
     def has_admin_webauthn_credential(self, *, credential_id: str) -> bool:
         with self._connect() as conn:
@@ -1092,6 +1136,17 @@ class SignalStore:
                 WHERE credential_id = ?
                 """,
                 (now, credential_id),
+            )
+
+    def update_admin_webauthn_sign_count(self, *, credential_id: str, sign_count: int) -> None:
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE admin_webauthn_credentials
+                SET sign_count = ?
+                WHERE credential_id = ?
+                """,
+                (int(sign_count), credential_id),
             )
 
     def create_admin_auth_challenge(

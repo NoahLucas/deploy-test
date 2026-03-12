@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Owner Access</title>
+    <style>
+      :root {
+        --bg: #0d1016;
+        --text: #e8ebf2;
+        --muted: #96a0b3;
+        --line: #2a3040;
+        --panel: #11151d;
+        --accent: #5d7a5f;
+      }
+
+      * { box-sizing: border-box; }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(72vmax 72vmax at 82% 18%, rgba(255, 255, 255, 0.04), transparent 74%),
+          radial-gradient(80vmax 80vmax at 12% 84%, rgba(255, 255, 255, 0.03), transparent 78%);
+      }
+
+      main {
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+      }
+
+      .panel {
+        width: min(420px, 100%);
+        padding: 1.1rem 1.15rem 1rem;
+        border: 1px solid var(--line);
+        background: rgba(17, 21, 29, 0.82);
+        backdrop-filter: blur(12px);
+      }
+
+      .eyebrow {
+        margin: 0 0 0.45rem;
+        color: var(--muted);
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 520;
+        line-height: 1.2;
+      }
+
+      p {
+        margin: 0.55rem 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+      }
+
+      .enter-btn {
+        appearance: none;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--text);
+        padding: 0.52rem 0.72rem;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .enter-btn:hover,
+      .enter-btn:focus-visible {
+        border-color: color-mix(in srgb, var(--accent) 60%, var(--line));
+        outline: none;
+      }
+
+      .status {
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .status-dot {
+        display: inline-block;
+        width: 0.44rem;
+        height: 0.44rem;
+        border-radius: 999px;
+        background: var(--accent);
+        margin-right: 0.38rem;
+        vertical-align: middle;
+        box-shadow: 0 0 0 1px rgba(93, 122, 95, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="panel" aria-label="Owner access">
+        <p class="eyebrow">Owner Access</p>
+        <h1>Secure entry to the private OS.</h1>
+        <p>Use the device passkey for Face ID or Touch ID authentication.</p>
+        <div class="actions">
+          <button id="enter-owner" class="enter-btn" type="button">Enter</button>
+          <div class="status"><span class="status-dot"></span>Secure connection</div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        const button = document.getElementById("enter-owner");
+
+        function b64urlToBytes(input) {
+          const base64 = input.replace(/-/g, "+").replace(/_/g, "/");
+          const padded = base64 + "=".repeat((4 - (base64.length % 4)) % 4);
+          const raw = atob(padded);
+          const bytes = new Uint8Array(raw.length);
+          for (let i = 0; i < raw.length; i += 1) bytes[i] = raw.charCodeAt(i);
+          return bytes;
+        }
+
+        function bytesToB64url(buffer) {
+          const bytes = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer);
+          let binary = "";
+          for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
+          return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+        }
+
+        function serializeRegistrationCredential(credential) {
+          return {
+            id: credential.id,
+            rawId: bytesToB64url(credential.rawId),
+            type: credential.type,
+            response: {
+              clientDataJSON: bytesToB64url(credential.response.clientDataJSON),
+              attestationObject: bytesToB64url(credential.response.attestationObject)
+            }
+          };
+        }
+
+        function serializeAuthenticationCredential(credential) {
+          return {
+            id: credential.id,
+            rawId: bytesToB64url(credential.rawId),
+            type: credential.type,
+            response: {
+              clientDataJSON: bytesToB64url(credential.response.clientDataJSON),
+              authenticatorData: bytesToB64url(credential.response.authenticatorData),
+              signature: bytesToB64url(credential.response.signature),
+              userHandle: credential.response.userHandle ? bytesToB64url(credential.response.userHandle) : null
+            }
+          };
+        }
+
+        async function postJSON(path, body, headers = {}) {
+          const response = await fetch(path, {
+            method: "POST",
+            credentials: "include",
+            headers: { "Content-Type": "application/json", ...headers },
+            body: JSON.stringify(body || {})
+          });
+          let data = {};
+          try {
+            data = await response.json();
+          } catch (_) {}
+          if (!response.ok) {
+            const detail = data && data.detail ? data.detail : `${response.status} ${response.statusText}`;
+            const err = new Error(detail);
+            err.status = response.status;
+            throw err;
+          }
+          return data;
+        }
+
+        async function enrollOwnerCredential() {
+          const token = window.prompt("Owner setup token");
+          if (!token) return false;
+          const start = await postJSON("/api/v1/public/admin-auth/webauthn/register/challenge", {}, { "X-Admin-Token": token });
+          const credential = await navigator.credentials.create({
+            publicKey: {
+              challenge: b64urlToBytes(start.challenge),
+              rp: start.rp,
+              user: {
+                id: b64urlToBytes(start.user.id),
+                name: start.user.name,
+                displayName: start.user.displayName
+              },
+              pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
+              authenticatorSelection: {
+                authenticatorAttachment: "platform",
+                residentKey: "required",
+                userVerification: "required"
+              },
+              timeout: start.timeout || 60000,
+              attestation: "none"
+            }
+          });
+          await postJSON(
+            "/api/v1/public/admin-auth/webauthn/register/complete",
+            {
+              challenge_id: start.challenge_id,
+              credential: serializeRegistrationCredential(credential),
+              label: "Owner Passkey"
+            },
+            { "X-Admin-Token": token }
+          );
+          return true;
+        }
+
+        async function authenticateOwner() {
+          let start;
+          try {
+            start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
+          } catch (error) {
+            if (error.status === 428) {
+              const enrolled = await enrollOwnerCredential();
+              if (!enrolled) return;
+              start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
+            } else {
+              throw error;
+            }
+          }
+
+          const assertion = await navigator.credentials.get({
+            publicKey: {
+              challenge: b64urlToBytes(start.challenge),
+              rpId: start.rp_id || window.location.hostname,
+              allowCredentials: (start.allow_credentials || []).map((id) => ({
+                type: "public-key",
+                id: b64urlToBytes(id)
+              })),
+              userVerification: "required",
+              timeout: start.timeout || 60000
+            }
+          });
+
+          await postJSON("/api/v1/public/admin-auth/webauthn/verify", {
+            challenge_id: start.challenge_id,
+            credential: serializeAuthenticationCredential(assertion)
+          });
+          window.location.href = "/ux-live.html";
+        }
+
+        button.addEventListener("click", async () => {
+          if (!window.PublicKeyCredential || !navigator.credentials) {
+            window.alert("Biometric auth is not available on this device/browser.");
+            return;
+          }
+
+          button.disabled = true;
+          try {
+            await authenticateOwner();
+          } catch (error) {
+            window.alert(error && error.message ? error.message : "Owner auth failed.");
+          } finally {
+            button.disabled = false;
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

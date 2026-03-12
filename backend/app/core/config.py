@@ -33,6 +33,9 @@ class Settings:
     squarespace_webhook_enforce_signature: bool
     render_prod_deploy_hook_url: str
     render_prod_deploy_hook_token: str
+    webauthn_rp_id: str
+    webauthn_rp_name: str
+    webauthn_origin: str
 
 
 def _split_csv(value: str) -> List[str]:
@@ -87,4 +90,7 @@ def get_settings() -> Settings:
         squarespace_webhook_enforce_signature=_to_bool(os.getenv("SQUARESPACE_WEBHOOK_ENFORCE_SIGNATURE", "true"), True),
         render_prod_deploy_hook_url=os.getenv("RENDER_PROD_DEPLOY_HOOK_URL", ""),
         render_prod_deploy_hook_token=os.getenv("RENDER_PROD_DEPLOY_HOOK_TOKEN", ""),
+        webauthn_rp_id=os.getenv("WEBAUTHN_RP_ID", "").strip(),
+        webauthn_rp_name=os.getenv("WEBAUTHN_RP_NAME", "Noah Lucas Owner Access").strip() or "Noah Lucas Owner Access",
+        webauthn_origin=os.getenv("WEBAUTHN_ORIGIN", "").strip(),
     )
