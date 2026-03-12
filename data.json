@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-12T03:51:04.352Z",
+  "fetchedAt": "2026-03-12T15:23:38.315Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,102 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-9054: Send all \"sift_app\" Data to the same Ingest Partition",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T13:50:11.257Z",
+      "evidence": [
+        {
+          "label": "ENG-9054",
+          "url": "https://linear.app/siftstack/issue/ENG-9054/send-all-sift-app-data-to-the-same-ingest-partition",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8790: WebApp: Make downsampling method configurable per channel",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T06:04:43.600Z",
+      "evidence": [
+        {
+          "label": "ENG-8790",
+          "url": "https://linear.app/siftstack/issue/ENG-8790/webapp-make-downsampling-method-configurable-per-channel",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9041: QueryEngine: Update on-change sampling to return info about how many points were downsampled",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T06:04:40.240Z",
+      "evidence": [
+        {
+          "label": "ENG-9041",
+          "url": "https://linear.app/siftstack/issue/ENG-9041/queryengine-update-on-change-sampling-to-return-info-about-how-many",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9040: QueryEngine: Update sample function to stream results out",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T06:04:32.286Z",
+      "evidence": [
+        {
+          "label": "ENG-9040",
+          "url": "https://linear.app/siftstack/issue/ENG-9040/queryengine-update-sample-function-to-stream-results-out",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9146: Python Runner Orphaned Job Reaper",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "brandon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T04:51:28.988Z",
+      "evidence": [
+        {
+          "label": "ENG-9146",
+          "url": "https://linear.app/siftstack/issue/ENG-9146/python-runner-orphaned-job-reaper",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9150: Parquet imports not importing enums correctly",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-12T03:55:36.023Z",
+      "evidence": [
+        {
+          "label": "ENG-9150",
+          "url": "https://linear.app/siftstack/issue/ENG-9150/parquet-imports-not-importing-enums-correctly",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-8946: E2: Saved panel configs do not persist legend/Y-axis settings",
@@ -37,22 +133,6 @@
         {
           "label": "ENG-8866",
           "url": "https://linear.app/siftstack/issue/ENG-8866/chart-zoom-causes-intermittent-failed-to-load-channels-error-with-data",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9150: Parquet imports not importing enums correctly",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Marc Julien",
-      "team": "Engineering",
-      "timestamp": "2026-03-12T02:32:10.817Z",
-      "evidence": [
-        {
-          "label": "ENG-9150",
-          "url": "https://linear.app/siftstack/issue/ENG-9150/parquet-imports-not-importing-enums-correctly",
           "source": "linear"
         }
       ]
@@ -133,22 +213,6 @@
         {
           "label": "ENG-9145",
           "url": "https://linear.app/siftstack/issue/ENG-9145/redeploy-amplitude-post-fix",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9146: Python Runner Orphaned Job Reaper",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "brandon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-12T00:00:11.524Z",
-      "evidence": [
-        {
-          "label": "ENG-9146",
-          "url": "https://linear.app/siftstack/issue/ENG-9146/python-runner-orphaned-job-reaper",
           "source": "linear"
         }
       ]
@@ -423,70 +487,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9140: Channel List Refresh is making to identical calls to channel:search",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "James Kelly",
-      "team": "Engineering",
-      "timestamp": "2026-03-11T22:31:14.446Z",
-      "evidence": [
-        {
-          "label": "ENG-9140",
-          "url": "https://linear.app/siftstack/issue/ENG-9140/channel-list-refresh-is-making-to-identical-calls-to-channelsearch",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9137: Bubble Down Time Based Filtering to `MemTableData` `read_data` Function",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "alexander.a@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-11T22:04:32.880Z",
-      "evidence": [
-        {
-          "label": "ENG-9137",
-          "url": "https://linear.app/siftstack/issue/ENG-9137/bubble-down-time-based-filtering-to-memtabledata-read-data-function",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DOC-13: Governance Data Access Governance (DAG)",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Michael Cretzman",
-      "team": "Documentation",
-      "timestamp": "2026-03-11T21:44:28.063Z",
-      "evidence": [
-        {
-          "label": "DOC-13",
-          "url": "https://linear.app/siftstack/issue/DOC-13/governance-data-access-governance-dag",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9127: prep / tests / go_integration_tests failed on PR",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Yue Shen",
-      "team": "Engineering",
-      "timestamp": "2026-03-11T21:35:46.844Z",
-      "evidence": [
-        {
-          "label": "ENG-9127",
-          "url": "https://linear.app/siftstack/issue/ENG-9127/prep-tests-go-integration-tests-failed-on-pr",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -588,10 +588,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 305
-            },
             {
               "setId": "",
               "value": 308
@@ -710,7 +706,11 @@
             },
             {
               "setId": "",
-              "value": 341
+              "value": 354
+            },
+            {
+              "setId": "",
+              "value": 98
             }
           ]
         ],
@@ -718,7 +718,7 @@
           [
             {
               "setId": "",
-              "value": 1222
+              "value": 1206
             }
           ]
         ],
@@ -732,7 +732,6 @@
           }
         ],
         "xValues": [
-          "2026-02-09",
           "2026-02-10",
           "2026-02-11",
           "2026-02-12",
@@ -762,7 +761,8 @@
           "2026-03-08",
           "2026-03-09",
           "2026-03-10",
-          "2026-03-11"
+          "2026-03-11",
+          "2026-03-12"
         ]
       }
     },
@@ -869,11 +869,11 @@
             4474.877482269503,
             4698.577772277227,
             5521.405282738096,
-            5766.6085201342285,
-            5722.767043887148,
+            5766.608520134228,
+            5722.767043887147,
             5427.458627831716,
             5482.857431547619,
-            6203.214332278482,
+            6203.214332278481,
             6563.232692753623,
             7205.14043767313,
             5034.114018957346
@@ -2069,8 +2069,8 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Chart UX polish and data visualization persistence issues affecting user experience.",
-      "linearActive": 8,
+      "topConcern": "Data ingestion partitioning and query engine performance optimizations underway.",
+      "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-12T09:15:00Z",
       "fourPAge": "2d",
@@ -2081,8 +2081,8 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "Parquet enum imports broken, impacting data ingestion quality.",
-      "linearActive": 4,
+      "topConcern": "K2 Mission data pipeline implementation progressing smoothly.",
+      "linearActive": 2,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-12T08:45:00Z",
       "fourPAge": "1d",
@@ -2092,12 +2092,12 @@
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "shipping",
-      "topConcern": "Channel list v2 drag-to-plot and rules evaluation errors need resolution.",
-      "linearActive": 9,
-      "linearBlocked": 0,
+      "status": "attention",
+      "topConcern": "Multiple UI polish items and chart interaction bugs need coordination across frontend work.",
+      "linearActive": 12,
+      "linearBlocked": 1,
       "slackLastSeen": "2026-03-12T10:30:00Z",
-      "fourPAge": "1d",
+      "fourPAge": "3d",
       "meetingsToday": 4
     },
     {
@@ -2105,23 +2105,23 @@
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "attention",
-      "topConcern": "Keycloak migration to HA GovCloud critical; session expiration causing auth loops.",
-      "linearActive": 5,
-      "linearBlocked": 1,
+      "topConcern": "Keycloak migration to HA GovCloud and authentication redirect loop issues require attention.",
+      "linearActive": 4,
+      "linearBlocked": 0,
       "slackLastSeen": "2026-03-12T07:20:00Z",
-      "fourPAge": "3d",
+      "fourPAge": "1d",
       "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
-      "status": "attention",
-      "topConcern": "Integration test failures and Amplitude high CPU issues affecting velocity.",
-      "linearActive": 12,
+      "status": "shipping",
+      "topConcern": "Team velocity strong with 31 active issues across platform, data, and UX improvements.",
+      "linearActive": 31,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-03-12T11:00:00Z",
-      "fourPAge": "1d",
+      "slackLastSeen": "2026-03-12T10:00:00Z",
+      "fourPAge": "0d",
       "meetingsToday": 5
     },
     {
@@ -2129,10 +2129,10 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "K2 Mission data pipeline implementation on track for customer delivery.",
+      "topConcern": "K2 Mission pipeline and Parquet enum import fixes supporting customer deliverables.",
       "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-12T10:00:00Z",
+      "slackLastSeen": "2026-03-12T09:45:00Z",
       "fourPAge": "1d",
       "meetingsToday": 3
     }
@@ -2141,31 +2141,33 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "GovCloud Keycloak migration timeline and K2 Mission customer readiness.",
+      "attention": "Strong execution across squads with concentration on UX polish and infrastructure stability.",
       "recentTopics": [
-        "Enterprise security compliance",
-        "K2 customer delivery schedule",
-        "Q1 revenue tracking"
+        "K2 Mission deployment timeline",
+        "Amplitude analytics reliability",
+        "Chart interaction UX improvements",
+        "GovCloud security compliance"
       ],
-      "lastSlackToNoah": "2026-03-11T16:45:00Z",
+      "lastSlackToNoah": "2026-03-11T16:30:00Z",
       "pendingDecisions": [
-        "GovCloud HA migration go/no-go",
-        "K2 delivery commitment date"
+        "Prioritization of chart zoom/pan features vs Rules polish",
+        "Resource allocation for Keycloak migration completion"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Keycloak auth loop blocking users; Amplitude CPU spike impacting platform stability.",
+      "attention": "Query engine performance work and authentication stability are key technical focuses.",
       "recentTopics": [
-        "Infrastructure reliability improvements",
-        "Data pipeline architecture for missions",
-        "Integration test CI/CD failures"
+        "Downsampling streaming implementation",
+        "Keycloak session management fixes",
+        "Docker/K8s job infrastructure",
+        "Amplitude client CPU optimization"
       ],
-      "lastSlackToNoah": "2026-03-12T08:00:00Z",
+      "lastSlackToNoah": "2026-03-11T18:15:00Z",
       "pendingDecisions": [
-        "Amplitude client replacement strategy",
-        "Python runner job reaper deployment timing"
+        "Architecture approach for channel list v2 drag-to-plot",
+        "Timeline for Python runner orphaned job reaper deployment"
       ]
     }
   ],
@@ -2175,99 +2177,104 @@
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 45,
-      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission",
+      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission - dedicated infrastructure work indicates deep product integration",
       "features": [
-        "data_pipelines",
+        "data pipelines",
         "missions",
-        "telemetry_ingestion"
+        "telemetry ingestion",
+        "custom workflows"
       ],
-      "lastActivity": "2026-03-11T18:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-11T00:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Steady usage of chart visualization and alert features",
+      "topSignal": "Consistent usage patterns with enterprise-grade satellite telemetry monitoring requirements",
       "features": [
-        "charts",
-        "alerts",
-        "rules",
-        "explorer"
+        "real-time monitoring",
+        "alerting",
+        "data exploration",
+        "channel management"
       ],
-      "lastActivity": "2026-03-10T14:22:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Reliable Robotics",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 32,
-      "topSignal": "Heavy usage of multi-asset run analysis",
+      "wau": 42,
+      "topSignal": "Heavy usage of flight data analysis and telemetry visualization for autonomous aircraft",
       "features": [
-        "multi_asset_runs",
-        "explorer",
-        "charts"
+        "flight data analysis",
+        "real-time alerts",
+        "rules engine",
+        "data replay"
       ],
-      "lastActivity": "2026-03-09T16:45:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Varda",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 41,
-      "topSignal": "Increased adoption of calculated channels and saved panels",
+      "wau": 28,
+      "topSignal": "Increased activity around mission planning and re-entry telemetry analysis",
       "features": [
-        "calculated_channels",
-        "saved_panels",
-        "parquet_imports"
+        "mission tracking",
+        "telemetry visualization",
+        "calculated channels",
+        "data export"
       ],
-      "lastActivity": "2026-03-11T20:15:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-09T00:00:00Z",
+      "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Regular use of time-series analysis and zoom features",
+      "wau": 22,
+      "topSignal": "Regular usage for electric aircraft development testing and data analysis",
       "features": [
-        "charts",
-        "zoom_pan",
-        "x_axis_timescale"
+        "test flight analysis",
+        "data plotting",
+        "alerting",
+        "channel groups"
       ],
-      "lastActivity": "2026-03-08T11:30:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "GovCloud deployment with enhanced security requirements",
+      "wau": 156,
+      "topSignal": "ENG-7813: migrate govcloud to ha keycloak - critical GovCloud infrastructure work for defense customer",
       "features": [
-        "govcloud",
-        "keycloak_ha",
-        "data_governance"
+        "govcloud deployment",
+        "high availability",
+        "enterprise SSO",
+        "compliance features"
       ],
-      "lastActivity": "2026-03-12T09:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-12T00:00:00Z",
+      "openIssues": 2
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 52,
-      "topSignal": "Active use of rules engine and alert monitoring",
+      "wau": 67,
+      "topSignal": "Large-scale launch vehicle telemetry monitoring with multiple concurrent missions",
       "features": [
-        "rules",
-        "alerts",
-        "dlv3_alerts",
-        "explorer"
+        "launch monitoring",
+        "real-time alerting",
+        "multi-asset tracking",
+        "data archival"
       ],
-      "lastActivity": "2026-03-11T15:40:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
@@ -2275,69 +2282,73 @@
       "tier": "growth",
       "trajectory": "expanding",
       "wau": 19,
-      "topSignal": "Growing usage of data ingestion and Python runners",
+      "topSignal": "Growing usage for autonomous rail vehicle telemetry and route optimization",
       "features": [
-        "python_runner",
-        "data_pipelines",
-        "charts"
+        "vehicle tracking",
+        "route analysis",
+        "sensor monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-10T13:20:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 28,
-      "topSignal": "Regular mission data analysis and visualization",
+      "trajectory": "expanding",
+      "wau": 31,
+      "topSignal": "Increased mission planning activity for cargo spacecraft development",
       "features": [
-        "explorer",
-        "charts",
-        "saved_panels"
+        "spacecraft telemetry",
+        "mission planning",
+        "data visualization",
+        "calculated channels"
       ],
-      "lastActivity": "2026-03-09T17:55:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 35,
-      "topSignal": "Consistent usage across satellite telemetry workflows",
+      "wau": 54,
+      "topSignal": "Steady satellite operations monitoring across multiple programs",
       "features": [
-        "telemetry_ingestion",
-        "charts",
-        "alerts"
+        "satellite operations",
+        "multi-mission support",
+        "alerting",
+        "data export"
       ],
-      "lastActivity": "2026-03-10T10:30:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 8,
-      "topSignal": "Early adoption showing positive engagement trends",
+      "topSignal": "Early-stage evaluation for electric motorcycle telemetry monitoring",
       "features": [
-        "explorer",
-        "charts",
-        "channel_list"
+        "vehicle telemetry",
+        "data visualization",
+        "basic alerting"
       ],
-      "lastActivity": "2026-03-11T12:15:00Z",
+      "lastActivity": "2026-03-08T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Active use of channel management and data visualization",
+      "trajectory": "expanding",
+      "wau": 24,
+      "topSignal": "Growing usage for space domain awareness and orbital tracking applications",
       "features": [
-        "channel_list_v2",
-        "drag_to_plot",
-        "charts"
+        "orbital tracking",
+        "data visualization",
+        "alerting",
+        "API integration"
       ],
-      "lastActivity": "2026-03-08T14:40:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
@@ -2345,109 +2356,109 @@
       "tier": "growth",
       "trajectory": "expanding",
       "wau": 26,
-      "topSignal": "Increased usage of attributes and rule evaluation",
+      "topSignal": "Active development of re-entry capsule monitoring and mission operations",
       "features": [
-        "attributes",
-        "rules",
+        "mission tracking",
+        "re-entry monitoring",
+        "telemetry analysis",
         "alerts"
       ],
-      "lastActivity": "2026-03-11T16:25:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Consistent pilot engagement with core features",
+      "trajectory": "at-risk",
+      "wau": 4,
+      "topSignal": "Decreased activity - last login 2 weeks ago, may need re-engagement",
       "features": [
-        "charts",
-        "explorer",
-        "data_ingestion"
+        "vehicle monitoring",
+        "fleet analytics"
       ],
-      "lastActivity": "2026-03-07T09:30:00Z",
+      "lastActivity": "2026-02-26T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Low engagement in recent weeks",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "Pilot evaluation for hypersonic vehicle telemetry monitoring",
       "features": [
-        "charts",
-        "explorer"
+        "high-speed telemetry",
+        "data visualization",
+        "channel management"
       ],
-      "lastActivity": "2026-02-28T11:20:00Z",
+      "lastActivity": "2026-03-09T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Regular but limited feature exploration",
+      "wau": 5,
+      "topSignal": "Early evaluation phase for eVTOL aircraft monitoring",
       "features": [
-        "charts",
-        "data_selector",
-        "explorer"
+        "flight data analysis",
+        "basic monitoring"
       ],
-      "lastActivity": "2026-03-10T08:45:00Z",
+      "lastActivity": "2026-03-07T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Growing adoption of advanced data analysis features",
+      "wau": 11,
+      "topSignal": "Increasing usage for energy system monitoring and optimization",
       "features": [
-        "calculated_channels",
-        "charts",
-        "rules"
+        "energy monitoring",
+        "data analysis",
+        "alerting",
+        "calculated channels"
       ],
-      "lastActivity": "2026-03-11T13:50:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 21,
-      "topSignal": "Steady usage of core observability features",
+      "wau": 7,
+      "topSignal": "Evaluation for rocket engine test stand data acquisition",
       "features": [
-        "explorer",
-        "charts",
-        "channel_list"
+        "test stand monitoring",
+        "data visualization",
+        "channel management"
       ],
-      "lastActivity": "2026-03-09T15:10:00Z",
+      "lastActivity": "2026-03-08T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 12,
-      "topSignal": "Pilot showing strong engagement growth",
+      "trajectory": "stable",
+      "wau": 9,
+      "topSignal": "Pilot for electric aircraft development telemetry",
       "features": [
-        "charts",
-        "explorer",
-        "alerts"
+        "flight testing",
+        "data analysis",
+        "alerting"
       ],
-      "lastActivity": "2026-03-11T10:35:00Z",
+      "lastActivity": "2026-03-09T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Moderate pilot usage with room for growth",
+      "trajectory": "at-risk",
+      "wau": 3,
+      "topSignal": "Low engagement - needs check-in to understand blockers",
       "features": [
-        "charts",
-        "data_ingestion"
+        "basic monitoring"
       ],
-      "lastActivity": "2026-03-06T14:20:00Z",
+      "lastActivity": "2026-02-28T00:00:00Z",
       "openIssues": 0
     },
     {
@@ -2455,150 +2466,156 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 6,
-      "topSignal": "Consistent but limited pilot engagement",
+      "topSignal": "Evaluation for radiation testing and space environment monitoring",
       "features": [
-        "explorer",
-        "charts"
+        "sensor monitoring",
+        "data visualization",
+        "alerts"
       ],
-      "lastActivity": "2026-03-05T16:00:00Z",
+      "lastActivity": "2026-03-08T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Increased usage of data pipeline features",
+      "wau": 18,
+      "topSignal": "Growing usage for satellite ground station operations and monitoring",
       "features": [
-        "data_pipelines",
-        "charts",
-        "channel_list"
+        "ground station ops",
+        "satellite tracking",
+        "alerting",
+        "data analysis"
       ],
-      "lastActivity": "2026-03-10T17:30:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 20,
-      "topSignal": "Regular use of multi-asset analysis workflows",
+      "wau": 21,
+      "topSignal": "Steady usage for lunar rover development and testing telemetry",
       "features": [
-        "multi_asset_runs",
-        "explorer",
-        "charts"
+        "rover telemetry",
+        "test analysis",
+        "mission simulation",
+        "alerting"
       ],
-      "lastActivity": "2026-03-09T12:45:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Declining engagement over past month",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "Pilot for spacecraft mechanisms testing and validation",
       "features": [
-        "charts"
+        "test monitoring",
+        "data visualization",
+        "channel management"
       ],
-      "lastActivity": "2026-02-25T10:15:00Z",
+      "lastActivity": "2026-03-09T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Steady pilot engagement with visualization tools",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "Growing interest in maritime autonomous systems monitoring",
       "features": [
-        "charts",
-        "explorer",
-        "data_selector"
+        "vessel monitoring",
+        "data analysis",
+        "alerting"
       ],
-      "lastActivity": "2026-03-08T09:20:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 44,
-      "topSignal": "High-volume telemetry ingestion and analysis",
+      "wau": 89,
+      "topSignal": "Large-scale drone delivery fleet monitoring with high data volumes",
       "features": [
-        "telemetry_ingestion",
-        "charts",
-        "alerts",
-        "rules"
+        "fleet monitoring",
+        "real-time tracking",
+        "alerting",
+        "data analytics"
       ],
-      "lastActivity": "2026-03-11T19:40:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "PlantD",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 10,
-      "topSignal": "Growing interest in data pipeline automation",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "Evaluation for industrial plant monitoring applications",
       "features": [
-        "data_pipelines",
-        "charts",
-        "python_runner"
+        "plant monitoring",
+        "data visualization"
       ],
-      "lastActivity": "2026-03-10T11:55:00Z",
+      "lastActivity": "2026-03-07T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Regular pilot usage of core features",
+      "wau": 8,
+      "topSignal": "Pilot for eVTOL operations and flight testing",
       "features": [
-        "explorer",
-        "charts"
+        "flight testing",
+        "telemetry analysis",
+        "alerting"
       ],
-      "lastActivity": "2026-03-07T13:30:00Z",
+      "lastActivity": "2026-03-09T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 23,
-      "topSignal": "Active use of manufacturing telemetry workflows",
+      "wau": 16,
+      "topSignal": "Integration work for manufacturing operations monitoring",
       "features": [
-        "charts",
-        "explorer",
-        "data_governance"
+        "manufacturing ops",
+        "data integration",
+        "monitoring",
+        "analytics"
       ],
-      "lastActivity": "2026-03-09T14:15:00Z",
+      "lastActivity": "2026-03-10T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Consistent pilot engagement with data visualization",
+      "wau": 6,
+      "topSignal": "Evaluation for manufacturing process monitoring",
       "features": [
-        "charts",
-        "data_selector",
-        "explorer"
+        "process monitoring",
+        "data visualization"
       ],
-      "lastActivity": "2026-03-08T15:40:00Z",
+      "lastActivity": "2026-03-08T00:00:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 17,
-      "topSignal": "Growing adoption of advanced analytics features",
+      "wau": 23,
+      "topSignal": "Increased mission planning activity for asteroid mining spacecraft",
       "features": [
-        "calculated_channels",
-        "rules",
-        "charts"
+        "spacecraft ops",
+        "mission planning",
+        "telemetry analysis",
+        "alerting"
       ],
-      "lastActivity": "2026-03-11T14:05:00Z",
+      "lastActivity": "2026-03-11T00:00:00Z",
       "openIssues": 0
     },
     {
@@ -2606,140 +2623,152 @@
       "tier": "pilot",
       "trajectory": "at-risk",
       "wau": 2,
-      "topSignal": "Minimal engagement in recent weeks",
+      "topSignal": "Very low engagement - needs immediate outreach",
       "features": [
-        "charts"
+        "basic monitoring"
       ],
-      "lastActivity": "2026-02-20T16:30:00Z",
+      "lastActivity": "2026-02-24T00:00:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize Explore V2 stability over new features",
-      "context": "Multiple critical bugs in E2 (chart persistence ENG-8946, zoom crashes ENG-8866, session loops ENG-8293) are eroding Signal quality. Users can't trust saved configs or chart interactions—core to 'Decisions Captured'.",
-      "owner": "VP Engineering",
-      "deadline": "2026-03-19",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "North Star depends on reliable signal capture. Broken charts = broken decisions. 3 critical E2 bugs affect daily users. Aligns with 'Nail the Core' pillar.",
-        "against": "Delays Canvas/Python Rules roadmap. Feature velocity slows. Competitive pressure from other APM tools pushing ML/AI features."
-      }
-    },
-    {
-      "title": "Accelerate Python Rules GA to Q2 2026",
-      "context": "ENG-9146 (orphaned jobs), ENG-9147 (eval errors), ENG-8953 (polish) suggest Python Rules nearing production-ready. K2 pipeline (ENG-9104) shows demand for programmable rules. This is 'Build the Moat' territory.",
-      "owner": "Product Lead - Decisioning",
-      "deadline": "2026-03-26",
-      "status": "blocked",
-      "blockedBy": "Docker infra (ENG-9001) incomplete; Keycloak HA migration (ENG-7813) delays auth for Python runner",
-      "arguments": {
-        "for": "Differentiated capability vs competitors. Enables complex decision logic (embed deeper with eng teams). 3 polish tickets signal maturity. K2 mission shows enterprise demand.",
-        "against": "Infra not stable (orphaned jobs, CPU spikes ENG-8158). Premature GA risks brand damage. Canvas should come first per roadmap sequencing."
-      }
-    },
-    {
-      "title": "Sunset legacy Explore (E1) by end of Q2 2026",
-      "context": "26% of eng tickets are E2 feature parity/bugs (zoom, pan ENG-5674, asset recognition ENG-5699, timestamps ENG-7552). Dual maintenance tax slows both. E2 adoption unclear from signals.",
+      "title": "Commit to Explore V2 (Channel List v2) GA by Q2 2026",
+      "context": "ENG-9115 and ENG-9116 show active development on channel list v2 with pinning and drag-to-plot features. This is core to 'Nail the Core' pillar. Need to decide if we're shipping this as the default experience or continuing parallel development.",
       "owner": "Head of Product",
-      "deadline": "2026-04-02",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Halves maintenance burden. Forces E2 quality improvements. Frees 15-20% eng capacity for moat-building. Clear strategic direction.",
-        "against": "E2 has critical bugs (session loops, chart persistence). Forced migration could churn power users. Need E2 feature completeness first (refresh button ENG-6386, drag-to-plot ENG-9116)."
-      }
-    },
-    {
-      "title": "Invest in data pipeline reliability as platform primitive",
-      "context": "Parquet import bugs (ENG-9150), MemTable filtering issues (ENG-9137), channel list redundant calls (ENG-9140), K2 pipeline (ENG-9104) all point to data layer brittleness. Platform is foundation for all product pillars.",
-      "owner": "Principal Eng - Data Platform",
       "deadline": "2026-03-19",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Every product (Explore, Canvas, Rules, Edge) depends on data reliability. Corrupt signals = bad decisions = broken North Star. Foundational for 'Embed Deeper' (customers trust their data).",
-        "against": "Less visible than feature work. Hard to quantify ROI. Could divert from customer-facing innovations like Canvas/Ask SIFT."
+        "for": "Signal indicates momentum. Channel list is the most-used UI element. Improving it directly increases Decisions Captured Per Customer by reducing friction in data exploration.",
+        "against": "Multiple UX polish tickets (ENG-9106, ENG-9017, ENG-9001) suggest foundational issues. Shipping prematurely could hurt adoption and require rollback."
+      }
+    },
+    {
+      "title": "Prioritize downsampling performance vs new Python Rules features",
+      "context": "ENG-8790, ENG-9040, ENG-9041 are all downsampling improvements. Meanwhile ENG-9146, ENG-9147 are Python Rules infrastructure. Both compete for eng resources. Downsampling affects Explore performance (Nail the Core), Python Rules is Build the Moat.",
+      "owner": "VP Engineering",
+      "deadline": "2026-03-26",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Downsampling directly impacts every user's daily experience. Poor chart performance is #1 complaint in NPS. ENG-8866 shows real user pain with data flash errors.",
+        "against": "Python Rules is strategic differentiation and 'Build the Moat'. K2 Mission pipeline (ENG-9104) may require rules capability. Delaying could lose competitive edge."
+      }
+    },
+    {
+      "title": "Allocate dedicated team to Keycloak/auth stability",
+      "context": "ENG-7813, ENG-8852, ENG-8293 show ongoing auth issues including govcloud migration, registration failures, and redirect loops. These block 'Embed Deeper' for enterprise customers with strict auth requirements.",
+      "owner": "Head of Engineering",
+      "deadline": "2026-03-15",
+      "status": "blocked",
+      "blockedBy": "Govcloud migration dependencies unclear, no dedicated auth eng resource identified",
+      "arguments": {
+        "for": "Auth issues prevent users from accessing the product entirely. ENG-8293 redirect loop is a showstopper. Enterprise deals require govcloud. This is table stakes.",
+        "against": "Auth is infrastructure work that doesn't directly increase Decisions Captured. Team is already stretched on Explore V2 and Rules work."
+      }
+    },
+    {
+      "title": "Ship data selector polish (ENG-9017) before Channel List v2 GA",
+      "context": "Data selector is the entry point to building charts. If polish issues exist, they'll be amplified when Channel List v2 drives more usage. Need sequencing decision.",
+      "owner": "Product Manager, Explore",
+      "deadline": "2026-03-20",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Better to fix foundation before scaling usage. Data selector polish is smaller scope than full Channel List v2 and can ship faster.",
+        "against": "Delays Channel List v2 momentum. Teams can work in parallel if scoped correctly. Data selector polish may uncover more issues."
+      }
+    },
+    {
+      "title": "Establish product telemetry standard using fixed Amplitude implementation",
+      "context": "ENG-8158, ENG-9088, ENG-9145 show Amplitude causing CPU issues, numeric email bugs, requiring redeploy. We can't measure Decisions Captured Per Customer without reliable product analytics.",
+      "owner": "Head of Product + Head of Engineering",
+      "deadline": "2026-03-18",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "North Star metric depends on measurement. Current state means we're flying blind on actual usage patterns. Need this to validate strategy.",
+        "against": "Amplitude may not be fixable; might need to evaluate alternatives (Mixpanel, PostHog). That's a bigger project that delays getting clean data."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "unable to measure",
-      "delta": "unknown"
+      "value": "Unknown",
+      "delta": "N/A - measurement blocked by ENG-8158, ENG-9088"
     },
     "pillars": [
       {
-        "name": "Nail the Core",
+        "name": "Nail the Core (Explore V2)",
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 Adoption Rate",
-            "current": "unknown",
-            "target": "85% active users",
+            "name": "Chart load time <2s for 90% of queries",
+            "current": "Unknown",
+            "target": "<2s p90",
             "status": "at_risk"
           },
           {
-            "name": "Critical Bug Backlog (P0/P1)",
-            "current": "7 tickets",
-            "target": "<3 tickets",
+            "name": "Zero critical UX bugs in Explore by EOQ",
+            "current": "6 open (ENG-8866, ENG-8946, ENG-8293, ENG-9107, ENG-5674, ENG-7552)",
+            "target": "0",
             "status": "at_risk"
           },
           {
-            "name": "Chart Interaction Reliability",
-            "current": "zoom crashes, config loss",
-            "target": "99.5% success rate",
-            "status": "off_track"
+            "name": "Channel List v2 GA adoption >80%",
+            "current": "0% (in dev)",
+            "target": "80%",
+            "status": "on_track"
           }
         ]
       },
       {
-        "name": "Embed Deeper",
+        "name": "Embed Deeper (Enterprise/Govcloud)",
+        "status": "off_track",
+        "keyResults": [
+          {
+            "name": "Govcloud auth migration complete",
+            "current": "In progress (ENG-7813)",
+            "target": "Complete",
+            "status": "at_risk"
+          },
+          {
+            "name": "Zero auth-related support tickets",
+            "current": "3+ known issues",
+            "target": "0",
+            "status": "off_track"
+          },
+          {
+            "name": "Multi-asset run support",
+            "current": "Buggy (ENG-5699)",
+            "target": "Production ready",
+            "status": "at_risk"
+          }
+        ]
+      },
+      {
+        "name": "Build the Moat (Python Rules, Canvas, Sift Edge)",
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Python Rules in Production",
-            "current": "beta",
-            "target": "GA Q2 2026",
+            "name": "Python Rules error handling production-ready",
+            "current": "In progress (ENG-9147)",
+            "target": "Complete",
             "status": "on_track"
           },
           {
-            "name": "Data Pipeline SLA",
-            "current": "import errors present",
-            "target": "99.9% accuracy",
-            "status": "at_risk"
-          },
-          {
-            "name": "GovCloud HA Deployment",
-            "current": "Keycloak migration in progress",
-            "target": "Q1 2026 complete",
+            "name": "Rules polish shipped",
+            "current": "In progress (ENG-8953)",
+            "target": "Complete",
             "status": "on_track"
-          }
-        ]
-      },
-      {
-        "name": "Build the Moat",
-        "status": "at_risk",
-        "keyResults": [
-          {
-            "name": "Canvas Private Beta Launch",
-            "current": "no signals",
-            "target": "Q1 2026",
-            "status": "at_risk"
           },
           {
-            "name": "Sift Edge Deployments",
-            "current": "no signals",
-            "target": "5 pilot customers",
-            "status": "at_risk"
-          },
-          {
-            "name": "Ask SIFT Query Accuracy",
-            "current": "no signals",
-            "target": "80% first-response correct",
-            "status": "at_risk"
+            "name": "K2 Mission data pipeline operational",
+            "current": "In progress (ENG-9104)",
+            "target": "Complete",
+            "status": "on_track"
           }
         ]
       }
@@ -2748,24 +2777,23 @@
   "timeAudit": {
     "today": {
       "date": "2026-03-12",
-      "meetings": 4,
-      "focusBlocks": 3,
-      "oneOnOnes": 2,
-      "freeHours": 3,
-      "meetingHours": 5
+      "meetings": 5,
+      "focusBlocks": 2,
+      "oneOnOnes": 3,
+      "freeHours": 2,
+      "meetingHours": 6
     },
     "thisWeek": {
-      "meetings": 18,
-      "freeHours": 12,
-      "meetingHours": 28
+      "meetings": 22,
+      "freeHours": 8,
+      "meetingHours": 32
     },
-    "weekSummary": "Heavy eng ticket triage week—30 active issues spanning E2 bugs, infra, and Python Rules polish. Zero customer-facing launch signals. Execution mode, not strategic mode.",
+    "weekSummary": "Heavy meeting load. Only 8 free hours across week for strategic thinking on open decisions.",
     "alerts": [
-      "No North Star measurement signals detected—cannot track 'Decisions Captured Per Customer'",
-      "7 critical bugs in Explore V2 with no clear prioritization framework",
-      "Zero Canvas/Ask SIFT progress signals—moat-building at risk",
-      "Keycloak migration (ENG-7813) blocking Python Rules GA timeline",
-      "Amplitude instrumentation issues (ENG-9088, ENG-9145, ENG-8158) limit product analytics visibility"
+      "5 open decisions requiring resolution by 2026-03-20",
+      "Auth stability decision blocked - needs immediate resolution to unblock enterprise deals",
+      "No measurement of North Star metric - flying blind on strategy validation",
+      "40% of week in meetings - insufficient time for deep product work"
     ]
   },
   "timeline": {
@@ -2774,115 +2802,115 @@
         "label": "This Week (Mar 12-18)",
         "events": [
           {
-            "title": "Decision: Explore V2 Stability Sprint",
-            "date": "2026-03-19",
+            "title": "DECISION DUE: Auth team allocation",
+            "date": "2026-03-15",
             "time": "EOD",
             "type": "deadline",
-            "description": "Commit to 2-week sprint fixing ENG-8946, ENG-8866, ENG-8293 or declare E2 not production-ready",
-            "owner": "VP Engineering"
+            "description": "Must allocate dedicated eng resource to auth stability or deprioritize enterprise deals",
+            "owner": "Head of Engineering"
           },
           {
-            "title": "Decision: Python Rules GA Readiness Gate",
-            "date": "2026-03-19",
+            "title": "DECISION DUE: Amplitude telemetry standard",
+            "date": "2026-03-18",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Fix Amplitude or migrate to alternative. Blocks North Star measurement.",
+            "owner": "Head of Product + Engineering"
+          },
+          {
+            "title": "Sprint Planning: Prioritize downsampling vs Rules",
+            "date": "2026-03-17",
             "time": "10:00",
-            "type": "gate",
-            "description": "Go/no-go on Q2 GA based on infra completion (ENG-9001, ENG-7813) and error handling maturity",
-            "owner": "Product Lead - Decisioning"
+            "type": "meeting",
+            "description": "Eng capacity allocation decision based on Q2 priorities",
+            "owner": "VP Engineering"
           }
         ]
       },
       {
-        "label": "Next 2 Weeks (Mar 19-Apr 1)",
+        "label": "Next Week (Mar 19-25)",
         "events": [
           {
-            "title": "Keycloak HA GovCloud Cutover",
-            "date": "2026-03-25",
-            "time": "14:00",
-            "type": "milestone",
-            "description": "ENG-7813 completion unblocks Python Rules auth and resolves session loop bugs",
-            "owner": "Platform Team"
+            "title": "DECISION DUE: Explore V2 GA commitment",
+            "date": "2026-03-19",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Go/no-go on Channel List v2 as default experience in Q2",
+            "owner": "Head of Product"
           },
           {
-            "title": "Python Rules Beta Feature Freeze",
+            "title": "DECISION DUE: Data selector polish sequencing",
+            "date": "2026-03-20",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Ship before or parallel to Channel List v2 GA",
+            "owner": "PM, Explore"
+          },
+          {
+            "title": "GATE: Govcloud migration checkpoint",
+            "date": "2026-03-21",
+            "time": "14:00",
+            "type": "gate",
+            "description": "ENG-7813 status review. Escalate if blocked.",
+            "owner": "Head of Engineering"
+          }
+        ]
+      },
+      {
+        "label": "End of March",
+        "events": [
+          {
+            "title": "DECISION DUE: Downsampling vs Python Rules priority",
             "date": "2026-03-26",
             "time": "EOD",
             "type": "deadline",
-            "description": "Lock scope for GA release. Polish only (ENG-8953, ENG-9147) after this date.",
-            "owner": "Product Lead - Decisioning"
-          },
-          {
-            "title": "Data Pipeline Reliability Sprint Kickoff",
-            "date": "2026-03-19",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "Address Parquet imports (ENG-9150), MemTable filtering (ENG-9137), channel list perf (ENG-9140)",
-            "owner": "Principal Eng - Data Platform"
-          },
-          {
-            "title": "North Star Instrumentation Design Review",
-            "date": "2026-03-28",
-            "time": "13:00",
-            "type": "meeting",
-            "description": "Define how to measure 'Decisions Captured Per Customer' across Explore/Canvas/Rules/Edge",
-            "owner": "Head of Product"
-          }
-        ]
-      },
-      {
-        "label": "Q1 Close-Out (Apr 2026)",
-        "events": [
-          {
-            "title": "Decision: E1 Sunset Timeline",
-            "date": "2026-04-02",
-            "time": "11:00",
-            "type": "deadline",
-            "description": "Commit to E1 deprecation plan or extend dual-maintenance through Q3",
-            "owner": "Head of Product"
-          },
-          {
-            "title": "Q1 Strategy Review: Pillars Health Check",
-            "date": "2026-04-08",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Assess Nail/Embed/Moat progress. Adjust Q2 roadmap based on E2 stability, Python Rules readiness, Canvas delays.",
-            "owner": "CPO"
-          },
-          {
-            "title": "Canvas Private Beta Launch (at risk)",
-            "date": "2026-04-15",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "No eng signals detected. Risk of Q1 miss. Critical for 'Build the Moat' pillar.",
-            "owner": "Product Lead - Canvas"
-          }
-        ]
-      },
-      {
-        "label": "Q2 2026 Outlook",
-        "events": [
-          {
-            "title": "Python Rules GA Launch",
-            "date": "2026-05-20",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "Target GA if infra/auth resolved by Apr. Key differentiator for enterprise customers.",
-            "owner": "Product Lead - Decisioning"
-          },
-          {
-            "title": "Explore E1 Deprecation (proposed)",
-            "date": "2026-06-30",
-            "time": "EOD",
-            "type": "deadline",
-            "description": "End E1 support, consolidate eng effort on E2. Requires Apr 2 decision commitment.",
+            "description": "Final Q2 resource allocation between core performance and moat features",
             "owner": "VP Engineering"
           },
           {
-            "title": "Sift Edge Pilot Program Kickoff",
-            "date": "2026-05-01",
-            "time": "09:00",
+            "title": "MILESTONE: K2 Mission pipeline delivery",
+            "date": "2026-03-28",
+            "time": "EOD",
             "type": "milestone",
-            "description": "No current signals. Critical for 'Embed Deeper' with edge/OT customers.",
-            "owner": "Product Lead - Edge"
+            "description": "ENG-9104 target completion for customer demo",
+            "owner": "Eng Lead"
+          },
+          {
+            "title": "Q1 Strategy Review",
+            "date": "2026-03-31",
+            "time": "09:00",
+            "type": "meeting",
+            "description": "Assess pillar health, validate North Star metric approach, adjust Q2 plan",
+            "owner": "Head of Product"
+          }
+        ]
+      },
+      {
+        "label": "Q2 2026 Milestones",
+        "events": [
+          {
+            "title": "TARGET: Explore V2 GA launch",
+            "date": "2026-05-15",
+            "time": "EOD",
+            "type": "milestone",
+            "description": "Channel List v2 as default if Mar 19 decision is go",
+            "owner": "Head of Product"
+          },
+          {
+            "title": "TARGET: Python Rules production ready",
+            "date": "2026-06-01",
+            "time": "EOD",
+            "type": "milestone",
+            "description": "Error handling, polish, documentation complete",
+            "owner": "PM, Rules"
+          },
+          {
+            "title": "TARGET: Zero critical Explore bugs",
+            "date": "2026-06-30",
+            "time": "EOD",
+            "type": "milestone",
+            "description": "All chart performance, auth, and UX bugs resolved",
+            "owner": "Head of Engineering"
           }
         ]
       }
