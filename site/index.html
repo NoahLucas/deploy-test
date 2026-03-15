@@ -203,6 +203,77 @@
         color: color-mix(in srgb, #b33 75%, var(--text));
       }
 
+      .owner-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: none;
+        place-items: center;
+        background: color-mix(in srgb, var(--bg) 72%, transparent);
+        backdrop-filter: blur(10px);
+      }
+
+      .owner-modal[data-open="true"] {
+        display: grid;
+      }
+
+      .owner-modal-card {
+        width: min(28rem, calc(100vw - 2rem));
+        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        color: var(--text);
+        padding: 1rem 1rem 0.9rem;
+      }
+
+      .owner-modal-title {
+        margin: 0 0 0.25rem;
+        font-size: 12px;
+        font-weight: 520;
+        letter-spacing: 0.02em;
+      }
+
+      .owner-modal-copy {
+        margin: 0 0 0.8rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.4;
+      }
+
+      .owner-modal-input {
+        width: 100%;
+        border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+        background: transparent;
+        color: var(--text);
+        padding: 0.65rem 0.7rem;
+        font: inherit;
+        outline: none;
+      }
+
+      .owner-modal-input:focus {
+        border-color: color-mix(in srgb, var(--text) 28%, transparent);
+      }
+
+      .owner-modal-actions {
+        margin-top: 0.7rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.55rem;
+      }
+
+      .owner-modal-btn {
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+        background: transparent;
+        color: var(--text);
+        padding: 0.42rem 0.7rem;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .owner-modal-btn[disabled] {
+        opacity: 0.45;
+        cursor: wait;
+      }
+
       .theme-btn:hover {
         opacity: 0.95;
         color: var(--text);
@@ -542,6 +613,17 @@
     <button id="theme-toggle" class="theme-btn" type="button" aria-label="Theme mode: system" title="Theme mode: system">◐</button>
     <button id="owner-gate" class="owner-gate" type="button" aria-label="Owner access">◎</button>
     <div id="owner-status" class="owner-status" aria-live="polite" aria-atomic="true"></div>
+    <div id="owner-modal" class="owner-modal" aria-hidden="true">
+      <form id="owner-modal-form" class="owner-modal-card">
+        <p class="owner-modal-title">Owner setup token</p>
+        <p class="owner-modal-copy">Enter the app's ADMIN_TOKEN to enroll this device for secure owner access.</p>
+        <input id="owner-token-input" class="owner-modal-input" type="password" autocomplete="off" spellcheck="false" />
+        <div class="owner-modal-actions">
+          <button id="owner-modal-cancel" class="owner-modal-btn" type="button">Cancel</button>
+          <button id="owner-modal-submit" class="owner-modal-btn" type="submit">Continue</button>
+        </div>
+      </form>
+    </div>
     <main>
       <section class="wrap">
         <section class="timeline" aria-label="Work timeline">
@@ -648,6 +730,11 @@
         const themeButton = document.getElementById("theme-toggle");
         const ownerGate = document.getElementById("owner-gate");
         const ownerStatus = document.getElementById("owner-status");
+        const ownerModal = document.getElementById("owner-modal");
+        const ownerModalForm = document.getElementById("owner-modal-form");
+        const ownerTokenInput = document.getElementById("owner-token-input");
+        const ownerModalCancel = document.getElementById("owner-modal-cancel");
+        const ownerModalSubmit = document.getElementById("owner-modal-submit");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
         const themeOptions = ["system", "light", "dark", "24h"];
@@ -920,6 +1007,58 @@
           }
         }
 
+        function setOwnerModalOpen(open) {
+          if (!ownerModal) return;
+          ownerModal.dataset.open = open ? "true" : "false";
+          ownerModal.setAttribute("aria-hidden", open ? "false" : "true");
+          if (open) {
+            window.setTimeout(() => ownerTokenInput && ownerTokenInput.focus(), 20);
+          } else if (ownerTokenInput) {
+            ownerTokenInput.value = "";
+          }
+        }
+
+        function requestOwnerToken() {
+          return new Promise((resolve) => {
+            if (!ownerModal || !ownerModalForm || !ownerTokenInput) {
+              resolve(null);
+              return;
+            }
+
+            const cleanup = () => {
+              ownerModalForm.removeEventListener("submit", onSubmit);
+              ownerModalCancel.removeEventListener("click", onCancel);
+              ownerModal.removeEventListener("click", onBackdrop);
+              document.removeEventListener("keydown", onKeydown);
+            };
+
+            const finish = (value) => {
+              cleanup();
+              setOwnerModalOpen(false);
+              resolve(value);
+            };
+
+            const onSubmit = (event) => {
+              event.preventDefault();
+              finish((ownerTokenInput.value || "").trim() || null);
+            };
+
+            const onCancel = () => finish(null);
+            const onBackdrop = (event) => {
+              if (event.target === ownerModal) finish(null);
+            };
+            const onKeydown = (event) => {
+              if (event.key === "Escape") finish(null);
+            };
+
+            ownerModalForm.addEventListener("submit", onSubmit);
+            ownerModalCancel.addEventListener("click", onCancel);
+            ownerModal.addEventListener("click", onBackdrop);
+            document.addEventListener("keydown", onKeydown);
+            setOwnerModalOpen(true);
+          });
+        }
+
         async function syncOwnerSessionState() {
           try {
             const response = await fetch("/api/v1/public/admin-auth/session", {
@@ -1057,7 +1196,7 @@
         }
 
         async function enrollOwnerCredential() {
-          const token = window.prompt("Owner setup token");
+          const token = await requestOwnerToken();
           if (!token) return false;
           setOwnerStatus("Requesting secure setup...", "default", true);
           const start = await postJSON("/api/v1/public/admin-auth/webauthn/register/challenge", {}, { "X-Admin-Token": token });
