@@ -48,7 +48,7 @@ def main() -> int:
         "year": args.year,
         "persona_label": args.persona,
         "style_brief": args.style_brief,
-        "include_private_context": True,
+        "include_private_context": False,
         "force_regenerate": args.force,
         "subdir": args.subdir,
     }

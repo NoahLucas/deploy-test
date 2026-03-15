@@ -39,7 +39,7 @@ def main() -> int:
         "month": args.month,
         "persona_label": args.persona,
         "style_brief": args.style_brief,
-        "include_private_context": True,
+        "include_private_context": False,
         "force_regenerate": False,
         "subdir": args.subdir,
     }

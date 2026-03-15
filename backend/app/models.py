@@ -475,6 +475,16 @@ class AutobiographerMemoryReviewUpdateResponse(BaseModel):
     review_state: str
 
 
+class AutobiographerMemoryVisibilityUpdateRequest(BaseModel):
+    event_ids: List[int] = Field(min_length=1, max_length=100)
+    privacy_level: str = Field(min_length=3, max_length=32)
+
+
+class AutobiographerMemoryVisibilityUpdateResponse(BaseModel):
+    updated: int
+    privacy_level: str
+
+
 class AutobiographerSceneItem(BaseModel):
     id: int
     year: int
@@ -774,7 +784,7 @@ class AutobiographerPublishLiveNoteRequest(BaseModel):
         min_length=12,
         max_length=1200,
     )
-    include_private_context: bool = True
+    include_private_context: bool = False
     force_regenerate: bool = False
     subdir: str = Field(default="notes-drafts", min_length=1, max_length=64)
 
@@ -801,7 +811,7 @@ class AutobiographerPublishYearNoteRequest(BaseModel):
         min_length=12,
         max_length=1200,
     )
-    include_private_context: bool = True
+    include_private_context: bool = False
     force_regenerate: bool = False
     subdir: str = Field(default="notes-drafts", min_length=1, max_length=64)
 

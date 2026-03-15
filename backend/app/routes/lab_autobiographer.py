@@ -16,6 +16,10 @@ from app.models import (
     AutobiographerMemoryEventCreateRequest,
     AutobiographerMemoryEventItem,
     AutobiographerMemoryEventsResponse,
+    AutobiographerMemoryReviewUpdateRequest,
+    AutobiographerMemoryReviewUpdateResponse,
+    AutobiographerMemoryVisibilityUpdateRequest,
+    AutobiographerMemoryVisibilityUpdateResponse,
     AutobiographerMonthlyChapterGenerateRequest,
     AutobiographerMonthlyChapterItem,
     AutobiographerMonthlyChapterResponse,
@@ -37,7 +41,8 @@ def _month_label(month: int) -> str:
 
 
 def _as_dt(value: str) -> datetime:
-    dt = datetime.fromisoformat(value)
+    normalized = value[:-1] + "+00:00" if value.endswith("Z") else value
+    dt = datetime.fromisoformat(normalized)
     if dt.tzinfo is None:
         return dt.replace(tzinfo=timezone.utc)
     return dt
@@ -118,6 +123,10 @@ def _safe_subdir(raw: str) -> str:
     return cleaned or "notes-drafts"
 
 
+def _event_is_public_approved(item: AutobiographerMemoryEventItem) -> bool:
+    return item.privacy_level == "public" and item.review_state == "accepted"
+
+
 def _build_live_note_markdown(year: int, chapter_rows: list[dict]) -> tuple[str, str]:
     sorted_rows = sorted(chapter_rows, key=lambda row: row["month"])
     title = f"{year} Autobiography (Live)"
@@ -144,9 +153,12 @@ def _build_year_inputs(
     *,
     store,
     year: int,
+    include_private_context: bool,
 ) -> tuple[list[dict], list[dict]]:
     memory_rows = store.list_autobiographer_memory_events(limit=500, year=year)
     events = [_to_memory_item(row) for row in memory_rows]
+    if not include_private_context:
+        events = [item for item in events if _event_is_public_approved(item)]
     events.sort(key=lambda item: item.event_at)
 
     month_rows = store.list_autobiographer_month_chapters(year=year, limit=24)
@@ -212,13 +224,46 @@ def list_autobiographer_events(
     year: Optional[int] = Query(default=None, ge=2000, le=2100),
     month: Optional[int] = Query(default=None, ge=1, le=12),
     limit: int = Query(default=120, ge=1, le=500),
+    privacy_level: Optional[str] = Query(default=None),
+    review_state: Optional[str] = Query(default=None),
 ) -> AutobiographerMemoryEventsResponse:
     require_admin(request)
-    rows = request.app.state.store.list_autobiographer_memory_events(limit=limit, year=year)
+    rows = request.app.state.store.list_autobiographer_memory_events(
+        limit=limit,
+        year=year,
+        privacy_level=privacy_level,
+        review_state=review_state,
+    )
     items = [_to_memory_item(row) for row in rows]
     if month is not None:
         items = [item for item in items if item.event_at.month == month and (year is None or item.event_at.year == year)]
     return AutobiographerMemoryEventsResponse(items=items)
+
+
+@router.post("/lab/autobiographer/events/visibility", response_model=AutobiographerMemoryVisibilityUpdateResponse)
+def update_autobiographer_event_visibility(
+    payload: AutobiographerMemoryVisibilityUpdateRequest,
+    request: Request,
+) -> AutobiographerMemoryVisibilityUpdateResponse:
+    require_admin(request)
+    updated = request.app.state.store.update_autobiographer_memory_privacy_level(
+        event_ids=payload.event_ids,
+        privacy_level=payload.privacy_level,
+    )
+    return AutobiographerMemoryVisibilityUpdateResponse(updated=updated, privacy_level=payload.privacy_level)
+
+
+@router.post("/lab/autobiographer/events/review", response_model=AutobiographerMemoryReviewUpdateResponse)
+def update_autobiographer_event_review_state(
+    payload: AutobiographerMemoryReviewUpdateRequest,
+    request: Request,
+) -> AutobiographerMemoryReviewUpdateResponse:
+    require_admin(request)
+    updated = request.app.state.store.update_autobiographer_memory_review_state(
+        event_ids=payload.event_ids,
+        review_state=payload.review_state,
+    )
+    return AutobiographerMemoryReviewUpdateResponse(updated=updated, review_state=payload.review_state)
 
 
 @router.post("/lab/autobiographer/chapters/initialize-year", response_model=AutobiographerMonthlyChaptersResponse)
@@ -279,6 +324,8 @@ def generate_autobiographer_month_chapter(
 
     rows = store.list_autobiographer_memory_events(limit=500, year=payload.year)
     events = [_to_memory_item(row) for row in rows]
+    if not payload.include_private_context:
+        events = [item for item in events if _event_is_public_approved(item)]
     month_events = [item for item in events if item.event_at.month == payload.month]
     month_events.sort(key=lambda item: item.event_at)
 
@@ -353,7 +400,11 @@ def generate_autobiographer_year_chapter(
     require_admin(request)
     store = request.app.state.store
 
-    monthly_payload, memory_payload = _build_year_inputs(store=store, year=payload.year)
+    monthly_payload, memory_payload = _build_year_inputs(
+        store=store,
+        year=payload.year,
+        include_private_context=payload.include_private_context,
+    )
     if not monthly_payload and not memory_payload:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,

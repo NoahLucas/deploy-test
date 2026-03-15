@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import ast
+import base64
 import sqlite3
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -987,12 +989,28 @@ class SignalStore:
             conn.execute("SELECT ?", (now,))
             return int(cursor.rowcount or 0)
 
+    def update_autobiographer_memory_privacy_level(self, *, event_ids: List[int], privacy_level: str) -> int:
+        if not event_ids:
+            return 0
+        placeholders = ", ".join("?" for _ in event_ids)
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                f"""
+                UPDATE autobiographer_memory_events
+                SET privacy_level = ?, source_metadata_json = source_metadata_json, created_at = created_at
+                WHERE id IN ({placeholders})
+                """,
+                [privacy_level] + event_ids,
+            )
+            return int(cursor.rowcount or 0)
+
     def list_autobiographer_memory_events(
         self,
         *,
         limit: int = 120,
         year: Optional[int] = None,
         review_state: Optional[str] = None,
+        privacy_level: Optional[str] = None,
     ) -> List[Dict[str, str]]:
         safe_limit = max(1, min(limit, 500))
         with self._connect() as conn:
@@ -1006,6 +1024,9 @@ class SignalStore:
             if review_state:
                 where_clauses.append("review_state = ?")
                 params.append(review_state)
+            if privacy_level:
+                where_clauses.append("privacy_level = ?")
+                params.append(privacy_level)
             where_sql = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
             params.append(safe_limit)
             rows = conn.execute(
@@ -1639,7 +1660,49 @@ class SignalStore:
                 (credential_id, label, public_key_b64, int(sign_count), now, now),
             )
 
+    @staticmethod
+    def _normalize_admin_credential_id_value(value: str) -> str:
+        raw = str(value).strip()
+        if not raw:
+            return raw
+        if (raw.startswith("b'") and raw.endswith("'")) or (raw.startswith('b"') and raw.endswith('"')):
+            try:
+                parsed = ast.literal_eval(raw)
+            except Exception:
+                return raw
+            if isinstance(parsed, (bytes, bytearray)):
+                return base64.urlsafe_b64encode(bytes(parsed)).decode("ascii").rstrip("=")
+        return raw
+
+    def normalize_admin_webauthn_credential_ids(self) -> int:
+        with self._lock, self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT credential_id
+                FROM admin_webauthn_credentials
+                """
+            ).fetchall()
+            updates: list[tuple[str, str]] = []
+            for row in rows:
+                current = str(row["credential_id"])
+                normalized = self._normalize_admin_credential_id_value(current)
+                if normalized and normalized != current:
+                    updates.append((normalized, current))
+
+            for normalized, current in updates:
+                conn.execute(
+                    """
+                    UPDATE admin_webauthn_credentials
+                    SET credential_id = ?
+                    WHERE credential_id = ?
+                    """,
+                    (normalized, current),
+                )
+
+        return len(updates)
+
     def list_admin_webauthn_credentials(self) -> List[Dict[str, str]]:
+        self.normalize_admin_webauthn_credential_ids()
         with self._connect() as conn:
             rows = conn.execute(
                 """
@@ -1650,7 +1713,7 @@ class SignalStore:
             ).fetchall()
         return [
             {
-                "credential_id": str(row["credential_id"]),
+                "credential_id": self._normalize_admin_credential_id_value(str(row["credential_id"])),
                 "label": str(row["label"]),
                 "public_key_b64": str(row["public_key_b64"]),
                 "sign_count": int(row["sign_count"]),
@@ -1661,6 +1724,7 @@ class SignalStore:
         ]
 
     def get_admin_webauthn_credential(self, *, credential_id: str) -> Optional[Dict[str, str | int]]:
+        self.normalize_admin_webauthn_credential_ids()
         with self._connect() as conn:
             row = conn.execute(
                 """
@@ -1673,7 +1737,7 @@ class SignalStore:
         if row is None:
             return None
         return {
-            "credential_id": str(row["credential_id"]),
+            "credential_id": self._normalize_admin_credential_id_value(str(row["credential_id"])),
             "label": str(row["label"]),
             "public_key_b64": str(row["public_key_b64"]),
             "sign_count": int(row["sign_count"]),
