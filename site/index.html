@@ -170,33 +170,6 @@
         letter-spacing: 0.02em;
       }
 
-      .place-detail {
-        position: absolute;
-        left: calc(100% + 0.28rem);
-        top: 0.05rem;
-        width: 200px;
-        padding: 0;
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.28;
-        opacity: 0;
-        transform: translateX(-6px) scaleX(0.92) scaleY(0.98);
-        transform-origin: left center;
-        transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-        pointer-events: none;
-        z-index: 2;
-      }
-
-      .place-detail::before {
-        content: "";
-        position: absolute;
-        left: -0.28rem;
-        top: 0.72em;
-        width: 0.22rem;
-        height: 1px;
-        background: color-mix(in srgb, var(--text) 18%, transparent);
-      }
-
       .core-column {
         align-self: start;
         display: flex;
@@ -318,34 +291,6 @@
         margin-top: 0.14rem;
       }
 
-      .experience-detail {
-        position: absolute;
-        right: calc(100% + 0.28rem);
-        top: 0.05rem;
-        width: 220px;
-        padding: 0;
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.28;
-        text-align: right;
-        opacity: 0;
-        transform: translateX(6px) scaleX(0.92) scaleY(0.98);
-        transform-origin: right center;
-        transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
-        pointer-events: none;
-        z-index: 2;
-      }
-
-      .experience-detail::before {
-        content: "";
-        position: absolute;
-        right: -0.28rem;
-        top: 0.72em;
-        width: 0.22rem;
-        height: 1px;
-        background: color-mix(in srgb, var(--text) 18%, transparent);
-      }
-
       .place:hover,
       .place:focus-within {
         transform: translateX(8px) scale(1.03);
@@ -354,14 +299,6 @@
       .experience:hover,
       .experience:focus-within {
         transform: translateX(-8px) scale(1.03);
-      }
-
-      .place:hover .place-detail,
-      .place:focus-within .place-detail,
-      .experience:hover .experience-detail,
-      .experience:focus-within .experience-detail {
-        opacity: 1;
-        transform: translateX(0) scaleX(1) scaleY(1);
       }
 
       @media (max-width: 680px) {
@@ -399,11 +336,6 @@
           transform: none;
         }
 
-        .place-detail,
-        .experience-detail {
-          display: none;
-        }
-
         .core-column {
           min-height: auto;
           padding: 0;
@@ -420,55 +352,46 @@
           <article class="place">
             <span class="place-title">Ojai</span>
             <span class="place-subtitle">California</span>
-            <span class="place-detail">Ojai carries a quiet beauty, soft light, and restorative stillness that makes it feel both grounding and expansive.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Costa Mesa</span>
             <span class="place-subtitle">California</span>
-            <span class="place-detail">Costa Mesa felt bright, coastal, and easy to live in, with the kind of everyday energy that makes Southern California magnetic.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Central Park West</span>
             <span class="place-subtitle">New York City</span>
-            <span class="place-detail">Central Park West offers one of New York&apos;s most graceful rhythms, with the park, the skyline, and a sense of classic city elegance always close at hand.</span>
           </article>
 
           <article class="place">
             <span class="place-title">San Francisco</span>
             <span class="place-subtitle">California</span>
-            <span class="place-detail">San Francisco has a rare mix of ambition, creativity, and edge that makes building there feel electric.</span>
           </article>
 
           <article class="place">
             <span class="place-title">East Village</span>
             <span class="place-subtitle">New York City</span>
-            <span class="place-detail">The East Village has a character and independence that gives everyday life there real texture.</span>
           </article>
 
           <article class="place">
             <span class="place-title">RPI</span>
             <span class="place-subtitle">New York</span>
-            <span class="place-detail">RPI in New York gave Noah an early foundation in Experimental Media &amp; Design, where technology, interface thinking, and digital making started to converge.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Zionsville</span>
             <span class="place-subtitle">Indiana</span>
-            <span class="place-detail">Zionsville was the setting for Noah&apos;s real growing-up years, from third grade through high school, and still carries the warmth of home and formation.</span>
           </article>
 
           <article class="place">
             <span class="place-title">Lake Bluff</span>
             <span class="place-subtitle">Illinois</span>
-            <span class="place-detail">Lake Bluff holds the feeling of earliest childhood, family closeness, and the calm beginnings of the story.</span>
           </article>
 
           <article class="place">
             <span class="place-title">New Haven</span>
             <span class="place-subtitle">Connecticut</span>
-            <span class="place-detail">New Haven is the place where the story begins, with the simple affection that comes from being one&apos;s place of origin.</span>
           </article>
         </section>
 
@@ -486,43 +409,36 @@
           <article class="experience">
             <a class="experience-title" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
             <div class="experience-subtitle">Vice President of Product</div>
-            <span class="experience-detail">AI-native telemetry and decision platform for advanced machines. Own product strategy, execution cadence, and the signal-to-decision loop across aerospace, defense, and robotics customers.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
             <div class="experience-subtitle">Principal Product Manager</div>
-            <span class="experience-detail">Defense technology company building autonomous systems. Owned AI infrastructure for navigation, mapping, simulation, digital twins, and mixed reality across a heterogeneous fleet.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
             <div class="experience-subtitle">Product</div>
-            <span class="experience-detail">DoD-funded geolocation system designed for GPS-denied conditions. Led early product development to take the neural-sensor prototype toward field-ready validation and adoption.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
             <div class="experience-subtitle">Director of Product Management</div>
-            <span class="experience-detail">Public robotics company commercializing L4 sidewalk autonomy. Owned revenue, GTM, partner surfaces, and the field-data-to-roadmap loop across autonomy, navigation, mapping, hardware, and ops.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
             <div class="experience-subtitle">Product Lead</div>
-            <span class="experience-detail">Marketplace logistics company acquired by Uber. Built core product and launched the B2B developer platform from 0 to $12M ARR and roughly 30 percent of delivery volume.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
             <div class="experience-subtitle">Product</div>
-            <span class="experience-detail">Global travel platform. Owned mobile product bets including rental cars, flights, and itineraries, with a focus on international growth across APAC and EMEA.</span>
           </article>
 
           <article class="experience">
             <a class="experience-title" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
             <div class="experience-subtitle">Product</div>
-            <span class="experience-detail">Financial intelligence and market data platform. Defined UX and product requirements for near-real-time financial data collection and pipeline systems.</span>
           </article>
         </section>
       </section>
