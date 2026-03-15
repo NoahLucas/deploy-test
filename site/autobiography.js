@@ -77,6 +77,20 @@ function formatDate(value) {
   return date.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
 }
 
+function cleanRenderedAutobiography(host) {
+  if (!host) return;
+  const firstHeading = host.querySelector("h1");
+  if (firstHeading) firstHeading.remove();
+
+  const firstParagraph = host.querySelector("p");
+  if (
+    firstParagraph &&
+    /living chapter feed updated throughout the year/i.test(firstParagraph.textContent || "")
+  ) {
+    firstParagraph.remove();
+  }
+}
+
 async function loadAutobiography() {
   try {
     const res = await fetch("/api/v1/public/autobiography/live", { headers: { Accept: "application/json" } });
@@ -90,6 +104,7 @@ async function loadAutobiography() {
     if (host) {
       host.classList.remove("autobio-empty");
       host.innerHTML = renderMarkdown(data.body_markdown);
+      cleanRenderedAutobiography(host);
     }
   } catch (_) {
     setText("autobio-summary", "The living autobiography is not available yet.");
