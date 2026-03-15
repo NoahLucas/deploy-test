@@ -145,6 +145,31 @@
         animation: fireflyFlicker 11s ease-in-out infinite;
       }
 
+      :root[data-cycle-phase="night"] .place-title,
+      :root[data-cycle-phase="night"] .experience-title,
+      :root[data-cycle-phase="night"] .core-trigger,
+      :root[data-cycle-phase="night"] .theme-btn,
+      :root[data-cycle-phase="night"] .owner-gate {
+        color: #ddfbff;
+        text-shadow: 0 0 14px rgba(66, 219, 255, 0.14);
+      }
+
+      :root[data-cycle-phase="night"] .place-subtitle,
+      :root[data-cycle-phase="night"] .experience-subtitle,
+      :root[data-cycle-phase="night"] .core-sentence,
+      :root[data-cycle-phase="night"] .core-link,
+      :root[data-cycle-phase="night"] .owner-status {
+        color: #9bcce4;
+        text-shadow: 0 0 12px rgba(50, 173, 214, 0.08);
+      }
+
+      :root[data-cycle-phase="night"] .places-rail::after,
+      :root[data-cycle-phase="night"] .timeline::after,
+      :root[data-cycle-phase="night"] .core-block::before {
+        background: rgba(68, 136, 192, 0.42);
+        box-shadow: 0 0 18px rgba(51, 182, 255, 0.1);
+      }
+
       @keyframes fireflyFlicker {
         0%, 100% { opacity: 0.4; }
         18% { opacity: 0.64; }
@@ -825,10 +850,10 @@
             return {
               phase: "night",
               bg: "#06101c",
-              text: "#dff9ff",
-              muted: "#8ba2c6",
+              text: "#ddfbff",
+              muted: "#97cde6",
               surface: "#0b1730",
-              line: "#25537c",
+              line: "#2d658f",
               glowA: "rgba(46, 222, 255, 0.24)",
               glowB: "rgba(103, 84, 255, 0.26)",
               mistA: "rgba(18, 98, 130, 0.22)",
