@@ -178,6 +178,31 @@
         outline: none;
       }
 
+      .owner-status {
+        position: fixed;
+        left: 1.05rem;
+        bottom: 2rem;
+        z-index: 10;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.25;
+        letter-spacing: 0.02em;
+        opacity: 0;
+        transform: translateY(3px);
+        transition: opacity 160ms ease, transform 160ms ease, color 160ms ease;
+        pointer-events: none;
+        max-width: min(260px, calc(100vw - 2rem));
+      }
+
+      .owner-status[data-visible="true"] {
+        opacity: 0.82;
+        transform: translateY(0);
+      }
+
+      .owner-status[data-tone="error"] {
+        color: color-mix(in srgb, #b33 75%, var(--text));
+      }
+
       .theme-btn:hover {
         opacity: 0.95;
         color: var(--text);
@@ -516,6 +541,7 @@
   <body>
     <button id="theme-toggle" class="theme-btn" type="button" aria-label="Theme mode: system" title="Theme mode: system">◐</button>
     <button id="owner-gate" class="owner-gate" type="button" aria-label="Owner access">◎</button>
+    <div id="owner-status" class="owner-status" aria-live="polite" aria-atomic="true"></div>
     <main>
       <section class="wrap">
         <section class="timeline" aria-label="Work timeline">
@@ -563,7 +589,7 @@
               <span class="core-sentence-line">and Bruce the cat.</span>
               <span class="core-sentence-line"><button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Working at Sift</button>.</span>
             </p>
-            <a class="core-link" id="notes-link" href="https://noahlucas.squarespace.com/notes" target="_blank" rel="noopener">Notes</a>
+            <a class="core-link" id="notes-link" href="/notes.html">Notes</a>
           </div>
         </section>
 
@@ -621,6 +647,7 @@
         const root = document.documentElement;
         const themeButton = document.getElementById("theme-toggle");
         const ownerGate = document.getElementById("owner-gate");
+        const ownerStatus = document.getElementById("owner-status");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
         const themeOptions = ["system", "light", "dark", "24h"];
@@ -875,6 +902,24 @@
           ownerGate.style.opacity = "";
         }
 
+        let ownerStatusTimer = null;
+
+        function setOwnerStatus(message, tone = "default", persist = false) {
+          if (!ownerStatus) return;
+          ownerStatus.textContent = message || "";
+          ownerStatus.dataset.tone = tone;
+          ownerStatus.dataset.visible = message ? "true" : "false";
+          if (ownerStatusTimer) {
+            window.clearTimeout(ownerStatusTimer);
+            ownerStatusTimer = null;
+          }
+          if (message && !persist) {
+            ownerStatusTimer = window.setTimeout(() => {
+              ownerStatus.dataset.visible = "false";
+            }, 2800);
+          }
+        }
+
         async function syncOwnerSessionState() {
           try {
             const response = await fetch("/api/v1/public/admin-auth/session", {
@@ -976,13 +1021,28 @@
           };
         }
 
-        async function postJSON(path, body, headers = {}) {
-          const response = await fetch(path, {
-            method: "POST",
-            credentials: "include",
-            headers: { "Content-Type": "application/json", ...headers },
-            body: JSON.stringify(body || {})
-          });
+        async function postJSON(path, body, headers = {}, timeoutMs = 15000) {
+          const controller = new AbortController();
+          const timeout = window.setTimeout(() => controller.abort(), timeoutMs);
+          let response;
+          try {
+            response = await fetch(path, {
+              method: "POST",
+              credentials: "include",
+              headers: { "Content-Type": "application/json", ...headers },
+              body: JSON.stringify(body || {}),
+              signal: controller.signal
+            });
+          } catch (error) {
+            window.clearTimeout(timeout);
+            if (error && error.name === "AbortError") {
+              const err = new Error("Request timed out. Check Render health and WebAuthn config.");
+              err.status = 408;
+              throw err;
+            }
+            throw error;
+          }
+          window.clearTimeout(timeout);
           let data = {};
           try {
             data = await response.json();
@@ -999,7 +1059,9 @@
         async function enrollOwnerCredential() {
           const token = window.prompt("Owner setup token");
           if (!token) return false;
+          setOwnerStatus("Requesting secure setup...", "default", true);
           const start = await postJSON("/api/v1/public/admin-auth/webauthn/register/challenge", {}, { "X-Admin-Token": token });
+          setOwnerStatus("Waiting for Face ID or passkey approval...", "default", true);
           const credential = await navigator.credentials.create({
             publicKey: {
               challenge: b64urlToBytes(start.challenge),
@@ -1019,6 +1081,10 @@
               attestation: "none"
             }
           });
+          if (!credential) {
+            throw new Error("Passkey setup was cancelled.");
+          }
+          setOwnerStatus("Verifying secure setup...", "default", true);
           await postJSON(
             "/api/v1/public/admin-auth/webauthn/register/complete",
             {
@@ -1028,23 +1094,27 @@
             },
             { "X-Admin-Token": token }
           );
+          setOwnerStatus("Owner device enrolled.", "default");
           return true;
         }
 
         async function authenticateOwner() {
           let start;
           try {
+            setOwnerStatus("Checking secure access...", "default", true);
             start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
           } catch (error) {
             if (error.status === 428) {
               const enrolled = await enrollOwnerCredential();
               if (!enrolled) return;
+              setOwnerStatus("Preparing secure sign-in...", "default", true);
               start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
             } else {
               throw error;
             }
           }
 
+          setOwnerStatus("Waiting for Face ID or passkey approval...", "default", true);
           const assertion = await navigator.credentials.get({
             publicKey: {
               challenge: b64urlToBytes(start.challenge),
@@ -1057,11 +1127,16 @@
               timeout: start.timeout || 60000
             }
           });
+          if (!assertion) {
+            throw new Error("Passkey sign-in was cancelled.");
+          }
 
+          setOwnerStatus("Verifying secure session...", "default", true);
           await postJSON("/api/v1/public/admin-auth/webauthn/verify", {
             challenge_id: start.challenge_id,
             credential: serializeAuthenticationCredential(assertion)
           });
+          setOwnerStatus("Secure connection established.", "default");
           window.location.href = "/ux-live.html";
         }
 
@@ -1079,6 +1154,7 @@
           try {
             await authenticateOwner();
           } catch (error) {
+            setOwnerStatus(error && error.message ? error.message : "Owner auth failed.", "error");
             window.alert(error && error.message ? error.message : "Owner auth failed.");
           } finally {
             ownerGate.disabled = false;
