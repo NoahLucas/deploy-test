@@ -529,6 +529,15 @@
         letter-spacing: 0.01em;
       }
 
+      .core-name {
+        margin: 0 0 0.85rem;
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 520;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+      }
+
       .core-sentence-line {
         display: block;
       }
@@ -560,10 +569,17 @@
 
       .core-link {
         display: inline-block;
-        margin-top: 1.05rem;
+        margin-top: 0;
         font-size: 11px;
         text-decoration: none;
         line-height: 1.2;
+      }
+
+      .core-links {
+        display: grid;
+        justify-items: center;
+        gap: 0.5rem;
+        margin-top: 1.05rem;
       }
 
       .timeline {
@@ -661,6 +677,11 @@
         .core-sentence {
           max-width: 18rem;
           margin: 0 auto;
+        }
+
+        .core-links {
+          gap: 0.55rem;
+          margin-top: 0.95rem;
         }
 
         .core-column {
@@ -778,13 +799,15 @@
 
         <section class="core-column" aria-label="Core">
           <div class="core-block">
+            <p class="core-name">Noah Lucas</p>
             <p class="core-sentence">
               <span class="core-sentence-line">Living in <button class="core-trigger" id="place-toggle" type="button" aria-expanded="false" aria-label="Expand places lived">Ojai, California</button></span>
-              <span class="core-sentence-line">with Sara, Willa,</span>
-              <span class="core-sentence-line">and Bruce the cat.</span>
-              <span class="core-sentence-line"><button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Working at Sift</button>.</span>
+              <span class="core-sentence-line">with Sara, Willa, and Bruce the cat. <button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Working at Sift</button>.</span>
             </p>
-            <a class="core-link" id="notes-link" href="/autobiography">Autobiography</a>
+            <div class="core-links" aria-label="Core links">
+              <a class="core-link" id="biography-link" href="/autobiography">Biography</a>
+              <a class="core-link" id="notes-link" href="https://noahlucas.squarespace.com/notes">Notes</a>
+            </div>
           </div>
         </section>
 
@@ -1227,17 +1250,6 @@
         applyJobState(getStoredDetailState());
         renderOwnerGate();
         syncOwnerSessionState();
-
-        fetch("/api/v1/public/squarespace-notes", { cache: "no-store" })
-          .then((response) => (response.ok ? response.json() : null))
-          .then((data) => {
-            if (!data || !Array.isArray(data.items) || !data.items.length) return;
-            const link = document.getElementById("notes-link");
-            if (!link) return;
-            link.href = data.items[0].url || "https://noahlucas.squarespace.com/notes";
-            link.textContent = data.items[0].title || "Notes";
-          })
-          .catch(() => {});
 
         themeButton.addEventListener("click", () => {
           const idx = themeOptions.indexOf(currentTheme);
