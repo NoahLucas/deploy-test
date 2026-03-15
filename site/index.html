@@ -170,6 +170,58 @@
         box-shadow: 0 0 18px rgba(51, 182, 255, 0.1);
       }
 
+      :root[data-cycle-phase="dusk"] .place-title,
+      :root[data-cycle-phase="dusk"] .experience-title,
+      :root[data-cycle-phase="dusk"] .core-trigger {
+        color: #f4effa;
+        text-shadow: 0 0 10px rgba(255, 192, 110, 0.08);
+      }
+
+      :root[data-cycle-phase="dusk"] .place-subtitle,
+      :root[data-cycle-phase="dusk"] .experience-subtitle,
+      :root[data-cycle-phase="dusk"] .core-sentence,
+      :root[data-cycle-phase="dusk"] .core-link {
+        color: #c2b7d4;
+      }
+
+      :root[data-cycle-phase="dusk"] .places-rail::after,
+      :root[data-cycle-phase="dusk"] .timeline::after,
+      :root[data-cycle-phase="dusk"] .core-block::before {
+        background: rgba(124, 104, 168, 0.34);
+      }
+
+      :root[data-cycle-phase="sunrise"] .place-title,
+      :root[data-cycle-phase="sunrise"] .experience-title,
+      :root[data-cycle-phase="sunrise"] .core-trigger,
+      :root[data-cycle-phase="sunset"] .place-title,
+      :root[data-cycle-phase="sunset"] .experience-title,
+      :root[data-cycle-phase="sunset"] .core-trigger {
+        text-shadow: 0 0 12px rgba(255, 214, 181, 0.12);
+      }
+
+      :root[data-cycle-phase="sunrise"] .place-subtitle,
+      :root[data-cycle-phase="sunrise"] .experience-subtitle,
+      :root[data-cycle-phase="sunrise"] .core-sentence,
+      :root[data-cycle-phase="sunrise"] .core-link {
+        color: #d4c2b8;
+      }
+
+      :root[data-cycle-phase="sunset"] .place-subtitle,
+      :root[data-cycle-phase="sunset"] .experience-subtitle,
+      :root[data-cycle-phase="sunset"] .core-sentence,
+      :root[data-cycle-phase="sunset"] .core-link {
+        color: #846d63;
+      }
+
+      :root[data-cycle-phase="sunrise"] .places-rail::after,
+      :root[data-cycle-phase="sunrise"] .timeline::after,
+      :root[data-cycle-phase="sunrise"] .core-block::before,
+      :root[data-cycle-phase="sunset"] .places-rail::after,
+      :root[data-cycle-phase="sunset"] .timeline::after,
+      :root[data-cycle-phase="sunset"] .core-block::before {
+        background: color-mix(in srgb, var(--line) 80%, #fff0dd 20%);
+      }
+
       @keyframes fireflyFlicker {
         0%, 100% { opacity: 0.4; }
         18% { opacity: 0.64; }
