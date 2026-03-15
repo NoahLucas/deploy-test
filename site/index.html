@@ -543,7 +543,7 @@
               <span class="core-sentence-line">and Bruce the cat.</span>
               <span class="core-sentence-line"><button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Working at Sift</button>.</span>
             </p>
-            <a class="core-link" id="notes-link" href="https://noahlucas.com/notes" target="_blank" rel="noopener">Notes</a>
+            <a class="core-link" id="notes-link" href="https://noahlucas.squarespace.com/notes" target="_blank" rel="noopener">Notes</a>
           </div>
         </section>
 
@@ -698,7 +698,7 @@
             if (!data || !Array.isArray(data.items) || !data.items.length) return;
             const link = document.getElementById("notes-link");
             if (!link) return;
-            link.href = data.items[0].url || "https://noahlucas.com/notes";
+            link.href = data.items[0].url || "https://noahlucas.squarespace.com/notes";
             link.textContent = data.items[0].title || "Notes";
           })
           .catch(() => {});
