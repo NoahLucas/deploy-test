@@ -4,6 +4,7 @@ import base64
 import json
 import re
 import secrets
+from html import escape
 from html import unescape
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -11,6 +12,7 @@ from xml.etree import ElementTree
 
 import httpx
 from fastapi import APIRouter, Cookie, HTTPException, Request, Response, status
+from fastapi.responses import HTMLResponse, RedirectResponse
 from webauthn import verify_authentication_response, verify_registration_response
 from webauthn.helpers import base64url_to_bytes
 
@@ -88,6 +90,43 @@ def _expected_origin(request: Request) -> str:
     if configured:
         return configured
     return f"{'https' if _is_secure_request(request) else 'http'}://{request.url.hostname or ''}"
+
+
+def _apple_web_client_id(request: Request) -> str:
+    settings = request.app.state.settings
+    return (settings.apple_web_client_id or settings.apple_identity_audience or "").strip()
+
+
+def _apple_web_redirect_uri(request: Request) -> str:
+    return (request.app.state.settings.apple_web_redirect_uri or "").strip()
+
+
+def _ensure_apple_web_ready(request: Request) -> tuple[str, str]:
+    client_id = _apple_web_client_id(request)
+    redirect_uri = _apple_web_redirect_uri(request)
+    if not client_id or not redirect_uri:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Sign in with Apple is not configured yet. Add APPLE_WEB_CLIENT_ID and APPLE_WEB_REDIRECT_URI.",
+        )
+    return client_id, redirect_uri
+
+
+def _issue_admin_session(request: Request, response: Response) -> str:
+    now = datetime.now(timezone.utc)
+    expires_at = now + timedelta(hours=8)
+    session_id = secrets.token_urlsafe(32)
+    request.app.state.store.create_admin_auth_session(session_id=session_id, expires_at=expires_at.isoformat())
+    response.set_cookie(
+        key=_ADMIN_AUTH_COOKIE_NAME,
+        value=session_id,
+        httponly=True,
+        secure=_is_secure_request(request),
+        samesite="lax",
+        max_age=int(timedelta(hours=8).total_seconds()),
+        path="/",
+    )
+    return expires_at.isoformat()
 
 
 @router.get("/feed", response_model=PublicFeedResponse)
@@ -259,6 +298,77 @@ def logout_admin_auth(
     return {"logged_out": True}
 
 
+@router.get("/admin-auth/apple/config")
+def get_admin_apple_auth_config(request: Request) -> dict[str, object]:
+    client_id = _apple_web_client_id(request)
+    redirect_uri = _apple_web_redirect_uri(request)
+    return {
+        "enabled": bool(client_id and redirect_uri),
+        "client_id": client_id or None,
+        "redirect_uri": redirect_uri or None,
+    }
+
+
+@router.post("/admin-auth/apple/start")
+def start_admin_apple_auth(request: Request) -> dict[str, object]:
+    client_id, redirect_uri = _ensure_apple_web_ready(request)
+    state = secrets.token_urlsafe(24)
+    nonce = secrets.token_urlsafe(24)
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=10)
+    request.app.state.store.create_admin_auth_challenge(
+        challenge_id=state,
+        kind="apple-web",
+        challenge_b64=nonce,
+        expires_at=expires_at.isoformat(),
+    )
+    return {
+        "state": state,
+        "nonce": nonce,
+        "client_id": client_id,
+        "redirect_uri": redirect_uri,
+    }
+
+
+@router.post("/admin-auth/apple/callback")
+async def complete_admin_apple_auth(request: Request) -> Response:
+    form = await request.form()
+    error = str(form.get("error", "")).strip()
+    error_description = str(form.get("error_description", "")).strip()
+    if error:
+        message = error_description or error or "Apple sign-in failed."
+        return HTMLResponse(
+            content=(
+                "<html><body style=\"font-family:-apple-system,Helvetica,Arial,sans-serif;padding:24px;\">"
+                "<p>Sign in with Apple failed.</p>"
+                f"<p>{escape(message)}</p></body></html>"
+            ),
+            status_code=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    state = str(form.get("state", "")).strip()
+    identity_token = str(form.get("id_token", "")).strip()
+    if not state or not identity_token:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing Apple sign-in state or id_token.")
+
+    challenge = request.app.state.store.consume_admin_auth_challenge(challenge_id=state, kind="apple-web")
+    if not challenge:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Apple sign-in state invalid or expired.")
+
+    try:
+        request.app.state.apple_identity_service.verify_identity_token(
+            identity_token=identity_token,
+            nonce=challenge["challenge_b64"],
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Apple sign-in verification failed: {exc}") from exc
+
+    response = RedirectResponse(url="/ux-live.html", status_code=status.HTTP_303_SEE_OTHER)
+    _issue_admin_session(request, response)
+    return response
+
+
 @router.post("/admin-auth/webauthn/register/challenge")
 def start_admin_register_challenge(request: Request) -> dict[str, object]:
     assert_admin_token(request.headers.get("x-admin-token", ""), request.app.state.settings.admin_token)
@@ -367,22 +477,10 @@ def verify_admin_auth_challenge(request: Request, response: Response, payload: d
     except Exception as exc:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Authentication verification failed: {exc}") from exc
 
-    now = datetime.now(timezone.utc)
-    expires_at = now + timedelta(hours=8)
-    session_id = secrets.token_urlsafe(32)
-    request.app.state.store.create_admin_auth_session(session_id=session_id, expires_at=expires_at.isoformat())
+    expires_at = _issue_admin_session(request, response)
     request.app.state.store.mark_admin_webauthn_credential_used(credential_id=credential_id)
     request.app.state.store.update_admin_webauthn_sign_count(
         credential_id=credential_id,
         sign_count=int(verification.new_sign_count),
     )
-    response.set_cookie(
-        key=_ADMIN_AUTH_COOKIE_NAME,
-        value=session_id,
-        httponly=True,
-        secure=_is_secure_request(request),
-        samesite="lax",
-        max_age=int(timedelta(hours=8).total_seconds()),
-        path="/",
-    )
-    return {"authorized": True, "expires_at": expires_at.isoformat()}
+    return {"authorized": True, "expires_at": expires_at}
