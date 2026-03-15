@@ -91,6 +91,22 @@
         transition: background 700ms ease;
       }
 
+      :root[data-cycle-phase="night"] body::before {
+        background:
+          linear-gradient(to bottom, rgba(3, 7, 16, 0.68) 0%, rgba(3, 7, 16, 0.18) 28%, transparent 52%),
+          radial-gradient(70vmax 60vmax at 78% 16%, var(--glow-a), transparent 70%),
+          radial-gradient(82vmax 74vmax at 12% 88%, var(--glow-b), transparent 75%),
+          radial-gradient(58vmax 32vmax at 50% 12%, var(--mist-b), transparent 80%);
+      }
+
+      :root[data-cycle-phase="dusk"] body::before {
+        background:
+          linear-gradient(to bottom, rgba(16, 12, 28, 0.28) 0%, rgba(16, 12, 28, 0.08) 26%, transparent 46%),
+          radial-gradient(68vmax 62vmax at 78% 16%, var(--glow-a), transparent 72%),
+          radial-gradient(76vmax 72vmax at 14% 88%, var(--glow-b), transparent 76%),
+          radial-gradient(54vmax 34vmax at 50% 12%, var(--mist-b), transparent 82%);
+      }
+
       body::after {
         content: "";
         position: fixed;
@@ -113,7 +129,7 @@
 
       :root[data-cycle-phase="sunrise"] body::after,
       :root[data-cycle-phase="sunset"] body::after {
-        opacity: 0.54;
+        opacity: 0.6;
       }
 
       :root[data-cycle-phase="morning"] body::after,
@@ -802,32 +818,32 @@
           if (hour >= 22 || hour < 5) {
             return {
               phase: "night",
-              bg: "#07101d",
-              text: "#dbf7ff",
-              muted: "#8ba3c7",
-              surface: "#0d1730",
-              line: "#234b72",
-              glowA: "rgba(36, 217, 255, 0.2)",
-              glowB: "rgba(108, 88, 255, 0.22)",
-              mistA: "rgba(26, 112, 146, 0.18)",
-              mistB: "rgba(52, 191, 174, 0.12)",
-              fireflyA: "rgba(255, 197, 137, 0.28)",
-              fireflyB: "rgba(127, 112, 255, 0.22)"
+              bg: "#06101c",
+              text: "#dff9ff",
+              muted: "#8ba2c6",
+              surface: "#0b1730",
+              line: "#25537c",
+              glowA: "rgba(46, 222, 255, 0.24)",
+              glowB: "rgba(103, 84, 255, 0.26)",
+              mistA: "rgba(18, 98, 130, 0.22)",
+              mistB: "rgba(62, 210, 184, 0.14)",
+              fireflyA: "rgba(255, 204, 147, 0.32)",
+              fireflyB: "rgba(129, 118, 255, 0.24)"
             };
           }
 
           if (hour < 7) {
             return {
               phase: "sunrise",
-              bg: "#25273b",
-              text: "#f7f2ee",
-              muted: "#c8b9b0",
-              surface: "#31364d",
-              line: "#5d6075",
-              glowA: "rgba(255, 182, 142, 0.22)",
-              glowB: "rgba(120, 160, 255, 0.14)",
-              mistA: "rgba(255, 203, 160, 0.26)",
-              mistB: "rgba(150, 175, 255, 0.18)",
+              bg: "#25283d",
+              text: "#f8f2ef",
+              muted: "#c9bbb1",
+              surface: "#313851",
+              line: "#61657b",
+              glowA: "rgba(255, 188, 148, 0.24)",
+              glowB: "rgba(124, 168, 255, 0.16)",
+              mistA: "rgba(255, 214, 174, 0.34)",
+              mistB: "rgba(156, 182, 255, 0.22)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
@@ -870,15 +886,15 @@
           if (hour < 19) {
             return {
               phase: "sunset",
-              bg: "#efe4dc",
-              text: "#241816",
-              muted: "#776158",
+              bg: "#eee3db",
+              text: "#241917",
+              muted: "#77625a",
               surface: "#f8f0e9",
-              line: "#dcc7b8",
-              glowA: "rgba(244, 165, 96, 0.22)",
-              glowB: "rgba(230, 174, 152, 0.18)",
-              mistA: "rgba(251, 190, 135, 0.26)",
-              mistB: "rgba(223, 156, 199, 0.16)",
+              line: "#dcc8b9",
+              glowA: "rgba(246, 170, 100, 0.24)",
+              glowB: "rgba(231, 176, 154, 0.18)",
+              mistA: "rgba(251, 196, 138, 0.34)",
+              mistB: "rgba(226, 160, 202, 0.18)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
@@ -887,17 +903,17 @@
           if (hour < 22) {
             return {
               phase: "dusk",
-              bg: "#29243a",
+              bg: "#282339",
               text: "#f2eef9",
               muted: "#b5adc9",
-              surface: "#342d47",
-              line: "#5b4e72",
-              glowA: "rgba(118, 173, 255, 0.18)",
-              glowB: "rgba(228, 117, 193, 0.15)",
-              mistA: "rgba(105, 144, 255, 0.18)",
-              mistB: "rgba(233, 127, 196, 0.12)",
-              fireflyA: "rgba(255, 218, 118, 0.26)",
-              fireflyB: "rgba(172, 255, 210, 0.2)"
+              surface: "#332d47",
+              line: "#5d5074",
+              glowA: "rgba(116, 177, 255, 0.2)",
+              glowB: "rgba(228, 118, 194, 0.15)",
+              mistA: "rgba(102, 146, 255, 0.2)",
+              mistB: "rgba(232, 129, 198, 0.13)",
+              fireflyA: "rgba(255, 208, 112, 0.34)",
+              fireflyB: "rgba(255, 166, 94, 0.26)"
             };
           }
 
