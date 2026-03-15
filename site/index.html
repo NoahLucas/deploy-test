@@ -179,7 +179,7 @@
 
       .core-block {
         position: relative;
-        width: min(360px, 100%);
+        width: min(290px, 100%);
         text-align: center;
         padding: 0 0 0.35rem;
       }
@@ -229,7 +229,7 @@
         display: none;
       }
 
-      @media (max-width: 980px) {
+      @media (max-width: 1100px) {
         main {
           padding: 5rem 2rem 2.6rem;
         }
@@ -259,6 +259,10 @@
         font-size: 12px;
         line-height: 1.55;
         letter-spacing: 0.01em;
+      }
+
+      .core-sentence-line {
+        display: block;
       }
 
       .core-trigger {
@@ -356,41 +360,60 @@
         transform: translateX(-8px) scale(1.03);
       }
 
-      @media (max-width: 900px) {
+      @media (max-width: 1100px) {
         body::before {
           background: radial-gradient(60vmax 60vmax at 50% 10%, color-mix(in srgb, var(--text) 6%, transparent), transparent 82%);
         }
 
         main {
-          padding: 4.4rem 1.1rem 2.4rem;
+          padding: 4.6rem 1.2rem 2.8rem;
         }
 
         .wrap {
-          grid-template-columns: 1fr;
-          row-gap: 2rem;
-          justify-items: center;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          column-gap: 1.6rem;
+          row-gap: 1.9rem;
+          align-items: start;
+        }
+
+        .core-column {
+          order: 1;
+          grid-column: 1 / -1;
+          padding: 0 0 0.2rem;
+        }
+
+        .core-block::before {
+          display: none;
+        }
+
+        .core-block {
+          width: auto;
+          padding: 0;
+        }
+
+        .core-sentence {
+          max-width: 19.5rem;
+          margin: 0 auto;
+        }
+
+        .places-rail,
+        .timeline {
+          width: 100%;
+          gap: 0.8rem;
         }
 
         .places-rail {
-          width: min(320px, 100%);
-          padding-left: 0;
-          gap: 0.82rem;
-          justify-items: center;
-          text-align: center;
+          order: 2;
+          padding-left: 1rem;
+          justify-items: start;
+          text-align: left;
         }
 
         .timeline {
-          width: min(320px, 100%);
-          padding-right: 0;
-          gap: 0.82rem;
-          justify-items: center;
-          text-align: center;
-        }
-
-        .places-rail::after,
-        .timeline::after,
-        .core-block::before {
-          display: none;
+          order: 3;
+          padding-right: 1rem;
+          justify-items: end;
+          text-align: right;
         }
 
         .place:hover,
@@ -400,24 +423,46 @@
           transform: none;
         }
 
+        .place,
+        .experience {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        main {
+          padding: 4.35rem 1rem 2.4rem;
+        }
+
+        .wrap {
+          grid-template-columns: 1fr;
+          row-gap: 1.8rem;
+          justify-items: center;
+        }
+
         .core-column {
           order: 2;
           padding: 0;
         }
 
+        .core-sentence {
+          max-width: 18rem;
+        }
+
         .places-rail {
           order: 1;
+          width: min(320px, 100%);
+          padding-left: 0;
+          justify-items: center;
+          text-align: center;
         }
 
         .timeline {
           order: 3;
-        }
-
-        .place,
-        .experience {
-          display: block;
-          margin-left: 0;
-          max-width: none;
+          width: min(320px, 100%);
+          padding-right: 0;
+          justify-items: center;
+          text-align: center;
         }
 
         .place-title,
@@ -431,9 +476,9 @@
           text-align: center;
         }
 
-        .core-block {
-          width: auto;
-          padding: 0;
+        .places-rail::after,
+        .timeline::after {
+          display: none;
         }
       }
     </style>
@@ -493,10 +538,10 @@
         <section class="core-column" aria-label="Core">
           <div class="core-block">
             <p class="core-sentence">
-              Living in
-              <button class="core-trigger" id="place-toggle" type="button" aria-expanded="false" aria-label="Expand places lived">Ojai, California</button>
-              with Sara, Willa, and Bruce the cat.
-              <button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Vice President of Product at Sift</button>.
+              <span class="core-sentence-line">Living in <button class="core-trigger" id="place-toggle" type="button" aria-expanded="false" aria-label="Expand places lived">Ojai, California</button></span>
+              <span class="core-sentence-line">with Sara, Willa,</span>
+              <span class="core-sentence-line">and Bruce the cat.</span>
+              <span class="core-sentence-line"><button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Working at Sift</button>.</span>
             </p>
             <a class="core-link" id="notes-link" href="https://noahlucas.com/notes" target="_blank" rel="noopener">Notes</a>
           </div>
