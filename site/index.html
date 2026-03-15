@@ -850,6 +850,8 @@
         let ownerSessionActive = false;
         let dayCycleTimer = null;
         let dayCyclePreviewHour = null;
+        let touchStartX = null;
+        let touchStartY = null;
 
         function getStoredTheme() {
           const saved = localStorage.getItem("nl-theme");
@@ -1064,6 +1066,14 @@
           return detailStates.includes(saved) ? saved : "collapsed";
         }
 
+        function stepDayCyclePreview(delta) {
+          if (currentTheme !== "24h") return;
+          const baseHour = Number.isInteger(dayCyclePreviewHour) ? dayCyclePreviewHour : new Date().getHours();
+          dayCyclePreviewHour = (baseHour + delta + 24) % 24;
+          applyDayCycleTheme(new Date());
+          scheduleDayCycleRefresh(currentTheme);
+        }
+
         function applyPlaceState(state) {
           root.setAttribute("data-place-state", state);
           if (placeToggle) {
@@ -1238,14 +1248,32 @@
           if (currentTheme !== "24h") return;
           if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
           event.preventDefault();
-          const baseHour = Number.isInteger(dayCyclePreviewHour) ? dayCyclePreviewHour : new Date().getHours();
-          dayCyclePreviewHour =
-            event.key === "ArrowRight"
-              ? (baseHour + 1) % 24
-              : (baseHour + 23) % 24;
-          applyDayCycleTheme(new Date());
-          scheduleDayCycleRefresh(currentTheme);
+          stepDayCyclePreview(event.key === "ArrowRight" ? 1 : -1);
         });
+
+        document.addEventListener("touchstart", (event) => {
+          if (currentTheme !== "24h" || ownerModal?.dataset.open === "true") return;
+          if (!event.touches || event.touches.length !== 1) return;
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener("touchend", (event) => {
+          if (currentTheme !== "24h" || ownerModal?.dataset.open === "true") return;
+          if (touchStartX === null || touchStartY === null) return;
+          const touch = event.changedTouches && event.changedTouches[0];
+          if (!touch) {
+            touchStartX = null;
+            touchStartY = null;
+            return;
+          }
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          touchStartX = null;
+          touchStartY = null;
+          if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+          stepDayCyclePreview(deltaX < 0 ? 1 : -1);
+        }, { passive: true });
 
         if (placeToggle) {
           placeToggle.addEventListener("click", togglePlaceState);
