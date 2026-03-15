@@ -179,10 +179,9 @@
 
       .core-block {
         position: relative;
-        width: min(280px, 100%);
+        width: min(360px, 100%);
         text-align: center;
         padding: 0 0 0.35rem;
-        cursor: pointer;
       }
 
       .core-block::before {
@@ -202,29 +201,31 @@
         z-index: 1;
       }
 
-      .core-block:focus-visible {
-        outline: none;
-      }
-
       .place[data-current="true"],
       .experience[data-current="true"] {
         order: -1;
       }
 
-      :root[data-rail-state="collapsed"] .places-rail,
-      :root[data-rail-state="collapsed"] .timeline {
+      :root[data-place-state="collapsed"] .places-rail {
         gap: 0;
       }
 
-      :root[data-rail-state="collapsed"] .places-rail::after,
-      :root[data-rail-state="collapsed"] .timeline::after {
+      :root[data-job-state="collapsed"] .timeline {
+        gap: 0;
+      }
+
+      :root[data-place-state="collapsed"] .places-rail::after,
+      :root[data-job-state="collapsed"] .timeline::after {
         top: 0.2rem;
         bottom: auto;
         height: 2.4rem;
       }
 
-      :root[data-rail-state="collapsed"] .place:not([data-current="true"]),
-      :root[data-rail-state="collapsed"] .experience:not([data-current="true"]) {
+      :root[data-place-state="collapsed"] .place:not([data-current="true"]) {
+        display: none;
+      }
+
+      :root[data-job-state="collapsed"] .experience:not([data-current="true"]) {
         display: none;
       }
 
@@ -252,22 +253,30 @@
         }
       }
 
-      .core-name {
-        display: block;
-        color: var(--text);
-        font-size: 15px;
-        font-weight: 520;
-        line-height: 1.22;
-        letter-spacing: 0.02em;
+      .core-sentence {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.55;
+        letter-spacing: 0.01em;
       }
 
-      .core-line {
-        display: block;
-        margin-top: 0.3rem;
-        color: var(--muted);
-        font-size: 11px;
-        line-height: 1.2;
-        letter-spacing: 0.02em;
+      .core-trigger {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        color: var(--text);
+        font: inherit;
+        font-weight: 520;
+        letter-spacing: inherit;
+        cursor: pointer;
+      }
+
+      .core-trigger:hover,
+      .core-trigger:focus-visible {
+        color: var(--text);
+        outline: none;
       }
 
       .core-link,
@@ -482,12 +491,13 @@
         </section>
 
         <section class="core-column" aria-label="Core">
-          <div class="core-block" id="core-toggle" role="button" tabindex="0" aria-expanded="true" aria-label="Toggle places and work detail">
-            <span class="core-name">Lucas</span>
-            <span class="core-line">Noah</span>
-            <span class="core-line">Sara</span>
-            <span class="core-line">Willa</span>
-            <span class="core-line">Bruce</span>
+          <div class="core-block">
+            <p class="core-sentence">
+              Living in
+              <button class="core-trigger" id="place-toggle" type="button" aria-expanded="false" aria-label="Expand places lived">Ojai, California</button>
+              with Sara, Willa, and Bruce the cat.
+              <button class="core-trigger" id="job-toggle" type="button" aria-expanded="false" aria-label="Expand work history">Vice President of Product at Sift</button>.
+            </p>
             <a class="core-link" id="notes-link" href="https://noahlucas.com/notes" target="_blank" rel="noopener">Notes</a>
           </div>
         </section>
@@ -536,9 +546,10 @@
         const root = document.documentElement;
         const themeButton = document.getElementById("theme-toggle");
         const ownerGate = document.getElementById("owner-gate");
-        const coreToggle = document.getElementById("core-toggle");
+        const placeToggle = document.getElementById("place-toggle");
+        const jobToggle = document.getElementById("job-toggle");
         const themeOptions = ["system", "light", "dark"];
-        const railStates = ["expanded", "collapsed"];
+        const detailStates = ["expanded", "collapsed"];
         let ownerSessionActive = false;
 
         function getStoredTheme() {
@@ -559,29 +570,45 @@
           themeButton.setAttribute("title", label);
         }
 
-        function getStoredRailState() {
-          const saved = localStorage.getItem("nl-rail-state");
-          return railStates.includes(saved) ? saved : "expanded";
+        function getStoredDetailState(key) {
+          const saved = localStorage.getItem(key);
+          return detailStates.includes(saved) ? saved : "collapsed";
         }
 
-        function applyRailState(state) {
-          root.setAttribute("data-rail-state", state);
-          if (coreToggle) {
-            coreToggle.setAttribute("aria-expanded", String(state === "expanded"));
-            coreToggle.setAttribute(
+        function applyPlaceState(state) {
+          root.setAttribute("data-place-state", state);
+          if (placeToggle) {
+            placeToggle.setAttribute("aria-expanded", String(state === "expanded"));
+            placeToggle.setAttribute(
               "aria-label",
-              state === "expanded"
-                ? "Collapse places and work detail"
-                : "Expand places and work detail"
+              state === "expanded" ? "Collapse places lived" : "Expand places lived"
             );
           }
         }
 
-        function toggleRailState() {
-          const current = root.getAttribute("data-rail-state") || "expanded";
+        function applyJobState(state) {
+          root.setAttribute("data-job-state", state);
+          if (jobToggle) {
+            jobToggle.setAttribute("aria-expanded", String(state === "expanded"));
+            jobToggle.setAttribute(
+              "aria-label",
+              state === "expanded" ? "Collapse work history" : "Expand work history"
+            );
+          }
+        }
+
+        function togglePlaceState() {
+          const current = root.getAttribute("data-place-state") || "collapsed";
           const next = current === "expanded" ? "collapsed" : "expanded";
-          localStorage.setItem("nl-rail-state", next);
-          applyRailState(next);
+          localStorage.setItem("nl-place-state", next);
+          applyPlaceState(next);
+        }
+
+        function toggleJobState() {
+          const current = root.getAttribute("data-job-state") || "collapsed";
+          const next = current === "expanded" ? "collapsed" : "expanded";
+          localStorage.setItem("nl-job-state", next);
+          applyJobState(next);
         }
 
         function renderOwnerGate() {
@@ -615,7 +642,8 @@
 
         let currentTheme = getStoredTheme();
         applyTheme(currentTheme);
-        applyRailState(getStoredRailState());
+        applyPlaceState(getStoredDetailState("nl-place-state"));
+        applyJobState(getStoredDetailState("nl-job-state"));
         renderOwnerGate();
         syncOwnerSessionState();
 
@@ -637,12 +665,22 @@
           applyTheme(currentTheme);
         });
 
-        if (coreToggle) {
-          coreToggle.addEventListener("click", toggleRailState);
-          coreToggle.addEventListener("keydown", (event) => {
+        if (placeToggle) {
+          placeToggle.addEventListener("click", togglePlaceState);
+          placeToggle.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
-              toggleRailState();
+              togglePlaceState();
+            }
+          });
+        }
+
+        if (jobToggle) {
+          jobToggle.addEventListener("click", toggleJobState);
+          jobToggle.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              toggleJobState();
             }
           });
         }
