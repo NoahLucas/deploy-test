@@ -85,8 +85,9 @@
         inset: 0;
         pointer-events: none;
         background:
-          radial-gradient(72vmax 72vmax at 82% 18%, var(--glow-a), transparent 74%),
-          radial-gradient(80vmax 80vmax at 12% 84%, var(--glow-b), transparent 78%);
+          radial-gradient(68vmax 62vmax at 78% 16%, var(--glow-a), transparent 72%),
+          radial-gradient(76vmax 72vmax at 14% 88%, var(--glow-b), transparent 76%),
+          radial-gradient(54vmax 34vmax at 50% 12%, var(--mist-b), transparent 82%);
         transition: background 700ms ease;
       }
 
@@ -110,8 +111,22 @@
         opacity: 0.62;
       }
 
+      :root[data-cycle-phase="sunrise"] body::after,
+      :root[data-cycle-phase="sunset"] body::after {
+        opacity: 0.54;
+      }
+
+      :root[data-cycle-phase="morning"] body::after,
+      :root[data-cycle-phase="day"] body::after {
+        opacity: 0.34;
+      }
+
       :root[data-cycle-phase="dusk"] body::after {
         animation: fireflyFlicker 9s ease-in-out infinite;
+      }
+
+      :root[data-cycle-phase="night"] body::after {
+        animation: fireflyFlicker 11s ease-in-out infinite;
       }
 
       @keyframes fireflyFlicker {
@@ -383,6 +398,7 @@
       :root[data-job-state="collapsed"] .experience:not([data-current="true"]) {
         display: none;
       }
+
       @media (max-width: 1100px) {
         main {
           padding: 5rem 2rem 2.6rem;
@@ -520,7 +536,7 @@
         }
 
         main {
-          padding: 4.6rem 1.15rem 2.6rem;
+          padding: 4.35rem 1rem 2.4rem;
         }
 
         .wrap {
@@ -783,35 +799,35 @@
         function get24HourPalette(date = new Date()) {
           const hour = date.getHours();
 
-          if (hour >= 0 && hour < 5) {
+          if (hour >= 22 || hour < 5) {
             return {
               phase: "night",
-              bg: "#07111f",
-              text: "#ddf7ff",
-              muted: "#8fa6c7",
-              surface: "#0e1832",
-              line: "#27446e",
-              glowA: "rgba(47, 210, 255, 0.16)",
-              glowB: "rgba(103, 86, 255, 0.2)",
-              mistA: "rgba(14, 84, 135, 0.16)",
-              mistB: "rgba(88, 72, 204, 0.1)",
-              fireflyA: "rgba(88, 239, 255, 0.22)",
-              fireflyB: "rgba(122, 112, 255, 0.18)"
+              bg: "#07101d",
+              text: "#dbf7ff",
+              muted: "#8ba3c7",
+              surface: "#0d1730",
+              line: "#234b72",
+              glowA: "rgba(36, 217, 255, 0.2)",
+              glowB: "rgba(108, 88, 255, 0.22)",
+              mistA: "rgba(26, 112, 146, 0.18)",
+              mistB: "rgba(52, 191, 174, 0.12)",
+              fireflyA: "rgba(255, 197, 137, 0.28)",
+              fireflyB: "rgba(127, 112, 255, 0.22)"
             };
           }
 
           if (hour < 7) {
             return {
               phase: "sunrise",
-              bg: "#1f2234",
-              text: "#f5f2f0",
-              muted: "#c4b7b0",
-              surface: "#2a2f45",
-              line: "#53556c",
-              glowA: "rgba(255, 177, 141, 0.18)",
-              glowB: "rgba(117, 147, 255, 0.12)",
-              mistA: "rgba(255, 197, 158, 0.22)",
-              mistB: "rgba(132, 154, 255, 0.14)",
+              bg: "#25273b",
+              text: "#f7f2ee",
+              muted: "#c8b9b0",
+              surface: "#31364d",
+              line: "#5d6075",
+              glowA: "rgba(255, 182, 142, 0.22)",
+              glowB: "rgba(120, 160, 255, 0.14)",
+              mistA: "rgba(255, 203, 160, 0.26)",
+              mistB: "rgba(150, 175, 255, 0.18)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
@@ -820,15 +836,15 @@
           if (hour < 11) {
             return {
               phase: "morning",
-              bg: "#e8ece8",
-              text: "#17211b",
-              muted: "#5e6e64",
-              surface: "#f4f5ef",
-              line: "#cfd6cc",
-              glowA: "rgba(176, 220, 192, 0.22)",
-              glowB: "rgba(197, 214, 235, 0.18)",
-              mistA: "rgba(216, 232, 222, 0.14)",
-              mistB: "rgba(208, 220, 232, 0.12)",
+              bg: "#e6ece8",
+              text: "#162019",
+              muted: "#607065",
+              surface: "#f2f5ef",
+              line: "#cdd7cd",
+              glowA: "rgba(169, 223, 192, 0.2)",
+              glowB: "rgba(191, 220, 233, 0.18)",
+              mistA: "rgba(213, 233, 220, 0.18)",
+              mistB: "rgba(202, 226, 238, 0.13)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
@@ -837,15 +853,15 @@
           if (hour < 16) {
             return {
               phase: "day",
-              bg: "#e7ecef",
-              text: "#111b20",
-              muted: "#5d6b73",
-              surface: "#f7f9fa",
-              line: "#ced8dd",
-              glowA: "rgba(157, 203, 219, 0.2)",
-              glowB: "rgba(210, 224, 231, 0.16)",
-              mistA: "rgba(214, 228, 236, 0.1)",
-              mistB: "rgba(221, 232, 238, 0.08)",
+              bg: "#e6ecef",
+              text: "#121b21",
+              muted: "#5d6d74",
+              surface: "#f6f9fa",
+              line: "#ced9dd",
+              glowA: "rgba(148, 204, 222, 0.16)",
+              glowB: "rgba(219, 228, 233, 0.14)",
+              mistA: "rgba(207, 224, 232, 0.1)",
+              mistB: "rgba(224, 236, 242, 0.08)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
@@ -854,50 +870,50 @@
           if (hour < 19) {
             return {
               phase: "sunset",
-              bg: "#efe7df",
-              text: "#231917",
-              muted: "#76625a",
-              surface: "#f7f1eb",
-              line: "#dbc8ba",
-              glowA: "rgba(240, 165, 101, 0.18)",
-              glowB: "rgba(224, 197, 150, 0.16)",
-              mistA: "rgba(250, 194, 136, 0.22)",
-              mistB: "rgba(219, 162, 201, 0.12)",
+              bg: "#efe4dc",
+              text: "#241816",
+              muted: "#776158",
+              surface: "#f8f0e9",
+              line: "#dcc7b8",
+              glowA: "rgba(244, 165, 96, 0.22)",
+              glowB: "rgba(230, 174, 152, 0.18)",
+              mistA: "rgba(251, 190, 135, 0.26)",
+              mistB: "rgba(223, 156, 199, 0.16)",
               fireflyA: "transparent",
               fireflyB: "transparent"
             };
           }
 
-          if (hour < 21) {
+          if (hour < 22) {
             return {
               phase: "dusk",
-              bg: "#2a2434",
-              text: "#f0edf8",
-              muted: "#b3abc7",
-              surface: "#342d43",
-              line: "#564d67",
-              glowA: "rgba(122, 169, 255, 0.16)",
-              glowB: "rgba(237, 129, 196, 0.14)",
-              mistA: "rgba(111, 135, 255, 0.16)",
-              mistB: "rgba(230, 121, 192, 0.1)",
-              fireflyA: "rgba(255, 222, 110, 0.24)",
-              fireflyB: "rgba(173, 255, 205, 0.2)"
+              bg: "#29243a",
+              text: "#f2eef9",
+              muted: "#b5adc9",
+              surface: "#342d47",
+              line: "#5b4e72",
+              glowA: "rgba(118, 173, 255, 0.18)",
+              glowB: "rgba(228, 117, 193, 0.15)",
+              mistA: "rgba(105, 144, 255, 0.18)",
+              mistB: "rgba(233, 127, 196, 0.12)",
+              fireflyA: "rgba(255, 218, 118, 0.26)",
+              fireflyB: "rgba(172, 255, 210, 0.2)"
             };
           }
 
           return {
             phase: "night",
-            bg: "#081120",
-            text: "#e2f8ff",
-            muted: "#90a8cb",
-            surface: "#101a35",
-            line: "#28436f",
-            glowA: "rgba(43, 214, 255, 0.16)",
-            glowB: "rgba(94, 92, 255, 0.2)",
-            mistA: "rgba(18, 90, 140, 0.15)",
-            mistB: "rgba(98, 88, 220, 0.1)",
-            fireflyA: "rgba(94, 241, 255, 0.22)",
-            fireflyB: "rgba(126, 111, 255, 0.18)"
+            bg: "#07111f",
+            text: "#ddf7ff",
+            muted: "#8aa6c9",
+            surface: "#0c1831",
+            line: "#25527b",
+            glowA: "rgba(48, 225, 255, 0.2)",
+            glowB: "rgba(97, 86, 255, 0.24)",
+            mistA: "rgba(16, 93, 135, 0.2)",
+            mistB: "rgba(72, 214, 188, 0.12)",
+            fireflyA: "rgba(255, 202, 145, 0.28)",
+            fireflyB: "rgba(125, 116, 255, 0.22)"
           };
         }
 
