@@ -186,10 +186,11 @@
       .places-rail {
         width: 100%;
         position: relative;
-        padding-left: 1.35rem;
+        padding-right: 1.35rem;
         display: grid;
         gap: 0.88rem;
-        text-align: left;
+        justify-items: end;
+        text-align: right;
       }
 
       .places-rail::after {
@@ -197,7 +198,7 @@
         position: absolute;
         top: 0.2rem;
         bottom: 0.2rem;
-        left: 0;
+        right: 0;
         width: 1px;
         background: color-mix(in srgb, var(--text) 20%, transparent);
       }
@@ -207,12 +208,11 @@
         display: inline-block;
         max-width: 300px;
         transition: transform 220ms ease, opacity 220ms ease;
-        transform-origin: left center;
+        transform-origin: right center;
       }
 
       .place-title {
         display: block;
-        margin-left: 1.1rem;
         color: var(--text);
         font-size: 13px;
         font-weight: 520;
@@ -222,7 +222,6 @@
 
       .place-subtitle {
         display: block;
-        margin-left: 1.1rem;
         margin-top: 0.14rem;
         color: var(--muted);
         font-size: 11px;
@@ -300,11 +299,11 @@
         }
 
         .places-rail {
-          padding-left: 1rem;
+          padding-right: 1rem;
         }
 
         .timeline {
-          padding-right: 1rem;
+          padding-left: 1rem;
         }
 
         .place-title,
@@ -361,10 +360,11 @@
       .timeline {
         width: 100%;
         position: relative;
-        padding-right: 1.35rem;
+        padding-left: 1.35rem;
         display: grid;
         gap: 0.88rem;
-        text-align: right;
+        justify-items: start;
+        text-align: left;
       }
 
       .timeline::after {
@@ -372,7 +372,7 @@
         position: absolute;
         top: 0.2rem;
         bottom: 0.2rem;
-        right: 0;
+        left: 0;
         width: 1px;
         background: color-mix(in srgb, var(--text) 20%, transparent);
       }
@@ -380,9 +380,8 @@
       .experience {
         position: relative;
         display: inline-block;
-        margin-left: auto;
         transition: transform 180ms ease, opacity 180ms ease;
-        transform-origin: right center;
+        transform-origin: left center;
       }
 
       .experience-title,
@@ -412,12 +411,12 @@
 
       .place:hover,
       .place:focus-within {
-        transform: translateX(8px) scale(1.03);
+        transform: translateX(-8px) scale(1.03);
       }
 
       .experience:hover,
       .experience:focus-within {
-        transform: translateX(-8px) scale(1.03);
+        transform: translateX(8px) scale(1.03);
       }
 
       @media (max-width: 1100px) {
@@ -464,14 +463,14 @@
 
         .places-rail {
           order: 3;
-          padding-left: 1rem;
+          padding-right: 1rem;
           justify-items: start;
           text-align: left;
         }
 
         .timeline {
           order: 2;
-          padding-right: 1rem;
+          padding-left: 1rem;
           justify-items: end;
           text-align: right;
         }
