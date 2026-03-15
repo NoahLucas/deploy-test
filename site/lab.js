@@ -203,8 +203,151 @@ function bindAppleTools() {
   });
 }
 
+function bindAutobiographer() {
+  const output = $("autobio-output");
+  const initForm = $("autobio-init-form");
+  const refreshBtn = $("autobio-refresh-chapters");
+  const eventForm = $("autobio-event-form");
+  const generateForm = $("autobio-generate-form");
+  const generateYearBtn = $("autobio-generate-year-chapter");
+  const publishYearBtn = $("autobio-publish-year");
+  const publishBtn = $("autobio-publish-live");
+  if (!output || !initForm || !refreshBtn || !eventForm || !generateForm || !generateYearBtn || !publishYearBtn || !publishBtn) return;
+
+  const yearInput = $("autobio-year");
+  const personaInput = $("autobio-persona");
+  const styleInput = $("autobio-style");
+  const generateYearInput = $("autobio-generate-year");
+  const generateMonthInput = $("autobio-generate-month");
+  const forceInput = $("autobio-force");
+
+  const load = async () => {
+    try {
+      const year = Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear());
+      const [months, years] = await Promise.all([
+        getJson(`/api/v1/lab/autobiographer/chapters?year=${year}`, true),
+        getJson("/api/v1/lab/autobiographer/year-chapters?limit=12", true)
+      ]);
+      pretty(output, { monthly: months, yearly: years });
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  };
+
+  initForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+      const payload = {
+        year: Number(yearInput?.value || new Date().getFullYear()),
+        persona_label: personaInput?.value || "founder-biographer",
+        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes."
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/chapters/initialize-year", payload, true);
+      pretty(output, data);
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+
+  eventForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+      const tags = String($("autobio-event-tags")?.value || "")
+        .split(",")
+        .map((v) => v.trim())
+        .filter(Boolean);
+      const payload = {
+        source: $("autobio-event-source")?.value || "manual-journal",
+        title: $("autobio-event-title")?.value || "",
+        detail: $("autobio-event-detail")?.value || "",
+        tags,
+        event_at: ($("autobio-event-at")?.value || "").trim() || undefined
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/events", payload, true);
+      pretty(output, data);
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+
+  generateForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+      const payload = {
+        year: Number(generateYearInput?.value || new Date().getFullYear()),
+        month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
+        persona_label: personaInput?.value || "founder-biographer",
+        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        include_private_context: true,
+        force_regenerate: String(forceInput?.value || "false") === "true"
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/chapters/generate", payload, true);
+      pretty(output, data);
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+
+  refreshBtn.addEventListener("click", load);
+  generateYearBtn.addEventListener("click", async () => {
+    try {
+      const payload = {
+        year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
+        persona_label: personaInput?.value || "founder-biographer",
+        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        include_private_context: true
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/year-chapters/generate", payload, true);
+      pretty(output, data);
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+  publishYearBtn.addEventListener("click", async () => {
+    try {
+      const payload = {
+        year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
+        persona_label: personaInput?.value || "founder-biographer",
+        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        include_private_context: true,
+        force_regenerate: String(forceInput?.value || "false") === "true",
+        subdir: "notes-drafts"
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/publish-year-note", payload, true);
+      pretty(output, data);
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+  publishBtn.addEventListener("click", async () => {
+    try {
+      const payload = {
+        year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
+        month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
+        persona_label: personaInput?.value || "founder-biographer",
+        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        include_private_context: true,
+        force_regenerate: false,
+        subdir: "notes-drafts"
+      };
+      const data = await postJson("/api/v1/lab/autobiographer/publish-live-note", payload, true);
+      pretty(output, data);
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  });
+
+  load();
+}
+
 bindToken();
 bindDailyBrief();
 bindWeeklySnapshot();
 bindDecisionJournal();
+bindAutobiographer();
 bindAppleTools();

@@ -6,6 +6,8 @@ from typing import Any, Dict, Optional
 import httpx
 
 from app.core.config import Settings
+from app.prompts.autobiographer import autobiographer_month_prompt, autobiographer_year_prompt
+from app.prompts.historian import historian_interview_prompt
 
 
 class OpenAIService:
@@ -13,7 +15,7 @@ class OpenAIService:
         self.settings = settings
         self._client = httpx.Client(
             base_url="https://api.openai.com",
-            timeout=httpx.Timeout(20.0, connect=8.0),
+            timeout=httpx.Timeout(120.0, connect=8.0),
             headers={
                 "Authorization": f"Bearer {settings.openai_api_key}",
                 "Content-Type": "application/json",
@@ -40,7 +42,7 @@ class OpenAIService:
         payload = {
             "model": self._active_model,
             "store": False,
-            "input": [{"role": "user", "content": [{"type": "text", "text": "health check"}]}],
+            "input": [{"role": "user", "content": [{"type": "input_text", "text": "health check"}]}],
             "max_output_tokens": 8,
         }
         response = self._client.post("/v1/responses", json=payload)
@@ -90,7 +92,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "You generate concise executive operating intelligence for a public website. "
                                 "Never reveal raw health metrics. Output strict JSON with keys headline and action. "
@@ -103,7 +105,7 @@ class OpenAIService:
                     "role": "user",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": json.dumps(prompt),
                         }
                     ],
@@ -156,7 +158,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "Generate high-quality notes ideas for an operator-focused personal brand. "
                                 "Return strict JSON: {\"ideas\":[{\"title\",\"thesis\",\"why_now\",\"format\",\"outline\"}]}. "
@@ -168,7 +170,7 @@ class OpenAIService:
                 },
                 {
                     "role": "user",
-                    "content": [{"type": "text", "text": json.dumps(prompt)}],
+                    "content": [{"type": "input_text", "text": json.dumps(prompt)}],
                 },
             ],
         }
@@ -208,7 +210,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "Write a publish-ready markdown note in an operator voice. "
                                 "Return strict JSON with keys: "
@@ -221,7 +223,7 @@ class OpenAIService:
                 },
                 {
                     "role": "user",
-                    "content": [{"type": "text", "text": json.dumps(prompt)}],
+                    "content": [{"type": "input_text", "text": json.dumps(prompt)}],
                 },
             ],
         }
@@ -262,7 +264,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "You generate a concise daily operating brief for an executive product leader. "
                                 "Return strict JSON with keys: headline, top_actions, watchouts, communication_draft. "
@@ -274,7 +276,7 @@ class OpenAIService:
                 },
                 {
                     "role": "user",
-                    "content": [{"type": "text", "text": json.dumps(prompt)}],
+                    "content": [{"type": "input_text", "text": json.dumps(prompt)}],
                 },
             ],
         }
@@ -307,7 +309,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "You are a chief-of-staff orchestrator for an AI-native product operation. "
                                 "Return strict JSON with keys planner_summary and tasks. "
@@ -322,7 +324,7 @@ class OpenAIService:
                     "role": "user",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": json.dumps({"mission": mission, "context": context}),
                         }
                     ],
@@ -359,7 +361,7 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": (
                                 "You are an execution agent in an AI-native product operating system. "
                                 "Return strict JSON with keys: summary, deliverable, next_steps. "
@@ -373,7 +375,7 @@ class OpenAIService:
                     "role": "user",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": json.dumps(
                                 {
                                     "mission": mission,
@@ -420,14 +422,8 @@ class OpenAIService:
                     "role": "system",
                     "content": [
                         {
-                            "type": "text",
-                            "text": (
-                                "You are an autobiographer agent creating one monthly chapter for a living life journal. "
-                                "Return strict JSON with keys: summary, chapter_markdown. "
-                                "summary must be <= 45 words. "
-                                "chapter_markdown should include: title, narrative arc, key moments, reflections, and open threads. "
-                                "Write in grounded nonfiction style, emotionally intelligent, specific, and personal."
-                            ),
+                            "type": "input_text",
+                            "text": autobiographer_month_prompt(),
                         }
                     ],
                 },
@@ -435,7 +431,7 @@ class OpenAIService:
                     "role": "user",
                     "content": [
                         {
-                            "type": "text",
+                            "type": "input_text",
                             "text": json.dumps(
                                 {
                                     "year": year,
@@ -445,6 +441,180 @@ class OpenAIService:
                                     "style_brief": style_brief,
                                     "include_private_context": include_private_context,
                                     "memory_events": memory_events,
+                                }
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
+    def generate_autobiographer_year_chapter(
+        self,
+        *,
+        year: int,
+        persona_label: str,
+        style_brief: str,
+        monthly_chapters: list[Dict[str, Any]],
+        memory_events: list[Dict[str, Any]],
+        include_private_context: bool,
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": autobiographer_year_prompt(),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": json.dumps(
+                                {
+                                    "year": year,
+                                    "persona_label": persona_label,
+                                    "style_brief": style_brief,
+                                    "include_private_context": include_private_context,
+                                    "monthly_chapters": monthly_chapters,
+                                    "memory_events": memory_events,
+                                }
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
+    def generate_historian_interview_turn(
+        self,
+        *,
+        session: Dict[str, Any],
+        turns: list[Dict[str, Any]],
+        memory_events: list[Dict[str, Any]],
+        year_chapters: list[Dict[str, Any]],
+        max_questions: int,
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": historian_interview_prompt(),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": json.dumps(
+                                {
+                                    "session": session,
+                                    "turns": turns,
+                                    "memory_events": memory_events,
+                                    "year_chapters": year_chapters,
+                                    "max_questions": max_questions,
+                                }
+                            ),
+                        }
+                    ],
+                },
+            ],
+        }
+        response = self._client.post("/v1/responses", json=payload)
+        response.raise_for_status()
+        text = self._extract_text(response.json())
+        if not text:
+            return None
+        try:
+            parsed = json.loads(text)
+        except json.JSONDecodeError:
+            return None
+        if not isinstance(parsed, dict):
+            return None
+        return parsed
+
+    def generate_site_memory_chat(
+        self,
+        *,
+        message: str,
+        year: Optional[int],
+        memory_events: list[Dict[str, Any]],
+        year_chapters: list[Dict[str, Any]],
+        revisions: list[Dict[str, Any]],
+    ) -> Optional[Dict[str, Any]]:
+        self._require_key()
+        payload = {
+            "model": self._active_model,
+            "store": False,
+            "input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": (
+                                "You are the memory and autobiography guide for noahlucas.com. "
+                                "Answer from the provided life records only. "
+                                "Return strict JSON with keys: answer_markdown, sources. "
+                                "sources must be an array of objects with keys kind, label, detail, ref. "
+                                "Every substantive answer should cite the most relevant records. "
+                                "Do not invent facts or imply certainty beyond the evidence."
+                            ),
+                        }
+                    ],
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": json.dumps(
+                                {
+                                    "message": message,
+                                    "year": year,
+                                    "memory_events": memory_events,
+                                    "year_chapters": year_chapters,
+                                    "revisions": revisions,
                                 }
                             ),
                         }

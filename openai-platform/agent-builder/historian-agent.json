@@ -1,0 +1,44 @@
+{
+  "name": "Historian",
+  "purpose": "Interview organically, detect missing life periods, and turn recollection into structured memory leads.",
+  "runtime": "responses-api",
+  "recommended_model": "gpt-5",
+  "prompt_file": "openai-platform/prompts/historian.prompt.md",
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_interview_sessions",
+      "description": "Fetch prior historian interview sessions."
+    },
+    {
+      "type": "function",
+      "name": "list_interview_turns",
+      "description": "Fetch prior interview turns for context."
+    },
+    {
+      "type": "function",
+      "name": "list_memory_events",
+      "description": "Fetch existing autobiographer memory events to identify gaps and overlaps."
+    },
+    {
+      "type": "function",
+      "name": "list_year_chapters",
+      "description": "Fetch existing yearly chapters to identify sparse or missing eras."
+    },
+    {
+      "type": "function",
+      "name": "save_interview_turn",
+      "description": "Persist the next historian turn."
+    },
+    {
+      "type": "function",
+      "name": "extract_memories_from_turns",
+      "description": "Convert user answers into candidate autobiographer memory events."
+    }
+  ],
+  "notes": [
+    "Use Responses API in production.",
+    "Use Agent Builder for interview prompt iteration and workflow shaping.",
+    "Keep confidence explicit and do not invent memories."
+  ]
+}

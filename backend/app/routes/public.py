@@ -8,6 +8,7 @@ from html import escape
 from html import unescape
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from typing import Optional
 from xml.etree import ElementTree
 
 import httpx
@@ -49,6 +50,59 @@ def _draft_files(project_root: Path, limit: int = 24) -> list[Path]:
 
 def _read_draft(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _find_draft_by_slug(project_root: Path, slug: str) -> Optional[dict]:
+    slug = slug.strip().lower()
+    if not slug:
+        return None
+
+    for file_path in _draft_files(project_root, limit=100):
+        try:
+            raw = _read_draft(file_path)
+        except Exception:
+            continue
+        if str(raw.get("slug", "")).strip().lower() != slug:
+            continue
+        try:
+            return {
+                "title": str(raw["title"]),
+                "slug": str(raw["slug"]),
+                "summary": str(raw["summary"]),
+                "body_markdown": str(raw["body_markdown"]),
+                "meta_title": str(raw["meta_title"]),
+                "meta_description": str(raw["meta_description"]),
+                "social_quotes": [str(q) for q in raw.get("social_quotes", [])][:3],
+                "generated_at": datetime.fromtimestamp(file_path.stat().st_mtime, tz=timezone.utc),
+            }
+        except Exception:
+            return None
+    return None
+
+
+def _latest_autobiography_slug(project_root: Path, *, prefer_live: bool) -> Optional[str]:
+    matched: list[tuple[datetime, str]] = []
+    prefix = "autobiography-"
+    suffix = "-live" if prefer_live else ""
+
+    for file_path in _draft_files(project_root, limit=100):
+        try:
+            raw = _read_draft(file_path)
+        except Exception:
+            continue
+        slug = str(raw.get("slug", "")).strip().lower()
+        if not slug.startswith(prefix):
+            continue
+        if prefer_live and not slug.endswith("-live"):
+            continue
+        if not prefer_live and slug.endswith("-live"):
+            continue
+        matched.append((datetime.fromtimestamp(file_path.stat().st_mtime, tz=timezone.utc), slug))
+
+    if not matched:
+        return None
+    matched.sort(key=lambda item: item[0], reverse=True)
+    return matched[0][1]
 
 
 def _rss_text(parent: ElementTree.Element, tag: str) -> str:
@@ -190,28 +244,33 @@ def get_public_note_draft_detail(slug: str, request: Request) -> PublicNoteDetai
     if not slug:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found.")
 
-    for file_path in _draft_files(project_root, limit=100):
-        try:
-            raw = _read_draft(file_path)
-        except Exception:
-            continue
-        if str(raw.get("slug", "")).strip().lower() != slug:
-            continue
-        try:
-            return PublicNoteDetailResponse(
-                title=str(raw["title"]),
-                slug=str(raw["slug"]),
-                summary=str(raw["summary"]),
-                body_markdown=str(raw["body_markdown"]),
-                meta_title=str(raw["meta_title"]),
-                meta_description=str(raw["meta_description"]),
-                social_quotes=[str(q) for q in raw.get("social_quotes", [])][:3],
-                generated_at=datetime.fromtimestamp(file_path.stat().st_mtime, tz=timezone.utc),
-            )
-        except Exception:
-            break
+    found = _find_draft_by_slug(project_root, slug)
+    if found is not None:
+        return PublicNoteDetailResponse(**found)
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Note not found.")
+
+
+@router.get("/autobiography/live", response_model=PublicNoteDetailResponse)
+def get_public_live_autobiography(request: Request) -> PublicNoteDetailResponse:
+    project_root: Path = request.app.state.settings.project_root
+    slug = _latest_autobiography_slug(project_root, prefer_live=True)
+    if slug is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Live autobiography not found.")
+    found = _find_draft_by_slug(project_root, slug)
+    if found is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Live autobiography not found.")
+    return PublicNoteDetailResponse(**found)
+
+
+@router.get("/autobiography/{year}", response_model=PublicNoteDetailResponse)
+def get_public_year_autobiography(year: int, request: Request) -> PublicNoteDetailResponse:
+    project_root: Path = request.app.state.settings.project_root
+    slug = f"autobiography-{year}"
+    found = _find_draft_by_slug(project_root, slug)
+    if found is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Year autobiography not found.")
+    return PublicNoteDetailResponse(**found)
 
 
 @router.get("/squarespace-notes", response_model=SquarespaceNotesResponse)
@@ -275,7 +334,7 @@ def get_squarespace_notes() -> SquarespaceNotesResponse:
 @router.get("/admin-auth/session")
 def get_admin_auth_session(
     request: Request,
-    admin_session: str | None = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
+    admin_session: Optional[str] = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
 ) -> dict[str, object]:
     if not admin_session:
         return {"authorized": False}
@@ -290,7 +349,7 @@ def get_admin_auth_session(
 def logout_admin_auth(
     request: Request,
     response: Response,
-    admin_session: str | None = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
+    admin_session: Optional[str] = Cookie(default=None, alias=_ADMIN_AUTH_COOKIE_NAME),
 ) -> dict[str, bool]:
     if admin_session:
         request.app.state.store.revoke_admin_auth_session(session_id=admin_session)

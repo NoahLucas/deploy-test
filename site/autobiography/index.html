@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A living autobiography updated over time from memory, family life, and work." />
+    <title>Noah Lucas | Autobiography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .autobio-shell {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .autobio-meta {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .autobio-meta article {
+        border: 1px solid var(--line);
+        border-radius: 1.25rem;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 1rem 1.1rem;
+      }
+
+      .autobio-meta .label {
+        margin-bottom: 0.45rem;
+      }
+
+      .autobio-body {
+        line-height: 1.75;
+      }
+
+      .autobio-body h1,
+      .autobio-body h2,
+      .autobio-body h3 {
+        font-family: "Instrument Serif", serif;
+        font-weight: 400;
+        color: var(--paper);
+      }
+
+      .autobio-body p {
+        color: var(--paper);
+      }
+
+      .autobio-body ul {
+        padding-left: 1.15rem;
+      }
+
+      .autobio-empty {
+        border: 1px dashed var(--line);
+        border-radius: 1.25rem;
+        padding: 1.2rem;
+        color: var(--muted);
+      }
+
+      @media (max-width: 720px) {
+        .autobio-meta {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="/">Noah Lucas</a>
+      <nav>
+        <a href="/work.html">Work</a>
+        <a href="/autobiography">Autobiography</a>
+        <a href="/notes.html">Notes</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal">
+        <p class="eyebrow">LIVING AUTOBIOGRAPHY</p>
+        <h1>A public chapter that keeps revising as <span>life continues.</span></h1>
+        <p id="autobio-summary" class="lede">Loading the latest chapter...</p>
+      </section>
+
+      <section class="panel reveal autobio-shell">
+        <div class="panel-head"><h2>Current Chapter</h2><p>Updated nightly from the autobiographer agent.</p></div>
+        <div class="autobio-meta">
+          <article><p class="label">Status</p><p class="value">Live</p></article>
+          <article><p class="label">Slug</p><p id="autobio-slug" class="value">Loading...</p></article>
+          <article><p class="label">Updated</p><p id="autobio-updated" class="value">Loading...</p></article>
+        </div>
+        <article id="autobio-content" class="autobio-body autobio-empty">The living autobiography will appear here once the latest note is available.</article>
+      </section>
+    </main>
+
+    <footer><p>© <span id="year"></span> Noah Lucas</p></footer>
+    <script src="../ui.js"></script>
+    <script src="../autobiography.js"></script>
+  </body>
+</html>

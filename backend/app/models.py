@@ -392,6 +392,14 @@ class AutobiographerMemoryEventCreateRequest(BaseModel):
     title: str = Field(min_length=4, max_length=200)
     detail: str = Field(min_length=6, max_length=8000)
     tags: List[str] = Field(default_factory=list, max_length=20)
+    people: List[str] = Field(default_factory=list, max_length=20)
+    place_label: Optional[str] = Field(default=None, max_length=160)
+    privacy_level: str = Field(default="private", min_length=3, max_length=32)
+    review_state: str = Field(default="accepted", min_length=3, max_length=32)
+    source_kind: str = Field(default="manual", min_length=3, max_length=32)
+    joy_score: Optional[float] = Field(default=None, ge=0, le=1)
+    family_relevance_score: Optional[float] = Field(default=None, ge=0, le=1)
+    importance_score: Optional[float] = Field(default=None, ge=0, le=1)
     event_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -401,6 +409,14 @@ class AutobiographerMemoryEventItem(BaseModel):
     title: str
     detail: str
     tags: List[str]
+    people: List[str] = Field(default_factory=list)
+    place_label: Optional[str] = None
+    privacy_level: str = "private"
+    review_state: str = "accepted"
+    source_kind: str = "manual"
+    joy_score: Optional[float] = None
+    family_relevance_score: Optional[float] = None
+    importance_score: Optional[float] = None
     event_at: datetime
     created_at: datetime
 
@@ -409,11 +425,265 @@ class AutobiographerMemoryEventsResponse(BaseModel):
     items: List[AutobiographerMemoryEventItem]
 
 
+class AutobiographerMemoryArtifactInput(BaseModel):
+    artifact_type: str = Field(min_length=2, max_length=40)
+    uri: str = Field(min_length=4, max_length=4000)
+    captured_at: Optional[datetime] = None
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class AppleAutobiographerCapturedMemory(BaseModel):
+    source: str = Field(default="apple-journal", min_length=2, max_length=80)
+    source_kind: str = Field(default="apple_capture", min_length=3, max_length=32)
+    title: str = Field(min_length=4, max_length=200)
+    detail: str = Field(min_length=6, max_length=8000)
+    tags: List[str] = Field(default_factory=list, max_length=24)
+    people: List[str] = Field(default_factory=list, max_length=24)
+    place_label: Optional[str] = Field(default=None, max_length=160)
+    privacy_level: str = Field(default="private", min_length=3, max_length=32)
+    review_state: str = Field(default="candidate", min_length=3, max_length=32)
+    joy_score: Optional[float] = Field(default=None, ge=0, le=1)
+    family_relevance_score: Optional[float] = Field(default=None, ge=0, le=1)
+    importance_score: Optional[float] = Field(default=None, ge=0, le=1)
+    event_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    artifacts: List[AutobiographerMemoryArtifactInput] = Field(default_factory=list, max_length=12)
+    source_metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class AppleAutobiographerCaptureRequest(BaseModel):
+    device_id: str = Field(min_length=6, max_length=256)
+    bundle_id: Optional[str] = Field(default=None, max_length=128)
+    app_version: Optional[str] = Field(default=None, max_length=64)
+    ios_version: Optional[str] = Field(default=None, max_length=64)
+    attestation_token: Optional[str] = Field(default=None, max_length=4096)
+    memories: List[AppleAutobiographerCapturedMemory] = Field(min_length=1, max_length=50)
+
+
+class AppleAutobiographerCaptureResponse(BaseModel):
+    accepted: int
+    artifacts_created: int
+    message: str
+
+
+class AutobiographerMemoryReviewUpdateRequest(BaseModel):
+    event_ids: List[int] = Field(min_length=1, max_length=100)
+    review_state: str = Field(min_length=3, max_length=32)
+
+
+class AutobiographerMemoryReviewUpdateResponse(BaseModel):
+    updated: int
+    review_state: str
+
+
+class AutobiographerSceneItem(BaseModel):
+    id: int
+    year: int
+    title: str
+    summary: str
+    place_label: Optional[str] = None
+    people: List[str] = Field(default_factory=list)
+    themes: List[str] = Field(default_factory=list)
+    event_ids: List[int] = Field(default_factory=list)
+    start_at: datetime
+    end_at: datetime
+    created_at: datetime
+    updated_at: datetime
+
+
+class AutobiographerScenesResponse(BaseModel):
+    year: int
+    items: List[AutobiographerSceneItem]
+
+
+class AutobiographerSceneRebuildRequest(BaseModel):
+    year: int = Field(ge=2000, le=2100)
+    max_gap_hours: int = Field(default=72, ge=1, le=336)
+    min_scene_events: int = Field(default=1, ge=1, le=20)
+
+
+class AutobiographerRevisionItem(BaseModel):
+    id: int
+    year: int
+    mode: str
+    title: str
+    slug: str
+    summary: str
+    body_markdown: str
+    source_job_id: Optional[int] = None
+    created_at: datetime
+
+
+class AutobiographerRevisionResponse(BaseModel):
+    revision: AutobiographerRevisionItem
+
+
+class AutobiographerRevisionsResponse(BaseModel):
+    year: int
+    items: List[AutobiographerRevisionItem]
+
+
+class AutobiographerRevisionJobGenerateRequest(BaseModel):
+    year: int = Field(ge=2000, le=2100)
+    mode: str = Field(default="year", min_length=3, max_length=24)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
+        min_length=12,
+        max_length=1200,
+    )
+    include_private_context: bool = True
+    persist_note: bool = True
+    subdir: str = Field(default="notes-drafts", min_length=1, max_length=64)
+
+
+class AutobiographerRevisionJobItem(BaseModel):
+    id: int
+    year: int
+    mode: str
+    status: str
+    summary: str
+    error_text: Optional[str] = None
+    revision_id: Optional[int] = None
+    created_at: datetime
+    updated_at: datetime
+    completed_at: Optional[datetime] = None
+
+
+class AutobiographerRevisionJobResponse(BaseModel):
+    job: AutobiographerRevisionJobItem
+    revision: Optional[AutobiographerRevisionItem] = None
+
+
+class AutobiographerRevisionJobsResponse(BaseModel):
+    items: List[AutobiographerRevisionJobItem]
+
+
+class HistorianInterviewSessionCreateRequest(BaseModel):
+    title: str = Field(min_length=4, max_length=200)
+    objective: str = Field(
+        default="Backfill missing life chapters through organic, low-pressure interview prompts.",
+        min_length=8,
+        max_length=2000,
+    )
+    start_year: Optional[int] = Field(default=None, ge=1900, le=2100)
+    end_year: Optional[int] = Field(default=None, ge=1900, le=2100)
+
+
+class HistorianInterviewSessionItem(BaseModel):
+    id: int
+    title: str
+    objective: str
+    start_year: Optional[int] = None
+    end_year: Optional[int] = None
+    created_at: datetime
+    updated_at: datetime
+
+
+class HistorianInterviewSessionsResponse(BaseModel):
+    items: List[HistorianInterviewSessionItem]
+
+
+class HistorianInterviewTurnCreateRequest(BaseModel):
+    speaker: str = Field(min_length=4, max_length=16)
+    content: str = Field(min_length=2, max_length=16000)
+
+
+class HistorianInterviewTurnItem(BaseModel):
+    id: int
+    session_id: int
+    speaker: str
+    content: str
+    created_at: datetime
+
+
+class HistorianInterviewSessionDetailResponse(BaseModel):
+    session: HistorianInterviewSessionItem
+    turns: List[HistorianInterviewTurnItem]
+
+
+class HistorianInterviewQuestionItem(BaseModel):
+    question: str
+    why_this_matters: str
+    target_years: List[int] = Field(default_factory=list)
+    follow_if_answered: Optional[str] = None
+
+
+class HistorianMemoryLeadItem(BaseModel):
+    title: str
+    detail: str
+    year: Optional[int] = None
+    tags: List[str] = Field(default_factory=list)
+    people: List[str] = Field(default_factory=list)
+    place_label: Optional[str] = None
+    confidence: str
+
+
+class HistorianInterviewGenerateRequest(BaseModel):
+    max_questions: int = Field(default=5, ge=1, le=8)
+
+
+class HistorianInterviewGenerateResponse(BaseModel):
+    session: HistorianInterviewSessionItem
+    assistant_turn: HistorianInterviewTurnItem
+    questions: List[HistorianInterviewQuestionItem]
+    missing_periods: List[str]
+    memory_leads: List[HistorianMemoryLeadItem]
+
+
+class HistorianExtractMemoriesRequest(BaseModel):
+    turn_ids: List[int] = Field(min_length=1, max_length=50)
+
+
+class HistorianExtractMemoriesResponse(BaseModel):
+    created_events: List[AutobiographerMemoryEventItem]
+
+
+class MemorySourceProvenanceItem(BaseModel):
+    kind: str
+    label: str
+    detail: str
+    ref: str
+
+
+class SiteMemoryChatRequest(BaseModel):
+    message: str = Field(min_length=4, max_length=8000)
+    year: Optional[int] = Field(default=None, ge=1900, le=2100)
+    include_private_context: bool = True
+
+
+class SiteMemoryChatResponse(BaseModel):
+    answer_markdown: str
+    sources: List[MemorySourceProvenanceItem]
+    generated_at: datetime
+
+
+class ProvenanceExportRequest(BaseModel):
+    year: int = Field(ge=1900, le=2100)
+    include_private_context: bool = True
+
+
+class ProvenanceExportResponse(BaseModel):
+    year: int
+    export_root: str
+    manifest_path: str
+    events_exported: int
+    chapters_exported: int
+    revisions_exported: int
+    scenes_exported: int
+    exported_at: datetime
+
+
 class AutobiographerChapterGenerateRequest(BaseModel):
     year: int = Field(ge=2000, le=2100)
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
-        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
         min_length=12,
         max_length=1200,
     )
@@ -444,7 +714,10 @@ class AutobiographerMonthlyChapterGenerateRequest(BaseModel):
     month: int = Field(ge=1, le=12)
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
-        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
         min_length=12,
         max_length=1200,
     )
@@ -456,7 +729,10 @@ class AutobiographerMonthlyChaptersInitializeRequest(BaseModel):
     year: int = Field(ge=2000, le=2100)
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
-        default="Clear narrative nonfiction with reflective operator insights and grounded detail.",
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
         min_length=12,
         max_length=1200,
     )
@@ -484,3 +760,57 @@ class AutobiographerMonthlyChapterResponse(BaseModel):
 class AutobiographerMonthlyChaptersResponse(BaseModel):
     year: int
     items: List[AutobiographerMonthlyChapterItem]
+
+
+class AutobiographerPublishLiveNoteRequest(BaseModel):
+    year: int = Field(default_factory=lambda: datetime.now(timezone.utc).year, ge=2000, le=2100)
+    month: int = Field(default_factory=lambda: datetime.now(timezone.utc).month, ge=1, le=12)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
+        min_length=12,
+        max_length=1200,
+    )
+    include_private_context: bool = True
+    force_regenerate: bool = False
+    subdir: str = Field(default="notes-drafts", min_length=1, max_length=64)
+
+
+class AutobiographerPublishLiveNoteResponse(BaseModel):
+    year: int
+    month: int
+    slug: str
+    title: str
+    markdown_path: str
+    json_path: str
+    summary: str
+    updated_at: datetime
+
+
+class AutobiographerPublishYearNoteRequest(BaseModel):
+    year: int = Field(default_factory=lambda: datetime.now(timezone.utc).year, ge=2000, le=2100)
+    persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
+    style_brief: str = Field(
+        default=(
+            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
+            "specific, psychologically perceptive, and grounded in real scenes."
+        ),
+        min_length=12,
+        max_length=1200,
+    )
+    include_private_context: bool = True
+    force_regenerate: bool = False
+    subdir: str = Field(default="notes-drafts", min_length=1, max_length=64)
+
+
+class AutobiographerPublishYearNoteResponse(BaseModel):
+    year: int
+    slug: str
+    title: str
+    markdown_path: str
+    json_path: str
+    summary: str
+    updated_at: datetime

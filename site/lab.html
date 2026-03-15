@@ -118,6 +118,78 @@
         <pre id="decision-output" class="codebox">No decisions loaded.</pre>
       </section>
 
+      <section class="panel reveal" id="autobiographer">
+        <div class="panel-head">
+          <h2>Autobiographer</h2>
+          <p>One chapter each year, built from monthly memories, digital exhaust, and the good stuff worth remembering</p>
+        </div>
+
+        <form id="autobio-init-form" class="lab-form-grid">
+          <label>
+            <span class="label">Year</span>
+            <input id="autobio-year" type="number" min="2000" max="2100" value="2026" />
+          </label>
+          <label>
+            <span class="label">Persona</span>
+            <input id="autobio-persona" value="founder-biographer" />
+          </label>
+          <label class="full">
+            <span class="label">Style Brief</span>
+            <textarea id="autobio-style" rows="3">Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.</textarea>
+          </label>
+          <button class="btn btn-solid" type="submit">Initialize 12 Chapters</button>
+          <button id="autobio-refresh-chapters" class="btn btn-ghost" type="button">Refresh Chapters</button>
+        </form>
+
+        <form id="autobio-event-form" class="lab-form-grid">
+          <label>
+            <span class="label">Source</span>
+            <input id="autobio-event-source" value="manual-journal" />
+          </label>
+          <label>
+            <span class="label">Title</span>
+            <input id="autobio-event-title" placeholder="Key moment title" />
+          </label>
+          <label class="full">
+            <span class="label">Detail</span>
+            <textarea id="autobio-event-detail" rows="4" placeholder="What happened, why it mattered, and what changed."></textarea>
+          </label>
+          <label>
+            <span class="label">Tags (comma-separated)</span>
+            <input id="autobio-event-tags" placeholder="work,decision,family,reflection" />
+          </label>
+          <label>
+            <span class="label">Event Time (ISO, optional)</span>
+            <input id="autobio-event-at" placeholder="2026-03-09T12:00:00Z" />
+          </label>
+          <button class="btn btn-solid" type="submit">Add Memory Event</button>
+        </form>
+
+        <form id="autobio-generate-form" class="lab-form-grid">
+          <label>
+            <span class="label">Generate Year</span>
+            <input id="autobio-generate-year" type="number" min="2000" max="2100" value="2026" />
+          </label>
+          <label>
+            <span class="label">Generate Month (1-12)</span>
+            <input id="autobio-generate-month" type="number" min="1" max="12" value="3" />
+          </label>
+          <label>
+            <span class="label">Force Regenerate Locked Month</span>
+            <select id="autobio-force">
+              <option value="false" selected>false</option>
+              <option value="true">true</option>
+            </select>
+          </label>
+          <button class="btn btn-solid" type="submit">Generate Month Chapter</button>
+          <button id="autobio-generate-year-chapter" class="btn btn-ghost" type="button">Generate Year Chapter</button>
+          <button id="autobio-publish-year" class="btn btn-ghost" type="button">Publish Year Chapter</button>
+          <button id="autobio-publish-live" class="btn btn-ghost" type="button">Publish Live Year Note</button>
+        </form>
+
+        <pre id="autobio-output" class="codebox">No autobiographer activity yet.</pre>
+      </section>
+
       <section class="panel reveal" id="apple">
         <div class="panel-head">
           <h2>Apple Identity + App Attest</h2>

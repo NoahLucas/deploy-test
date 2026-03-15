@@ -161,6 +161,15 @@ class SignalStore:
                     title TEXT NOT NULL,
                     detail TEXT NOT NULL,
                     tags_json TEXT NOT NULL,
+                    people_json TEXT NOT NULL DEFAULT '[]',
+                    place_label TEXT,
+                    privacy_level TEXT NOT NULL DEFAULT 'private',
+                    review_state TEXT NOT NULL DEFAULT 'accepted',
+                    source_kind TEXT NOT NULL DEFAULT 'manual',
+                    joy_score REAL,
+                    family_relevance_score REAL,
+                    importance_score REAL,
+                    source_metadata_json TEXT NOT NULL DEFAULT '{}',
                     event_at TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 )
@@ -172,6 +181,21 @@ class SignalStore:
                 ON autobiographer_memory_events(event_at DESC)
                 """
             )
+            for statement in (
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN people_json TEXT NOT NULL DEFAULT '[]'",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN place_label TEXT",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN privacy_level TEXT NOT NULL DEFAULT 'private'",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN review_state TEXT NOT NULL DEFAULT 'accepted'",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN source_kind TEXT NOT NULL DEFAULT 'manual'",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN joy_score REAL",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN family_relevance_score REAL",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN importance_score REAL",
+                "ALTER TABLE autobiographer_memory_events ADD COLUMN source_metadata_json TEXT NOT NULL DEFAULT '{}'",
+            ):
+                try:
+                    conn.execute(statement)
+                except sqlite3.OperationalError:
+                    pass
             conn.execute(
                 """
                 CREATE TABLE IF NOT EXISTS autobiographer_chapters (
@@ -208,6 +232,127 @@ class SignalStore:
                 """
                 CREATE INDEX IF NOT EXISTS idx_autobio_monthly_year_month
                 ON autobiographer_monthly_chapters(year, month)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_memory_artifacts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    event_id INTEGER,
+                    source TEXT NOT NULL,
+                    artifact_type TEXT NOT NULL,
+                    uri TEXT NOT NULL,
+                    captured_at TEXT NOT NULL,
+                    metadata_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    FOREIGN KEY(event_id) REFERENCES autobiographer_memory_events(id)
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_artifacts_event_id
+                ON autobiographer_memory_artifacts(event_id, captured_at DESC)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_scene_clusters (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL,
+                    title TEXT NOT NULL,
+                    summary TEXT NOT NULL,
+                    place_label TEXT,
+                    people_json TEXT NOT NULL,
+                    themes_json TEXT NOT NULL,
+                    event_ids_json TEXT NOT NULL,
+                    start_at TEXT NOT NULL,
+                    end_at TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_scene_year
+                ON autobiographer_scene_clusters(year, start_at DESC)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_revisions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL,
+                    mode TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    slug TEXT NOT NULL,
+                    summary TEXT NOT NULL,
+                    body_markdown TEXT NOT NULL,
+                    source_job_id INTEGER,
+                    created_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_revision_year
+                ON autobiographer_revisions(year, created_at DESC)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS autobiographer_revision_jobs (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    year INTEGER NOT NULL,
+                    mode TEXT NOT NULL,
+                    status TEXT NOT NULL,
+                    summary TEXT NOT NULL,
+                    input_json TEXT NOT NULL,
+                    output_json TEXT NOT NULL,
+                    error_text TEXT,
+                    revision_id INTEGER,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    completed_at TEXT
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_autobio_revision_job_year
+                ON autobiographer_revision_jobs(year, created_at DESC)
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS historian_interview_sessions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    title TEXT NOT NULL,
+                    objective TEXT NOT NULL,
+                    start_year INTEGER,
+                    end_year INTEGER,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS historian_interview_turns (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    session_id INTEGER NOT NULL,
+                    speaker TEXT NOT NULL,
+                    content TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    FOREIGN KEY(session_id) REFERENCES historian_interview_sessions(id)
+                )
+                """
+            )
+            conn.execute(
+                """
+                CREATE INDEX IF NOT EXISTS idx_historian_turns_session
+                ON historian_interview_turns(session_id, created_at ASC)
                 """
             )
             conn.execute(
@@ -783,50 +928,98 @@ class SignalStore:
         title: str,
         detail: str,
         tags_json: str,
+        people_json: str = "[]",
+        place_label: str = "",
+        privacy_level: str = "private",
+        review_state: str = "accepted",
+        source_kind: str = "manual",
+        joy_score: Optional[float] = None,
+        family_relevance_score: Optional[float] = None,
+        importance_score: Optional[float] = None,
+        source_metadata_json: str = "{}",
         event_at: str,
     ) -> int:
         created_at = datetime.now(timezone.utc).isoformat()
         with self._lock, self._connect() as conn:
             cursor = conn.execute(
                 """
-                INSERT INTO autobiographer_memory_events(source, title, detail, tags_json, event_at, created_at)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO autobiographer_memory_events(
+                    source, title, detail, tags_json, people_json, place_label,
+                    privacy_level, review_state, source_kind, joy_score,
+                    family_relevance_score, importance_score, source_metadata_json, event_at, created_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
-                (source, title, detail, tags_json, event_at, created_at),
+                (
+                    source,
+                    title,
+                    detail,
+                    tags_json,
+                    people_json,
+                    place_label,
+                    privacy_level,
+                    review_state,
+                    source_kind,
+                    joy_score,
+                    family_relevance_score,
+                    importance_score,
+                    source_metadata_json,
+                    event_at,
+                    created_at,
+                ),
             )
             return int(cursor.lastrowid)
+
+    def update_autobiographer_memory_review_state(self, *, event_ids: List[int], review_state: str) -> int:
+        if not event_ids:
+            return 0
+        now = datetime.now(timezone.utc).isoformat()
+        placeholders = ", ".join("?" for _ in event_ids)
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                f"""
+                UPDATE autobiographer_memory_events
+                SET review_state = ?, source_metadata_json = source_metadata_json, created_at = created_at
+                WHERE id IN ({placeholders})
+                """,
+                [review_state] + event_ids,
+            )
+            conn.execute("SELECT ?", (now,))
+            return int(cursor.rowcount or 0)
 
     def list_autobiographer_memory_events(
         self,
         *,
         limit: int = 120,
         year: Optional[int] = None,
+        review_state: Optional[str] = None,
     ) -> List[Dict[str, str]]:
         safe_limit = max(1, min(limit, 500))
         with self._connect() as conn:
-            if year is None:
-                rows = conn.execute(
-                    """
-                    SELECT id, source, title, detail, tags_json, event_at, created_at
-                    FROM autobiographer_memory_events
-                    ORDER BY event_at DESC, id DESC
-                    LIMIT ?
-                    """,
-                    (safe_limit,),
-                ).fetchall()
-            else:
+            where_clauses: List[str] = []
+            params: List[object] = []
+            if year is not None:
                 start = f"{year:04d}-01-01T00:00:00"
                 end = f"{year + 1:04d}-01-01T00:00:00"
-                rows = conn.execute(
-                    """
-                    SELECT id, source, title, detail, tags_json, event_at, created_at
-                    FROM autobiographer_memory_events
-                    WHERE event_at >= ? AND event_at < ?
-                    ORDER BY event_at DESC, id DESC
-                    LIMIT ?
-                    """,
-                    (start, end, safe_limit),
-                ).fetchall()
+                where_clauses.append("event_at >= ? AND event_at < ?")
+                params.extend([start, end])
+            if review_state:
+                where_clauses.append("review_state = ?")
+                params.append(review_state)
+            where_sql = f"WHERE {' AND '.join(where_clauses)}" if where_clauses else ""
+            params.append(safe_limit)
+            rows = conn.execute(
+                f"""
+                SELECT id, source, title, detail, tags_json, people_json, place_label, privacy_level,
+                       review_state, source_kind, joy_score, family_relevance_score, importance_score,
+                       source_metadata_json, event_at, created_at
+                FROM autobiographer_memory_events
+                {where_sql}
+                ORDER BY event_at DESC, id DESC
+                LIMIT ?
+                """,
+                params,
+            ).fetchall()
         return [
             {
                 "id": int(row["id"]),
@@ -834,7 +1027,381 @@ class SignalStore:
                 "title": str(row["title"]),
                 "detail": str(row["detail"]),
                 "tags_json": str(row["tags_json"]),
+                "people_json": str(row["people_json"]),
+                "place_label": str(row["place_label"]) if row["place_label"] is not None else "",
+                "privacy_level": str(row["privacy_level"]),
+                "review_state": str(row["review_state"]),
+                "source_kind": str(row["source_kind"]),
+                "joy_score": float(row["joy_score"]) if row["joy_score"] is not None else None,
+                "family_relevance_score": float(row["family_relevance_score"]) if row["family_relevance_score"] is not None else None,
+                "importance_score": float(row["importance_score"]) if row["importance_score"] is not None else None,
+                "source_metadata_json": str(row["source_metadata_json"]),
                 "event_at": str(row["event_at"]),
+                "created_at": str(row["created_at"]),
+            }
+            for row in rows
+        ]
+
+    def create_autobiographer_memory_artifact(
+        self,
+        *,
+        event_id: Optional[int],
+        source: str,
+        artifact_type: str,
+        uri: str,
+        captured_at: str,
+        metadata_json: str,
+    ) -> int:
+        created_at = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO autobiographer_memory_artifacts(
+                    event_id, source, artifact_type, uri, captured_at, metadata_json, created_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                (event_id, source, artifact_type, uri, captured_at, metadata_json, created_at),
+            )
+            return int(cursor.lastrowid)
+
+    def replace_autobiographer_scene_clusters(self, *, year: int, scenes: List[Dict[str, str]]) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute("DELETE FROM autobiographer_scene_clusters WHERE year = ?", (year,))
+            for scene in scenes:
+                conn.execute(
+                    """
+                    INSERT INTO autobiographer_scene_clusters(
+                        year, title, summary, place_label, people_json, themes_json, event_ids_json,
+                        start_at, end_at, created_at, updated_at
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        year,
+                        scene["title"],
+                        scene["summary"],
+                        scene.get("place_label", ""),
+                        scene["people_json"],
+                        scene["themes_json"],
+                        scene["event_ids_json"],
+                        scene["start_at"],
+                        scene["end_at"],
+                        now,
+                        now,
+                    ),
+                )
+
+    def list_autobiographer_scene_clusters(self, *, year: int, limit: int = 120) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 300))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, year, title, summary, place_label, people_json, themes_json, event_ids_json,
+                       start_at, end_at, created_at, updated_at
+                FROM autobiographer_scene_clusters
+                WHERE year = ?
+                ORDER BY start_at DESC, id DESC
+                LIMIT ?
+                """,
+                (year, safe_limit),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "year": int(row["year"]),
+                "title": str(row["title"]),
+                "summary": str(row["summary"]),
+                "place_label": str(row["place_label"]) if row["place_label"] is not None else "",
+                "people_json": str(row["people_json"]),
+                "themes_json": str(row["themes_json"]),
+                "event_ids_json": str(row["event_ids_json"]),
+                "start_at": str(row["start_at"]),
+                "end_at": str(row["end_at"]),
+                "created_at": str(row["created_at"]),
+                "updated_at": str(row["updated_at"]),
+            }
+            for row in rows
+        ]
+
+    def create_autobiographer_revision_job(
+        self,
+        *,
+        year: int,
+        mode: str,
+        status: str,
+        summary: str,
+        input_json: str,
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO autobiographer_revision_jobs(
+                    year, mode, status, summary, input_json, output_json, created_at, updated_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (year, mode, status, summary, input_json, "{}", now, now),
+            )
+            return int(cursor.lastrowid)
+
+    def complete_autobiographer_revision_job(
+        self,
+        *,
+        job_id: int,
+        status: str,
+        summary: str,
+        output_json: str,
+        revision_id: Optional[int] = None,
+        error_text: str = "",
+    ) -> None:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            conn.execute(
+                """
+                UPDATE autobiographer_revision_jobs
+                SET status = ?, summary = ?, output_json = ?, revision_id = ?, error_text = ?, updated_at = ?, completed_at = ?
+                WHERE id = ?
+                """,
+                (status, summary, output_json, revision_id, error_text or None, now, now, job_id),
+            )
+
+    def list_autobiographer_revision_jobs(self, *, limit: int = 50) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 200))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, year, mode, status, summary, error_text, revision_id, created_at, updated_at, completed_at
+                FROM autobiographer_revision_jobs
+                ORDER BY created_at DESC, id DESC
+                LIMIT ?
+                """,
+                (safe_limit,),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "year": int(row["year"]),
+                "mode": str(row["mode"]),
+                "status": str(row["status"]),
+                "summary": str(row["summary"]),
+                "error_text": str(row["error_text"]) if row["error_text"] is not None else "",
+                "revision_id": int(row["revision_id"]) if row["revision_id"] is not None else None,
+                "created_at": str(row["created_at"]),
+                "updated_at": str(row["updated_at"]),
+                "completed_at": str(row["completed_at"]) if row["completed_at"] is not None else "",
+            }
+            for row in rows
+        ]
+
+    def get_autobiographer_revision_job(self, *, job_id: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, year, mode, status, summary, error_text, revision_id, created_at, updated_at, completed_at
+                FROM autobiographer_revision_jobs
+                WHERE id = ?
+                """,
+                (job_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "year": int(row["year"]),
+            "mode": str(row["mode"]),
+            "status": str(row["status"]),
+            "summary": str(row["summary"]),
+            "error_text": str(row["error_text"]) if row["error_text"] is not None else "",
+            "revision_id": int(row["revision_id"]) if row["revision_id"] is not None else None,
+            "created_at": str(row["created_at"]),
+            "updated_at": str(row["updated_at"]),
+            "completed_at": str(row["completed_at"]) if row["completed_at"] is not None else "",
+        }
+
+    def create_autobiographer_revision(
+        self,
+        *,
+        year: int,
+        mode: str,
+        title: str,
+        slug: str,
+        summary: str,
+        body_markdown: str,
+        source_job_id: Optional[int],
+    ) -> int:
+        created_at = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO autobiographer_revisions(
+                    year, mode, title, slug, summary, body_markdown, source_job_id, created_at
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (year, mode, title, slug, summary, body_markdown, source_job_id, created_at),
+            )
+            return int(cursor.lastrowid)
+
+    def list_autobiographer_revisions(self, *, year: int, limit: int = 30) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 100))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, year, mode, title, slug, summary, body_markdown, source_job_id, created_at
+                FROM autobiographer_revisions
+                WHERE year = ?
+                ORDER BY created_at DESC, id DESC
+                LIMIT ?
+                """,
+                (year, safe_limit),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "year": int(row["year"]),
+                "mode": str(row["mode"]),
+                "title": str(row["title"]),
+                "slug": str(row["slug"]),
+                "summary": str(row["summary"]),
+                "body_markdown": str(row["body_markdown"]),
+                "source_job_id": int(row["source_job_id"]) if row["source_job_id"] is not None else None,
+                "created_at": str(row["created_at"]),
+            }
+            for row in rows
+        ]
+
+    def get_autobiographer_revision(self, *, revision_id: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, year, mode, title, slug, summary, body_markdown, source_job_id, created_at
+                FROM autobiographer_revisions
+                WHERE id = ?
+                """,
+                (revision_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "year": int(row["year"]),
+            "mode": str(row["mode"]),
+            "title": str(row["title"]),
+            "slug": str(row["slug"]),
+            "summary": str(row["summary"]),
+            "body_markdown": str(row["body_markdown"]),
+            "source_job_id": int(row["source_job_id"]) if row["source_job_id"] is not None else None,
+            "created_at": str(row["created_at"]),
+        }
+
+    def create_historian_interview_session(
+        self,
+        *,
+        title: str,
+        objective: str,
+        start_year: Optional[int],
+        end_year: Optional[int],
+    ) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO historian_interview_sessions(title, objective, start_year, end_year, created_at, updated_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
+                (title, objective, start_year, end_year, now, now),
+            )
+            return int(cursor.lastrowid)
+
+    def list_historian_interview_sessions(self, *, limit: int = 30) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 100))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, title, objective, start_year, end_year, created_at, updated_at
+                FROM historian_interview_sessions
+                ORDER BY updated_at DESC, id DESC
+                LIMIT ?
+                """,
+                (safe_limit,),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "title": str(row["title"]),
+                "objective": str(row["objective"]),
+                "start_year": int(row["start_year"]) if row["start_year"] is not None else None,
+                "end_year": int(row["end_year"]) if row["end_year"] is not None else None,
+                "created_at": str(row["created_at"]),
+                "updated_at": str(row["updated_at"]),
+            }
+            for row in rows
+        ]
+
+    def get_historian_interview_session(self, *, session_id: int) -> Optional[Dict[str, str]]:
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT id, title, objective, start_year, end_year, created_at, updated_at
+                FROM historian_interview_sessions
+                WHERE id = ?
+                """,
+                (session_id,),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "id": int(row["id"]),
+            "title": str(row["title"]),
+            "objective": str(row["objective"]),
+            "start_year": int(row["start_year"]) if row["start_year"] is not None else None,
+            "end_year": int(row["end_year"]) if row["end_year"] is not None else None,
+            "created_at": str(row["created_at"]),
+            "updated_at": str(row["updated_at"]),
+        }
+
+    def add_historian_interview_turn(self, *, session_id: int, speaker: str, content: str) -> int:
+        now = datetime.now(timezone.utc).isoformat()
+        with self._lock, self._connect() as conn:
+            cursor = conn.execute(
+                """
+                INSERT INTO historian_interview_turns(session_id, speaker, content, created_at)
+                VALUES (?, ?, ?, ?)
+                """,
+                (session_id, speaker, content, now),
+            )
+            conn.execute(
+                """
+                UPDATE historian_interview_sessions
+                SET updated_at = ?
+                WHERE id = ?
+                """,
+                (now, session_id),
+            )
+            return int(cursor.lastrowid)
+
+    def list_historian_interview_turns(self, *, session_id: int, limit: int = 200) -> List[Dict[str, str]]:
+        safe_limit = max(1, min(limit, 500))
+        with self._connect() as conn:
+            rows = conn.execute(
+                """
+                SELECT id, session_id, speaker, content, created_at
+                FROM historian_interview_turns
+                WHERE session_id = ?
+                ORDER BY created_at ASC, id ASC
+                LIMIT ?
+                """,
+                (session_id, safe_limit),
+            ).fetchall()
+        return [
+            {
+                "id": int(row["id"]),
+                "session_id": int(row["session_id"]),
+                "speaker": str(row["speaker"]),
+                "content": str(row["content"]),
                 "created_at": str(row["created_at"]),
             }
             for row in rows

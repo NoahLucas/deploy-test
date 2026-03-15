@@ -33,6 +33,7 @@ async function loadNote() {
     const res = await fetch(`/api/v1/public/notes-drafts/${encodeURIComponent(slug)}`, { headers: { Accept: "application/json" } });
     if (!res.ok) throw new Error("note not found");
     const data = await res.json();
+    setText("note-type", slug.startsWith("autobiography-") ? "LIVING AUTOBIOGRAPHY" : "DRAFT NOTE");
     setText("note-title", data.title);
     setText("note-summary", data.summary);
     const body = document.getElementById("note-body");

@@ -43,7 +43,17 @@
 - [ ] Implement personal signal intelligence production hardening (phase C)
 - [x] Implement agentic workflow foundation (phase D: chief dispatch, run/task ledger, status controls)
 - [x] Implement agentic workflow execution foundation (phase D: server-side run execution + task outputs)
+- [x] Build autobiographer monthly/yearly generation foundation
+- [x] Define autobiographer agent platform architecture
+- [x] Define historian agent prompt and interview model
+- [x] Build historian interview session backend foundation
+- [x] Add OpenAI-platform prompt and Agent Builder source specs
 - [ ] Implement Squarespace webhook event handlers and content sync actions
+- [ ] Build Apple memory capture layer for autobiographer agent
+- [ ] Build autobiographer memory graph (people, places, artifacts, scene clusters, revisions)
+- [ ] Build background yearly synthesis and live revision loop
+- [ ] Add OpenAI background-mode submission/polling for nightly autobiographer jobs
+- [ ] Build eval datasets for autobiographer and historian agents
 - [ ] Expand native app to Apple auth + App Attest + notes pipeline
 - [ ] QA + SEO + analytics validation
 - [ ] Production launch
@@ -54,6 +64,6 @@
 
 ## Next 3 actions
 
-1. Implement strict cryptographic App Attest verification chain (currently scaffolded).
-2. Add OAuth/passthrough UX polish for Apple web sign-in script integration.
-3. Implement Squarespace webhook mapping for publish/content-update triggers.
+1. Add OpenAI background-mode submission and polling for nightly autobiographer jobs.
+2. Finish autobiographer memory graph and revision history route layer.
+3. Build Apple memory capture layer for explicit memories plus EventKit and HealthKit summaries.

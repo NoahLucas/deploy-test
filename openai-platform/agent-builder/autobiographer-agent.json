@@ -1,0 +1,48 @@
+{
+  "name": "Autobiographer",
+  "purpose": "Write a living autobiography from memory events, life artifacts, yearly chapters, and revisions.",
+  "runtime": "responses-api",
+  "recommended_model": "gpt-5",
+  "prompt_file": "openai-platform/prompts/autobiographer.prompt.md",
+  "tools": [
+    {
+      "type": "function",
+      "name": "list_memory_events",
+      "description": "Fetch autobiographer memory events for a year or month."
+    },
+    {
+      "type": "function",
+      "name": "list_scene_clusters",
+      "description": "Fetch reconstructed life scenes for a given year."
+    },
+    {
+      "type": "function",
+      "name": "list_year_chapters",
+      "description": "Fetch existing yearly chapters."
+    },
+    {
+      "type": "function",
+      "name": "list_revisions",
+      "description": "Fetch previous live autobiography revisions."
+    },
+    {
+      "type": "function",
+      "name": "publish_live_note",
+      "description": "Publish the updated living autobiography note."
+    },
+    {
+      "type": "function",
+      "name": "export_provenance_package",
+      "description": "Write the yearly provenance package to the synced archive."
+    }
+  ],
+  "background_jobs": {
+    "enabled": true,
+    "primary_use_case": "nightly living autobiography refresh"
+  },
+  "notes": [
+    "Use Responses API in production.",
+    "Use Agent Builder as the workflow and debugging surface.",
+    "Do not build new functionality on Assistants API."
+  ]
+}
