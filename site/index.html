@@ -11,6 +11,8 @@
         --muted: #676767;
         --surface: #ffffff;
         --line: #d9d9d2;
+        --glow-a: color-mix(in srgb, var(--text) 5%, transparent);
+        --glow-b: color-mix(in srgb, var(--text) 4%, transparent);
       }
 
       @media (prefers-color-scheme: dark) {
@@ -20,6 +22,8 @@
           --muted: #9ba4b7;
           --surface: #151923;
           --line: #2a3040;
+          --glow-a: color-mix(in srgb, var(--text) 6%, transparent);
+          --glow-b: color-mix(in srgb, var(--text) 5%, transparent);
         }
       }
 
@@ -29,6 +33,8 @@
         --muted: #676767;
         --surface: #ffffff;
         --line: #d9d9d2;
+        --glow-a: color-mix(in srgb, var(--text) 5%, transparent);
+        --glow-b: color-mix(in srgb, var(--text) 4%, transparent);
       }
 
       :root[data-theme="dark"] {
@@ -37,6 +43,8 @@
         --muted: #9ba4b7;
         --surface: #151923;
         --line: #2a3040;
+        --glow-a: color-mix(in srgb, var(--text) 6%, transparent);
+        --glow-b: color-mix(in srgb, var(--text) 5%, transparent);
       }
 
       * { box-sizing: border-box; }
@@ -61,8 +69,9 @@
         inset: 0;
         pointer-events: none;
         background:
-          radial-gradient(72vmax 72vmax at 82% 18%, color-mix(in srgb, var(--text) 5%, transparent), transparent 74%),
-          radial-gradient(80vmax 80vmax at 12% 84%, color-mix(in srgb, var(--text) 4%, transparent), transparent 78%);
+          radial-gradient(72vmax 72vmax at 82% 18%, var(--glow-a), transparent 74%),
+          radial-gradient(80vmax 80vmax at 12% 84%, var(--glow-b), transparent 78%);
+        transition: background 700ms ease;
       }
 
       main {
@@ -593,9 +602,10 @@
         const ownerGate = document.getElementById("owner-gate");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
-        const themeOptions = ["system", "light", "dark"];
+        const themeOptions = ["system", "light", "dark", "24h"];
         const detailStates = ["expanded", "collapsed"];
         let ownerSessionActive = false;
+        let dayCycleTimer = null;
 
         function getStoredTheme() {
           const saved = localStorage.getItem("nl-theme");
@@ -605,14 +615,142 @@
         function applyTheme(theme) {
           if (theme === "system") {
             root.removeAttribute("data-theme");
+            clearDynamicTheme();
           } else {
             root.setAttribute("data-theme", theme);
+            if (theme !== "24h") clearDynamicTheme();
           }
-          const iconMap = { system: "◐", light: "○", dark: "●" };
+          if (theme === "24h") applyDayCycleTheme();
+          scheduleDayCycleRefresh(theme);
+          const iconMap = { system: "◐", light: "○", dark: "●", "24h": "◒" };
           const label = `Theme mode: ${theme}`;
           themeButton.textContent = iconMap[theme] || "◐";
           themeButton.setAttribute("aria-label", label);
           themeButton.setAttribute("title", label);
+        }
+
+        function clearDynamicTheme() {
+          [
+            "--bg",
+            "--text",
+            "--muted",
+            "--surface",
+            "--line",
+            "--glow-a",
+            "--glow-b"
+          ].forEach((name) => root.style.removeProperty(name));
+        }
+
+        function get24HourPalette(date = new Date()) {
+          const hour = date.getHours();
+
+          if (hour >= 0 && hour < 5) {
+            return {
+              bg: "#0c1020",
+              text: "#eef6ff",
+              muted: "#9aa7c9",
+              surface: "#121935",
+              line: "#2e3f6a",
+              glowA: "rgba(82, 194, 255, 0.14)",
+              glowB: "rgba(102, 92, 255, 0.16)"
+            };
+          }
+
+          if (hour < 7) {
+            return {
+              bg: "#1f2234",
+              text: "#f5f2f0",
+              muted: "#c4b7b0",
+              surface: "#2a2f45",
+              line: "#53556c",
+              glowA: "rgba(255, 177, 141, 0.18)",
+              glowB: "rgba(117, 147, 255, 0.12)"
+            };
+          }
+
+          if (hour < 11) {
+            return {
+              bg: "#e8ece8",
+              text: "#17211b",
+              muted: "#5e6e64",
+              surface: "#f4f5ef",
+              line: "#cfd6cc",
+              glowA: "rgba(176, 220, 192, 0.22)",
+              glowB: "rgba(197, 214, 235, 0.18)"
+            };
+          }
+
+          if (hour < 16) {
+            return {
+              bg: "#e7ecef",
+              text: "#111b20",
+              muted: "#5d6b73",
+              surface: "#f7f9fa",
+              line: "#ced8dd",
+              glowA: "rgba(157, 203, 219, 0.2)",
+              glowB: "rgba(210, 224, 231, 0.16)"
+            };
+          }
+
+          if (hour < 19) {
+            return {
+              bg: "#efe7df",
+              text: "#231917",
+              muted: "#76625a",
+              surface: "#f7f1eb",
+              line: "#dbc8ba",
+              glowA: "rgba(240, 165, 101, 0.18)",
+              glowB: "rgba(224, 197, 150, 0.16)"
+            };
+          }
+
+          if (hour < 21) {
+            return {
+              bg: "#2a2434",
+              text: "#f0edf8",
+              muted: "#b3abc7",
+              surface: "#342d43",
+              line: "#564d67",
+              glowA: "rgba(122, 169, 255, 0.16)",
+              glowB: "rgba(237, 129, 196, 0.14)"
+            };
+          }
+
+          return {
+            bg: "#0b1021",
+            text: "#ecf7ff",
+            muted: "#97a8ca",
+            surface: "#121a36",
+            line: "#2a3d69",
+            glowA: "rgba(49, 215, 255, 0.14)",
+            glowB: "rgba(84, 91, 255, 0.18)"
+          };
+        }
+
+        function applyDayCycleTheme(date = new Date()) {
+          const palette = get24HourPalette(date);
+          root.style.setProperty("--bg", palette.bg);
+          root.style.setProperty("--text", palette.text);
+          root.style.setProperty("--muted", palette.muted);
+          root.style.setProperty("--surface", palette.surface);
+          root.style.setProperty("--line", palette.line);
+          root.style.setProperty("--glow-a", palette.glowA);
+          root.style.setProperty("--glow-b", palette.glowB);
+        }
+
+        function scheduleDayCycleRefresh(theme) {
+          if (dayCycleTimer) {
+            window.clearTimeout(dayCycleTimer);
+            dayCycleTimer = null;
+          }
+          if (theme !== "24h") return;
+          const now = new Date();
+          const nextHour = new Date(now);
+          nextHour.setHours(now.getHours() + 1, 0, 2, 0);
+          dayCycleTimer = window.setTimeout(() => {
+            applyDayCycleTheme(new Date());
+            scheduleDayCycleRefresh("24h");
+          }, nextHour.getTime() - now.getTime());
         }
 
         function getStoredDetailState(key) {
