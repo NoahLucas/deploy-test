@@ -162,9 +162,17 @@ def _build_year_inputs(
     memory_payload = [
         {
             "source": item.source,
+            "source_kind": item.source_kind,
             "title": item.title,
             "detail": item.detail,
             "tags": item.tags,
+            "people": item.people,
+            "place_label": item.place_label,
+            "privacy_level": item.privacy_level,
+            "review_state": item.review_state,
+            "joy_score": item.joy_score,
+            "family_relevance_score": item.family_relevance_score,
+            "importance_score": item.importance_score,
             "event_at": item.event_at.isoformat(),
         }
         for item in events
@@ -181,9 +189,17 @@ def create_autobiographer_event(payload: AutobiographerMemoryEventCreateRequest,
         title=payload.title,
         detail=payload.detail,
         tags_json=json.dumps(payload.tags),
+        people_json=json.dumps(payload.people),
+        place_label=payload.place_label or "",
+        privacy_level=payload.privacy_level,
+        review_state=payload.review_state,
+        source_kind=payload.source_kind,
+        joy_score=payload.joy_score,
+        family_relevance_score=payload.family_relevance_score,
+        importance_score=payload.importance_score,
         event_at=payload.event_at.astimezone(timezone.utc).isoformat(),
     )
-    rows = store.list_autobiographer_memory_events(limit=1)
+    rows = store.list_autobiographer_memory_events(limit=500)
     event_row = next((row for row in rows if row["id"] == event_id), None)
     if event_row is None:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Failed to persist event.")
@@ -269,9 +285,17 @@ def generate_autobiographer_month_chapter(
     memory_payload = [
         {
             "source": item.source,
+            "source_kind": item.source_kind,
             "title": item.title,
             "detail": item.detail,
             "tags": item.tags,
+            "people": item.people,
+            "place_label": item.place_label,
+            "privacy_level": item.privacy_level,
+            "review_state": item.review_state,
+            "joy_score": item.joy_score,
+            "family_relevance_score": item.family_relevance_score,
+            "importance_score": item.importance_score,
             "event_at": item.event_at.isoformat(),
         }
         for item in month_events

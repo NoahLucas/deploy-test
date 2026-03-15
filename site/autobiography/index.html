@@ -10,30 +10,91 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="../styles.css" />
     <style>
-      .autobio-shell {
+      main.autobio-page {
+        width: min(1100px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 4.25rem 0 5rem;
+      }
+
+      .autobio-hero {
         display: grid;
-        gap: 1.5rem;
+        grid-template-columns: minmax(0, 0.95fr) minmax(18rem, 0.7fr);
+        gap: 2.4rem;
+        align-items: end;
+        margin-bottom: 3rem;
+      }
+
+      .autobio-kicker {
+        display: inline-block;
+        margin-bottom: 0.9rem;
+        color: var(--muted);
+        font-size: 0.76rem;
+        letter-spacing: 0.14em;
+      }
+
+      .autobio-hero h1 {
+        margin: 0;
+        max-width: 12ch;
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(3.4rem, 10vw, 6.9rem);
+        line-height: 0.92;
+        font-weight: 400;
+        letter-spacing: -0.04em;
+        color: var(--paper);
+      }
+
+      .autobio-hero-copy {
+        margin: 0;
+        max-width: 30rem;
+        color: var(--muted);
+        font-size: 1rem;
+        line-height: 1.8;
+      }
+
+      .autobio-frame {
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 13rem minmax(0, 1fr);
+        gap: 2rem;
+        padding-top: 1.6rem;
+      }
+
+      .autobio-aside {
+        display: grid;
+        gap: 1.1rem;
+        align-content: start;
       }
 
       .autobio-meta {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1rem;
+        padding-right: 1.2rem;
+        border-right: 1px solid var(--line);
       }
 
-      .autobio-meta article {
-        border: 1px solid var(--line);
-        border-radius: 1.25rem;
-        background: rgba(255, 255, 255, 0.02);
-        padding: 1rem 1.1rem;
+      .autobio-meta article + article {
+        margin-top: 1rem;
       }
 
       .autobio-meta .label {
-        margin-bottom: 0.45rem;
+        margin: 0 0 0.32rem;
+        color: var(--muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .autobio-meta .value {
+        margin: 0;
+        color: var(--paper);
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .autobio-note {
+        max-width: 44rem;
       }
 
       .autobio-body {
-        line-height: 1.75;
+        color: var(--paper);
       }
 
       .autobio-body h1,
@@ -42,26 +103,58 @@
         font-family: "Instrument Serif", serif;
         font-weight: 400;
         color: var(--paper);
+        letter-spacing: -0.02em;
+      }
+
+      .autobio-body h1 {
+        margin: 0 0 1.3rem;
+        font-size: clamp(2.2rem, 5vw, 3.4rem);
+        line-height: 1;
+      }
+
+      .autobio-body h2 {
+        margin: 2.3rem 0 0.9rem;
+        font-size: clamp(1.6rem, 3vw, 2.15rem);
+        line-height: 1.06;
+      }
+
+      .autobio-body h3 {
+        margin: 1.5rem 0 0.6rem;
+        font-size: 1.3rem;
+      }
+
+      .autobio-body p,
+      .autobio-body li {
+        color: var(--paper);
+        font-size: 1rem;
+        line-height: 1.9;
       }
 
       .autobio-body p {
-        color: var(--paper);
+        margin: 0 0 1.1rem;
       }
 
       .autobio-body ul {
-        padding-left: 1.15rem;
+        margin: 1rem 0 1.35rem;
+        padding-left: 1.3rem;
       }
 
       .autobio-empty {
-        border: 1px dashed var(--line);
-        border-radius: 1.25rem;
-        padding: 1.2rem;
         color: var(--muted);
+        padding: 1.1rem 0;
       }
 
-      @media (max-width: 720px) {
-        .autobio-meta {
+      @media (max-width: 900px) {
+        .autobio-hero,
+        .autobio-frame {
           grid-template-columns: 1fr;
+        }
+
+        .autobio-meta {
+          border-right: 0;
+          padding-right: 0;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid var(--line);
         }
       }
     </style>
@@ -78,21 +171,24 @@
       </nav>
     </header>
 
-    <main>
-      <section class="hero reveal">
-        <p class="eyebrow">LIVING AUTOBIOGRAPHY</p>
-        <h1>A public chapter that keeps revising as <span>life continues.</span></h1>
-        <p id="autobio-summary" class="lede">Loading the latest chapter...</p>
+    <main class="autobio-page">
+      <section class="autobio-hero reveal">
+        <div>
+          <span class="autobio-kicker">LIVING AUTOBIOGRAPHY</span>
+          <h1>A chapter that keeps up with a real life.</h1>
+        </div>
+        <p id="autobio-summary" class="autobio-hero-copy">Loading the latest chapter...</p>
       </section>
 
-      <section class="panel reveal autobio-shell">
-        <div class="panel-head"><h2>Current Chapter</h2><p>Updated nightly from the autobiographer agent.</p></div>
-        <div class="autobio-meta">
-          <article><p class="label">Status</p><p class="value">Live</p></article>
-          <article><p class="label">Slug</p><p id="autobio-slug" class="value">Loading...</p></article>
-          <article><p class="label">Updated</p><p id="autobio-updated" class="value">Loading...</p></article>
-        </div>
-        <article id="autobio-content" class="autobio-body autobio-empty">The living autobiography will appear here once the latest note is available.</article>
+      <section class="autobio-frame reveal">
+        <aside class="autobio-aside">
+          <div class="autobio-meta">
+            <article><p class="label">Status</p><p class="value">Live</p></article>
+            <article><p class="label">Slug</p><p id="autobio-slug" class="value">Loading...</p></article>
+            <article><p class="label">Updated</p><p id="autobio-updated" class="value">Loading...</p></article>
+          </div>
+        </aside>
+        <article id="autobio-content" class="autobio-note autobio-body autobio-empty">The living autobiography will appear here once the latest note is available.</article>
       </section>
     </main>
 

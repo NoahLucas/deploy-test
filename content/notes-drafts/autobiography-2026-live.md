@@ -1,7 +1,7 @@
 ---
 title: "2026 Autobiography (Live)"
 slug: "autobiography-2026-live"
-summary: "A quiet month in the record: almost no trace remains. The blank page becomes the subject\u2014what absence means, what may have been lived off-camera, and the questions we carry forward until memory or evidence fills them in."
+summary: "March in Ojai, anchored with Sara, Willa, and Bruce. VP Product at Sift pressed hard, but I kept home as the spine. Mid-month I began building a living autobiographer to remember this season faithfully\u2014for them, and to steady my attention."
 meta_title: "2026 Autobiography (Live) - Noah Lucas"
 meta_description: "A continuously updated yearly autobiography note generated from monthly chapter synthesis."
 ---
@@ -11,20 +11,14 @@ A living chapter feed updated throughout the year. Each month remains live until
 
 ## March 2026 · Live
 
-# March 2026 — A Quiet Gap
+# Home as Center, Work in Motion
 
-The archive for March is spare. No notes, no calendar threads, no artifacts that fix a day to a place or a voice. The absence itself becomes the fact: something was lived here, but it left little digital wake we can name without guesswork.
+I live in Ojai with Sara, Willa, and Bruce the cat. The headline is not the map point but the people: this is a family season, not career theater. The rooms we share are the anchor for how I want this stretch of life to feel from the inside.
 
-With discipline, we resist backfilling. We don’t invent scenes or reasons; we let the month remain a quiet room. What can be said, honestly, is that this silence has weight. It withholds the textures that usually prove a month happened—the person you texted twice in a day, the line of code or sentence that finally held, the laugh across a table that softened an edge. Their not-being-here reminds us how easily the ordinary disappears.
+At Sift, leading product carries the usual gravity—execution pressure, tradeoffs, the discipline to build. The live question this month was practical and moral at once: how to ship with urgency and still be truly present at home. I felt the pull every day, not as a crisis, more like a steady tide that asks you to set your feet.
 
-If a turning point sat in these weeks, it doesn’t appear in our record. If March was simply a steady run of days, that steadiness deserves witness too; cadence is part of a life’s shape. Either way, the lack of detail keeps us humble about cause and effect, and careful about stories we can’t verify.
+Mid-March I turned that question into a project. I started building a living autobiographer—designed to hold a faithful record over time: one chapter each year, one living post that keeps revising—so the people closest to me can later understand what this season actually felt like. Not a performance, a ledger of the real: what we valued, what it cost, and how we tried to carry both.
 
-Open threads to fill when memory allows:
+What I want to remember from this month is ordinary and central: the texture of our household, the way being with Sara and Willa gives shape to the week, Bruce padding through like quiet punctuation. Work moved fast; home kept its own steady tempo. Holding those two without letting one erase the other felt like the work beneath the work.
 
-- Was any decision made this month that changed the slope of work or home?
-- Did a relationship shift tempo—closer, quieter, or newly strained?
-- Is there a place that belongs to March—a room, a street, a screen—and why?
-- Was there a sentence someone said that stayed with you?
-- Did health, energy, or sleep mark these weeks in any way?
-
-What endures, even unrecorded, is the commitment to notice. When evidence returns—a photo’s timestamp, a receipt, a stray email—we’ll stitch it in without embroidery. Until then, we keep March as it is: a blank with edges, held open for the ordinary and the unmissable that may yet come back to hand.
+Open threads: how to protect presence on the heaviest weeks; whether this memory system can train my attention as much as it records it; and how to lead at Sift without letting its stage define the story. For now, Ojai—and the people in it—remain the spine.

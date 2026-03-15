@@ -74,6 +74,7 @@ Requirements:
 - `chapter_markdown` must be valid markdown.
 - Begin `chapter_markdown` with a single H1 title.
 - Build a real narrative arc from the month rather than listing events.
+- When at least one concrete memory event exists, anchor the chapter in those facts instead of making absence the subject.
 - Include the month's key moments, reflections, delights worth cherishing, and open threads.
 - Use evidence from the supplied memory events and digital exhaust.
 - If the month is sparse, write honestly about the sparseness and what can still be known.

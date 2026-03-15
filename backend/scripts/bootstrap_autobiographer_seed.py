@@ -24,9 +24,10 @@ def build_seed_events(year: int) -> list[dict]:
             "source_kind": "bootstrap",
             "title": "Living in Ojai with family",
             "detail": (
-                "Home base is Ojai, California. Life is centered around living with Sara, Willa, "
-                "and Bruce the cat. This is a family season, not just a work season, and that fact "
-                "should be part of the narrative spine."
+                "Home base is Ojai, California. The everyday scene is domestic and specific: "
+                "living with Sara, Willa, and Bruce the cat, building a life whose emotional center "
+                "is family rather than career theater. The important fact is not only where he lives, "
+                "but who is there with him and what that says about the season of life."
             ),
             "tags": ["family", "home", "ojai", "season-of-life"],
             "people": ["Sara", "Willa"],
@@ -44,8 +45,8 @@ def build_seed_events(year: int) -> list[dict]:
             "title": "Working at Sift as VP Product",
             "detail": (
                 "Current work chapter is serving as Vice President of Product at Sift. "
-                "The season combines product leadership, execution pressure, and the question "
-                "of how to build while still staying present inside family life."
+                "This is a real leadership season: product judgment, organizational execution, "
+                "and the constant balancing act between intensity at work and presence at home."
             ),
             "tags": ["work", "sift", "product", "leadership"],
             "people": [],
@@ -56,6 +57,25 @@ def build_seed_events(year: int) -> list[dict]:
             "family_relevance_score": 0.5,
             "importance_score": 0.92,
             "event_at": f"{year}-03-03T17:00:00+00:00",
+        },
+        {
+            "source": "site-bootstrap",
+            "source_kind": "bootstrap",
+            "title": "Holding work and family in the same frame",
+            "detail": (
+                "The central tension of the season is not dramatic but enduring: how to do serious work "
+                "without letting ambition flatten the life happening at home. Ojai, family, and leadership "
+                "at Sift are not separate storylines; they are the same chapter competing for attention each day."
+            ),
+            "tags": ["family", "work", "balance", "season-of-life"],
+            "people": ["Sara", "Willa"],
+            "place_label": "Ojai, California",
+            "privacy_level": "private",
+            "review_state": "accepted",
+            "joy_score": 0.77,
+            "family_relevance_score": 0.95,
+            "importance_score": 0.9,
+            "event_at": f"{year}-03-08T19:00:00+00:00",
         },
         {
             "source": "site-bootstrap",
@@ -76,6 +96,25 @@ def build_seed_events(year: int) -> list[dict]:
             "family_relevance_score": 0.96,
             "importance_score": 0.95,
             "event_at": f"{year}-03-14T18:30:00+00:00",
+        },
+        {
+            "source": "site-bootstrap",
+            "source_kind": "bootstrap",
+            "title": "Choosing remembrance over ambient forgetting",
+            "detail": (
+                "The autobiography project is not a branding exercise. It starts from a more intimate fear: "
+                "that the best parts of life disappear because no one writes them down. The aim is to preserve "
+                "the ordinary good stuff for family memory before it is sanded down into vague summary."
+            ),
+            "tags": ["memory", "family", "writing", "meaning"],
+            "people": ["Sara", "Willa"],
+            "place_label": "Ojai, California",
+            "privacy_level": "private",
+            "review_state": "accepted",
+            "joy_score": 0.93,
+            "family_relevance_score": 0.99,
+            "importance_score": 0.96,
+            "event_at": f"{year}-03-14T20:00:00+00:00",
         },
     ]
 

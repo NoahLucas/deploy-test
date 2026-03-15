@@ -3,19 +3,72 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
-function renderMarkdown(markdown) {
-  const safe = String(markdown || "")
+function escapeHtml(value) {
+  return String(value || "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
-  return safe
-    .replace(/^### (.*)$/gm, "<h3>$1</h3>")
-    .replace(/^## (.*)$/gm, "<h2>$1</h2>")
-    .replace(/^# (.*)$/gm, "<h1>$1</h1>")
-    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-    .replace(/^- (.*)$/gm, "<li>$1</li>")
-    .replace(/(<li>.*<\/li>)/gs, "<ul>$1</ul>")
-    .replace(/\n\n/g, "</p><p>");
+}
+
+function formatInline(value) {
+  return escapeHtml(value).replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+}
+
+function renderMarkdown(markdown) {
+  const lines = String(markdown || "").split(/\r?\n/);
+  const parts = [];
+  let paragraph = [];
+  let listItems = [];
+
+  function flushParagraph() {
+    if (!paragraph.length) return;
+    parts.push(`<p>${formatInline(paragraph.join(" "))}</p>`);
+    paragraph = [];
+  }
+
+  function flushList() {
+    if (!listItems.length) return;
+    parts.push(`<ul>${listItems.map((item) => `<li>${formatInline(item)}</li>`).join("")}</ul>`);
+    listItems = [];
+  }
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!line) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+    if (line.startsWith("### ")) {
+      flushParagraph();
+      flushList();
+      parts.push(`<h3>${formatInline(line.slice(4))}</h3>`);
+      continue;
+    }
+    if (line.startsWith("## ")) {
+      flushParagraph();
+      flushList();
+      parts.push(`<h2>${formatInline(line.slice(3))}</h2>`);
+      continue;
+    }
+    if (line.startsWith("# ")) {
+      flushParagraph();
+      flushList();
+      parts.push(`<h1>${formatInline(line.slice(2))}</h1>`);
+      continue;
+    }
+    if (line.startsWith("- ")) {
+      flushParagraph();
+      listItems.push(line.slice(2));
+      continue;
+    }
+    flushList();
+    paragraph.push(line);
+  }
+
+  flushParagraph();
+  flushList();
+  return parts.join("");
 }
 
 function formatDate(value) {
@@ -32,10 +85,11 @@ async function loadAutobiography() {
     setText("autobio-summary", data.summary || "Living chapter loaded.");
     setText("autobio-slug", data.slug || "autobiography-live");
     setText("autobio-updated", formatDate(data.generated_at));
+    document.title = `${data.title || "Autobiography"} | Noah Lucas`;
     const host = document.getElementById("autobio-content");
     if (host) {
       host.classList.remove("autobio-empty");
-      host.innerHTML = `<p>${renderMarkdown(data.body_markdown)}</p>`;
+      host.innerHTML = renderMarkdown(data.body_markdown);
     }
   } catch (_) {
     setText("autobio-summary", "The living autobiography is not available yet.");
