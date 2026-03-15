@@ -425,20 +425,19 @@
         }
 
         main {
-          padding: 4.6rem 1.2rem 2.8rem;
+          padding: 4.35rem 1rem 2.4rem;
         }
 
         .wrap {
-          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-          column-gap: 1.6rem;
+          grid-template-columns: 1fr;
           row-gap: 1.9rem;
-          align-items: start;
+          justify-items: center;
         }
 
         .core-column {
           order: 1;
-          grid-column: 1 / -1;
-          padding: 0 0 0.2rem;
+          grid-column: auto;
+          padding: 0;
         }
 
         .core-block::before {
@@ -451,28 +450,28 @@
         }
 
         .core-sentence {
-          max-width: 19.5rem;
+          max-width: 18rem;
           margin: 0 auto;
         }
 
         .places-rail,
         .timeline {
-          width: 100%;
+          width: min(320px, 100%);
           gap: 0.8rem;
-        }
-
-        .places-rail {
-          order: 3;
-          padding-right: 1rem;
-          justify-items: start;
-          text-align: left;
+          justify-items: center;
+          text-align: center;
         }
 
         .timeline {
           order: 2;
-          padding-left: 1rem;
-          justify-items: end;
-          text-align: right;
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .places-rail {
+          order: 3;
+          padding-left: 0;
+          padding-right: 0;
         }
 
         .place:hover,
@@ -486,43 +485,6 @@
         .experience {
           max-width: none;
         }
-      }
-
-      @media (max-width: 640px) {
-        main {
-          padding: 4.35rem 1rem 2.4rem;
-        }
-
-        .wrap {
-          grid-template-columns: 1fr;
-          row-gap: 1.8rem;
-          justify-items: center;
-        }
-
-        .core-column {
-          order: 2;
-          padding: 0;
-        }
-
-        .core-sentence {
-          max-width: 18rem;
-        }
-
-        .places-rail {
-          order: 3;
-          width: min(320px, 100%);
-          padding-left: 0;
-          justify-items: center;
-          text-align: center;
-        }
-
-        .timeline {
-          order: 1;
-          width: min(320px, 100%);
-          padding-right: 0;
-          justify-items: center;
-          text-align: center;
-        }
 
         .place-title,
         .place-subtitle {
@@ -533,6 +495,10 @@
         .experience-subtitle {
           display: block;
           text-align: center;
+        }
+
+        .core-link {
+          margin-top: 0.5rem;
         }
 
         .places-rail::after,
