@@ -162,6 +162,21 @@
             <span class="label">Event Time (ISO, optional)</span>
             <input id="autobio-event-at" placeholder="2026-03-09T12:00:00Z" />
           </label>
+          <label>
+            <span class="label">Visibility</span>
+            <select id="autobio-event-privacy">
+              <option value="private" selected>private</option>
+              <option value="public">public</option>
+            </select>
+          </label>
+          <label>
+            <span class="label">Review State</span>
+            <select id="autobio-event-review">
+              <option value="accepted" selected>accepted</option>
+              <option value="candidate">candidate</option>
+              <option value="rejected">rejected</option>
+            </select>
+          </label>
           <button class="btn btn-solid" type="submit">Add Memory Event</button>
         </form>
 
@@ -181,11 +196,67 @@
               <option value="true">true</option>
             </select>
           </label>
+          <label>
+            <span class="label">Include Private Context</span>
+            <select id="autobio-private-context">
+              <option value="false" selected>false</option>
+              <option value="true">true</option>
+            </select>
+          </label>
           <button class="btn btn-solid" type="submit">Generate Month Chapter</button>
           <button id="autobio-generate-year-chapter" class="btn btn-ghost" type="button">Generate Year Chapter</button>
           <button id="autobio-publish-year" class="btn btn-ghost" type="button">Publish Year Chapter</button>
           <button id="autobio-publish-live" class="btn btn-ghost" type="button">Publish Live Year Note</button>
         </form>
+
+        <div class="panel-head" style="margin-top:1.25rem;">
+          <h2>Public Memory Approval</h2>
+          <p>Public autobiography only publishes events that are both public and accepted.</p>
+        </div>
+
+        <form id="autobio-memory-filter-form" class="lab-form-grid">
+          <label>
+            <span class="label">Filter Year</span>
+            <input id="autobio-memory-year" type="number" min="2000" max="2100" value="2026" />
+          </label>
+          <label>
+            <span class="label">Filter Month</span>
+            <input id="autobio-memory-month" type="number" min="1" max="12" value="3" />
+          </label>
+          <label>
+            <span class="label">Visibility Filter</span>
+            <select id="autobio-memory-privacy-filter">
+              <option value="" selected>all</option>
+              <option value="public">public</option>
+              <option value="private">private</option>
+            </select>
+          </label>
+          <label>
+            <span class="label">Review Filter</span>
+            <select id="autobio-memory-review-filter">
+              <option value="" selected>all</option>
+              <option value="accepted">accepted</option>
+              <option value="candidate">candidate</option>
+              <option value="rejected">rejected</option>
+            </select>
+          </label>
+          <button id="autobio-memory-refresh" class="btn btn-ghost" type="button">Refresh Memory Events</button>
+        </form>
+
+        <div class="actions">
+          <button id="autobio-mark-public" class="btn btn-ghost" type="button">Mark Selected Public</button>
+          <button id="autobio-mark-private" class="btn btn-ghost" type="button">Mark Selected Private</button>
+          <button id="autobio-mark-accepted" class="btn btn-ghost" type="button">Mark Selected Accepted</button>
+          <button id="autobio-mark-candidate" class="btn btn-ghost" type="button">Mark Selected Candidate</button>
+        </div>
+
+        <div id="autobio-memory-list" class="grid notes-grid">
+          <article class="note">
+            <p class="note-type">LOADING</p>
+            <h3>Loading memory events...</h3>
+            <p>Public approval controls will appear here.</p>
+          </article>
+        </div>
 
         <pre id="autobio-output" class="codebox">No autobiographer activity yet.</pre>
       </section>

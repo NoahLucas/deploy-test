@@ -212,6 +212,17 @@ function bindAutobiographer() {
   const generateYearBtn = $("autobio-generate-year-chapter");
   const publishYearBtn = $("autobio-publish-year");
   const publishBtn = $("autobio-publish-live");
+  const privateContextInput = $("autobio-private-context");
+  const memoryYearInput = $("autobio-memory-year");
+  const memoryMonthInput = $("autobio-memory-month");
+  const memoryPrivacyFilter = $("autobio-memory-privacy-filter");
+  const memoryReviewFilter = $("autobio-memory-review-filter");
+  const memoryRefreshBtn = $("autobio-memory-refresh");
+  const memoryList = $("autobio-memory-list");
+  const markPublicBtn = $("autobio-mark-public");
+  const markPrivateBtn = $("autobio-mark-private");
+  const markAcceptedBtn = $("autobio-mark-accepted");
+  const markCandidateBtn = $("autobio-mark-candidate");
   if (!output || !initForm || !refreshBtn || !eventForm || !generateForm || !generateYearBtn || !publishYearBtn || !publishBtn) return;
 
   const yearInput = $("autobio-year");
@@ -220,6 +231,91 @@ function bindAutobiographer() {
   const generateYearInput = $("autobio-generate-year");
   const generateMonthInput = $("autobio-generate-month");
   const forceInput = $("autobio-force");
+  const eventPrivacyInput = $("autobio-event-privacy");
+  const eventReviewInput = $("autobio-event-review");
+
+  function includePrivateContext() {
+    return String(privateContextInput?.value || "false") === "true";
+  }
+
+  function selectedEventIds() {
+    return Array.from(document.querySelectorAll('input[name="autobio-memory-select"]:checked'))
+      .map((input) => Number(input.value))
+      .filter((value) => Number.isFinite(value));
+  }
+
+  function renderMemoryEvents(items) {
+    if (!memoryList) return;
+    if (!items.length) {
+      memoryList.innerHTML = `
+        <article class="note">
+          <p class="note-type">EMPTY</p>
+          <h3>No matching memory events</h3>
+          <p>Adjust the filters or add a new autobiographer memory event.</p>
+        </article>
+      `;
+      return;
+    }
+
+    memoryList.innerHTML = items
+      .map((item) => {
+        const tags = Array.isArray(item.tags) ? item.tags.join(", ") : "";
+        const detail = String(item.detail || "");
+        const excerpt = detail.length > 220 ? `${detail.slice(0, 220)}...` : detail;
+        return `
+          <article class="note">
+            <p class="note-type">${String(item.privacy_level || "private").toUpperCase()} · ${String(item.review_state || "candidate").toUpperCase()}</p>
+            <h3>
+              <label style="display:flex; gap:0.6rem; align-items:flex-start; cursor:pointer;">
+                <input type="checkbox" name="autobio-memory-select" value="${item.id}" style="margin-top:0.2rem;" />
+                <span>${item.title}</span>
+              </label>
+            </h3>
+            <p>${excerpt || "No detail provided."}</p>
+            <p class="note-meta">#${item.id} · ${new Date(item.event_at).toLocaleString()}${tags ? ` · ${tags}` : ""}</p>
+          </article>
+        `;
+      })
+      .join("");
+  }
+
+  const loadMemoryEvents = async () => {
+    try {
+      const year = Number(memoryYearInput?.value || generateYearInput?.value || yearInput?.value || new Date().getFullYear());
+      const month = Number(memoryMonthInput?.value || generateMonthInput?.value || new Date().getMonth() + 1);
+      const params = new URLSearchParams({ year: String(year), month: String(month), limit: "200" });
+      if (memoryPrivacyFilter?.value) params.set("privacy_level", memoryPrivacyFilter.value);
+      if (memoryReviewFilter?.value) params.set("review_state", memoryReviewFilter.value);
+      const data = await getJson(`/api/v1/lab/autobiographer/events?${params.toString()}`, true);
+      renderMemoryEvents(data.items || []);
+    } catch (err) {
+      if (memoryList) {
+        memoryList.innerHTML = `
+          <article class="note">
+            <p class="note-type">ERROR</p>
+            <h3>Memory events failed to load</h3>
+            <p>${String(err)}</p>
+          </article>
+        `;
+      }
+    }
+  };
+
+  const updateSelectedEvents = async (path, body) => {
+    const eventIds = selectedEventIds();
+    if (!eventIds.length) {
+      pretty(output, { error: "Select at least one memory event first." });
+      return;
+    }
+    try {
+      const data = await postJson(path, { event_ids: eventIds, ...body }, true);
+      pretty(output, data);
+      await loadMemoryEvents();
+      await load();
+    } catch (err) {
+      pretty(output, { error: String(err) });
+    }
+  };
 
   const load = async () => {
     try {
@@ -262,10 +358,13 @@ function bindAutobiographer() {
         title: $("autobio-event-title")?.value || "",
         detail: $("autobio-event-detail")?.value || "",
         tags,
+        privacy_level: eventPrivacyInput?.value || "private",
+        review_state: eventReviewInput?.value || "accepted",
         event_at: ($("autobio-event-at")?.value || "").trim() || undefined
       };
       const data = await postJson("/api/v1/lab/autobiographer/events", payload, true);
       pretty(output, data);
+      await loadMemoryEvents();
       await load();
     } catch (err) {
       pretty(output, { error: String(err) });
@@ -280,7 +379,7 @@ function bindAutobiographer() {
         month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
         persona_label: personaInput?.value || "founder-biographer",
         style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
-        include_private_context: true,
+        include_private_context: includePrivateContext(),
         force_regenerate: String(forceInput?.value || "false") === "true"
       };
       const data = await postJson("/api/v1/lab/autobiographer/chapters/generate", payload, true);
@@ -298,7 +397,7 @@ function bindAutobiographer() {
         year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
         persona_label: personaInput?.value || "founder-biographer",
         style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
-        include_private_context: true
+        include_private_context: includePrivateContext()
       };
       const data = await postJson("/api/v1/lab/autobiographer/year-chapters/generate", payload, true);
       pretty(output, data);
@@ -313,7 +412,7 @@ function bindAutobiographer() {
         year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
         persona_label: personaInput?.value || "founder-biographer",
         style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
-        include_private_context: true,
+        include_private_context: includePrivateContext(),
         force_regenerate: String(forceInput?.value || "false") === "true",
         subdir: "notes-drafts"
       };
@@ -331,7 +430,7 @@ function bindAutobiographer() {
         month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
         persona_label: personaInput?.value || "founder-biographer",
         style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
-        include_private_context: true,
+        include_private_context: includePrivateContext(),
         force_regenerate: false,
         subdir: "notes-drafts"
       };
@@ -342,7 +441,14 @@ function bindAutobiographer() {
     }
   });
 
+  memoryRefreshBtn?.addEventListener("click", loadMemoryEvents);
+  markPublicBtn?.addEventListener("click", () => updateSelectedEvents("/api/v1/lab/autobiographer/events/visibility", { privacy_level: "public" }));
+  markPrivateBtn?.addEventListener("click", () => updateSelectedEvents("/api/v1/lab/autobiographer/events/visibility", { privacy_level: "private" }));
+  markAcceptedBtn?.addEventListener("click", () => updateSelectedEvents("/api/v1/lab/autobiographer/events/review", { review_state: "accepted" }));
+  markCandidateBtn?.addEventListener("click", () => updateSelectedEvents("/api/v1/lab/autobiographer/events/review", { review_state: "candidate" }));
+
   load();
+  loadMemoryEvents();
 }
 
 bindToken();

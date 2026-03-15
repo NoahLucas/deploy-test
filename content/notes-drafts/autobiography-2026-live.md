@@ -11,4 +11,6 @@ A living chapter feed updated throughout the year. Each month remains live until
 
 ## March 2026 · Live
 
+# March 2026
+
 In March, we moved to Ojai.

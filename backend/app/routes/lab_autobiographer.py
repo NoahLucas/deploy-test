@@ -127,6 +127,24 @@ def _event_is_public_approved(item: AutobiographerMemoryEventItem) -> bool:
     return item.privacy_level == "public" and item.review_state == "accepted"
 
 
+def _public_low_evidence_month_output(*, month_label: str, year: int, events: list[AutobiographerMemoryEventItem]) -> tuple[str, str]:
+    if not events:
+        summary = f"No approved public facts are available yet for {month_label} {year}."
+        chapter = f"# {month_label} {year}\n\nNo approved public facts are available yet for this month."
+        return summary, chapter
+
+    first = events[0]
+    detail = str(first.detail).strip()
+    if detail:
+        summary = detail
+        chapter = f"# {month_label} {year}\n\n{detail}"
+        return summary[:160], chapter
+
+    summary = str(first.title).strip()
+    chapter = f"# {month_label} {year}\n\n{summary}"
+    return summary[:160], chapter
+
+
 def _build_live_note_markdown(year: int, chapter_rows: list[dict]) -> tuple[str, str]:
     sorted_rows = sorted(chapter_rows, key=lambda row: row["month"])
     title = f"{year} Autobiography (Live)"
@@ -328,6 +346,30 @@ def generate_autobiographer_month_chapter(
         events = [item for item in events if _event_is_public_approved(item)]
     month_events = [item for item in events if item.event_at.month == payload.month]
     month_events.sort(key=lambda item: item.event_at)
+
+    if not payload.include_private_context and len(month_events) <= 1:
+        summary, chapter_markdown = _public_low_evidence_month_output(
+            month_label=_month_label(payload.month),
+            year=payload.year,
+            events=month_events,
+        )
+        is_closed = _is_month_closed(year=payload.year, month=payload.month, now=now)
+        status_value = "locked" if is_closed else "live"
+        locked_at = now.isoformat() if is_closed else ""
+        store.upsert_autobiographer_month_chapter(
+            year=payload.year,
+            month=payload.month,
+            persona_label=payload.persona_label,
+            style_brief=payload.style_brief,
+            summary=summary,
+            chapter_markdown=chapter_markdown,
+            status=status_value,
+            locked_at=locked_at,
+        )
+        row = store.get_autobiographer_month_chapter(year=payload.year, month=payload.month)
+        if row is None:
+            raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Chapter not found after generation.")
+        return AutobiographerMonthlyChapterResponse(chapter=_to_month_chapter_item(row))
 
     memory_payload = [
         {
