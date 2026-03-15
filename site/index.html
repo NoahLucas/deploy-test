@@ -772,6 +772,7 @@
         const detailStates = ["expanded", "collapsed"];
         let ownerSessionActive = false;
         let dayCycleTimer = null;
+        let dayCyclePreviewHour = null;
 
         function getStoredTheme() {
           const saved = localStorage.getItem("nl-theme");
@@ -786,10 +787,15 @@
             root.setAttribute("data-theme", theme);
             if (theme !== "24h") clearDynamicTheme();
           }
+          if (theme !== "24h") dayCyclePreviewHour = null;
           if (theme === "24h") applyDayCycleTheme();
           scheduleDayCycleRefresh(theme);
           const iconMap = { system: "◐", light: "○", dark: "●", "24h": "◒" };
-          const label = `Theme mode: ${theme}`;
+          const previewSuffix =
+            theme === "24h" && Number.isInteger(dayCyclePreviewHour)
+              ? ` (${String(dayCyclePreviewHour).padStart(2, "0")}:00 preview)`
+              : "";
+          const label = `Theme mode: ${theme}${previewSuffix}`;
           themeButton.textContent = iconMap[theme] || "◐";
           themeButton.setAttribute("aria-label", label);
           themeButton.setAttribute("title", label);
@@ -934,7 +940,11 @@
         }
 
         function applyDayCycleTheme(date = new Date()) {
-          const palette = get24HourPalette(date);
+          const target = new Date(date);
+          if (Number.isInteger(dayCyclePreviewHour)) {
+            target.setHours(dayCyclePreviewHour, 0, 0, 0);
+          }
+          const palette = get24HourPalette(target);
           root.setAttribute("data-cycle-phase", palette.phase);
           root.style.setProperty("--bg", palette.bg);
           root.style.setProperty("--text", palette.text);
@@ -947,6 +957,14 @@
           root.style.setProperty("--mist-b", palette.mistB);
           root.style.setProperty("--firefly-a", palette.fireflyA);
           root.style.setProperty("--firefly-b", palette.fireflyB);
+          if (currentTheme === "24h") {
+            const previewSuffix = Number.isInteger(dayCyclePreviewHour)
+              ? ` (${String(dayCyclePreviewHour).padStart(2, "0")}:00 preview)`
+              : "";
+            const label = `Theme mode: 24h${previewSuffix}`;
+            themeButton.setAttribute("aria-label", label);
+            themeButton.setAttribute("title", label);
+          }
         }
 
         function scheduleDayCycleRefresh(theme) {
@@ -954,7 +972,7 @@
             window.clearTimeout(dayCycleTimer);
             dayCycleTimer = null;
           }
-          if (theme !== "24h") return;
+          if (theme !== "24h" || Number.isInteger(dayCyclePreviewHour)) return;
           const now = new Date();
           const nextHour = new Date(now);
           nextHour.setHours(now.getHours() + 1, 0, 2, 0);
@@ -1127,6 +1145,29 @@
           currentTheme = themeOptions[(idx + 1) % themeOptions.length];
           localStorage.setItem("nl-theme", currentTheme);
           applyTheme(currentTheme);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          const target = event.target;
+          const tagName = target && target.tagName ? String(target.tagName).toLowerCase() : "";
+          if (
+            tagName === "input" ||
+            tagName === "textarea" ||
+            tagName === "select" ||
+            ownerModal?.dataset.open === "true"
+          ) {
+            return;
+          }
+          if (currentTheme !== "24h") return;
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          const baseHour = Number.isInteger(dayCyclePreviewHour) ? dayCyclePreviewHour : new Date().getHours();
+          dayCyclePreviewHour =
+            event.key === "ArrowRight"
+              ? (baseHour + 1) % 24
+              : (baseHour + 23) % 24;
+          applyDayCycleTheme(new Date());
+          scheduleDayCycleRefresh(currentTheme);
         });
 
         if (placeToggle) {
