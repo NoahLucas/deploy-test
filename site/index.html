@@ -397,6 +397,11 @@
         text-align: right;
       }
 
+      .places-rail[data-interactive="true"],
+      .timeline[data-interactive="true"] {
+        cursor: pointer;
+      }
+
       .places-rail::after {
         content: "";
         position: absolute;
@@ -845,6 +850,8 @@
         const ownerModalSubmit = document.getElementById("owner-modal-submit");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
+        const placesRail = document.querySelector(".places-rail");
+        const timelineRail = document.querySelector(".timeline");
         const themeOptions = ["system", "light", "dark", "24h"];
         const detailStates = ["expanded", "collapsed"];
         let ownerSessionActive = false;
@@ -1061,9 +1068,8 @@
           }, nextHour.getTime() - now.getTime());
         }
 
-        function getStoredDetailState(key) {
-          const saved = localStorage.getItem(key);
-          return detailStates.includes(saved) ? saved : "collapsed";
+        function getStoredDetailState() {
+          return "collapsed";
         }
 
         function stepDayCyclePreview(delta) {
@@ -1076,6 +1082,10 @@
 
         function applyPlaceState(state) {
           root.setAttribute("data-place-state", state);
+          if (placesRail) {
+            placesRail.dataset.interactive = "true";
+            placesRail.setAttribute("aria-expanded", String(state === "expanded"));
+          }
           if (placeToggle) {
             placeToggle.setAttribute("aria-expanded", String(state === "expanded"));
             placeToggle.setAttribute(
@@ -1087,6 +1097,10 @@
 
         function applyJobState(state) {
           root.setAttribute("data-job-state", state);
+          if (timelineRail) {
+            timelineRail.dataset.interactive = "true";
+            timelineRail.setAttribute("aria-expanded", String(state === "expanded"));
+          }
           if (jobToggle) {
             jobToggle.setAttribute("aria-expanded", String(state === "expanded"));
             jobToggle.setAttribute(
@@ -1099,14 +1113,12 @@
         function togglePlaceState() {
           const current = root.getAttribute("data-place-state") || "collapsed";
           const next = current === "expanded" ? "collapsed" : "expanded";
-          localStorage.setItem("nl-place-state", next);
           applyPlaceState(next);
         }
 
         function toggleJobState() {
           const current = root.getAttribute("data-job-state") || "collapsed";
           const next = current === "expanded" ? "collapsed" : "expanded";
-          localStorage.setItem("nl-job-state", next);
           applyJobState(next);
         }
 
@@ -1211,8 +1223,8 @@
 
         let currentTheme = getStoredTheme();
         applyTheme(currentTheme);
-        applyPlaceState(getStoredDetailState("nl-place-state"));
-        applyJobState(getStoredDetailState("nl-job-state"));
+        applyPlaceState(getStoredDetailState());
+        applyJobState(getStoredDetailState());
         renderOwnerGate();
         syncOwnerSessionState();
 
@@ -1288,6 +1300,36 @@
         if (jobToggle) {
           jobToggle.addEventListener("click", toggleJobState);
           jobToggle.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              toggleJobState();
+            }
+          });
+        }
+
+        if (placesRail) {
+          placesRail.setAttribute("role", "button");
+          placesRail.setAttribute("tabindex", "0");
+          placesRail.addEventListener("click", (event) => {
+            if (event.target.closest("a, button")) return;
+            togglePlaceState();
+          });
+          placesRail.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              togglePlaceState();
+            }
+          });
+        }
+
+        if (timelineRail) {
+          timelineRail.setAttribute("role", "button");
+          timelineRail.setAttribute("tabindex", "0");
+          timelineRail.addEventListener("click", (event) => {
+            if (event.target.closest("a, button")) return;
+            toggleJobState();
+          });
+          timelineRail.addEventListener("keydown", (event) => {
             if (event.key === "Enter" || event.key === " ") {
               event.preventDefault();
               toggleJobState();
