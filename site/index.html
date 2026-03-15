@@ -13,6 +13,10 @@
         --line: #d9d9d2;
         --glow-a: color-mix(in srgb, var(--text) 5%, transparent);
         --glow-b: color-mix(in srgb, var(--text) 4%, transparent);
+        --mist-a: transparent;
+        --mist-b: transparent;
+        --firefly-a: transparent;
+        --firefly-b: transparent;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -24,6 +28,10 @@
           --line: #2a3040;
           --glow-a: color-mix(in srgb, var(--text) 6%, transparent);
           --glow-b: color-mix(in srgb, var(--text) 5%, transparent);
+          --mist-a: transparent;
+          --mist-b: transparent;
+          --firefly-a: transparent;
+          --firefly-b: transparent;
         }
       }
 
@@ -35,6 +43,10 @@
         --line: #d9d9d2;
         --glow-a: color-mix(in srgb, var(--text) 5%, transparent);
         --glow-b: color-mix(in srgb, var(--text) 4%, transparent);
+        --mist-a: transparent;
+        --mist-b: transparent;
+        --firefly-a: transparent;
+        --firefly-b: transparent;
       }
 
       :root[data-theme="dark"] {
@@ -45,6 +57,10 @@
         --line: #2a3040;
         --glow-a: color-mix(in srgb, var(--text) 6%, transparent);
         --glow-b: color-mix(in srgb, var(--text) 5%, transparent);
+        --mist-a: transparent;
+        --mist-b: transparent;
+        --firefly-a: transparent;
+        --firefly-b: transparent;
       }
 
       * { box-sizing: border-box; }
@@ -72,6 +88,41 @@
           radial-gradient(72vmax 72vmax at 82% 18%, var(--glow-a), transparent 74%),
           radial-gradient(80vmax 80vmax at 12% 84%, var(--glow-b), transparent 78%);
         transition: background 700ms ease;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(58vmax 30vmax at 50% 104%, var(--mist-a), transparent 72%),
+          radial-gradient(42vmax 22vmax at 52% 18%, var(--mist-b), transparent 75%),
+          radial-gradient(0.55rem 0.55rem at 22% 68%, var(--firefly-a), transparent 72%),
+          radial-gradient(0.42rem 0.42rem at 76% 61%, var(--firefly-b), transparent 72%),
+          radial-gradient(0.35rem 0.35rem at 64% 74%, var(--firefly-a), transparent 70%);
+        opacity: 0.42;
+        transition: background 900ms ease, opacity 500ms ease;
+      }
+
+      :root[data-cycle-phase="dusk"] body::after,
+      :root[data-cycle-phase="night"] body::after {
+        opacity: 0.62;
+      }
+
+      :root[data-cycle-phase="dusk"] body::after {
+        animation: fireflyFlicker 9s ease-in-out infinite;
+      }
+
+      @keyframes fireflyFlicker {
+        0%, 100% { opacity: 0.4; }
+        18% { opacity: 0.64; }
+        19% { opacity: 0.38; }
+        37% { opacity: 0.56; }
+        39% { opacity: 0.34; }
+        66% { opacity: 0.7; }
+        68% { opacity: 0.42; }
+        84% { opacity: 0.58; }
       }
 
       main {
@@ -630,6 +681,7 @@
         }
 
         function clearDynamicTheme() {
+          root.removeAttribute("data-cycle-phase");
           [
             "--bg",
             "--text",
@@ -637,7 +689,11 @@
             "--surface",
             "--line",
             "--glow-a",
-            "--glow-b"
+            "--glow-b",
+            "--mist-a",
+            "--mist-b",
+            "--firefly-a",
+            "--firefly-b"
           ].forEach((name) => root.style.removeProperty(name));
         }
 
@@ -646,89 +702,125 @@
 
           if (hour >= 0 && hour < 5) {
             return {
+              phase: "night",
               bg: "#0c1020",
               text: "#eef6ff",
               muted: "#9aa7c9",
               surface: "#121935",
               line: "#2e3f6a",
               glowA: "rgba(82, 194, 255, 0.14)",
-              glowB: "rgba(102, 92, 255, 0.16)"
+              glowB: "rgba(102, 92, 255, 0.16)",
+              mistA: "rgba(24, 78, 126, 0.14)",
+              mistB: "rgba(91, 76, 191, 0.08)",
+              fireflyA: "rgba(70, 214, 255, 0.18)",
+              fireflyB: "rgba(130, 109, 255, 0.14)"
             };
           }
 
           if (hour < 7) {
             return {
+              phase: "sunrise",
               bg: "#1f2234",
               text: "#f5f2f0",
               muted: "#c4b7b0",
               surface: "#2a2f45",
               line: "#53556c",
               glowA: "rgba(255, 177, 141, 0.18)",
-              glowB: "rgba(117, 147, 255, 0.12)"
+              glowB: "rgba(117, 147, 255, 0.12)",
+              mistA: "rgba(255, 197, 158, 0.22)",
+              mistB: "rgba(132, 154, 255, 0.14)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
             };
           }
 
           if (hour < 11) {
             return {
+              phase: "morning",
               bg: "#e8ece8",
               text: "#17211b",
               muted: "#5e6e64",
               surface: "#f4f5ef",
               line: "#cfd6cc",
               glowA: "rgba(176, 220, 192, 0.22)",
-              glowB: "rgba(197, 214, 235, 0.18)"
+              glowB: "rgba(197, 214, 235, 0.18)",
+              mistA: "rgba(216, 232, 222, 0.14)",
+              mistB: "rgba(208, 220, 232, 0.12)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
             };
           }
 
           if (hour < 16) {
             return {
+              phase: "day",
               bg: "#e7ecef",
               text: "#111b20",
               muted: "#5d6b73",
               surface: "#f7f9fa",
               line: "#ced8dd",
               glowA: "rgba(157, 203, 219, 0.2)",
-              glowB: "rgba(210, 224, 231, 0.16)"
+              glowB: "rgba(210, 224, 231, 0.16)",
+              mistA: "rgba(214, 228, 236, 0.1)",
+              mistB: "rgba(221, 232, 238, 0.08)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
             };
           }
 
           if (hour < 19) {
             return {
+              phase: "sunset",
               bg: "#efe7df",
               text: "#231917",
               muted: "#76625a",
               surface: "#f7f1eb",
               line: "#dbc8ba",
               glowA: "rgba(240, 165, 101, 0.18)",
-              glowB: "rgba(224, 197, 150, 0.16)"
+              glowB: "rgba(224, 197, 150, 0.16)",
+              mistA: "rgba(250, 194, 136, 0.22)",
+              mistB: "rgba(219, 162, 201, 0.12)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
             };
           }
 
           if (hour < 21) {
             return {
+              phase: "dusk",
               bg: "#2a2434",
               text: "#f0edf8",
               muted: "#b3abc7",
               surface: "#342d43",
               line: "#564d67",
               glowA: "rgba(122, 169, 255, 0.16)",
-              glowB: "rgba(237, 129, 196, 0.14)"
+              glowB: "rgba(237, 129, 196, 0.14)",
+              mistA: "rgba(111, 135, 255, 0.16)",
+              mistB: "rgba(230, 121, 192, 0.1)",
+              fireflyA: "rgba(255, 222, 110, 0.24)",
+              fireflyB: "rgba(173, 255, 205, 0.2)"
             };
           }
 
           return {
+            phase: "night",
             bg: "#0b1021",
             text: "#ecf7ff",
             muted: "#97a8ca",
             surface: "#121a36",
             line: "#2a3d69",
             glowA: "rgba(49, 215, 255, 0.14)",
-            glowB: "rgba(84, 91, 255, 0.18)"
+            glowB: "rgba(84, 91, 255, 0.18)",
+            mistA: "rgba(23, 88, 135, 0.14)",
+            mistB: "rgba(101, 88, 223, 0.08)",
+            fireflyA: "rgba(85, 240, 255, 0.2)",
+            fireflyB: "rgba(126, 107, 255, 0.16)"
           };
         }
 
         function applyDayCycleTheme(date = new Date()) {
           const palette = get24HourPalette(date);
+          root.setAttribute("data-cycle-phase", palette.phase);
           root.style.setProperty("--bg", palette.bg);
           root.style.setProperty("--text", palette.text);
           root.style.setProperty("--muted", palette.muted);
@@ -736,6 +828,10 @@
           root.style.setProperty("--line", palette.line);
           root.style.setProperty("--glow-a", palette.glowA);
           root.style.setProperty("--glow-b", palette.glowB);
+          root.style.setProperty("--mist-a", palette.mistA);
+          root.style.setProperty("--mist-b", palette.mistB);
+          root.style.setProperty("--firefly-a", palette.fireflyA);
+          root.style.setProperty("--firefly-b", palette.fireflyB);
         }
 
         function scheduleDayCycleRefresh(theme) {
