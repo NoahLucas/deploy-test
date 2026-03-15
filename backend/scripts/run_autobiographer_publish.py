@@ -24,8 +24,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--style-brief",
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         help="Style prompt for chapter generation",
     )

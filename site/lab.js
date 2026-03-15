@@ -240,7 +240,7 @@ function bindAutobiographer() {
       const payload = {
         year: Number(yearInput?.value || new Date().getFullYear()),
         persona_label: personaInput?.value || "founder-biographer",
-        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes."
+        style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone."
       };
       const data = await postJson("/api/v1/lab/autobiographer/chapters/initialize-year", payload, true);
       pretty(output, data);
@@ -279,7 +279,7 @@ function bindAutobiographer() {
         year: Number(generateYearInput?.value || new Date().getFullYear()),
         month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
         persona_label: personaInput?.value || "founder-biographer",
-        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
         include_private_context: true,
         force_regenerate: String(forceInput?.value || "false") === "true"
       };
@@ -297,7 +297,7 @@ function bindAutobiographer() {
       const payload = {
         year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
         persona_label: personaInput?.value || "founder-biographer",
-        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
         include_private_context: true
       };
       const data = await postJson("/api/v1/lab/autobiographer/year-chapters/generate", payload, true);
@@ -312,7 +312,7 @@ function bindAutobiographer() {
       const payload = {
         year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
         persona_label: personaInput?.value || "founder-biographer",
-        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
         include_private_context: true,
         force_regenerate: String(forceInput?.value || "false") === "true",
         subdir: "notes-drafts"
@@ -330,7 +330,7 @@ function bindAutobiographer() {
         year: Number(generateYearInput?.value || yearInput?.value || new Date().getFullYear()),
         month: Number(generateMonthInput?.value || new Date().getMonth() + 1),
         persona_label: personaInput?.value || "founder-biographer",
-        style_brief: styleInput?.value || "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, specific, psychologically perceptive, and grounded in real scenes.",
+        style_brief: styleInput?.value || "Concise biographical nonfiction: direct, observant, emotionally precise, grounded in real scenes, and adapted toward Noah's own spare, practical tone.",
         include_private_context: true,
         force_regenerate: false,
         subdir: "notes-drafts"

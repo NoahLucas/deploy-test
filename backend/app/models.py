@@ -528,8 +528,8 @@ class AutobiographerRevisionJobGenerateRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
@@ -681,8 +681,8 @@ class AutobiographerChapterGenerateRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
@@ -715,8 +715,8 @@ class AutobiographerMonthlyChapterGenerateRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
@@ -730,8 +730,8 @@ class AutobiographerMonthlyChaptersInitializeRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
@@ -768,8 +768,8 @@ class AutobiographerPublishLiveNoteRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
@@ -795,8 +795,8 @@ class AutobiographerPublishYearNoteRequest(BaseModel):
     persona_label: str = Field(default="founder-biographer", min_length=2, max_length=80)
     style_brief: str = Field(
         default=(
-            "Narrative nonfiction in a Walter Isaacson-inspired mode: warm, observant, "
-            "specific, psychologically perceptive, and grounded in real scenes."
+            "Concise biographical nonfiction: direct, observant, emotionally precise, "
+            "grounded in real scenes, and adapted toward Noah's own spare, practical tone."
         ),
         min_length=12,
         max_length=1200,
