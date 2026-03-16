@@ -357,6 +357,13 @@ def logout_admin_auth(
     return {"logged_out": True}
 
 
+@router.post("/admin-auth/code-login")
+def code_login_admin_auth(request: Request, response: Response) -> dict[str, object]:
+    assert_admin_token(request.headers.get("x-admin-token", ""), request.app.state.settings.admin_token)
+    expires_at = _issue_admin_session(request, response)
+    return {"authorized": True, "expires_at": expires_at, "method": "code"}
+
+
 @router.get("/admin-auth/apple/config")
 def get_admin_apple_auth_config(request: Request) -> dict[str, object]:
     client_id = _apple_web_client_id(request)
@@ -396,11 +403,8 @@ async def complete_admin_apple_auth(request: Request) -> Response:
     if error:
         message = error_description or error or "Apple sign-in failed."
         return HTMLResponse(
-            content=(
-                "<html><body style=\"font-family:-apple-system,Helvetica,Arial,sans-serif;padding:24px;\">"
-                "<p>Sign in with Apple failed.</p>"
-                f"<p>{escape(message)}</p></body></html>"
-            ),
+            content=f"<html><body style=\"font-family:-apple-system,Helvetica,Arial,sans-serif;padding:24px;\">"
+            f"<p>Sign in with Apple failed.</p><p>{escape(message)}</p></body></html>",
             status_code=status.HTTP_401_UNAUTHORIZED,
         )
 
@@ -474,7 +478,7 @@ def complete_admin_register_challenge(request: Request, payload: dict[str, objec
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Registration verification failed: {exc}") from exc
 
     request.app.state.store.save_admin_webauthn_credential(
-        credential_id=str(verification.credential_id),
+        credential_id=str(credential.get("id", "")).strip() or str(verification.credential_id),
         label=label,
         public_key_b64=_b64url_encode(verification.credential_public_key),
         sign_count=int(verification.sign_count),

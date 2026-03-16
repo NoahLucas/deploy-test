@@ -749,12 +749,12 @@
     <div id="owner-status" class="owner-status" aria-live="polite" aria-atomic="true"></div>
     <div id="owner-modal" class="owner-modal" aria-hidden="true">
       <form id="owner-modal-form" class="owner-modal-card">
-        <p class="owner-modal-title">Owner setup token</p>
-        <p class="owner-modal-copy">Enter the app's ADMIN_TOKEN to enroll this device for secure owner access.</p>
+        <p class="owner-modal-title">Owner access code</p>
+        <p class="owner-modal-copy">Enter the owner access code defined for this site to open the private view.</p>
         <input id="owner-token-input" class="owner-modal-input" type="password" autocomplete="off" spellcheck="false" />
         <div class="owner-modal-actions">
           <button id="owner-modal-cancel" class="owner-modal-btn" type="button">Cancel</button>
-          <button id="owner-modal-submit" class="owner-modal-btn" type="submit">Continue</button>
+          <button id="owner-modal-submit" class="owner-modal-btn" type="submit">Open</button>
         </div>
       </form>
     </div>
@@ -1426,88 +1426,14 @@
           return data;
         }
 
-        async function enrollOwnerCredential() {
+        async function authenticateOwnerWithCode() {
           const token = await requestOwnerToken();
           if (!token) return false;
-          setOwnerStatus("Requesting secure setup...", "default", true);
-          const start = await postJSON("/api/v1/public/admin-auth/webauthn/register/challenge", {}, { "X-Admin-Token": token });
-          setOwnerStatus("Waiting for Face ID or passkey approval...", "default", true);
-          const credential = await navigator.credentials.create({
-            publicKey: {
-              challenge: b64urlToBytes(start.challenge),
-              rp: start.rp,
-              user: {
-                id: b64urlToBytes(start.user.id),
-                name: start.user.name,
-                displayName: start.user.displayName
-              },
-              pubKeyCredParams: [{ type: "public-key", alg: -7 }, { type: "public-key", alg: -257 }],
-              authenticatorSelection: {
-                authenticatorAttachment: "platform",
-                residentKey: "required",
-                userVerification: "required"
-              },
-              timeout: start.timeout || 60000,
-              attestation: "none"
-            }
-          });
-          if (!credential) {
-            throw new Error("Passkey setup was cancelled.");
-          }
-          setOwnerStatus("Verifying secure setup...", "default", true);
-          await postJSON(
-            "/api/v1/public/admin-auth/webauthn/register/complete",
-            {
-              challenge_id: start.challenge_id,
-              credential: serializeRegistrationCredential(credential),
-              label: "Owner Passkey"
-            },
-            { "X-Admin-Token": token }
-          );
-          setOwnerStatus("Owner device enrolled.", "default");
-          return true;
-        }
-
-        async function authenticateOwner() {
-          let start;
-          try {
-            setOwnerStatus("Checking secure access...", "default", true);
-            start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
-          } catch (error) {
-            if (error.status === 428) {
-              const enrolled = await enrollOwnerCredential();
-              if (!enrolled) return;
-              setOwnerStatus("Preparing secure sign-in...", "default", true);
-              start = await postJSON("/api/v1/public/admin-auth/webauthn/challenge", {});
-            } else {
-              throw error;
-            }
-          }
-
-          setOwnerStatus("Waiting for Face ID or passkey approval...", "default", true);
-          const assertion = await navigator.credentials.get({
-            publicKey: {
-              challenge: b64urlToBytes(start.challenge),
-              rpId: start.rp_id || window.location.hostname,
-              allowCredentials: (start.allow_credentials || []).map((id) => ({
-                type: "public-key",
-                id: b64urlToBytes(id)
-              })),
-              userVerification: "required",
-              timeout: start.timeout || 60000
-            }
-          });
-          if (!assertion) {
-            throw new Error("Passkey sign-in was cancelled.");
-          }
-
-          setOwnerStatus("Verifying secure session...", "default", true);
-          await postJSON("/api/v1/public/admin-auth/webauthn/verify", {
-            challenge_id: start.challenge_id,
-            credential: serializeAuthenticationCredential(assertion)
-          });
+          setOwnerStatus("Verifying owner access...", "default", true);
+          await postJSON("/api/v1/public/admin-auth/code-login", {}, { "X-Admin-Token": token });
           setOwnerStatus("Secure connection established.", "default");
           window.location.href = "/ux-live.html";
+          return true;
         }
 
         ownerGate.addEventListener("click", async () => {
@@ -1515,14 +1441,10 @@
             window.location.href = "/ux-live.html";
             return;
           }
-          if (!window.PublicKeyCredential || !navigator.credentials) {
-            window.alert("Biometric auth is not available on this device/browser.");
-            return;
-          }
           ownerGate.disabled = true;
           ownerGate.style.opacity = "0.35";
           try {
-            await authenticateOwner();
+            await authenticateOwnerWithCode();
           } catch (error) {
             setOwnerStatus(error && error.message ? error.message : "Owner auth failed.", "error");
             window.alert(error && error.message ? error.message : "Owner auth failed.");
