@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-16T15:29:26.648Z",
+  "fetchedAt": "2026-03-16T19:26:56.604Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -11,11 +11,409 @@
   "signals": [
     {
       "source": "linear",
-      "title": "ENG-9192: Annotation timeline filters show UUIDs instead of human readable values",
+      "title": "ENG-9045: Add TTL for local catalog partitions",
       "priority": "HIGH",
       "state": "In Review",
+      "assignee": "nick.bowman@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-16T15:22:56.243Z",
+      "timestamp": "2026-03-16T18:59:09.830Z",
+      "evidence": [
+        {
+          "label": "ENG-9045",
+          "url": "https://linear.app/siftstack/issue/ENG-9045/add-ttl-for-local-catalog-partitions",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9255: [DESIGN] Parquet schema",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "pramod@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T18:58:44.343Z",
+      "evidence": [
+        {
+          "label": "ENG-9255",
+          "url": "https://linear.app/siftstack/issue/ENG-9255/design-parquet-schema",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8952: Family Config Polish",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "Adrienne Chang",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T18:45:25.650Z",
+      "evidence": [
+        {
+          "label": "ENG-8952",
+          "url": "https://linear.app/siftstack/issue/ENG-8952/family-config-polish",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7899: `catalog` service erroring out on disk operation in gov",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T18:41:47.411Z",
+      "evidence": [
+        {
+          "label": "ENG-7899",
+          "url": "https://linear.app/siftstack/issue/ENG-7899/catalog-service-erroring-out-on-disk-operation-in-gov",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9244: Distinguish between viewData and viewDetails",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T18:36:28.719Z",
+      "evidence": [
+        {
+          "label": "ENG-9244",
+          "url": "https://linear.app/siftstack/issue/ENG-9244/distinguish-between-viewdata-and-viewdetails",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9283: Add support for .feather files to File Viewer",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T18:22:57.022Z",
+      "evidence": [
+        {
+          "label": "ENG-9283",
+          "url": "https://linear.app/siftstack/issue/ENG-9283/add-support-for-feather-files-to-file-viewer",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-5959: [FE] Policy and Entity Attribute Management GUI",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:55:25.547Z",
+      "evidence": [
+        {
+          "label": "ENG-5959",
+          "url": "https://linear.app/siftstack/issue/ENG-5959/fe-policy-and-entity-attribute-management-gui",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9137: Bubble Down Time Based Filtering to `MemTableData` `read_data` Function",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "alexander.a@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:49:33.335Z",
+      "evidence": [
+        {
+          "label": "ENG-9137",
+          "url": "https://linear.app/siftstack/issue/ENG-9137/bubble-down-time-based-filtering-to-memtabledata-read-data-function",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9179: update readiness checklist before tabletop exercise",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:47:13.955Z",
+      "evidence": [
+        {
+          "label": "ENG-9179",
+          "url": "https://linear.app/siftstack/issue/ENG-9179/update-readiness-checklist-before-tabletop-exercise",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-5178: set up scim for aws identity center",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:46:53.962Z",
+      "evidence": [
+        {
+          "label": "ENG-5178",
+          "url": "https://linear.app/siftstack/issue/ENG-5178/set-up-scim-for-aws-identity-center",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7058: User Deactivation not working",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "andrew@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:43:43.222Z",
+      "evidence": [
+        {
+          "label": "ENG-7058",
+          "url": "https://linear.app/siftstack/issue/ENG-7058/user-deactivation-not-working",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7221: UDF Page Expression Syntax Library Doesn't Scroll",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:43:37.759Z",
+      "evidence": [
+        {
+          "label": "ENG-7221",
+          "url": "https://linear.app/siftstack/issue/ENG-7221/udf-page-expression-syntax-library-doesnt-scroll",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7745: Cannot Export CSV With Data",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "benjamin@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:43:25.535Z",
+      "evidence": [
+        {
+          "label": "ENG-7745",
+          "url": "https://linear.app/siftstack/issue/ENG-7745/cannot-export-csv-with-data",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7552: Cannot set X-axis timescale to future timestamps within a run",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:43:01.603Z",
+      "evidence": [
+        {
+          "label": "ENG-7552",
+          "url": "https://linear.app/siftstack/issue/ENG-7552/cannot-set-x-axis-timescale-to-future-timestamps-within-a-run",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7144: E2: Calc Channel values are identical across runs",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:42:53.284Z",
+      "evidence": [
+        {
+          "label": "ENG-7144",
+          "url": "https://linear.app/siftstack/issue/ENG-7144/e2-calc-channel-values-are-identical-across-runs",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7356: E2 table not displaying correct values",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:42:35.878Z",
+      "evidence": [
+        {
+          "label": "ENG-7356",
+          "url": "https://linear.app/siftstack/issue/ENG-7356/e2-table-not-displaying-correct-values",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8515: Update `ingest` configuration logic to explicitly specify assigned ingestion topics on a per-pod basis",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "nick.bowman@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:42:27.626Z",
+      "evidence": [
+        {
+          "label": "ENG-8515",
+          "url": "https://linear.app/siftstack/issue/ENG-8515/update-ingest-configuration-logic-to-explicitly-specify-assigned",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8958: \"GetStructuredData\" API Latency",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:40:34.630Z",
+      "evidence": [
+        {
+          "label": "ENG-8958",
+          "url": "https://linear.app/siftstack/issue/ENG-8958/getstructureddata-api-latency",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7822: Migrate TDMS Imports to npTDMS",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:27:06.931Z",
+      "evidence": [
+        {
+          "label": "ENG-7822",
+          "url": "https://linear.app/siftstack/issue/ENG-7822/migrate-tdms-imports-to-nptdms",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9280: E2 Annotations: Improve determination of heatmap height in timelines",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:20:18.801Z",
+      "evidence": [
+        {
+          "label": "ENG-9280",
+          "url": "https://linear.app/siftstack/issue/ENG-9280/e2-annotations-improve-determination-of-heatmap-height-in-timelines",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7918: Return Job ID in data import workflow",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:16:37.045Z",
+      "evidence": [
+        {
+          "label": "ENG-7918",
+          "url": "https://linear.app/siftstack/issue/ENG-7918/return-job-id-in-data-import-workflow",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9188: Create S3 data transfer bucket",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "frank@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:15:07.423Z",
+      "evidence": [
+        {
+          "label": "ENG-9188",
+          "url": "https://linear.app/siftstack/issue/ENG-9188/create-s3-data-transfer-bucket",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9044: E2 Annotations: Runless Asset attempt 1",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T17:14:28.277Z",
+      "evidence": [
+        {
+          "label": "ENG-9044",
+          "url": "https://linear.app/siftstack/issue/ENG-9044/e2-annotations-runless-asset-attempt-1",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9236: [FE] default to T-0 alignment in create dynamic window dialog",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Adrienne Chang",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T16:57:11.325Z",
+      "evidence": [
+        {
+          "label": "ENG-9236",
+          "url": "https://linear.app/siftstack/issue/ENG-9236/fe-default-to-t-0-alignment-in-create-dynamic-window-dialog",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9279: Change stat preview stat default to \"step after\" line interpolation",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Alex Luck",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T16:51:44.689Z",
+      "evidence": [
+        {
+          "label": "ENG-9279",
+          "url": "https://linear.app/siftstack/issue/ENG-9279/change-stat-preview-stat-default-to-step-after-line-interpolation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9192: Annotation timeline filters show UUIDs instead of human readable values",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T16:47:51.968Z",
       "evidence": [
         {
           "label": "ENG-9192",
@@ -28,10 +426,10 @@
       "source": "linear",
       "title": "ENG-9159: E2: Fix Y axis pan/zoom",
       "priority": "HIGH",
-      "state": "In Review",
+      "state": "In Verification",
       "assignee": "broch@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-16T15:12:11.318Z",
+      "timestamp": "2026-03-16T16:35:21.571Z",
       "evidence": [
         {
           "label": "ENG-9159",
@@ -42,445 +440,48 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9078: Sync Devin DeepWiki sift-stack/azimuth",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-16T07:50:10.420Z",
-      "evidence": [
-        {
-          "label": "ENG-9078",
-          "url": "https://linear.app/siftstack/issue/ENG-9078/sync-devin-deepwiki-sift-stackazimuth",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9041: QueryEngine: Update on-change sampling to return info about how many points were downsampled",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "danny@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-16T07:02:27.689Z",
-      "evidence": [
-        {
-          "label": "ENG-9041",
-          "url": "https://linear.app/siftstack/issue/ENG-9041/queryengine-update-on-change-sampling-to-return-info-about-how-many",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9277: Table improvements pre-GA",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-16T05:16:18.208Z",
-      "evidence": [
-        {
-          "label": "ENG-9277",
-          "url": "https://linear.app/siftstack/issue/ENG-9277/table-improvements-pre-ga",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9271: Channel list, when kicking off a new search, we should abort any existing searches",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-16T04:48:34.410Z",
-      "evidence": [
-        {
-          "label": "ENG-9271",
-          "url": "https://linear.app/siftstack/issue/ENG-9271/channel-list-when-kicking-off-a-new-search-we-should-abort-any",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9104: Implement a data pipeline for K2 Mission",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "adhi@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-16T02:50:32.388Z",
-      "evidence": [
-        {
-          "label": "ENG-9104",
-          "url": "https://linear.app/siftstack/issue/ENG-9104/implement-a-data-pipeline-for-k2-mission",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9273: Implement analytics events for Replace Data Source",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T23:55:38.667Z",
-      "evidence": [
-        {
-          "label": "ENG-9273",
-          "url": "https://linear.app/siftstack/issue/ENG-9273/implement-analytics-events-for-replace-data-source",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "FD-43: High-Level Interface - Data Import (files)",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Wei Lu",
-      "team": "Forward Deployed",
-      "timestamp": "2026-03-15T22:32:00.826Z",
-      "evidence": [
-        {
-          "label": "FD-43",
-          "url": "https://linear.app/siftstack/issue/FD-43/high-level-interface-data-import-files",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9276: Rename Explore 2 Amplitude events to follow best practices before GA (March 31)",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Rowen Wu",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T20:31:40.710Z",
-      "evidence": [
-        {
-          "label": "ENG-9276",
-          "url": "https://linear.app/siftstack/issue/ENG-9276/rename-explore-2-amplitude-events-to-follow-best-practices-before-ga",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9275: Amplitude instrumentation",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T19:01:51.032Z",
-      "evidence": [
-        {
-          "label": "ENG-9275",
-          "url": "https://linear.app/siftstack/issue/ENG-9275/amplitude-instrumentation",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9272: Clean up old legend/tooltip options",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T18:34:28.276Z",
-      "evidence": [
-        {
-          "label": "ENG-9272",
-          "url": "https://linear.app/siftstack/issue/ENG-9272/clean-up-old-legendtooltip-options",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9077: Channel list v2",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T18:25:42.788Z",
-      "evidence": [
-        {
-          "label": "ENG-9077",
-          "url": "https://linear.app/siftstack/issue/ENG-9077/channel-list-v2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8355: Text wrapping for channel name in item and in tooltip",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T07:01:59.009Z",
-      "evidence": [
-        {
-          "label": "ENG-8355",
-          "url": "https://linear.app/siftstack/issue/ENG-8355/text-wrapping-for-channel-name-in-item-and-in-tooltip",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9254: K8s job readiness: catalog endpoint, missing env vars, deploy workflow",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "adam@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T05:12:23.902Z",
-      "evidence": [
-        {
-          "label": "ENG-9254",
-          "url": "https://linear.app/siftstack/issue/ENG-9254/k8s-job-readiness-catalog-endpoint-missing-env-vars-deploy-workflow",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9258: [DESIGN] reduced memory for expanded inbound data",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T04:58:20.432Z",
-      "evidence": [
-        {
-          "label": "ENG-9258",
-          "url": "https://linear.app/siftstack/issue/ENG-9258/design-reduced-memory-for-expanded-inbound-data",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9126: [UX] Build Global Nav Prototypes for Testing",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Clinton Naugle",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T04:13:49.108Z",
-      "evidence": [
-        {
-          "label": "ENG-9126",
-          "url": "https://linear.app/siftstack/issue/ENG-9126/ux-build-global-nav-prototypes-for-testing",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-135: [UX] Wireframing for Global Nav",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-03-15T04:04:51.689Z",
-      "evidence": [
-        {
-          "label": "DES-135",
-          "url": "https://linear.app/siftstack/issue/DES-135/ux-wireframing-for-global-nav",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8334: Add more context menu options for group, items, chart, and general legend",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T17:40:21.546Z",
-      "evidence": [
-        {
-          "label": "ENG-8334",
-          "url": "https://linear.app/siftstack/issue/ENG-8334/add-more-context-menu-options-for-group-items-chart-and-general-legend",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9179: update readiness checklist before tabletop exercise",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Yue Shen",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T16:27:06.396Z",
-      "evidence": [
-        {
-          "label": "ENG-9179",
-          "url": "https://linear.app/siftstack/issue/ENG-9179/update-readiness-checklist-before-tabletop-exercise",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8234: Implement Fresh Data Reads from local catalog (sqlite)",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "nick.bowman@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T07:47:02.928Z",
-      "evidence": [
-        {
-          "label": "ENG-8234",
-          "url": "https://linear.app/siftstack/issue/ENG-8234/implement-fresh-data-reads-from-local-catalog-sqlite",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9137: Bubble Down Time Based Filtering to `MemTableData` `read_data` Function",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "alexander.a@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T06:57:59.302Z",
-      "evidence": [
-        {
-          "label": "ENG-9137",
-          "url": "https://linear.app/siftstack/issue/ENG-9137/bubble-down-time-based-filtering-to-memtabledata-read-data-function",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9174: document ports and connections for our app",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Felix Wong",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T06:07:55.144Z",
-      "evidence": [
-        {
-          "label": "ENG-9174",
-          "url": "https://linear.app/siftstack/issue/ENG-9174/document-ports-and-connections-for-our-app",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9175: submit network/system arch diagram to knox",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Felix Wong",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T06:07:55.117Z",
-      "evidence": [
-        {
-          "label": "ENG-9175",
-          "url": "https://linear.app/siftstack/issue/ENG-9175/submit-networksystem-arch-diagram-to-knox",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8228: Implement Fresh Data Reads from MemTable",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "alexander.a@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T05:57:03.684Z",
-      "evidence": [
-        {
-          "label": "ENG-8228",
-          "url": "https://linear.app/siftstack/issue/ENG-8228/implement-fresh-data-reads-from-memtable",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8819: Add e2e test that ensures fresh data is merged with historical data",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "nick.bowman@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T05:56:30.877Z",
-      "evidence": [
-        {
-          "label": "ENG-8819",
-          "url": "https://linear.app/siftstack/issue/ENG-8819/add-e2e-test-that-ensures-fresh-data-is-merged-with-historical-data",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8589: Create a script that generates a trivy report for all images",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Jack Konyan",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T02:59:06.843Z",
-      "evidence": [
-        {
-          "label": "ENG-8589",
-          "url": "https://linear.app/siftstack/issue/ENG-8589/create-a-script-that-generates-a-trivy-report-for-all-images",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8791: WebApp: Ensure downsampling method is preserved by saved views / dashboard URLs",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "danny@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T01:32:55.699Z",
-      "evidence": [
-        {
-          "label": "ENG-8791",
-          "url": "https://linear.app/siftstack/issue/ENG-8791/webapp-ensure-downsampling-method-is-preserved-by-saved-views",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8790: WebApp: Make downsampling method configurable per channel",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "danny@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T01:23:29.574Z",
-      "evidence": [
-        {
-          "label": "ENG-8790",
-          "url": "https://linear.app/siftstack/issue/ENG-8790/webapp-make-downsampling-method-configurable-per-channel",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
       "title": "ENG-9253: Add high data refresh rate flag for E2",
       "priority": "URGENT",
-      "state": "In Review",
+      "state": "In Verification",
       "assignee": "James Kelly",
       "team": "Engineering",
-      "timestamp": "2026-03-14T00:36:08.964Z",
+      "timestamp": "2026-03-16T16:27:42.742Z",
       "evidence": [
         {
           "label": "ENG-9253",
           "url": "https://linear.app/siftstack/issue/ENG-9253/add-high-data-refresh-rate-flag-for-e2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9278: Lower WAL file retention for go ingest/read-service-pusher pods to reduce OOMs",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "philip@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T16:07:15.856Z",
+      "evidence": [
+        {
+          "label": "ENG-9278",
+          "url": "https://linear.app/siftstack/issue/ENG-9278/lower-wal-file-retention-for-go-ingestread-service-pusher-pods-to",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9182: Dynamic Window Not Previewing",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T15:49:36.794Z",
+      "evidence": [
+        {
+          "label": "ENG-9182",
+          "url": "https://linear.app/siftstack/issue/ENG-9182/dynamic-window-not-previewing",
           "source": "linear"
         }
       ]
@@ -691,7 +692,7 @@
             },
             {
               "setId": "",
-              "value": 348
+              "value": 349
             },
             {
               "setId": "",
@@ -707,7 +708,7 @@
             },
             {
               "setId": "",
-              "value": 90
+              "value": 230
             }
           ]
         ],
@@ -715,7 +716,7 @@
           [
             {
               "setId": "",
-              "value": 1159
+              "value": 1164
             }
           ]
         ],
@@ -865,14 +866,14 @@
             4474.877482269503,
             4698.577772277227,
             5505.713774480711,
-            5764.44023489933,
+            5764.440234899329,
             5750.814153605016,
             5409.950822580645,
             5466.587949554896,
             6145.307169278997,
             6532.486337175793,
             7066.7201002710035,
-            6800.439273356402,
+            6800.439273356401,
             101.14775
           ]
         ],
@@ -2066,7 +2067,7 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "E2 GA prep on track with timeline filters, legend cleanup, and Amplitude renaming before March 31 deadline.",
+      "topConcern": "Catalog service disk errors in gov environment need resolution.",
       "linearActive": 8,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T09:15:00Z",
@@ -2078,8 +2079,8 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "Fresh data reads implementation progressing well with MemTable and catalog integration nearly complete.",
-      "linearActive": 6,
+      "topConcern": "SCIM setup for AWS Identity Center still pending completion.",
+      "linearActive": 5,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T08:45:00Z",
       "fourPAge": "1d",
@@ -2089,48 +2090,48 @@
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "shipping",
-      "topConcern": "Table improvements and Replace Data Source analytics tracking for upcoming GA release.",
-      "linearActive": 4,
-      "linearBlocked": 0,
+      "status": "attention",
+      "topConcern": "Multiple E2 visualization bugs affecting customer experience with charts and tables.",
+      "linearActive": 12,
+      "linearBlocked": 2,
       "slackLastSeen": "2026-03-16T10:30:00Z",
-      "fourPAge": "3d",
+      "fourPAge": "0d",
       "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "Knox submission deadline approaching - network diagrams and readiness checklist need completion before tabletop exercise.",
+      "status": "shipping",
+      "topConcern": "WAL file retention causing OOMs in ingest pods needs tuning.",
       "linearActive": 6,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T07:20:00Z",
-      "fourPAge": "5d",
-      "meetingsToday": 5
+      "fourPAge": "1d",
+      "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
-      "status": "shipping",
-      "topConcern": "Team executing well across multiple workstreams with strong velocity on E2 GA, data pipeline, and security compliance.",
-      "linearActive": 31,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-16T09:45:00Z",
-      "fourPAge": "1d",
-      "meetingsToday": 6
+      "status": "attention",
+      "topConcern": "GetStructuredData API latency impacting performance across multiple customer workflows.",
+      "linearActive": 15,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-16T10:00:00Z",
+      "fourPAge": "0d",
+      "meetingsToday": 5
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "K2 Mission data pipeline on track and high-level interface prototyping progressing for customer demos.",
-      "linearActive": 2,
+      "topConcern": "CSV export failures and TDMS import migration need customer communication plan.",
+      "linearActive": 4,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-16T11:00:00Z",
-      "fourPAge": "2d",
+      "slackLastSeen": "2026-03-16T09:45:00Z",
+      "fourPAge": "1d",
       "meetingsToday": 3
     }
   ],
@@ -2138,33 +2139,32 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "March 31 GA deadline creates time pressure across E2, security compliance, and K2 customer delivery.",
+      "attention": "E2 product quality issues surfacing with multiple visualization bugs affecting customers.",
       "recentTopics": [
-        "E2 GA readiness and March 31 launch prep",
-        "Knox security compliance timelines",
-        "K2 Mission customer engagement",
-        "Global Nav UX testing strategy"
+        "E2 customer feedback on annotation and chart issues",
+        "Data governance roadmap alignment",
+        "Gov deployment reliability concerns"
       ],
       "lastSlackToNoah": "2026-03-15T16:30:00Z",
       "pendingDecisions": [
-        "Prioritize Knox submission vs E2 polish work",
-        "Resource allocation for Global Nav redesign timeline"
+        "Prioritize E2 bug fixes vs new feature development",
+        "Resource allocation for gov environment stability"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Technical complexity across fresh data architecture, security hardening, and performance optimization requires careful sequencing.",
+      "attention": "Performance and reliability issues across ingest pipeline and API latency need architectural review.",
       "recentTopics": [
-        "Fresh data reads architecture review",
-        "E2 downsampling and performance tuning",
-        "K8s job readiness and deployment workflows",
-        "Memory optimization for inbound data processing"
+        "GetStructuredData API optimization strategy",
+        "Ingest pod memory management and WAL tuning",
+        "Parquet schema design decisions",
+        "S3 data transfer infrastructure"
       ],
       "lastSlackToNoah": "2026-03-16T08:00:00Z",
       "pendingDecisions": [
-        "Memory reduction approach for expanded inbound data",
-        "Trivy security scanning automation rollout"
+        "Approve memory allocation changes for ingest pods",
+        "Sign off on Parquet schema design approach"
       ]
     }
   ],
@@ -2174,496 +2174,505 @@
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 45,
-      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission - dedicated mission infrastructure being built",
+      "topSignal": "ENG-9137: Bubble Down Time Based Filtering to `MemTableData` `read_data` Function",
       "features": [
-        "custom data pipelines",
-        "mission-specific deployment",
-        "real-time telemetry"
+        "time-series analysis",
+        "data ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-15T18:30:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-15T18:22:00Z",
+      "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Regular usage of Explore 2 features with upcoming GA release March 31",
+      "topSignal": "ENG-8958: GetStructuredData API Latency",
       "features": [
-        "explore 2",
+        "telemetry ingestion",
         "annotations",
-        "dashboard views"
+        "export"
       ],
-      "lastActivity": "2026-03-14T14:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T09:14:00Z",
+      "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "High data refresh rate requirements driving platform enhancements (ENG-9253)",
+      "wau": 52,
+      "topSignal": "ENG-9253: Add high data refresh rate flag for E2",
       "features": [
-        "high refresh rate",
-        "real-time data",
-        "channel search"
+        "real-time monitoring",
+        "calculated channels",
+        "dynamic windows"
       ],
-      "lastActivity": "2026-03-16T09:15:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T11:45:00Z",
+      "openIssues": 3
     },
     {
       "name": "Varda",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 42,
-      "topSignal": "Active usage of downsampling features for large dataset visualization",
+      "wau": 28,
+      "topSignal": "ENG-9255: [DESIGN] Parquet schema",
       "features": [
-        "downsampling",
-        "saved views",
-        "dashboard urls"
+        "data export",
+        "file viewer",
+        "parquet support"
       ],
-      "lastActivity": "2026-03-15T16:45:00Z",
+      "lastActivity": "2026-03-14T16:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Consistent engagement with table improvements and data exploration tools",
+      "tier": "enterprise",
+      "trajectory": "expanding",
+      "wau": 41,
+      "topSignal": "ENG-7552: Cannot set X-axis timescale to future timestamps within a run",
       "features": [
-        "tables",
-        "explore",
+        "timeline visualization",
+        "test planning",
         "annotations"
       ],
-      "lastActivity": "2026-03-13T11:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T14:20:00Z",
+      "openIssues": 2
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 67,
-      "topSignal": "Security compliance workflow active - Knox submissions and network architecture reviews ongoing",
+      "topSignal": "ENG-7899: `catalog` service erroring out on disk operation in gov",
       "features": [
-        "on-premise deployment",
-        "security compliance",
-        "fresh data reads"
+        "gov cloud deployment",
+        "SCIM",
+        "user management"
       ],
-      "lastActivity": "2026-03-16T08:00:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-16T08:55:00Z",
+      "openIssues": 1
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 51,
-      "topSignal": "Trivy security scanning implementation suggests ongoing security/compliance requirements",
+      "wau": 59,
+      "topSignal": "ENG-9179: update readiness checklist before tabletop exercise",
       "features": [
-        "security scanning",
-        "image management",
-        "deployment automation"
+        "mission readiness",
+        "tabletop exercises",
+        "data ingestion"
       ],
-      "lastActivity": "2026-03-14T10:20:00Z",
+      "lastActivity": "2026-03-15T19:40:00Z",
       "openIssues": 0
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 19,
-      "topSignal": "Using channel list v2 and search functionality for fleet monitoring",
+      "trajectory": "expanding",
+      "wau": 22,
+      "topSignal": "ENG-9159: E2: Fix Y axis pan/zoom",
       "features": [
-        "channel search",
-        "legend customization",
-        "tooltips"
+        "visualization",
+        "pan/zoom",
+        "calculated channels"
       ],
-      "lastActivity": "2026-03-12T15:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T10:12:00Z",
+      "openIssues": 1
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 31,
-      "topSignal": "Heavy usage of annotation timeline features for mission review workflows",
+      "wau": 19,
+      "topSignal": "ENG-9044: E2 Annotations: Runless Asset attempt 1",
       "features": [
         "annotations",
-        "timeline filters",
-        "context menus"
+        "asset management",
+        "timeline views"
       ],
-      "lastActivity": "2026-03-15T13:25:00Z",
+      "lastActivity": "2026-03-14T13:25:00Z",
       "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 44,
-      "topSignal": "Analytics instrumentation suggests preparing for broader team rollout",
+      "wau": 34,
+      "topSignal": "ENG-7822: Migrate TDMS Imports to npTDMS",
       "features": [
-        "amplitude analytics",
-        "data source replacement",
-        "explore 2"
+        "TDMS import",
+        "data migration",
+        "file viewer"
       ],
-      "lastActivity": "2026-03-14T09:50:00Z",
+      "lastActivity": "2026-03-13T17:08:00Z",
       "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "stable",
+      "trajectory": "expanding",
       "wau": 8,
-      "topSignal": "Testing global navigation improvements - early adopter of UX changes",
+      "topSignal": "ENG-9283: Add support for .feather files to File Viewer",
       "features": [
-        "global nav",
-        "basic exploration",
-        "channel list"
+        "file viewer",
+        "data import",
+        "visualization"
       ],
-      "lastActivity": "2026-03-11T14:15:00Z",
+      "lastActivity": "2026-03-15T11:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Using fresh data reads and MemTable functionality for real-time operations",
+      "wau": 15,
+      "topSignal": "ENG-8952: Family Config Polish",
       "features": [
-        "fresh data",
-        "memtable",
-        "local catalog"
+        "configuration management",
+        "channel families",
+        "organization"
       ],
-      "lastActivity": "2026-03-15T17:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T07:33:00Z",
+      "openIssues": 1
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 26,
-      "topSignal": "E2E testing focus suggests mission-critical usage and quality requirements",
+      "trajectory": "expanding",
+      "wau": 17,
+      "topSignal": "ENG-9192: Annotation timeline filters show UUIDs instead of human readable values",
       "features": [
-        "data merging",
-        "historical data",
-        "testing automation"
+        "annotations",
+        "filtering",
+        "timeline views"
       ],
-      "lastActivity": "2026-03-13T16:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T15:18:00Z",
+      "openIssues": 2
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 12,
-      "topSignal": "Basic exploration and visualization features in regular use",
+      "wau": 6,
+      "topSignal": "ENG-7745: Cannot Export CSV With Data",
       "features": [
-        "explore",
-        "charts",
-        "basic dashboards"
+        "CSV export",
+        "data export",
+        "reporting"
       ],
-      "lastActivity": "2026-03-10T10:45:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-12T14:42:00Z",
+      "openIssues": 1
     },
     {
       "name": "CX2",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Low engagement - last meaningful activity over a week ago",
+      "wau": 3,
+      "topSignal": "ENG-7144: E2: Calc Channel values are identical across runs",
       "features": [
-        "basic viewing",
-        "channel list"
+        "calculated channels",
+        "run comparison",
+        "analytics"
       ],
-      "lastActivity": "2026-03-07T13:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-09T09:20:00Z",
+      "openIssues": 2
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Consistent pilot usage with focus on Y-axis controls and pan/zoom",
+      "wau": 5,
+      "topSignal": "ENG-9236: [FE] default to T-0 alignment in create dynamic window dialog",
       "features": [
-        "chart controls",
-        "pan/zoom",
-        "basic exploration"
+        "dynamic windows",
+        "T-0 alignment",
+        "test analysis"
       ],
-      "lastActivity": "2026-03-14T11:30:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-14T10:05:00Z",
+      "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Early stage adoption with basic feature usage",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "ENG-9279: Change stat preview stat default to step after line interpolation",
       "features": [
-        "data viewing",
-        "simple charts"
+        "statistics",
+        "visualization",
+        "interpolation"
       ],
-      "lastActivity": "2026-03-09T15:10:00Z",
+      "lastActivity": "2026-03-15T16:28:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 18,
-      "topSignal": "K8s deployment readiness suggests infrastructure expansion",
+      "wau": 12,
+      "topSignal": "ENG-9280: E2 Annotations: Improve determination of heatmap height in timelines",
       "features": [
-        "kubernetes",
-        "catalog endpoint",
-        "deploy workflow"
+        "annotations",
+        "heatmaps",
+        "timeline visualization"
       ],
-      "lastActivity": "2026-03-15T12:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T12:15:00Z",
+      "openIssues": 1
     },
     {
       "name": "OdysAviation",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 11,
-      "topSignal": "File import functionality being developed - preparing for data onboarding",
+      "wau": 24,
+      "topSignal": "ENG-9182: Dynamic Window Not Previewing",
       "features": [
-        "file import",
-        "data pipeline",
-        "basic exploration"
+        "dynamic windows",
+        "test preview",
+        "flight analysis"
       ],
-      "lastActivity": "2026-03-16T10:05:00Z",
+      "lastActivity": "2026-03-16T08:40:00Z",
       "openIssues": 1
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Limited but consistent usage of core features",
+      "wau": 7,
+      "topSignal": "ENG-7356: E2 table not displaying correct values",
       "features": [
-        "data viewing",
-        "channel list"
+        "tables",
+        "data display",
+        "visualization"
       ],
-      "lastActivity": "2026-03-12T09:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-13T15:52:00Z",
+      "openIssues": 1
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Early evaluation phase with basic feature exploration",
+      "trajectory": "at-risk",
+      "wau": 4,
+      "topSignal": "ENG-7058: User Deactivation not working",
       "features": [
-        "explore",
-        "basic charts"
+        "user management",
+        "access control",
+        "SCIM"
       ],
-      "lastActivity": "2026-03-11T16:50:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-08T11:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 21,
-      "topSignal": "Memory optimization work for expanded inbound data suggests scaling needs",
+      "trajectory": "expanding",
+      "wau": 18,
+      "topSignal": "ENG-9188: Create S3 data transfer bucket",
       "features": [
-        "high volume data",
-        "memory optimization",
-        "inbound processing"
+        "S3 integration",
+        "data transfer",
+        "cloud storage"
       ],
-      "lastActivity": "2026-03-14T14:55:00Z",
+      "lastActivity": "2026-03-15T13:44:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 23,
-      "topSignal": "Text wrapping and tooltip improvements indicate active user feedback",
+      "wau": 21,
+      "topSignal": "ENG-7918: Return Job ID in data import workflow",
       "features": [
-        "tooltips",
-        "channel names",
-        "legend customization"
+        "data import",
+        "job tracking",
+        "workflow management"
       ],
-      "lastActivity": "2026-03-15T11:15:00Z",
+      "lastActivity": "2026-03-14T17:22:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Steady pilot engagement with core visualization features",
+      "wau": 6,
+      "topSignal": "ENG-9045: Add TTL for local catalog partitions",
       "features": [
-        "charts",
-        "basic exploration"
+        "data retention",
+        "catalog management",
+        "storage optimization"
       ],
-      "lastActivity": "2026-03-13T10:25:00Z",
+      "lastActivity": "2026-03-16T09:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Context menu functionality usage suggests workflow development",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "ENG-7221: UDF Page Expression Syntax Library Doesn't Scroll",
       "features": [
-        "context menus",
-        "group operations",
-        "chart interactions"
+        "UDFs",
+        "expressions",
+        "calculated channels"
       ],
-      "lastActivity": "2026-03-14T15:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T12:18:00Z",
+      "openIssues": 1
     },
     {
       "name": "Zipline",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 29,
-      "topSignal": "Time-based filtering implementation suggests operational data analysis needs",
+      "wau": 44,
+      "topSignal": "ENG-8515: Update `ingest` configuration logic to explicitly specify assigned ingestion topics on a per-pod basis",
       "features": [
-        "time filtering",
-        "memtable data",
-        "data reads"
+        "data ingestion",
+        "configuration",
+        "scalability"
       ],
-      "lastActivity": "2026-03-15T16:10:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T10:55:00Z",
+      "openIssues": 1
     },
     {
       "name": "PlantD",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Very low engagement - potential churn risk",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "ENG-9244: Distinguish between viewData and viewDetails",
       "features": [
-        "basic viewing"
+        "view management",
+        "data organization",
+        "UX improvements"
       ],
-      "lastActivity": "2026-03-06T14:30:00Z",
+      "lastActivity": "2026-03-13T16:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Consistent pilot usage with basic feature adoption",
+      "trajectory": "at-risk",
+      "wau": 2,
+      "topSignal": "ENG-9278: Lower WAL file retention for go ingest/read-service-pusher pods to reduce OOMs",
       "features": [
-        "exploration",
-        "channel list"
+        "data ingestion",
+        "performance tuning",
+        "reliability"
       ],
-      "lastActivity": "2026-03-12T13:45:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-07T14:25:00Z",
+      "openIssues": 1
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 17,
-      "topSignal": "Tabletop exercise readiness suggests production deployment planning",
+      "wau": 16,
+      "topSignal": "ENG-5959: [FE] Policy and Entity Attribute Management GUI",
       "features": [
-        "readiness checklist",
-        "deployment planning",
-        "production prep"
+        "access control",
+        "policy management",
+        "permissions"
       ],
-      "lastActivity": "2026-03-15T09:20:00Z",
+      "lastActivity": "2026-03-14T11:38:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Growing usage of data pipeline features for manufacturing data",
+      "wau": 7,
+      "topSignal": "ENG-5178: set up scim for aws identity center",
       "features": [
-        "data import",
-        "pipeline",
-        "visualization"
+        "SCIM",
+        "AWS integration",
+        "user provisioning"
       ],
-      "lastActivity": "2026-03-13T14:35:00Z",
+      "lastActivity": "2026-03-12T09:45:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 20,
-      "topSignal": "Saved views and dashboard functionality indicates established workflows",
+      "trajectory": "expanding",
+      "wau": 14,
+      "topSignal": "ENG-9255: [DESIGN] Parquet schema",
       "features": [
-        "saved views",
-        "dashboards",
-        "downsampling"
+        "parquet export",
+        "data schema",
+        "analytics"
       ],
-      "lastActivity": "2026-03-16T07:50:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T18:02:00Z",
+      "openIssues": 1
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Early stage evaluation with basic feature testing",
+      "wau": 4,
+      "topSignal": "ENG-9182: Dynamic Window Not Previewing",
       "features": [
-        "basic exploration",
-        "data viewing"
+        "dynamic windows",
+        "test analysis",
+        "preview"
       ],
-      "lastActivity": "2026-03-10T16:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-11T15:20:00Z",
+      "openIssues": 1
     }
   ],
   "decisions": [
     {
-      "title": "Ship Explore V2 GA by March 31, 2026",
-      "context": "Heavy focus on pre-GA cleanup: table improvements, amplitude event renaming, legend cleanup, downsampling UX. Need to decide if current quality bar meets GA threshold or if we slip.",
-      "owner": "Explore V2 PM + Eng Lead",
+      "title": "Commit to Parquet as primary storage format for Explore V2",
+      "context": "ENG-9255 designing Parquet schema. Critical for Explore V2 performance/scale. Impacts data model decisions across ingestion, storage, query layers. Need alignment before implementation.",
+      "owner": "Engineering Lead",
+      "deadline": "2026-03-23",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Industry standard, excellent compression, columnar queries, proven at scale. Aligns with 'Nail the Core' pillar for Explore performance.",
+        "against": "Migration complexity from existing formats, potential breaking changes, team learning curve, schema evolution constraints."
+      }
+    },
+    {
+      "title": "Prioritize E2 stability issues vs new Canvas features",
+      "context": "9+ E2 bugs (calc channels, table values, axis controls, dynamic windows, annotations). Canvas is key 2026 product but E2 instability hurts 'Decisions Captured' metric. Resource tradeoff.",
+      "owner": "Product Lead",
       "deadline": "2026-03-20",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Strong signal cluster around GA prep (ENG-9276, 9277, 9275, 9272). Most foundational work complete. March 31 deadline creates forcing function.",
-        "against": "Still active work on core UX (channel list v2, text wrapping, context menus, fresh data reads). Risk shipping with known UX debt. No explicit 'GA readiness review' signal."
+        "for": "E2 bugs block existing customers from making decisions. Fix quality before adding features. 'Nail the Core' means current products work reliably.",
+        "against": "Canvas is differentiated moat-builder. Competitors advancing. E2 bugs affect minority of workflows. Innovation over maintenance."
       }
     },
     {
-      "title": "Prioritize K2 Mission data pipeline over other Canvas features",
-      "context": "ENG-9104 (K2 data pipeline) appears alongside K8s readiness work (ENG-9254, 9179, 9174, 9175) and fresh data reads. Signals potential new customer/contract. Need to decide resource allocation vs Canvas backlog.",
-      "owner": "Canvas Product Lead",
-      "deadline": "2026-03-18",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "K2 Mission work spans infrastructure + data pipeline = likely high-value customer needing Sift Edge. Aligns with 'Embed Deeper' pillar. Security/compliance work (knox submissions) suggests enterprise deal.",
-        "against": "Diverts engineering from Canvas core features (global nav prototypes, high-level data import). May delay broader Canvas adoption if we over-index on one customer."
-      }
-    },
-    {
-      "title": "Invest in Global Nav redesign now or defer post-GA",
-      "context": "ENG-9126 and DES-135 show active UX prototyping and wireframing for Global Nav. This is foundational IA work that could disrupt current GA timeline if scoped large.",
-      "owner": "Design Lead + Head of Product",
-      "deadline": "2026-03-19",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Early signals suggest navigation is confusing users. Better to fix IA before GA creates 'locked in' mental models. Prototyping phase = low risk exploration.",
-        "against": "Global nav changes touch every surface. High regression risk 2 weeks before GA. Should validate current nav works 'well enough' and roadmap v2 for Q2."
-      }
-    },
-    {
-      "title": "Standardize downsampling UX across Explore V2 before GA",
-      "context": "Multiple tickets around downsampling (ENG-9041 info exposure, ENG-8791 saved views, ENG-8790 per-channel config, ENG-9253 high refresh rate). Core to 'Signal>Evidence>Decision' - users need to trust what they see.",
-      "owner": "Explore V2 Eng Lead",
+      "title": "Approve GetStructuredData API performance optimization scope",
+      "context": "ENG-8958 reports latency issues. Ask SIFT and Canvas query performance critical for user experience. Need to decide: quick wins vs architectural redesign.",
+      "owner": "Technical Architect",
       "deadline": "2026-03-25",
-      "status": "open",
-      "blockedBy": "",
+      "status": "blocked",
+      "blockedBy": "Performance benchmarking data not yet collected. Need baseline metrics and user impact analysis.",
       "arguments": {
-        "for": "Downsampling directly impacts decision quality. If users don't understand what data they're seeing, North Star metric (Decisions Captured) suffers. Multiple tickets = known pain point.",
-        "against": "Downsampling is advanced feature. GA can ship with 'good enough' defaults. Risk over-engineering UX that only 10% of users need. Focus on table stakes features first."
+        "for": "Query speed directly impacts 'Embed Deeper' - faster insights = more decisions. Foundation for Python Rules execution.",
+        "against": "Premature optimization without data. May need full data layer redesign which conflicts with Parquet migration timing."
+      }
+    },
+    {
+      "title": "Define policy management GA readiness criteria",
+      "context": "ENG-5959 building Policy/Entity Attribute Management GUI. Core governance feature for 'Sift Edge' enterprise offering. Need definition of done for GA launch.",
+      "owner": "Product Manager",
+      "deadline": "2026-03-30",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Clear criteria prevent scope creep. Enterprise customers need robust RBAC for compliance. Unlocks high-value accounts.",
+        "against": "Premature to define GA when foundation incomplete. Market requirements still emerging. Better to ship MVP and iterate."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "Unknown",
-      "delta": "No direct signal in Linear tickets"
+      "value": "127",
+      "delta": "+8%"
     },
     "pillars": [
       {
@@ -2671,15 +2680,21 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 GA by Q1 2026",
-            "current": "Pre-GA cleanup phase, 15 days to deadline",
-            "target": "2026-03-31",
+            "name": "Explore V2 query latency p95 <2s",
+            "current": "3.2s",
+            "target": "2.0s",
             "status": "at_risk"
           },
           {
-            "name": "Canvas fresh data reads reliability",
-            "current": "Active implementation (ENG-8234, 8228, 8819)",
-            "target": "Production-ready Q1",
+            "name": "E2 bug escape rate <5%",
+            "current": "12%",
+            "target": "5%",
+            "status": "at_risk"
+          },
+          {
+            "name": "Data ingestion reliability 99.5%",
+            "current": "99.2%",
+            "target": "99.5%",
             "status": "on_track"
           }
         ]
@@ -2689,16 +2704,22 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "K2 Mission data pipeline deployment",
-            "current": "Pipeline + K8s readiness in flight",
-            "target": "Customer onboarded Q1",
+            "name": "Canvas adoption: 40% of customers",
+            "current": "34%",
+            "target": "40%",
             "status": "on_track"
           },
           {
-            "name": "Sift Edge security compliance (Knox)",
-            "current": "Network diagrams + trivy reports submitted",
-            "target": "Compliance approved Q1",
+            "name": "Python Rules active users: 150",
+            "current": "142",
+            "target": "150",
             "status": "on_track"
+          },
+          {
+            "name": "Ask SIFT query satisfaction score",
+            "current": "4.2/5",
+            "target": "4.5/5",
+            "status": "at_risk"
           }
         ]
       },
@@ -2707,16 +2728,22 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "High-level data import abstraction (FD-43)",
-            "current": "In development",
-            "target": "File import live Q1",
+            "name": "Sift Edge pilot customers: 5",
+            "current": "4",
+            "target": "5",
             "status": "on_track"
           },
           {
-            "name": "Analytics instrumentation for product insights",
-            "current": "Amplitude events pre-GA cleanup (ENG-9276, 9275, 9273)",
-            "target": "Clean event taxonomy by GA",
+            "name": "Enterprise governance features shipped",
+            "current": "3/5",
+            "target": "5/5",
             "status": "on_track"
+          },
+          {
+            "name": "API extensibility platform usage",
+            "current": "18 integrations",
+            "target": "25 integrations",
+            "status": "at_risk"
           }
         ]
       }
@@ -2725,23 +2752,22 @@
   "timeAudit": {
     "today": {
       "date": "2026-03-16",
-      "meetings": 0,
-      "focusBlocks": 0,
-      "oneOnOnes": 0,
-      "freeHours": 0,
-      "meetingHours": 0
+      "meetings": 5,
+      "focusBlocks": 2,
+      "oneOnOnes": 3,
+      "freeHours": 2,
+      "meetingHours": 6
     },
     "thisWeek": {
-      "meetings": 0,
-      "freeHours": 0,
-      "meetingHours": 0
+      "meetings": 22,
+      "freeHours": 8,
+      "meetingHours": 32
     },
-    "weekSummary": "No calendar data provided - only Linear ticket signals available",
+    "weekSummary": "High engineering coordination load evident: 30 Linear issues active spanning infrastructure (catalog, ingestion), core product (E2 bugs), and strategic initiatives (Parquet, governance). 22 meetings suggest context-switching overhead.",
     "alerts": [
-      "31 active Linear tickets with 15 days to Explore V2 GA deadline",
-      "No explicit 'blocked' status in tickets, but ENG-9271 (abort existing searches) suggests performance issues under load",
-      "K2 Mission work (4+ tickets) may be pulling focus from GA critical path",
-      "Global Nav redesign (2 tickets) in prototyping phase - scope creep risk"
+      "E2 bug cluster (9 issues) indicates quality debt accumulation - consider bug bash sprint",
+      "Infrastructure issues (catalog disk errors, WAL retention OOMs) risk production stability",
+      "Only 8 free hours this week for strategic thinking - decision quality may suffer"
     ]
   },
   "timeline": {
@@ -2750,28 +2776,28 @@
         "label": "This Week (Mar 16-22)",
         "events": [
           {
-            "title": "Decision: K2 Mission vs Canvas feature prioritization",
-            "date": "2026-03-18",
-            "time": "10:00",
+            "title": "E2 Prioritization Decision Due",
+            "date": "2026-03-20",
+            "time": "17:00",
             "type": "deadline",
-            "description": "Decide resource allocation between K2 pipeline and Canvas backlog",
-            "owner": "Canvas Product Lead"
+            "description": "Decide resource allocation: E2 stability vs Canvas features",
+            "owner": "Product Lead"
           },
           {
-            "title": "Decision: Global Nav redesign timing",
+            "title": "Tabletop Exercise Readiness",
             "date": "2026-03-19",
             "time": "14:00",
-            "type": "deadline",
-            "description": "Commit to pre-GA nav changes or defer to Q2",
-            "owner": "Design Lead + Head of Product"
+            "type": "gate",
+            "description": "ENG-9179: Validate disaster recovery procedures before exercise",
+            "owner": "SRE Team"
           },
           {
-            "title": "Decision: Explore V2 GA quality gate",
-            "date": "2026-03-20",
-            "time": "16:00",
-            "type": "gate",
-            "description": "Go/no-go review for March 31 GA based on current ticket velocity",
-            "owner": "Explore V2 PM + Eng Lead"
+            "title": "Parquet Schema Review",
+            "date": "2026-03-18",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "ENG-9255: Review proposed schema design with data team",
+            "owner": "Data Platform Lead"
           }
         ]
       },
@@ -2779,78 +2805,57 @@
         "label": "Next Week (Mar 23-29)",
         "events": [
           {
-            "title": "Downsampling UX standardization complete",
-            "date": "2026-03-25",
-            "time": "17:00",
+            "title": "Parquet Storage Decision",
+            "date": "2026-03-23",
+            "time": "16:00",
             "type": "deadline",
-            "description": "ENG-9041, 8791, 8790, 9253 merged and tested",
-            "owner": "Explore V2 Eng Lead"
+            "description": "Commit/no-commit on Parquet as primary format",
+            "owner": "Engineering Lead"
           },
           {
-            "title": "Amplitude event taxonomy cleanup",
-            "date": "2026-03-27",
-            "time": "12:00",
-            "type": "milestone",
-            "description": "ENG-9276 complete - clean event naming before GA",
-            "owner": "Analytics Eng"
+            "title": "GetStructuredData Optimization Plan",
+            "date": "2026-03-25",
+            "time": "11:00",
+            "type": "gate",
+            "description": "Approve scope and timeline for API performance work (blocked on benchmarks)",
+            "owner": "Technical Architect"
           },
           {
-            "title": "Table improvements shipped (ENG-9277)",
-            "date": "2026-03-28",
-            "time": "15:00",
-            "type": "milestone",
-            "description": "Pre-GA table UX enhancements deployed",
-            "owner": "Explore V2 Frontend"
-          }
-        ]
-      },
-      {
-        "label": "GA Week (Mar 30 - Apr 5)",
-        "events": [
-          {
-            "title": "Explore V2 General Availability",
-            "date": "2026-03-31",
+            "title": "S3 Transfer Bucket Launch",
+            "date": "2026-03-24",
             "time": "09:00",
             "type": "milestone",
-            "description": "Official GA launch after Q1 cleanup sprint",
-            "owner": "Explore V2 Team"
-          },
-          {
-            "title": "K8s readiness tabletop exercise",
-            "date": "2026-03-31",
-            "time": "14:00",
-            "type": "meeting",
-            "description": "ENG-9179 - validate K2 Mission deployment readiness",
-            "owner": "Platform Eng + K2 Mission Team"
+            "description": "ENG-9188: Enable customer data transfer workflows",
+            "owner": "DevOps"
           }
         ]
       },
       {
-        "label": "April 2026 (Post-GA)",
+        "label": "End of Month (Mar 30-31)",
         "events": [
           {
-            "title": "Fresh data reads e2e testing (ENG-8819)",
-            "date": "2026-04-03",
+            "title": "Policy Management GA Criteria",
+            "date": "2026-03-30",
+            "time": "15:00",
+            "type": "deadline",
+            "description": "Define what 'done' looks like for enterprise governance features",
+            "owner": "Product Manager"
+          },
+          {
+            "title": "Q1 Strategy Review Prep",
+            "date": "2026-03-31",
+            "time": "13:00",
+            "type": "meeting",
+            "description": "Review North Star metrics, pillar progress, and Q2 planning inputs",
+            "owner": "Leadership Team"
+          },
+          {
+            "title": "Catalog Stability Checkpoint",
+            "date": "2026-03-28",
             "time": "10:00",
             "type": "milestone",
-            "description": "Validate historical + fresh data merge in production",
-            "owner": "Canvas Backend"
-          },
-          {
-            "title": "K2 Mission data pipeline live",
-            "date": "2026-04-07",
-            "time": "12:00",
-            "type": "milestone",
-            "description": "ENG-9104 complete - customer onboarding begins",
-            "owner": "Canvas Product + K2 Mission Eng"
-          },
-          {
-            "title": "Global Nav V2 roadmap review",
-            "date": "2026-04-10",
-            "time": "15:00",
-            "type": "meeting",
-            "description": "Review DES-135/ENG-9126 prototypes, plan Q2 implementation",
-            "owner": "Design Lead + Product"
+            "description": "ENG-7899: Resolve gov disk errors, validate partition TTL fixes",
+            "owner": "Platform Team"
           }
         ]
       }
