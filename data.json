@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-16T04:04:30.740Z",
+  "fetchedAt": "2026-03-16T15:29:26.648Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,100 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-9192: Annotation timeline filters show UUIDs instead of human readable values",
+      "priority": "HIGH",
+      "state": "In Review",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T15:22:56.243Z",
+      "evidence": [
+        {
+          "label": "ENG-9192",
+          "url": "https://linear.app/siftstack/issue/ENG-9192/annotation-timeline-filters-show-uuids-instead-of-human-readable",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9159: E2: Fix Y axis pan/zoom",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T15:12:11.318Z",
+      "evidence": [
+        {
+          "label": "ENG-9159",
+          "url": "https://linear.app/siftstack/issue/ENG-9159/e2-fix-y-axis-panzoom",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9078: Sync Devin DeepWiki sift-stack/azimuth",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T07:50:10.420Z",
+      "evidence": [
+        {
+          "label": "ENG-9078",
+          "url": "https://linear.app/siftstack/issue/ENG-9078/sync-devin-deepwiki-sift-stackazimuth",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9041: QueryEngine: Update on-change sampling to return info about how many points were downsampled",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T07:02:27.689Z",
+      "evidence": [
+        {
+          "label": "ENG-9041",
+          "url": "https://linear.app/siftstack/issue/ENG-9041/queryengine-update-on-change-sampling-to-return-info-about-how-many",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9277: Table improvements pre-GA",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T05:16:18.208Z",
+      "evidence": [
+        {
+          "label": "ENG-9277",
+          "url": "https://linear.app/siftstack/issue/ENG-9277/table-improvements-pre-ga",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9271: Channel list, when kicking off a new search, we should abort any existing searches",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-16T04:48:34.410Z",
+      "evidence": [
+        {
+          "label": "ENG-9271",
+          "url": "https://linear.app/siftstack/issue/ENG-9271/channel-list-when-kicking-off-a-new-search-we-should-abort-any",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-9104: Implement a data pipeline for K2 Mission",
@@ -116,22 +210,6 @@
         {
           "label": "ENG-9077",
           "url": "https://linear.app/siftstack/issue/ENG-9077/channel-list-v2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9271: Channel list, when kicking off a new search, we should abort any existing searches",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-15T17:39:57.941Z",
-      "evidence": [
-        {
-          "label": "ENG-9271",
-          "url": "https://linear.app/siftstack/issue/ENG-9271/channel-list-when-kicking-off-a-new-search-we-should-abort-any",
           "source": "linear"
         }
       ]
@@ -361,21 +439,6 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9192: Annotation timeline filters show UUIDs instead of human readable values",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T01:59:02.727Z",
-      "evidence": [
-        {
-          "label": "ENG-9192",
-          "url": "https://linear.app/siftstack/issue/ENG-9192/annotation-timeline-filters-show-uuids-instead-of-human-readable",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
       "title": "ENG-8791: WebApp: Ensure downsampling method is preserved by saved views / dashboard URLs",
       "priority": "HIGH",
       "state": "In Review",
@@ -421,70 +484,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9236: [FE] default to T-0 alignment in create dynamic window dialog",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-03-14T00:21:01.934Z",
-      "evidence": [
-        {
-          "label": "ENG-9236",
-          "url": "https://linear.app/siftstack/issue/ENG-9236/fe-default-to-t-0-alignment-in-create-dynamic-window-dialog",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7899: `catalog` service erroring out on disk operation in gov",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "danny@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-13T23:30:05.857Z",
-      "evidence": [
-        {
-          "label": "ENG-7899",
-          "url": "https://linear.app/siftstack/issue/ENG-7899/catalog-service-erroring-out-on-disk-operation-in-gov",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8036: Give users the option to treat Bitfields as a single channel in E2",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "James Kelly",
-      "team": "Engineering",
-      "timestamp": "2026-03-13T23:10:38.966Z",
-      "evidence": [
-        {
-          "label": "ENG-8036",
-          "url": "https://linear.app/siftstack/issue/ENG-8036/give-users-the-option-to-treat-bitfields-as-a-single-channel-in-e2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-5674: Allow zoom and pan outside of the default zoom range",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "James Kelly",
-      "team": "Engineering",
-      "timestamp": "2026-03-13T23:09:50.510Z",
-      "evidence": [
-        {
-          "label": "ENG-5674",
-          "url": "https://linear.app/siftstack/issue/ENG-5674/allow-zoom-and-pan-outside-of-the-default-zoom-range",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -493,10 +492,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 567
-            },
             {
               "setId": "",
               "value": 299
@@ -543,7 +538,11 @@
             },
             {
               "setId": "",
-              "value": 637
+              "value": 638
+            },
+            {
+              "setId": "",
+              "value": 90
             }
           ]
         ],
@@ -551,7 +550,7 @@
           [
             {
               "setId": "",
-              "value": 1946
+              "value": 1859
             }
           ]
         ],
@@ -565,7 +564,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -577,7 +575,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     },
@@ -586,10 +585,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 283
-            },
             {
               "setId": "",
               "value": 87
@@ -708,7 +703,11 @@
             },
             {
               "setId": "",
-              "value": 103
+              "value": 107
+            },
+            {
+              "setId": "",
+              "value": 90
             }
           ]
         ],
@@ -716,7 +715,7 @@
           [
             {
               "setId": "",
-              "value": 1172
+              "value": 1159
             }
           ]
         ],
@@ -730,7 +729,6 @@
           }
         ],
         "xValues": [
-          "2026-02-13",
           "2026-02-14",
           "2026-02-15",
           "2026-02-16",
@@ -760,7 +758,8 @@
           "2026-03-12",
           "2026-03-13",
           "2026-03-14",
-          "2026-03-15"
+          "2026-03-15",
+          "2026-03-16"
         ]
       }
     },
@@ -769,10 +768,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 81
-            },
             {
               "setId": "",
               "value": 21
@@ -819,7 +814,11 @@
             },
             {
               "setId": "",
-              "value": 97
+              "value": 98
+            },
+            {
+              "setId": "",
+              "value": 1
             }
           ]
         ],
@@ -827,7 +826,7 @@
           [
             {
               "setId": "",
-              "value": 1099
+              "value": 1020
             }
           ]
         ],
@@ -841,7 +840,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -853,7 +851,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     },
@@ -862,7 +861,6 @@
       "data": {
         "series": [
           [
-            6780.846113149847,
             4985.218921568628,
             4474.877482269503,
             4698.577772277227,
@@ -874,14 +872,15 @@
             6145.307169278997,
             6532.486337175793,
             7066.7201002710035,
-            6681.266414634146
+            6800.439273356402,
+            101.14775
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 25265.88902002225
+              "value": 23587.721733639493
             }
           ]
         ],
@@ -892,7 +891,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15T00:00:00",
           "2025-12-22T00:00:00",
           "2025-12-29T00:00:00",
           "2026-01-05T00:00:00",
@@ -904,7 +902,8 @@
           "2026-02-16T00:00:00",
           "2026-02-23T00:00:00",
           "2026-03-02T00:00:00",
-          "2026-03-09T00:00:00"
+          "2026-03-09T00:00:00",
+          "2026-03-16T00:00:00"
         ]
       }
     },
@@ -913,10 +912,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 356
-            },
             {
               "setId": "",
               "value": 179
@@ -964,13 +959,13 @@
             {
               "setId": "",
               "value": 433
+            },
+            {
+              "setId": "",
+              "value": 33
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 64
-            },
             {
               "setId": "",
               "value": 32
@@ -1018,13 +1013,13 @@
             {
               "setId": "",
               "value": 48
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 77
-            },
             {
               "setId": "",
               "value": 30
@@ -1072,13 +1067,13 @@
             {
               "setId": "",
               "value": 54
+            },
+            {
+              "setId": "",
+              "value": 2
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 1
-            },
             {
               "setId": "",
               "value": 1
@@ -1126,6 +1121,10 @@
             {
               "setId": "",
               "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ]
         ],
@@ -1133,25 +1132,25 @@
           [
             {
               "setId": "",
-              "value": 1000
+              "value": 968
             }
           ],
           [
             {
               "setId": "",
-              "value": 249
+              "value": 234
             }
           ],
           [
             {
               "setId": "",
-              "value": 236
+              "value": 206
             }
           ],
           [
             {
               "setId": "",
-              "value": 7
+              "value": 6
             }
           ]
         ],
@@ -1180,7 +1179,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -1192,7 +1190,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     },
@@ -1403,7 +1402,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -1415,7 +1413,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     },
@@ -1424,10 +1423,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 131
-            },
             {
               "setId": "",
               "value": 68
@@ -1475,13 +1470,13 @@
             {
               "setId": "",
               "value": 121
+            },
+            {
+              "setId": "",
+              "value": 6
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 20
-            },
             {
               "setId": "",
               "value": 2
@@ -1529,13 +1524,13 @@
             {
               "setId": "",
               "value": 8
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 11
-            },
             {
               "setId": "",
               "value": 5
@@ -1583,13 +1578,13 @@
             {
               "setId": "",
               "value": 3
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 231
-            },
             {
               "setId": "",
               "value": 97
@@ -1637,6 +1632,10 @@
             {
               "setId": "",
               "value": 260
+            },
+            {
+              "setId": "",
+              "value": 9
             }
           ]
         ],
@@ -1644,25 +1643,25 @@
           [
             {
               "setId": "",
-              "value": 370
+              "value": 352
             }
           ],
           [
             {
               "setId": "",
-              "value": 90
+              "value": 75
             }
           ],
           [
             {
               "setId": "",
-              "value": 28
+              "value": 25
             }
           ],
           [
             {
               "setId": "",
-              "value": 706
+              "value": 674
             }
           ]
         ],
@@ -1691,7 +1690,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -1703,7 +1701,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     },
@@ -1712,10 +1711,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 178
-            },
             {
               "setId": "",
               "value": 28
@@ -1763,13 +1758,13 @@
             {
               "setId": "",
               "value": 48
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 260
-            },
             {
               "setId": "",
               "value": 136
@@ -1817,56 +1812,6 @@
             {
               "setId": "",
               "value": 264
-            }
-          ],
-          [
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
             },
             {
               "setId": "",
@@ -1876,8 +1821,58 @@
           [
             {
               "setId": "",
-              "value": 1967
+              "value": 0
             },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
             {
               "setId": "",
               "value": 559
@@ -1924,7 +1919,11 @@
             },
             {
               "setId": "",
-              "value": 1106
+              "value": 1107
+            },
+            {
+              "setId": "",
+              "value": 19
             }
           ],
           [
@@ -1986,13 +1985,13 @@
           [
             {
               "setId": "",
-              "value": 1320
+              "value": 1142
             }
           ],
           [
             {
               "setId": "",
-              "value": 2423
+              "value": 2163
             }
           ],
           [
@@ -2004,7 +2003,7 @@
           [
             {
               "setId": "",
-              "value": 10473
+              "value": 8526
             }
           ],
           [
@@ -2044,7 +2043,6 @@
           }
         ],
         "xValues": [
-          "2025-12-15",
           "2025-12-22",
           "2025-12-29",
           "2026-01-05",
@@ -2056,7 +2054,8 @@
           "2026-02-16",
           "2026-02-23",
           "2026-03-02",
-          "2026-03-09"
+          "2026-03-09",
+          "2026-03-16"
         ]
       }
     }
@@ -2067,11 +2066,11 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Fresh data reads implementation across MemTable and catalog progressing well.",
-      "linearActive": 4,
+      "topConcern": "E2 GA prep on track with timeline filters, legend cleanup, and Amplitude renaming before March 31 deadline.",
+      "linearActive": 8,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T09:15:00Z",
-      "fourPAge": "1d",
+      "fourPAge": "2d",
       "meetingsToday": 3
     },
     {
@@ -2079,59 +2078,59 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "K2 Mission data pipeline and catalog endpoint readiness on track for deployment.",
-      "linearActive": 3,
+      "topConcern": "Fresh data reads implementation progressing well with MemTable and catalog integration nearly complete.",
+      "linearActive": 6,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T08:45:00Z",
-      "fourPAge": "2d",
+      "fourPAge": "1d",
       "meetingsToday": 2
     },
     {
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "attention",
-      "topConcern": "Explore 2 GA March 31 deadline tight with Amplitude events rename and instrumentation work.",
-      "linearActive": 8,
+      "status": "shipping",
+      "topConcern": "Table improvements and Replace Data Source analytics tracking for upcoming GA release.",
+      "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T10:30:00Z",
-      "fourPAge": "0d",
+      "fourPAge": "3d",
       "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "shipping",
-      "topConcern": "Knox submission materials ready, tabletop exercise prep complete with docs submitted.",
-      "linearActive": 5,
+      "status": "attention",
+      "topConcern": "Knox submission deadline approaching - network diagrams and readiness checklist need completion before tabletop exercise.",
+      "linearActive": 6,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T07:20:00Z",
-      "fourPAge": "1d",
-      "meetingsToday": 2
+      "fourPAge": "5d",
+      "meetingsToday": 5
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "Good velocity across squads, prioritizing E2 GA features and fresh data architecture.",
-      "linearActive": 12,
+      "topConcern": "Team executing well across multiple workstreams with strong velocity on E2 GA, data pipeline, and security compliance.",
+      "linearActive": 31,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T09:45:00Z",
-      "fourPAge": "0d",
-      "meetingsToday": 5
+      "fourPAge": "1d",
+      "meetingsToday": 6
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "High-level data import interface progressing smoothly for customer enablement.",
-      "linearActive": 1,
+      "topConcern": "K2 Mission data pipeline on track and high-level interface prototyping progressing for customer demos.",
+      "linearActive": 2,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-16T11:00:00Z",
-      "fourPAge": "1d",
+      "fourPAge": "2d",
       "meetingsToday": 3
     }
   ],
@@ -2139,32 +2138,33 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "E2 GA timeline March 31 creates time pressure on analytics instrumentation.",
+      "attention": "March 31 GA deadline creates time pressure across E2, security compliance, and K2 customer delivery.",
       "recentTopics": [
-        "Explore 2 GA readiness",
-        "Customer adoption metrics",
-        "Q1 revenue tracking"
+        "E2 GA readiness and March 31 launch prep",
+        "Knox security compliance timelines",
+        "K2 Mission customer engagement",
+        "Global Nav UX testing strategy"
       ],
       "lastSlackToNoah": "2026-03-15T16:30:00Z",
       "pendingDecisions": [
-        "E2 GA marketing announcement timing",
-        "Q2 hiring plan approval"
+        "Prioritize Knox submission vs E2 polish work",
+        "Resource allocation for Global Nav redesign timeline"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Fresh data architecture progressing well, gov deployment catalog issues need monitoring.",
+      "attention": "Technical complexity across fresh data architecture, security hardening, and performance optimization requires careful sequencing.",
       "recentTopics": [
-        "Fresh data reads implementation",
-        "K8s job deployment readiness",
-        "Security compliance for Knox",
-        "Catalog service gov environment stability"
+        "Fresh data reads architecture review",
+        "E2 downsampling and performance tuning",
+        "K8s job readiness and deployment workflows",
+        "Memory optimization for inbound data processing"
       ],
       "lastSlackToNoah": "2026-03-16T08:00:00Z",
       "pendingDecisions": [
-        "Memory optimization approach for inbound data",
-        "Global nav UX direction after testing"
+        "Memory reduction approach for expanded inbound data",
+        "Trivy security scanning automation rollout"
       ]
     }
   ],
@@ -2174,27 +2174,27 @@
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 45,
-      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission",
+      "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission - dedicated mission infrastructure being built",
       "features": [
-        "Custom Data Pipelines",
-        "Mission-Specific Integrations",
-        "Real-time Telemetry"
+        "custom data pipelines",
+        "mission-specific deployment",
+        "real-time telemetry"
       ],
-      "lastActivity": "2026-03-16T09:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T18:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Regular usage of channel visualization and downsampling features",
+      "topSignal": "Regular usage of Explore 2 features with upcoming GA release March 31",
       "features": [
-        "Channel Analytics",
-        "Historical Data Review",
-        "Dashboard Views"
+        "explore 2",
+        "annotations",
+        "dashboard views"
       ],
-      "lastActivity": "2026-03-15T14:30:00Z",
+      "lastActivity": "2026-03-14T14:20:00Z",
       "openIssues": 0
     },
     {
@@ -2202,489 +2202,468 @@
       "tier": "growth",
       "trajectory": "expanding",
       "wau": 28,
-      "topSignal": "Increased usage of annotation timeline and filtering capabilities",
+      "topSignal": "High data refresh rate requirements driving platform enhancements (ENG-9253)",
       "features": [
-        "Annotation Timelines",
-        "Channel Filtering",
-        "Fresh Data Reads"
+        "high refresh rate",
+        "real-time data",
+        "channel search"
       ],
-      "lastActivity": "2026-03-15T16:45:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-16T09:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "Varda",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 42,
-      "topSignal": "Heavy use of bitfield analysis and zoom/pan features",
+      "topSignal": "Active usage of downsampling features for large dataset visualization",
       "features": [
-        "Bitfield Analysis",
-        "Advanced Zoom Controls",
-        "Custom Views"
+        "downsampling",
+        "saved views",
+        "dashboard urls"
       ],
-      "lastActivity": "2026-03-16T08:15:00Z",
+      "lastActivity": "2026-03-15T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 25,
-      "topSignal": "Adoption of E2 explore features and high refresh rate monitoring",
+      "trajectory": "stable",
+      "wau": 22,
+      "topSignal": "Consistent engagement with table improvements and data exploration tools",
       "features": [
-        "Explore 2.0",
-        "High Data Refresh",
-        "Real-time Monitoring"
+        "tables",
+        "explore",
+        "annotations"
       ],
-      "lastActivity": "2026-03-15T11:20:00Z",
+      "lastActivity": "2026-03-13T11:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 156,
-      "topSignal": "Government deployment with catalog service and security requirements",
+      "wau": 67,
+      "topSignal": "Security compliance workflow active - Knox submissions and network architecture reviews ongoing",
       "features": [
-        "Gov Cloud Deployment",
-        "Catalog Service",
-        "Security Compliance"
+        "on-premise deployment",
+        "security compliance",
+        "fresh data reads"
       ],
-      "lastActivity": "2026-03-16T07:00:00Z",
+      "lastActivity": "2026-03-16T08:00:00Z",
       "openIssues": 2
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 89,
-      "topSignal": "Mission-critical telemetry monitoring with dashboard customization",
+      "wau": 51,
+      "topSignal": "Trivy security scanning implementation suggests ongoing security/compliance requirements",
       "features": [
-        "Launch Telemetry",
-        "Custom Dashboards",
-        "Multi-user Access"
+        "security scanning",
+        "image management",
+        "deployment automation"
       ],
-      "lastActivity": "2026-03-15T18:30:00Z",
+      "lastActivity": "2026-03-14T10:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 19,
-      "topSignal": "Testing new global navigation and channel list improvements",
+      "topSignal": "Using channel list v2 and search functionality for fleet monitoring",
       "features": [
-        "Channel List v2",
-        "Global Navigation",
-        "Context Menus"
+        "channel search",
+        "legend customization",
+        "tooltips"
       ],
-      "lastActivity": "2026-03-14T13:45:00Z",
+      "lastActivity": "2026-03-12T15:40:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Data import usage and T-0 alignment for mission profiles",
+      "wau": 31,
+      "topSignal": "Heavy usage of annotation timeline features for mission review workflows",
       "features": [
-        "File Import",
-        "T-0 Alignment",
-        "Dynamic Windows"
+        "annotations",
+        "timeline filters",
+        "context menus"
       ],
-      "lastActivity": "2026-03-15T10:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-15T13:25:00Z",
+      "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "European space operations with multi-mission support",
+      "wau": 44,
+      "topSignal": "Analytics instrumentation suggests preparing for broader team rollout",
       "features": [
-        "Multi-Mission Support",
-        "Data Analysis",
-        "Saved Views"
+        "amplitude analytics",
+        "data source replacement",
+        "explore 2"
       ],
-      "lastActivity": "2026-03-16T06:30:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-14T09:50:00Z",
+      "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 8,
-      "topSignal": "Early evaluation of telemetry visualization capabilities",
+      "topSignal": "Testing global navigation improvements - early adopter of UX changes",
       "features": [
-        "Basic Visualization",
-        "Channel Search",
-        "Data Explorer"
+        "global nav",
+        "basic exploration",
+        "channel list"
       ],
-      "lastActivity": "2026-03-13T15:20:00Z",
+      "lastActivity": "2026-03-11T14:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Kubernetes deployment and infrastructure readiness activities",
+      "trajectory": "stable",
+      "wau": 24,
+      "topSignal": "Using fresh data reads and MemTable functionality for real-time operations",
       "features": [
-        "K8s Deployment",
-        "Infrastructure Monitoring",
-        "Network Architecture"
+        "fresh data",
+        "memtable",
+        "local catalog"
       ],
-      "lastActivity": "2026-03-15T12:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-15T17:30:00Z",
+      "openIssues": 0
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 21,
-      "topSignal": "Memory optimization usage for expanded inbound data streams",
+      "trajectory": "stable",
+      "wau": 26,
+      "topSignal": "E2E testing focus suggests mission-critical usage and quality requirements",
       "features": [
-        "Memory Optimization",
-        "High Volume Data",
-        "Fresh Data Reads"
+        "data merging",
+        "historical data",
+        "testing automation"
       ],
-      "lastActivity": "2026-03-14T16:30:00Z",
+      "lastActivity": "2026-03-13T16:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Initial exploration of analytics and event tracking",
+      "wau": 12,
+      "topSignal": "Basic exploration and visualization features in regular use",
       "features": [
-        "Analytics Events",
-        "Basic Dashboards",
-        "Data Exploration"
+        "explore",
+        "charts",
+        "basic dashboards"
       ],
-      "lastActivity": "2026-03-12T14:00:00Z",
+      "lastActivity": "2026-03-10T10:45:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 11,
-      "topSignal": "Growing engagement with channel visualization and filtering",
+      "trajectory": "at-risk",
+      "wau": 4,
+      "topSignal": "Low engagement - last meaningful activity over a week ago",
       "features": [
-        "Channel Visualization",
-        "Filtering",
-        "Time-based Analysis"
+        "basic viewing",
+        "channel list"
       ],
-      "lastActivity": "2026-03-15T09:15:00Z",
+      "lastActivity": "2026-03-07T13:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Limited activity in past two weeks",
+      "trajectory": "stable",
+      "wau": 9,
+      "topSignal": "Consistent pilot usage with focus on Y-axis controls and pan/zoom",
       "features": [
-        "Basic Setup",
-        "Data Import",
-        "Simple Queries"
+        "chart controls",
+        "pan/zoom",
+        "basic exploration"
       ],
-      "lastActivity": "2026-03-08T11:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-14T11:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Arbor Energy",
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 7,
-      "topSignal": "Evaluating for energy system monitoring applications",
+      "topSignal": "Early stage adoption with basic feature usage",
       "features": [
-        "Data Visualization",
-        "Channel Monitoring",
-        "Alert Setup"
+        "data viewing",
+        "simple charts"
       ],
-      "lastActivity": "2026-03-13T10:30:00Z",
+      "lastActivity": "2026-03-09T15:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "Integration testing with catalog endpoints and APIs",
+      "wau": 18,
+      "topSignal": "K8s deployment readiness suggests infrastructure expansion",
       "features": [
-        "API Integration",
-        "Catalog Endpoints",
-        "Data Pipelines"
+        "kubernetes",
+        "catalog endpoint",
+        "deploy workflow"
       ],
-      "lastActivity": "2026-03-14T15:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-15T12:40:00Z",
+      "openIssues": 0
     },
     {
       "name": "OdysAviation",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Aviation telemetry with downsampling and saved view features",
+      "wau": 11,
+      "topSignal": "File import functionality being developed - preparing for data onboarding",
       "features": [
-        "Downsampling Methods",
-        "Saved Views",
-        "Flight Data Analysis"
+        "file import",
+        "data pipeline",
+        "basic exploration"
       ],
-      "lastActivity": "2026-03-15T13:45:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-16T10:05:00Z",
+      "openIssues": 1
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Testing e2e workflows and data merging capabilities",
+      "wau": 6,
+      "topSignal": "Limited but consistent usage of core features",
       "features": [
-        "E2E Testing",
-        "Data Merging",
-        "Historical Analysis"
+        "data viewing",
+        "channel list"
       ],
-      "lastActivity": "2026-03-14T08:30:00Z",
+      "lastActivity": "2026-03-12T09:30:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Minimal engagement over past month",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "Early evaluation phase with basic feature exploration",
       "features": [
-        "Basic Monitoring",
-        "Channel Setup",
-        "Data Import"
+        "explore",
+        "basic charts"
       ],
-      "lastActivity": "2026-03-06T14:20:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-11T16:50:00Z",
+      "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 23,
-      "topSignal": "Security compliance work with Trivy reports and system documentation",
+      "trajectory": "stable",
+      "wau": 21,
+      "topSignal": "Memory optimization work for expanded inbound data suggests scaling needs",
       "features": [
-        "Security Scanning",
-        "System Documentation",
-        "Compliance Tools"
+        "high volume data",
+        "memory optimization",
+        "inbound processing"
       ],
-      "lastActivity": "2026-03-15T17:00:00Z",
+      "lastActivity": "2026-03-14T14:55:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 27,
-      "topSignal": "Lunar rover telemetry with custom tooltip and legend configurations",
+      "wau": 23,
+      "topSignal": "Text wrapping and tooltip improvements indicate active user feedback",
       "features": [
-        "Custom Tooltips",
-        "Legend Options",
-        "Rover Telemetry"
+        "tooltips",
+        "channel names",
+        "legend customization"
       ],
-      "lastActivity": "2026-03-16T07:45:00Z",
+      "lastActivity": "2026-03-15T11:15:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 12,
-      "topSignal": "Robotics telemetry evaluation with increasing usage patterns",
+      "trajectory": "stable",
+      "wau": 8,
+      "topSignal": "Steady pilot engagement with core visualization features",
       "features": [
-        "Robotics Monitoring",
-        "Channel Analytics",
-        "Data Visualization"
+        "charts",
+        "basic exploration"
       ],
-      "lastActivity": "2026-03-15T11:00:00Z",
+      "lastActivity": "2026-03-13T10:25:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Early stage deployment with basic feature usage",
+      "wau": 7,
+      "topSignal": "Context menu functionality usage suggests workflow development",
       "features": [
-        "Basic Setup",
-        "Channel Monitoring",
-        "Simple Dashboards"
+        "context menus",
+        "group operations",
+        "chart interactions"
       ],
-      "lastActivity": "2026-03-13T16:00:00Z",
+      "lastActivity": "2026-03-14T15:40:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 54,
-      "topSignal": "Drone delivery telemetry with high-frequency data refresh needs",
+      "wau": 29,
+      "topSignal": "Time-based filtering implementation suggests operational data analysis needs",
       "features": [
-        "High Refresh Rate",
-        "Fleet Monitoring",
-        "Real-time Alerts"
+        "time filtering",
+        "memtable data",
+        "data reads"
       ],
-      "lastActivity": "2026-03-16T09:30:00Z",
+      "lastActivity": "2026-03-15T16:10:00Z",
       "openIssues": 0
     },
     {
       "name": "PlantD",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Industrial monitoring use case exploration",
+      "trajectory": "at-risk",
+      "wau": 3,
+      "topSignal": "Very low engagement - potential churn risk",
       "features": [
-        "Industrial Monitoring",
-        "Data Collection",
-        "Basic Analytics"
+        "basic viewing"
       ],
-      "lastActivity": "2026-03-14T12:15:00Z",
+      "lastActivity": "2026-03-06T14:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 10,
-      "topSignal": "Growing interest in annotation and timeline features",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "Consistent pilot usage with basic feature adoption",
       "features": [
-        "Annotations",
-        "Timeline Filters",
-        "Event Marking"
+        "exploration",
+        "channel list"
       ],
-      "lastActivity": "2026-03-15T14:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-12T13:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Manufacturing data integration with Sift workflows",
+      "wau": 17,
+      "topSignal": "Tabletop exercise readiness suggests production deployment planning",
       "features": [
-        "Manufacturing Integration",
-        "Data Pipelines",
-        "Quality Monitoring"
+        "readiness checklist",
+        "deployment planning",
+        "production prep"
       ],
-      "lastActivity": "2026-03-14T10:45:00Z",
+      "lastActivity": "2026-03-15T09:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Production line telemetry evaluation phase",
+      "wau": 10,
+      "topSignal": "Growing usage of data pipeline features for manufacturing data",
       "features": [
-        "Production Monitoring",
-        "Channel Setup",
-        "Data Visualization"
+        "data import",
+        "pipeline",
+        "visualization"
       ],
-      "lastActivity": "2026-03-13T09:30:00Z",
+      "lastActivity": "2026-03-13T14:35:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 20,
-      "topSignal": "Asteroid mining mission prep with MemTable data optimization",
+      "topSignal": "Saved views and dashboard functionality indicates established workflows",
       "features": [
-        "MemTable Operations",
-        "Data Optimization",
-        "Mission Planning"
+        "saved views",
+        "dashboards",
+        "downsampling"
       ],
-      "lastActivity": "2026-03-15T15:30:00Z",
+      "lastActivity": "2026-03-16T07:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Very limited activity, potential churn risk",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "Early stage evaluation with basic feature testing",
       "features": [
-        "Initial Setup",
-        "Basic Features",
-        "Trial Access"
+        "basic exploration",
+        "data viewing"
       ],
-      "lastActivity": "2026-03-05T13:00:00Z",
+      "lastActivity": "2026-03-10T16:20:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Explore V2 GA Launch Date: March 31, 2026",
-      "context": "Analytics instrumentation and event renaming (ENG-9276, ENG-9275) must be completed before GA. This is critical for measuring North Star metric (Decisions Captured Per Customer) and validates 'Nail the Core' pillar.",
-      "owner": "Product Engineering Lead",
-      "deadline": "2026-03-31",
-      "status": "at_risk",
-      "blockedBy": "Analytics event cleanup must complete by March 24 to allow validation time",
-      "arguments": {
-        "for": "Market timing is optimal, sales pipeline ready, competitive pressure mounting. Delaying reduces Q2 revenue opportunity by ~$400K.",
-        "against": "Analytics foundation incomplete = blind to user behavior post-launch. Cannot validate decision capture metrics. Risk shipping without measurement = cannot prove value or iterate effectively."
-      }
-    },
-    {
-      "title": "Prioritize K2 Mission Data Pipeline over Channel List v2 polish",
-      "context": "ENG-9104 (K2 Mission pipeline) enables new customer segment (aerospace/defense). Channel list v2 (ENG-9077, ENG-9271) improves existing UX. Trade-off between 'Embed Deeper' (new use case) vs 'Nail the Core' (better experience).",
-      "owner": "Head of Product",
+      "title": "Ship Explore V2 GA by March 31, 2026",
+      "context": "Heavy focus on pre-GA cleanup: table improvements, amplitude event renaming, legend cleanup, downsampling UX. Need to decide if current quality bar meets GA threshold or if we slip.",
+      "owner": "Explore V2 PM + Eng Lead",
       "deadline": "2026-03-20",
       "status": "open",
-      "blockedBy": "Engineering capacity allocation unclear for next sprint",
+      "blockedBy": "",
       "arguments": {
-        "for": "K2 Mission = $1.2M ARR opportunity, expands TAM into defense sector (Build the Moat). Strategic differentiation. Channel list v2 is incremental improvement.",
-        "against": "Existing customers report channel search frustration (ENG-9271 abort searches, ENG-8355 text wrapping). Churn risk if core workflows remain clunky. Should nail existing experience before expanding."
+        "for": "Strong signal cluster around GA prep (ENG-9276, 9277, 9275, 9272). Most foundational work complete. March 31 deadline creates forcing function.",
+        "against": "Still active work on core UX (channel list v2, text wrapping, context menus, fresh data reads). Risk shipping with known UX debt. No explicit 'GA readiness review' signal."
       }
     },
     {
-      "title": "Build Python Rules native integration vs. API-only approach",
-      "context": "No direct signal in current tickets, but FD-43 (data import) and ENG-8234/ENG-8228 (fresh data reads) suggest push toward programmatic access. Python Rules product needs decision on integration depth.",
-      "owner": "Product Strategy Lead",
+      "title": "Prioritize K2 Mission data pipeline over other Canvas features",
+      "context": "ENG-9104 (K2 data pipeline) appears alongside K8s readiness work (ENG-9254, 9179, 9174, 9175) and fresh data reads. Signals potential new customer/contract. Need to decide resource allocation vs Canvas backlog.",
+      "owner": "Canvas Product Lead",
+      "deadline": "2026-03-18",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "K2 Mission work spans infrastructure + data pipeline = likely high-value customer needing Sift Edge. Aligns with 'Embed Deeper' pillar. Security/compliance work (knox submissions) suggests enterprise deal.",
+        "against": "Diverts engineering from Canvas core features (global nav prototypes, high-level data import). May delay broader Canvas adoption if we over-index on one customer."
+      }
+    },
+    {
+      "title": "Invest in Global Nav redesign now or defer post-GA",
+      "context": "ENG-9126 and DES-135 show active UX prototyping and wireframing for Global Nav. This is foundational IA work that could disrupt current GA timeline if scoped large.",
+      "owner": "Design Lead + Head of Product",
+      "deadline": "2026-03-19",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Early signals suggest navigation is confusing users. Better to fix IA before GA creates 'locked in' mental models. Prototyping phase = low risk exploration.",
+        "against": "Global nav changes touch every surface. High regression risk 2 weeks before GA. Should validate current nav works 'well enough' and roadmap v2 for Q2."
+      }
+    },
+    {
+      "title": "Standardize downsampling UX across Explore V2 before GA",
+      "context": "Multiple tickets around downsampling (ENG-9041 info exposure, ENG-8791 saved views, ENG-8790 per-channel config, ENG-9253 high refresh rate). Core to 'Signal>Evidence>Decision' - users need to trust what they see.",
+      "owner": "Explore V2 Eng Lead",
       "deadline": "2026-03-25",
-      "status": "blocked",
-      "blockedBy": "Requires Canvas roadmap alignment and architecture review for embed strategy",
-      "arguments": {
-        "for": "Native integration = 'Embed Deeper' pillar realized. Enables automated decision capture (North Star). Competitive moat vs. Tableau/PowerBI. Increases stickiness 3x based on beta data.",
-        "against": "Significant engineering lift (8-10 weeks). Delays Explore V2 post-GA improvements. API-first approach faster to market, validates demand before heavy investment. Risk building wrong abstraction."
-      }
-    },
-    {
-      "title": "Accelerate Sift Edge readiness vs. polish Explore V2 post-GA",
-      "context": "ENG-9254 (K8s job readiness), ENG-9179 (readiness checklist), ENG-9174/9175 (network docs) indicate Edge deployment prep. ENG-7899 (catalog service errors in gov) shows deployment complexity.",
-      "owner": "VP Engineering",
-      "deadline": "2026-03-30",
       "status": "open",
-      "blockedBy": "Knox approval timeline unknown, security review could take 4-8 weeks",
+      "blockedBy": "",
       "arguments": {
-        "for": "Sift Edge = 'Build the Moat' crown jewel. On-prem/air-gapped = untapped $5M+ ARR market. First-mover advantage in secure analytics. Differentiates from cloud-only competitors.",
-        "against": "Explore V2 just launched, needs iteration based on user feedback. Splitting focus risks both products being mediocre. Edge deployment complexity high (gov env errors). Should stabilize core before expanding."
-      }
-    },
-    {
-      "title": "Invest in Ask SIFT conversational analytics now or wait for Canvas maturity",
-      "context": "No direct signals, but ENG-9126/DES-135 (Global Nav prototypes) suggest UX rethink. Ask SIFT could be nav entry point. Canvas maturity affects whether Ask SIFT surfaces decision templates or raw queries.",
-      "owner": "Head of Product",
-      "deadline": "2026-04-10",
-      "status": "open",
-      "blockedBy": "Canvas product definition incomplete, GenAI roadmap unclear",
-      "arguments": {
-        "for": "Ask SIFT = ultimate 'Signal>Evidence>Decision' interface. Natural language query = accessibility = broader user adoption = more decisions captured. Market expects AI features, competitive pressure (Sigma/Mode investing heavily).",
-        "against": "Canvas templates must exist for Ask SIFT to be valuable (otherwise just chatbot to SQL). Premature to build NL interface before decision frameworks are codified. Risk: shiny AI feature that doesn't drive North Star metric."
+        "for": "Downsampling directly impacts decision quality. If users don't understand what data they're seeing, North Star metric (Decisions Captured) suffers. Multiple tickets = known pain point.",
+        "against": "Downsampling is advanced feature. GA can ship with 'good enough' defaults. Risk over-engineering UX that only 10% of users need. Focus on table stakes features first."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "127",
-      "delta": "+18% MoM"
+      "value": "Unknown",
+      "delta": "No direct signal in Linear tickets"
     },
     "pillars": [
       {
@@ -2692,21 +2671,15 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 GA with <10% regression in core workflows",
-            "current": "88%",
-            "target": "90%",
+            "name": "Explore V2 GA by Q1 2026",
+            "current": "Pre-GA cleanup phase, 15 days to deadline",
+            "target": "2026-03-31",
             "status": "at_risk"
           },
           {
-            "name": "Channel search latency <500ms p95",
-            "current": "720ms",
-            "target": "500ms",
-            "status": "off_track"
-          },
-          {
-            "name": "Fresh data reads <2s latency",
-            "current": "1.8s",
-            "target": "2s",
+            "name": "Canvas fresh data reads reliability",
+            "current": "Active implementation (ENG-8234, 8228, 8819)",
+            "target": "Production-ready Q1",
             "status": "on_track"
           }
         ]
@@ -2716,45 +2689,33 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Python Rules beta customers using >=3x/week",
-            "current": "67%",
-            "target": "70%",
+            "name": "K2 Mission data pipeline deployment",
+            "current": "Pipeline + K8s readiness in flight",
+            "target": "Customer onboarded Q1",
             "status": "on_track"
           },
           {
-            "name": "K2 Mission pipeline deployed to prod",
-            "current": "60%",
-            "target": "100% by Apr 15",
+            "name": "Sift Edge security compliance (Knox)",
+            "current": "Network diagrams + trivy reports submitted",
+            "target": "Compliance approved Q1",
             "status": "on_track"
-          },
-          {
-            "name": "Data import API adoption (5+ customers)",
-            "current": "3",
-            "target": "5",
-            "status": "at_risk"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "at_risk",
+        "status": "on_track",
         "keyResults": [
           {
-            "name": "Sift Edge Knox approval secured",
-            "current": "Submitted",
-            "target": "Approved by Apr 30",
-            "status": "at_risk"
+            "name": "High-level data import abstraction (FD-43)",
+            "current": "In development",
+            "target": "File import live Q1",
+            "status": "on_track"
           },
           {
-            "name": "Canvas decision templates created",
-            "current": "12",
-            "target": "25",
-            "status": "off_track"
-          },
-          {
-            "name": "Bitfield handling differentiation shipped",
-            "current": "Design",
-            "target": "Beta by May 15",
+            "name": "Analytics instrumentation for product insights",
+            "current": "Amplitude events pre-GA cleanup (ENG-9276, 9275, 9273)",
+            "target": "Clean event taxonomy by GA",
             "status": "on_track"
           }
         ]
@@ -2764,23 +2725,23 @@
   "timeAudit": {
     "today": {
       "date": "2026-03-16",
-      "meetings": 5,
-      "focusBlocks": 2,
-      "oneOnOnes": 3,
-      "freeHours": 2,
-      "meetingHours": 6
+      "meetings": 0,
+      "focusBlocks": 0,
+      "oneOnOnes": 0,
+      "freeHours": 0,
+      "meetingHours": 0
     },
     "thisWeek": {
-      "meetings": 22,
-      "freeHours": 8,
-      "meetingHours": 32
+      "meetings": 0,
+      "freeHours": 0,
+      "meetingHours": 0
     },
-    "weekSummary": "67% of week in meetings. Only 8 deep work hours for 30 active engineering tickets = bottleneck risk.",
+    "weekSummary": "No calendar data provided - only Linear ticket signals available",
     "alerts": [
-      "3 one-on-ones today limit decision-making bandwidth for critical GA launch call",
-      "No focus blocks Wed-Thu despite March 31 deadline pressure on analytics instrumentation",
-      "22 meetings this week = context switching kills flow on complex technical decisions (K2 pipeline, Edge readiness)",
-      "Engineering leads report 'meeting fatigue' impacting velocity on ENG-9254, ENG-9276 critical path items"
+      "31 active Linear tickets with 15 days to Explore V2 GA deadline",
+      "No explicit 'blocked' status in tickets, but ENG-9271 (abort existing searches) suggests performance issues under load",
+      "K2 Mission work (4+ tickets) may be pulling focus from GA critical path",
+      "Global Nav redesign (2 tickets) in prototyping phase - scope creep risk"
     ]
   },
   "timeline": {
@@ -2789,36 +2750,28 @@
         "label": "This Week (Mar 16-22)",
         "events": [
           {
-            "title": "Analytics Event Renaming Complete",
-            "date": "2026-03-20",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "ENG-9276 must complete to allow 1 week buffer before GA. Critical path for measuring North Star metric post-launch.",
-            "owner": "Analytics Engineering"
-          },
-          {
-            "title": "K2 Mission Pipeline Decision",
-            "date": "2026-03-20",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Product leadership aligns on prioritization: K2 Mission vs Channel List v2 polish. Impacts sprint planning Mar 24.",
-            "owner": "Head of Product"
-          },
-          {
-            "title": "Fresh Data Reads E2E Testing",
-            "date": "2026-03-19",
+            "title": "Decision: K2 Mission vs Canvas feature prioritization",
+            "date": "2026-03-18",
             "time": "10:00",
-            "type": "milestone",
-            "description": "ENG-8819 validates fresh+historical merge. Unblocks downsampling config (ENG-8791, ENG-8790) for GA.",
-            "owner": "Backend Team"
+            "type": "deadline",
+            "description": "Decide resource allocation between K2 pipeline and Canvas backlog",
+            "owner": "Canvas Product Lead"
           },
           {
-            "title": "Global Nav Prototype Review",
-            "date": "2026-03-21",
-            "time": "15:00",
-            "type": "meeting",
-            "description": "ENG-9126/DES-135 review. Determines if Ask SIFT can be nav-level feature or needs separate entry. Informs Q2 roadmap.",
-            "owner": "Design Lead"
+            "title": "Decision: Global Nav redesign timing",
+            "date": "2026-03-19",
+            "time": "14:00",
+            "type": "deadline",
+            "description": "Commit to pre-GA nav changes or defer to Q2",
+            "owner": "Design Lead + Head of Product"
+          },
+          {
+            "title": "Decision: Explore V2 GA quality gate",
+            "date": "2026-03-20",
+            "time": "16:00",
+            "type": "gate",
+            "description": "Go/no-go review for March 31 GA based on current ticket velocity",
+            "owner": "Explore V2 PM + Eng Lead"
           }
         ]
       },
@@ -2826,102 +2779,78 @@
         "label": "Next Week (Mar 23-29)",
         "events": [
           {
-            "title": "Amplitude Instrumentation Complete",
-            "date": "2026-03-24",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "ENG-9275 final implementation. Last validation checkpoint before GA launch. No slip allowed.",
-            "owner": "Analytics Engineering"
-          },
-          {
-            "title": "Python Rules Integration Decision",
+            "title": "Downsampling UX standardization complete",
             "date": "2026-03-25",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Native vs API-only approach decided. Impacts Q2 engineering allocation and Canvas roadmap dependencies.",
-            "owner": "Product Strategy Lead"
-          },
-          {
-            "title": "Sift Edge Architecture Review",
-            "date": "2026-03-26",
-            "time": "13:00",
-            "type": "meeting",
-            "description": "ENG-9174/9175 network diagram walkthrough. Knox submission readiness check. Security team signoff required.",
-            "owner": "VP Engineering"
-          },
-          {
-            "title": "Catalog Service Gov Environment Fix",
-            "date": "2026-03-28",
-            "time": "16:00",
-            "type": "milestone",
-            "description": "ENG-7899 resolution validates Edge deployment viability. Critical for convincing leadership Edge is ready.",
-            "owner": "Infrastructure Team"
-          }
-        ]
-      },
-      {
-        "label": "Launch Week (Mar 30 - Apr 5)",
-        "events": [
-          {
-            "title": "Sift Edge Acceleration Decision",
-            "date": "2026-03-30",
-            "time": "09:00",
-            "type": "gate",
-            "description": "VP Eng + Head of Product align on Edge timeline vs Explore V2 post-GA polish trade-off. Impacts H1 revenue forecasts.",
-            "owner": "VP Engineering"
-          },
-          {
-            "title": "Explore V2 GA Launch",
-            "date": "2026-03-31",
-            "time": "08:00",
-            "type": "milestone",
-            "description": "Public launch of Explore V2. Analytics instrumentation live. Begin measuring Decisions Captured Per Customer at scale.",
-            "owner": "Product Engineering Lead"
-          },
-          {
-            "title": "Post-GA Launch Retrospective",
-            "date": "2026-04-02",
-            "time": "14:00",
-            "type": "meeting",
-            "description": "Team debrief on launch execution. Identify quick wins for week 1 iteration. Prioritize bug fixes vs new features.",
-            "owner": "Head of Product"
-          },
-          {
-            "title": "K2 Mission Pipeline Demo",
-            "date": "2026-04-03",
-            "time": "11:00",
-            "type": "milestone",
-            "description": "ENG-9104 complete. Internal demo to sales team. Enables outbound to aerospace/defense prospects for Q2 pipeline.",
-            "owner": "Engineering Lead"
-          }
-        ]
-      },
-      {
-        "label": "April (Strategic Planning)",
-        "events": [
-          {
-            "title": "Ask SIFT vs Canvas Maturity Decision",
-            "date": "2026-04-10",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Product leadership decides timing for Ask SIFT investment. Depends on Canvas template library status and GenAI roadmap clarity.",
-            "owner": "Head of Product"
-          },
-          {
-            "title": "K2 Mission Pipeline Production Deploy",
-            "date": "2026-04-15",
-            "time": "14:00",
-            "type": "deadline",
-            "description": "ENG-9104 live in prod. First aerospace customer onboarding begins. Validates 'Embed Deeper' pillar expansion.",
-            "owner": "DevOps Team"
-          },
-          {
-            "title": "Knox Approval Target",
-            "date": "2026-04-30",
             "time": "17:00",
             "type": "deadline",
-            "description": "Sift Edge security review complete. Unblocks gov/on-prem sales motion for H2. $5M+ ARR opportunity.",
-            "owner": "Security + Compliance"
+            "description": "ENG-9041, 8791, 8790, 9253 merged and tested",
+            "owner": "Explore V2 Eng Lead"
+          },
+          {
+            "title": "Amplitude event taxonomy cleanup",
+            "date": "2026-03-27",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "ENG-9276 complete - clean event naming before GA",
+            "owner": "Analytics Eng"
+          },
+          {
+            "title": "Table improvements shipped (ENG-9277)",
+            "date": "2026-03-28",
+            "time": "15:00",
+            "type": "milestone",
+            "description": "Pre-GA table UX enhancements deployed",
+            "owner": "Explore V2 Frontend"
+          }
+        ]
+      },
+      {
+        "label": "GA Week (Mar 30 - Apr 5)",
+        "events": [
+          {
+            "title": "Explore V2 General Availability",
+            "date": "2026-03-31",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "Official GA launch after Q1 cleanup sprint",
+            "owner": "Explore V2 Team"
+          },
+          {
+            "title": "K8s readiness tabletop exercise",
+            "date": "2026-03-31",
+            "time": "14:00",
+            "type": "meeting",
+            "description": "ENG-9179 - validate K2 Mission deployment readiness",
+            "owner": "Platform Eng + K2 Mission Team"
+          }
+        ]
+      },
+      {
+        "label": "April 2026 (Post-GA)",
+        "events": [
+          {
+            "title": "Fresh data reads e2e testing (ENG-8819)",
+            "date": "2026-04-03",
+            "time": "10:00",
+            "type": "milestone",
+            "description": "Validate historical + fresh data merge in production",
+            "owner": "Canvas Backend"
+          },
+          {
+            "title": "K2 Mission data pipeline live",
+            "date": "2026-04-07",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "ENG-9104 complete - customer onboarding begins",
+            "owner": "Canvas Product + K2 Mission Eng"
+          },
+          {
+            "title": "Global Nav V2 roadmap review",
+            "date": "2026-04-10",
+            "time": "15:00",
+            "type": "meeting",
+            "description": "Review DES-135/ENG-9126 prototypes, plan Q2 implementation",
+            "owner": "Design Lead + Product"
           }
         ]
       }
