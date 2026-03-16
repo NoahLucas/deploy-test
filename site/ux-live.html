@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>UX Live - Noah Lucas Concept</title>
+    <title>Noah Lucas · God Mode</title>
     <script>
       (function () {
         document.documentElement.setAttribute("data-owner-auth", "pending");
@@ -26,15 +26,37 @@
     </script>
     <style>
       :root {
-        --paper: #f3f0e8;
-        --ink: #1e1f21;
-        --muted: #676862;
-        --line: #d3cec2;
-        --panel: #faf8f2;
-        --accent: #245f9b;
+        --bg: #f7f7f4;
+        --text: #111111;
+        --muted: #676767;
+        --surface: rgba(255, 255, 255, 0.56);
+        --line: #d9d9d2;
+        --glow-a: color-mix(in srgb, var(--text) 5%, transparent);
+        --glow-b: color-mix(in srgb, var(--text) 4%, transparent);
+        --mist-a: transparent;
+        --mist-b: transparent;
+        --firefly-a: transparent;
+        --firefly-b: transparent;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0e1014;
+          --text: #e8ebf2;
+          --muted: #9ba4b7;
+          --surface: rgba(21, 25, 35, 0.62);
+          --line: #2a3040;
+          --glow-a: color-mix(in srgb, var(--text) 6%, transparent);
+          --glow-b: color-mix(in srgb, var(--text) 5%, transparent);
+        }
       }
 
       * { box-sizing: border-box; }
+
+      html,
+      body {
+        min-height: 100%;
+      }
 
       html[data-owner-auth="pending"] body {
         visibility: hidden;
@@ -42,427 +64,951 @@
 
       body {
         margin: 0;
-        background: radial-gradient(circle at 100% 0%, #e9e4d8 0%, #f3f0e8 45%);
-        color: var(--ink);
-        font-family: "IBM Plex Mono", "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+        background: var(--bg);
+        color: var(--text);
+        font: 12px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        transition: background-color 220ms ease, color 220ms ease;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(68vmax 62vmax at 78% 16%, var(--glow-a), transparent 72%),
+          radial-gradient(76vmax 72vmax at 14% 88%, var(--glow-b), transparent 76%),
+          radial-gradient(54vmax 34vmax at 50% 12%, var(--mist-b), transparent 82%);
+        transition: background 700ms ease;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(58vmax 30vmax at 50% 104%, var(--mist-a), transparent 72%),
+          radial-gradient(42vmax 22vmax at 52% 18%, var(--mist-b), transparent 75%),
+          radial-gradient(0.55rem 0.55rem at 22% 68%, var(--firefly-a), transparent 72%),
+          radial-gradient(0.42rem 0.42rem at 76% 61%, var(--firefly-b), transparent 72%);
+        opacity: 0.44;
+        transition: background 900ms ease, opacity 500ms ease;
+      }
+
+      :root[data-cycle-phase="dusk"] body::after {
+        animation: fireflyFlicker 9s ease-in-out infinite;
+      }
+
+      :root[data-cycle-phase="night"] body::after {
+        animation: fireflyFlicker 11s ease-in-out infinite;
+      }
+
+      :root[data-cycle-phase="night"] body::before {
+        background:
+          linear-gradient(to bottom, rgba(3, 7, 16, 0.68) 0%, rgba(3, 7, 16, 0.18) 28%, transparent 52%),
+          radial-gradient(70vmax 60vmax at 78% 16%, var(--glow-a), transparent 70%),
+          radial-gradient(82vmax 74vmax at 12% 88%, var(--glow-b), transparent 75%),
+          radial-gradient(58vmax 32vmax at 50% 12%, var(--mist-b), transparent 80%);
+      }
+
+      :root[data-cycle-phase="dusk"] body::before {
+        background:
+          linear-gradient(to bottom, rgba(16, 12, 28, 0.28) 0%, rgba(16, 12, 28, 0.08) 26%, transparent 46%),
+          radial-gradient(68vmax 62vmax at 78% 16%, var(--glow-a), transparent 72%),
+          radial-gradient(76vmax 72vmax at 14% 88%, var(--glow-b), transparent 76%),
+          radial-gradient(54vmax 34vmax at 50% 12%, var(--mist-b), transparent 82%);
+      }
+
+      :root[data-cycle-phase="night"] .meta,
+      :root[data-cycle-phase="night"] .panel-kicker,
+      :root[data-cycle-phase="night"] .mini,
+      :root[data-cycle-phase="night"] .nav button,
+      :root[data-cycle-phase="night"] .ghost {
+        color: #9bcce4;
+      }
+
+      :root[data-cycle-phase="night"] .secure-dot,
+      :root[data-cycle-phase="night"] .theme-btn,
+      :root[data-cycle-phase="night"] .logout,
+      :root[data-cycle-phase="night"] .hero-title,
+      :root[data-cycle-phase="night"] .card-title {
+        color: #ddfbff;
+        text-shadow: 0 0 14px rgba(66, 219, 255, 0.14);
+      }
+
+      :root[data-cycle-phase="night"] .shell,
+      :root[data-cycle-phase="night"] .panel,
+      :root[data-cycle-phase="night"] .nav button,
+      :root[data-cycle-phase="night"] .rail::after,
+      :root[data-cycle-phase="night"] .core-spine {
+        border-color: rgba(68, 136, 192, 0.32);
+        box-shadow: 0 0 18px rgba(51, 182, 255, 0.06);
+      }
+
+      .theme-btn {
+        position: fixed;
+        top: 0.72rem;
+        right: 0.78rem;
+        z-index: 10;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1;
+        padding: 0.08rem 0.14rem;
+        cursor: pointer;
+        opacity: 0.56;
+        transition: opacity 160ms ease, color 160ms ease;
+      }
+
+      .theme-btn:hover,
+      .theme-btn:focus-visible {
+        opacity: 0.95;
+        color: var(--text);
+        outline: none;
       }
 
       .shell {
-        width: min(1180px, calc(100% - 1.2rem));
-        margin: 0.7rem auto 1.4rem;
-        border: 1px solid var(--line);
-        background: var(--paper);
+        position: relative;
+        z-index: 1;
+        width: min(1360px, calc(100% - 1.8rem));
+        margin: 0 auto;
+        padding: 4.75rem 0 2.4rem;
       }
 
-      .top {
+      .topbar {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        gap: 0.8rem;
-        border-bottom: 1px solid var(--line);
-        padding: 0.62rem 0.78rem;
-        font-size: 0.74rem;
-        color: var(--muted);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        gap: 1rem;
+        margin-bottom: 1.35rem;
       }
 
-      .top-meta {
+      .top-left,
+      .top-right {
         display: inline-flex;
         align-items: center;
-        gap: 0.65rem;
-      }
-
-      .secure-indicator {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.34rem;
-        color: var(--muted);
-        white-space: nowrap;
-      }
-
-      .secure-indicator-dot {
-        width: 0.42rem;
-        height: 0.42rem;
-        border-radius: 999px;
-        background: #5d7a5f;
-        box-shadow: 0 0 0 1px rgba(93, 122, 95, 0.16);
-      }
-
-      .layout {
-        display: grid;
-        grid-template-columns: 220px 1fr;
-        min-height: 80vh;
-      }
-
-      .rail {
-        border-right: 1px solid var(--line);
-        padding: 0.75rem;
-      }
-
-      .identity {
-        border: 1px solid var(--line);
-        background: var(--panel);
-        padding: 0.8rem;
-      }
-
-      .identity h2 {
-        margin: 0;
-        font-size: 1.05rem;
-        font-weight: 500;
-      }
-
-      .identity p {
-        margin: 0.35rem 0 0;
-        font-size: 0.78rem;
-        color: var(--muted);
-      }
-
-      .nav {
-        margin-top: 0.68rem;
-        display: grid;
-        gap: 0.36rem;
-      }
-
-      .nav button {
-        border: 1px solid var(--line);
-        background: transparent;
-        color: var(--ink);
-        text-align: left;
-        padding: 0.5rem 0.56rem;
-        cursor: pointer;
-        font-size: 0.82rem;
-      }
-
-      .nav button.active {
-        border-color: #afab9f;
-        background: #fdfbf7;
-      }
-
-      .main {
-        padding: 0.85rem;
-        display: grid;
         gap: 0.72rem;
       }
 
-      .page { display: none; }
-      .page.active { display: grid; gap: 0.72rem; }
+      .brand {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
 
-      .panel {
-        border: 1px solid var(--line);
-        background: var(--panel);
-        padding: 0.9rem;
+      .secure {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.42rem;
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .secure-dot {
+        width: 0.46rem;
+        height: 0.46rem;
+        border-radius: 999px;
+        background: #7fa88f;
+        box-shadow: 0 0 0 1px rgba(127, 168, 143, 0.16);
+      }
+
+      .logout,
+      .logout:visited,
+      .logout:hover,
+      .logout:active {
+        color: var(--muted);
+      }
+
+      .logout {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        font: inherit;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+
+      .frame {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr) 240px;
+        gap: clamp(1.25rem, 3vw, 2.75rem);
+        align-items: start;
+      }
+
+      .rail {
+        position: relative;
+        display: grid;
+        gap: 1rem;
+        padding-left: 1.35rem;
+      }
+
+      .rail::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.2rem;
+        bottom: 0.2rem;
+        width: 1px;
+        background: color-mix(in srgb, var(--text) 20%, transparent);
+      }
+
+      .identity h1 {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 520;
+        line-height: 1.2;
+        letter-spacing: 0.02em;
+      }
+
+      .identity p {
+        margin: 0.28rem 0 0;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.45;
+      }
+
+      .nav {
+        display: grid;
+        gap: 0.5rem;
+      }
+
+      .nav button {
+        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        background: color-mix(in srgb, var(--surface) 70%, transparent);
+        color: var(--muted);
+        text-align: left;
+        padding: 0.72rem 0.8rem;
+        font: inherit;
+        font-size: 12px;
+        line-height: 1.35;
+        cursor: pointer;
+        transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .nav button strong {
+        display: block;
+        color: var(--text);
+        font-weight: 520;
+        margin-bottom: 0.12rem;
+      }
+
+      .nav button.active {
+        border-color: color-mix(in srgb, var(--text) 18%, transparent);
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        color: var(--text);
+      }
+
+      .main {
+        display: grid;
+        gap: 1rem;
       }
 
       .hero {
+        position: relative;
         display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        gap: 0.8rem;
+        justify-items: center;
+        text-align: center;
+        padding: 0.4rem 0 1.2rem;
       }
 
-      .hero h1 {
-        margin: 0;
-        font-family: "Iowan Old Style", "Palatino Linotype", Palatino, serif;
-        font-weight: 400;
-        font-size: clamp(2.4rem, 5.8vw, 5rem);
-        line-height: 0.9;
-        letter-spacing: -0.02em;
+      .core-spine {
+        position: absolute;
+        top: -0.3rem;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: color-mix(in srgb, var(--text) 14%, transparent);
+        transform: translateX(-50%);
+        pointer-events: none;
       }
 
-      .hero .lede {
-        margin: 0.55rem 0 0;
-        max-width: 58ch;
-        color: #3f403a;
+      .hero-inner {
+        position: relative;
+        z-index: 1;
+        width: min(420px, 100%);
       }
 
       .meta {
-        margin-top: 0.62rem;
-        font-size: 0.74rem;
-        letter-spacing: 0.07em;
-        text-transform: uppercase;
+        margin: 0 0 0.65rem;
         color: var(--muted);
-      }
-
-      .signal {
-        border: 1px solid var(--line);
-        background: #fffdf9;
-        padding: 0.78rem;
-      }
-
-      .kicker {
-        margin: 0 0 0.5rem;
-        font-size: 0.74rem;
-        letter-spacing: 0.07em;
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--muted);
       }
 
-      .signal p {
+      .hero-title {
         margin: 0;
-        color: #3f403a;
+        font-size: clamp(32px, 5vw, 56px);
+        line-height: 0.92;
+        letter-spacing: -0.03em;
+        font-weight: 520;
       }
 
-      .tri {
+      .hero-copy {
+        margin: 0.9rem 0 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      .hero-copy strong {
+        color: var(--text);
+        font-weight: 520;
+      }
+
+      .hero-links {
+        display: inline-grid;
+        gap: 0.45rem;
+        margin-top: 1rem;
+      }
+
+      .hero-links a,
+      .hero-links a:visited,
+      .hero-links a:hover,
+      .hero-links a:active {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 11px;
+      }
+
+      .page {
+        display: none;
+        gap: 0.9rem;
+      }
+
+      .page.active {
+        display: grid;
+      }
+
+      .panel {
+        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        background: color-mix(in srgb, var(--surface) 88%, transparent);
+        padding: 0.95rem 1rem;
+        backdrop-filter: blur(12px);
+      }
+
+      .panel-kicker {
+        margin: 0 0 0.55rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .grid-3 {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.8rem;
+      }
+
+      .card-title {
+        margin: 0;
+        color: var(--text);
+        font-size: 14px;
+        line-height: 1.3;
+        font-weight: 520;
+      }
+
+      .card-copy {
+        margin: 0.42rem 0 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .mini {
+        margin-top: 0.55rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      .list {
+        display: grid;
         gap: 0.6rem;
       }
 
-      .tri .cell {
-        border: 1px solid var(--line);
-        background: #fffdf9;
-        padding: 0.62rem;
+      .list-item {
+        border-top: 1px solid color-mix(in srgb, var(--text) 8%, transparent);
+        padding-top: 0.6rem;
       }
 
-      .tri .cell strong {
-        display: block;
-        margin-bottom: 0.2rem;
+      .list-item:first-child {
+        border-top: 0;
+        padding-top: 0;
       }
 
-      .work-cards,
-      .note-cards {
+      .ghost,
+      .ghost:visited,
+      .ghost:hover,
+      .ghost:active {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .aside {
+        position: relative;
         display: grid;
-        gap: 0.55rem;
+        gap: 0.8rem;
+        padding-right: 1.35rem;
+        text-align: right;
       }
 
-      .work-cards {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .aside::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0.2rem;
+        bottom: 0.2rem;
+        width: 1px;
+        background: color-mix(in srgb, var(--text) 20%, transparent);
       }
 
-      .role-card {
-        border: 1px solid var(--line);
-        background: #fffdf9;
-        padding: 0.7rem;
+      .status-stack {
+        display: grid;
+        gap: 0.9rem;
       }
 
-      .role-card h3 {
-        margin: 0;
-        font-size: 0.98rem;
+      .status-line {
+        display: grid;
+        gap: 0.12rem;
       }
 
-      .role-card p {
-        margin: 0.42rem 0 0;
-        color: #454642;
+      .status-line strong {
+        color: var(--text);
+        font-size: 13px;
+        font-weight: 520;
       }
 
-      .role-card ul {
-        margin: 0.45rem 0 0;
-        padding-left: 1rem;
-      }
-
-      .role-card li { margin: 0.18rem 0; }
-
-      .note {
-        border: 1px solid var(--line);
-        background: #fffdf9;
-        padding: 0.7rem;
-      }
-
-      .note h3 {
-        margin: 0;
-        font-size: 0.95rem;
-      }
-
-      .note p {
-        margin: 0.42rem 0 0;
-        color: #454642;
-      }
-
-      .note .m {
-        margin-top: 0.38rem;
-        font-size: 0.74rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+      .status-line span {
         color: var(--muted);
+        font-size: 11px;
       }
 
-      .footer-line {
-        border-top: 1px solid var(--line);
-        padding-top: 0.62rem;
-        color: var(--muted);
-        font-size: 0.8rem;
+      @keyframes fireflyFlicker {
+        0%, 100% { opacity: 0.4; }
+        18% { opacity: 0.64; }
+        19% { opacity: 0.38; }
+        37% { opacity: 0.56; }
+        39% { opacity: 0.34; }
+        66% { opacity: 0.7; }
+        68% { opacity: 0.42; }
+        84% { opacity: 0.58; }
       }
 
-      @media (max-width: 1020px) {
-        .layout { grid-template-columns: 1fr; }
-        .rail { border-right: 0; border-bottom: 1px solid var(--line); }
-        .nav { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; }
-        .hero { grid-template-columns: 1fr; }
-        .tri,
-        .work-cards { grid-template-columns: 1fr; }
+      @media (max-width: 1080px) {
+        .frame {
+          grid-template-columns: 1fr;
+        }
+
+        .rail,
+        .aside {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .rail::after,
+        .aside::after,
+        .core-spine {
+          display: none;
+        }
+
+        .nav {
+          grid-auto-flow: column;
+          grid-auto-columns: minmax(180px, 1fr);
+          overflow-x: auto;
+        }
+
+        .aside {
+          text-align: left;
+        }
+
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          width: min(100% - 1rem, 1360px);
+          padding-top: 4.2rem;
+        }
+
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .hero-title {
+          font-size: 30px;
+        }
+
+        .hero-copy {
+          font-size: 13px;
+        }
       }
     </style>
   </head>
   <body>
+    <button id="theme-toggle" class="theme-btn" type="button" aria-label="Theme mode: system" title="Theme mode: system">◐</button>
+
     <main class="shell">
-      <header class="top">
-        <span>UX Live Preview</span>
-        <span class="top-meta">
-          <span class="secure-indicator" aria-label="Secure connection active" title="Secure connection active">
-            <span class="secure-indicator-dot" aria-hidden="true"></span>
-            <span>Secure</span>
+      <header class="topbar">
+        <div class="top-left">
+          <span class="brand">Noah Lucas · God Mode</span>
+          <span class="secure" aria-label="Secure connection active" title="Secure connection active">
+            <span class="secure-dot" aria-hidden="true"></span>
+            <span>Secure Session</span>
           </span>
-          <span>Direction: Living Dossier</span>
-        </span>
+        </div>
+        <div class="top-right">
+          <span class="brand">Private Surface</span>
+          <button id="logout" class="logout" type="button">Log Out</button>
+        </div>
       </header>
 
-      <section class="layout">
+      <section class="frame">
         <aside class="rail">
           <div class="identity">
-            <h2>Noah Lucas</h2>
-            <p>Product leadership at the edge of AI, hardware, and autonomy.</p>
+            <h1>Noah Lucas</h1>
+            <p>Private operator surface for memory, publishing, context, and system control.</p>
           </div>
           <nav class="nav" id="nav">
-            <button class="active" data-page="home" type="button">Home</button>
-            <button data-page="work" type="button">Work</button>
-            <button data-page="notes" type="button">Notes</button>
+            <button class="active" data-page="overview" type="button"><strong>Overview</strong><span>Command surface</span></button>
+            <button data-page="publishing" type="button"><strong>Publishing</strong><span>Public output control</span></button>
+            <button data-page="notes" type="button"><strong>Notes</strong><span>Drafts and authored surfaces</span></button>
+            <button data-page="system" type="button"><strong>System</strong><span>Access, status, and edges</span></button>
           </nav>
         </aside>
 
         <section class="main">
-          <div class="page active" data-page="home">
-            <article class="panel hero">
-              <div>
-                <h1>Noah Lucas</h1>
-                <p class="lede">A calm public surface for work, memory, and operator context. Built as a living product artifact, not a static portfolio.</p>
-                <p class="meta">Ojai, California · VP Product at Sift</p>
+          <article class="hero">
+            <div class="core-spine" aria-hidden="true"></div>
+            <div class="hero-inner">
+              <p class="meta">Owner View</p>
+              <h2 class="hero-title">God Mode</h2>
+              <p class="hero-copy">
+                Living in <strong>Ojai, California</strong> with Sara, Willa, and Bruce the cat.
+                Working at <strong>Sift</strong>. This is the private control surface behind the public site.
+              </p>
+              <div class="hero-links">
+                <a href="/autobiography">Biography</a>
+                <a href="https://noahlucas.squarespace.com/notes">Notes</a>
+                <a href="/lab.html">Lab</a>
               </div>
-              <div class="signal">
-                <p class="kicker">Active Memory</p>
-                <p>Current focus: telemetry systems for advanced machines, decision quality under ambiguity, and product execution at mission tempo.</p>
+            </div>
+          </article>
+
+          <section class="page active" data-page="overview">
+            <article class="panel">
+              <p class="panel-kicker">Current Frame</p>
+              <div class="grid-3">
+                <div>
+                  <h3 class="card-title">Publishing posture</h3>
+                  <p class="card-copy">Public surface stays restrained. Notes and autobiography remain the outward narrative layer.</p>
+                </div>
+                <div>
+                  <h3 class="card-title">Admin access</h3>
+                  <p class="card-copy">Owner session is established. This view is now code-gated instead of relying on brittle biometric setup.</p>
+                </div>
+                <div>
+                  <h3 class="card-title">Current leverage</h3>
+                  <p class="card-copy">One page controls narrative, links, private tools, and the public-facing system feel.</p>
+                </div>
               </div>
             </article>
 
             <article class="panel">
-              <p class="kicker">Core System</p>
-              <div class="tri">
-                <div class="cell"><strong>Empathy</strong>Design around human priorities, not tool complexity.</div>
-                <div class="cell"><strong>Memory</strong>Preserve continuity across decisions, writing, and execution.</div>
-                <div class="cell"><strong>Intelligence</strong>Synthesize fragmented signals into actionable context.</div>
+              <p class="panel-kicker">Immediate Surfaces</p>
+              <div class="grid-2">
+                <div>
+                  <h3 class="card-title">Public homepage</h3>
+                  <p class="card-copy">The living front door. Theme system, collapsed rails, and sentence-based biography are now aligned.</p>
+                  <p class="mini"><a class="ghost" href="/">Open public site</a></p>
+                </div>
+                <div>
+                  <h3 class="card-title">Autobiography prototype</h3>
+                  <p class="card-copy">The long-form life-story surface can evolve in parallel without destabilizing the homepage.</p>
+                  <p class="mini"><a class="ghost" href="/autobiography">Open biography</a></p>
+                </div>
               </div>
             </article>
+          </section>
 
+          <section class="page" data-page="publishing">
             <article class="panel">
-              <p class="kicker">Selected Work</p>
-              <div class="work-cards">
-                <article class="role-card">
-                  <h3>Sift · VP Product</h3>
-                  <p>Telemetry and decision platform for advanced machines in aerospace, defense, and robotics.</p>
-                </article>
-                <article class="role-card">
-                  <h3>Anduril · Principal PM</h3>
-                  <p>AI infrastructure and autonomy systems for mission-critical defense operations.</p>
-                </article>
-                <article class="role-card">
-                  <h3>Serve Robotics · Director PM</h3>
-                  <p>Commercialized autonomy products for scalable robotic logistics.</p>
-                </article>
-                <article class="role-card">
-                  <h3>Postmates · Product Lead</h3>
-                  <p>Built platform and partner systems across large-scale marketplace operations.</p>
-                </article>
+              <p class="panel-kicker">Publishing Controls</p>
+              <div class="list">
+                <div class="list-item">
+                  <h3 class="card-title">Public homepage</h3>
+                  <p class="card-copy">Controls your current identity sentence, work rail, place rail, and time-of-day visual system.</p>
+                  <p class="mini"><a class="ghost" href="/">Review public page</a></p>
+                </div>
+                <div class="list-item">
+                  <h3 class="card-title">Notes surface</h3>
+                  <p class="card-copy">Squarespace remains the publishing surface for notes so analytics and uptime stay clean.</p>
+                  <p class="mini"><a class="ghost" href="https://noahlucas.squarespace.com/notes">Open notes</a></p>
+                </div>
+                <div class="list-item">
+                  <h3 class="card-title">Autobiography</h3>
+                  <p class="card-copy">A separate narrative surface for the life story prototype, intentionally downstream from the private system.</p>
+                  <p class="mini"><a class="ghost" href="/autobiography">Open biography</a></p>
+                </div>
               </div>
             </article>
+          </section>
 
-            <article class="panel footer-line">
-              Computing should feel less like software and more like understanding.
-            </article>
-          </div>
-
-          <div class="page" data-page="work">
+          <section class="page" data-page="notes">
             <article class="panel">
-              <p class="kicker">Work Archive</p>
-              <div class="work-cards">
-                <article class="role-card">
-                  <h3>Sift</h3>
-                  <p>Vice President of Product</p>
-                  <ul>
-                    <li>Lead platform strategy for telemetry and decision systems.</li>
-                    <li>Drive product-engineering cadence for mission-critical delivery.</li>
-                  </ul>
-                </article>
-                <article class="role-card">
-                  <h3>Anduril</h3>
-                  <p>Principal Product Manager</p>
-                  <ul>
-                    <li>Owned AI infrastructure for autonomy, simulation, and navigation.</li>
-                    <li>Drove GPS-denied and edge-delivery product architecture.</li>
-                  </ul>
-                </article>
-                <article class="role-card">
-                  <h3>Serve Robotics</h3>
-                  <p>Director of Product Management</p>
-                  <ul>
-                    <li>Commercialized L4 sidewalk autonomy.</li>
-                    <li>Built partner APIs and operational product surfaces.</li>
-                  </ul>
-                </article>
-                <article class="role-card">
-                  <h3>Postmates</h3>
-                  <p>Product Lead</p>
-                  <ul>
-                    <li>Built B2B/developer platform and scaled marketplace systems.</li>
-                    <li>Led enterprise integrations and international launches.</li>
-                  </ul>
-                </article>
-                <article class="role-card">
-                  <h3>Pendulum</h3>
-                  <p>Applied Product Research</p>
-                  <ul>
-                    <li>Led geolocation product development in GPS-denied contexts.</li>
-                    <li>Shaped DoD innovation loops with field validation.</li>
-                  </ul>
-                </article>
-                <article class="role-card">
-                  <h3>Expedia + S&amp;P</h3>
-                  <p>Global mobile + data platform foundations</p>
-                  <ul>
-                    <li>Scaled mobile travel products globally.</li>
-                    <li>Defined near-real-time data platform product requirements.</li>
-                  </ul>
-                </article>
+              <p class="panel-kicker">Writing + Drafts</p>
+              <div class="list">
+                <div class="list-item">
+                  <h3 class="card-title">Squarespace notes</h3>
+                  <p class="card-copy">Public note archive remains on Squarespace for reporting, delivery, and stable public analytics.</p>
+                  <p class="mini"><a class="ghost" href="https://noahlucas.squarespace.com/notes">Open public notes</a></p>
+                </div>
+                <div class="list-item">
+                  <h3 class="card-title">Draft notes API</h3>
+                  <p class="card-copy">Private drafts can still live in the app layer before they are surfaced publicly.</p>
+                  <p class="mini"><a class="ghost" href="/api/v1/public/notes-drafts">Open drafts endpoint</a></p>
+                </div>
+                <div class="list-item">
+                  <h3 class="card-title">Autobiographer lab</h3>
+                  <p class="card-copy">The life-story prototype remains available as a simple evolving surface while the rest of the system stays clean.</p>
+                  <p class="mini"><a class="ghost" href="/lab.html">Open lab</a></p>
+                </div>
               </div>
             </article>
-          </div>
+          </section>
 
-          <div class="page" data-page="notes">
+          <section class="page" data-page="system">
             <article class="panel">
-              <p class="kicker">Operator Notes</p>
-              <div class="note-cards">
-                <article class="note">
-                  <h3>How VP Product systems become company leverage</h3>
-                  <p>Execution architecture that turns signal into durable advantage.</p>
-                  <p class="m">Product Systems · 7 min</p>
-                </article>
-                <article class="note">
-                  <h3>The decision architecture behind shipping speed</h3>
-                  <p>Why cadence, evidence, and clarity outperform reactive roadmaps.</p>
-                  <p class="m">Operator Notes · 6 min</p>
-                </article>
-                <article class="note">
-                  <h3>Building AI-native teams without hype cycles</h3>
-                  <p>Practical rituals for integrating intelligence into real product work.</p>
-                  <p class="m">Leadership · 8 min</p>
-                </article>
+              <p class="panel-kicker">System State</p>
+              <div class="grid-2">
+                <div>
+                  <h3 class="card-title">Access</h3>
+                  <p class="card-copy">Owner access now resolves through a defined code instead of the unstable setup-token-plus-passkey flow.</p>
+                </div>
+                <div>
+                  <h3 class="card-title">Hosting split</h3>
+                  <p class="card-copy">Public surface can move back to Squarespace while private OS and experimentation remain app-backed.</p>
+                </div>
               </div>
             </article>
-          </div>
+            <article class="panel">
+              <p class="panel-kicker">Useful Paths</p>
+              <div class="list">
+                <div class="list-item"><a class="ghost" href="/">/</a></div>
+                <div class="list-item"><a class="ghost" href="/autobiography">/autobiography</a></div>
+                <div class="list-item"><a class="ghost" href="/lab.html">/lab.html</a></div>
+                <div class="list-item"><a class="ghost" href="/api/v1/public/admin-auth/session">/api/v1/public/admin-auth/session</a></div>
+              </div>
+            </article>
+          </section>
         </section>
+
+        <aside class="aside">
+          <div class="status-stack">
+            <div class="status-line">
+              <strong>Current</strong>
+              <span>Ojai / Sift / public site live</span>
+            </div>
+            <div class="status-line">
+              <strong>Mode</strong>
+              <span>Private operator view</span>
+            </div>
+            <div class="status-line">
+              <strong>Theme</strong>
+              <span>Shared with public aesthetic</span>
+            </div>
+            <div class="status-line">
+              <strong>Priority</strong>
+              <span>Keep public surface premium, stable, and calm</span>
+            </div>
+          </div>
+        </aside>
       </section>
     </main>
 
     <script>
-      const nav = document.getElementById("nav");
-      const pages = Array.from(document.querySelectorAll(".page"));
+      (function () {
+        const nav = document.getElementById("nav");
+        const pages = Array.from(document.querySelectorAll(".page"));
+        const logout = document.getElementById("logout");
+        const themeButton = document.getElementById("theme-toggle");
+        const themeOptions = ["system", "light", "dark", "24h"];
+        let currentTheme = localStorage.getItem("nl-theme");
+        let dayCycleTimer = null;
+        let dayCyclePreviewHour = null;
+        let touchStartX = null;
+        let touchStartY = null;
 
-      function setPage(page) {
-        pages.forEach((p) => p.classList.toggle("active", p.dataset.page === page));
-        nav.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.page === page));
-      }
+        function setPage(page) {
+          pages.forEach((p) => p.classList.toggle("active", p.dataset.page === page));
+          nav.querySelectorAll("button").forEach((b) => b.classList.toggle("active", b.dataset.page === page));
+        }
 
-      nav.addEventListener("click", (event) => {
-        const target = event.target;
-        if (target instanceof HTMLButtonElement) setPage(target.dataset.page);
-      });
+        function clearDynamicTheme() {
+          document.documentElement.removeAttribute("data-cycle-phase");
+          [
+            "--bg", "--text", "--muted", "--surface", "--line",
+            "--glow-a", "--glow-b", "--mist-a", "--mist-b", "--firefly-a", "--firefly-b"
+          ].forEach((name) => document.documentElement.style.removeProperty(name));
+        }
+
+        function get24HourPalette(date = new Date()) {
+          const hour = date.getHours();
+
+          if (hour >= 22 || hour < 5) {
+            return {
+              phase: "night",
+              bg: "#06101c",
+              text: "#ddfbff",
+              muted: "#97cde6",
+              surface: "rgba(11, 23, 48, 0.62)",
+              line: "#2d658f",
+              glowA: "rgba(46, 222, 255, 0.24)",
+              glowB: "rgba(103, 84, 255, 0.26)",
+              mistA: "rgba(18, 98, 130, 0.22)",
+              mistB: "rgba(62, 210, 184, 0.14)",
+              fireflyA: "rgba(255, 204, 147, 0.32)",
+              fireflyB: "rgba(129, 118, 255, 0.24)"
+            };
+          }
+
+          if (hour < 7) {
+            return {
+              phase: "sunrise",
+              bg: "#25283d",
+              text: "#f8f2ef",
+              muted: "#c9bbb1",
+              surface: "rgba(49, 56, 81, 0.54)",
+              line: "#61657b",
+              glowA: "rgba(255, 188, 148, 0.24)",
+              glowB: "rgba(124, 168, 255, 0.16)",
+              mistA: "rgba(255, 214, 174, 0.34)",
+              mistB: "rgba(156, 182, 255, 0.22)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
+            };
+          }
+
+          if (hour < 11) {
+            return {
+              phase: "morning",
+              bg: "#e6ece8",
+              text: "#162019",
+              muted: "#607065",
+              surface: "rgba(242, 245, 239, 0.6)",
+              line: "#cdd7cd",
+              glowA: "rgba(169, 223, 192, 0.2)",
+              glowB: "rgba(191, 220, 233, 0.18)",
+              mistA: "rgba(213, 233, 220, 0.18)",
+              mistB: "rgba(202, 226, 238, 0.13)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
+            };
+          }
+
+          if (hour < 16) {
+            return {
+              phase: "day",
+              bg: "#e6ecef",
+              text: "#121b21",
+              muted: "#5d6d74",
+              surface: "rgba(246, 249, 250, 0.6)",
+              line: "#ced9dd",
+              glowA: "rgba(148, 204, 222, 0.16)",
+              glowB: "rgba(219, 228, 233, 0.14)",
+              mistA: "rgba(207, 224, 232, 0.1)",
+              mistB: "rgba(224, 236, 242, 0.08)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
+            };
+          }
+
+          if (hour < 19) {
+            return {
+              phase: "sunset",
+              bg: "#eee3db",
+              text: "#241917",
+              muted: "#77625a",
+              surface: "rgba(248, 240, 233, 0.62)",
+              line: "#dcc8b9",
+              glowA: "rgba(246, 170, 100, 0.24)",
+              glowB: "rgba(231, 176, 154, 0.18)",
+              mistA: "rgba(251, 196, 138, 0.34)",
+              mistB: "rgba(226, 160, 202, 0.18)",
+              fireflyA: "transparent",
+              fireflyB: "transparent"
+            };
+          }
+
+          return {
+            phase: "dusk",
+            bg: "#282339",
+            text: "#f2eef9",
+            muted: "#b5adc9",
+            surface: "rgba(51, 45, 71, 0.6)",
+            line: "#5d5074",
+            glowA: "rgba(116, 177, 255, 0.2)",
+            glowB: "rgba(228, 118, 194, 0.15)",
+            mistA: "rgba(102, 146, 255, 0.2)",
+            mistB: "rgba(232, 129, 198, 0.13)",
+            fireflyA: "rgba(255, 208, 112, 0.34)",
+            fireflyB: "rgba(255, 166, 94, 0.26)"
+          };
+        }
+
+        function applyDayCycleTheme(date = new Date()) {
+          const target = new Date(date);
+          if (Number.isInteger(dayCyclePreviewHour)) {
+            target.setHours(dayCyclePreviewHour, 0, 0, 0);
+          }
+          const palette = get24HourPalette(target);
+          document.documentElement.setAttribute("data-cycle-phase", palette.phase);
+          document.documentElement.style.setProperty("--bg", palette.bg);
+          document.documentElement.style.setProperty("--text", palette.text);
+          document.documentElement.style.setProperty("--muted", palette.muted);
+          document.documentElement.style.setProperty("--surface", palette.surface);
+          document.documentElement.style.setProperty("--line", palette.line);
+          document.documentElement.style.setProperty("--glow-a", palette.glowA);
+          document.documentElement.style.setProperty("--glow-b", palette.glowB);
+          document.documentElement.style.setProperty("--mist-a", palette.mistA);
+          document.documentElement.style.setProperty("--mist-b", palette.mistB);
+          document.documentElement.style.setProperty("--firefly-a", palette.fireflyA);
+          document.documentElement.style.setProperty("--firefly-b", palette.fireflyB);
+          if (currentTheme === "24h") {
+            const previewSuffix = Number.isInteger(dayCyclePreviewHour)
+              ? ` (${String(dayCyclePreviewHour).padStart(2, "0")}:00 preview)`
+              : "";
+            const label = `Theme mode: 24h${previewSuffix}`;
+            themeButton.setAttribute("aria-label", label);
+            themeButton.setAttribute("title", label);
+          }
+        }
+
+        function scheduleDayCycleRefresh(theme) {
+          if (dayCycleTimer) {
+            window.clearTimeout(dayCycleTimer);
+            dayCycleTimer = null;
+          }
+          if (theme !== "24h" || Number.isInteger(dayCyclePreviewHour)) return;
+          const now = new Date();
+          const nextHour = new Date(now);
+          nextHour.setHours(now.getHours() + 1, 0, 2, 0);
+          dayCycleTimer = window.setTimeout(() => {
+            applyDayCycleTheme(new Date());
+            scheduleDayCycleRefresh("24h");
+          }, nextHour.getTime() - now.getTime());
+        }
+
+        function applyTheme(theme) {
+          if (theme === "system") {
+            document.documentElement.removeAttribute("data-theme");
+            clearDynamicTheme();
+          } else {
+            document.documentElement.setAttribute("data-theme", theme);
+            if (theme !== "24h") clearDynamicTheme();
+          }
+          if (theme !== "24h") dayCyclePreviewHour = null;
+          if (theme === "24h") applyDayCycleTheme();
+          scheduleDayCycleRefresh(theme);
+          const iconMap = { system: "◐", light: "○", dark: "●", "24h": "◒" };
+          const previewSuffix =
+            theme === "24h" && Number.isInteger(dayCyclePreviewHour)
+              ? ` (${String(dayCyclePreviewHour).padStart(2, "0")}:00 preview)`
+              : "";
+          const label = `Theme mode: ${theme}${previewSuffix}`;
+          themeButton.textContent = iconMap[theme] || "◐";
+          themeButton.setAttribute("aria-label", label);
+          themeButton.setAttribute("title", label);
+        }
+
+        function stepDayCyclePreview(delta) {
+          if (currentTheme !== "24h") return;
+          const baseHour = Number.isInteger(dayCyclePreviewHour) ? dayCyclePreviewHour : new Date().getHours();
+          dayCyclePreviewHour = (baseHour + delta + 24) % 24;
+          applyDayCycleTheme(new Date());
+          scheduleDayCycleRefresh(currentTheme);
+        }
+
+        currentTheme = themeOptions.includes(currentTheme) ? currentTheme : "system";
+        applyTheme(currentTheme);
+
+        nav.addEventListener("click", (event) => {
+          const target = event.target.closest("button");
+          if (target) setPage(target.dataset.page);
+        });
+
+        themeButton.addEventListener("click", () => {
+          const idx = themeOptions.indexOf(currentTheme);
+          currentTheme = themeOptions[(idx + 1) % themeOptions.length];
+          localStorage.setItem("nl-theme", currentTheme);
+          applyTheme(currentTheme);
+        });
+
+        document.addEventListener("keydown", (event) => {
+          const tagName = event.target && event.target.tagName ? String(event.target.tagName).toLowerCase() : "";
+          if (tagName === "input" || tagName === "textarea" || tagName === "select") return;
+          if (currentTheme !== "24h") return;
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          stepDayCyclePreview(event.key === "ArrowRight" ? 1 : -1);
+        });
+
+        document.addEventListener("touchstart", (event) => {
+          if (currentTheme !== "24h" || !event.touches || event.touches.length !== 1) return;
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener("touchend", (event) => {
+          if (currentTheme !== "24h") return;
+          if (touchStartX === null || touchStartY === null) return;
+          const touch = event.changedTouches && event.changedTouches[0];
+          if (!touch) {
+            touchStartX = null;
+            touchStartY = null;
+            return;
+          }
+          const deltaX = touch.clientX - touchStartX;
+          const deltaY = touch.clientY - touchStartY;
+          touchStartX = null;
+          touchStartY = null;
+          if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
+          stepDayCyclePreview(deltaX < 0 ? 1 : -1);
+        }, { passive: true });
+
+        logout.addEventListener("click", async () => {
+          try {
+            await fetch("/api/v1/public/admin-auth/logout", {
+              method: "POST",
+              credentials: "include"
+            });
+          } catch (_) {}
+          window.location.replace("/");
+        });
+      })();
     </script>
   </body>
 </html>
