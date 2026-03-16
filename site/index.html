@@ -347,6 +347,59 @@
         line-height: 1.4;
       }
 
+      .owner-modal-stack {
+        display: grid;
+        gap: 0.72rem;
+      }
+
+      .owner-modal-apple {
+        display: grid;
+        gap: 0.42rem;
+      }
+
+      .owner-modal-apple-btn {
+        width: 100%;
+        border: 1px solid color-mix(in srgb, var(--text) 12%, transparent);
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        color: var(--text);
+        padding: 0.68rem 0.8rem;
+        font: inherit;
+        line-height: 1.2;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .owner-modal-apple-btn[disabled] {
+        opacity: 0.48;
+        cursor: not-allowed;
+      }
+
+      .owner-modal-meta {
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.35;
+        text-align: center;
+      }
+
+      .owner-modal-divider {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 0.6rem;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .owner-modal-divider::before,
+      .owner-modal-divider::after {
+        content: "";
+        height: 1px;
+        background: color-mix(in srgb, var(--text) 10%, transparent);
+      }
+
       .owner-modal-input {
         width: 100%;
         border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
@@ -750,11 +803,18 @@
     <div id="owner-modal" class="owner-modal" aria-hidden="true">
       <form id="owner-modal-form" class="owner-modal-card">
         <p class="owner-modal-title">Owner access code</p>
-        <p class="owner-modal-copy">Enter the owner access code defined for this site to open the private view.</p>
-        <input id="owner-token-input" class="owner-modal-input" type="password" autocomplete="off" spellcheck="false" />
-        <div class="owner-modal-actions">
-          <button id="owner-modal-cancel" class="owner-modal-btn" type="button">Cancel</button>
-          <button id="owner-modal-submit" class="owner-modal-btn" type="submit">Open</button>
+        <p class="owner-modal-copy">Sign in with Apple when available, or use the owner access code as a fallback.</p>
+        <div class="owner-modal-stack">
+          <div class="owner-modal-apple">
+            <button id="owner-apple-button" class="owner-modal-apple-btn" type="button">Sign in with Apple</button>
+            <div id="owner-apple-meta" class="owner-modal-meta">Primary owner sign-in</div>
+          </div>
+          <div class="owner-modal-divider" aria-hidden="true"><span>or</span></div>
+          <input id="owner-token-input" class="owner-modal-input" type="password" autocomplete="off" spellcheck="false" placeholder="Owner access code" />
+          <div class="owner-modal-actions">
+            <button id="owner-modal-cancel" class="owner-modal-btn" type="button">Cancel</button>
+            <button id="owner-modal-submit" class="owner-modal-btn" type="submit">Use Access Code</button>
+          </div>
         </div>
       </form>
     </div>
@@ -871,6 +931,8 @@
         const ownerTokenInput = document.getElementById("owner-token-input");
         const ownerModalCancel = document.getElementById("owner-modal-cancel");
         const ownerModalSubmit = document.getElementById("owner-modal-submit");
+        const ownerAppleButton = document.getElementById("owner-apple-button");
+        const ownerAppleMeta = document.getElementById("owner-apple-meta");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
         const placesRail = document.querySelector(".places-rail");
@@ -878,6 +940,7 @@
         const themeOptions = ["system", "light", "dark", "24h"];
         const detailStates = ["expanded", "collapsed"];
         let ownerSessionActive = false;
+        let appleOwnerConfig = null;
         let dayCycleTimer = null;
         let dayCyclePreviewHour = null;
         let touchStartX = null;
@@ -1183,6 +1246,7 @@
           ownerModal.dataset.open = open ? "true" : "false";
           ownerModal.setAttribute("aria-hidden", open ? "false" : "true");
           if (open) {
+            syncAppleOwnerConfig();
             window.setTimeout(() => ownerTokenInput && ownerTokenInput.focus(), 20);
           } else if (ownerTokenInput) {
             ownerTokenInput.value = "";
@@ -1228,6 +1292,60 @@
             document.addEventListener("keydown", onKeydown);
             setOwnerModalOpen(true);
           });
+        }
+
+        async function syncAppleOwnerConfig() {
+          if (!ownerAppleButton || !ownerAppleMeta) return;
+          ownerAppleButton.disabled = true;
+          ownerAppleMeta.textContent = "Checking Apple sign-in setup...";
+          try {
+            const response = await fetch("/api/v1/public/admin-auth/apple/config", {
+              credentials: "include",
+              cache: "no-store"
+            });
+            const data = await response.json();
+            appleOwnerConfig = response.ok ? data : null;
+          } catch (_) {
+            appleOwnerConfig = null;
+          }
+
+          if (appleOwnerConfig && appleOwnerConfig.enabled) {
+            ownerAppleButton.disabled = false;
+            ownerAppleMeta.textContent = "Primary owner sign-in";
+          } else {
+            ownerAppleButton.disabled = true;
+            ownerAppleMeta.textContent = "Apple sign-in setup pending";
+          }
+        }
+
+        async function startAppleOwnerSignIn() {
+          setOwnerStatus("Preparing Apple sign-in...", "default", true);
+          const start = await postJSON("/api/v1/public/admin-auth/apple/start", {});
+          const form = document.createElement("form");
+          form.method = "POST";
+          form.action = "https://appleid.apple.com/auth/authorize";
+          form.style.display = "none";
+
+          const fields = {
+            client_id: start.client_id,
+            redirect_uri: start.redirect_uri,
+            response_type: "code id_token",
+            response_mode: "form_post",
+            scope: "name email",
+            state: start.state,
+            nonce: start.nonce
+          };
+
+          Object.entries(fields).forEach(([name, value]) => {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = name;
+            input.value = value;
+            form.appendChild(input);
+          });
+
+          document.body.appendChild(form);
+          form.submit();
         }
 
         async function syncOwnerSessionState() {
@@ -1432,13 +1550,24 @@
           setOwnerStatus("Verifying owner access...", "default", true);
           await postJSON("/api/v1/public/admin-auth/code-login", {}, { "X-Admin-Token": token });
           setOwnerStatus("Secure connection established.", "default");
-          window.location.href = "/ux-live.html";
+          window.location.href = "/godmode.html";
           return true;
+        }
+
+        if (ownerAppleButton) {
+          ownerAppleButton.addEventListener("click", async () => {
+            try {
+              await startAppleOwnerSignIn();
+            } catch (error) {
+              setOwnerStatus(error && error.message ? error.message : "Apple sign-in failed.", "error");
+              window.alert(error && error.message ? error.message : "Apple sign-in failed.");
+            }
+          });
         }
 
         ownerGate.addEventListener("click", async () => {
           if (ownerSessionActive) {
-            window.location.href = "/ux-live.html";
+            window.location.href = "/godmode.html";
             return;
           }
           ownerGate.disabled = true;
