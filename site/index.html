@@ -89,6 +89,8 @@
           radial-gradient(76vmax 72vmax at 14% 88%, var(--glow-b), transparent 76%),
           radial-gradient(54vmax 34vmax at 50% 12%, var(--mist-b), transparent 82%);
         transition: background 700ms ease;
+        animation: washDrift 18s ease-in-out infinite alternate;
+        transform-origin: center;
       }
 
       :root[data-cycle-phase="night"] body::before {
@@ -233,6 +235,20 @@
         84% { opacity: 0.58; }
       }
 
+      @keyframes washDrift {
+        0% { transform: translate3d(-1.5%, -1%, 0) scale(1); }
+        100% { transform: translate3d(2%, 2.5%, 0) scale(1.05); }
+      }
+
+      @keyframes orbDrift {
+        0% {
+          transform: translate3d(calc(var(--orb-x, 0px) - 6px), calc(var(--orb-y, 0px) + var(--scroll-shift, 0px) - 8px), 0) scale(0.98);
+        }
+        100% {
+          transform: translate3d(calc(var(--orb-x, 0px) + 8px), calc(var(--orb-y, 0px) + var(--scroll-shift, 0px) + 6px), 0) scale(1.08);
+        }
+      }
+
       main {
         min-height: 100%;
         padding: 5.4rem 4.5rem 3rem;
@@ -245,6 +261,17 @@
         grid-template-columns: minmax(220px, 1fr) minmax(140px, 180px) minmax(220px, 1fr);
         column-gap: clamp(2.5rem, 5.5vw, 6.5rem);
         align-items: start;
+        transition: opacity 620ms cubic-bezier(0.16, 1, 0.3, 1), transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .motion-ready .wrap {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      .motion-ready .wrap.is-mounted {
+        opacity: 1;
+        transform: translateY(0);
       }
 
       .theme-btn {
@@ -473,6 +500,23 @@
         transform-origin: right center;
       }
 
+      .motion-ready [data-ix-reveal] {
+        opacity: 0;
+        transform: translateY(24px) scale(0.985);
+        filter: blur(6px);
+        transition:
+          opacity 760ms cubic-bezier(0.16, 1, 0.3, 1),
+          transform 760ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 620ms ease;
+        transition-delay: var(--ix-delay, 0ms);
+      }
+
+      .motion-ready [data-ix-reveal].in {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+
       .place-title {
         display: block;
         color: var(--text);
@@ -502,7 +546,14 @@
         position: relative;
         width: min(290px, 100%);
         text-align: center;
-        padding: 0 0 0.35rem;
+        padding: 1.4rem 1.15rem 1.25rem;
+        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
+        border-radius: 28px;
+        background: color-mix(in srgb, var(--surface) 78%, transparent);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 40px color-mix(in srgb, var(--text) 8%, transparent);
+        overflow: hidden;
+        transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
       }
 
       .core-block::before {
@@ -514,6 +565,24 @@
         width: 1px;
         background: color-mix(in srgb, var(--text) 14%, transparent);
         transform: translateX(-50%);
+        pointer-events: none;
+      }
+
+      .core-block::after {
+        content: "";
+        position: absolute;
+        width: 16rem;
+        height: 16rem;
+        right: -3.5rem;
+        bottom: -7rem;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 50% 50%, color-mix(in srgb, #fff 88%, transparent), transparent 56%),
+          radial-gradient(circle at 40% 35%, color-mix(in srgb, #f0a36c 35%, transparent), transparent 66%);
+        opacity: 0.72;
+        transform: translate3d(var(--orb-x, 0px), calc(var(--orb-y, 0px) + var(--scroll-shift, 0px)), 0);
+        transition: transform 220ms ease-out, opacity 240ms ease;
+        animation: orbDrift 12s ease-in-out infinite alternate;
         pointer-events: none;
       }
 
@@ -689,12 +758,19 @@
 
       .place:hover,
       .place:focus-within {
-        transform: translateX(-8px) scale(1.03);
+        transform: translateX(-10px) scale(1.035);
       }
 
       .experience:hover,
       .experience:focus-within {
-        transform: translateX(8px) scale(1.03);
+        transform: translateX(10px) scale(1.035);
+      }
+
+      .core-block:hover,
+      .core-block:focus-within {
+        transform: translateY(-3px);
+        box-shadow: 0 28px 50px color-mix(in srgb, var(--text) 10%, transparent);
+        border-color: color-mix(in srgb, var(--text) 16%, transparent);
       }
 
       @media (max-width: 1100px) {
@@ -724,7 +800,7 @@
 
         .core-block {
           width: auto;
-          padding: 0;
+          padding: 1.1rem 1rem;
         }
 
         .core-sentence {
@@ -794,6 +870,25 @@
           display: none;
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .motion-ready .wrap,
+        .motion-ready .wrap.is-mounted,
+        .motion-ready [data-ix-reveal],
+        .motion-ready [data-ix-reveal].in {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -820,45 +915,45 @@
     </div>
     <main>
       <section class="wrap">
-        <section class="timeline" aria-label="Work timeline">
-          <article class="experience" data-current="true">
+        <section class="timeline" aria-label="Work timeline" data-ix-reveal>
+          <article class="experience" data-current="true" data-ix-reveal>
             <a class="experience-title" href="https://www.siftstack.com" target="_blank" rel="noopener">Sift</a>
             <div class="experience-subtitle">Vice President of Product</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://www.anduril.com" target="_blank" rel="noopener">Anduril</a>
             <div class="experience-subtitle">Principal Product Manager</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://www.pendulum.com" target="_blank" rel="noopener">Pendulum</a>
             <div class="experience-subtitle">Product</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://www.serverobotics.com" target="_blank" rel="noopener">Serve Robotics</a>
             <div class="experience-subtitle">Director of Product Management</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://postmates.com" target="_blank" rel="noopener">Postmates</a>
             <div class="experience-subtitle">Product Lead</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://www.expedia.com" target="_blank" rel="noopener">Expedia</a>
             <div class="experience-subtitle">Product</div>
           </article>
 
-          <article class="experience">
+          <article class="experience" data-ix-reveal>
             <a class="experience-title" href="https://www.spglobal.com/marketintelligence" target="_blank" rel="noopener">S&amp;P Capital IQ</a>
             <div class="experience-subtitle">Product</div>
           </article>
         </section>
 
         <section class="core-column" aria-label="Core">
-          <div class="core-block">
+          <div class="core-block" data-ix-reveal>
             <p class="core-name">Noah Lucas</p>
             <p class="core-sentence">
               <span class="core-sentence-line">Living in <button class="core-trigger" id="place-toggle" type="button" aria-expanded="false" aria-label="Expand places lived">Ojai, California</button></span>
@@ -871,48 +966,48 @@
           </div>
         </section>
 
-        <section class="places-rail" aria-label="Places">
-          <article class="place" data-current="true">
+        <section class="places-rail" aria-label="Places" data-ix-reveal>
+          <article class="place" data-current="true" data-ix-reveal>
             <span class="place-title">Ojai</span>
             <span class="place-subtitle">California</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">Costa Mesa</span>
             <span class="place-subtitle">California</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">Central Park West</span>
             <span class="place-subtitle">New York City</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">San Francisco</span>
             <span class="place-subtitle">California</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">East Village</span>
             <span class="place-subtitle">New York City</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">RPI</span>
             <span class="place-subtitle">New York</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">Zionsville</span>
             <span class="place-subtitle">Indiana</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">Lake Bluff</span>
             <span class="place-subtitle">Illinois</span>
           </article>
 
-          <article class="place">
+          <article class="place" data-ix-reveal>
             <span class="place-title">New Haven</span>
             <span class="place-subtitle">Connecticut</span>
           </article>
@@ -937,14 +1032,56 @@
         const jobToggle = document.getElementById("job-toggle");
         const placesRail = document.querySelector(".places-rail");
         const timelineRail = document.querySelector(".timeline");
+        const coreBlock = document.querySelector(".core-block");
+        const wrap = document.querySelector(".wrap");
+        const revealItems = Array.from(document.querySelectorAll("[data-ix-reveal]"));
         const themeOptions = ["system", "light", "dark", "24h"];
         const detailStates = ["expanded", "collapsed"];
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
         let ownerSessionActive = false;
         let appleOwnerConfig = null;
         let dayCycleTimer = null;
         let dayCyclePreviewHour = null;
         let touchStartX = null;
         let touchStartY = null;
+
+        root.classList.add("motion-ready");
+
+        function setRevealDelays() {
+          revealItems.forEach((item, index) => {
+            item.style.setProperty("--ix-delay", `${Math.min(index * 45, 420)}ms`);
+          });
+        }
+
+        function initReveal() {
+          setRevealDelays();
+          wrap?.classList.add("is-mounted");
+          if (reduceMotion || !("IntersectionObserver" in window)) {
+            revealItems.forEach((item) => item.classList.add("in"));
+            return;
+          }
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("in");
+            });
+          }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+          revealItems.forEach((item) => observer.observe(item));
+        }
+
+        function updateScrollMotion() {
+          if (reduceMotion) return;
+          const progress = Math.min((window.scrollY || 0) / Math.max(window.innerHeight || 1, 1), 1.2);
+          root.style.setProperty("--scroll-shift", `${(progress * -20).toFixed(2)}px`);
+        }
+
+        function updateOrbPointer(event) {
+          if (reduceMotion || !coreBlock) return;
+          const bounds = coreBlock.getBoundingClientRect();
+          const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 18;
+          const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 18;
+          root.style.setProperty("--orb-x", `${x.toFixed(2)}px`);
+          root.style.setProperty("--orb-y", `${y.toFixed(2)}px`);
+        }
 
         function getStoredTheme() {
           const saved = localStorage.getItem("nl-theme");
@@ -1368,6 +1505,8 @@
         applyJobState(getStoredDetailState());
         renderOwnerGate();
         syncOwnerSessionState();
+        initReveal();
+        updateScrollMotion();
 
         themeButton.addEventListener("click", () => {
           const idx = themeOptions.indexOf(currentTheme);
@@ -1416,6 +1555,16 @@
           if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) return;
           stepDayCyclePreview(deltaX < 0 ? 1 : -1);
         }, { passive: true });
+
+        document.addEventListener("scroll", updateScrollMotion, { passive: true });
+
+        if (coreBlock) {
+          coreBlock.addEventListener("pointermove", updateOrbPointer);
+          coreBlock.addEventListener("pointerleave", () => {
+            root.style.setProperty("--orb-x", "0px");
+            root.style.setProperty("--orb-y", "0px");
+          });
+        }
 
         if (placeToggle) {
           placeToggle.addEventListener("click", togglePlaceState);

@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Noah Lucas Motion Preview</title>
+    <style>
+      :root {
+        --bg: #ece7de;
+        --bg-deep: #d9d3c8;
+        --surface: rgba(255, 251, 244, 0.72);
+        --surface-strong: rgba(255, 252, 248, 0.88);
+        --line: rgba(56, 47, 35, 0.14);
+        --ink: #17130f;
+        --muted: #685f54;
+        --accent: #b86f3f;
+        --accent-soft: rgba(184, 111, 63, 0.15);
+        --sky: rgba(234, 149, 87, 0.24);
+        --mint: rgba(115, 153, 133, 0.18);
+        --shadow: 0 22px 60px rgba(42, 31, 20, 0.12);
+        --panel-shadow: 0 16px 40px rgba(42, 31, 20, 0.08);
+        --mode-drift: 18s;
+        --mode-pulse: 4.2s;
+        --mode-blur: 12px;
+        --mode-wash-opacity: 0.35;
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background:
+          radial-gradient(1200px 800px at 10% 10%, rgba(255, 247, 232, 0.95), transparent 55%),
+          radial-gradient(900px 600px at 85% 18%, rgba(239, 210, 184, 0.6), transparent 58%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+        color: var(--ink);
+        font-family: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+        position: relative;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: -12%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      body::before {
+        background:
+          radial-gradient(42rem 42rem at 16% 24%, var(--sky), transparent 62%),
+          radial-gradient(32rem 32rem at 84% 20%, var(--mint), transparent 60%),
+          radial-gradient(28rem 28rem at 52% 78%, rgba(255, 255, 255, 0.24), transparent 58%);
+        filter: blur(var(--mode-blur));
+        opacity: var(--mode-wash-opacity);
+        animation: wash-drift var(--mode-drift) ease-in-out infinite alternate;
+      }
+
+      body::after {
+        background-image:
+          linear-gradient(rgba(23, 19, 15, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(23, 19, 15, 0.04) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(circle at center, black 35%, transparent 88%);
+        opacity: 0.35;
+      }
+
+      .shell {
+        position: relative;
+        z-index: 1;
+        width: min(1220px, calc(100% - 2rem));
+        margin: 0 auto;
+        padding: 1rem 0 5rem;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 0.8rem 0;
+      }
+
+      .eyebrow,
+      .meta {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .controls {
+        display: inline-flex;
+        gap: 0.5rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .mode-btn {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.5);
+        color: var(--ink);
+        padding: 0.55rem 0.8rem;
+        border-radius: 999px;
+        cursor: pointer;
+        font: inherit;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transition: transform 220ms ease, border-color 220ms ease, background-color 220ms ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .mode-btn:hover,
+      .mode-btn:focus-visible,
+      .mode-btn.active {
+        transform: translateY(-1px);
+        border-color: rgba(56, 47, 35, 0.28);
+        background: rgba(255, 252, 248, 0.86);
+        outline: none;
+      }
+
+      .hero {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+        gap: 1.25rem;
+        align-items: stretch;
+        min-height: 78vh;
+      }
+
+      .hero-copy,
+      .hero-stack,
+      .panel,
+      .scene {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        backdrop-filter: blur(14px);
+        box-shadow: var(--panel-shadow);
+      }
+
+      .hero-copy {
+        position: relative;
+        overflow: hidden;
+        border-radius: 28px;
+        padding: clamp(1.3rem, 3vw, 2.3rem);
+      }
+
+      .hero-copy::before {
+        content: "";
+        position: absolute;
+        inset: auto -8% -28% auto;
+        width: 24rem;
+        height: 24rem;
+        border-radius: 999px;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(255, 252, 248, 0.95), rgba(255, 252, 248, 0) 58%),
+          radial-gradient(circle at 35% 35%, rgba(234, 149, 87, 0.34), rgba(234, 149, 87, 0) 68%);
+        opacity: 0.72;
+        transform: translate3d(calc(var(--orb-x, 0) * 1px), calc(var(--orb-y, 0) * 1px), 0);
+        transition: transform 220ms ease-out;
+        animation: orb-float calc(var(--mode-drift) * 0.62) ease-in-out infinite alternate;
+      }
+
+      .hero-copy > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: "Instrument Serif", "Iowan Old Style", "Times New Roman", serif;
+        font-weight: 400;
+        font-size: clamp(3.8rem, 9vw, 7.4rem);
+        line-height: 0.88;
+        letter-spacing: -0.05em;
+        max-width: 9ch;
+      }
+
+      .lede {
+        margin: 1.1rem 0 0;
+        max-width: 34rem;
+        color: var(--muted);
+        font-size: clamp(0.95rem, 1.7vw, 1.15rem);
+        line-height: 1.7;
+      }
+
+      .lede strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .stat-row {
+        display: flex;
+        gap: 0.7rem;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+      }
+
+      .stat-pill {
+        min-width: 9.5rem;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid rgba(56, 47, 35, 0.12);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      .stat-pill strong {
+        display: block;
+        font-size: 1.1rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .hero-stack {
+        display: grid;
+        gap: 1rem;
+        border-radius: 28px;
+        padding: 1rem;
+      }
+
+      .scene {
+        position: relative;
+        min-height: 340px;
+        border-radius: 22px;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.66), rgba(247, 239, 229, 0.88)),
+          radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0) 62%);
+      }
+
+      .scene::before,
+      .scene::after {
+        content: "";
+        position: absolute;
+        inset: auto;
+        border-radius: 999px;
+        filter: blur(2px);
+      }
+
+      .scene::before {
+        width: 18rem;
+        height: 18rem;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid rgba(56, 47, 35, 0.08);
+        animation: halo-spin calc(var(--mode-drift) * 1.1) linear infinite;
+      }
+
+      .scene::after {
+        width: 8rem;
+        height: 8rem;
+        left: 50%;
+        top: 50%;
+        background: radial-gradient(circle at center, rgba(184, 111, 63, 0.28), rgba(184, 111, 63, 0) 70%);
+        transform: translate(-50%, -50%) scale(var(--pulse-scale, 1));
+        opacity: 0.8;
+        animation: center-pulse var(--mode-pulse) ease-in-out infinite;
+      }
+
+      .ring,
+      .beam,
+      .shard {
+        position: absolute;
+      }
+
+      .ring {
+        inset: 50% auto auto 50%;
+        border: 1px solid rgba(56, 47, 35, 0.12);
+        border-radius: 999px;
+        transform: translate(-50%, -50%);
+      }
+
+      .ring.one {
+        width: 12rem;
+        height: 12rem;
+        animation: wobble-a 8s ease-in-out infinite;
+      }
+
+      .ring.two {
+        width: 16rem;
+        height: 16rem;
+        animation: wobble-b 11s ease-in-out infinite;
+      }
+
+      .ring.three {
+        width: 21rem;
+        height: 21rem;
+        opacity: 0.55;
+        animation: wobble-a 14s ease-in-out infinite reverse;
+      }
+
+      .beam {
+        left: 50%;
+        top: 50%;
+        width: 1px;
+        height: 44%;
+        transform-origin: top center;
+        background: linear-gradient(180deg, rgba(56, 47, 35, 0.55), rgba(56, 47, 35, 0));
+      }
+
+      .beam.a { transform: translate(-50%, -10%) rotate(-58deg); }
+      .beam.b { transform: translate(-50%, -8%) rotate(18deg); }
+      .beam.c { transform: translate(-50%, -6%) rotate(124deg); }
+
+      .shard {
+        width: 6rem;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(56, 47, 35, 0), rgba(56, 47, 35, 0.5), rgba(56, 47, 35, 0));
+        transform-origin: center;
+      }
+
+      .shard.one {
+        top: 18%;
+        left: 16%;
+        transform: rotate(24deg);
+        animation: drift-x 7s ease-in-out infinite alternate;
+      }
+
+      .shard.two {
+        bottom: 18%;
+        right: 12%;
+        transform: rotate(-32deg);
+        animation: drift-y 9s ease-in-out infinite alternate;
+      }
+
+      .mini-panel {
+        display: grid;
+        gap: 0.45rem;
+        padding: 0.9rem 0.95rem;
+        border-radius: 18px;
+        border: 1px solid rgba(56, 47, 35, 0.1);
+        background: rgba(255, 252, 248, 0.68);
+      }
+
+      .mini-panel strong {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .mini-panel span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .section {
+        margin-top: 5rem;
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: end;
+        margin-bottom: 1rem;
+      }
+
+      .section-head h2 {
+        margin: 0.25rem 0 0;
+        font-family: "Instrument Serif", "Iowan Old Style", "Times New Roman", serif;
+        font-size: clamp(2.1rem, 4vw, 3.6rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .panel {
+        border-radius: 24px;
+        padding: 1.1rem;
+        transform: translateY(34px) scale(0.97);
+        opacity: 0;
+        filter: blur(8px);
+        transition:
+          transform 800ms cubic-bezier(0.16, 1, 0.3, 1),
+          opacity 800ms cubic-bezier(0.16, 1, 0.3, 1),
+          filter 700ms ease,
+          box-shadow 260ms ease,
+          border-color 260ms ease;
+        transition-delay: var(--delay, 0ms);
+      }
+
+      .panel.in {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+
+      .panel:hover {
+        box-shadow: var(--shadow);
+        border-color: rgba(56, 47, 35, 0.22);
+      }
+
+      .panel h3 {
+        margin: 0;
+        font-size: 0.95rem;
+      }
+
+      .panel p {
+        margin: 0.7rem 0 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .panel .chipline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem;
+        margin-top: 1rem;
+      }
+
+      .chip {
+        padding: 0.35rem 0.55rem;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--ink);
+        font-size: 0.72rem;
+      }
+
+      .footer-note {
+        margin-top: 4rem;
+        padding: 1rem 0;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.82rem;
+      }
+
+      @keyframes wash-drift {
+        0% { transform: translate3d(-2%, -1%, 0) scale(1); }
+        100% { transform: translate3d(2%, 3%, 0) scale(1.06); }
+      }
+
+      @keyframes orb-float {
+        0% { transform: translate3d(calc(var(--orb-x, 0) * 1px), calc(var(--orb-y, 0) * 1px), 0) scale(1); }
+        100% { transform: translate3d(calc(var(--orb-x, 0) * 1px + 8px), calc(var(--orb-y, 0) * 1px - 10px), 0) scale(1.08); }
+      }
+
+      @keyframes halo-spin {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+      }
+
+      @keyframes center-pulse {
+        0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.45; }
+        50% { transform: translate(-50%, -50%) scale(1.18); opacity: 0.95; }
+      }
+
+      @keyframes wobble-a {
+        0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        50% { transform: translate(-50%, -50%) rotate(12deg) scale(1.04); }
+      }
+
+      @keyframes wobble-b {
+        0%, 100% { transform: translate(-50%, -50%) rotate(0deg) scale(1); }
+        50% { transform: translate(-50%, -50%) rotate(-14deg) scale(0.97); }
+      }
+
+      @keyframes drift-x {
+        0% { transform: translateX(0) rotate(24deg); opacity: 0.4; }
+        100% { transform: translateX(18px) rotate(16deg); opacity: 0.95; }
+      }
+
+      @keyframes drift-y {
+        0% { transform: translateY(0) rotate(-32deg); opacity: 0.38; }
+        100% { transform: translateY(-18px) rotate(-20deg); opacity: 0.92; }
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: auto;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .shell {
+          width: calc(100% - 1rem);
+        }
+
+        .topbar,
+        .section-head {
+          display: grid;
+          gap: 0.75rem;
+        }
+
+        .hero-copy,
+        .hero-stack,
+        .panel {
+          border-radius: 20px;
+        }
+
+        .scene {
+          min-height: 280px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+
+        .panel {
+          opacity: 1;
+          transform: none;
+          filter: none;
+        }
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">Motion Preview Route</div>
+          <div class="meta">Built to test a bolder animation system before we fold it into the main site</div>
+        </div>
+        <div class="controls" aria-label="motion intensity">
+          <button class="mode-btn active" type="button" data-mode="calm">Calm</button>
+          <button class="mode-btn" type="button" data-mode="cinematic">Cinematic</button>
+          <button class="mode-btn" type="button" data-mode="charged">Charged</button>
+        </div>
+      </header>
+
+      <section class="hero">
+        <article class="hero-copy">
+          <div class="eyebrow">Noah Lucas</div>
+          <h1>Motion that feels intentional, not decorative.</h1>
+          <p class="lede">This route is a sandbox for <strong>ambient movement</strong>, <strong>reveal choreography</strong>, and <strong>depth</strong> so we can choose what belongs on the real page without guessing from static mockups.</p>
+          <div class="stat-row">
+            <div class="stat-pill">
+              <strong>3 modes</strong>
+              <span>Compare pacing and energy quickly.</span>
+            </div>
+            <div class="stat-pill">
+              <strong>Scroll aware</strong>
+              <span>Hero orb and cards respond to movement.</span>
+            </div>
+            <div class="stat-pill">
+              <strong>Accessible</strong>
+              <span>Reduced-motion fallback is built in.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-stack">
+          <div class="scene" id="scene">
+            <div class="ring one"></div>
+            <div class="ring two"></div>
+            <div class="ring three"></div>
+            <div class="beam a"></div>
+            <div class="beam b"></div>
+            <div class="beam c"></div>
+            <div class="shard one"></div>
+            <div class="shard two"></div>
+          </div>
+          <div class="mini-panel">
+            <strong>What to look for</strong>
+            <span>The page should feel alive before interaction, then become more expressive as you scroll and switch intensity modes.</span>
+          </div>
+          <div class="mini-panel">
+            <strong>Production candidates</strong>
+            <span>Keep the staggered reveals, hero drift, and panel lift. Treat the orbital scene as a reference for tone, not a literal homepage element.</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Animation Language</div>
+            <h2>Small set of motions, clear purpose.</h2>
+          </div>
+          <div class="meta">Reveal, drift, pulse, and parallax</div>
+        </div>
+        <div class="grid">
+          <article class="panel" data-reveal>
+            <h3>Ambient Depth</h3>
+            <p>Background washes move on a long loop so the surface never feels frozen. The motion stays broad and slow, which makes the page feel premium instead of busy.</p>
+            <div class="chipline">
+              <span class="chip">background drift</span>
+              <span class="chip">soft gradients</span>
+            </div>
+          </article>
+          <article class="panel" data-reveal>
+            <h3>Staggered Entry</h3>
+            <p>Cards enter with blur and vertical lift, offset just enough to create rhythm without turning the layout into a presentation deck.</p>
+            <div class="chipline">
+              <span class="chip">stagger</span>
+              <span class="chip">blur-to-sharp</span>
+            </div>
+          </article>
+          <article class="panel" data-reveal>
+            <h3>Scroll Response</h3>
+            <p>The hero orb and scene react to the viewport so there is a sense of elasticity tied to the user’s movement, not just autoplay loops.</p>
+            <div class="chipline">
+              <span class="chip">parallax</span>
+              <span class="chip">orb tracking</span>
+            </div>
+          </article>
+          <article class="panel" data-reveal>
+            <h3>Mode Switching</h3>
+            <p>The three motion modes help us judge whether the live site should feel restrained, cinematic, or more editorially charged.</p>
+            <div class="chipline">
+              <span class="chip">calm</span>
+              <span class="chip">cinematic</span>
+              <span class="chip">charged</span>
+            </div>
+          </article>
+          <article class="panel" data-reveal>
+            <h3>Hover Feedback</h3>
+            <p>Cards lift slightly and sharpen their borders so interaction feels tactile without turning every element into a button.</p>
+            <div class="chipline">
+              <span class="chip">panel lift</span>
+              <span class="chip">shadow ramp</span>
+            </div>
+          </article>
+          <article class="panel" data-reveal>
+            <h3>Reduced Motion</h3>
+            <p>Every effect degrades cleanly when the system asks for it. That gives us room to be expressive without breaking accessibility discipline.</p>
+            <div class="chipline">
+              <span class="chip">prefers-reduced-motion</span>
+              <span class="chip">safe fallback</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <p class="footer-note">Preview route: <code>/motion-preview.html</code></p>
+    </main>
+
+    <script>
+      const panels = Array.from(document.querySelectorAll("[data-reveal]"));
+      const modeButtons = Array.from(document.querySelectorAll("[data-mode]"));
+      const root = document.documentElement;
+      const heroCopy = document.querySelector(".hero-copy");
+      const scene = document.getElementById("scene");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      const modeConfig = {
+        calm: { drift: "18s", pulse: "4.2s", blur: "12px", washOpacity: "0.35" },
+        cinematic: { drift: "12s", pulse: "3.3s", blur: "16px", washOpacity: "0.52" },
+        charged: { drift: "8s", pulse: "2.3s", blur: "20px", washOpacity: "0.66" }
+      };
+
+      function applyMode(mode) {
+        const config = modeConfig[mode] || modeConfig.calm;
+        root.style.setProperty("--mode-drift", config.drift);
+        root.style.setProperty("--mode-pulse", config.pulse);
+        root.style.setProperty("--mode-blur", config.blur);
+        root.style.setProperty("--mode-wash-opacity", config.washOpacity);
+        modeButtons.forEach((button) => button.classList.toggle("active", button.dataset.mode === mode));
+      }
+
+      function setPanelDelays() {
+        panels.forEach((panel, index) => {
+          panel.style.setProperty("--delay", `${Math.min(index * 90, 420)}ms`);
+        });
+      }
+
+      function initReveal() {
+        setPanelDelays();
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+          panels.forEach((panel) => panel.classList.add("in"));
+          return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) entry.target.classList.add("in");
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+        panels.forEach((panel) => observer.observe(panel));
+      }
+
+      function updateParallax() {
+        if (reduceMotion) return;
+        const scrollY = window.scrollY || 0;
+        const viewport = window.innerHeight || 1;
+        const progress = Math.min(scrollY / viewport, 1.2);
+        heroCopy?.style.setProperty("--orb-y", `${Math.round(progress * -28)}`);
+        scene?.style.setProperty("transform", `translateY(${(progress * -14).toFixed(2)}px)`);
+      }
+
+      function updatePointer(event) {
+        if (reduceMotion || !heroCopy) return;
+        const bounds = heroCopy.getBoundingClientRect();
+        const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 22;
+        const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 22;
+        heroCopy.style.setProperty("--orb-x", x.toFixed(2));
+        heroCopy.style.setProperty("--orb-y", y.toFixed(2));
+      }
+
+      modeButtons.forEach((button) => {
+        button.addEventListener("click", () => applyMode(button.dataset.mode));
+      });
+
+      document.addEventListener("scroll", updateParallax, { passive: true });
+      heroCopy?.addEventListener("pointermove", updatePointer);
+      heroCopy?.addEventListener("pointerleave", () => {
+        heroCopy.style.setProperty("--orb-x", "0");
+        heroCopy.style.setProperty("--orb-y", "0");
+      });
+
+      applyMode("calm");
+      initReveal();
+      updateParallax();
+    </script>
+  </body>
+</html>
