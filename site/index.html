@@ -546,14 +546,8 @@
         position: relative;
         width: min(290px, 100%);
         text-align: center;
-        padding: 1.4rem 1.15rem 1.25rem;
-        border: 1px solid color-mix(in srgb, var(--text) 10%, transparent);
-        border-radius: 28px;
-        background: color-mix(in srgb, var(--surface) 78%, transparent);
-        backdrop-filter: blur(12px);
-        box-shadow: 0 20px 40px color-mix(in srgb, var(--text) 8%, transparent);
-        overflow: hidden;
-        transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+        padding: 0.25rem 0 0.35rem;
+        overflow: visible;
       }
 
       .core-block::before {
@@ -768,9 +762,7 @@
 
       .core-block:hover,
       .core-block:focus-within {
-        transform: translateY(-3px);
-        box-shadow: 0 28px 50px color-mix(in srgb, var(--text) 10%, transparent);
-        border-color: color-mix(in srgb, var(--text) 16%, transparent);
+        transform: translateY(-2px);
       }
 
       @media (max-width: 1100px) {
@@ -800,7 +792,7 @@
 
         .core-block {
           width: auto;
-          padding: 1.1rem 1rem;
+          padding: 0;
         }
 
         .core-sentence {
@@ -1048,7 +1040,15 @@
         root.classList.add("motion-ready");
 
         function setRevealDelays() {
-          revealItems.forEach((item, index) => {
+          const orderedItems = [
+            coreBlock,
+            timelineRail,
+            ...(timelineRail ? Array.from(timelineRail.querySelectorAll(".experience[data-ix-reveal]")) : []),
+            placesRail,
+            ...(placesRail ? Array.from(placesRail.querySelectorAll(".place[data-ix-reveal]")) : []),
+          ].filter(Boolean);
+
+          orderedItems.forEach((item, index) => {
             item.style.setProperty("--ix-delay", `${Math.min(index * 45, 420)}ms`);
           });
         }
