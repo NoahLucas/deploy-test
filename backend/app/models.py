@@ -32,6 +32,8 @@ class FeedMetrics(BaseModel):
 class PublicFeedResponse(BaseModel):
     headline: str
     metrics: FeedMetrics
+    latest_heart_rate_bpm: Optional[int] = None
+    latest_heart_rate_at: Optional[datetime] = None
     updated_at: datetime
 
 

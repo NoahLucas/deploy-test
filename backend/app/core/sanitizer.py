@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Dict
 
 ALLOWED_SIGNALS = {
+    "heart_rate_bpm": {"min": 30.0, "max": 220.0, "precision": 0},
     "sleep_hours": {"min": 0.0, "max": 16.0, "precision": 1},
     "resting_hr": {"min": 35.0, "max": 120.0, "precision": 0},
     "steps": {"min": 0.0, "max": 40000.0, "precision": 0},

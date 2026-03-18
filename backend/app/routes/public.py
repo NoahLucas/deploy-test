@@ -187,6 +187,12 @@ def _issue_admin_session(request: Request, response: Response) -> str:
 def get_public_feed(request: Request) -> PublicFeedResponse:
     store = request.app.state.store
     cached = store.get_public_feed()
+    latest_heart_rate = store.latest_signal("heart_rate_bpm", max_age_hours=24)
+    latest_heart_rate_bpm = None
+    latest_heart_rate_at = None
+    if latest_heart_rate is not None:
+        latest_heart_rate_bpm = int(round(float(latest_heart_rate["value"])))
+        latest_heart_rate_at = datetime.fromisoformat(str(latest_heart_rate["collected_at"]))
 
     if cached:
         updated_at = datetime.fromisoformat(cached["updated_at"])
@@ -198,6 +204,8 @@ def get_public_feed(request: Request) -> PublicFeedResponse:
                 balance=cached["balance"],
                 action=cached["action"],
             ),
+            latest_heart_rate_bpm=latest_heart_rate_bpm,
+            latest_heart_rate_at=latest_heart_rate_at,
             updated_at=updated_at,
         )
 
@@ -212,6 +220,8 @@ def get_public_feed(request: Request) -> PublicFeedResponse:
             balance=f"{scores['balance']}/100",
             action=default_action(scores),
         ),
+        latest_heart_rate_bpm=latest_heart_rate_bpm,
+        latest_heart_rate_at=latest_heart_rate_at,
         updated_at=datetime.now(timezone.utc),
     )
 
@@ -427,7 +437,7 @@ async def complete_admin_apple_auth(request: Request) -> Response:
     except Exception as exc:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Apple sign-in verification failed: {exc}") from exc
 
-    response = RedirectResponse(url="/ux-live.html", status_code=status.HTTP_303_SEE_OTHER)
+    response = RedirectResponse(url="/godmode.html", status_code=status.HTTP_303_SEE_OTHER)
     _issue_admin_session(request, response)
     return response
 

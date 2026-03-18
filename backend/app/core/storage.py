@@ -438,6 +438,27 @@ class SignalStore:
             ).fetchall()
         return {str(row["signal_key"]): float(row["avg_value"]) for row in rows}
 
+    def latest_signal(self, signal_key: str, max_age_hours: int = 24) -> Optional[Dict[str, object]]:
+        since = (datetime.now(timezone.utc) - timedelta(hours=max(max_age_hours, 1))).isoformat()
+        with self._connect() as conn:
+            row = conn.execute(
+                """
+                SELECT signal_key, value, collected_at
+                FROM ingested_signals
+                WHERE signal_key = ? AND collected_at >= ?
+                ORDER BY collected_at DESC
+                LIMIT 1
+                """,
+                (signal_key, since),
+            ).fetchone()
+        if row is None:
+            return None
+        return {
+            "signal_key": str(row["signal_key"]),
+            "value": float(row["value"]),
+            "collected_at": str(row["collected_at"]),
+        }
+
     def save_public_feed(
         self,
         day: str,

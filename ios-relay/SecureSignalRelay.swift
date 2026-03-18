@@ -93,16 +93,74 @@ final class SecureSignalRelay {
         }
     }
 
-    // Replace this stub with real HealthKit queries and local aggregation.
     private func collectSanitizedSignals() async throws -> [String: Double] {
-        return [
-            "sleep_hours": 7.4,
-            "resting_hr": 58,
-            "steps": 9300,
-            "mindful_minutes": 22,
-            "deep_work_minutes": 185,
-            "screen_time_hours": 5.1
-        ]
+        var signals: [String: Double] = [:]
+
+        if let latestHeartRate = try await latestHeartRateBPM() {
+            signals["heart_rate_bpm"] = latestHeartRate
+        }
+
+        if let restingHeartRate = try await latestRestingHeartRateBPM() {
+            signals["resting_hr"] = restingHeartRate
+        }
+
+        return signals
+    }
+
+    private func latestHeartRateBPM() async throws -> Double? {
+        try await latestQuantitySample(
+            identifier: .heartRate,
+            unit: HKUnit.count().unitDivided(by: .minute()),
+            sinceHours: 24
+        )
+    }
+
+    private func latestRestingHeartRateBPM() async throws -> Double? {
+        try await latestQuantitySample(
+            identifier: .restingHeartRate,
+            unit: HKUnit.count().unitDivided(by: .minute()),
+            sinceHours: 72
+        )
+    }
+
+    private func latestQuantitySample(
+        identifier: HKQuantityTypeIdentifier,
+        unit: HKUnit,
+        sinceHours: Double
+    ) async throws -> Double? {
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: identifier) else {
+            return nil
+        }
+
+        let predicate = HKQuery.predicateForSamples(
+            withStart: Date().addingTimeInterval(-(sinceHours * 60 * 60)),
+            end: Date(),
+            options: .strictStartDate
+        )
+        let sortDescriptors = [NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)]
+
+        return try await withCheckedThrowingContinuation { continuation in
+            let query = HKSampleQuery(
+                sampleType: quantityType,
+                predicate: predicate,
+                limit: 1,
+                sortDescriptors: sortDescriptors
+            ) { _, samples, error in
+                if let error {
+                    continuation.resume(throwing: error)
+                    return
+                }
+
+                guard let sample = samples?.first as? HKQuantitySample else {
+                    continuation.resume(returning: nil)
+                    return
+                }
+
+                continuation.resume(returning: sample.quantity.doubleValue(for: unit))
+            }
+
+            healthStore.execute(query)
+        }
     }
 
     private func makeSignature(body: Data, timestamp: String, nonce: String) -> String {

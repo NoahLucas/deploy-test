@@ -698,6 +698,20 @@
         margin-top: 1.05rem;
       }
 
+      .core-heart-rate {
+        margin-top: 0.95rem;
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.3;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .core-heart-rate strong {
+        color: var(--text);
+        font-weight: 520;
+      }
+
       .timeline {
         width: 100%;
         position: relative;
@@ -955,6 +969,7 @@
               <a class="core-link" id="biography-link" href="/autobiography">Biography</a>
               <a class="core-link" id="notes-link" href="https://noahlucas.squarespace.com/notes">Notes</a>
             </div>
+            <div class="core-heart-rate" id="heart-rate-line" hidden>Heart Rate <strong id="heart-rate-value">--</strong></div>
           </div>
         </section>
 
@@ -1020,6 +1035,8 @@
         const ownerModalSubmit = document.getElementById("owner-modal-submit");
         const ownerAppleButton = document.getElementById("owner-apple-button");
         const ownerAppleMeta = document.getElementById("owner-apple-meta");
+        const heartRateLine = document.getElementById("heart-rate-line");
+        const heartRateValue = document.getElementById("heart-rate-value");
         const placeToggle = document.getElementById("place-toggle");
         const jobToggle = document.getElementById("job-toggle");
         const placesRail = document.querySelector(".places-rail");
@@ -1081,6 +1098,23 @@
           const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 18;
           root.style.setProperty("--orb-x", `${x.toFixed(2)}px`);
           root.style.setProperty("--orb-y", `${y.toFixed(2)}px`);
+        }
+
+        async function syncPublicHeartRate() {
+          if (!heartRateLine || !heartRateValue) return;
+          try {
+            const response = await fetch("/api/v1/public/feed", {
+              cache: "no-store",
+              headers: { Accept: "application/json" }
+            });
+            if (!response.ok) return;
+            const data = await response.json();
+            if (!Number.isFinite(data.latest_heart_rate_bpm)) return;
+            heartRateValue.textContent = `${Math.round(data.latest_heart_rate_bpm)} BPM`;
+            heartRateLine.hidden = false;
+          } catch (_) {
+            // Leave the public page unchanged if the feed is unavailable.
+          }
         }
 
         function getStoredTheme() {
@@ -1505,6 +1539,7 @@
         applyJobState(getStoredDetailState());
         renderOwnerGate();
         syncOwnerSessionState();
+        syncPublicHeartRate();
         initReveal();
         updateScrollMotion();
 
