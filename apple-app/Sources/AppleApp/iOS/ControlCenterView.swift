@@ -1,7 +1,11 @@
 import SwiftUI
+import UIKit
 
 struct ControlCenterView: View {
     @AppStorage("admin_token") private var adminToken: String = ""
+    @AppStorage("relay_base_url") private var relayBaseURL: String = SiteConfiguration.apiBaseURL.absoluteString
+    @AppStorage("relay_secret") private var relaySecret: String = ""
+    @AppStorage("relay_device_id") private var relayDeviceID: String = UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     @State private var prioritiesText: String = "Ship one note\nReview endpoint toggles"
     @State private var risksText: String = "Context switching"
     @State private var contextText: String = "Focus on brand authority and shipping cadence."
@@ -11,9 +15,76 @@ struct ControlCenterView: View {
     @State private var sqEvents: [SquarespaceEventItem] = []
     @State private var isLoading = false
     @State private var errorMessage: String?
+    @StateObject private var healthRelay = HealthRelayManager()
 
     var body: some View {
         List {
+            Section("Health Sync") {
+                LabeledContent("Availability") {
+                    Text(healthRelay.healthDataAvailable ? "Available" : "Unavailable")
+                        .foregroundStyle(healthRelay.healthDataAvailable ? .primary : .secondary)
+                }
+                LabeledContent("Authorization") {
+                    Text(healthRelay.authorizationGranted ? "Granted" : "Not granted")
+                        .foregroundStyle(healthRelay.authorizationGranted ? .primary : .secondary)
+                }
+                if let bpm = healthRelay.lastHeartRateBPM {
+                    LabeledContent("Latest Heart Rate") {
+                        Text("\(bpm) BPM")
+                    }
+                }
+                if let recordedAt = healthRelay.lastHeartRateAt {
+                    LabeledContent("Recorded") {
+                        Text(recordedAt.formatted(date: .omitted, time: .shortened))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                TextField("Relay backend URL", text: $relayBaseURL)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .keyboardType(.URL)
+                SecureField("Relay shared secret", text: $relaySecret)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                TextField("Device ID", text: $relayDeviceID)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                Button("Authorize HealthKit") {
+                    Task { await healthRelay.requestAuthorization() }
+                }
+                .disabled(!healthRelay.healthDataAvailable)
+                Button("Sync Now") {
+                    Task {
+                        await healthRelay.syncNow(
+                            baseURLString: relayBaseURL,
+                            relaySecret: relaySecret,
+                            deviceId: relayDeviceID
+                        )
+                    }
+                }
+                .disabled(!healthRelay.authorizationGranted)
+                switch healthRelay.syncState {
+                case .idle:
+                    Text("Latest heart rate from HealthKit will be sent to `/api/v1/apple/ingest` and can come from Apple Watch or Oura if HealthKit has the sample.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                case .syncing:
+                    HStack(spacing: 8) {
+                        ProgressView()
+                        Text("Syncing latest heart-rate sample…")
+                            .font(.footnote)
+                    }
+                case .success(let message):
+                    Text(message)
+                        .font(.footnote)
+                        .foregroundStyle(.green)
+                case .failure(let message):
+                    Text(message)
+                        .font(.footnote)
+                        .foregroundStyle(.red)
+                }
+            }
+
             Section("Admin") {
                 TextField("X-Admin-Token", text: $adminToken)
                     .textInputAutocapitalization(.never)
@@ -99,6 +170,7 @@ struct ControlCenterView: View {
             }
         }
         .task {
+            await healthRelay.refreshAuthorizationStatus()
             await loadAll()
         }
     }
