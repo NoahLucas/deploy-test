@@ -577,24 +577,6 @@
         pointer-events: none;
       }
 
-      .core-block::after {
-        content: "";
-        position: absolute;
-        width: 16rem;
-        height: 16rem;
-        right: -3.5rem;
-        bottom: -7rem;
-        border-radius: 999px;
-        background:
-          radial-gradient(circle at 50% 50%, color-mix(in srgb, #fff 88%, transparent), transparent 56%),
-          radial-gradient(circle at 40% 35%, color-mix(in srgb, #f0a36c 35%, transparent), transparent 66%);
-        opacity: 0.72;
-        transform: translate3d(var(--orb-x, 0px), calc(var(--orb-y, 0px) + var(--scroll-shift, 0px)), 0);
-        transition: transform 220ms ease-out, opacity 240ms ease;
-        animation: orbDrift 12s ease-in-out infinite alternate;
-        pointer-events: none;
-      }
-
       .core-block > * {
         position: relative;
         z-index: 1;
