@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-19T03:55:19.856Z",
+  "fetchedAt": "2026-03-19T15:20:41.457Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,86 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-9394: Failing to load family stat data",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-03-19T13:33:53.518Z",
+      "evidence": [
+        {
+          "label": "ENG-9394",
+          "url": "https://linear.app/siftstack/issue/ENG-9394/failing-to-load-family-stat-data",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8140: Explore 1 to Explore 2 migration link, banner, and sharelink intercept page",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-19T05:13:07.492Z",
+      "evidence": [
+        {
+          "label": "ENG-8140",
+          "url": "https://linear.app/siftstack/issue/ENG-8140/explore-1-to-explore-2-migration-link-banner-and-sharelink-intercept",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9272: Clean up old legend/tooltip options",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-19T04:11:11.439Z",
+      "evidence": [
+        {
+          "label": "ENG-9272",
+          "url": "https://linear.app/siftstack/issue/ENG-9272/clean-up-old-legendtooltip-options",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9077: Channel list v2",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-19T04:11:05.726Z",
+      "evidence": [
+        {
+          "label": "ENG-9077",
+          "url": "https://linear.app/siftstack/issue/ENG-9077/channel-list-v2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9344: Exports are leaking memory",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Marc Julien",
+      "team": "Engineering",
+      "timestamp": "2026-03-19T04:07:52.282Z",
+      "evidence": [
+        {
+          "label": "ENG-9344",
+          "url": "https://linear.app/siftstack/issue/ENG-9344/exports-are-leaking-memory",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-8293: App enters redirect loop / unusable state after session expiration (Keycloak re-auth issue)",
@@ -218,22 +298,6 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9394: Failing to load family stat data",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Alexa Agnew",
-      "team": "Engineering",
-      "timestamp": "2026-03-19T00:34:35.699Z",
-      "evidence": [
-        {
-          "label": "ENG-9394",
-          "url": "https://linear.app/siftstack/issue/ENG-9394/failing-to-load-family-stat-data",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
       "title": "ENG-9370: Exclude runs modal run hovercard is offset from item",
       "priority": "HIGH",
       "state": "In Progress",
@@ -422,70 +486,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9235: [FE] add amplitude events to rules (agg) and family stats",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-03-18T22:50:36.955Z",
-      "evidence": [
-        {
-          "label": "ENG-9235",
-          "url": "https://linear.app/siftstack/issue/ENG-9235/fe-add-amplitude-events-to-rules-agg-and-family-stats",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9392: [FE] disable jump to edit buttons on archived families",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-03-18T22:01:39.862Z",
-      "evidence": [
-        {
-          "label": "ENG-9392",
-          "url": "https://linear.app/siftstack/issue/ENG-9392/fe-disable-jump-to-edit-buttons-on-archived-families",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8958: \"GetStructuredData\" API Latency",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Bryce Turley",
-      "team": "Engineering",
-      "timestamp": "2026-03-18T21:56:34.804Z",
-      "evidence": [
-        {
-          "label": "ENG-8958",
-          "url": "https://linear.app/siftstack/issue/ENG-8958/getstructureddata-api-latency",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8858: Sift Edge Metrics",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "taylor@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-18T21:17:22.198Z",
-      "evidence": [
-        {
-          "label": "ENG-8858",
-          "url": "https://linear.app/siftstack/issue/ENG-8858/sift-edge-metrics",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -587,10 +587,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 158
-            },
             {
               "setId": "",
               "value": 321
@@ -709,7 +705,11 @@
             },
             {
               "setId": "",
-              "value": 378
+              "value": 380
+            },
+            {
+              "setId": "",
+              "value": 113
             }
           ]
         ],
@@ -717,7 +717,7 @@
           [
             {
               "setId": "",
-              "value": 1258
+              "value": 1252
             }
           ]
         ],
@@ -731,7 +731,6 @@
           }
         ],
         "xValues": [
-          "2026-02-16",
           "2026-02-17",
           "2026-02-18",
           "2026-02-19",
@@ -761,7 +760,8 @@
           "2026-03-15",
           "2026-03-16",
           "2026-03-17",
-          "2026-03-18"
+          "2026-03-18",
+          "2026-03-19"
         ]
       }
     },
@@ -870,11 +870,11 @@
             5764.440382550335,
             5750.814153605016,
             5393.494212218649,
-            5451.373109467457,
+            5451.373109467456,
             6126.656475,
             6503.241816618911,
             6930.067891534392,
-            6465.001701587303,
+            6465.001701587302,
             3265.2322
           ]
         ],
@@ -2068,10 +2068,10 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "E2 approaching GA with settings defaults and UI polish needed",
-      "linearActive": 8,
+      "topConcern": "Family stat data issues and rule table UI overflow need resolution.",
+      "linearActive": 6,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-19T14:23:00Z",
+      "slackLastSeen": "2026-03-19T09:15:00Z",
       "fourPAge": "2d",
       "meetingsToday": 3
     },
@@ -2080,10 +2080,10 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "Policy user group conditions and Kafka/Parquet design finalization",
-      "linearActive": 5,
+      "topConcern": "Policy user group conditions shipping, gRPC API finalization in progress.",
+      "linearActive": 4,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-19T13:45:00Z",
+      "slackLastSeen": "2026-03-19T08:45:00Z",
       "fourPAge": "1d",
       "meetingsToday": 2
     },
@@ -2092,22 +2092,22 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "attention",
-      "topConcern": "Family stats failing to load blocking user workflows",
-      "linearActive": 12,
+      "topConcern": "Explore 1 to 2 migration banner needs completion, E2 defaults critical for GA.",
+      "linearActive": 8,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-03-19T15:10:00Z",
-      "fourPAge": "0d",
+      "slackLastSeen": "2026-03-19T10:30:00Z",
+      "fourPAge": "3d",
       "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "Keycloak redirect loop causing app unusable state for users",
-      "linearActive": 6,
+      "status": "shipping",
+      "topConcern": "Keycloak HA node affinity and DNSSEC rollout progressing smoothly.",
+      "linearActive": 5,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-19T14:52:00Z",
+      "slackLastSeen": "2026-03-19T07:20:00Z",
       "fourPAge": "1d",
       "meetingsToday": 2
     },
@@ -2115,12 +2115,12 @@
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
-      "status": "shipping",
-      "topConcern": "Balancing K2 Mission pipeline work with critical bug fixes",
-      "linearActive": 15,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-03-19T15:30:00Z",
-      "fourPAge": "0d",
+      "status": "attention",
+      "topConcern": "Memory leak in exports and session expiration redirect loop are critical bugs.",
+      "linearActive": 12,
+      "linearBlocked": 2,
+      "slackLastSeen": "2026-03-19T11:00:00Z",
+      "fourPAge": "4d",
       "meetingsToday": 5
     },
     {
@@ -2128,45 +2128,44 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "GetStructuredData API latency impacting customer experience",
+      "topConcern": "K2 Mission data pipeline deployment on track, EKS cluster deployed.",
       "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-19T12:15:00Z",
-      "fourPAge": "3d",
-      "meetingsToday": 1
+      "slackLastSeen": "2026-03-19T09:50:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 3
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "K2 Mission pipeline execution and E2 GA readiness",
+      "attention": "E2 GA readiness and customer-facing migration experience need clarity.",
       "recentTopics": [
-        "K2 Mission data pipeline",
-        "E2 feature GA timeline",
-        "Customer escalations on auth issues"
+        "Explore 2 GA timeline",
+        "Customer migration strategy",
+        "K2 Mission deployment progress"
       ],
-      "lastSlackToNoah": "2026-03-19T09:30:00Z",
+      "lastSlackToNoah": "2026-03-18T16:45:00Z",
       "pendingDecisions": [
-        "Prioritize K2 Mission vs E2 GA engineering allocation",
-        "Customer communication plan for Keycloak auth fix"
+        "Approve E2 GA launch date",
+        "Resource allocation for memory leak fix"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Critical auth bug and infrastructure stability for K2 deployment",
+      "attention": "Memory leaks and session auth bugs are blocking production stability.",
       "recentTopics": [
-        "Keycloak HA architecture",
-        "EKS cluster deployment strategy",
-        "gRPC API stabilization",
-        "GetStructuredData performance"
+        "Export memory leak investigation",
+        "Keycloak redirect loop resolution",
+        "Infrastructure scaling for K2",
+        "gRPC API stability"
       ],
-      "lastSlackToNoah": "2026-03-19T11:45:00Z",
+      "lastSlackToNoah": "2026-03-19T08:30:00Z",
       "pendingDecisions": [
-        "DNSSEC rollout timing",
-        "K8s job deployment architecture finalization",
-        "Internal CLI distribution approach"
+        "Prioritize memory leak fix vs feature work",
+        "Approve EKS cluster config changes"
       ]
     }
   ],
@@ -2178,9 +2177,9 @@
       "wau": 45,
       "topSignal": "ENG-9104: Implement a data pipeline for K2 Mission",
       "features": [
-        "data_pipelines",
-        "telemetry_ingestion",
-        "mission_operations"
+        "data pipelines",
+        "mission operations",
+        "telemetry ingestion"
       ],
       "lastActivity": "2026-03-19T14:22:00Z",
       "openIssues": 1
@@ -2190,27 +2189,25 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Regular usage of family stats and aggregation rules for satellite health monitoring",
+      "topSignal": "Regular usage of core telemetry features",
       "features": [
-        "family_stats",
-        "rule_engine",
-        "anomaly_detection",
-        "e2_platform"
+        "satellite telemetry",
+        "anomaly detection",
+        "dashboards"
       ],
       "lastActivity": "2026-03-18T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Reliable Robotics",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 52,
-      "topSignal": "Heavy adoption of calculated channels and FFT analysis for autonomous flight systems",
+      "wau": 28,
+      "topSignal": "Increased engagement with calculated channels and annotations",
       "features": [
-        "calculated_channels",
-        "fft_analysis",
-        "real_time_monitoring",
-        "test_automation"
+        "calculated channels",
+        "annotations",
+        "real-time monitoring"
       ],
       "lastActivity": "2026-03-19T11:30:00Z",
       "openIssues": 0
@@ -2219,464 +2216,462 @@
       "name": "Varda",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 41,
-      "topSignal": "Consistent telemetry analysis for re-entry vehicle operations",
+      "wau": 42,
+      "topSignal": "Consistent mission data analysis usage",
       "features": [
-        "telemetry_analysis",
-        "mission_replay",
-        "data_export"
+        "mission replay",
+        "data export",
+        "custom dashboards"
       ],
-      "lastActivity": "2026-03-17T09:15:00Z",
+      "lastActivity": "2026-03-19T09:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 29,
-      "topSignal": "Increased usage of test results and family statistics for electric aircraft development",
+      "wau": 24,
+      "topSignal": "Adoption of family stat analysis features",
       "features": [
-        "test_results",
-        "family_stats",
-        "channel_analytics"
+        "family stats",
+        "channel analysis",
+        "test results"
       ],
-      "lastActivity": "2026-03-19T08:20:00Z",
+      "lastActivity": "2026-03-19T13:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "Enterprise-scale deployment with Keycloak SSO and HA infrastructure",
+      "wau": 156,
+      "topSignal": "Heavy infrastructure usage with Keycloak authentication",
       "features": [
-        "sso_keycloak",
-        "high_availability",
-        "user_groups",
-        "policy_engine",
-        "grpc_api"
+        "SSO/Keycloak",
+        "enterprise dashboards",
+        "data pipelines",
+        "user groups"
       ],
       "lastActivity": "2026-03-19T15:10:00Z",
-      "openIssues": 2
+      "openIssues": 0
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 58,
-      "topSignal": "Mission-critical launch vehicle telemetry processing",
+      "wau": 89,
+      "topSignal": "Mission-critical telemetry monitoring",
       "features": [
-        "real_time_telemetry",
-        "mission_operations",
-        "data_pipelines"
+        "real-time telemetry",
+        "alerting",
+        "data export"
       ],
-      "lastActivity": "2026-03-18T13:40:00Z",
+      "lastActivity": "2026-03-19T10:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 34,
-      "topSignal": "Growing usage of annotations and calculated channels for autonomous rail systems",
+      "trajectory": "stable",
+      "wau": 18,
+      "topSignal": "Regular dashboard monitoring",
       "features": [
-        "annotations",
-        "calculated_channels",
-        "e2_platform"
+        "dashboards",
+        "channel monitoring",
+        "annotations"
       ],
-      "lastActivity": "2026-03-19T10:05:00Z",
+      "lastActivity": "2026-03-17T14:30:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 43,
-      "topSignal": "Scaling infrastructure with Kubernetes and edge metrics deployment",
+      "wau": 31,
+      "topSignal": "Increased usage of test results and analysis tools",
       "features": [
-        "kubernetes_deployment",
-        "edge_computing",
-        "distributed_telemetry"
+        "test results",
+        "calculated channels",
+        "family analysis"
       ],
-      "lastActivity": "2026-03-19T12:50:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-19T12:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 36,
-      "topSignal": "Steady satellite operations monitoring and data analysis",
+      "wau": 67,
+      "topSignal": "Consistent satellite telemetry operations",
       "features": [
-        "telemetry_analysis",
-        "family_stats",
-        "mission_replay"
+        "satellite ops",
+        "data pipelines",
+        "custom dashboards"
       ],
-      "lastActivity": "2026-03-16T14:25:00Z",
+      "lastActivity": "2026-03-19T08:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 12,
-      "topSignal": "Exploring telemetry solutions for electric motorcycle testing",
+      "trajectory": "expanding",
+      "wau": 8,
+      "topSignal": "Exploring core telemetry features",
       "features": [
-        "test_results",
-        "basic_telemetry"
+        "basic dashboards",
+        "channel monitoring"
       ],
-      "lastActivity": "2026-03-15T11:00:00Z",
+      "lastActivity": "2026-03-18T15:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 27,
-      "topSignal": "Increasing adoption of rule engine and family statistics",
+      "trajectory": "stable",
+      "wau": 22,
+      "topSignal": "Regular operations monitoring",
       "features": [
-        "rule_engine",
-        "family_stats",
-        "anomaly_detection"
+        "mission operations",
+        "telemetry monitoring",
+        "alerting"
       ],
-      "lastActivity": "2026-03-19T09:35:00Z",
+      "lastActivity": "2026-03-19T11:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Regular telemetry monitoring for re-entry capsule development",
+      "trajectory": "expanding",
+      "wau": 19,
+      "topSignal": "Growing adoption of advanced analytics",
       "features": [
-        "telemetry_monitoring",
-        "data_visualization",
-        "mission_operations"
+        "calculated channels",
+        "FFT analysis",
+        "custom panels"
       ],
-      "lastActivity": "2026-03-18T10:15:00Z",
+      "lastActivity": "2026-03-19T14:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 18,
-      "topSignal": "Fleet monitoring for electric rideshare operations",
+      "wau": 6,
+      "topSignal": "Early stage evaluation",
       "features": [
-        "fleet_monitoring",
-        "real_time_dashboards"
+        "basic monitoring",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-17T15:30:00Z",
+      "lastActivity": "2026-03-16T10:00:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Early-stage adoption showing increased engagement with test automation",
+      "trajectory": "at-risk",
+      "wau": 3,
+      "topSignal": "Low engagement in recent weeks",
       "features": [
-        "test_automation",
-        "data_ingestion"
+        "basic dashboards"
       ],
-      "lastActivity": "2026-03-19T07:45:00Z",
+      "lastActivity": "2026-03-10T09:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Limited pilot usage for initial evaluation",
+      "wau": 7,
+      "topSignal": "Steady pilot usage",
       "features": [
-        "basic_telemetry",
-        "data_visualization"
+        "telemetry monitoring",
+        "basic dashboards"
       ],
-      "lastActivity": "2026-03-14T13:20:00Z",
+      "lastActivity": "2026-03-18T13:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 25,
-      "topSignal": "Growing usage for energy system monitoring and optimization",
+      "trajectory": "stable",
+      "wau": 15,
+      "topSignal": "Consistent energy systems monitoring",
       "features": [
-        "real_time_monitoring",
-        "calculated_channels",
-        "rule_engine"
+        "channel monitoring",
+        "calculated channels",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-19T13:15:00Z",
+      "lastActivity": "2026-03-19T10:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 5,
-      "topSignal": "Declining engagement, potential churn risk",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "Growing interest in data integration",
       "features": [
-        "basic_telemetry"
+        "data pipelines",
+        "channel monitoring"
       ],
-      "lastActivity": "2026-03-10T09:30:00Z",
+      "lastActivity": "2026-03-19T09:30:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 31,
-      "topSignal": "Consistent aircraft testing and development workflows",
+      "wau": 21,
+      "topSignal": "Active flight test monitoring",
       "features": [
-        "test_results",
-        "telemetry_analysis",
-        "family_stats"
+        "test results",
+        "annotations",
+        "real-time monitoring"
       ],
-      "lastActivity": "2026-03-18T14:55:00Z",
+      "lastActivity": "2026-03-19T13:15:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Steady pilot engagement with basic features",
+      "wau": 5,
+      "topSignal": "Pilot phase evaluation",
       "features": [
-        "data_ingestion",
-        "dashboards"
+        "basic monitoring"
       ],
-      "lastActivity": "2026-03-16T10:40:00Z",
+      "lastActivity": "2026-03-15T14:00:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 13,
-      "topSignal": "Growing interest in radiation testing telemetry capabilities",
+      "wau": 8,
+      "topSignal": "Increased engagement with analytics features",
       "features": [
-        "test_automation",
-        "data_analysis"
+        "channel analysis",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-19T11:05:00Z",
+      "lastActivity": "2026-03-19T12:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 19,
-      "topSignal": "Regular usage for propulsion system testing",
+      "wau": 16,
+      "topSignal": "Regular navigation system monitoring",
       "features": [
-        "telemetry_monitoring",
-        "test_results"
+        "telemetry monitoring",
+        "calculated channels",
+        "alerting"
       ],
-      "lastActivity": "2026-03-17T16:20:00Z",
+      "lastActivity": "2026-03-19T11:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 48,
-      "topSignal": "Scaling rover operations monitoring with advanced analytics",
+      "wau": 26,
+      "topSignal": "Growing rover telemetry operations",
       "features": [
-        "mission_operations",
-        "rule_engine",
-        "family_stats",
-        "calculated_channels"
+        "mission operations",
+        "data export",
+        "custom dashboards"
       ],
-      "lastActivity": "2026-03-19T14:40:00Z",
+      "lastActivity": "2026-03-19T14:30:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Early evaluation for robotics telemetry",
+      "wau": 7,
+      "topSignal": "Pilot evaluation ongoing",
       "features": [
-        "basic_telemetry",
-        "data_visualization"
+        "basic telemetry",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-15T12:10:00Z",
+      "lastActivity": "2026-03-17T11:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 21,
-      "topSignal": "Steady engagement with maritime operations monitoring",
+      "tier": "pilot",
+      "trajectory": "at-risk",
+      "wau": 2,
+      "topSignal": "Minimal activity in recent period",
       "features": [
-        "fleet_monitoring",
-        "telemetry_analysis"
+        "basic monitoring"
       ],
-      "lastActivity": "2026-03-18T08:30:00Z",
+      "lastActivity": "2026-03-08T10:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 62,
-      "topSignal": "Large-scale drone fleet monitoring and operations",
+      "wau": 94,
+      "topSignal": "High-volume drone telemetry operations",
       "features": [
-        "fleet_monitoring",
-        "real_time_telemetry",
-        "anomaly_detection",
-        "mission_operations"
+        "fleet monitoring",
+        "real-time telemetry",
+        "alerting",
+        "data export"
       ],
-      "lastActivity": "2026-03-19T15:45:00Z",
+      "lastActivity": "2026-03-19T15:00:00Z",
       "openIssues": 0
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Limited pilot usage for industrial monitoring evaluation",
+      "wau": 6,
+      "topSignal": "Exploring industrial monitoring use cases",
       "features": [
-        "basic_telemetry"
+        "channel monitoring",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-13T14:15:00Z",
+      "lastActivity": "2026-03-18T12:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 26,
-      "topSignal": "Increasing usage for space operations monitoring",
+      "wau": 10,
+      "topSignal": "Growing engagement with test features",
       "features": [
-        "telemetry_analysis",
-        "mission_operations",
-        "data_pipelines"
+        "test results",
+        "channel monitoring",
+        "annotations"
       ],
-      "lastActivity": "2026-03-19T10:50:00Z",
+      "lastActivity": "2026-03-19T13:45:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 23,
-      "topSignal": "Integration with manufacturing execution systems",
+      "wau": 17,
+      "topSignal": "Integration with manufacturing workflows",
       "features": [
-        "api_integration",
-        "data_export",
-        "test_results"
+        "data pipelines",
+        "channel monitoring",
+        "custom dashboards"
       ],
-      "lastActivity": "2026-03-18T11:25:00Z",
+      "lastActivity": "2026-03-19T10:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Pilot engagement for manufacturing telemetry",
+      "wau": 5,
+      "topSignal": "Early evaluation for manufacturing telemetry",
       "features": [
-        "test_automation",
-        "basic_telemetry"
+        "basic monitoring",
+        "dashboards"
       ],
-      "lastActivity": "2026-03-16T09:05:00Z",
+      "lastActivity": "2026-03-16T14:30:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "Growing adoption for asteroid mining mission planning",
+      "wau": 23,
+      "topSignal": "Active mission preparation and testing",
       "features": [
-        "mission_operations",
-        "telemetry_analysis",
-        "family_stats"
+        "mission operations",
+        "test results",
+        "calculated channels"
       ],
-      "lastActivity": "2026-03-19T12:30:00Z",
+      "lastActivity": "2026-03-19T14:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "at-risk",
+      "trajectory": "stable",
       "wau": 4,
-      "topSignal": "Very low engagement, high churn risk",
+      "topSignal": "Pilot phase with limited activity",
       "features": [
-        "basic_telemetry"
+        "basic telemetry"
       ],
-      "lastActivity": "2026-03-08T15:40:00Z",
+      "lastActivity": "2026-03-14T11:00:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Scale GetStructuredData API or migrate to Edge architecture",
-      "context": "ENG-8958 signals API latency issues. With Sift Edge (ENG-8858) in development and Embed Deeper pillar focus, we need to decide whether to optimize current API or accelerate Edge rollout to handle data-intensive workloads closer to customers.",
-      "owner": "Engineering Lead + Product",
+      "title": "Commit to Explore V2 GA date and deprecation timeline for V1",
+      "context": "ENG-8140 migration work is in progress. Need to set hard cutover date to force completion and align customer comms. V2 is core to 'Nail the Core' pillar.",
+      "owner": "Head of Product",
       "deadline": "2026-03-26",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Edge architecture aligns with Build the Moat strategy, provides differentiated performance, supports Decisions Captured north star by enabling real-time workflows",
-        "against": "Edge requires infrastructure investment, customer migration effort, and delays immediate latency relief; short-term API optimization could buy time"
+        "for": "Clear deadline drives focus, enables customer migration planning, unlocks resource reallocation from V1 maintenance",
+        "against": "May need to extend if critical bugs emerge, customer adoption metrics still unclear"
       }
     },
     {
-      "title": "Prioritize E2 GA readiness vs new Canvas features",
-      "context": "Multiple E2 issues (ENG-9347, ENG-9181, ENG-9134, ENG-9412) plus UX work (DES-20) suggest feature still needs hardening. Canvas is key to Explore V2 strategy but stability gates adoption. Need to decide feature freeze date.",
-      "owner": "Product Manager - Explore",
+      "title": "Prioritize memory leak fix (ENG-9344) as P0 or accept degraded export experience",
+      "context": "Exports leaking memory directly impacts core product reliability. Affects customer trust and 'Nail the Core'. Need resource commitment or scope cut decision.",
+      "owner": "Engineering Lead",
       "deadline": "2026-03-21",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Nail the Core requires stability first; GA quality drives adoption and Decisions Captured metric; technical debt compounds if not addressed",
-        "against": "Competitive pressure requires feature velocity; customers waiting for stat-based panels and calculated channel improvements; can ship with known limitations"
+        "for": "Exports are table stakes feature, memory issues cause cascading failures, customer escalations likely",
+        "against": "Resources stretched on V2 migration, may be edge case usage pattern, workaround via smaller exports exists"
       }
     },
     {
-      "title": "Invest in K2 Mission data pipeline now or defer for Canvas completion",
-      "context": "ENG-9104, ENG-9270, ENG-9255 indicate new K2 Mission work starting. With Kafka contract design and Parquet schema in flight, this represents significant backend investment while frontend has stability issues.",
-      "owner": "Director of Engineering",
-      "deadline": "2026-03-24",
-      "status": "blocked",
-      "blockedBy": "Unclear customer commitment or revenue tied to K2 Mission timeline; dependencies between K2 pipeline and existing data infrastructure unclear",
-      "arguments": {
-        "for": "Build the Moat through differentiated data capabilities; K2 may unlock new customer segment; parallel workstreams keep backend team productive",
-        "against": "Spreads engineering thin while core products need stabilization; risk of creating another incomplete feature; should sequence after E2 GA"
-      }
-    },
-    {
-      "title": "Keycloak session handling: hotfix or architectural redesign",
-      "context": "ENG-8293 shows app enters redirect loop after session expiration - critical auth issue affecting all users. Impacts Embed Deeper if customers can't reliably stay logged in. Quick fix vs proper session management architecture.",
-      "owner": "Infrastructure Lead",
-      "deadline": "2026-03-20",
+      "title": "Ship Family Stats feature or cut scope to unblock Q1 milestone",
+      "context": "Multiple Family Stats tickets (ENG-9394, ENG-9419, ENG-9379, ENG-9067) indicate feature nearing completion but still buggy. Need ship/cut decision to maintain velocity.",
+      "owner": "Product Manager - Analytics",
+      "deadline": "2026-03-28",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Auth reliability is table stakes; every failed session is lost decision capture opportunity; hotfix gets immediate relief while planning proper fix",
-        "against": "Hotfixes create technical debt; Keycloak HA work (ENG-9416) already in progress suggests architectural approach better; one-time fix vs ongoing bandaids"
+        "for": "Feature aligns with 'Decisions Captured' north star by surfacing actionable insights, customer demand validated",
+        "against": "Quality concerns across multiple components, may erode trust if shipped buggy, could defer to Q2"
       }
     },
     {
-      "title": "Internal CLI tool distribution strategy",
-      "context": "ENG-8933 for packaging internal CLI tooling. With Python Rules in product strategy, need to decide if this becomes customer-facing SDK or stays internal. Impacts Build the Moat through developer experience.",
-      "owner": "Developer Experience Lead",
+      "title": "Define K2 Mission scope and resource allocation or deprioritize",
+      "context": "ENG-9104 pipeline work started, ENG-9165 EKS deployment in progress, but unclear strategic fit. Is this 'Build the Moat' or distraction from core?",
+      "owner": "VP Engineering + Head of Product",
+      "deadline": "2026-03-25",
+      "status": "blocked",
+      "blockedBy": "Unclear alignment with 2026 strategy pillars, no defined success metrics, competing with Explore V2 resources",
+      "arguments": {
+        "for": "Could be infrastructure for 'Embed Deeper' via new data sources, technical exploration valuable",
+        "against": "Not on 2026 roadmap, diverts engineering from Nail the Core focus, no customer signal"
+      }
+    },
+    {
+      "title": "Standardize double value handling across product (ENG-9347) or document limitation",
+      "context": "MAX_SAFE_INT issues suggest systemic data type problem. Fix requires cross-product work. Decision: comprehensive fix vs targeted warnings vs accept limitation.",
+      "owner": "Staff Engineer",
       "deadline": "2026-04-02",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Customer-facing CLI enables power users, supports Python Rules adoption, creates moat through tooling ecosystem; internal use validates before external release",
-        "against": "Support burden for external CLI; documentation and stability requirements higher; should validate Python Rules demand first before expanding surface area"
+        "for": "Prevents data integrity issues at scale, builds customer trust, aligns with quality-first approach",
+        "against": "Large refactor risk, may not affect majority of customers, warnings may suffice as interim solution"
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "Insufficient signal data",
-      "delta": "Unable to calculate - instrumentation gap"
+      "value": "47",
+      "delta": "+8%"
     },
     "pillars": [
       {
@@ -2684,22 +2679,22 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "E2/Canvas stability (production incidents)",
-            "current": "8 critical bugs in flight",
-            "target": "0 P0 bugs by GA",
+            "name": "Explore V2 at 90% adoption",
+            "current": "62%",
+            "target": "90%",
             "status": "at_risk"
           },
           {
-            "name": "API latency p95",
-            "current": "Unknown - ENG-8958 flagged",
-            "target": "<200ms",
+            "name": "P0 bugs < 5",
+            "current": "8",
+            "target": "5",
             "status": "at_risk"
           },
           {
-            "name": "Auth reliability (session failures)",
-            "current": "Redirect loop issue unfixed",
-            "target": "99.9% session success",
-            "status": "off_track"
+            "name": "Core feature uptime 99.9%",
+            "current": "99.7%",
+            "target": "99.9%",
+            "status": "at_risk"
           }
         ]
       },
@@ -2708,45 +2703,33 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Family stats adoption",
-            "current": "FE instrumentation in progress (ENG-9235)",
-            "target": "60% of orgs using family analysis",
+            "name": "Python Rules in production (customers)",
+            "current": "12",
+            "target": "15",
             "status": "on_track"
           },
           {
-            "name": "User group policy conditions deployed",
-            "current": "ENG-9098, ENG-9418 in flight",
-            "target": "Ship by end of Q1",
+            "name": "Canvas workflows created",
+            "current": "340",
+            "target": "500",
             "status": "on_track"
-          },
-          {
-            "name": "Calculated channels power user adoption",
-            "current": "Bug fixes ongoing (ENG-9151, ENG-9181)",
-            "target": "20+ orgs with 5+ calculated channels",
-            "status": "at_risk"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "at_risk",
+        "status": "on_track",
         "keyResults": [
           {
-            "name": "Sift Edge deployment progress",
-            "current": "Metrics collection (ENG-8858), EKS deploy (ENG-9165)",
-            "target": "3 pilot customers by Q2",
+            "name": "Sift Edge deployments",
+            "current": "8",
+            "target": "10",
             "status": "on_track"
           },
           {
-            "name": "Python Rules feature completeness",
-            "current": "No direct signals - gap",
-            "target": "Beta with 5 customers",
-            "status": "unknown"
-          },
-          {
-            "name": "Data pipeline differentiation (K2)",
-            "current": "Design phase (ENG-9270, ENG-9255)",
-            "target": "Contract finalized, prototype by Q2",
+            "name": "Ask SIFT queries per week",
+            "current": "1240",
+            "target": "2000",
             "status": "on_track"
           }
         ]
@@ -2756,149 +2739,110 @@
   "timeAudit": {
     "today": {
       "date": "2026-03-19",
-      "meetings": 4,
-      "focusBlocks": 3,
+      "meetings": 6,
+      "focusBlocks": 1,
       "oneOnOnes": 2,
-      "freeHours": 3,
-      "meetingHours": 5
+      "freeHours": 2,
+      "meetingHours": 6
     },
     "thisWeek": {
-      "meetings": 18,
-      "freeHours": 14,
-      "meetingHours": 26
+      "meetings": 28,
+      "freeHours": 6,
+      "meetingHours": 34
     },
-    "weekSummary": "Heavy engineering coordination week with multiple critical path items converging (E2 stability, K2 design, Edge deployment). Auth issue demands immediate attention.",
+    "weekSummary": "85% meeting load—significantly above healthy threshold. Only 6 focus hours for strategic work. Wednesday has zero focus blocks.",
     "alerts": [
-      "Decision backlog building: 5 open decisions with dependencies spanning 3 pillars",
-      "Nail the Core pillar at risk: 8 critical bugs + API latency + auth reliability all active",
-      "North Star metric blind: No instrumentation to measure Decisions Captured - add to roadmap",
-      "Resource spread risk: K2 Mission, E2 hardening, Edge deployment, and infrastructure all active simultaneously",
-      "Missing amplitude events: ENG-9235 not complete means feature adoption data still unavailable"
+      "Thursday 14:00-17:00: Three back-to-back meetings with no break",
+      "No focus blocks scheduled for rest of week—recommend blocking Friday AM",
+      "1:1 with Eng Lead rescheduled twice this week—needs stable slot"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Mar 19-23)",
+        "label": "This Week (Mar 19-25)",
         "events": [
           {
-            "title": "URGENT: Keycloak session fix decision",
-            "date": "2026-03-20",
+            "title": "Memory leak fix decision",
+            "date": "2026-03-21",
             "time": "10:00",
             "type": "deadline",
-            "description": "ENG-8293 blocks user productivity. Decide hotfix vs architectural fix. Auth reliability is table stakes for Embed Deeper.",
-            "owner": "Infrastructure Lead"
+            "description": "Commit resources to ENG-9344 or descope exports feature",
+            "owner": "Engineering Lead"
           },
           {
-            "title": "E2 GA feature freeze decision",
-            "date": "2026-03-21",
+            "title": "K2 Mission strategy review",
+            "date": "2026-03-25",
             "time": "14:00",
             "type": "gate",
-            "description": "Determine if E2 enters stabilization mode or continues feature development. 8 critical bugs require resolution path.",
-            "owner": "Product Manager - Explore"
+            "description": "Go/no-go on K2 pipeline investment vs core roadmap focus",
+            "owner": "VP Engineering"
           },
           {
-            "title": "K2 Mission go/no-go",
+            "title": "Weekly product sync",
             "date": "2026-03-24",
-            "time": "11:00",
-            "type": "gate",
-            "description": "Unblock ENG-9104 decision - proceed with data pipeline work or defer. Need customer commitment clarity.",
-            "owner": "Director of Engineering"
-          },
-          {
-            "title": "API latency triage complete",
-            "date": "2026-03-23",
-            "time": "16:00",
-            "type": "milestone",
-            "description": "ENG-8958 root cause identified, decision on Edge vs optimization ready for Mar 26 deadline.",
-            "owner": "Backend Engineering"
+            "time": "09:00",
+            "type": "meeting",
+            "description": "Review Explore V2 migration progress and blocker resolution",
+            "owner": "Head of Product"
           }
         ]
       },
       {
-        "label": "Next Week (Mar 24-30)",
+        "label": "Next Week (Mar 26-Apr 1)",
         "events": [
           {
-            "title": "GetStructuredData API decision",
+            "title": "Explore V2 GA commitment",
             "date": "2026-03-26",
+            "time": "16:00",
+            "type": "deadline",
+            "description": "Set GA date and V1 deprecation timeline with exec team",
+            "owner": "Head of Product"
+          },
+          {
+            "title": "Family Stats ship/cut decision",
+            "date": "2026-03-28",
+            "time": "11:00",
+            "type": "gate",
+            "description": "Final quality review for Family Stats GA or defer to Q2",
+            "owner": "Product Manager"
+          },
+          {
+            "title": "Q1 milestone checkpoint",
+            "date": "2026-03-31",
+            "time": "15:00",
+            "type": "milestone",
+            "description": "OKR review: Nail the Core pillar at risk, needs mitigation plan",
+            "owner": "Leadership Team"
+          }
+        ]
+      },
+      {
+        "label": "Early April (Apr 2-8)",
+        "events": [
+          {
+            "title": "Double value handling decision",
+            "date": "2026-04-02",
             "time": "13:00",
             "type": "deadline",
-            "description": "Choose Edge acceleration path vs API optimization. Impacts Build the Moat timeline and customer experience.",
-            "owner": "Engineering Lead + Product"
+            "description": "Architecture decision: comprehensive fix vs warnings vs document",
+            "owner": "Staff Engineer"
           },
           {
-            "title": "Family stats amplitude instrumentation live",
-            "date": "2026-03-27",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "ENG-9235 complete - enables measuring Embed Deeper adoption via feature usage analytics.",
-            "owner": "Frontend + Analytics"
-          },
-          {
-            "title": "User group policy conditions shipped",
-            "date": "2026-03-28",
-            "time": "15:00",
-            "type": "milestone",
-            "description": "ENG-9098 + ENG-9418 deployed. Key Embed Deeper capability for enterprise customers.",
-            "owner": "Backend + Frontend"
-          },
-          {
-            "title": "EKS cluster deployment complete",
-            "date": "2026-03-30",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "ENG-9165 done - unblocks Sift Edge pilot testing and Build the Moat progress.",
-            "owner": "Infrastructure"
-          }
-        ]
-      },
-      {
-        "label": "Early April (Mar 31 - Apr 6)",
-        "events": [
-          {
-            "title": "Internal CLI distribution strategy",
-            "date": "2026-04-02",
-            "time": "14:00",
-            "type": "deadline",
-            "description": "ENG-8933 completion path decided - internal only or customer-facing SDK for Python Rules enablement.",
-            "owner": "Developer Experience Lead"
-          },
-          {
-            "title": "E2 GA readiness review",
+            "title": "Channel List V2 release",
             "date": "2026-04-04",
             "time": "10:00",
-            "type": "gate",
-            "description": "Assess if all critical bugs resolved, calculated channels stable, UX polish complete. Go/no-go for GA announcement.",
-            "owner": "Product Manager - Explore"
+            "type": "milestone",
+            "description": "ENG-9077 completion, part of Explore V2 GA readiness",
+            "owner": "Frontend Lead"
           },
           {
-            "title": "K2 Kafka contract finalized",
-            "date": "2026-04-06",
-            "time": "11:00",
+            "title": "Policy engine user group support",
+            "date": "2026-04-07",
+            "time": "14:00",
             "type": "milestone",
-            "description": "ENG-9270 complete - enables DFS integration work and data pipeline prototype. Build the Moat deliverable.",
-            "owner": "Data Engineering"
-          }
-        ]
-      },
-      {
-        "label": "Mid April (Apr 7-13)",
-        "events": [
-          {
-            "title": "Sift Edge first pilot customer deployment",
-            "date": "2026-04-11",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "ENG-8858 metrics validate, EKS ready. First real-world Edge deployment validates Build the Moat architecture.",
-            "owner": "Edge Product Team"
-          },
-          {
-            "title": "North Star instrumentation decision",
-            "date": "2026-04-13",
-            "time": "15:00",
-            "type": "deadline",
-            "description": "Close measurement gap for Decisions Captured Per Customer. Define events, implement tracking, establish baseline.",
-            "owner": "Product + Analytics"
+            "description": "ENG-9098, ENG-9418 complete—enables enterprise customer use case",
+            "owner": "Backend Lead"
           }
         ]
       }
