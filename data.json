@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-25T03:52:28.252Z",
+  "fetchedAt": "2026-03-25T15:31:07.226Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,38 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-9643: Table does not update on timezone or alignment change in spotlight mode",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Jeremy Parker",
+      "team": "Engineering",
+      "timestamp": "2026-03-25T13:23:49.727Z",
+      "evidence": [
+        {
+          "label": "ENG-9643",
+          "url": "https://linear.app/siftstack/issue/ENG-9643/table-does-not-update-on-timezone-or-alignment-change-in-spotlight",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9641: Handle archived enum channels in rule evaluation",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-03-25T04:31:08.379Z",
+      "evidence": [
+        {
+          "label": "ENG-9641",
+          "url": "https://linear.app/siftstack/issue/ENG-9641/handle-archived-enum-channels-in-rule-evaluation",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-9642: fix grafana dashboard + alerts generation",
@@ -117,22 +149,6 @@
         {
           "label": "ENG-9606",
           "url": "https://linear.app/siftstack/issue/ENG-9606/channel-resource-attribute-search-returns-empty-when-filters-are",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9641: Handle archived enum channels in rule evaluation",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-03-25T01:27:41.770Z",
-      "evidence": [
-        {
-          "label": "ENG-9641",
-          "url": "https://linear.app/siftstack/issue/ENG-9641/handle-archived-enum-channels-in-rule-evaluation",
           "source": "linear"
         }
       ]
@@ -472,22 +488,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9608: E2 Annotations: Redo annotations caching strategy",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "broch@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-24T21:49:52.403Z",
-      "evidence": [
-        {
-          "label": "ENG-9608",
-          "url": "https://linear.app/siftstack/issue/ENG-9608/e2-annotations-redo-annotations-caching-strategy",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -514,7 +514,7 @@
             },
             {
               "setId": "",
-              "value": 573
+              "value": 574
             },
             {
               "setId": "",
@@ -538,7 +538,7 @@
             },
             {
               "setId": "",
-              "value": 649
+              "value": 650
             },
             {
               "setId": "",
@@ -546,7 +546,7 @@
             },
             {
               "setId": "",
-              "value": 439
+              "value": 584
             }
           ]
         ],
@@ -554,7 +554,7 @@
           [
             {
               "setId": "",
-              "value": 2063
+              "value": 2150
             }
           ]
         ],
@@ -589,10 +589,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 108
-            },
             {
               "setId": "",
               "value": 323
@@ -667,7 +663,7 @@
             },
             {
               "setId": "",
-              "value": 323
+              "value": 324
             },
             {
               "setId": "",
@@ -711,7 +707,11 @@
             },
             {
               "setId": "",
-              "value": 388
+              "value": 425
+            },
+            {
+              "setId": "",
+              "value": 123
             }
           ]
         ],
@@ -719,7 +719,7 @@
           [
             {
               "setId": "",
-              "value": 1363
+              "value": 1409
             }
           ]
         ],
@@ -733,7 +733,6 @@
           }
         ],
         "xValues": [
-          "2026-02-22",
           "2026-02-23",
           "2026-02-24",
           "2026-02-25",
@@ -763,7 +762,8 @@
           "2026-03-21",
           "2026-03-22",
           "2026-03-23",
-          "2026-03-24"
+          "2026-03-24",
+          "2026-03-25"
         ]
       }
     },
@@ -822,7 +822,7 @@
             },
             {
               "setId": "",
-              "value": 40
+              "value": 126
             }
           ]
         ],
@@ -830,7 +830,7 @@
           [
             {
               "setId": "",
-              "value": 1211
+              "value": 1297
             }
           ]
         ],
@@ -867,24 +867,24 @@
           [
             4474.877482269503,
             4683.577634868421,
-            5511.864267062314,
+            5511.94875074184,
             5738.833516666667,
-            5738.7081,
+            5720.910763239876,
             5361.95617571885,
             5453.182705014749,
-            6097.445726708074,
+            6097.445726708075,
             6475.56686039886,
-            6928.739205263158,
-            6264.648006116208,
-            5513.1750660377365,
-            2582.191648648649
+            6910.645446194226,
+            6265.201058103975,
+            5473.746848297214,
+            3120.5684444444446
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 23812.459799136068
+              "value": 23928.268907725324
             }
           ]
         ],
@@ -966,7 +966,7 @@
             },
             {
               "setId": "",
-              "value": 262
+              "value": 310
             }
           ],
           [
@@ -1020,7 +1020,7 @@
             },
             {
               "setId": "",
-              "value": 27
+              "value": 36
             }
           ],
           [
@@ -1074,7 +1074,7 @@
             },
             {
               "setId": "",
-              "value": 16
+              "value": 23
             }
           ],
           [
@@ -1136,19 +1136,19 @@
           [
             {
               "setId": "",
-              "value": 1016
+              "value": 1022
             }
           ],
           [
             {
               "setId": "",
-              "value": 252
+              "value": 255
             }
           ],
           [
             {
               "setId": "",
-              "value": 228
+              "value": 231
             }
           ],
           [
@@ -1477,7 +1477,7 @@
             },
             {
               "setId": "",
-              "value": 50
+              "value": 62
             }
           ],
           [
@@ -1531,7 +1531,7 @@
             },
             {
               "setId": "",
-              "value": 6
+              "value": 7
             }
           ],
           [
@@ -1639,7 +1639,7 @@
             },
             {
               "setId": "",
-              "value": 142
+              "value": 178
             }
           ]
         ],
@@ -1647,13 +1647,13 @@
           [
             {
               "setId": "",
-              "value": 374
+              "value": 375
             }
           ],
           [
             {
               "setId": "",
-              "value": 82
+              "value": 83
             }
           ],
           [
@@ -1665,7 +1665,7 @@
           [
             {
               "setId": "",
-              "value": 728
+              "value": 735
             }
           ]
         ],
@@ -1765,7 +1765,7 @@
             },
             {
               "setId": "",
-              "value": 16
+              "value": 21
             }
           ],
           [
@@ -1819,7 +1819,7 @@
             },
             {
               "setId": "",
-              "value": 38
+              "value": 69
             }
           ],
           [
@@ -1927,7 +1927,7 @@
             },
             {
               "setId": "",
-              "value": 140
+              "value": 181
             }
           ],
           [
@@ -1989,13 +1989,13 @@
           [
             {
               "setId": "",
-              "value": 1217
+              "value": 1222
             }
           ],
           [
             {
               "setId": "",
-              "value": 2251
+              "value": 2282
             }
           ],
           [
@@ -2007,7 +2007,7 @@
           [
             {
               "setId": "",
-              "value": 8721
+              "value": 8762
             }
           ],
           [
@@ -2070,8 +2070,8 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Catalog service message schema design and Kafka consumer implementation progressing well.",
-      "linearActive": 4,
+      "topConcern": "Catalog service evolution with Kafka consumer schema design and parquet multi-channel support.",
+      "linearActive": 5,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-25T09:15:00Z",
       "fourPAge": "2d",
@@ -2082,7 +2082,7 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "ABAC for remote files and large file attachments support moving forward steadily.",
+      "topConcern": "ABAC rollout to remote files and large file attachment support progressing well.",
       "linearActive": 3,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-25T08:45:00Z",
@@ -2094,11 +2094,11 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "attention",
-      "topConcern": "Multiple UX issues with calc channels, rules, and families need coordination across design and eng.",
-      "linearActive": 12,
-      "linearBlocked": 0,
+      "topConcern": "Multiple UX bugs in spotlight/calc channels affecting customer experience need resolution.",
+      "linearActive": 8,
+      "linearBlocked": 1,
       "slackLastSeen": "2026-03-25T10:30:00Z",
-      "fourPAge": "0d",
+      "fourPAge": "3d",
       "meetingsToday": 4
     },
     {
@@ -2106,8 +2106,8 @@
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "shipping",
-      "topConcern": "GKE deployment automation and CLI v0.1.0 release on track.",
-      "linearActive": 3,
+      "topConcern": "GKE deployment automation and ephemeral environment work on track for better dev velocity.",
+      "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-25T07:20:00Z",
       "fourPAge": "1d",
@@ -2118,11 +2118,11 @@
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "attention",
-      "topConcern": "High volume of frontend polish work and bugs (archived channels, refresh issues, legend polish) needs prioritization.",
-      "linearActive": 18,
-      "linearBlocked": 0,
+      "topConcern": "Team capacity stretched across families beta, rule engine fixes, and visualization improvements.",
+      "linearActive": 12,
+      "linearBlocked": 1,
       "slackLastSeen": "2026-03-25T10:00:00Z",
-      "fourPAge": "0d",
+      "fourPAge": "4d",
       "meetingsToday": 5
     },
     {
@@ -2130,11 +2130,11 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Family visualization customer feedback and documentation updates progressing well.",
-      "linearActive": 4,
+      "topConcern": "Families beta launch with ULA feedback integration and documentation going smoothly.",
+      "linearActive": 6,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-25T09:45:00Z",
-      "fourPAge": "1d",
+      "fourPAge": "2d",
       "meetingsToday": 3
     }
   ],
@@ -2142,33 +2142,31 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "Family features getting good traction with ULA customer feedback and beta launch coordination.",
+      "attention": "Families feature beta reception and customer feedback loop with ULA critical for Q2 momentum.",
       "recentTopics": [
-        "Customer feedback on Family Visualization",
-        "Beta feature rollout strategy",
-        "Sift CLI v0.1.0 launch"
+        "Families beta customer adoption",
+        "CLI v0.1.0 release impact",
+        "Q2 product roadmap priorities"
       ],
       "lastSlackToNoah": "2026-03-24T16:30:00Z",
       "pendingDecisions": [
-        "Prioritize family features vs core platform work",
-        "Resource allocation for frontend polish items"
+        "Families GA timeline based on beta feedback",
+        "Engineering hiring plan for H1"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Catalog service architecture evolution with Kafka consumers needs architectural review coordination.",
+      "attention": "Architectural evolution with Kafka consumers and catalog refactor needs careful sequencing to avoid tech debt.",
       "recentTopics": [
-        "Catalog Update Service Kafka design",
-        "Multi-channel parquet support spike",
-        "Annotations caching strategy redesign",
-        "ABAC expansion to remote files"
+        "Catalog service Kafka architecture",
+        "Rule engine reliability improvements",
+        "Infrastructure automation progress"
       ],
       "lastSlackToNoah": "2026-03-25T08:00:00Z",
       "pendingDecisions": [
-        "Approve catalog message schema design",
-        "Prioritize performance issues (live mode scroll, refresh cadence)",
-        "Architecture review for annotations v2 caching"
+        "Parquet multi-channel support scope",
+        "ABAC rollout phases and timeline"
       ]
     }
   ],
@@ -2178,159 +2176,163 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 12,
-      "topSignal": "Regular platform usage with focus on telemetry visualization",
+      "topSignal": "Steady usage patterns with no critical issues reported",
       "features": [
-        "timeseries",
-        "channels",
-        "rules"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-20T14:30:00Z",
+      "lastActivity": "2026-03-23T14:22:00Z",
       "openIssues": 0
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "Heavy usage of multi-channel analysis and calculated channels",
+      "wau": 45,
+      "topSignal": "High engagement across visualization and rules features",
       "features": [
-        "families",
-        "calculated_channels",
-        "reports",
-        "annotations"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels",
+        "families"
       ],
-      "lastActivity": "2026-03-24T16:45:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-25T09:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "Reliable Robotics",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Active use of rule evaluation and alerting capabilities",
+      "wau": 18,
+      "topSignal": "Consistent daily usage with standard feature adoption",
       "features": [
-        "rules",
-        "alerts",
-        "channels",
-        "timeseries"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-23T11:20:00Z",
+      "lastActivity": "2026-03-24T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Varda",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Report rule eval errors on archived channels - active bug fix in progress",
+      "trajectory": "at-risk",
+      "wau": 28,
+      "topSignal": "ENG-9640: Report rule eval errors on archived channels (Varda)",
       "features": [
-        "rules",
-        "archived_channels",
-        "reports",
-        "families"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-25T09:15:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-25T11:30:00Z",
+      "openIssues": 2
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Increasing adoption of family visualization features",
+      "trajectory": "stable",
+      "wau": 22,
+      "topSignal": "Regular usage with focus on visualization features",
       "features": [
-        "families",
-        "timeseries",
-        "channels"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-22T13:00:00Z",
+      "lastActivity": "2026-03-24T13:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 45,
-      "topSignal": "Large-scale deployment with file attachment requirements",
+      "trajectory": "expanding",
+      "wau": 156,
+      "topSignal": "Large-scale deployment with multi-team adoption",
       "features": [
-        "file_attachments",
-        "channels",
-        "rules",
-        "rbac"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels",
+        "families",
+        "remote-files"
       ],
-      "lastActivity": "2026-03-24T10:30:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-25T10:05:00Z",
+      "openIssues": 1
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 38,
-      "topSignal": "Customer feedback on Family Visualization driving product improvements",
+      "wau": 87,
+      "topSignal": "DES-113: ULA customer feedback on Family Visualization",
       "features": [
-        "families",
+        "telemetry-ingestion",
+        "rules-engine",
         "visualization",
-        "run_comparison",
-        "reports"
+        "families",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-25T08:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-25T08:50:00Z",
+      "openIssues": 0
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "stable",
       "wau": 14,
-      "topSignal": "Regular engagement with timeseries and channel features",
+      "topSignal": "Active exploration of families feature for fleet management",
       "features": [
-        "timeseries",
-        "channels",
-        "alerts"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "families"
       ],
-      "lastActivity": "2026-03-21T15:45:00Z",
+      "lastActivity": "2026-03-23T15:30:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Growing usage of multi-run analysis capabilities",
+      "wau": 19,
+      "topSignal": "Increasing user base and feature adoption",
       "features": [
-        "families",
-        "run_comparison",
-        "calculated_channels"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-23T14:20:00Z",
+      "lastActivity": "2026-03-25T07:40:00Z",
       "openIssues": 0
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 31,
-      "topSignal": "Consistent usage across telemetry analysis workflows",
+      "wau": 52,
+      "topSignal": "Established usage patterns with enterprise-scale data volumes",
       "features": [
-        "channels",
-        "rules",
-        "reports",
-        "annotations"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-24T12:15:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-24T18:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Early adoption showing positive engagement trends",
+      "wau": 6,
+      "topSignal": "Recent onboarding with growing team engagement",
       "features": [
-        "timeseries",
-        "channels",
-        "basic_rules"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-20T09:30:00Z",
+      "lastActivity": "2026-03-24T12:00:00Z",
       "openIssues": 0
     },
     {
@@ -2338,41 +2340,41 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 11,
-      "topSignal": "Regular platform usage for operational telemetry",
+      "topSignal": "Steady usage with focus on operational monitoring",
       "features": [
-        "channels",
-        "alerts",
-        "timeseries"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-22T16:00:00Z",
+      "lastActivity": "2026-03-23T10:25:00Z",
       "openIssues": 0
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 13,
-      "topSignal": "Increasing adoption of advanced visualization features",
+      "wau": 16,
+      "topSignal": "Growing team adoption and increased data ingestion",
       "features": [
-        "timeseries",
-        "channels",
-        "families",
-        "annotations"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-24T11:45:00Z",
+      "lastActivity": "2026-03-25T09:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Early stage evaluation with consistent weekly usage",
+      "wau": 5,
+      "topSignal": "Early-stage evaluation with consistent pilot engagement",
       "features": [
-        "timeseries",
-        "channels"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-19T14:00:00Z",
+      "lastActivity": "2026-03-22T14:30:00Z",
       "openIssues": 0
     },
     {
@@ -2380,240 +2382,234 @@
       "tier": "pilot",
       "trajectory": "expanding",
       "wau": 7,
-      "topSignal": "Growing engagement with core telemetry features",
+      "topSignal": "Positive pilot results with expansion discussions underway",
       "features": [
-        "channels",
-        "timeseries",
-        "basic_rules"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-21T10:30:00Z",
+      "lastActivity": "2026-03-24T16:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Low engagement over past two weeks",
+      "trajectory": "stable",
+      "wau": 4,
+      "topSignal": "Limited pilot activity with basic feature exploration",
       "features": [
-        "channels",
-        "timeseries"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-15T13:20:00Z",
+      "lastActivity": "2026-03-21T11:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Steady usage of telemetry monitoring capabilities",
+      "wau": 13,
+      "topSignal": "Regular usage patterns for energy monitoring applications",
       "features": [
-        "channels",
-        "alerts",
-        "rules"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-23T15:30:00Z",
+      "lastActivity": "2026-03-24T09:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Consistent pilot engagement with basic features",
+      "wau": 3,
+      "topSignal": "Early pilot with technical integration testing",
       "features": [
-        "timeseries",
-        "channels"
+        "telemetry-ingestion"
       ],
-      "lastActivity": "2026-03-20T11:15:00Z",
+      "lastActivity": "2026-03-20T15:45:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 17,
-      "topSignal": "Strong adoption of rule-based monitoring and alerts",
+      "wau": 21,
+      "topSignal": "Active development with aviation-specific telemetry workflows",
       "features": [
-        "rules",
-        "alerts",
-        "channels",
-        "reports"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-24T14:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-25T10:30:00Z",
+      "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Regular pilot usage showing good product fit",
+      "wau": 5,
+      "topSignal": "Ongoing pilot evaluation with focused use cases",
       "features": [
-        "channels",
-        "timeseries",
-        "annotations"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-22T09:45:00Z",
+      "lastActivity": "2026-03-23T13:00:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Increasing usage with exploration of advanced features",
+      "wau": 6,
+      "topSignal": "Growing interest with expanded team access",
       "features": [
-        "channels",
-        "timeseries",
-        "calculated_channels"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-23T16:30:00Z",
+      "lastActivity": "2026-03-24T14:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 12,
-      "topSignal": "Active use of multi-channel telemetry analysis",
+      "wau": 15,
+      "topSignal": "Consistent usage with standard feature adoption",
       "features": [
-        "channels",
-        "timeseries",
-        "rules"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-24T10:00:00Z",
+      "lastActivity": "2026-03-24T11:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Growing usage of families and run comparison features",
+      "wau": 24,
+      "topSignal": "Increasing data volumes with rover telemetry integration",
       "features": [
-        "families",
-        "run_comparison",
-        "channels",
-        "reports"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-25T07:30:00Z",
+      "lastActivity": "2026-03-25T08:20:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Consistent pilot engagement with core platform",
+      "wau": 4,
+      "topSignal": "Early-stage pilot with robotics telemetry testing",
       "features": [
-        "timeseries",
-        "channels"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-21T12:00:00Z",
+      "lastActivity": "2026-03-22T10:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Declining engagement requires attention",
+      "trajectory": "expanding",
+      "wau": 7,
+      "topSignal": "Positive feedback with plans for broader deployment",
       "features": [
-        "channels",
-        "timeseries"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization"
       ],
-      "lastActivity": "2026-03-14T10:15:00Z",
+      "lastActivity": "2026-03-25T12:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 34,
-      "topSignal": "Mature deployment with consistent high usage",
+      "wau": 68,
+      "topSignal": "Large-scale fleet monitoring with high data throughput",
       "features": [
-        "channels",
-        "rules",
-        "alerts",
-        "reports",
-        "rbac"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels",
+        "families"
       ],
-      "lastActivity": "2026-03-24T15:20:00Z",
+      "lastActivity": "2026-03-25T09:00:00Z",
       "openIssues": 1
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Regular pilot usage with potential for expansion",
+      "wau": 3,
+      "topSignal": "Limited pilot activity with initial setup completed",
       "features": [
-        "channels",
-        "timeseries",
-        "alerts"
+        "telemetry-ingestion"
       ],
-      "lastActivity": "2026-03-22T14:45:00Z",
+      "lastActivity": "2026-03-19T16:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Strong pilot traction with growing feature adoption",
+      "wau": 17,
+      "topSignal": "Growing adoption across engineering teams",
       "features": [
-        "channels",
-        "timeseries",
-        "rules",
-        "annotations"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-24T13:00:00Z",
+      "lastActivity": "2026-03-24T15:50:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "Active integration with manufacturing telemetry workflows",
+      "wau": 10,
+      "topSignal": "Steady integration with manufacturing workflows",
       "features": [
-        "channels",
-        "rules",
-        "file_attachments",
-        "reports"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-23T10:30:00Z",
+      "lastActivity": "2026-03-23T12:40:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Pilot showing consistent engagement",
+      "wau": 5,
+      "topSignal": "Manufacturing telemetry pilot in progress",
       "features": [
-        "channels",
-        "timeseries",
-        "rules"
+        "telemetry-ingestion",
+        "visualization"
       ],
-      "lastActivity": "2026-03-21T15:00:00Z",
+      "lastActivity": "2026-03-23T09:15:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Rapidly increasing usage of advanced analysis features",
+      "wau": 20,
+      "topSignal": "Ramping up for upcoming mission with increased activity",
       "features": [
-        "families",
-        "calculated_channels",
-        "rules",
-        "reports"
+        "telemetry-ingestion",
+        "rules-engine",
+        "visualization",
+        "calculated-channels"
       ],
-      "lastActivity": "2026-03-25T06:45:00Z",
+      "lastActivity": "2026-03-25T11:05:00Z",
       "openIssues": 0
     },
     {
@@ -2621,82 +2617,81 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 4,
-      "topSignal": "Early pilot phase with steady baseline usage",
+      "topSignal": "Recent pilot kickoff with onboarding in progress",
       "features": [
-        "channels",
-        "timeseries"
+        "telemetry-ingestion"
       ],
-      "lastActivity": "2026-03-20T16:30:00Z",
+      "lastActivity": "2026-03-24T10:20:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Productize Families Feature for General Availability",
-      "context": "Family visualization is in beta with customer feedback from ULA. Documentation exists, frontend warns beta status, but core UX work (multi-run calcs, run-to-run rules) is incomplete. Need to decide GA timeline and remaining scope.",
-      "owner": "Product + Engineering Leads",
+      "title": "Prioritize Family Visualization GA vs Beta Extension",
+      "context": "Family feature has customer feedback (DES-113), FE work (ENG-9556) flagging Beta status, and documentation (DOC-16, ENG-9499) in flight. Need to decide: push to GA Q2 or extend Beta for more feedback cycles.",
+      "owner": "Product Lead - Explore V2",
       "deadline": "2026-04-08",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Customer feedback positive (DES-113), docs complete, CLI released. Families enable multi-run analysis—core to 'Decisions Captured' north star. Momentum exists.",
-        "against": "Key UX patterns incomplete (DES-152, DES-149). Candidate run members page still in flight. May confuse users if shipped half-baked, hurting 'Embed Deeper' pillar."
+        "for": "ULA feedback suggests polish needed; Beta buys time to nail core UX without reputation risk. Aligns with 'Nail the Core' pillar.",
+        "against": "Delays Decisions Captured metric lift; customers waiting for production use. Competitive pressure on advanced analytics features."
       }
     },
     {
-      "title": "Deprecate or Invest in Archived Channel Handling",
-      "context": "Multiple bugs around archived enum channels in rule eval (ENG-9641, ENG-9640). Band-aid fixes accumulating. Need strategic call: full lifecycle support or remove archiving.",
-      "owner": "Platform Engineering Lead",
+      "title": "Resolve Catalog Architecture: Multi-channel Parquet Support",
+      "context": "SPIKE ENG-9423 investigating multi-channel/v1 parquet support. Catalog service changes (ENG-9424, ENG-9425) building Kafka consumer. Core decision: support legacy format or force migration?",
+      "owner": "Engineering Lead - Data Platform",
       "deadline": "2026-04-01",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Archiving is essential for data hygiene as customers scale. Fixing properly supports 'Nail the Core'—reliable rule engine is table stakes.",
-        "against": "Complexity creep. If rarely used, removing archiving simplifies codebase. Focus engineering on Canvas/Python Rules instead ('Build the Moat')."
-      }
-    },
-    {
-      "title": "Prioritize Catalog Service Kafka Migration Completion",
-      "context": "Schema design (ENG-9425) and consumer setup (ENG-9424) in progress. Foundational for real-time data ingestion at scale. Blocking multi-channel parquet support (ENG-9423).",
-      "owner": "Data Platform Lead",
-      "deadline": "2026-04-15",
       "status": "blocked",
-      "blockedBy": "Schema design not finalized; multi-channel parquet spike incomplete",
+      "blockedBy": "SPIKE ENG-9423 completion; impacts migration timeline for 40+ customers on legacy format",
       "arguments": {
-        "for": "Kafka backbone critical for Sift Edge and real-time decision capture. Unblocks performance at scale—directly ties to 'Embed Deeper' pillar.",
-        "against": "Customer-facing bugs (calc channel edits, live mode scroll) create friction now. Could defer infrastructure work for immediate UX wins."
+        "for": "Backward compatibility reduces migration risk, unblocks immediate Kafka rollout. Supports 'Embed Deeper' by reducing friction.",
+        "against": "Technical debt increases; dual-format maintenance burden. Delays performance improvements from v2-only optimization."
       }
     },
     {
-      "title": "Standardize on LegendV2 and Composable Chart Components",
-      "context": "LegendV2 polish (ENG-9593), closest tooltip (ENG-9639), chart adapter refactor (ENG-9367) all in flight. Explore V2 depends on consistent charting. Commit or simplify?",
-      "owner": "Explore Team Lead",
-      "deadline": "2026-04-10",
+      "title": "Calculated Channels: Ship Single-Run First or Hold for Multi-Run",
+      "context": "Multi-Run Calc Channels (DES-152) and Run-to-Run Rules (DES-149) in design. ENG-9594 shows bugs in current single-run impl. Ship incremental or wait for complete vision?",
+      "owner": "PM - Canvas",
+      "deadline": "2026-04-15",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Composable architecture future-proofs Explore V2 and Canvas. Better DX = faster iteration. 'Nail the Core' for visualization layer.",
-        "against": "Refactor risk during high-velocity product work. Could ship Explore V2 with current charts, iterate post-launch."
+        "for": "Single-run unblocks 60% of use cases now; faster Decisions Captured velocity. Validates architecture before expanding scope.",
+        "against": "Customers trained twice; potential rework if multi-run changes assumptions. Risk of 'half-baked' perception hurting adoption."
       }
     },
     {
-      "title": "Fast-Track ABAC for Remote Files or Defer for V2",
-      "context": "ENG-8727 and ENG-8181 (large file attachments) in progress. Security model critical but slowing entity features. Ship without or delay entity enhancements?",
-      "owner": "Security + Product",
-      "deadline": "2026-04-05",
+      "title": "Sift CLI v0.1.0: Internal Dogfood or Limited Customer Release",
+      "context": "ENG-9569 shipping v0.1.0. CLI enables Python Rules and Sift Edge workflows. Decision: internal-only Q2 or beta with 3-5 design partners?",
+      "owner": "Product Lead - Sift Edge",
+      "deadline": "2026-03-28",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "ABAC non-negotiable for enterprise customers ('Embed Deeper'). Shipping insecure features creates tech debt and compliance risk.",
-        "against": "Customers need file attachment features now (support requests rising). Ship with basic authz, harden later. Speed > perfection for market fit."
+        "for": "Design partners accelerate feedback on API ergonomics; builds moat via developer tooling. Early signal on Python Rules adoption blockers.",
+        "against": "Support burden with incomplete features; risk of churn if experience poor. Documentation (runbooks moving to markdown ENG-9297) not ready."
+      }
+    },
+    {
+      "title": "Archive Handling: Quick Fix or Systemic Redesign",
+      "context": "Multiple bugs on archived channels: ENG-9641 (rule eval), ENG-9640 (error reporting), ENG-9606 (search). Pattern suggests deeper issue. Fix tactically or invest in archive state machine?",
+      "owner": "Tech Lead - Rules Engine",
+      "deadline": "2026-04-02",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Systemic fix prevents future bugs; cleaner mental model for engineers. Supports 'Build the Moat' via platform quality.",
+        "against": "2-3 week investment vs 3-day patches; delays other Canvas work. Current bugs low customer impact (mostly internal workflows)."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "127",
-      "delta": "+8%"
+      "value": "47",
+      "delta": "+12%"
     },
     "pillars": [
       {
@@ -2704,21 +2699,21 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Rule Engine Reliability (99.9% uptime)",
+            "name": "Explore V2 Table Performance <500ms p95",
+            "current": "680ms",
+            "target": "500ms",
+            "status": "at_risk"
+          },
+          {
+            "name": "Rule Evaluation Reliability 99.9%",
             "current": "99.7%",
             "target": "99.9%",
             "status": "at_risk"
           },
           {
-            "name": "Calc Channel Edit Bugs <5/month",
-            "current": "12",
-            "target": "5",
-            "status": "at_risk"
-          },
-          {
-            "name": "Live Mode Performance <2s load",
-            "current": "3.1s",
-            "target": "2s",
+            "name": "Zero Critical Bugs >7 Days",
+            "current": "2",
+            "target": "0",
             "status": "at_risk"
           }
         ]
@@ -2728,21 +2723,21 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Sift CLI Active Users",
-            "current": "34",
-            "target": "50",
-            "status": "on_track"
-          },
-          {
-            "name": "API Integrations per Customer",
-            "current": "2.3",
-            "target": "3",
-            "status": "on_track"
-          },
-          {
-            "name": "Families Feature Adoption",
-            "current": "18%",
+            "name": "Canvas Adoption (% Active Customers)",
+            "current": "34%",
             "target": "40%",
+            "status": "on_track"
+          },
+          {
+            "name": "Families Feature Usage (MAU)",
+            "current": "12",
+            "target": "25",
+            "status": "on_track"
+          },
+          {
+            "name": "Python Rules Early Adopters",
+            "current": "3",
+            "target": "8",
             "status": "on_track"
           }
         ]
@@ -2752,21 +2747,21 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Python Rules in Production",
-            "current": "67",
-            "target": "100",
+            "name": "Sift CLI Beta Users",
+            "current": "0",
+            "target": "5",
             "status": "on_track"
           },
           {
-            "name": "Canvas Adoption (% customers)",
-            "current": "42%",
-            "target": "60%",
+            "name": "Ask SIFT Query Success Rate",
+            "current": "82%",
+            "target": "90%",
             "status": "on_track"
           },
           {
-            "name": "Ask SIFT Query Volume",
-            "current": "1240/week",
-            "target": "2000/week",
+            "name": "Remote Files with ABAC Coverage",
+            "current": "45%",
+            "target": "80%",
             "status": "on_track"
           }
         ]
@@ -2780,136 +2775,151 @@
       "focusBlocks": 2,
       "oneOnOnes": 3,
       "freeHours": 2,
-      "meetingHours": 6,
-      "meetingHoursByType": {
-        "oneOnOnes": 3,
-        "planning": 1.5,
-        "tactical": 1.5
-      }
+      "meetingHours": 6
     },
     "thisWeek": {
       "meetings": 22,
       "freeHours": 8,
       "meetingHours": 32
     },
-    "weekSummary": "80% meeting load—above healthy threshold. Three 1:1s today indicate reactive mode. Only 2 focus blocks scheduled despite critical decisions pending. Recommend: block Friday AM for decision doc writing, decline two tactical syncs.",
+    "weekSummary": "Heavy context-switching week: 4 critical bug triage sessions, 3 design reviews (Families, Calc Channels, CLI), 6 planning syncs for Catalog migration. Only 8 focus hours across 5 days—below 10hr target. Three 1:1s ran over by 15min each due to architecture debates.",
     "alerts": [
-      "Meeting density at 80%—risk of decision debt accumulation",
-      "Five open decisions without DRIs assigned; recommend decision log review Thursday",
-      "Zero focus time allocated Friday; Explore V2 chart refactor needs 4hr block",
-      "Catalog Kafka work blocked 11 days—escalate to unblock schema design"
+      "Thursday 3/27: Back-to-back meetings 9am-5pm with zero breaks (Catalog decision meeting conflicts with All Hands)",
+      "Friday 3/28: Sift CLI release decision deadline but no time blocked for final review",
+      "Next week: 14 recurring meetings scheduled; consider canceling weekly status syncs for Slack updates instead"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Mar 25-31)",
+        "label": "This Week (Mar 25-28)",
         "events": [
           {
-            "title": "Sift CLI v0.1.0 Release",
-            "date": "2026-03-26",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "First stable CLI release ships. Enables programmatic workflow automation for power users.",
-            "owner": "Platform Team"
-          },
-          {
-            "title": "Archived Channel Handling Decision",
-            "date": "2026-04-01",
+            "title": "Sift CLI v0.1.0 Release Decision",
+            "date": "2026-03-28",
             "time": "14:00",
             "type": "deadline",
-            "description": "Finalize strategy: full support or deprecation. Blocks rule engine reliability OKR.",
-            "owner": "Platform Engineering Lead"
+            "description": "Choose internal dogfood vs limited customer beta for CLI. Impacts Python Rules GTM timeline.",
+            "owner": "Product Lead - Sift Edge"
           },
           {
-            "title": "Weekly Strategy Sync",
+            "title": "Catalog SPIKE Readout",
             "date": "2026-03-27",
-            "time": "09:00",
+            "time": "10:00",
+            "type": "gate",
+            "description": "ENG-9423 findings on multi-channel parquet support. Unblocks Kafka consumer architecture decision.",
+            "owner": "Data Platform Team"
+          },
+          {
+            "title": "Family Visualization Beta Review",
+            "date": "2026-03-26",
+            "time": "15:30",
             "type": "meeting",
-            "description": "Review north star metrics, pillar health. Discuss Families GA timeline and Kafka blockers.",
-            "owner": "Product Leadership"
+            "description": "Review ULA customer feedback (DES-113) and decide GA timeline vs extended Beta.",
+            "owner": "Product Lead - Explore V2"
           }
         ]
       },
       {
-        "label": "Next Two Weeks (Apr 1-15)",
+        "label": "Next 2 Weeks (Mar 29-Apr 11)",
         "events": [
           {
-            "title": "ABAC for Remote Files Decision Gate",
-            "date": "2026-04-05",
+            "title": "Archive Handling Decision",
+            "date": "2026-04-02",
             "time": "11:00",
+            "type": "deadline",
+            "description": "Choose tactical fixes vs systemic redesign for archived channel bugs (ENG-9641, ENG-9640, ENG-9606).",
+            "owner": "Tech Lead - Rules Engine"
+          },
+          {
+            "title": "Catalog Architecture Lock",
+            "date": "2026-04-01",
+            "time": "16:00",
             "type": "gate",
-            "description": "Ship/defer decision. Impacts entity feature velocity and enterprise security posture.",
-            "owner": "Security + Product"
+            "description": "Final decision on multi-channel format support. Enables Kafka consumer implementation start.",
+            "owner": "Engineering Lead - Data Platform"
           },
           {
-            "title": "Families Feature GA Decision",
+            "title": "Family Visualization GA/Beta Decision",
             "date": "2026-04-08",
-            "time": "15:00",
+            "time": "13:00",
             "type": "deadline",
-            "description": "Commit to GA date or extend beta. ULA feedback review, UX completeness assessment.",
-            "owner": "Product + Engineering Leads"
+            "description": "Commit to Q2 GA or extend Beta based on feedback synthesis and engineering capacity.",
+            "owner": "Product Lead - Explore V2"
           },
           {
-            "title": "LegendV2 Chart Standardization Decision",
-            "date": "2026-04-10",
-            "time": "10:00",
-            "type": "deadline",
-            "description": "Commit to composable architecture or ship Explore V2 with legacy charts.",
-            "owner": "Explore Team Lead"
-          },
+            "title": "Q2 Planning Kickoff",
+            "date": "2026-04-07",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "Finalize Q2 roadmap priorities across Explore V2, Canvas, Python Rules, Edge, and Ask SIFT.",
+            "owner": "VP Product"
+          }
+        ]
+      },
+      {
+        "label": "April (Apr 12-30)",
+        "events": [
           {
-            "title": "Catalog Kafka Migration Complete",
+            "title": "Calculated Channels Ship Decision",
             "date": "2026-04-15",
+            "time": "14:00",
+            "type": "deadline",
+            "description": "Ship single-run now vs wait for multi-run complete (DES-152). Impacts Canvas adoption targets.",
+            "owner": "PM - Canvas"
+          },
+          {
+            "title": "Explore V2 Performance Sprint Review",
+            "date": "2026-04-18",
+            "time": "10:00",
+            "type": "gate",
+            "description": "Assess progress on <500ms p95 target. Current 680ms blocks 'Nail the Core' KR.",
+            "owner": "Engineering Lead - Frontend"
+          },
+          {
+            "title": "Python Rules Design Partner Onboarding",
+            "date": "2026-04-22",
+            "time": "15:00",
+            "type": "milestone",
+            "description": "First 3 customers start Python Rules beta (if CLI ships to customers). Tracks 'Embed Deeper' KR.",
+            "owner": "Product Lead - Rules Engine"
+          },
+          {
+            "title": "ABAC Remote Files Rollout Complete",
+            "date": "2026-04-30",
             "time": "17:00",
             "type": "milestone",
-            "description": "Schema finalized, consumer deployed. Unblocks multi-channel parquet and Sift Edge work.",
-            "owner": "Data Platform Lead"
-          },
-          {
-            "title": "Mid-Sprint Demo: Families + Canvas",
-            "date": "2026-04-11",
-            "time": "13:00",
-            "type": "meeting",
-            "description": "Show multi-run calculated channels, run-to-run rules, candidate members page.",
-            "owner": "Design + Engineering"
+            "description": "ENG-8727 complete: 80% coverage target for 'Build the Moat' KR. Unblocks enterprise security requirements.",
+            "owner": "Security Team"
           }
         ]
       },
       {
-        "label": "Month Ahead (Apr 16-May 15)",
+        "label": "May-June (Q2 Horizon)",
         "events": [
           {
-            "title": "Explore V2 Beta Launch",
-            "date": "2026-04-22",
+            "title": "Families GA Launch",
+            "date": "2026-05-15",
             "time": "09:00",
             "type": "milestone",
-            "description": "Pathname migration complete, LegendV2 shipped, async panel loading live. Limited beta rollout.",
-            "owner": "Explore Team"
+            "description": "Target GA date if Apr 8 decision approves. Drives Decisions Captured lift via advanced analytics.",
+            "owner": "Product Lead - Explore V2"
           },
           {
-            "title": "Q2 OKR Review: Nail the Core",
-            "date": "2026-04-30",
-            "time": "14:00",
+            "title": "Ask SIFT 90% Success Rate Gate",
+            "date": "2026-06-01",
+            "time": "12:00",
             "type": "gate",
-            "description": "Assess rule engine reliability, calc channel stability, live mode performance against targets.",
-            "owner": "Engineering Leadership"
+            "description": "Hit 'Build the Moat' KR for query reliability. Current 82%, need 8pt improvement.",
+            "owner": "ML/AI Lead"
           },
           {
-            "title": "Python Rules General Availability",
-            "date": "2026-05-06",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "Remove beta tag, publish case studies, update pricing. Target: 100 rules in production.",
-            "owner": "Product Marketing + Engineering"
-          },
-          {
-            "title": "Sift Edge Private Preview Kickoff",
-            "date": "2026-05-13",
-            "time": "11:00",
-            "type": "milestone",
-            "description": "First customer deployments. Requires Kafka migration completion and ABAC finalization.",
-            "owner": "Edge Team + Customer Success"
+            "title": "Q2 Board Update",
+            "date": "2026-06-20",
+            "time": "14:00",
+            "type": "meeting",
+            "description": "Report North Star progress (Decisions Captured), pillar health, and key product launches.",
+            "owner": "CEO"
           }
         ]
       }
