@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-03-30T19:26:30.046Z",
+  "fetchedAt": "2026-03-30T23:15:05.949Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -11,46 +11,110 @@
   "signals": [
     {
       "source": "linear",
-      "title": "ENG-9667: mergesort + output file rotation",
-      "priority": "HIGH",
+      "title": "ENG-9838: update internal external_sync.md with required Keycloak and API actions",
+      "priority": "URGENT",
       "state": "In Progress",
-      "assignee": "adam@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T19:01:31.373Z",
+      "timestamp": "2026-03-30T23:02:16.784Z",
       "evidence": [
         {
-          "label": "ENG-9667",
-          "url": "https://linear.app/siftstack/issue/ENG-9667/mergesort-output-file-rotation",
+          "label": "ENG-9838",
+          "url": "https://linear.app/siftstack/issue/ENG-9838/update-internal-external-syncmd-with-required-keycloak-and-api-actions",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-7232: Make the exported family YAML more understandable",
+      "title": "ENG-9430: Migrate /sensitivity-labels routes",
       "priority": "URGENT",
       "state": "Ready for Work",
+      "assignee": "jon@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:59:25.405Z",
+      "timestamp": "2026-03-30T22:55:41.031Z",
       "evidence": [
         {
-          "label": "ENG-7232",
-          "url": "https://linear.app/siftstack/issue/ENG-7232/make-the-exported-family-yaml-more-understandable",
+          "label": "ENG-9430",
+          "url": "https://linear.app/siftstack/issue/ENG-9430/migrate-sensitivity-labels-routes",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-7289: Handle Data Source Swap from E2 data selector",
+      "title": "ENG-9458: Import and export permission denied are surfaced as errors on the frontend even though API 403s.",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T22:52:04.002Z",
+      "evidence": [
+        {
+          "label": "ENG-9458",
+          "url": "https://linear.app/siftstack/issue/ENG-9458/import-and-export-permission-denied-are-surfaced-as-errors-on-the",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7289: Replace data source: Family data",
       "priority": "URGENT",
       "state": "Ready for Work",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:58:45.204Z",
+      "timestamp": "2026-03-30T22:49:45.755Z",
       "evidence": [
         {
           "label": "ENG-7289",
-          "url": "https://linear.app/siftstack/issue/ENG-7289/handle-data-source-swap-from-e2-data-selector",
+          "url": "https://linear.app/siftstack/issue/ENG-7289/replace-data-source-family-data",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9785: Block email invitation flow for SCIM-managed organizations",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T22:48:47.318Z",
+      "evidence": [
+        {
+          "label": "ENG-9785",
+          "url": "https://linear.app/siftstack/issue/ENG-9785/block-email-invitation-flow-for-scim-managed-organizations",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9784: Block admin user deactivation for SCIM-managed organizations",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T22:48:42.321Z",
+      "evidence": [
+        {
+          "label": "ENG-9784",
+          "url": "https://linear.app/siftstack/issue/ENG-9784/block-admin-user-deactivation-for-scim-managed-organizations",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9837: Loading metadata values for more than 65k entries fails",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "brandon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T22:45:32.390Z",
+      "evidence": [
+        {
+          "label": "ENG-9837",
+          "url": "https://linear.app/siftstack/issue/ENG-9837/loading-metadata-values-for-more-than-65k-entries-fails",
           "source": "linear"
         }
       ]
@@ -61,294 +125,11 @@
       "priority": "URGENT",
       "state": "Ready for Work",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:57:36.793Z",
+      "timestamp": "2026-03-30T22:44:06.521Z",
       "evidence": [
         {
           "label": "ENG-9832",
           "url": "https://linear.app/siftstack/issue/ENG-9832/auto-name-alignments-when-the-name-is-still-default-but-a-user-selects",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7666: Recently defined alignments are immediately removed from table in a confusing way",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:55:46.051Z",
-      "evidence": [
-        {
-          "label": "ENG-7666",
-          "url": "https://linear.app/siftstack/issue/ENG-7666/recently-defined-alignments-are-immediately-removed-from-table-in-a",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9831: Add a warning when saving a panel config against a family plot",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:53:14.526Z",
-      "evidence": [
-        {
-          "label": "ENG-9831",
-          "url": "https://linear.app/siftstack/issue/ENG-9831/add-a-warning-when-saving-a-panel-config-against-a-family-plot",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9309: Canvas: Add metadata",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Ian Later",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:50:28.442Z",
-      "evidence": [
-        {
-          "label": "ENG-9309",
-          "url": "https://linear.app/siftstack/issue/ENG-9309/canvas-add-metadata",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9605: Integrate Tailscale with GCP",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "Yue Shen",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:48:23.571Z",
-      "evidence": [
-        {
-          "label": "ENG-9605",
-          "url": "https://linear.app/siftstack/issue/ENG-9605/integrate-tailscale-with-gcp",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7937: Add \"reset x\" and \"reset y\" buttons to all plot chart types",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:48:04.964Z",
-      "evidence": [
-        {
-          "label": "ENG-7937",
-          "url": "https://linear.app/siftstack/issue/ENG-7937/add-reset-x-and-reset-y-buttons-to-all-plot-chart-types",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7936: Time-alignment settings for histogram",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:48:03.019Z",
-      "evidence": [
-        {
-          "label": "ENG-7936",
-          "url": "https://linear.app/siftstack/issue/ENG-7936/time-alignment-settings-for-histogram",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6412: Plot families in scatter plot panels",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:47:54.590Z",
-      "evidence": [
-        {
-          "label": "ENG-6412",
-          "url": "https://linear.app/siftstack/issue/ENG-6412/plot-families-in-scatter-plot-panels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6411: Plot families in geo map panels",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:47:54.518Z",
-      "evidence": [
-        {
-          "label": "ENG-6411",
-          "url": "https://linear.app/siftstack/issue/ENG-6411/plot-families-in-geo-map-panels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9734: Select data button polish",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:47:19.387Z",
-      "evidence": [
-        {
-          "label": "ENG-9734",
-          "url": "https://linear.app/siftstack/issue/ENG-9734/select-data-button-polish",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6409: Plot families in histogram panels",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:47:00.013Z",
-      "evidence": [
-        {
-          "label": "ENG-6409",
-          "url": "https://linear.app/siftstack/issue/ENG-6409/plot-families-in-histogram-panels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6408: Plot families in table panels",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:46:59.928Z",
-      "evidence": [
-        {
-          "label": "ENG-6408",
-          "url": "https://linear.app/siftstack/issue/ENG-6408/plot-families-in-table-panels",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9799: When doing a bulk include of runs with existing alignments, it can load for awhile in the background",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:45:17.819Z",
-      "evidence": [
-        {
-          "label": "ENG-9799",
-          "url": "https://linear.app/siftstack/issue/ENG-9799/when-doing-a-bulk-include-of-runs-with-existing-alignments-it-can-load",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9720: E2 GA: Channel data not showing when jumping from campaign (E1 and E2)",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:42:44.833Z",
-      "evidence": [
-        {
-          "label": "ENG-9720",
-          "url": "https://linear.app/siftstack/issue/ENG-9720/e2-ga-channel-data-not-showing-when-jumping-from-campaign-e1-and-e2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9829: BatchExpandRunBounds() Deadlock",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Bryce Turley",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:41:29.217Z",
-      "evidence": [
-        {
-          "label": "ENG-9829",
-          "url": "https://linear.app/siftstack/issue/ENG-9829/batchexpandrunbounds-deadlock",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6405: [FE] Support families in all charts",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:38:34.274Z",
-      "evidence": [
-        {
-          "label": "ENG-6405",
-          "url": "https://linear.app/siftstack/issue/ENG-6405/fe-support-families-in-all-charts",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-61: [UX] Assign multiple alignment points for a single Family member",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-03-30T18:34:12.110Z",
-      "evidence": [
-        {
-          "label": "DES-61",
-          "url": "https://linear.app/siftstack/issue/DES-61/ux-assign-multiple-alignment-points-for-a-single-family-member",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7789: Multiple alignment points for a single family member",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:34:12.110Z",
-      "evidence": [
-        {
-          "label": "ENG-7789",
-          "url": "https://linear.app/siftstack/issue/ENG-7789/multiple-alignment-points-for-a-single-family-member",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8857: Add enum + bitfield support to Sift Edge",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "benjamin@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-03-30T18:33:37.413Z",
-      "evidence": [
-        {
-          "label": "ENG-8857",
-          "url": "https://linear.app/siftstack/issue/ENG-8857/add-enum-bitfield-support-to-sift-edge",
           "source": "linear"
         }
       ]
@@ -360,7 +141,7 @@
       "state": "In Review",
       "assignee": "anna@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:33:17.688Z",
+      "timestamp": "2026-03-30T22:41:34.969Z",
       "evidence": [
         {
           "label": "ENG-9651",
@@ -371,32 +152,48 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9828: Canvas: Disposition history",
+      "title": "ENG-9828: Canvas: Disposition history/comments",
       "priority": "URGENT",
       "state": "Ready for Work",
       "assignee": "Ian Later",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:24:05.348Z",
+      "timestamp": "2026-03-30T22:35:23.491Z",
       "evidence": [
         {
           "label": "ENG-9828",
-          "url": "https://linear.app/siftstack/issue/ENG-9828/canvas-disposition-history",
+          "url": "https://linear.app/siftstack/issue/ENG-9828/canvas-disposition-historycomments",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9437: Canvas: Pass/Fail Buttons",
-      "priority": "URGENT",
+      "title": "ENG-9339: Clean up configurable-downsampling feature flag",
+      "priority": "HIGH",
       "state": "In Progress",
-      "assignee": "Ian Later",
+      "assignee": "danny@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:24:05.348Z",
+      "timestamp": "2026-03-30T22:31:16.885Z",
       "evidence": [
         {
-          "label": "ENG-9437",
-          "url": "https://linear.app/siftstack/issue/ENG-9437/canvas-passfail-buttons",
+          "label": "ENG-9339",
+          "url": "https://linear.app/siftstack/issue/ENG-9339/clean-up-configurable-downsampling-feature-flag",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "DES-61: [UX] Assign multiple alignment points for a single Family member",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Clinton Naugle",
+      "team": "Design",
+      "timestamp": "2026-03-30T22:26:27.122Z",
+      "evidence": [
+        {
+          "label": "DES-61",
+          "url": "https://linear.app/siftstack/issue/DES-61/ux-assign-multiple-alignment-points-for-a-single-family-member",
           "source": "linear"
         }
       ]
@@ -405,10 +202,10 @@
       "source": "linear",
       "title": "ENG-8756: Sync panel time: scrolling table disrupts time series range",
       "priority": "HIGH",
-      "state": "In Progress",
+      "state": "In Review",
       "assignee": "evan@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:22:35.415Z",
+      "timestamp": "2026-03-30T22:26:06.474Z",
       "evidence": [
         {
           "label": "ENG-8756",
@@ -419,64 +216,269 @@
     },
     {
       "source": "linear",
-      "title": "ENG-9499: Link to sift docs on families from family page",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Bill Raj-Derouin",
+      "title": "ENG-9437: Canvas: Pass/Fail Buttons",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Ian Later",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:12:57.084Z",
+      "timestamp": "2026-03-30T22:15:50.528Z",
       "evidence": [
         {
-          "label": "ENG-9499",
-          "url": "https://linear.app/siftstack/issue/ENG-9499/link-to-sift-docs-on-families-from-family-page",
+          "label": "ENG-9437",
+          "url": "https://linear.app/siftstack/issue/ENG-9437/canvas-passfail-buttons",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-8515: Update `ingest` configuration logic to explicitly specify assigned ingestion topics on a per-pod basis",
+      "title": "DES-134: [UX] Adhoc Run Dynamic Window Alignment in E2",
       "priority": "HIGH",
       "state": "Ready for Work",
+      "assignee": "Clinton Naugle",
+      "team": "Design",
+      "timestamp": "2026-03-30T22:08:22.655Z",
+      "evidence": [
+        {
+          "label": "DES-134",
+          "url": "https://linear.app/siftstack/issue/DES-134/ux-adhoc-run-dynamic-window-alignment-in-e2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7748: Add relative time compare mode to E2 Metrics",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "leo@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T22:04:59.923Z",
+      "evidence": [
+        {
+          "label": "ENG-7748",
+          "url": "https://linear.app/siftstack/issue/ENG-7748/add-relative-time-compare-mode-to-e2-metrics",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9836: Write Test Results KPI Dashboard MVP RFC",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Alex Luck",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T21:59:32.065Z",
+      "evidence": [
+        {
+          "label": "ENG-9836",
+          "url": "https://linear.app/siftstack/issue/ENG-9836/write-test-results-kpi-dashboard-mvp-rfc",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9365: Test Results: Wider Sidebar tooltips",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T21:58:50.519Z",
+      "evidence": [
+        {
+          "label": "ENG-9365",
+          "url": "https://linear.app/siftstack/issue/ENG-9365/test-results-wider-sidebar-tooltips",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9507: Test Results: Display image attachments inline",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "Ian Later",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T21:58:50.479Z",
+      "evidence": [
+        {
+          "label": "ENG-9507",
+          "url": "https://linear.app/siftstack/issue/ENG-9507/test-results-display-image-attachments-inline",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9652: GetData v.s. GetStructuredData query perf analysis",
+      "priority": "HIGH",
+      "state": "In Progress",
       "assignee": "nick.bowman@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:08:57.872Z",
+      "timestamp": "2026-03-30T20:55:23.953Z",
       "evidence": [
         {
-          "label": "ENG-8515",
-          "url": "https://linear.app/siftstack/issue/ENG-8515/update-ingest-configuration-logic-to-explicitly-specify-assigned",
+          "label": "ENG-9652",
+          "url": "https://linear.app/siftstack/issue/ENG-9652/getdata-vs-getstructureddata-query-perf-analysis",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9433: Run's asset visible in overview despite asset access being denied",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
+      "title": "ENG-9829: BatchExpandRunBounds() Deadlock",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Bryce Turley",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:06:02.043Z",
+      "timestamp": "2026-03-30T20:43:14.857Z",
       "evidence": [
         {
-          "label": "ENG-9433",
-          "url": "https://linear.app/siftstack/issue/ENG-9433/runs-asset-visible-in-overview-despite-asset-access-being-denied",
+          "label": "ENG-9829",
+          "url": "https://linear.app/siftstack/issue/ENG-9829/batchexpandrunbounds-deadlock",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9339: Clean up configurable-downsampling feature flag",
+      "title": "ENG-9616: Remove ArbPB use of \"ingest_config_flows\" table",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T20:37:12.128Z",
+      "evidence": [
+        {
+          "label": "ENG-9616",
+          "url": "https://linear.app/siftstack/issue/ENG-9616/remove-arbpb-use-of-ingest-config-flows-table",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9805: S3 throttling retry (rate limiter + channel retry + tuned RetryConfig)",
       "priority": "HIGH",
       "state": "Ready for Work",
-      "assignee": "danny@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-03-30T18:05:09.458Z",
+      "timestamp": "2026-03-30T20:26:50.704Z",
       "evidence": [
         {
-          "label": "ENG-9339",
-          "url": "https://linear.app/siftstack/issue/ENG-9339/clean-up-configurable-downsampling-feature-flag",
+          "label": "ENG-9805",
+          "url": "https://linear.app/siftstack/issue/ENG-9805/s3-throttling-retry-rate-limiter-channel-retry-tuned-retryconfig",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9806: Integrated post-commit validation & auto-rollback for compaction",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T20:26:24.638Z",
+      "evidence": [
+        {
+          "label": "ENG-9806",
+          "url": "https://linear.app/siftstack/issue/ENG-9806/integrated-post-commit-validation-and-auto-rollback-for-compaction",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8579: Enable freezing channel name timestamp in metrics",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "leo@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T20:05:33.567Z",
+      "evidence": [
+        {
+          "label": "ENG-8579",
+          "url": "https://linear.app/siftstack/issue/ENG-8579/enable-freezing-channel-name-timestamp-in-metrics",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9515: No UI level enforcement on Ingest Data permission (we should hide the buttons)",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T20:04:22.146Z",
+      "evidence": [
+        {
+          "label": "ENG-9515",
+          "url": "https://linear.app/siftstack/issue/ENG-9515/no-ui-level-enforcement-on-ingest-data-permission-we-should-hide-the",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9778: Load Testing Ingest Scale",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "pramod@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T19:59:06.434Z",
+      "evidence": [
+        {
+          "label": "ENG-9778",
+          "url": "https://linear.app/siftstack/issue/ENG-9778/load-testing-ingest-scale",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9529: [BE] Find candidate runs endpoint",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T19:52:12.073Z",
+      "evidence": [
+        {
+          "label": "ENG-9529",
+          "url": "https://linear.app/siftstack/issue/ENG-9529/be-find-candidate-runs-endpoint",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "DES-140: UX/UI: Canvas Output - Rule-based Reports",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "jessica@siftstack.com",
+      "team": "Design",
+      "timestamp": "2026-03-30T19:38:36.540Z",
+      "evidence": [
+        {
+          "label": "DES-140",
+          "url": "https://linear.app/siftstack/issue/DES-140/uxui-canvas-output-rule-based-reports",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9194: Live mode not working with table plotted",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-03-30T19:35:24.157Z",
+      "evidence": [
+        {
+          "label": "ENG-9194",
+          "url": "https://linear.app/siftstack/issue/ENG-9194/live-mode-not-working-with-table-plotted",
           "source": "linear"
         }
       ]
@@ -659,7 +661,7 @@
             },
             {
               "setId": "",
-              "value": 416
+              "value": 417
             },
             {
               "setId": "",
@@ -687,15 +689,15 @@
             },
             {
               "setId": "",
-              "value": 357
+              "value": 360
             },
             {
               "setId": "",
-              "value": 334
+              "value": 337
             },
             {
               "setId": "",
-              "value": 154
+              "value": 155
             },
             {
               "setId": "",
@@ -703,7 +705,7 @@
             },
             {
               "setId": "",
-              "value": 319
+              "value": 402
             }
           ]
         ],
@@ -711,7 +713,7 @@
           [
             {
               "setId": "",
-              "value": 1531
+              "value": 1544
             }
           ]
         ],
@@ -2062,8 +2064,8 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Family alignment features rolling out across multiple chart types",
-      "linearActive": 8,
+      "topConcern": "SCIM user management blocking and permission enforcement gaps need attention",
+      "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-03-30T09:15:00Z",
       "fourPAge": "2d",
@@ -2073,11 +2075,11 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "shipping",
-      "topConcern": "E2 GA channel data issues and data source swap handling",
-      "linearActive": 5,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-30T08:45:00Z",
+      "status": "attention",
+      "topConcern": "S3 throttling and compaction stability issues impacting data pipeline reliability",
+      "linearActive": 6,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-03-30T10:42:00Z",
       "fourPAge": "1d",
       "meetingsToday": 2
     },
@@ -2086,34 +2088,34 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Canvas metadata and disposition history features shipping on schedule",
-      "linearActive": 4,
+      "topConcern": "Canvas features shipping well but alignment UX complexity needs design validation",
+      "linearActive": 7,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-30T10:30:00Z",
-      "fourPAge": "1d",
+      "slackLastSeen": "2026-03-30T11:20:00Z",
+      "fourPAge": "0d",
       "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "BatchExpandRunBounds deadlock needs immediate resolution",
-      "linearActive": 6,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-03-30T07:20:00Z",
+      "status": "blocked",
+      "topConcern": "BatchExpandRunBounds deadlock blocking ingest scale testing and load validation",
+      "linearActive": 5,
+      "linearBlocked": 2,
+      "slackLastSeen": "2026-03-30T08:30:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 2
+      "meetingsToday": 1
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "attention",
-      "topConcern": "Coordinating across families feature work and critical deadlock fix",
-      "linearActive": 12,
+      "topConcern": "Team bandwidth stretched across feature flags cleanup and critical perf issues",
+      "linearActive": 8,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-03-30T09:00:00Z",
+      "slackLastSeen": "2026-03-30T10:05:00Z",
       "fourPAge": "1d",
       "meetingsToday": 5
     },
@@ -2122,43 +2124,43 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Sift Edge enum support and customer data access issues",
+      "topConcern": "Test Results KPI dashboard RFC needs stakeholder alignment for customer rollout",
       "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-30T08:00:00Z",
-      "fourPAge": "2d",
-      "meetingsToday": 3
+      "slackLastSeen": "2026-03-30T09:50:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 2
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "E2 GA stability and families feature rollout velocity",
+      "attention": "SCIM enterprise features need go-to-market alignment with infrastructure stability work",
       "recentTopics": [
-        "Customer adoption metrics",
-        "E2 migration timeline",
-        "Q2 product roadmap"
+        "Enterprise auth roadmap",
+        "Customer escalations on data reliability",
+        "Q2 product prioritization"
       ],
       "lastSlackToNoah": "2026-03-29T16:45:00Z",
       "pendingDecisions": [
-        "Prioritize families vs Canvas features for customer demo",
-        "Resource allocation for E2 GA support"
+        "Prioritize SCIM GA vs Canvas feature expansion",
+        "Load testing timeline before enterprise customer onboarding"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "BatchExpandRunBounds deadlock and ingestion architecture cleanup",
+      "attention": "Critical path: resolve deadlock and S3 throttling before scaling ingest infrastructure",
       "recentTopics": [
-        "Infrastructure scalability",
-        "PTSID service deprecation",
-        "Tailscale GCP integration"
+        "Ingest architecture performance",
+        "Compaction validation strategy",
+        "Query optimization priorities"
       ],
-      "lastSlackToNoah": "2026-03-30T07:30:00Z",
+      "lastSlackToNoah": "2026-03-30T07:20:00Z",
       "pendingDecisions": [
-        "Timeline for removing configurable-downsampling flag",
-        "Ingestion topic assignment strategy"
+        "Resource allocation for perf vs features",
+        "Timeline for ArbPB migration completion"
       ]
     }
   ],
@@ -2168,15 +2170,15 @@
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 42,
-      "topSignal": "Heavy investment in plot families across multiple chart types - driving core product roadmap",
+      "topSignal": "Active canvas disposition workflow development with pass/fail buttons and rule-based reports",
       "features": [
-        "plot_families",
-        "data_alignment",
-        "time_series",
-        "scatter_plots",
-        "histograms"
+        "Canvas",
+        "Test Results",
+        "Alignment",
+        "Metrics",
+        "SCIM"
       ],
-      "lastActivity": "2026-03-28T14:22:00Z",
+      "lastActivity": "2026-03-29T18:45:00Z",
       "openIssues": 2
     },
     {
@@ -2184,508 +2186,513 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Active Canvas usage with disposition workflows - production telemetry review process",
+      "topSignal": "Heavy ingest scale load testing and S3 throttling optimization work",
       "features": [
-        "canvas",
-        "data_alignment",
-        "campaign_analysis",
-        "sift_edge"
+        "Ingest",
+        "Metrics",
+        "Data Sources",
+        "Test Results"
       ],
-      "lastActivity": "2026-03-29T16:45:00Z",
+      "lastActivity": "2026-03-30T14:22:00Z",
       "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 31,
-      "topSignal": "E2 data selector integration work - migrating to next-gen data architecture",
+      "wau": 35,
+      "topSignal": "Advanced alignment workflows with dynamic window and multiple family member assignments",
       "features": [
-        "e2_data_selector",
-        "plot_families",
-        "table_panels",
-        "time_alignment"
+        "Alignment",
+        "Family Data",
+        "E2 Metrics",
+        "Test Results"
       ],
-      "lastActivity": "2026-03-30T09:15:00Z",
+      "lastActivity": "2026-03-30T11:30:00Z",
       "openIssues": 3
     },
     {
       "name": "Varda",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 27,
-      "topSignal": "Multiple alignment points for family members - complex multi-vehicle correlation analysis",
+      "trajectory": "stable",
+      "wau": 28,
+      "topSignal": "Expanding test results usage with image attachments and KPI dashboard requirements",
       "features": [
-        "plot_families",
-        "data_alignment",
-        "histogram_panels",
-        "geo_maps"
+        "Test Results",
+        "Metrics",
+        "Canvas",
+        "Data Export"
       ],
-      "lastActivity": "2026-03-29T11:30:00Z",
+      "lastActivity": "2026-03-29T16:40:00Z",
       "openIssues": 1
     },
     {
       "name": "Heart Aerospace",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Enum and bitfield support requests - aviation-specific discrete telemetry handling",
+      "tier": "enterprise",
+      "trajectory": "expanding",
+      "wau": 31,
+      "topSignal": "Implementing SCIM-managed organization with enhanced security controls",
       "features": [
-        "sift_edge",
-        "time_series",
-        "data_export",
-        "campaign_analysis"
+        "SCIM",
+        "Permissions",
+        "Sensitivity Labels",
+        "Metrics"
       ],
-      "lastActivity": "2026-03-27T13:20:00Z",
+      "lastActivity": "2026-03-30T09:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 19,
-      "topSignal": "Tailscale integration work - secure enterprise connectivity requirements",
+      "wau": 67,
+      "topSignal": "Enterprise SCIM integration with blocked email invitations and admin deactivation controls",
       "features": [
-        "infrastructure",
-        "data_security",
-        "campaign_analysis",
-        "table_panels"
+        "SCIM",
+        "Permissions",
+        "External Sync",
+        "Keycloak"
       ],
-      "lastActivity": "2026-03-25T10:05:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T13:50:00Z",
+      "openIssues": 1
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Bulk run operations with alignment - large-scale launch campaign analysis",
+      "wau": 54,
+      "topSignal": "Large-scale metadata handling with 65k+ entries workload optimization",
       "features": [
-        "campaign_analysis",
-        "data_alignment",
-        "plot_families",
-        "data_export"
+        "Metadata",
+        "Ingest",
+        "Test Results",
+        "Canvas"
       ],
-      "lastActivity": "2026-03-26T15:40:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-29T20:10:00Z",
+      "openIssues": 2
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Geo map panel families - fleet tracking and corridor analysis for autonomous rail",
+      "wau": 22,
+      "topSignal": "Metrics relative time compare mode for cross-run analysis",
       "features": [
-        "geo_maps",
-        "plot_families",
-        "time_series",
-        "scatter_plots"
+        "Metrics",
+        "E2 Metrics",
+        "Alignment",
+        "Test Results"
       ],
-      "lastActivity": "2026-03-29T08:50:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-30T10:25:00Z",
+      "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 16,
-      "topSignal": "Panel config against family plots - standardizing multi-mission telemetry views",
+      "trajectory": "expanding",
+      "wau": 19,
+      "topSignal": "Canvas workflow adoption with disposition history and commenting features",
       "features": [
-        "plot_families",
-        "panel_config",
-        "time_alignment",
-        "histograms"
+        "Canvas",
+        "Test Results",
+        "Metrics",
+        "Annotations"
       ],
-      "lastActivity": "2026-03-28T12:10:00Z",
+      "lastActivity": "2026-03-28T14:35:00Z",
       "openIssues": 1
     },
     {
       "name": "OHB",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "YAML export improvements - configuration management for satellite constellations",
+      "wau": 41,
+      "topSignal": "Sync panel improvements addressing time series scrolling disruptions",
       "features": [
-        "data_export",
-        "campaign_analysis",
-        "time_series",
-        "table_panels"
+        "Sync Panel",
+        "Metrics",
+        "Time Series",
+        "Data Export"
       ],
-      "lastActivity": "2026-03-24T14:35:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T08:40:00Z",
+      "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Auto-naming alignments with annotations - streamlining test analysis workflow",
+      "wau": 8,
+      "topSignal": "Test results exploration with inline image attachment viewing",
       "features": [
-        "data_alignment",
-        "annotations",
-        "time_series",
-        "histograms"
+        "Test Results",
+        "Metrics",
+        "Canvas"
       ],
-      "lastActivity": "2026-03-30T07:25:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-27T11:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Orbital Operations",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "Canvas metadata features - building structured review processes",
+      "wau": 16,
+      "topSignal": "Query performance analysis between GetData and GetStructuredData endpoints",
       "features": [
-        "canvas",
-        "metadata",
-        "campaign_analysis",
-        "time_series"
+        "Data Query",
+        "Metrics",
+        "Ingest",
+        "API"
       ],
-      "lastActivity": "2026-03-27T16:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-29T09:55:00Z",
+      "openIssues": 2
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 15,
-      "topSignal": "E2 GA migration - channel data access patterns for re-entry telemetry",
+      "wau": 24,
+      "topSignal": "Live mode functionality with table plotting integration",
       "features": [
-        "e2_data_selector",
-        "time_series",
-        "scatter_plots",
-        "data_alignment"
+        "Live Mode",
+        "Metrics",
+        "Tables",
+        "Real-time"
       ],
-      "lastActivity": "2026-03-29T10:45:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-30T15:10:00Z",
+      "openIssues": 1
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 7,
-      "topSignal": "Select data button polish - improving user experience for fleet analysis",
+      "topSignal": "Basic metrics usage with frozen channel name timestamps",
       "features": [
-        "data_selector",
-        "time_series",
-        "geo_maps",
-        "table_panels"
+        "Metrics",
+        "Channels",
+        "Ingest"
       ],
-      "lastActivity": "2026-03-26T09:30:00Z",
+      "lastActivity": "2026-03-26T13:45:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "Asset access control issues - security configuration blockers",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "Permissions exploration with import/export error handling improvements",
       "features": [
-        "access_control",
-        "campaign_analysis",
-        "time_series"
+        "Permissions",
+        "Data Import",
+        "Data Export",
+        "API"
       ],
-      "lastActivity": "2026-03-22T11:15:00Z",
+      "lastActivity": "2026-03-28T16:30:00Z",
       "openIssues": 1
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Documentation links from family page - onboarding to advanced features",
+      "wau": 5,
+      "topSignal": "Initial metrics and test results evaluation",
       "features": [
-        "plot_families",
-        "time_series",
-        "histograms"
+        "Metrics",
+        "Test Results"
       ],
-      "lastActivity": "2026-03-28T13:50:00Z",
+      "lastActivity": "2026-03-25T10:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 5,
-      "topSignal": "Reset axis buttons for all plots - iterative data exploration workflows",
+      "wau": 18,
+      "topSignal": "Infrastructure migration removing PTSID service and cache dependencies",
       "features": [
-        "time_series",
-        "scatter_plots",
-        "histograms",
-        "plot_controls"
+        "Ingest",
+        "Processors",
+        "Data Pipeline",
+        "Metrics"
       ],
-      "lastActivity": "2026-03-29T15:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T12:05:00Z",
+      "openIssues": 1
     },
     {
       "name": "Synnax",
       "tier": "pilot",
-      "trajectory": "stable",
+      "trajectory": "at-risk",
       "wau": 3,
-      "topSignal": "Mergesort and output file rotation - large dataset processing requirements",
+      "topSignal": "Minimal activity, last engaged with basic metrics features",
       "features": [
-        "data_processing",
-        "file_management",
-        "time_series"
+        "Metrics",
+        "Ingest"
       ],
-      "lastActivity": "2026-03-25T08:40:00Z",
+      "lastActivity": "2026-03-18T14:20:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Time-alignment settings for histograms - flight phase comparative analysis",
+      "wau": 21,
+      "topSignal": "Backend candidate runs endpoint for automated test matching",
       "features": [
-        "histograms",
-        "time_alignment",
-        "data_alignment",
-        "time_series"
+        "Test Results",
+        "API",
+        "Runs",
+        "Alignment"
       ],
-      "lastActivity": "2026-03-27T10:25:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-29T17:25:00Z",
+      "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Sync panel time issues - workflow disruption with table scrolling",
+      "trajectory": "expanding",
+      "wau": 11,
+      "topSignal": "Auto-naming alignments with annotation selection integration",
       "features": [
-        "table_panels",
-        "time_series",
-        "panel_sync"
+        "Alignment",
+        "Annotations",
+        "Metrics"
       ],
-      "lastActivity": "2026-03-20T14:10:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-29T08:50:00Z",
+      "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Ingestion configuration updates - custom data pipeline setup",
+      "wau": 6,
+      "topSignal": "Test results sidebar tooltip improvements for better UX",
       "features": [
-        "data_ingestion",
-        "infrastructure",
-        "time_series"
+        "Test Results",
+        "UI/UX"
       ],
-      "lastActivity": "2026-03-26T11:55:00Z",
+      "lastActivity": "2026-03-27T15:40:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
-      "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 6,
-      "topSignal": "Canvas pass/fail buttons - standardizing test verdict workflows",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 20,
+      "topSignal": "Compaction validation with post-commit checks and auto-rollback capability",
       "features": [
-        "canvas",
-        "disposition",
-        "campaign_analysis",
-        "time_series"
+        "Data Pipeline",
+        "Compaction",
+        "Infrastructure",
+        "Ingest"
       ],
-      "lastActivity": "2026-03-29T14:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T07:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astrolab",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Scatter plot families - multi-rover terrain correlation analysis",
+      "trajectory": "expanding",
+      "wau": 17,
+      "topSignal": "Canvas rule-based reports for automated test output generation",
       "features": [
-        "scatter_plots",
-        "plot_families",
-        "geo_maps",
-        "time_series"
+        "Canvas",
+        "Reports",
+        "Test Results",
+        "Automation"
       ],
-      "lastActivity": "2026-03-28T09:40:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-30T16:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Feature flag cleanup - production environment stabilization",
+      "wau": 4,
+      "topSignal": "Basic ingest data permission enforcement and UI improvements",
       "features": [
-        "downsampling",
-        "time_series",
-        "campaign_analysis"
+        "Permissions",
+        "Ingest",
+        "UI"
       ],
-      "lastActivity": "2026-03-24T16:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-24T09:10:00Z",
+      "openIssues": 1
     },
     {
       "name": "Neros",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "BatchExpandRunBounds deadlock - performance issues blocking analysis",
+      "wau": 2,
+      "topSignal": "Very limited engagement, no recent feature usage",
       "features": [
-        "campaign_analysis",
-        "time_series",
-        "data_processing"
+        "Metrics"
       ],
-      "lastActivity": "2026-03-23T10:05:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-15T11:30:00Z",
+      "openIssues": 0
     },
     {
       "name": "Zipline",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 13,
-      "topSignal": "Table panel families - fleet-wide delivery metrics dashboards",
+      "wau": 49,
+      "topSignal": "Resolving BatchExpandRunBounds deadlock for high-throughput scenarios",
       "features": [
-        "table_panels",
-        "plot_families",
-        "geo_maps",
-        "time_series"
+        "Runs",
+        "Data Pipeline",
+        "Test Results",
+        "Metrics"
       ],
-      "lastActivity": "2026-03-29T12:15:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T14:55:00Z",
+      "openIssues": 2
     },
     {
       "name": "PlantD",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Processor updates and PTSID service removal - infrastructure modernization",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "Configurable downsampling feature cleanup indicating matured usage",
       "features": [
-        "infrastructure",
-        "data_processing",
-        "time_series"
+        "Downsampling",
+        "Metrics",
+        "Performance"
       ],
-      "lastActivity": "2026-03-25T15:30:00Z",
+      "lastActivity": "2026-03-28T10:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Canvas disposition history - audit trail for certification workflows",
+      "wau": 7,
+      "topSignal": "Family data replacement workflows being explored",
       "features": [
-        "canvas",
-        "disposition",
-        "audit_trail",
-        "campaign_analysis"
+        "Family Data",
+        "Data Sources",
+        "Alignment"
       ],
-      "lastActivity": "2026-03-28T11:05:00Z",
+      "lastActivity": "2026-03-26T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
-      "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 6,
-      "topSignal": "Alignment removal UX improvements - streamlining iterative analysis workflow",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 15,
+      "topSignal": "ArbPB migration removing ingest config flows table dependencies",
       "features": [
-        "data_alignment",
-        "time_series",
-        "histograms"
+        "Ingest",
+        "Configuration",
+        "Data Pipeline"
       ],
-      "lastActivity": "2026-03-29T13:45:00Z",
+      "lastActivity": "2026-03-29T12:40:00Z",
       "openIssues": 1
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 3,
-      "topSignal": "Data export YAML improvements - integration with manufacturing systems",
+      "wau": 8,
+      "topSignal": "Sensitivity label migration for enhanced data classification",
       "features": [
-        "data_export",
-        "time_series",
-        "table_panels"
+        "Sensitivity Labels",
+        "Permissions",
+        "Security"
       ],
-      "lastActivity": "2026-03-26T14:50:00Z",
+      "lastActivity": "2026-03-27T08:25:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
-      "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "E2 channel data access - validating new data architecture for mission ops",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 23,
+      "topSignal": "Test Results KPI Dashboard MVP RFC driving analytics requirements",
       "features": [
-        "e2_data_selector",
-        "time_series",
-        "campaign_analysis"
+        "Test Results",
+        "Dashboards",
+        "KPI",
+        "Analytics"
       ],
-      "lastActivity": "2026-03-27T09:20:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-03-30T13:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Minimal activity - potential churn risk or delayed project start",
+      "wau": 3,
+      "topSignal": "Low activity, basic metrics exploration only",
       "features": [
-        "time_series",
-        "campaign_analysis"
+        "Metrics"
       ],
-      "lastActivity": "2026-03-19T16:30:00Z",
+      "lastActivity": "2026-03-20T14:50:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize Canvas GA over Explore V2 family features",
-      "context": "Canvas disposition history (ENG-9828) and pass/fail buttons (ENG-9437) are nearing completion while Explore V2 family plotting (ENG-6408-6412) spans multiple panels. Canvas directly supports Signal>Evidence>Decision workflow and captures decisions explicitly (North Star metric).",
-      "owner": "Head of Product",
+      "title": "Prioritize Canvas disposition workflow over Test Results sidebar enhancements",
+      "context": "Canvas disposition history/comments (ENG-9828) and Pass/Fail buttons (ENG-9437) are core to 'Nail the Core' strategy for Canvas product. Test Results sidebar improvements (ENG-9365, ENG-9507) are incremental UX polish. Need to sequence work to deliver decision-capture capabilities first.",
+      "owner": "Engineering Lead",
       "deadline": "2026-04-05",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Canvas features directly increment 'Decisions Captured Per Customer' metric. Pass/fail buttons and disposition history are core decision-capture primitives. Canvas is Embed Deeper pillar - integrating into customer workflows.",
-        "against": "Explore V2 family features (ENG-6408-6412, ENG-7789, DES-61) represent significant customer asks. Delaying could impact Nail the Core pillar. Multiple alignment points (ENG-7789) blocks advanced family analysis workflows."
+        "for": "Canvas disposition features directly drive North Star metric (Decisions Captured). Enables users to make and document pass/fail decisions inline. Critical for Q2 Canvas adoption targets.",
+        "against": "Test Results improvements affect larger existing user base. Sidebar UX issues create friction in current workflow. Delaying may impact user satisfaction scores."
       }
     },
     {
-      "title": "Sunset PTSID service before Sift Edge GA",
-      "context": "ENG-9651 removes PTSID service/cache - architectural simplification. Sift Edge (ENG-8857 adds enum/bitfield support) is Build the Moat pillar. Technical debt cleanup should precede new edge capabilities to avoid compounding complexity.",
-      "owner": "VP Engineering",
-      "deadline": "2026-04-12",
+      "title": "Approve ingest scale infrastructure investments before Q2 customer onboarding",
+      "context": "Multiple ingest scalability issues surfacing: S3 throttling (ENG-9805), metadata loading failures at 65k+ entries (ENG-9837), load testing needed (ENG-9778). Three enterprise customers scheduled for April onboarding with expected 10x data volume.",
+      "owner": "Infrastructure PM",
+      "deadline": "2026-04-10",
       "status": "blocked",
-      "blockedBy": "Migration plan for existing PTSID-dependent integrations unclear. Need customer impact analysis.",
+      "blockedBy": "Pending capacity planning review and budget approval for S3 throughput increase",
       "arguments": {
-        "for": "Reduces infrastructure complexity before launching edge product. Cleaner foundation for Sift Edge = faster iteration. Aligns with 'Nail the Core' by simplifying architecture.",
-        "against": "Adds migration risk pre-GA. Could delay Sift Edge launch if PTSID removal uncovers dependencies. Edge customers may not care about backend simplification."
+        "for": "Customer onboarding at risk without infrastructure improvements. Failed ingests create poor first impression and churn risk. Fixes support 'Embed Deeper' by handling enterprise-scale data.",
+        "against": "Significant infrastructure cost increase (~$40k/mo estimated). May be premature optimization if customer volumes don't materialize. Could defer 2-3 weeks without immediate impact."
       }
     },
     {
-      "title": "Address E2 data selector regression (ENG-7289) before broader E2 rollout",
-      "context": "Data source swap from E2 selector is broken. ENG-9720 shows E2/E1 campaign jumping issues. E2 represents Explore V2 - core product evolution. Bugs undermine 'Nail the Core' pillar and customer trust during transition period.",
-      "owner": "Explore Product Lead",
-      "deadline": "2026-04-02",
+      "title": "Fast-track SCIM user management blockers vs. new enterprise SSO features",
+      "context": "Two critical SCIM blockers identified: email invitation flow (ENG-9785) and admin deactivation (ENG-9784) must be resolved. These block 4 enterprise deals requiring SCIM provisioning. Competes with Keycloak external sync work (ENG-9838).",
+      "owner": "Enterprise PM",
+      "deadline": "2026-04-12",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "E2 adoption blocked by data selector issues. Customers experiencing friction switching between E1/E2 reduces confidence in platform stability. Quick fix preserves momentum on Explore V2 adoption.",
-        "against": "E2 is pre-GA so some bugs expected. Resources could focus on new E2 features instead of regression fixes. Workarounds may exist for affected customers."
+        "for": "SCIM blockers directly gate $800k+ in Q2 enterprise ARR. Security/compliance requirement for large customers. Supports 'Embed Deeper' by removing deployment friction.",
+        "against": "Keycloak work enables broader SSO ecosystem (6+ identity providers). Larger TAM impact. SCIM workarounds exist via direct API management."
       }
     },
     {
-      "title": "Standardize alignment UX (ENG-9832, ENG-7666) before multi-alignment feature (ENG-7789)",
-      "context": "Auto-naming alignments (ENG-9832) and confusing removal behavior (ENG-7666) indicate baseline alignment UX needs polish. Multi-alignment feature (ENG-7789, DES-61) adds complexity. Foundation must be solid first.",
-      "owner": "Design Lead",
+      "title": "Commit to alignment workflow redesign for Family data products",
+      "context": "Multiple alignment issues across products: auto-naming (ENG-9832), multiple alignment points (DES-61), dynamic window alignment (DES-134), Family data replacement (ENG-7289). Signals indicate current alignment UX is fragmented and confusing users.",
+      "owner": "Product Design Lead",
+      "deadline": "2026-04-20",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Alignment is foundational to Signal>Evidence>Decision workflow. Poor UX creates friction in evidence gathering. Unified design supports 'Nail the Core' across Explore V2 and Canvas.",
+        "against": "Large design investment with unclear ROI. Current system works for power users. May distract from Canvas MVP and Python Rules launches. Could phase improvements incrementally."
+      }
+    },
+    {
+      "title": "Resource Python Rules launch vs. Canvas rule-based reports feature",
+      "context": "Canvas Output rule-based reports (DES-140) overlaps with Python Rules product positioning. Both enable programmatic decision logic. Team capacity insufficient to deliver both in Q2.",
+      "owner": "Product Strategy Lead",
       "deadline": "2026-04-08",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Poor baseline UX amplified by advanced features. Auto-naming and deletion clarity are table-stakes. Fixing now prevents compounding confusion when users manage multiple alignments per family member.",
-        "against": "Multi-alignment is higher customer priority (DES-61 explicitly scoped). Delaying advanced feature for polish work risks appearing slow to deliver. Customers may tolerate UX quirks for functionality."
+        "for": "Python Rules is strategic 'Build the Moat' investment - enables customer-specific logic and extensibility. Opens advanced analytics use cases. Rule-based Canvas reports can follow in Q3.",
+        "against": "Canvas reports serve broader user base (analysts vs. engineers). Lower technical barrier to adoption. Delivers faster time-to-value for existing Canvas users."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "4.2",
+      "value": "47",
       "delta": "+12%"
     },
     "pillars": [
@@ -2694,39 +2701,45 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 Family Features Complete",
-            "current": "45%",
-            "target": "80%",
-            "status": "at_risk"
-          },
-          {
-            "name": "E2 Data Selector Stability",
-            "current": "68%",
-            "target": "95%",
-            "status": "at_risk"
-          },
-          {
-            "name": "PTSID Service Migration",
-            "current": "30%",
+            "name": "Canvas disposition workflow completion",
+            "current": "60%",
             "target": "100%",
+            "status": "at_risk"
+          },
+          {
+            "name": "Explore V2 time-series compare modes shipped",
+            "current": "1/3",
+            "target": "3/3",
+            "status": "on_track"
+          },
+          {
+            "name": "Test Results inline attachments adoption",
+            "current": "22%",
+            "target": "40%",
             "status": "on_track"
           }
         ]
       },
       {
         "name": "Embed Deeper",
-        "status": "on_track",
+        "status": "off_track",
         "keyResults": [
           {
-            "name": "Canvas Disposition Capture",
-            "current": "85%",
-            "target": "100%",
-            "status": "on_track"
+            "name": "Enterprise SCIM provisioning blockers resolved",
+            "current": "0/2",
+            "target": "2/2",
+            "status": "at_risk"
           },
           {
-            "name": "Canvas Metadata Integration",
-            "current": "60%",
-            "target": "90%",
+            "name": "Ingest scale for 10x data volume",
+            "current": "3x",
+            "target": "10x",
+            "status": "at_risk"
+          },
+          {
+            "name": "SSO identity provider coverage",
+            "current": "4",
+            "target": "8",
             "status": "on_track"
           }
         ]
@@ -2736,16 +2749,22 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Sift Edge Enum/Bitfield Support",
-            "current": "70%",
-            "target": "100%",
+            "name": "Python Rules alpha customer count",
+            "current": "3",
+            "target": "5",
             "status": "on_track"
           },
           {
-            "name": "Tailscale GCP Integration",
-            "current": "40%",
-            "target": "100%",
+            "name": "API performance optimization (GetData queries)",
+            "current": "240ms p95",
+            "target": "150ms p95",
             "status": "on_track"
+          },
+          {
+            "name": "Data compaction auto-rollback reliability",
+            "current": "94%",
+            "target": "99.9%",
+            "status": "at_risk"
           }
         ]
       }
@@ -2758,18 +2777,26 @@
       "focusBlocks": 2,
       "oneOnOnes": 3,
       "freeHours": 2,
-      "meetingHours": 6
+      "meetingHours": 6,
+      "meetingList": [
+        "Product Strategy Sync (9:00-10:00)",
+        "1:1 Engineering Lead (10:30-11:00)",
+        "1:1 Design Lead (11:15-11:45)",
+        "Canvas Roadmap Review (14:00-15:30)",
+        "1:1 Enterprise PM (16:00-16:30)"
+      ]
     },
     "thisWeek": {
       "meetings": 22,
       "freeHours": 8,
       "meetingHours": 32
     },
-    "weekSummary": "High meeting load (32h) limiting execution bandwidth. Canvas and family features both need focused build time.",
+    "weekSummary": "Meeting load 80% - above sustainable threshold. Three decision-forcing meetings scheduled but may lack sufficient prep time given limited focus blocks. Recommend declining Canvas rule-based reports kickoff (Fri) to create space for ingest scalability decision research.",
     "alerts": [
-      "Only 2 focus blocks today - insufficient for deep product strategy work on Canvas vs Explore V2 tradeoffs",
-      "22 meetings this week suggests over-collaboration - consider async decision-making for alignment UX priorities",
-      "3 one-on-ones today - opportunity to align leads on PTSID migration blockers and E2 regression urgency"
+      "Focus time only 20% of week - below 40% target for strategic work",
+      "Back-to-back 1:1s today (10:30-11:45) without buffer - risk of running over",
+      "No dedicated time blocked for Q2 planning due April 15",
+      "Five open decisions with deadlines in next 3 weeks - need prioritization"
     ]
   },
   "timeline": {
@@ -2778,78 +2805,131 @@
         "label": "This Week (Mar 30 - Apr 5)",
         "events": [
           {
-            "title": "E2 Data Selector Fix Due",
-            "date": "2026-04-02",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "Resolve ENG-7289 and ENG-9720 to unblock E2 rollout. Critical for Nail the Core pillar.",
-            "owner": "Explore Product Lead"
-          },
-          {
-            "title": "Canvas vs Explore V2 Priority Decision",
+            "title": "Canvas disposition prioritization decision",
             "date": "2026-04-05",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Finalize resource allocation between Canvas GA features and Explore V2 family plotting.",
-            "owner": "Head of Product"
-          }
-        ]
-      },
-      {
-        "label": "Next Two Weeks (Apr 6 - Apr 19)",
-        "events": [
-          {
-            "title": "Alignment UX Standardization Complete",
-            "date": "2026-04-08",
-            "time": "17:00",
-            "type": "milestone",
-            "description": "Ship ENG-9832 (auto-naming) and ENG-7666 (deletion clarity) before multi-alignment work begins.",
-            "owner": "Design Lead"
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Finalize sequencing of Canvas disposition history/comments and Pass/Fail buttons vs Test Results enhancements",
+            "owner": "Engineering Lead"
           },
           {
-            "title": "PTSID Migration Decision Gate",
-            "date": "2026-04-12",
+            "title": "Ingest load testing kickoff",
+            "date": "2026-04-02",
+            "time": "10:00",
+            "type": "milestone",
+            "description": "Begin load testing for 10x ingest scale (ENG-9778) to inform infrastructure decision",
+            "owner": "Infrastructure Team"
+          },
+          {
+            "title": "S3 throttling retry implementation review",
+            "date": "2026-04-03",
             "time": "14:00",
             "type": "gate",
-            "description": "Review customer impact analysis and approve ENG-9651 migration plan or defer.",
-            "owner": "VP Engineering"
-          },
-          {
-            "title": "Canvas Disposition History Release",
-            "date": "2026-04-15",
-            "time": "12:00",
-            "type": "milestone",
-            "description": "ENG-9828 ships - enables tracking decision history. Direct North Star metric impact.",
-            "owner": "Canvas Team Lead"
-          },
-          {
-            "title": "Sift Edge Enum Support Beta",
-            "date": "2026-04-18",
-            "time": "16:00",
-            "type": "milestone",
-            "description": "ENG-8857 beta release to early access customers. Build the Moat validation.",
-            "owner": "Edge Product Lead"
+            "description": "Technical review of rate limiter and retry logic (ENG-9805) before production deployment",
+            "owner": "Backend Eng"
           }
         ]
       },
       {
-        "label": "Month Ahead (Apr 20 - Apr 30)",
+        "label": "Next Week (Apr 6-12)",
         "events": [
           {
-            "title": "Family Features Cross-Panel Review",
-            "date": "2026-04-22",
-            "time": "10:00",
-            "type": "meeting",
-            "description": "Assess progress on ENG-6408-6412 (family plotting across panels). Decide if phased rollout needed.",
-            "owner": "Explore Product Lead"
+            "title": "Python Rules vs Canvas Reports resource decision",
+            "date": "2026-04-08",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Commit team allocation between Python Rules launch and Canvas rule-based reports",
+            "owner": "Product Strategy Lead"
           },
           {
-            "title": "Q2 Strategy Checkpoint",
-            "date": "2026-04-30",
+            "title": "Ingest infrastructure budget approval",
+            "date": "2026-04-10",
+            "time": "15:00",
+            "type": "gate",
+            "description": "Finance review of S3 throughput and infrastructure scaling costs for enterprise onboarding",
+            "owner": "Infrastructure PM"
+          },
+          {
+            "title": "SCIM blockers resolution deadline",
+            "date": "2026-04-12",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Ship SCIM email invitation and admin deactivation fixes to unblock enterprise deals",
+            "owner": "Enterprise PM"
+          },
+          {
+            "title": "Q2 enterprise customer onboarding begins",
+            "date": "2026-04-14",
             "time": "09:00",
             "type": "milestone",
-            "description": "Review North Star metric progress, pillar health, and resource allocation effectiveness.",
-            "owner": "Head of Product"
+            "description": "First of three large enterprise customers starts onboarding - ingest scale requirements go live",
+            "owner": "Customer Success"
+          }
+        ]
+      },
+      {
+        "label": "Rest of April (Apr 13-30)",
+        "events": [
+          {
+            "title": "Q2 Planning Deadline",
+            "date": "2026-04-15",
+            "time": "17:00",
+            "type": "deadline",
+            "description": "Finalize Q2 roadmap commitments and resource allocation across all product pillars",
+            "owner": "Product Strategy Lead"
+          },
+          {
+            "title": "Alignment workflow redesign decision",
+            "date": "2026-04-20",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Commit to unified alignment UX approach across Family data, auto-naming, and dynamic windows",
+            "owner": "Product Design Lead"
+          },
+          {
+            "title": "Canvas disposition MVP launch",
+            "date": "2026-04-25",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "Ship Canvas Pass/Fail buttons and disposition history to production - drives North Star metric",
+            "owner": "Engineering Lead"
+          },
+          {
+            "title": "Test Results KPI Dashboard RFC review",
+            "date": "2026-04-28",
+            "time": "14:00",
+            "type": "gate",
+            "description": "Technical design review for Test Results dashboard MVP (ENG-9836)",
+            "owner": "Engineering"
+          }
+        ]
+      },
+      {
+        "label": "Looking Ahead (May+)",
+        "events": [
+          {
+            "title": "Python Rules General Availability",
+            "date": "2026-05-15",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "Exit alpha and launch Python Rules to all customers - key Build the Moat milestone",
+            "owner": "Product"
+          },
+          {
+            "title": "Explore V2 relative time compare modes complete",
+            "date": "2026-05-20",
+            "time": "EOD",
+            "type": "milestone",
+            "description": "Ship remaining 2 time-series compare modes (ENG-7748) - completes Nail the Core for Explore",
+            "owner": "Engineering"
+          },
+          {
+            "title": "Mid-Q2 Strategy Review",
+            "date": "2026-05-30",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "Assess progress on Nail the Core, Embed Deeper, Build the Moat pillars and North Star metric trajectory",
+            "owner": "Leadership"
           }
         ]
       }
