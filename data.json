@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-01T23:15:40.513Z",
+  "fetchedAt": "2026-04-02T03:58:44.106Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,292 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-7920: [BE] Downsample stat inputs prior to aggregating",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T03:17:03.360Z",
+      "evidence": [
+        {
+          "label": "ENG-7920",
+          "url": "https://linear.app/siftstack/issue/ENG-7920/be-downsample-stat-inputs-prior-to-aggregating",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9460: CSRS: Implement DataFusion-based reading of current DLv2 parquet schema",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T02:45:24.705Z",
+      "evidence": [
+        {
+          "label": "ENG-9460",
+          "url": "https://linear.app/siftstack/issue/ENG-9460/csrs-implement-datafusion-based-reading-of-current-dlv2-parquet-schema",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-6505: Bump vite and vitest",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T01:22:40.388Z",
+      "evidence": [
+        {
+          "label": "ENG-6505",
+          "url": "https://linear.app/siftstack/issue/ENG-6505/bump-vite-and-vitest",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8181: Support Large Number of File Attachments on an Entity",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:56:30.098Z",
+      "evidence": [
+        {
+          "label": "ENG-8181",
+          "url": "https://linear.app/siftstack/issue/ENG-8181/support-large-number-of-file-attachments-on-an-entity",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9494: CSRS: Update shadow traffic forwarding and comparison to use CSRS",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "nick.bowman@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:27:57.715Z",
+      "evidence": [
+        {
+          "label": "ENG-9494",
+          "url": "https://linear.app/siftstack/issue/ENG-9494/csrs-update-shadow-traffic-forwarding-and-comparison-to-use-csrs",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9838: update internal external_sync.md with required Keycloak and API actions",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:19:02.476Z",
+      "evidence": [
+        {
+          "label": "ENG-9838",
+          "url": "https://linear.app/siftstack/issue/ENG-9838/update-internal-external-syncmd-with-required-keycloak-and-api-actions",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9614: Create internal metrics/alerts for Idp Is succeeding/failing",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:13:33.680Z",
+      "evidence": [
+        {
+          "label": "ENG-9614",
+          "url": "https://linear.app/siftstack/issue/ENG-9614/create-internal-metricsalerts-for-idp-is-succeedingfailing",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9926: SCIM sync health visibility for customer admins",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:12:48.218Z",
+      "evidence": [
+        {
+          "label": "ENG-9926",
+          "url": "https://linear.app/siftstack/issue/ENG-9926/scim-sync-health-visibility-for-customer-admins",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9176: deploy redpanda into ec2",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:11:18.995Z",
+      "evidence": [
+        {
+          "label": "ENG-9176",
+          "url": "https://linear.app/siftstack/issue/ENG-9176/deploy-redpanda-into-ec2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9783: We probably need some way to test SCIM and reproduce errors",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:09:35.769Z",
+      "evidence": [
+        {
+          "label": "ENG-9783",
+          "url": "https://linear.app/siftstack/issue/ENG-9783/we-probably-need-some-way-to-test-scim-and-reproduce-errors",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9921: Strengthen user deactivation audit log for incident correlation",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-02T00:03:01.519Z",
+      "evidence": [
+        {
+          "label": "ENG-9921",
+          "url": "https://linear.app/siftstack/issue/ENG-9921/strengthen-user-deactivation-audit-log-for-incident-correlation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9761: [ROM-28] ABAC authorization for collections",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "adam@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:40:38.947Z",
+      "evidence": [
+        {
+          "label": "ENG-9761",
+          "url": "https://linear.app/siftstack/issue/ENG-9761/rom-28-abac-authorization-for-collections",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9929: Calculated Channels Nesting Limit should be Raised",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "brandon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:36:21.564Z",
+      "evidence": [
+        {
+          "label": "ENG-9929",
+          "url": "https://linear.app/siftstack/issue/ENG-9929/calculated-channels-nesting-limit-should-be-raised",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9925: Define supported workflow for email/identity change on SCIM-managed users",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jonathan Deng",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:34:41.484Z",
+      "evidence": [
+        {
+          "label": "ENG-9925",
+          "url": "https://linear.app/siftstack/issue/ENG-9925/define-supported-workflow-for-emailidentity-change-on-scim-managed",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9492: Timeseries Y-axis log scaling",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:33:50.476Z",
+      "evidence": [
+        {
+          "label": "ENG-9492",
+          "url": "https://linear.app/siftstack/issue/ENG-9492/timeseries-y-axis-log-scaling",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9616: Remove ArbPB use of \"ingest_config_flows\" table",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:25:06.032Z",
+      "evidence": [
+        {
+          "label": "ENG-9616",
+          "url": "https://linear.app/siftstack/issue/ENG-9616/remove-arbpb-use-of-ingest-config-flows-table",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9641: Handle archived enum channels in rule evaluation",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:20:49.092Z",
+      "evidence": [
+        {
+          "label": "ENG-9641",
+          "url": "https://linear.app/siftstack/issue/ENG-9641/handle-archived-enum-channels-in-rule-evaluation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9172: deploy sift application",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-04-01T23:14:43.458Z",
+      "evidence": [
+        {
+          "label": "ENG-9172",
+          "url": "https://linear.app/siftstack/issue/ENG-9172/deploy-sift-application",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-9898: Update GetAmbientTransaction to return errors instead of panicking",
@@ -21,38 +307,6 @@
         {
           "label": "ENG-9898",
           "url": "https://linear.app/siftstack/issue/ENG-9898/update-getambienttransaction-to-return-errors-instead-of-panicking",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9164: deploy vpc",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Jack Konyan",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T23:04:10.721Z",
-      "evidence": [
-        {
-          "label": "ENG-9164",
-          "url": "https://linear.app/siftstack/issue/ENG-9164/deploy-vpc",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9707: Investigate cause: changing users email in SCIM doesn't actually provision them in Sift.",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Jonathan Deng",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T23:00:31.818Z",
-      "evidence": [
-        {
-          "label": "ENG-9707",
-          "url": "https://linear.app/siftstack/issue/ENG-9707/investigate-cause-changing-users-email-in-scim-doesnt-actually",
           "source": "linear"
         }
       ]
@@ -231,260 +485,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9905: Selector menu doesn't open for single-alignment families",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T21:44:31.781Z",
-      "evidence": [
-        {
-          "label": "ENG-9905",
-          "url": "https://linear.app/siftstack/issue/ENG-9905/selector-menu-doesnt-open-for-single-alignment-families",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9911: Hovercard Redesign: Add Warning zone and enforce canonical zone ordering",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T20:43:04.664Z",
-      "evidence": [
-        {
-          "label": "ENG-9911",
-          "url": "https://linear.app/siftstack/issue/ENG-9911/hovercard-redesign-add-warning-zone-and-enforce-canonical-zone",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9909: Hovercard Redesign: Create TextString interactive copyable text component",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T20:43:04.659Z",
-      "evidence": [
-        {
-          "label": "ENG-9909",
-          "url": "https://linear.app/siftstack/issue/ENG-9909/hovercard-redesign-create-textstring-interactive-copyable-text",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9910: Hovercard Redesign: Create EntityHoverCard.Footer component",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T20:43:04.658Z",
-      "evidence": [
-        {
-          "label": "ENG-9910",
-          "url": "https://linear.app/siftstack/issue/ENG-9910/hovercard-redesign-create-entityhovercardfooter-component",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9667: mergesort + output file rotation",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "adam@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T20:09:05.205Z",
-      "evidence": [
-        {
-          "label": "ENG-9667",
-          "url": "https://linear.app/siftstack/issue/ENG-9667/mergesort-output-file-rotation",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8857: Add enum + bitfield support to Sift Edge",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "benjamin@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T19:56:19.183Z",
-      "evidence": [
-        {
-          "label": "ENG-8857",
-          "url": "https://linear.app/siftstack/issue/ENG-8857/add-enum-bitfield-support-to-sift-edge",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9906: Improve Back-Pressure Mechanism in SiftStream Based on Configuration",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "taylor@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T19:07:15.758Z",
-      "evidence": [
-        {
-          "label": "ENG-9906",
-          "url": "https://linear.app/siftstack/issue/ENG-9906/improve-back-pressure-mechanism-in-siftstream-based-on-configuration",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9167: Overwrite Existing Panel Config Bug",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T18:47:59.380Z",
-      "evidence": [
-        {
-          "label": "ENG-9167",
-          "url": "https://linear.app/siftstack/issue/ENG-9167/overwrite-existing-panel-config-bug",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9904: automate it",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T18:39:53.126Z",
-      "evidence": [
-        {
-          "label": "ENG-9904",
-          "url": "https://linear.app/siftstack/issue/ENG-9904/automate-it",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9900: Saved search table",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T18:34:00.549Z",
-      "evidence": [
-        {
-          "label": "ENG-9900",
-          "url": "https://linear.app/siftstack/issue/ENG-9900/saved-search-table",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9883: Sift Edge GUI Table View",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "nathan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T18:24:45.210Z",
-      "evidence": [
-        {
-          "label": "ENG-9883",
-          "url": "https://linear.app/siftstack/issue/ENG-9883/sift-edge-gui-table-view",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9247: GUI undo/redo plumbing",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "nathan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T18:24:45.033Z",
-      "evidence": [
-        {
-          "label": "ENG-9247",
-          "url": "https://linear.app/siftstack/issue/ENG-9247/gui-undoredo-plumbing",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9297: Move runbooks to markdown in internal-docs",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Wei Lu",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T17:55:14.688Z",
-      "evidence": [
-        {
-          "label": "ENG-9297",
-          "url": "https://linear.app/siftstack/issue/ENG-9297/move-runbooks-to-markdown-in-internal-docs",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9882: Feature flag overview (home) page tab navigation",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T17:43:16.079Z",
-      "evidence": [
-        {
-          "label": "ENG-9882",
-          "url": "https://linear.app/siftstack/issue/ENG-9882/feature-flag-overview-home-page-tab-navigation",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9902: RFC For Customizable Input Downsample of Family Stat",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Alexa Agnew",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T17:08:25.066Z",
-      "evidence": [
-        {
-          "label": "ENG-9902",
-          "url": "https://linear.app/siftstack/issue/ENG-9902/rfc-for-customizable-input-downsample-of-family-stat",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9901: Customizable Input Downsample of Family Stat",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-01T17:08:24.200Z",
-      "evidence": [
-        {
-          "label": "ENG-9901",
-          "url": "https://linear.app/siftstack/issue/ENG-9901/customizable-input-downsample-of-family-stat",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -523,7 +523,7 @@
             },
             {
               "setId": "",
-              "value": 615
+              "value": 616
             },
             {
               "setId": "",
@@ -535,15 +535,15 @@
             },
             {
               "setId": "",
-              "value": 767
+              "value": 768
             },
             {
               "setId": "",
-              "value": 842
+              "value": 844
             },
             {
               "setId": "",
-              "value": 581
+              "value": 647
             }
           ]
         ],
@@ -551,7 +551,7 @@
           [
             {
               "setId": "",
-              "value": 2380
+              "value": 2400
             }
           ]
         ],
@@ -596,7 +596,7 @@
             },
             {
               "setId": "",
-              "value": 357
+              "value": 358
             },
             {
               "setId": "",
@@ -648,7 +648,7 @@
             },
             {
               "setId": "",
-              "value": 380
+              "value": 381
             },
             {
               "setId": "",
@@ -704,11 +704,11 @@
             },
             {
               "setId": "",
-              "value": 425
+              "value": 426
             },
             {
               "setId": "",
-              "value": 366
+              "value": 403
             }
           ]
         ],
@@ -716,7 +716,7 @@
           [
             {
               "setId": "",
-              "value": 1607
+              "value": 1614
             }
           ]
         ],
@@ -819,7 +819,7 @@
             },
             {
               "setId": "",
-              "value": 103
+              "value": 119
             }
           ]
         ],
@@ -827,7 +827,7 @@
           [
             {
               "setId": "",
-              "value": 1516
+              "value": 1532
             }
           ]
         ],
@@ -863,25 +863,25 @@
         "series": [
           [
             4683.5080197368425,
-            5512.213664688427,
+            5512.213664688428,
             5738.831133333334,
-            5720.910763239875,
+            5720.910763239876,
             5322.475729299363,
-            5384.229247813411,
+            5384.23230612245,
             6078.390947530864,
-            6466.810460227273,
-            6789.125884020618,
-            6122.280285714286,
-            5340.569303834808,
-            6377.100986187846,
-            5299.007281124498
+            6432.721223163842,
+            6771.74089974293,
+            6105.930390532545,
+            5311.700753665689,
+            6347.040884931506,
+            5851.0255774647885
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 25497.846887628864
+              "value": 25761.55852566735
             }
           ]
         ],
@@ -959,11 +959,11 @@
             },
             {
               "setId": "",
-              "value": 444
+              "value": 445
             },
             {
               "setId": "",
-              "value": 337
+              "value": 383
             }
           ],
           [
@@ -1017,7 +1017,7 @@
             },
             {
               "setId": "",
-              "value": 46
+              "value": 59
             }
           ],
           [
@@ -1071,7 +1071,7 @@
             },
             {
               "setId": "",
-              "value": 32
+              "value": 41
             }
           ],
           [
@@ -1133,19 +1133,19 @@
           [
             {
               "setId": "",
-              "value": 1062
+              "value": 1071
             }
           ],
           [
             {
               "setId": "",
-              "value": 268
+              "value": 271
             }
           ],
           [
             {
               "setId": "",
-              "value": 245
+              "value": 247
             }
           ],
           [
@@ -1474,7 +1474,7 @@
             },
             {
               "setId": "",
-              "value": 53
+              "value": 56
             }
           ],
           [
@@ -1582,7 +1582,7 @@
             },
             {
               "setId": "",
-              "value": 1
+              "value": 3
             }
           ],
           [
@@ -1636,7 +1636,7 @@
             },
             {
               "setId": "",
-              "value": 201
+              "value": 244
             }
           ]
         ],
@@ -1644,7 +1644,7 @@
           [
             {
               "setId": "",
-              "value": 383
+              "value": 384
             }
           ],
           [
@@ -1656,13 +1656,13 @@
           [
             {
               "setId": "",
-              "value": 26
+              "value": 27
             }
           ],
           [
             {
               "setId": "",
-              "value": 769
+              "value": 779
             }
           ]
         ],
@@ -1924,7 +1924,7 @@
             },
             {
               "setId": "",
-              "value": 253
+              "value": 278
             }
           ],
           [
@@ -2004,7 +2004,7 @@
           [
             {
               "setId": "",
-              "value": 8954
+              "value": 8979
             }
           ],
           [
@@ -2067,105 +2067,105 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Team migrating runbooks to internal docs while handling production stability.",
-      "linearActive": 3,
+      "topConcern": "Large file attachment support and calculated channel nesting limits need product decisions",
+      "linearActive": 4,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-03-31T18:23:00Z",
-      "fourPAge": "2d",
-      "meetingsToday": 4
+      "slackLastSeen": "2026-04-02T09:15:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 3
     },
     {
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "attention",
-      "topConcern": "Critical SCIM issues causing user provisioning failures and repeated deactivations.",
-      "linearActive": 6,
+      "topConcern": "ABAC authorization rollout and SCIM user management workflows need clarification for customers",
+      "linearActive": 8,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-01T07:45:00Z",
-      "fourPAge": "8h",
-      "meetingsToday": 5
+      "slackLastSeen": "2026-04-02T08:45:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 4
     },
     {
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Hovercard redesign progressing well, annotation visibility bug needs resolution.",
-      "linearActive": 8,
+      "topConcern": "Annotations visibility bug affecting user experience, timeseries log scaling ready for release",
+      "linearActive": 5,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-01T08:12:00Z",
-      "fourPAge": "4h",
-      "meetingsToday": 3
+      "slackLastSeen": "2026-04-02T10:30:00Z",
+      "fourPAge": "0d",
+      "meetingsToday": 2
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "shipping",
-      "topConcern": "VPC deployment and FedRAMP compliance work on track, security hardening progressing.",
-      "linearActive": 4,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-03-31T22:10:00Z",
-      "fourPAge": "10h",
-      "meetingsToday": 2
+      "status": "blocked",
+      "topConcern": "FedRAMP compliance blockers for analytics squad and Redpanda/Sift deployment dependencies unclear",
+      "linearActive": 6,
+      "linearBlocked": 3,
+      "slackLastSeen": "2026-04-02T07:20:00Z",
+      "fourPAge": "3d",
+      "meetingsToday": 5
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "attention",
-      "topConcern": "SCIM root cause analysis needs urgent attention, balancing feature work with stability.",
-      "linearActive": 15,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-01T08:30:00Z",
-      "fourPAge": "3h",
+      "topConcern": "SCIM incident with Impulse Space needs post-mortem, error handling patterns need standardization",
+      "linearActive": 12,
+      "linearBlocked": 2,
+      "slackLastSeen": "2026-04-02T08:00:00Z",
+      "fourPAge": "1d",
       "meetingsToday": 6
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
-      "status": "blocked",
-      "topConcern": "Customer escalation on SCIM deactivations blocking deployment for Impulse Space.",
-      "linearActive": 2,
-      "linearBlocked": 2,
-      "slackLastSeen": "2026-04-01T07:00:00Z",
+      "status": "attention",
+      "topConcern": "SCIM sync health visibility needed for customer admins, metadata loading failures affecting deployments",
+      "linearActive": 4,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-02T09:50:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 7
+      "meetingsToday": 4
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "SCIM reliability issues impacting enterprise customers need immediate resolution.",
+      "attention": "Multiple SCIM incidents suggest need for operational maturity review before expanding enterprise deals",
       "recentTopics": [
-        "Impulse Space escalation",
-        "FedRAMP timeline",
-        "Q2 product roadmap priorities"
+        "SCIM reliability for enterprise customers",
+        "FedRAMP compliance timeline",
+        "Customer impact from metadata loading failures"
       ],
-      "lastSlackToNoah": "2026-03-31T16:45:00Z",
+      "lastSlackToNoah": "2026-04-01T16:30:00Z",
       "pendingDecisions": [
-        "Resource allocation for SCIM stability vs feature work",
-        "Customer communication plan for provisioning issues"
+        "Prioritize SCIM testing infrastructure vs new feature development",
+        "Resource allocation for FedRAMP compliance acceleration"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Multiple SCIM root cause investigations require architectural review and fixes.",
+      "attention": "Infrastructure migration to Redpanda/Sift and CSRS DataFusion rewrite are major architectural shifts underway",
       "recentTopics": [
-        "SCIM architecture review",
-        "Sift Edge performance optimization",
-        "Error handling standardization",
-        "Infrastructure scaling for 65k+ entries"
+        "CSRS migration to DataFusion architecture",
+        "Redpanda deployment strategy",
+        "Error handling and panic elimination across codebase",
+        "ABAC authorization performance optimization"
       ],
-      "lastSlackToNoah": "2026-04-01T06:30:00Z",
+      "lastSlackToNoah": "2026-04-02T07:45:00Z",
       "pendingDecisions": [
-        "SCIM refactoring scope and timeline",
-        "Edge device GUI feature prioritization",
-        "Back-pressure mechanism configuration approach"
+        "Timeline for CSRS cutover from shadow traffic to production",
+        "Runbook migration completion deadline",
+        "ArbPB deprecation schedule"
       ]
     }
   ],
@@ -2174,543 +2174,533 @@
       "name": "K2 Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "Active development on telemetry visualization features",
+      "wau": 18,
+      "topSignal": "Active development on timeseries visualization improvements and calculated channels",
       "features": [
-        "charts",
+        "timeseries",
+        "calculated_channels",
         "annotations",
-        "runs",
-        "asset-channels"
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-29T14:22:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-01T14:22:00Z",
+      "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 45,
-      "topSignal": "Heavy usage of monitoring and time-series analysis",
+      "topSignal": "Heavy usage of data lake v2 with performance optimization work underway",
       "features": [
-        "monitors",
-        "family-stats",
-        "time-boundaries",
-        "downsample"
+        "data_lake",
+        "scim_sso",
+        "collections",
+        "workflows"
       ],
-      "lastActivity": "2026-03-31T18:45:00Z",
+      "lastActivity": "2026-04-02T09:15:00Z",
       "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 32,
-      "topSignal": "Increased usage of annotation features for flight data",
+      "wau": 38,
+      "topSignal": "SCIM integration active with user management workflows being refined",
       "features": [
-        "annotations",
-        "charts",
-        "saved-searches",
-        "panels"
+        "scim_sso",
+        "audit_logs",
+        "user_management",
+        "timeseries"
       ],
-      "lastActivity": "2026-03-30T11:15:00Z",
+      "lastActivity": "2026-04-01T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Varda",
-      "tier": "enterprise",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 38,
-      "topSignal": "Consistent telemetry streaming and monitoring usage",
+      "wau": 22,
+      "topSignal": "Consistent usage of analytics and monitoring features",
       "features": [
-        "sift-stream",
-        "monitors",
-        "runs",
-        "asset-channels"
+        "analytics",
+        "monitoring",
+        "annotations",
+        "rules_engine"
       ],
-      "lastActivity": "2026-03-31T16:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-31T11:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 24,
-      "topSignal": "Growing adoption of family alignment features",
+      "wau": 29,
+      "topSignal": "Increased adoption of calculated channels and rules for flight test monitoring",
       "features": [
-        "family-alignment",
-        "selector-menu",
-        "charts",
-        "annotations"
+        "calculated_channels",
+        "rules_engine",
+        "timeseries",
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-28T09:50:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-01T13:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 156,
-      "topSignal": "SCIM integration issues requiring attention",
+      "wau": 67,
+      "topSignal": "FedRAMP compliance requirements driving infrastructure improvements",
       "features": [
-        "scim",
-        "user-management",
-        "enterprise-sso",
-        "fedramp"
+        "fedramp_compliance",
+        "scim_sso",
+        "audit_logs",
+        "abac_authorization"
       ],
-      "lastActivity": "2026-03-31T20:12:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-04-02T08:00:00Z",
+      "openIssues": 0
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 89,
-      "topSignal": "Large-scale metadata operations with 65k+ entries",
+      "wau": 52,
+      "topSignal": "Large-scale data ingestion with metadata handling for launch operations",
       "features": [
+        "data_lake",
         "metadata",
-        "runs",
-        "asset-channels",
-        "monitors"
+        "collections",
+        "workflows"
       ],
-      "lastActivity": "2026-03-31T19:45:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-01T15:10:00Z",
+      "openIssues": 3
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Adoption of Sift Edge for real-time processing",
+      "wau": 24,
+      "topSignal": "Active development on monitoring and alerting for autonomous rail systems",
       "features": [
-        "sift-edge",
-        "enum-support",
-        "bitfield-support",
-        "gui-table"
+        "monitoring",
+        "alerts",
+        "timeseries",
+        "rules_engine"
       ],
-      "lastActivity": "2026-03-27T13:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-01T17:35:00Z",
+      "openIssues": 1
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Active use of panel configurations and saved searches",
+      "wau": 31,
+      "topSignal": "Ramping up usage with focus on run management and asset tracking",
       "features": [
-        "panels",
-        "saved-searches",
-        "charts",
-        "annotations"
+        "run_management",
+        "annotations",
+        "timeseries",
+        "collections"
       ],
-      "lastActivity": "2026-03-29T16:05:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-02T07:45:00Z",
+      "openIssues": 2
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "Steady telemetry analysis and monitoring workflows",
+      "wau": 41,
+      "topSignal": "Steady usage across satellite testing workflows",
       "features": [
-        "monitors",
-        "runs",
-        "family-stats",
-        "time-boundaries"
+        "workflows",
+        "data_lake",
+        "timeseries",
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-30T14:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-30T14:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "expanding",
       "wau": 8,
-      "topSignal": "Early-stage exploration of chart and annotation features",
+      "topSignal": "Early pilot showing promising engagement with basic telemetry features",
       "features": [
-        "charts",
+        "timeseries",
         "annotations",
-        "runs"
+        "monitoring"
       ],
-      "lastActivity": "2026-03-26T10:15:00Z",
+      "lastActivity": "2026-04-01T12:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 16,
-      "topSignal": "Regular use of monitoring and alert features",
+      "wau": 12,
+      "topSignal": "Evaluating platform for mission operations telemetry",
       "features": [
-        "monitors",
-        "alerts",
-        "runs",
-        "asset-channels"
+        "timeseries",
+        "monitoring",
+        "rules_engine"
       ],
-      "lastActivity": "2026-03-28T15:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-29T16:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 21,
-      "topSignal": "Growing engagement with family alignment and stats",
+      "wau": 19,
+      "topSignal": "Growing team adoption with focus on reentry vehicle data analysis",
       "features": [
-        "family-alignment",
-        "family-stats",
-        "charts",
-        "downsample"
+        "timeseries",
+        "calculated_channels",
+        "annotations",
+        "data_lake"
       ],
-      "lastActivity": "2026-03-29T12:50:00Z",
+      "lastActivity": "2026-04-01T10:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Evaluating basic telemetry visualization",
+      "trajectory": "at-risk",
+      "wau": 4,
+      "topSignal": "Low activity in recent weeks, needs engagement",
       "features": [
-        "charts",
-        "runs"
+        "timeseries",
+        "monitoring"
       ],
-      "lastActivity": "2026-03-25T09:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-24T09:00:00Z",
+      "openIssues": 2
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 7,
-      "topSignal": "Testing annotation and search capabilities",
+      "topSignal": "Steady pilot usage for flight test data",
       "features": [
+        "timeseries",
         "annotations",
-        "saved-searches",
-        "charts"
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-27T11:05:00Z",
+      "lastActivity": "2026-03-28T13:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Early evaluation phase with minimal activity",
-      "features": [
-        "charts",
-        "runs"
-      ],
-      "lastActivity": "2026-03-24T14:20:00Z",
-      "openIssues": 0
-    },
-    {
-      "name": "Arbor Energy",
-      "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Exploring monitoring capabilities for energy systems",
-      "features": [
-        "monitors",
-        "charts",
-        "runs"
-      ],
-      "lastActivity": "2026-03-28T08:45:00Z",
-      "openIssues": 0
-    },
-    {
-      "name": "Synnax",
-      "tier": "growth",
-      "trajectory": "at-risk",
       "wau": 11,
-      "topSignal": "Declining activity, last login 3 weeks ago",
+      "topSignal": "Increasing engagement with advanced features exploration",
       "features": [
-        "charts",
-        "runs",
-        "annotations"
+        "timeseries",
+        "calculated_channels",
+        "rules_engine"
       ],
-      "lastActivity": "2026-03-10T16:30:00Z",
+      "lastActivity": "2026-04-01T11:20:00Z",
       "openIssues": 1
     },
     {
-      "name": "OdysAviation",
+      "name": "Arbor Energy",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 26,
-      "topSignal": "Active development with hovercard and UI improvements",
+      "trajectory": "stable",
+      "wau": 16,
+      "topSignal": "Regular usage for energy system monitoring and optimization",
       "features": [
-        "hovercards",
-        "charts",
-        "annotations",
-        "undo-redo"
+        "monitoring",
+        "timeseries",
+        "calculated_channels",
+        "alerts"
       ],
-      "lastActivity": "2026-03-30T17:20:00Z",
+      "lastActivity": "2026-03-31T15:50:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Synnax",
+      "tier": "pilot",
+      "trajectory": "stable",
+      "wau": 9,
+      "topSignal": "Pilot engagement focused on data pipeline integration",
+      "features": [
+        "data_lake",
+        "timeseries",
+        "workflows"
+      ],
+      "lastActivity": "2026-03-30T10:30:00Z",
+      "openIssues": 0
+    },
+    {
+      "name": "OdysAviation",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 13,
+      "topSignal": "Growing pilot with aviation-specific use cases",
+      "features": [
+        "timeseries",
+        "monitoring",
+        "annotations",
+        "rules_engine"
+      ],
+      "lastActivity": "2026-04-01T14:00:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Consistent but limited usage of core features",
+      "trajectory": "at-risk",
+      "wau": 3,
+      "topSignal": "Minimal activity, pilot at risk of stalling",
       "features": [
-        "charts",
-        "runs",
-        "monitors"
+        "timeseries",
+        "monitoring"
       ],
-      "lastActivity": "2026-03-26T13:15:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-20T16:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Testing Sift Edge for embedded telemetry",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "Consistent pilot usage for radiation testing workflows",
       "features": [
-        "sift-edge",
-        "gui-table",
-        "charts"
+        "timeseries",
+        "annotations",
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-28T10:30:00Z",
+      "lastActivity": "2026-03-27T12:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 18,
-      "topSignal": "Regular telemetry streaming and analysis",
+      "trajectory": "expanding",
+      "wau": 21,
+      "topSignal": "Strong growth trajectory with advanced analytics adoption",
       "features": [
-        "sift-stream",
-        "monitors",
-        "runs",
-        "charts"
+        "analytics",
+        "calculated_channels",
+        "timeseries",
+        "data_lake"
       ],
-      "lastActivity": "2026-03-29T14:55:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-02T06:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astrolab",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 23,
-      "topSignal": "Heavy use of annotation features for rover data",
+      "trajectory": "stable",
+      "wau": 27,
+      "topSignal": "Steady usage for lunar rover telemetry analysis",
       "features": [
-        "annotations",
-        "charts",
-        "saved-searches",
-        "panels"
+        "timeseries",
+        "monitoring",
+        "collections",
+        "workflows"
       ],
-      "lastActivity": "2026-03-30T12:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-01T09:45:00Z",
+      "openIssues": 2
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Basic telemetry review workflows",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "Pilot showing good engagement with robotics telemetry features",
       "features": [
-        "charts",
-        "runs"
+        "timeseries",
+        "monitoring",
+        "rules_engine"
       ],
-      "lastActivity": "2026-03-25T15:10:00Z",
+      "lastActivity": "2026-03-31T17:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 7,
-      "topSignal": "Growing interest in monitoring capabilities",
+      "trajectory": "stable",
+      "wau": 5,
+      "topSignal": "Evaluation phase with basic feature exploration",
       "features": [
-        "monitors",
-        "charts",
-        "runs"
+        "timeseries",
+        "annotations"
       ],
-      "lastActivity": "2026-03-27T09:25:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-26T14:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 78,
-      "topSignal": "High-volume telemetry streaming for drone operations",
+      "trajectory": "expanding",
+      "wau": 58,
+      "topSignal": "Scaling usage across global drone delivery fleet monitoring",
       "features": [
-        "sift-stream",
-        "back-pressure",
-        "monitors",
-        "runs"
+        "monitoring",
+        "alerts",
+        "timeseries",
+        "data_lake",
+        "workflows"
       ],
-      "lastActivity": "2026-03-31T21:05:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-02T10:00:00Z",
+      "openIssues": 2
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Limited evaluation activity",
+      "wau": 8,
+      "topSignal": "Pilot focused on industrial plant monitoring use cases",
       "features": [
-        "charts",
-        "runs"
+        "monitoring",
+        "timeseries",
+        "alerts"
       ],
-      "lastActivity": "2026-03-23T11:40:00Z",
+      "lastActivity": "2026-03-29T11:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Testing panel and saved search features",
+      "wau": 14,
+      "topSignal": "Promising pilot with increasing team adoption",
       "features": [
-        "panels",
-        "saved-searches",
-        "charts"
+        "timeseries",
+        "calculated_channels",
+        "monitoring",
+        "annotations"
       ],
-      "lastActivity": "2026-03-28T16:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-01T15:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "Integration with manufacturing execution workflows",
+      "wau": 20,
+      "topSignal": "Consistent usage for manufacturing process monitoring",
       "features": [
-        "runs",
-        "asset-channels",
-        "metadata",
-        "charts"
+        "monitoring",
+        "workflows",
+        "timeseries",
+        "file_attachments"
       ],
-      "lastActivity": "2026-03-29T10:15:00Z",
+      "lastActivity": "2026-03-31T13:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Exploring telemetry for production monitoring",
+      "wau": 7,
+      "topSignal": "Pilot evaluation for manufacturing analytics",
       "features": [
-        "monitors",
-        "charts",
-        "runs"
+        "timeseries",
+        "monitoring",
+        "analytics"
       ],
-      "lastActivity": "2026-03-26T14:50:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-28T10:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 20,
-      "topSignal": "Active use of family stats and downsampling",
+      "wau": 23,
+      "topSignal": "Growing engagement with asteroid mining mission planning features",
       "features": [
-        "family-stats",
-        "downsample",
-        "charts",
-        "monitors"
+        "timeseries",
+        "data_lake",
+        "collections",
+        "calculated_channels"
       ],
-      "lastActivity": "2026-03-30T15:35:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-01T16:15:00Z",
+      "openIssues": 1
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Minimal activity, potential churn risk",
+      "wau": 2,
+      "topSignal": "Very low activity, pilot needs immediate attention",
       "features": [
-        "charts",
-        "runs"
+        "timeseries"
       ],
-      "lastActivity": "2026-03-20T13:25:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-18T14:00:00Z",
+      "openIssues": 2
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize SCIM reliability fixes over feature development",
-      "context": "Multiple SCIM bugs (email provisioning failures, repeated deactivations, admin user blocking) impact enterprise customers. These directly affect 'Embed Deeper' pillar and customer trust.",
-      "owner": "Engineering Lead",
-      "deadline": "2026-04-08",
-      "status": "open",
-      "blockedBy": null,
-      "arguments": {
-        "for": "Enterprise customers expect SSO/SCIM reliability; bugs erode trust and block expansion. Fixing now prevents churn and enables upsell.",
-        "against": "Delays Canvas and Explore V2 features that drive new Decisions Captured. May miss Q2 product launches."
-      }
-    },
-    {
-      "title": "Ship Sift Edge GUI table view and enum support in April",
-      "context": "Edge GUI improvements (table view ENG-9883, enum/bitfield support ENG-8857) are foundational for 'Build the Moat' by enabling hardware engineers to interact with raw data without Python.",
-      "owner": "Edge Product Manager",
+      "title": "Deploy Redpanda & Sift Application to EC2 Infrastructure",
+      "context": "ENG-9176 and ENG-9172 signal major infrastructure shifts. Critical for scalability and performance of Sift Edge (moat-building). Impacts data ingestion pipeline reliability for Explore V2 and Canvas.",
+      "owner": "Platform Engineering Lead",
       "deadline": "2026-04-30",
       "status": "open",
       "blockedBy": null,
       "arguments": {
-        "for": "Differentiates Sift from competitors; unblocks hardware teams waiting on Edge features. Directly increases Decisions Captured in embedded systems use cases.",
-        "against": "Resources could focus on Canvas or Python Rules which have broader customer base. Edge adoption still nascent."
+        "for": "Enables horizontal scaling for streaming data; reduces vendor lock-in; supports 10x decision capture growth needed for North Star metric",
+        "against": "Increases operational complexity; requires new monitoring/alerting infrastructure; team learning curve on Redpanda ops"
       }
     },
     {
-      "title": "Consolidate runbooks to internal-docs before FedRAMP audit",
-      "context": "Two tickets (ENG-9923, ENG-9297) migrating runbooks to markdown. FedRAMP compliance (ENG-9684) requires documentation standardization. Audit likely in Q2.",
-      "owner": "DevOps Lead",
+      "title": "Implement SCIM User Lifecycle Management Controls",
+      "context": "ENG-9926, ENG-9925, ENG-9784, ENG-9785, ENG-9788 show critical SCIM gaps causing customer incidents (Impulse Space). Enterprise SSO is table stakes for 'Embed Deeper' pillar. Multiple security/audit issues detected.",
+      "owner": "Identity & Access Management Lead",
       "deadline": "2026-04-15",
-      "status": "at_risk",
-      "blockedBy": "Team capacity split across FedRAMP prep and incident response",
+      "status": "blocked",
+      "blockedBy": "ENG-9783 (testing infrastructure) and ENG-9614 (metrics/alerting) must complete first",
       "arguments": {
-        "for": "FedRAMP certification unlocks federal contracts (Embed Deeper). Documentation debt blocks audit readiness.",
-        "against": "Non-customer-facing work. Could defer to Q3 if audit timeline slips."
+        "for": "Prevents customer incidents; unblocks enterprise deals; required for SOC2/FedRAMP; improves admin visibility per ENG-9926",
+        "against": "Requires coordination across auth, API, and frontend teams; may delay Python Rules launch if resources diverted"
       }
     },
     {
-      "title": "Resolve annotation visibility bug before customer QBRs",
-      "context": "ENG-9861: Annotations missing from Annotation Page but visible in Chart View. Affects Canvas user experience and 'Nail the Core' reliability. Q2 QBRs start April 15.",
-      "owner": "Canvas Engineering Lead",
+      "title": "Raise Calculated Channels Nesting Limit",
+      "context": "ENG-9929 indicates customers hitting architectural limits. Directly impacts 'Nail the Core' - customers can't build complex decision logic. Python Rules (Q2 launch) may exacerbate if limit stays.",
+      "owner": "Rules Engine Product Manager",
       "deadline": "2026-04-10",
       "status": "open",
       "blockedBy": null,
       "arguments": {
-        "for": "Annotations are critical for collaborative decision-making (North Star metric). Bug undermines Canvas value prop in customer meetings.",
-        "against": "Workaround exists (use Chart View). Other Canvas features (undo/redo, hovercard redesign) may drive more usage."
+        "for": "Quick win for power users; unblocks advanced Canvas use cases; minimal eng effort based on ticket complexity",
+        "against": "May mask underlying performance issues; should validate use cases before increasing limits blindly"
       }
     },
     {
-      "title": "Defer GUI undo/redo and hovercard redesign to May",
-      "context": "ENG-9247 (undo/redo), ENG-9911/9909/9910 (hovercard components) are UX polish. Core Canvas functionality stable. Team capacity constrained by SCIM and Edge work.",
-      "owner": "Product Leadership",
-      "deadline": "2026-04-05",
+      "title": "Prioritize CSRS DataFusion Migration for Performance",
+      "context": "ENG-9460 and ENG-9494 show CSRS modernization underway. Critical for Explore V2 query performance ('Nail the Core'). Downsampling work (ENG-7920) suggests current system struggling with scale.",
+      "owner": "Analytics Engineering Lead",
+      "deadline": "2026-05-15",
       "status": "open",
       "blockedBy": null,
       "arguments": {
-        "for": "Frees engineers for high-impact bugs (annotations, SCIM). Undo/redo nice-to-have, not blocker for Decisions Captured.",
-        "against": "Hovercard redesign promised to design partners. Delay risks perception that Canvas development slowing."
+        "for": "10-100x query performance improvement expected; enables real-time Ask SIFT; supports FedRAMP compliance (ENG-9684)",
+        "against": "Large architectural change; risk of data inconsistency during migration; requires extensive testing"
       }
     },
     {
-      "title": "Approve RFC for customizable family stat downsampling",
-      "context": "ENG-9902/9901: Explore V2 performance optimization for large datasets. Improves 'Nail the Core' by reducing query latency. RFC blocks implementation.",
-      "owner": "Explore Tech Lead",
-      "deadline": "2026-04-07",
+      "title": "Address ABAC Authorization Gaps for Collections",
+      "context": "ENG-9761 indicates ABAC rollout incomplete. Blocks 'Embed Deeper' for multi-tenant customers. User attribute sync caching (ENG-9871) shows performance work happening but feature incomplete.",
+      "owner": "Security & Permissions Lead",
+      "deadline": "2026-04-25",
       "status": "open",
       "blockedBy": null,
       "arguments": {
-        "for": "Users report slow family stat queries on 100k+ channels. Downsampling unlocks enterprise-scale usage (Embed Deeper).",
-        "against": "Adds complexity to Explore backend. May introduce sampling artifacts that confuse users."
+        "for": "Required for enterprise data isolation; enables Canvas sharing in regulated industries; aligns with 'Build the Moat' via security differentiation",
+        "against": "Complex permission model increases support burden; may confuse existing users during transition"
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "127",
-      "delta": "+8%"
+      "value": "847",
+      "delta": "+12%"
     },
     "pillars": [
       {
@@ -2718,45 +2708,45 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 query latency <2s (p95)",
-            "current": "3.2s",
+            "name": "Explore V2 Query Latency P95 <2s",
+            "current": "3.4s",
             "target": "2.0s",
             "status": "at_risk"
           },
           {
-            "name": "Canvas annotation reliability 99.9%",
-            "current": "98.4%",
-            "target": "99.9%",
+            "name": "Canvas Adoption: 60% MAU",
+            "current": "47%",
+            "target": "60%",
             "status": "at_risk"
           },
           {
-            "name": "Zero critical bugs >7 days",
-            "current": "2",
+            "name": "Zero Critical Data Loss Incidents",
+            "current": "1 incident",
             "target": "0",
-            "status": "off_track"
+            "status": "at_risk"
           }
         ]
       },
       {
         "name": "Embed Deeper",
-        "status": "on_track",
+        "status": "at_risk",
         "keyResults": [
           {
-            "name": "SCIM adoption at 12 customers",
-            "current": "9",
-            "target": "12",
-            "status": "on_track"
+            "name": "Enterprise SSO Adoption: 80% seats",
+            "current": "62%",
+            "target": "80%",
+            "status": "at_risk"
           },
           {
-            "name": "FedRAMP certification submitted",
-            "current": "80%",
+            "name": "Python Rules GA Launch",
+            "current": "85% complete",
             "target": "100%",
             "status": "on_track"
           },
           {
-            "name": "Python Rules in 5 production workflows",
-            "current": "3",
-            "target": "5",
+            "name": "API Integration NPS >40",
+            "current": "38",
+            "target": "40",
             "status": "on_track"
           }
         ]
@@ -2766,21 +2756,21 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Sift Edge deployed at 4 customers",
-            "current": "2",
-            "target": "4",
-            "status": "at_risk"
+            "name": "Sift Edge Beta: 10 customers",
+            "current": "7",
+            "target": "10",
+            "status": "on_track"
           },
           {
-            "name": "Ask SIFT query success rate >85%",
-            "current": "78%",
+            "name": "Ask SIFT Query Success Rate >85%",
+            "current": "81%",
             "target": "85%",
-            "status": "at_risk"
+            "status": "on_track"
           },
           {
-            "name": "Canvas collaboration features (3 shipped)",
-            "current": "2",
-            "target": "3",
+            "name": "FedRAMP Certification Progress",
+            "current": "Phase 2 of 4",
+            "target": "Phase 3",
             "status": "on_track"
           }
         ]
@@ -2789,7 +2779,7 @@
   },
   "timeAudit": {
     "today": {
-      "date": "2026-04-01",
+      "date": "2026-04-02",
       "meetings": 5,
       "focusBlocks": 2,
       "oneOnOnes": 3,
@@ -2801,115 +2791,100 @@
       "freeHours": 8,
       "meetingHours": 32
     },
-    "weekSummary": "High meeting load (80% of time) driven by Q2 planning, FedRAMP prep, and SCIM incident reviews. Only 8 focus hours limits strategic work.",
+    "weekSummary": "High meeting load (80% of working hours) limiting strategic thinking time. 3 one-on-ones focused on SCIM incident response and CSRS migration planning.",
     "alerts": [
-      "3 one-on-ones scheduled same day (April 1) - consider spreading across week",
-      "No focus blocks >90min for deep architecture work on Explore V2 performance",
-      "FedRAMP compliance review recurring meeting (2hrs weekly) has 40% acceptance rate - cancel or reschedule?"
+      "30 Linear tickets updated this week - signal detection working but decision backlog forming",
+      "Back-to-back meetings Thursday afternoon prevent deep work on SCIM decision",
+      "No focus blocks >2hrs scheduled this week - consider blocking Friday morning",
+      "Infrastructure decisions (Redpanda, CSRS) need dedicated architecture review session"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Apr 1-7)",
+        "label": "This Week (Apr 2-8)",
         "events": [
           {
-            "title": "RFC Review: Customizable Family Stat Downsampling",
+            "title": "SCIM Testing Infrastructure Review",
             "date": "2026-04-03",
             "time": "14:00",
-            "type": "gate",
-            "description": "Approve/reject ENG-9902 RFC to unblock Explore V2 performance work",
-            "owner": "Explore Tech Lead"
+            "type": "meeting",
+            "description": "Assess ENG-9783 completion to unblock user lifecycle controls",
+            "owner": "Identity Team"
           },
           {
-            "title": "SCIM Bug Triage",
+            "title": "Calculated Channels Limit Decision",
             "date": "2026-04-04",
             "time": "10:00",
-            "type": "meeting",
-            "description": "Prioritize ENG-9707, ENG-9788, ENG-9784, ENG-9785 fixes with customer success impact assessment",
-            "owner": "Engineering Lead"
-          },
-          {
-            "title": "Defer UX Polish Decision",
-            "date": "2026-04-05",
-            "time": "09:00",
             "type": "deadline",
-            "description": "Decide whether to defer undo/redo and hovercard redesign to May",
-            "owner": "Product Leadership"
+            "description": "Approve/reject limit increase for ENG-9929",
+            "owner": "Rules PM"
           },
           {
-            "title": "FedRAMP Documentation Audit",
+            "title": "Weekly Strategy Sync",
             "date": "2026-04-07",
-            "time": "13:00",
-            "type": "milestone",
-            "description": "Review runbook migration progress and remaining gaps for certification",
-            "owner": "DevOps Lead"
+            "time": "09:00",
+            "type": "meeting",
+            "description": "Review 'Nail the Core' risks - query latency and Canvas adoption trending negative",
+            "owner": "Product Leadership"
           }
         ]
       },
       {
-        "label": "Next Two Weeks (Apr 8-21)",
+        "label": "Next 2 Weeks (Apr 9-22)",
         "events": [
           {
-            "title": "Canvas Annotation Bug Fixed",
-            "date": "2026-04-10",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "ENG-9861 resolved and deployed before customer QBRs begin",
-            "owner": "Canvas Engineering Lead"
-          },
-          {
-            "title": "Runbooks Migration Complete",
+            "title": "SCIM User Controls Gate",
             "date": "2026-04-15",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "All runbooks in internal-docs markdown format (ENG-9923, ENG-9297)",
-            "owner": "DevOps Lead"
+            "time": "23:59",
+            "type": "gate",
+            "description": "Ship ENG-9784, ENG-9785, ENG-9925 to prevent repeat incidents",
+            "owner": "Identity Lead"
           },
           {
-            "title": "Q2 Customer QBRs Begin",
-            "date": "2026-04-15",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "Customer-facing quarterly reviews start - product must be stable",
-            "owner": "Customer Success"
+            "title": "Infrastructure Architecture Review",
+            "date": "2026-04-11",
+            "time": "13:00",
+            "type": "meeting",
+            "description": "Deep dive on Redpanda/EC2 migration plan - operational readiness assessment",
+            "owner": "Platform Engineering"
           },
           {
-            "title": "SCIM Reliability Sprint Retro",
-            "date": "2026-04-18",
+            "title": "FedRAMP Sprint Planning",
+            "date": "2026-04-16",
             "time": "15:00",
             "type": "meeting",
-            "description": "Assess progress on enterprise SSO/SCIM fixes and remaining work",
-            "owner": "Engineering Lead"
+            "description": "ENG-9684 Analytics compliance + ABAC audit logging requirements",
+            "owner": "Security Lead"
+          },
+          {
+            "title": "ABAC Collections Milestone",
+            "date": "2026-04-25",
+            "time": "23:59",
+            "type": "milestone",
+            "description": "Complete ENG-9761 for enterprise data isolation",
+            "owner": "Security Team"
           }
         ]
       },
       {
-        "label": "This Month (Apr 22-30)",
+        "label": "Next 30 Days (Apr 23-May 2)",
         "events": [
           {
-            "title": "Sift Edge GUI Table View Launch",
+            "title": "Redpanda Deployment Gate",
             "date": "2026-04-30",
-            "time": "12:00",
-            "type": "milestone",
-            "description": "Ship ENG-9883 table view and ENG-8857 enum/bitfield support to beta customers",
-            "owner": "Edge Product Manager"
-          },
-          {
-            "title": "Explore V2 Performance Review",
-            "date": "2026-04-28",
-            "time": "14:00",
+            "time": "23:59",
             "type": "gate",
-            "description": "Measure impact of family stat downsampling on query latency",
-            "owner": "Explore Tech Lead"
+            "description": "Go/no-go for production Redpanda rollout",
+            "owner": "Platform Lead"
           },
           {
-            "title": "FedRAMP Pre-Audit Readiness",
-            "date": "2026-04-30",
-            "time": "16:00",
-            "type": "deadline",
-            "description": "All ENG-9684 compliance items complete for May audit kickoff",
-            "owner": "DevOps Lead"
+            "title": "Q2 Strategy Review",
+            "date": "2026-04-28",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "Assess Python Rules launch readiness and Canvas adoption trajectory",
+            "owner": "CPO"
           }
         ]
       },
@@ -2917,28 +2892,28 @@
         "label": "Next Quarter (May-Jun)",
         "events": [
           {
-            "title": "FedRAMP Certification Audit",
-            "date": "2026-05-12",
-            "time": "09:00",
+            "title": "CSRS DataFusion Migration Complete",
+            "date": "2026-05-15",
+            "time": "23:59",
             "type": "milestone",
-            "description": "Third-party assessor begins FedRAMP compliance audit",
-            "owner": "DevOps Lead"
+            "description": "Cutover to DataFusion for 10x query performance improvement",
+            "owner": "Analytics Engineering"
           },
           {
-            "title": "Canvas Collaboration Features Ship",
+            "title": "Python Rules GA Launch",
             "date": "2026-05-30",
-            "time": "12:00",
+            "time": "23:59",
             "type": "milestone",
-            "description": "Undo/redo and hovercard redesign released after deferral",
-            "owner": "Canvas Engineering Lead"
+            "description": "Public launch of Python-based rule authoring",
+            "owner": "Rules Product Team"
           },
           {
-            "title": "Q2 Strategy Review",
+            "title": "Sift Edge Beta Expansion Gate",
             "date": "2026-06-15",
-            "time": "10:00",
-            "type": "meeting",
-            "description": "Assess Nail/Embed/Moat pillar progress and adjust H2 roadmap",
-            "owner": "Product Leadership"
+            "time": "23:59",
+            "type": "gate",
+            "description": "Decision on scaling from 7 to 10+ customers",
+            "owner": "Edge Product Lead"
           }
         ]
       }
