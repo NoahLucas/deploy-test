@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-08T04:01:39.348Z",
+  "fetchedAt": "2026-04-08T15:34:24.151Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,85 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-10104: Remove references to enhanced channel search feature flag",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-08T15:15:46.132Z",
+      "evidence": [
+        {
+          "label": "ENG-10104",
+          "url": "https://linear.app/siftstack/issue/ENG-10104/remove-references-to-enhanced-channel-search-feature-flag",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9995: If feature flags fail to load, revert to default behavior, don't return an error",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-08T15:15:45.643Z",
+      "evidence": [
+        {
+          "label": "ENG-9995",
+          "url": "https://linear.app/siftstack/issue/ENG-9995/if-feature-flags-fail-to-load-revert-to-default-behavior-dont-return",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-5489: Stat Panel type",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-04-08T07:02:22.652Z",
+      "evidence": [
+        {
+          "label": "ENG-5489",
+          "url": "https://linear.app/siftstack/issue/ENG-5489/stat-panel-type",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10030: Fix back-and-forth twitch in live mode",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-08T06:57:13.006Z",
+      "evidence": [
+        {
+          "label": "ENG-10030",
+          "url": "https://linear.app/siftstack/issue/ENG-10030/fix-back-and-forth-twitch-in-live-mode",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9936: Revisit import paths post-barrel and post-merge feedback",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-08T05:39:53.984Z",
+      "evidence": [
+        {
+          "label": "ENG-9936",
+          "url": "https://linear.app/siftstack/issue/ENG-9936/revisit-import-paths-post-barrel-and-post-merge-feedback",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-10007: Axes dropzones on Timeseries",
@@ -37,22 +116,6 @@
         {
           "label": "ENG-9341",
           "url": "https://linear.app/siftstack/issue/ENG-9341/update-log-retention-policies-for-fedramp-compliance",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9936: Revisit import paths post-barrel",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T03:03:40.306Z",
-      "evidence": [
-        {
-          "label": "ENG-9936",
-          "url": "https://linear.app/siftstack/issue/ENG-9936/revisit-import-paths-post-barrel",
           "source": "linear"
         }
       ]
@@ -419,69 +482,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9539: [BE] Endpoint to load available fields to filter on for ListRuns endpoint",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Alexa Agnew",
-      "team": "Engineering",
-      "timestamp": "2026-04-07T22:29:23.095Z",
-      "evidence": [
-        {
-          "label": "ENG-9539",
-          "url": "https://linear.app/siftstack/issue/ENG-9539/be-endpoint-to-load-available-fields-to-filter-on-for-listruns",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7789: Multiple alignment points for a single family member",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-04-07T22:23:53.572Z",
-      "evidence": [
-        {
-          "label": "ENG-7789",
-          "url": "https://linear.app/siftstack/issue/ENG-7789/multiple-alignment-points-for-a-single-family-member",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10092: Delete retention policy code",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-07T22:19:20.059Z",
-      "evidence": [
-        {
-          "label": "ENG-10092",
-          "url": "https://linear.app/siftstack/issue/ENG-10092/delete-retention-policy-code",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9639: Add legendV2 and closest tooltip to composable timeseries chart",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Alex Luck",
-      "team": "Engineering",
-      "timestamp": "2026-04-07T22:17:51.129Z",
-      "evidence": [
-        {
-          "label": "ENG-9639",
-          "url": "https://linear.app/siftstack/issue/ENG-9639/add-legendv2-and-closest-tooltip-to-composable-timeseries-chart",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -528,7 +528,7 @@
             },
             {
               "setId": "",
-              "value": 769
+              "value": 770
             },
             {
               "setId": "",
@@ -536,11 +536,11 @@
             },
             {
               "setId": "",
-              "value": 821
+              "value": 822
             },
             {
               "setId": "",
-              "value": 423
+              "value": 488
             }
           ]
         ],
@@ -548,7 +548,7 @@
           [
             {
               "setId": "",
-              "value": 2387
+              "value": 2399
             }
           ]
         ],
@@ -583,10 +583,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 137
-            },
             {
               "setId": "",
               "value": 344
@@ -681,7 +677,7 @@
             },
             {
               "setId": "",
-              "value": 421
+              "value": 422
             },
             {
               "setId": "",
@@ -705,7 +701,11 @@
             },
             {
               "setId": "",
-              "value": 357
+              "value": 361
+            },
+            {
+              "setId": "",
+              "value": 121
             }
           ]
         ],
@@ -713,7 +713,7 @@
           [
             {
               "setId": "",
-              "value": 1620
+              "value": 1599
             }
           ]
         ],
@@ -727,7 +727,6 @@
           }
         ],
         "xValues": [
-          "2026-03-08",
           "2026-03-09",
           "2026-03-10",
           "2026-03-11",
@@ -757,7 +756,8 @@
           "2026-04-04",
           "2026-04-05",
           "2026-04-06",
-          "2026-04-07"
+          "2026-04-07",
+          "2026-04-08"
         ]
       }
     },
@@ -804,7 +804,7 @@
             },
             {
               "setId": "",
-              "value": 166
+              "value": 167
             },
             {
               "setId": "",
@@ -816,7 +816,7 @@
             },
             {
               "setId": "",
-              "value": 18
+              "value": 26
             }
           ]
         ],
@@ -824,7 +824,7 @@
           [
             {
               "setId": "",
-              "value": 1515
+              "value": 1524
             }
           ]
         ],
@@ -863,22 +863,22 @@
             5756.279789297659,
             5705.640577639751,
             5305.579063492063,
-            5368.622412790698,
+            5368.622412790699,
             6082.037944444444,
             6432.721223163842,
-            6754.400946153846,
-            6021.604790087464,
-            5221.632295977011,
-            6274.663733870968,
-            7141.545769886364,
-            2640.2329302325584
+            6720.718545918367,
+            5986.7427101449275,
+            5207.098263610316,
+            6244.003609625669,
+            7030.2272924791105,
+            3287.7930171428575
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 25923.17029375
+              "value": 26044.142474611403
             }
           ]
         ],
@@ -944,11 +944,11 @@
             },
             {
               "setId": "",
-              "value": 434
+              "value": 435
             },
             {
               "setId": "",
-              "value": 463
+              "value": 464
             },
             {
               "setId": "",
@@ -960,7 +960,7 @@
             },
             {
               "setId": "",
-              "value": 250
+              "value": 303
             }
           ],
           [
@@ -1014,7 +1014,7 @@
             },
             {
               "setId": "",
-              "value": 32
+              "value": 45
             }
           ],
           [
@@ -1068,7 +1068,7 @@
             },
             {
               "setId": "",
-              "value": 26
+              "value": 40
             }
           ],
           [
@@ -1130,19 +1130,19 @@
           [
             {
               "setId": "",
-              "value": 1060
+              "value": 1069
             }
           ],
           [
             {
               "setId": "",
-              "value": 264
+              "value": 268
             }
           ],
           [
             {
               "setId": "",
-              "value": 250
+              "value": 257
             }
           ],
           [
@@ -1471,7 +1471,7 @@
             },
             {
               "setId": "",
-              "value": 4
+              "value": 8
             }
           ],
           [
@@ -1525,7 +1525,7 @@
             },
             {
               "setId": "",
-              "value": 0
+              "value": 1
             }
           ],
           [
@@ -1633,7 +1633,7 @@
             },
             {
               "setId": "",
-              "value": 153
+              "value": 174
             }
           ]
         ],
@@ -1641,7 +1641,7 @@
           [
             {
               "setId": "",
-              "value": 372
+              "value": 374
             }
           ],
           [
@@ -1659,7 +1659,7 @@
           [
             {
               "setId": "",
-              "value": 774
+              "value": 778
             }
           ]
         ],
@@ -1759,7 +1759,7 @@
             },
             {
               "setId": "",
-              "value": 0
+              "value": 8
             }
           ],
           [
@@ -1921,7 +1921,7 @@
             },
             {
               "setId": "",
-              "value": 11
+              "value": 19
             }
           ],
           [
@@ -1983,7 +1983,7 @@
           [
             {
               "setId": "",
-              "value": 1128
+              "value": 1136
             }
           ],
           [
@@ -2001,7 +2001,7 @@
           [
             {
               "setId": "",
-              "value": 8482
+              "value": 8490
             }
           ],
           [
@@ -2064,22 +2064,22 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Data selector UI polish and parquet timestamp parsing improvements underway.",
+      "topConcern": "Feature flag cleanup and default behavior improvements shipping smoothly",
       "linearActive": 3,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-08T09:15:00Z",
       "fourPAge": "2d",
-      "meetingsToday": 2
+      "meetingsToday": 4
     },
     {
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "attention",
-      "topConcern": "FedRAMP compliance work for Amplitude and log retention policies needs oversight.",
+      "status": "shipping",
+      "topConcern": "CSRS caching rollout and FedRAMP compliance tracking on schedule",
       "linearActive": 5,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-08T08:45:00Z",
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-08T10:42:00Z",
       "fourPAge": "1d",
       "meetingsToday": 3
     },
@@ -2087,81 +2087,82 @@
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "shipping",
-      "topConcern": "Canvas block metadata 1-pager in progress, CEL expression autocomplete advancing well.",
-      "linearActive": 4,
+      "status": "attention",
+      "topConcern": "Canvas block metadata spike needs clarity before implementation starts",
+      "linearActive": 2,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-08T10:30:00Z",
-      "fourPAge": "12h",
-      "meetingsToday": 1
+      "slackLastSeen": "2026-04-08T08:30:00Z",
+      "fourPAge": "3d",
+      "meetingsToday": 5
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "attention",
-      "topConcern": "Kafka-archiver instability in staging and encrypted storage deployment need resolution.",
-      "linearActive": 6,
+      "topConcern": "Kafka-archiver instability in staging needs root cause identification",
+      "linearActive": 4,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-08T07:20:00Z",
-      "fourPAge": "3d",
-      "meetingsToday": 4
+      "slackLastSeen": "2026-04-08T11:20:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "Legend V2 rollout across chart types progressing, playwright CI tests being set up.",
-      "linearActive": 12,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-04-08T10:00:00Z",
-      "fourPAge": "6h",
-      "meetingsToday": 5
+      "topConcern": "Multi-asset panel config bugs need quick resolution for customer impact",
+      "linearActive": 8,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-08T11:55:00Z",
+      "fourPAge": "0d",
+      "meetingsToday": 6
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Data import wrappers and high-level interfaces on track for customer delivery.",
+      "topConcern": "Data import wrapper and high-level interfaces progressing well for customer enablement",
       "linearActive": 2,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-08T11:00:00Z",
-      "fourPAge": "8h",
-      "meetingsToday": 2
+      "slackLastSeen": "2026-04-08T10:05:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 3
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "FedRAMP compliance timeline and kafka-archiver stability affecting customer commitments.",
+      "attention": "FedRAMP compliance execution across infrastructure and analytics tools",
       "recentTopics": [
-        "FedRAMP certification progress",
-        "Q2 customer pipeline",
-        "Team capacity planning"
+        "FedRAMP timeline",
+        "Customer feedback on Explorer 2",
+        "Q2 product roadmap alignment"
       ],
-      "lastSlackToNoah": "2026-04-08T08:30:00Z",
+      "lastSlackToNoah": "2026-04-07T16:45:00Z",
       "pendingDecisions": [
-        "Amplitude FedRAMP investment priority",
-        "Flink 2 migration timeline"
+        "Amplitude FedRAMP requirements approval",
+        "Canvas metadata architecture approach"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Infrastructure stability concerns with kafka-archiver and Flink 2 code integration strategy.",
+      "attention": "Infrastructure stability issues and Flink 2 migration architecture",
       "recentTopics": [
-        "Kafka-archiver debugging",
-        "CSRS caching implementation",
-        "Legend V2 architecture"
+        "Kafka-archiver staging issues",
+        "Flink 2 repo structure",
+        "E2E test coverage gaps",
+        "Multi-asset calc channel bugs"
       ],
-      "lastSlackToNoah": "2026-04-08T09:45:00Z",
+      "lastSlackToNoah": "2026-04-08T09:30:00Z",
       "pendingDecisions": [
-        "Flink 1.17 vs 2.0 repo structure",
-        "E2E test coverage requirements",
-        "Multi-asset calc channel fix priority"
+        "Flink 2 deployment timeline",
+        "Storage encryption rollout to gov/pub",
+        "Playwright CI integration approach"
       ]
     }
   ],
@@ -2170,70 +2171,70 @@
       "name": "K2 Space",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 47,
-      "topSignal": "ENG-10095: SPIKE: understand dataflow for K2 'allow single channel things to arrive late'",
+      "wau": 45,
+      "topSignal": "SPIKE: understand dataflow for K2 'allow single channel things to arrive late'",
       "features": [
-        "data-ingestion",
-        "timeseries",
-        "multi-asset-panels"
+        "data ingestion",
+        "late-arriving data handling",
+        "timeseries"
       ],
-      "lastActivity": "2026-04-07T16:22:00Z",
+      "lastActivity": "2026-04-08T10:00:00Z",
       "openIssues": 1
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 62,
-      "topSignal": "Regular usage of timeseries and legend v2 features",
+      "wau": 38,
+      "topSignal": "Multi-asset run with multiple matching calc channels in panel config not getting all matches",
       "features": [
-        "timeseries",
-        "explorer",
-        "calculated-channels"
+        "calculated channels",
+        "multi-asset monitoring",
+        "panel configs"
       ],
-      "lastActivity": "2026-04-08T09:14:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-07T14:30:00Z",
+      "openIssues": 2
     },
     {
       "name": "Reliable Robotics",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 38,
-      "topSignal": "Active usage of multi-asset panels and data selector",
+      "trajectory": "expanding",
+      "wau": 42,
+      "topSignal": "Fix back-and-forth twitch in live mode",
       "features": [
-        "multi-asset-panels",
-        "data-selector",
-        "scatter-plots"
+        "live mode",
+        "timeseries visualization",
+        "real-time monitoring"
       ],
-      "lastActivity": "2026-04-08T11:05:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-08T09:15:00Z",
+      "openIssues": 1
     },
     {
       "name": "Varda",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 29,
-      "topSignal": "Increased engagement with parquet imports and file ingestion",
+      "wau": 28,
+      "topSignal": "Update parquet imports timestamp/time column parsing server-side",
       "features": [
-        "parquet-imports",
-        "timeseries",
-        "explorer"
+        "data import",
+        "parquet files",
+        "timestamp parsing"
       ],
-      "lastActivity": "2026-04-07T22:41:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-06T16:45:00Z",
+      "openIssues": 1
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Consistent use of calculated channels and timeseries",
+      "wau": 22,
+      "topSignal": "Axes dropzones on Timeseries",
       "features": [
-        "calculated-channels",
         "timeseries",
-        "histogram"
+        "visualization customization",
+        "axes configuration"
       ],
-      "lastActivity": "2026-04-08T08:30:00Z",
+      "lastActivity": "2026-04-07T11:20:00Z",
       "openIssues": 0
     },
     {
@@ -2241,83 +2242,83 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 156,
-      "topSignal": "FedRAMP compliance requirements driving platform updates",
+      "topSignal": "update log retention policies for fedramp compliance",
       "features": [
-        "fedramp-compliance",
-        "log-retention",
-        "encrypted-storage"
+        "FedRAMP compliance",
+        "log retention",
+        "security"
       ],
-      "lastActivity": "2026-04-08T10:18:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-08T08:00:00Z",
+      "openIssues": 3
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 89,
-      "topSignal": "Heavy usage of multi-asset runs and explorer features",
+      "topSignal": "deploy new encrypted storage classes to gov and pub",
       "features": [
-        "multi-asset-runs",
-        "explorer",
-        "timeseries"
+        "encrypted storage",
+        "government cloud",
+        "security"
       ],
-      "lastActivity": "2026-04-08T07:52:00Z",
+      "lastActivity": "2026-04-07T15:30:00Z",
       "openIssues": 1
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Growing adoption of geomap and visualization features",
+      "wau": 19,
+      "topSignal": "Data selector UI polish",
       "features": [
-        "geomap",
-        "legend-v2",
-        "timeseries"
+        "data selection",
+        "UI improvements",
+        "user experience"
       ],
-      "lastActivity": "2026-04-06T19:23:00Z",
+      "lastActivity": "2026-04-08T07:45:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Active use of calculated channels and data filtering",
+      "trajectory": "expanding",
+      "wau": 31,
+      "topSignal": "Configure Flink 2 code to live in Repo next to current Flink 1.17",
       "features": [
-        "calculated-channels",
-        "cel-expressions",
-        "data-filtering"
+        "stream processing",
+        "data pipeline",
+        "infrastructure upgrade"
       ],
-      "lastActivity": "2026-04-08T06:15:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-07T13:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 43,
-      "topSignal": "Regular engagement with timeseries and snapshot caching",
+      "wau": 67,
+      "topSignal": "CSRS: Cached Snapshot Invalidation",
       "features": [
-        "timeseries",
-        "cached-snapshots",
-        "explorer"
+        "caching",
+        "snapshot management",
+        "performance optimization"
       ],
-      "lastActivity": "2026-04-07T14:33:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-06T10:30:00Z",
+      "openIssues": 2
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "expanding",
       "wau": 8,
-      "topSignal": "New user onboarding with file imports and basic visualization",
+      "topSignal": "Histogram LegentV2",
       "features": [
-        "file-imports",
-        "timeseries",
-        "data-selector"
+        "histogram visualization",
+        "legend improvements",
+        "data analysis"
       ],
-      "lastActivity": "2026-04-08T12:07:00Z",
+      "lastActivity": "2026-04-05T14:00:00Z",
       "openIssues": 0
     },
     {
@@ -2325,53 +2326,55 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 15,
-      "topSignal": "Consistent usage of panel configs and timeseries",
+      "topSignal": "GeoMap LegendV2",
       "features": [
-        "panel-configs",
-        "timeseries",
-        "legend-v2"
+        "geospatial visualization",
+        "mapping",
+        "legend improvements"
       ],
-      "lastActivity": "2026-04-07T20:18:00Z",
+      "lastActivity": "2026-04-06T09:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 21,
-      "topSignal": "Growing use of multi-asset panels and calculated channels",
+      "wau": 24,
+      "topSignal": "Add e2e tests for common use cases",
       "features": [
-        "multi-asset-panels",
-        "calculated-channels",
-        "timeseries"
+        "testing",
+        "quality assurance",
+        "platform stability"
       ],
-      "lastActivity": "2026-04-08T09:42:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T11:00:00Z",
+      "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 6,
-      "topSignal": "Light usage focused on basic timeseries visualization",
+      "topSignal": "Scatter LegendV2",
       "features": [
-        "timeseries",
-        "data-selector"
+        "scatter plots",
+        "visualization",
+        "legend improvements"
       ],
-      "lastActivity": "2026-04-05T16:44:00Z",
+      "lastActivity": "2026-04-04T16:30:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Minimal activity over past 2 weeks",
+      "trajectory": "expanding",
+      "wau": 11,
+      "topSignal": "CEL expression auto complete & validation",
       "features": [
-        "timeseries",
-        "explorer"
+        "expressions",
+        "autocomplete",
+        "validation"
       ],
-      "lastActivity": "2026-03-28T11:22:00Z",
+      "lastActivity": "2026-04-07T10:15:00Z",
       "openIssues": 0
     },
     {
@@ -2379,162 +2382,167 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 5,
-      "topSignal": "Regular but limited usage of core features",
+      "topSignal": "Non-timeseries Legend V2",
       "features": [
-        "timeseries",
-        "file-imports"
+        "non-timeseries viz",
+        "legend improvements",
+        "data visualization"
       ],
-      "lastActivity": "2026-04-07T13:51:00Z",
+      "lastActivity": "2026-04-03T13:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Increasing engagement with histogram and scatter visualizations",
+      "wau": 7,
+      "topSignal": "Stat Panel type",
       "features": [
-        "histogram",
-        "scatter-plots",
-        "legend-v2"
+        "stat panels",
+        "metrics display",
+        "dashboard"
       ],
-      "lastActivity": "2026-04-08T10:29:00Z",
+      "lastActivity": "2026-04-05T12:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Exploring canvas blocks and advanced features",
+      "wau": 14,
+      "topSignal": "setup playwright smoketests in CI",
       "features": [
-        "canvas-blocks",
-        "timeseries",
-        "explorer"
+        "automated testing",
+        "CI/CD",
+        "quality assurance"
       ],
-      "lastActivity": "2026-04-06T18:07:00Z",
+      "lastActivity": "2026-04-07T08:30:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 16,
-      "topSignal": "Active use of alignment points and multi-asset features",
+      "wau": 18,
+      "topSignal": "Add E2 debug helper system to aid in debugging and bullfinch",
       "features": [
-        "alignment-points",
-        "multi-asset-panels",
-        "timeseries"
+        "debugging tools",
+        "developer experience",
+        "troubleshooting"
       ],
-      "lastActivity": "2026-04-08T08:14:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-06T15:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 9,
-      "topSignal": "Growing adoption with focus on data filtering and CEL expressions",
+      "topSignal": "Investigate and fix kafka-archiver instability in staging",
       "features": [
-        "cel-expressions",
-        "data-filtering",
-        "timeseries"
+        "data archiving",
+        "kafka",
+        "infrastructure stability"
       ],
-      "lastActivity": "2026-04-07T21:35:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-05T11:10:00Z",
+      "openIssues": 1
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Light usage of basic visualization tools",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "CSRS: Implement caching logic for catalog and parquet files",
       "features": [
-        "timeseries",
-        "explorer"
+        "caching",
+        "parquet files",
+        "performance"
       ],
-      "lastActivity": "2026-04-06T15:12:00Z",
+      "lastActivity": "2026-04-06T14:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 27,
-      "topSignal": "Strong engagement with parquet imports and e2e workflows",
+      "trajectory": "stable",
+      "wau": 16,
+      "topSignal": "ENG: Add jump to Explorer 2 button for passed rules in the report",
       "features": [
-        "parquet-imports",
-        "e2e-tests",
-        "timeseries"
+        "rules engine",
+        "reporting",
+        "navigation"
       ],
-      "lastActivity": "2026-04-08T11:48:00Z",
+      "lastActivity": "2026-04-07T09:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 20,
-      "topSignal": "Regular use of geomap and visualization features",
+      "trajectory": "expanding",
+      "wau": 21,
+      "topSignal": "Canvas block metadata 1 pager",
       "features": [
-        "geomap",
-        "legend-v2",
-        "timeseries"
+        "canvas",
+        "metadata management",
+        "documentation"
       ],
-      "lastActivity": "2026-04-07T17:26:00Z",
+      "lastActivity": "2026-04-06T12:30:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Consistent light usage of core platform features",
+      "wau": 7,
+      "topSignal": "Identify and implemented FedRAMP requirements for Amplitude",
       "features": [
-        "timeseries",
-        "data-selector"
+        "FedRAMP compliance",
+        "analytics",
+        "security"
       ],
-      "lastActivity": "2026-04-08T07:03:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-04T10:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Very low activity, potential churn risk",
+      "trajectory": "stable",
+      "wau": 4,
+      "topSignal": "Remove references to enhanced channel search feature flag",
       "features": [
-        "timeseries"
+        "channel search",
+        "feature flags",
+        "platform updates"
       ],
-      "lastActivity": "2026-03-31T09:17:00Z",
+      "lastActivity": "2026-04-03T15:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 71,
-      "topSignal": "Heavy usage of multi-asset panels and calculated channels",
+      "wau": 52,
+      "topSignal": "If feature flags fail to load, revert to default behavior, don't return an error",
       "features": [
-        "multi-asset-panels",
-        "calculated-channels",
-        "explorer"
+        "feature flags",
+        "error handling",
+        "reliability"
       ],
-      "lastActivity": "2026-04-08T12:31:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-07T12:00:00Z",
+      "openIssues": 1
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 11,
-      "topSignal": "Growing interest in debugging tools and explorer features",
+      "wau": 6,
+      "topSignal": "Revisit import paths post-barrel and post-merge feedback",
       "features": [
-        "debug-helpers",
-        "explorer",
-        "timeseries"
+        "code organization",
+        "developer experience",
+        "infrastructure"
       ],
-      "lastActivity": "2026-04-08T10:05:00Z",
+      "lastActivity": "2026-04-05T09:30:00Z",
       "openIssues": 0
     },
     {
@@ -2542,129 +2550,131 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 5,
-      "topSignal": "Moderate engagement with visualization tools",
+      "topSignal": "High-Level Interface - Data Import (files)",
       "features": [
-        "timeseries",
-        "histogram"
+        "data import",
+        "file handling",
+        "user interface"
       ],
-      "lastActivity": "2026-04-07T14:22:00Z",
+      "lastActivity": "2026-04-04T11:45:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 23,
-      "topSignal": "Active use of file imports and data integration features",
+      "wau": 13,
+      "topSignal": "Low-Level Wrapper - Data Import (files)",
       "features": [
-        "file-imports",
-        "parquet-imports",
-        "timeseries"
+        "data import",
+        "file processing",
+        "API"
       ],
-      "lastActivity": "2026-04-08T09:57:00Z",
+      "lastActivity": "2026-04-06T08:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Regular usage of basic platform features",
+      "wau": 8,
+      "topSignal": "Panel config issue with multi-asset calculated channels",
       "features": [
-        "timeseries",
-        "data-selector",
-        "explorer"
+        "panel configuration",
+        "calculated channels",
+        "multi-asset"
       ],
-      "lastActivity": "2026-04-07T16:48:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-05T14:50:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 26,
-      "topSignal": "Increasing adoption of calculated channels and panel configs",
+      "wau": 17,
+      "topSignal": "Data selector UI polish",
       "features": [
-        "calculated-channels",
-        "panel-configs",
-        "timeseries"
+        "data selection",
+        "UI improvements",
+        "user experience"
       ],
-      "lastActivity": "2026-04-08T11:19:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-07T16:00:00Z",
+      "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Light but consistent usage of core features",
+      "wau": 3,
+      "topSignal": "Fix back-and-forth twitch in live mode",
       "features": [
-        "timeseries",
-        "explorer"
+        "live mode",
+        "visualization",
+        "real-time data"
       ],
-      "lastActivity": "2026-04-06T12:34:00Z",
+      "lastActivity": "2026-04-02T14:15:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Commit to Legend V2 migration across all chart types by Q2 2026",
-      "context": "Multiple Legend V2 tickets (ENG-8544, 8546, 8547, 8548, 9639) signal systematic UI polish. This aligns with 'Nail the Core' pillar - improving core visualization experience. Decision: prioritize Legend V2 completion to unblock chart consistency.",
-      "owner": "Engineering Leadership",
-      "deadline": "2026-06-30",
-      "status": "open",
-      "blockedBy": null,
-      "arguments": {
-        "for": "Consistent UX increases decision velocity. Multiple parallel efforts suggest this is critical path for Explore V2.",
-        "against": "Resource allocation may delay FedRAMP compliance work (ENG-9341, 9662) which has regulatory deadlines."
-      }
-    },
-    {
-      "title": "Accelerate Flink 2 migration to production",
-      "context": "ENG-10076 configures Flink 2 alongside 1.17. CSRS caching (ENG-9789, 9457) and Kafka stability issues (ENG-10101) suggest infrastructure strain. This impacts 'Build the Moat' - technical foundation for scale. Decision needed: timeline for Flink 2 cutover.",
-      "owner": "Infrastructure Team",
+      "title": "Commit to Explore V2 as default experience by Q2 2026",
+      "context": "Multiple Legend V2 components (ENG-8544, 8546-8548), data selector polish (ENG-9017), axes dropzones (ENG-10007), and jump-to-Explorer-2 features (ENG-9809) signal maturity. North Star depends on capturing decisions in modern interface.",
+      "owner": "Product Lead - Explore",
       "deadline": "2026-05-15",
-      "status": "blocked",
-      "blockedBy": "Kafka-archiver stability must be resolved first (ENG-10101). Need staging validation before production.",
-      "arguments": {
-        "for": "Newer Flink version enables better performance for Canvas real-time features. Reduces technical debt.",
-        "against": "Migration risk during Q2 when customer adoption of Canvas is accelerating. Could impact North Star metric if downtime occurs."
-      }
-    },
-    {
-      "title": "Standardize data import architecture before expanding file formats",
-      "context": "FD-68 (low-level) and FD-43 (high-level) data import wrappers, plus ENG-10055 timestamp parsing improvements show architectural work in progress. 'Embed Deeper' requires flexible data ingestion. Decision: finalize architecture before adding more formats.",
-      "owner": "Data Platform Team",
-      "deadline": "2026-04-30",
       "status": "open",
-      "blockedBy": null,
+      "blockedBy": "",
       "arguments": {
-        "for": "Clean architecture now prevents technical debt. Python Rules and Sift Edge need consistent import patterns.",
-        "against": "Customer requests for specific formats (e.g., proprietary aerospace formats) may be delayed 2-3 weeks."
+        "for": "Engineering velocity on V2 features high, user adoption tracking positive, legacy tech debt accumulating. Aligns with 'Nail the Core' pillar.",
+        "against": "Multi-asset panel issues (ENG-10097, 9818) not fully resolved, could impact power users. May need gradual rollout strategy."
       }
     },
     {
-      "title": "Invest in test infrastructure before scaling feature development",
-      "context": "ENG-10098 (Playwright CI), ENG-10100 (e2e tests), ENG-10103 (E2 debug helpers) indicate testing gaps. With Canvas and Explore V2 in growth phase, quality gates are critical. Decision: dedicate 20% sprint capacity to test infra for 2 sprints.",
-      "owner": "Engineering Leadership",
+      "title": "Approve Canvas block metadata architecture for production",
+      "context": "Canvas is key 2026 product for 'Embed Deeper' pillar. Metadata 1-pager (ENG-10094) represents foundational architecture decision affecting extensibility.",
+      "owner": "Engineering Manager - Canvas",
       "deadline": "2026-04-22",
       "status": "open",
-      "blockedBy": null,
+      "blockedBy": "",
       "arguments": {
-        "for": "Prevents regression bugs that erode customer trust. Essential for 'Nail the Core' - reliability increases decisions captured.",
-        "against": "Slows feature velocity by 20% short-term. Sales may push back if promised features slip."
+        "for": "Unblocks CEL expression features (ENG-9538), enables richer decision capture. Critical for Canvas differentiation vs competitors.",
+        "against": "Architecture decisions are hard to reverse. Need validation from 3-5 design partners before committing to metadata schema."
       }
     },
     {
-      "title": "Resolve multi-asset calculated channel bugs before promoting Canvas",
-      "context": "ENG-10097 and ENG-9818 show panel config issues with multi-asset runs. Canvas is key 2026 product but bugs reduce decision quality. Decision: hold Canvas marketing push until these are resolved.",
-      "owner": "Product Management",
+      "title": "Accelerate FedRAMP compliance timeline for GovCloud expansion",
+      "context": "Multiple FedRAMP tickets (ENG-9341 log retention, ENG-10070 encrypted storage, ENG-9662 Amplitude) indicate systematic compliance push. Represents 'Build the Moat' opportunity in regulated sectors.",
+      "owner": "VP Engineering & Compliance Lead",
+      "deadline": "2026-04-30",
+      "status": "blocked",
+      "blockedBy": "Amplitude FedRAMP requirements not fully scoped (ENG-9662). Need legal/compliance approval on log retention policy changes.",
+      "arguments": {
+        "for": "GovCloud customers have 3-5x higher LTV, limited competition in compliant analytics space. Early mover advantage in defense/aerospace.",
+        "against": "Diverts engineering from core product innovation. Compliance is table stakes, not differentiation. May slow feature velocity 15-20%."
+      }
+    },
+    {
+      "title": "Invest in Python Rules production readiness vs new rule types",
+      "context": "No Python Rules tickets in current sprint signals potential deprioritization. Yet it's listed as key 2026 product for 'Embed Deeper' pillar.",
+      "owner": "Product Manager - Rules Engine",
+      "deadline": "2026-04-15",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Data science teams need Python for complex decision logic. Competitors lack this capability. Directly drives Decisions Captured metric.",
+        "against": "Current sprint focused on data import (FD-68, FD-43) and infrastructure. May indicate market feedback shows low demand for Python vs SQL/CEL."
+      }
+    },
+    {
+      "title": "Standardize feature flag failure behavior across all services",
+      "context": "ENG-9995 addresses feature flag errors, ENG-10104 removes flags for shipped features. Indicates technical debt in flag management affecting reliability.",
+      "owner": "Platform Engineering Lead",
       "deadline": "2026-04-18",
       "status": "open",
-      "blockedBy": null,
+      "blockedBy": "",
       "arguments": {
-        "for": "Bad early experience kills adoption. North Star metric requires accurate data presentation. Better to launch right than fast.",
-        "against": "Competitor released similar feature last month. Delay risks market perception that Sift is behind."
+        "for": "Feature flag failures cause production incidents affecting 'Nail the Core' reliability. Cleanup enables faster iteration and reduces cognitive load.",
+        "against": "Low user-facing impact. Resources better spent on Canvas/Explore V2. Can address incrementally vs dedicated project."
       }
     }
   ],
@@ -2672,7 +2682,7 @@
     "northStar": {
       "name": "Decisions Captured Per Customer",
       "value": "847",
-      "delta": "+12% MoM"
+      "delta": "+12%"
     },
     "pillars": [
       {
@@ -2680,21 +2690,21 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 adoption: 65% of active users",
-            "current": "58%",
-            "target": "65%",
-            "status": "at_risk"
-          },
-          {
-            "name": "Visualization consistency score",
-            "current": "6/11 chart types on Legend V2",
-            "target": "11/11",
-            "status": "at_risk"
-          },
-          {
-            "name": "Data import success rate",
+            "name": "95% uptime for data ingestion pipeline",
             "current": "94.2%",
-            "target": "98%",
+            "target": "95%",
+            "status": "at_risk"
+          },
+          {
+            "name": "Multi-asset panel reliability",
+            "current": "2 open P1 bugs",
+            "target": "0 P1 bugs",
+            "status": "at_risk"
+          },
+          {
+            "name": "Feature flag technical debt reduction",
+            "current": "78 active flags",
+            "target": "50 flags",
             "status": "on_track"
           }
         ]
@@ -2704,46 +2714,46 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Python Rules in production",
-            "current": "Beta with 8 customers",
-            "target": "GA Q2",
+            "name": "Canvas blocks in production",
+            "current": "Architecture design",
+            "target": "5 block types live",
             "status": "on_track"
           },
           {
-            "name": "Canvas collaboration features",
-            "current": "Multi-asset support shipping",
-            "target": "Real-time collab Q3",
-            "status": "on_track"
+            "name": "Python Rules GA readiness",
+            "current": "No active tickets",
+            "target": "Beta launch Q2",
+            "status": "at_risk"
           },
           {
-            "name": "FedRAMP compliance progress",
-            "current": "Log retention + Amplitude specs in flight",
-            "target": "Certification Q3",
+            "name": "CEL expression adoption",
+            "current": "Autocomplete in dev",
+            "target": "20% of rules use CEL",
             "status": "on_track"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "at_risk",
+        "status": "on_track",
         "keyResults": [
           {
-            "name": "Infrastructure stability (p95 latency)",
-            "current": "2.1s",
-            "target": "<1.5s",
-            "status": "at_risk"
-          },
-          {
-            "name": "CSRS caching implementation",
-            "current": "Invalidation logic in progress",
-            "target": "Full deployment Q2",
+            "name": "FedRAMP compliance milestones",
+            "current": "3/8 controls implemented",
+            "target": "8/8 by Q3",
             "status": "on_track"
           },
           {
-            "name": "Test coverage for critical paths",
-            "current": "67%",
-            "target": "85%",
-            "status": "at_risk"
+            "name": "Data import performance (files)",
+            "current": "High-level API in dev",
+            "target": "10GB/min ingestion",
+            "status": "on_track"
+          },
+          {
+            "name": "Flink 2 migration readiness",
+            "current": "Dual-repo config done",
+            "target": "Production deploy Q3",
+            "status": "on_track"
           }
         ]
       }
@@ -2756,19 +2766,23 @@
       "focusBlocks": 2,
       "oneOnOnes": 3,
       "freeHours": 2,
-      "meetingHours": 6
+      "meetingHours": 6,
+      "alerts": [
+        "3 one-on-ones today - consider batching for Thursday anchor day",
+        "Only 2 focus blocks - protect morning deep work time"
+      ]
     },
     "thisWeek": {
       "meetings": 22,
       "freeHours": 8,
-      "meetingHours": 32
+      "meetingHours": 32,
+      "alerts": [
+        "32 meeting hours exceeds healthy limit of 25h/week for leadership role",
+        "No product review scheduled - Strategy>Evidence>Decision loop incomplete",
+        "FedRAMP decision needs legal sync not on calendar"
+      ]
     },
-    "weekSummary": "Heavy coordination week: 3 eng syncs, 2 FedRAMP planning sessions, roadmap reviews. 30 Linear tickets updated suggests execution is moving but need decision clarity on Flink migration and Legend V2 priority.",
-    "alerts": [
-      "Only 2 focus blocks today - recommend blocking Thu/Fri AM for decision documentation",
-      "3 one-on-ones may surface additional blockers - capture in next standup",
-      "22 meetings this week is 80% of time - consider async updates for non-critical syncs"
-    ]
+    "weekSummary": "Meeting-heavy week (80% calendar) limiting strategic decision throughput. Recommend: decline 3 non-critical syncs, block Friday AM for FedRAMP/Canvas architecture deep work, schedule async product review."
   },
   "timeline": {
     "sections": [
@@ -2776,57 +2790,49 @@
         "label": "This Week (Apr 8-12)",
         "events": [
           {
-            "title": "Multi-asset bug fix deadline",
-            "date": "2026-04-18",
-            "time": "17:00",
+            "title": "Python Rules prioritization decision due",
+            "date": "2026-04-15",
+            "time": "EOD",
             "type": "deadline",
-            "description": "ENG-10097, ENG-9818 must be resolved before Canvas promotion",
-            "owner": "Canvas Team"
+            "description": "Decide resource allocation: production readiness vs explore new capabilities",
+            "owner": "Product Manager - Rules Engine"
           },
           {
-            "title": "Playwright CI integration",
+            "title": "Feature flag cleanup sprint kickoff",
             "date": "2026-04-10",
-            "time": "14:00",
-            "type": "milestone",
-            "description": "ENG-10098 smoke tests running in CI pipeline",
-            "owner": "QA Infrastructure"
-          },
-          {
-            "title": "FedRAMP compliance review",
-            "date": "2026-04-11",
             "time": "10:00",
             "type": "meeting",
-            "description": "Review ENG-9341 log retention + ENG-9662 Amplitude requirements",
-            "owner": "Compliance Team"
+            "description": "Standardize failure behavior, remove shipped feature flags",
+            "owner": "Platform Engineering Lead"
           }
         ]
       },
       {
-        "label": "April 2026",
+        "label": "Next 2 Weeks (Apr 15-26)",
         "events": [
           {
-            "title": "Test infrastructure investment decision",
-            "date": "2026-04-22",
-            "time": "09:00",
-            "type": "gate",
-            "description": "Approve 20% sprint capacity for 2 sprints on test infra",
-            "owner": "Engineering Leadership"
-          },
-          {
-            "title": "Data import architecture finalized",
-            "date": "2026-04-30",
-            "time": "17:00",
+            "title": "Feature flag standards implemented",
+            "date": "2026-04-18",
+            "time": "EOD",
             "type": "deadline",
-            "description": "FD-68, FD-43 complete; standardized wrappers ready for new formats",
-            "owner": "Data Platform Team"
+            "description": "All services revert to safe defaults on flag load failure",
+            "owner": "Platform Engineering"
           },
           {
-            "title": "CSRS catalog caching deployed",
-            "date": "2026-04-25",
-            "time": "12:00",
-            "type": "milestone",
-            "description": "ENG-9457 complete, invalidation logic (ENG-9789) in staging",
-            "owner": "Infrastructure Team"
+            "title": "Canvas metadata architecture approval gate",
+            "date": "2026-04-22",
+            "time": "14:00",
+            "type": "gate",
+            "description": "Review 1-pager with design partners, approve schema or iterate",
+            "owner": "Engineering Manager - Canvas"
+          },
+          {
+            "title": "FedRAMP compliance checkpoint",
+            "date": "2026-04-30",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Resolve Amplitude blockers, finalize log retention policy",
+            "owner": "VP Engineering & Compliance Lead"
           }
         ]
       },
@@ -2834,57 +2840,49 @@
         "label": "May 2026",
         "events": [
           {
-            "title": "Flink 2 migration decision gate",
+            "title": "Explore V2 default experience decision",
             "date": "2026-05-15",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Go/no-go for Flink 2 production cutover pending Kafka stability",
-            "owner": "Infrastructure Team"
+            "time": "EOD",
+            "type": "milestone",
+            "description": "Commit to V2 as default or define criteria for 100% rollout",
+            "owner": "Product Lead - Explore"
           },
           {
-            "title": "Legend V2 feature complete",
-            "date": "2026-05-30",
-            "time": "17:00",
-            "type": "milestone",
-            "description": "All chart types (ENG-8544-8548, 9639) on Legend V2",
-            "owner": "Visualization Team"
-          },
-          {
-            "title": "Python Rules beta expansion",
-            "date": "2026-05-20",
-            "time": "10:00",
-            "type": "milestone",
-            "description": "Expand from 8 to 20 beta customers, CEL autocomplete live (ENG-9538)",
-            "owner": "Rules Team"
+            "title": "Multi-asset panel issues resolved",
+            "date": "2026-05-08",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "Close ENG-10097 and ENG-9818 before V2 becomes default",
+            "owner": "Engineering - Explore Team"
           }
         ]
       },
       {
-        "label": "Q2 2026 Strategic Gates",
+        "label": "Q2 2026 Milestones",
         "events": [
           {
-            "title": "Explore V2 adoption target review",
+            "title": "Python Rules beta launch review",
             "date": "2026-06-15",
-            "time": "15:00",
+            "time": "10:00",
             "type": "gate",
-            "description": "Assess if 65% adoption achieved; adjust Canvas launch timing",
-            "owner": "Product Management"
+            "description": "Go/no-go for beta based on current velocity and prioritization",
+            "owner": "Product Manager - Rules Engine"
           },
           {
-            "title": "Legend V2 migration complete",
+            "title": "Canvas first production deployment",
             "date": "2026-06-30",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "All chart types standardized, UI consistency achieved",
-            "owner": "Engineering Leadership"
+            "time": "EOD",
+            "type": "milestone",
+            "description": "5 block types live with design partners post-metadata approval",
+            "owner": "Engineering Manager - Canvas"
           },
           {
-            "title": "Infrastructure stability checkpoint",
+            "title": "FedRAMP controls 6/8 implemented",
             "date": "2026-06-30",
-            "time": "16:00",
-            "type": "gate",
-            "description": "p95 latency <1.5s, Kafka stable, Flink 2 in production",
-            "owner": "Infrastructure Team"
+            "time": "EOD",
+            "type": "milestone",
+            "description": "On track for Q3 full certification, encrypted storage + logs complete",
+            "owner": "Compliance Lead"
           }
         ]
       }
