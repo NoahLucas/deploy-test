@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-09T04:00:08.511Z",
+  "fetchedAt": "2026-04-09T15:36:50.690Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,118 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-10138: RFC For Api Filter Endpoint Changes",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T15:34:30.349Z",
+      "evidence": [
+        {
+          "label": "ENG-10138",
+          "url": "https://linear.app/siftstack/issue/ENG-10138/rfc-for-api-filter-endpoint-changes",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10139: Stop Gap: GetFamilyCandidateRunCount Skip archived runs",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T15:34:30.349Z",
+      "evidence": [
+        {
+          "label": "ENG-10139",
+          "url": "https://linear.app/siftstack/issue/ENG-10139/stop-gap-getfamilycandidateruncount-skip-archived-runs",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9924: Handle Archived Runs in Family Candidates",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T15:33:59.291Z",
+      "evidence": [
+        {
+          "label": "ENG-9924",
+          "url": "https://linear.app/siftstack/issue/ENG-9924/handle-archived-runs-in-family-candidates",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10058: Remove references to channel search replica feature flag",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T15:10:49.236Z",
+      "evidence": [
+        {
+          "label": "ENG-10058",
+          "url": "https://linear.app/siftstack/issue/ENG-10058/remove-references-to-channel-search-replica-feature-flag",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10137: Improve Sift-Edge Metrics Documentation",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T14:57:22.361Z",
+      "evidence": [
+        {
+          "label": "ENG-10137",
+          "url": "https://linear.app/siftstack/issue/ENG-10137/improve-sift-edge-metrics-documentation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9820: Add Sift-Edge \"Back Pressure\" Metrics on Channels",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T14:49:48.740Z",
+      "evidence": [
+        {
+          "label": "ENG-9820",
+          "url": "https://linear.app/siftstack/issue/ENG-9820/add-sift-edge-back-pressure-metrics-on-channels",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9789: CSRS: Cached Snapshot Invalidation",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T05:14:18.592Z",
+      "evidence": [
+        {
+          "label": "ENG-9789",
+          "url": "https://linear.app/siftstack/issue/ENG-9789/csrs-cached-snapshot-invalidation",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-10060: Migrate `ExpandedMultiProgress` from `playground` to `playground-2`",
@@ -101,22 +213,6 @@
         {
           "label": "ENG-10130",
           "url": "https://linear.app/siftstack/issue/ENG-10130/keep-duplicate-data-points",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10058: Remove references to channel search replica feature flag",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "danny@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T00:48:41.427Z",
-      "evidence": [
-        {
-          "label": "ENG-10058",
-          "url": "https://linear.app/siftstack/issue/ENG-10058/remove-references-to-channel-search-replica-feature-flag",
           "source": "linear"
         }
       ]
@@ -392,102 +488,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10124: Add connectrpc for server streaming responses to the frontend",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:42:21.832Z",
-      "evidence": [
-        {
-          "label": "ENG-10124",
-          "url": "https://linear.app/siftstack/issue/ENG-10124/add-connectrpc-for-server-streaming-responses-to-the-frontend",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10084: IA - Global nav bread crumb bar",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:37:54.187Z",
-      "evidence": [
-        {
-          "label": "ENG-10084",
-          "url": "https://linear.app/siftstack/issue/ENG-10084/ia-global-nav-bread-crumb-bar",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9614: Create internal metrics/alerts for Idp Is succeeding/failing",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Jonathan Deng",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:12:53.421Z",
-      "evidence": [
-        {
-          "label": "ENG-9614",
-          "url": "https://linear.app/siftstack/issue/ENG-9614/create-internal-metricsalerts-for-idp-is-succeedingfailing",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10039: ABAC policies evaluate archived resource_attribute assignments",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Jonathan Deng",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:12:31.877Z",
-      "evidence": [
-        {
-          "label": "ENG-10039",
-          "url": "https://linear.app/siftstack/issue/ENG-10039/abac-policies-evaluate-archived-resource-attribute-assignments",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9983: Investigate `Import Data` disabled with blanket allow",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:12:07.616Z",
-      "evidence": [
-        {
-          "label": "ENG-9983",
-          "url": "https://linear.app/siftstack/issue/ENG-9983/investigate-import-data-disabled-with-blanket-allow",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9122: Feature Flag Front-End Prototypes",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-08T21:10:59.597Z",
-      "evidence": [
-        {
-          "label": "ENG-9122",
-          "url": "https://linear.app/siftstack/issue/ENG-9122/feature-flag-front-end-prototypes",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -591,10 +591,6 @@
           [
             {
               "setId": "",
-              "value": 344
-            },
-            {
-              "setId": "",
               "value": 346
             },
             {
@@ -663,7 +659,7 @@
             },
             {
               "setId": "",
-              "value": 340
+              "value": 341
             },
             {
               "setId": "",
@@ -691,7 +687,7 @@
             },
             {
               "setId": "",
-              "value": 380
+              "value": 381
             },
             {
               "setId": "",
@@ -711,7 +707,11 @@
             },
             {
               "setId": "",
-              "value": 376
+              "value": 381
+            },
+            {
+              "setId": "",
+              "value": 125
             }
           ]
         ],
@@ -719,7 +719,7 @@
           [
             {
               "setId": "",
-              "value": 1622
+              "value": 1600
             }
           ]
         ],
@@ -733,7 +733,6 @@
           }
         ],
         "xValues": [
-          "2026-03-09",
           "2026-03-10",
           "2026-03-11",
           "2026-03-12",
@@ -763,7 +762,8 @@
           "2026-04-05",
           "2026-04-06",
           "2026-04-07",
-          "2026-04-08"
+          "2026-04-08",
+          "2026-04-09"
         ]
       }
     },
@@ -869,11 +869,11 @@
             5756.279789297659,
             5705.640577639751,
             5305.579063492063,
-            5368.622412790699,
-            6082.051604938272,
+            5368.622412790698,
+            6082.051604938271,
             6432.721223163842,
             6705.4209669211195,
-            5952.667896253603,
+            5952.6678962536025,
             5192.249568571428,
             6200.464848806367,
             6916.24618306011,
@@ -884,7 +884,7 @@
           [
             {
               "setId": "",
-              "value": 26259.35991134021
+              "value": 26259.359911340205
             }
           ]
         ],
@@ -2070,10 +2070,10 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Database-backed feature flags management tooling needs coordination across platform.",
+      "topConcern": "Managing API filter endpoint changes and feature flag cleanup across platform.",
       "linearActive": 4,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T09:15:00Z",
+      "slackLastSeen": "2026-04-09T14:30:00Z",
       "fourPAge": "2d",
       "meetingsToday": 3
     },
@@ -2081,687 +2081,712 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "attention",
-      "topConcern": "ABAC policies evaluating archived resource attributes creating security gap.",
+      "status": "shipping",
+      "topConcern": "Coordinating archived runs handling and family candidate improvements.",
       "linearActive": 5,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-09T08:45:00Z",
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-09T15:15:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 4
+      "meetingsToday": 2
     },
     {
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Canvas documentation rollout coordinated with multi-asset simulator support.",
+      "topConcern": "Canvas documentation delivery and timeseries plot enhancements shipping on schedule.",
       "linearActive": 8,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T10:30:00Z",
-      "fourPAge": "1d",
-      "meetingsToday": 2
+      "slackLastSeen": "2026-04-09T16:00:00Z",
+      "fourPAge": "0d",
+      "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "attention",
-      "topConcern": "GovCloud Windmill deployment for DS customer requiring compliance review.",
-      "linearActive": 3,
+      "topConcern": "GovCloud deployment complexity and database-backed feature flag management needs review.",
+      "linearActive": 6,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-09T07:20:00Z",
+      "slackLastSeen": "2026-04-09T13:45:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 5
+      "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "Team velocity strong but need to prioritize CEL files RFC completion.",
-      "linearActive": 12,
+      "topConcern": "High ticket volume across platform, need to ensure team capacity isn't stretched.",
+      "linearActive": 30,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-09T09:45:00Z",
+      "slackLastSeen": "2026-04-09T16:20:00Z",
       "fourPAge": "0d",
-      "meetingsToday": 6
+      "meetingsToday": 5
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "GovCloud customer onboarding needs engineering support for workflow management.",
-      "linearActive": 2,
+      "topConcern": "Files in CEL instrumentation and GovCloud customer deployment progressing well.",
+      "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T11:00:00Z",
+      "slackLastSeen": "2026-04-09T15:45:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 4
+      "meetingsToday": 3
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "GovCloud deployment timeline critical for DS customer relationship.",
+      "attention": "GovCloud deployment represents strategic customer expansion but needs resource commitment clarity.",
       "recentTopics": [
-        "GovCloud compliance requirements",
-        "Canvas documentation launch strategy",
-        "Q2 product roadmap alignment"
+        "GovCloud customer data workflow management",
+        "Canvas documentation readiness",
+        "Getting started phase 1 launch timing"
       ],
-      "lastSlackToNoah": "2026-04-08T16:30:00Z",
+      "lastSlackToNoah": "2026-04-08T18:30:00Z",
       "pendingDecisions": [
-        "Approve GovCloud infrastructure spend",
-        "Prioritize ABAC security fix vs feature work"
+        "GovCloud infrastructure investment approval",
+        "Canvas public launch date confirmation"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Files in CEL architecture needs review before broader rollout.",
+      "attention": "High engineering throughput but need to watch for technical debt with archived runs handling patterns.",
       "recentTopics": [
-        "CEL files RFC technical approach",
-        "ConnectRPC server streaming implementation",
-        "Database-backed feature flags migration strategy"
+        "Files in CEL RFC implementation progress",
+        "Sift-Edge metrics and back pressure monitoring",
+        "Database-backed feature flags architecture",
+        "Multi-asset simulator testing capabilities"
       ],
-      "lastSlackToNoah": "2026-04-09T08:00:00Z",
+      "lastSlackToNoah": "2026-04-09T10:15:00Z",
       "pendingDecisions": [
-        "Approve CEL files YAML support scope",
-        "Sign off on ClickHouse import config changes"
+        "Files in CEL YAML support scope confirmation",
+        "Feature flag management tooling prioritization"
       ]
     }
   ],
   "customers": [
     {
       "name": "K2 Space",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 12,
-      "topSignal": "Active development on multi-asset simulator support and CH10 import configs for satellite testing infrastructure",
+      "wau": 47,
+      "topSignal": "Active development on multi-asset simulator support and advanced plotting features for spacecraft testing",
       "features": [
         "simulator",
-        "data-import",
+        "multi-asset-testing",
         "timeseries-plots",
-        "asset-management"
+        "family-stats"
       ],
-      "lastActivity": "2026-04-08T19:23:00Z",
+      "lastActivity": "2026-04-09T18:32:00Z",
       "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 28,
-      "topSignal": "Leveraging log-scale plotting and family statistics for satellite telemetry analysis across constellation",
+      "wau": 52,
+      "topSignal": "Leveraging Sift-Edge metrics and channel back pressure monitoring for satellite telemetry",
       "features": [
-        "timeseries-plots",
-        "family-stats",
-        "canvas",
-        "annotations"
+        "sift-edge",
+        "channel-monitoring",
+        "archived-runs",
+        "log-scale-plotting"
       ],
-      "lastActivity": "2026-04-09T14:41:00Z",
+      "lastActivity": "2026-04-09T16:45:00Z",
       "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
-      "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 34,
-      "topSignal": "Heavy usage of offline file backing for test results during remote autonomous flight operations",
-      "features": [
-        "test-results",
-        "offline-mode",
-        "data-import",
-        "timeseries-plots"
-      ],
-      "lastActivity": "2026-04-09T16:12:00Z",
-      "openIssues": 3
-    },
-    {
-      "name": "Varda",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Utilizing CEL file attachments and YAML support for mission configuration tracking",
+      "wau": 34,
+      "topSignal": "Implementing CEL files support and asset attachment workflows for autonomous aircraft testing",
       "features": [
         "cel-files",
         "asset-management",
-        "data-import",
-        "annotations"
+        "yaml-support",
+        "test-results"
       ],
-      "lastActivity": "2026-04-09T11:28:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-09T14:22:00Z",
+      "openIssues": 0
+    },
+    {
+      "name": "Varda",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 41,
+      "topSignal": "Using family candidate runs and constrained ad hoc data for reentry vehicle analysis",
+      "features": [
+        "family-candidates",
+        "ad-hoc-data",
+        "run-time-constraints",
+        "canvas"
+      ],
+      "lastActivity": "2026-04-09T11:18:00Z",
+      "openIssues": 3
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Actively using timeseries axes customization and plot configuration for electric propulsion monitoring",
+      "trajectory": "expanding",
+      "wau": 29,
+      "topSignal": "Adopting documentation improvements and timeseries axis controls for electric aircraft development",
       "features": [
         "timeseries-plots",
-        "custom-axes",
-        "canvas",
-        "annotations"
+        "axis-controls",
+        "getting-started-docs",
+        "plot-config"
       ],
-      "lastActivity": "2026-04-08T22:15:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-09T09:53:00Z",
+      "openIssues": 1
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 67,
-      "topSignal": "GovCloud Windmill deployment for classified data workflow management and ABAC policy enforcement",
+      "wau": 68,
+      "topSignal": "GovCloud deployment for classified data workflows with Windmill integration",
       "features": [
         "govcloud",
-        "abac-policies",
-        "workflow-management",
-        "data-import"
+        "windmill",
+        "feature-flags",
+        "database-backed-flags"
       ],
-      "lastActivity": "2026-04-09T15:47:00Z",
-      "openIssues": 4
+      "lastActivity": "2026-04-09T17:41:00Z",
+      "openIssues": 2
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 52,
-      "topSignal": "Using family statistics across launch vehicle test runs with multi-asset simulator support",
+      "wau": 55,
+      "topSignal": "CH10 import configurations with run_id support for rocket launch telemetry",
       "features": [
-        "family-stats",
-        "simulator",
-        "test-results",
-        "timeseries-plots"
+        "ch10-import",
+        "run-id-tracking",
+        "sift-edge",
+        "channel-monitoring"
       ],
-      "lastActivity": "2026-04-09T13:22:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-09T15:27:00Z",
+      "openIssues": 4
     },
     {
       "name": "Parallel Systems",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Early adoption of canvas documentation and global navigation improvements for rail testing",
+      "wau": 23,
+      "topSignal": "Multi-asset simulator support for autonomous rail testing scenarios",
       "features": [
-        "canvas",
-        "timeseries-plots",
-        "data-import"
+        "simulator",
+        "multi-asset-testing",
+        "test-results",
+        "offline-filebacking"
       ],
-      "lastActivity": "2026-04-07T18:33:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T22:14:00Z",
+      "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Implementing run-constrained ad hoc data analysis for spacecraft reentry simulations",
+      "wau": 31,
+      "topSignal": "Family plot configurations and annotation auto-naming for spacecraft reusability analysis",
       "features": [
-        "simulator",
-        "data-import",
-        "timeseries-plots",
-        "annotations"
+        "family-plots",
+        "annotations",
+        "panel-config",
+        "alignment-naming"
       ],
-      "lastActivity": "2026-04-09T10:15:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-09T13:09:00Z",
+      "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 41,
-      "topSignal": "Extensive use of feature flags and database management tooling for European satellite programs",
+      "wau": 38,
+      "topSignal": "Cached snapshot invalidation and API filter endpoint improvements for satellite operations",
       "features": [
-        "feature-flags",
-        "asset-management",
-        "timeseries-plots",
-        "abac-policies"
+        "cached-snapshots",
+        "api-filters",
+        "channel-search",
+        "data-retention"
       ],
-      "lastActivity": "2026-04-09T12:51:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-04-09T10:33:00Z",
+      "openIssues": 2
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Using basic timeseries plotting and data import for electric motorcycle testing",
+      "trajectory": "expanding",
+      "wau": 12,
+      "topSignal": "Exploring timeseries plotting and basic documentation for electric motorcycle development",
       "features": [
         "timeseries-plots",
-        "data-import"
+        "getting-started-docs",
+        "axis-controls"
       ],
-      "lastActivity": "2026-04-06T20:44:00Z",
+      "lastActivity": "2026-04-07T16:47:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 17,
-      "topSignal": "Leveraging asset file attachments and CH10 import for satellite operations data management",
+      "trajectory": "stable",
+      "wau": 27,
+      "topSignal": "Duplicate data point handling and plot reliability improvements for orbital mechanics",
       "features": [
-        "asset-management",
-        "data-import",
-        "timeseries-plots",
-        "canvas"
+        "duplicate-data-handling",
+        "plot-matching",
+        "family-stats"
       ],
-      "lastActivity": "2026-04-09T09:37:00Z",
+      "lastActivity": "2026-04-09T08:21:00Z",
       "openIssues": 1
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Active use of multi-asset simulator for reentry capsule test scenarios",
+      "wau": 22,
+      "topSignal": "Canvas documentation and expanded multi-progress features for reentry capsule testing",
       "features": [
-        "simulator",
-        "test-results",
-        "timeseries-plots",
-        "annotations"
+        "canvas",
+        "multi-progress",
+        "playground-migration",
+        "documentation"
       ],
-      "lastActivity": "2026-04-08T21:19:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-09T12:55:00Z",
+      "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Basic timeseries visualization for EV rideshare fleet monitoring",
+      "wau": 9,
+      "topSignal": "Basic CEL instrumentation and file management for electric transit testing",
       "features": [
-        "timeseries-plots",
-        "data-import"
+        "cel-instrumentation",
+        "file-management",
+        "basic-plotting"
       ],
-      "lastActivity": "2026-04-05T17:22:00Z",
+      "lastActivity": "2026-04-06T14:32:00Z",
       "openIssues": 1
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Limited engagement with basic plotting features for early-stage propulsion testing",
+      "trajectory": "expanding",
+      "wau": 14,
+      "topSignal": "Asset file attachment and YAML support for carbon capture equipment monitoring",
       "features": [
-        "timeseries-plots"
+        "asset-files",
+        "yaml-support",
+        "cel-files"
       ],
-      "lastActivity": "2026-03-28T14:55:00Z",
+      "lastActivity": "2026-04-08T19:06:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Exploring canvas and visualization capabilities for energy management systems",
+      "trajectory": "at-risk",
+      "wau": 6,
+      "topSignal": "Limited engagement with getting started documentation",
       "features": [
-        "canvas",
-        "timeseries-plots",
-        "data-import"
+        "getting-started-docs",
+        "basic-plotting"
       ],
-      "lastActivity": "2026-04-07T11:08:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-04T11:23:00Z",
+      "openIssues": 2
     },
     {
       "name": "Arbor Energy",
-      "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Growing usage of family statistics and annotations for battery test analysis",
-      "features": [
-        "family-stats",
-        "annotations",
-        "timeseries-plots"
-      ],
-      "lastActivity": "2026-04-08T16:42:00Z",
-      "openIssues": 1
-    },
-    {
-      "name": "Synnax",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Internal tooling customer using CEL files and workflow management features",
+      "wau": 18,
+      "topSignal": "Feature flag management tooling for energy system testing workflows",
       "features": [
-        "cel-files",
-        "workflow-management",
-        "asset-management"
+        "feature-flags",
+        "database-backed-flags",
+        "test-results"
       ],
-      "lastActivity": "2026-04-09T08:24:00Z",
+      "lastActivity": "2026-04-09T07:14:00Z",
       "openIssues": 0
     },
     {
-      "name": "OdysAviation",
+      "name": "Synnax",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 10,
-      "topSignal": "Increased adoption of offline test results for distributed flight test operations",
+      "wau": 11,
+      "topSignal": "Exploring timeseries axis dropzones and log scale plotting capabilities",
       "features": [
-        "test-results",
-        "offline-mode",
-        "timeseries-plots"
+        "timeseries-plots",
+        "axis-dropzones",
+        "log-scale",
+        "reset-controls"
       ],
-      "lastActivity": "2026-04-08T19:51:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-08T21:38:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "OdysAviation",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 26,
+      "topSignal": "Multi-asset simulator and family stats for electric aircraft flight testing",
+      "features": [
+        "simulator",
+        "multi-asset-testing",
+        "family-stats",
+        "minimum-runs"
+      ],
+      "lastActivity": "2026-04-09T16:02:00Z",
+      "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Using basic data import and plotting for industrial automation testing",
+      "wau": 8,
+      "topSignal": "Basic plotting and documentation usage for manufacturing optimization",
       "features": [
-        "data-import",
-        "timeseries-plots"
+        "basic-plotting",
+        "getting-started-docs",
+        "timeseries"
       ],
-      "lastActivity": "2026-04-04T13:17:00Z",
+      "lastActivity": "2026-04-07T09:41:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Minimal activity with basic timeseries features for radiation testing",
+      "wau": 5,
+      "topSignal": "Minimal activity, last engaged with basic features two weeks ago",
       "features": [
-        "timeseries-plots"
+        "basic-plotting",
+        "channel-monitoring"
       ],
-      "lastActivity": "2026-03-21T10:33:00Z",
+      "lastActivity": "2026-03-26T13:17:00Z",
       "openIssues": 1
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Active development with server streaming and instrumentation for satellite ground operations",
+      "trajectory": "stable",
+      "wau": 21,
+      "topSignal": "Archived runs handling and family candidate features for satellite constellation management",
       "features": [
-        "timeseries-plots",
-        "data-import",
-        "asset-management",
-        "canvas"
+        "archived-runs",
+        "family-candidates",
+        "run-filtering",
+        "channel-search"
       ],
-      "lastActivity": "2026-04-09T15:03:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-09T14:49:00Z",
+      "openIssues": 2
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 20,
-      "topSignal": "Heavy simulator usage for lunar rover test campaigns with multi-asset support",
+      "wau": 25,
+      "topSignal": "Canvas documentation and multi-asset testing for lunar rover development",
       "features": [
+        "canvas",
+        "multi-asset-testing",
         "simulator",
-        "test-results",
-        "timeseries-plots",
-        "annotations"
+        "documentation"
       ],
-      "lastActivity": "2026-04-09T14:28:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-04-09T11:27:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Using plot configurations and axis controls for robotic arm telemetry",
+      "trajectory": "expanding",
+      "wau": 13,
+      "topSignal": "CEL files and asset management for robotic spacecraft systems",
       "features": [
-        "timeseries-plots",
-        "custom-axes",
-        "data-import"
+        "cel-files",
+        "asset-management",
+        "yaml-support",
+        "file-instrumentation"
       ],
-      "lastActivity": "2026-04-06T22:11:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T20:13:00Z",
+      "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Growing adoption of canvas and annotation features for maritime autonomous systems",
+      "trajectory": "stable",
+      "wau": 10,
+      "topSignal": "Timeseries plotting with axis controls for marine propulsion testing",
       "features": [
-        "canvas",
-        "annotations",
-        "timeseries-plots"
+        "timeseries-plots",
+        "axis-controls",
+        "reset-buttons"
       ],
-      "lastActivity": "2026-04-08T17:46:00Z",
+      "lastActivity": "2026-04-07T15:28:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 45,
-      "topSignal": "Mature deployment using family stats across drone fleet with global nav improvements",
+      "wau": 44,
+      "topSignal": "Sift-Edge back pressure metrics and offline file backing for drone delivery operations",
       "features": [
-        "family-stats",
-        "timeseries-plots",
-        "asset-management",
-        "data-import"
+        "sift-edge",
+        "back-pressure-metrics",
+        "offline-filebacking",
+        "test-results"
       ],
-      "lastActivity": "2026-04-09T13:55:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-09T17:11:00Z",
+      "openIssues": 3
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Basic usage of timeseries and data import for industrial IoT monitoring",
+      "wau": 7,
+      "topSignal": "Feature flag tooling exploration for agricultural automation",
       "features": [
-        "timeseries-plots",
-        "data-import"
+        "feature-flags",
+        "basic-plotting",
+        "channel-monitoring"
       ],
-      "lastActivity": "2026-04-05T15:29:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-06T10:52:00Z",
+      "openIssues": 1
     },
     {
       "name": "Halo One",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Low engagement with plotting features for early-stage carbon capture testing",
+      "trajectory": "expanding",
+      "wau": 15,
+      "topSignal": "Log scale plotting and family stats for rocket engine testing",
       "features": [
-        "timeseries-plots"
+        "log-scale",
+        "family-stats",
+        "timeseries-plots",
+        "y-axis-controls"
       ],
-      "lastActivity": "2026-03-30T12:44:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-09T09:19:00Z",
+      "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 13,
-      "topSignal": "Integration partner using asset management and workflow features for manufacturing ops",
+      "wau": 19,
+      "topSignal": "Database-backed feature flags and workflow management integration",
       "features": [
-        "asset-management",
-        "workflow-management",
-        "data-import"
+        "feature-flags",
+        "database-backed-flags",
+        "workflow-management"
       ],
-      "lastActivity": "2026-04-09T10:52:00Z",
+      "lastActivity": "2026-04-08T16:34:00Z",
       "openIssues": 1
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Exploring CEL files and asset attachments for quality control documentation",
+      "wau": 9,
+      "topSignal": "Basic documentation and plotting for manufacturing process monitoring",
       "features": [
-        "cel-files",
-        "asset-management",
-        "timeseries-plots"
+        "getting-started-docs",
+        "basic-plotting",
+        "timeseries"
       ],
-      "lastActivity": "2026-04-07T14:37:00Z",
+      "lastActivity": "2026-04-07T12:07:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Increasing use of simulator and test results for asteroid mining mission planning",
+      "wau": 28,
+      "topSignal": "Multi-asset simulator and ad hoc data constraints for asteroid mining spacecraft",
       "features": [
         "simulator",
-        "test-results",
-        "timeseries-plots",
-        "annotations"
+        "multi-asset-testing",
+        "ad-hoc-data",
+        "run-time-constraints"
       ],
-      "lastActivity": "2026-04-09T11:14:00Z",
+      "lastActivity": "2026-04-09T15:46:00Z",
       "openIssues": 2
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "stable",
+      "trajectory": "at-risk",
       "wau": 4,
-      "topSignal": "Limited usage of basic plotting and import for propulsion component testing",
+      "topSignal": "Very low engagement, last activity three weeks ago on basic features",
       "features": [
-        "timeseries-plots",
-        "data-import"
+        "basic-plotting",
+        "getting-started-docs"
       ],
-      "lastActivity": "2026-04-03T16:08:00Z",
+      "lastActivity": "2026-03-19T14:52:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize Canvas documentation completion for Q2 launch",
-      "context": "Canvas is a key 2026 product pillar (Embed Deeper). DOC-33 in progress but needs completion timeline to support user adoption and decision capture.",
+      "title": "Prioritize Canvas documentation completion before feature freeze",
+      "context": "DOC-33 Canvas docs in flight, critical for Embed Deeper pillar. Canvas drives decision capture by enabling analysts to build sharable workflows. Q2 product launches require supporting docs.",
       "owner": "Product + Docs Lead",
-      "deadline": "2026-04-30",
+      "deadline": "2026-04-25",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Canvas enables deeper embedding in customer workflows, directly supporting North Star metric. Documentation critical for adoption.",
-        "against": "Engineering capacity stretched across multiple initiatives. May need to deprioritize other doc work."
+        "for": "Canvas is key differentiator for Embed Deeper strategy. Without docs, adoption stalls and decision capture metrics won't move. Getting Started (DOC-21) shows doc velocity is good.",
+        "against": "Engineering could ship faster without waiting for docs. Could launch beta without full documentation. Risk: low adoption without proper onboarding materials."
       }
     },
     {
-      "title": "Commit to Files in CEL general availability date",
-      "context": "ENG-8700 RFC complete, ENG-10014 instrumentation in progress, ENG-10013 YAML support, ENG-10015 UI attachment ready. Feature aligns with 'Nail the Core' pillar for data handling.",
-      "owner": "Engineering Lead",
-      "deadline": "2026-04-23",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Clear technical progress across multiple workstreams. Files expand decision-making capabilities with richer data context.",
-        "against": "Need to validate performance at scale and ensure instrumentation coverage before GA announcement."
-      }
-    },
-    {
-      "title": "Approve GovCloud deployment for DS customer workflows",
-      "context": "ENG-9939: Windmill deployment requested for DS customer data workflow management. Government customers represent 'Build the Moat' opportunity.",
-      "owner": "Head of Product + Security Lead",
-      "deadline": "2026-04-16",
-      "status": "blocked",
-      "blockedBy": "Security compliance review and GovCloud certification timeline unclear",
-      "arguments": {
-        "for": "Unlocks government/regulated industry customers. Competitive moat through compliance capabilities.",
-        "against": "Significant ongoing compliance overhead. May distract from core product development."
-      }
-    },
-    {
-      "title": "Standardize feature flag management approach",
-      "context": "ENG-8723 database-backed feature flag tooling + ENG-9122 front-end prototypes + ENG-10058 cleanup work suggests need for unified strategy.",
-      "owner": "Platform Lead",
-      "deadline": "2026-05-01",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Current feature flag sprawl creates technical debt. Unified approach improves velocity and reduces errors.",
-        "against": "Migration effort significant. May slow short-term feature delivery."
-      }
-    },
-    {
-      "title": "Commit to multi-asset simulator capabilities roadmap",
-      "context": "ENG-9856 multi-asset support + ENG-7853 family stats minimum runs indicate push toward portfolio-level analysis. Aligns with Explore V2 vision.",
-      "owner": "Product Manager - Explore",
+      "title": "Formalize Files in CEL as core platform capability vs. experimental feature",
+      "context": "ENG-8700 RFC, ENG-10014 instrumentation, ENG-10015 UI attachment, ENG-10013 YAML support. Files enable asset-based workflows central to Signal>Evidence>Decision. Significant engineering investment already committed.",
+      "owner": "Platform Architect",
       "deadline": "2026-04-18",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Customers increasingly need portfolio-level decisions, not single-asset analysis. Clear differentiator vs competitors.",
-        "against": "Complexity increases significantly. UI/UX challenges for presenting multi-asset results clearly."
+        "for": "Clear product trajectory with RFC + 4 implementation tickets. Files unlock new decision workflows. YAML support suggests production intent. Aligns with Nail the Core (CEL platform stability).",
+        "against": "Still experimental - could be feature creep. Offline file backing (ENG-6764) not yet solved. May distract from core Canvas/Explore V2 priorities. Need usage data before committing."
+      }
+    },
+    {
+      "title": "Accelerate Sift Edge production readiness for Q2 enterprise deployments",
+      "context": "ENG-10137 metrics docs improvement, ENG-9820 back pressure metrics. Sift Edge is Build the Moat pillar - competitive differentiator for edge deployment. Metrics work suggests productization phase.",
+      "owner": "Edge Product Lead",
+      "deadline": "2026-05-01",
+      "status": "blocked",
+      "blockedBy": "Incomplete observability stack - back pressure metrics added but docs lag. No clear SLA definitions for enterprise customers. GovCloud deployment (ENG-9939) may require Edge support.",
+      "arguments": {
+        "for": "Edge is unique moat capability. Early enterprise interest. Metrics instrumentation shows engineering maturity. GovCloud customer needs offline/edge capabilities.",
+        "against": "Metrics docs improvements suggest current state isn't enterprise-ready. Could drain resources from Canvas/Explore V2. Market demand unclear vs. investment required."
+      }
+    },
+    {
+      "title": "Resolve family candidate/archived runs handling before Explore V2 launch",
+      "context": "ENG-10139 stop gap, ENG-9924 archived handling, ENG-7853 minimum input runs. Family stats critical for Explore V2 comparative analysis. Stop-gap solutions suggest underlying architecture issue.",
+      "owner": "Explore V2 Tech Lead",
+      "deadline": "2026-04-16",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Stop-gap ticket signals urgent prod issue. Family candidates enable multi-run comparisons = core decision workflow. Architectural fix needed before Explore V2 GA or tech debt compounds.",
+        "against": "Stop-gap may be sufficient for launch. Perfect solution could delay Explore V2. Users may not hit archived run edge cases frequently. Fast follow acceptable."
+      }
+    },
+    {
+      "title": "Commit to Python Rules GA timeline or deprioritize for 2026",
+      "context": "No Python Rules tickets in current sprint signals. Product identified as 2026 key product but no visible engineering velocity. Rules enable programmatic decision automation - high strategy value.",
+      "owner": "Product Strategy",
+      "deadline": "2026-04-11",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Lack of tickets suggests drift from strategy. Need explicit go/no-go to reallocate resources. Python Rules could be high-leverage for Embed Deeper (API-first workflows).",
+        "against": "May be in earlier research phase not reflected in Linear. Other products (Canvas, Files) showing strong momentum. Could be right to defer if market signal weak."
+      }
+    },
+    {
+      "title": "Standardize feature flag management before technical debt blocks velocity",
+      "context": "ENG-8723 database-backed feature flag tooling, ENG-10058 removing channel search replica flag. Feature flags proliferating across platform - need management discipline for Nail the Core.",
+      "owner": "Platform Lead",
+      "deadline": "2026-04-30",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Feature flag removal ticket suggests cleanup needed. Database-backed tooling indicates professionalization. Unmanaged flags create technical debt that slows all product development.",
+        "against": "Not customer-facing - opportunity cost vs. Canvas/Explore work. Current flag system may be working adequately. Could be premature optimization."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "47",
-      "delta": "+8%"
+      "value": "Insufficient signal data",
+      "delta": "Unknown - no decision capture events in engineering tickets"
     },
     "pillars": [
       {
         "name": "Nail the Core",
-        "status": "on_track",
+        "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2: Data quality reliability (ad hoc constraints, duplicate handling)",
-            "current": "85%",
-            "target": "95%",
-            "status": "on_track"
+            "name": "CEL Platform Stability",
+            "current": "Active investment - Files RFC + 4 tickets, but experimental",
+            "target": "Production-grade CEL with <0.1% error rate",
+            "status": "at_risk"
           },
           {
-            "name": "Plot/visualization improvements shipped (log scale, axes controls, family plots)",
-            "current": "6 of 10",
-            "target": "10",
-            "status": "on_track"
+            "name": "Technical Debt Reduction",
+            "current": "Mixed - feature flag tooling + cleanup, but stop-gap solutions appearing",
+            "target": "Zero stop-gap solutions in production",
+            "status": "at_risk"
           },
           {
-            "name": "Files in CEL: GA readiness",
-            "current": "75%",
-            "target": "100%",
+            "name": "Explore V2 Foundation",
+            "current": "10+ tickets - family candidates, axes, log scale, timeseries",
+            "target": "GA-ready Explore V2 by end Q2",
             "status": "on_track"
           }
         ]
       },
       {
         "name": "Embed Deeper",
-        "status": "at_risk",
+        "status": "on_track",
         "keyResults": [
           {
-            "name": "Canvas: Documentation and onboarding completion",
-            "current": "40%",
-            "target": "100%",
+            "name": "Canvas Adoption",
+            "current": "Documentation in flight (DOC-33), Getting Started live (DOC-21)",
+            "target": "50% of active customers using Canvas weekly",
+            "status": "on_track"
+          },
+          {
+            "name": "API-First Workflows",
+            "current": "API filter endpoint changes (ENG-10138), no Python Rules signal",
+            "target": "30% of decisions via API vs. UI",
             "status": "at_risk"
           },
           {
-            "name": "Windmill/workflow integration: GovCloud deployment",
-            "current": "30%",
-            "target": "100%",
-            "status": "at_risk"
-          },
-          {
-            "name": "Global nav IA improvements (breadcrumb, navigation)",
-            "current": "50%",
-            "target": "100%",
+            "name": "Multi-Asset Workflows",
+            "current": "Simulator multi-asset support (ENG-9856), files on assets (ENG-10015)",
+            "target": "Average 3+ assets per decision workflow",
             "status": "on_track"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "on_track",
+        "status": "at_risk",
         "keyResults": [
           {
-            "name": "Multi-asset simulator capabilities deployed",
-            "current": "60%",
-            "target": "100%",
+            "name": "Sift Edge Production Readiness",
+            "current": "Metrics instrumentation + docs, but not enterprise-ready",
+            "target": "5 enterprise Edge deployments by Q3",
+            "status": "at_risk"
+          },
+          {
+            "name": "GovCloud/Compliance Capabilities",
+            "current": "Windmill GovCloud deployment (ENG-9939) in progress",
+            "target": "FedRAMP Moderate equivalent by Q4",
             "status": "on_track"
           },
           {
-            "name": "Offline/edge capabilities (test results filebacking)",
-            "current": "70%",
-            "target": "100%",
-            "status": "on_track"
-          },
-          {
-            "name": "Enterprise features (ABAC, compliance, IdP monitoring)",
-            "current": "80%",
-            "target": "95%",
-            "status": "on_track"
+            "name": "Offline/Airgap Support",
+            "current": "Test results offline filebacking (ENG-6764) in backlog",
+            "target": "Full offline mode for Edge customers",
+            "status": "at_risk"
           }
         ]
       }
@@ -2770,87 +2795,120 @@
   "timeAudit": {
     "today": {
       "date": "2026-04-09",
-      "meetings": 5,
-      "focusBlocks": 2,
-      "oneOnOnes": 3,
-      "freeHours": 2,
-      "meetingHours": 6
+      "meetings": 4,
+      "focusBlocks": 3,
+      "oneOnOnes": 2,
+      "freeHours": 3,
+      "meetingHours": 5
     },
     "thisWeek": {
-      "meetings": 22,
-      "freeHours": 8,
-      "meetingHours": 32
+      "meetings": 18,
+      "freeHours": 12,
+      "meetingHours": 28
     },
-    "weekSummary": "30 engineering signals processed across core platform, visualization, and enterprise features. High activity on Files in CEL (4 tickets), plotting improvements (5 tickets), and infrastructure (feature flags, monitoring).",
+    "weekSummary": "High engineering execution week - 30+ tickets active across all pillars. Risk: diffusion across too many initiatives. Canvas docs, Files in CEL, Explore V2, Edge metrics, GovCloud all moving simultaneously. Need decision on Python Rules absence.",
     "alerts": [
-      "Canvas documentation (DOC-33) has no clear completion date - blocks Q2 launch messaging",
-      "GovCloud deployment (ENG-9939) appears to be moving forward without security decision checkpoint",
-      "Feature flag work spread across 3+ initiatives without unified strategy",
-      "ABAC policy bug (ENG-10039) could affect enterprise customers - verify priority"
+      "No Python Rules engineering activity despite being named 2026 key product - requires strategic decision by Friday",
+      "Stop-gap solutions appearing (ENG-10139) suggests architectural issues need dedicated focus time",
+      "Ask SIFT product has zero signals in current sprint - validate if still 2026 priority",
+      "Feature flag technical debt accumulating - ENG-8723 tooling needs prioritization decision",
+      "North Star metric (Decisions Captured) not instrumented in any tickets - cannot measure progress"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Apr 9-15)",
+        "label": "This Week (Apr 9-13)",
         "events": [
           {
-            "title": "Decision: Multi-asset simulator roadmap",
+            "title": "Python Rules Go/No-Go Decision",
             "date": "2026-04-11",
             "time": "14:00",
-            "type": "deadline",
-            "description": "Commit to portfolio-level analysis capabilities and timeline for Explore V2",
-            "owner": "Product Manager - Explore"
+            "type": "gate",
+            "description": "Commit to GA timeline with resourcing or explicitly defer to H2. Zero engineering signals require strategy clarification.",
+            "owner": "Product Strategy"
           },
           {
-            "title": "Gate: GovCloud security review checkpoint",
+            "title": "Family Candidates Architecture Fix",
             "date": "2026-04-16",
+            "time": "17:00",
+            "type": "deadline",
+            "description": "Resolve ENG-9924, ENG-10139 stop-gaps before Explore V2 beta. Critical for multi-run comparison workflows.",
+            "owner": "Explore V2 Tech Lead"
+          }
+        ]
+      },
+      {
+        "label": "Next Two Weeks (Apr 14-27)",
+        "events": [
+          {
+            "title": "Files in CEL Productization Decision",
+            "date": "2026-04-18",
             "time": "10:00",
             "type": "gate",
-            "description": "Go/no-go on Windmill GovCloud deployment based on compliance readiness",
-            "owner": "Head of Product + Security Lead"
-          }
-        ]
-      },
-      {
-        "label": "Next Two Weeks (Apr 16-29)",
-        "events": [
-          {
-            "title": "Decision: Files in CEL GA date",
-            "date": "2026-04-23",
-            "time": "15:00",
-            "type": "deadline",
-            "description": "Set public GA date based on instrumentation, YAML support, and UI completion",
-            "owner": "Engineering Lead"
+            "description": "Formalize as platform capability vs. experimental. RFC + 4 tickets need strategic commitment.",
+            "owner": "Platform Architect"
           },
           {
-            "title": "Milestone: Canvas documentation complete",
-            "date": "2026-04-30",
+            "title": "Canvas Documentation Complete",
+            "date": "2026-04-25",
             "time": "17:00",
             "type": "milestone",
-            "description": "DOC-33 completion enables Canvas launch communications and customer onboarding",
+            "description": "DOC-33 shipped to enable Embed Deeper pillar. Required for Q2 product launches.",
             "owner": "Product + Docs Lead"
+          },
+          {
+            "title": "Feature Flag Management Plan",
+            "date": "2026-04-30",
+            "time": "17:00",
+            "type": "deadline",
+            "description": "ENG-8723 tooling decision + cleanup roadmap. Prevent technical debt accumulation.",
+            "owner": "Platform Lead"
           }
         ]
       },
       {
-        "label": "May 2026",
+        "label": "Q2 Critical Path (May-Jun)",
         "events": [
           {
-            "title": "Decision: Feature flag strategy",
+            "title": "Sift Edge Enterprise Readiness",
             "date": "2026-05-01",
-            "time": "13:00",
-            "type": "deadline",
-            "description": "Unify approach across database-backed tooling, front-end prototypes, and cleanup work",
-            "owner": "Platform Lead"
+            "time": "17:00",
+            "type": "gate",
+            "description": "Observability, SLAs, docs complete for enterprise deployments. Build the Moat pillar dependency.",
+            "owner": "Edge Product Lead"
           },
           {
-            "title": "Milestone: Q2 strategy review",
+            "title": "Explore V2 Beta Launch",
             "date": "2026-05-15",
             "time": "09:00",
             "type": "milestone",
-            "description": "Review pillar progress, North Star metrics, and H2 2026 planning priorities",
-            "owner": "Head of Product"
+            "description": "Family stats, axes controls, log scale, timeseries all shipped. 10+ customers in beta program.",
+            "owner": "Explore V2 PM"
+          },
+          {
+            "title": "GovCloud Windmill Deployment",
+            "date": "2026-05-30",
+            "time": "17:00",
+            "type": "milestone",
+            "description": "ENG-9939 complete - DS customer workflow management in compliant environment.",
+            "owner": "Infrastructure Lead"
+          },
+          {
+            "title": "Q2 Strategy Review - North Star Instrumentation",
+            "date": "2026-06-15",
+            "time": "14:00",
+            "type": "meeting",
+            "description": "Assess Decisions Captured Per Customer metric. Current gap: no measurement in place. Review pillar progress.",
+            "owner": "Product Strategy"
+          },
+          {
+            "title": "Explore V2 GA Decision",
+            "date": "2026-06-30",
+            "time": "10:00",
+            "type": "gate",
+            "description": "Beta feedback review, go/no-go for general availability in Q3.",
+            "owner": "Product Leadership"
           }
         ]
       }
