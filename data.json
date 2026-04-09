@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-09T19:30:59.409Z",
+  "fetchedAt": "2026-04-09T23:19:12.458Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -11,12 +11,347 @@
   "signals": [
     {
       "source": "linear",
+      "title": "ENG-10117: Shadow comparisons: false negatives from dedup asymmetry between DLv2 and CSRS",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "danny@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T23:16:44.915Z",
+      "evidence": [
+        {
+          "label": "ENG-10117",
+          "url": "https://linear.app/siftstack/issue/ENG-10117/shadow-comparisons-false-negatives-from-dedup-asymmetry-between-dlv2",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9954: [IMPL] Switch data-batcher flow lookups to use legacy IngestionConfigFlow proto",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "adam@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T23:13:38.553Z",
+      "evidence": [
+        {
+          "label": "ENG-9954",
+          "url": "https://linear.app/siftstack/issue/ENG-9954/impl-switch-data-batcher-flow-lookups-to-use-legacy",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9846: Replace MD5 with SHA-256 in share link generation (FIPS compliance)",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "jon@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T23:12:36.106Z",
+      "evidence": [
+        {
+          "label": "ENG-9846",
+          "url": "https://linear.app/siftstack/issue/ENG-9846/replace-md5-with-sha-256-in-share-link-generation-fips-compliance",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10156: provision AWS workspace for developers to access FedRamp securely",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Yue Shen",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T23:02:36.820Z",
+      "evidence": [
+        {
+          "label": "ENG-10156",
+          "url": "https://linear.app/siftstack/issue/ENG-10156/provision-aws-workspace-for-developers-to-access-fedramp-securely",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10138: RFC For Api Filter Endpoint Changes",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:31:50.428Z",
+      "evidence": [
+        {
+          "label": "ENG-10138",
+          "url": "https://linear.app/siftstack/issue/ENG-10138/rfc-for-api-filter-endpoint-changes",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10154: Impulse Rust Asset Downsampling in Windmill (Cron Job)",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:31:26.963Z",
+      "evidence": [
+        {
+          "label": "ENG-10154",
+          "url": "https://linear.app/siftstack/issue/ENG-10154/impulse-rust-asset-downsampling-in-windmill-cron-job",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10093: Grafana to Sift Explore sharelinks broken",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "leo@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:26:59.246Z",
+      "evidence": [
+        {
+          "label": "ENG-10093",
+          "url": "https://linear.app/siftstack/issue/ENG-10093/grafana-to-sift-explore-sharelinks-broken",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9898: Update GetAmbientTransaction to return errors instead of panicking",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:26:36.700Z",
+      "evidence": [
+        {
+          "label": "ENG-9898",
+          "url": "https://linear.app/siftstack/issue/ENG-9898/update-getambienttransaction-to-return-errors-instead-of-panicking",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10124: Add connectrpc for server streaming responses to the frontend",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:25:53.515Z",
+      "evidence": [
+        {
+          "label": "ENG-10124",
+          "url": "https://linear.app/siftstack/issue/ENG-10124/add-connectrpc-for-server-streaming-responses-to-the-frontend",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10155: document dnssec rotations",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "Felix Wong",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:20:20.926Z",
+      "evidence": [
+        {
+          "label": "ENG-10155",
+          "url": "https://linear.app/siftstack/issue/ENG-10155/document-dnssec-rotations",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9939: Deploy Windmill in GovCloud for DS Customer Data Workflow Managment",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Felix Wong",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:13:25.885Z",
+      "evidence": [
+        {
+          "label": "ENG-9939",
+          "url": "https://linear.app/siftstack/issue/ENG-9939/deploy-windmill-in-govcloud-for-ds-customer-data-workflow-managment",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9436: Sift Edge exits on error due to sql lock contention",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "benjamin@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:12:56.029Z",
+      "evidence": [
+        {
+          "label": "ENG-9436",
+          "url": "https://linear.app/siftstack/issue/ENG-9436/sift-edge-exits-on-error-due-to-sql-lock-contention",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9883: Sift Edge GUI Table View",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "nathan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T22:12:55.999Z",
+      "evidence": [
+        {
+          "label": "ENG-9883",
+          "url": "https://linear.app/siftstack/issue/ENG-9883/sift-edge-gui-table-view",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9823: Auto-name panel from loaded panel config",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T21:34:24.121Z",
+      "evidence": [
+        {
+          "label": "ENG-9823",
+          "url": "https://linear.app/siftstack/issue/ENG-9823/auto-name-panel-from-loaded-panel-config",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9924: Handle Archived Runs in Family Candidates",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Alexa Agnew",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T21:33:41.183Z",
+      "evidence": [
+        {
+          "label": "ENG-9924",
+          "url": "https://linear.app/siftstack/issue/ENG-9924/handle-archived-runs-in-family-candidates",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "GTM-121: Article - When Grafana dashboards stop being enough",
+      "priority": "HIGH",
+      "state": "Todo",
+      "assignee": "nich@siftstack.com",
+      "team": "GTM",
+      "timestamp": "2026-04-09T21:04:41.455Z",
+      "evidence": [
+        {
+          "label": "GTM-121",
+          "url": "https://linear.app/siftstack/issue/GTM-121/article-when-grafana-dashboards-stop-being-enough",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10015: Add ability to attach files to assets on UI",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "david@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T20:50:09.799Z",
+      "evidence": [
+        {
+          "label": "ENG-10015",
+          "url": "https://linear.app/siftstack/issue/ENG-10015/add-ability-to-attach-files-to-assets-on-ui",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10142: E2 Annotations: Unable to search for users in the \"assigned to\" field in the Annotation Details.",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T20:44:01.177Z",
+      "evidence": [
+        {
+          "label": "ENG-10142",
+          "url": "https://linear.app/siftstack/issue/ENG-10142/e2-annotations-unable-to-search-for-users-in-the-assigned-to-field-in",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-6231: Plot multiple alignment points for a single channel in a run",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Adrienne Chang",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T20:36:08.153Z",
+      "evidence": [
+        {
+          "label": "ENG-6231",
+          "url": "https://linear.app/siftstack/issue/ENG-6231/plot-multiple-alignment-points-for-a-single-channel-in-a-run",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10007: Axes dropzones on Timeseries",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T20:20:51.238Z",
+      "evidence": [
+        {
+          "label": "ENG-10007",
+          "url": "https://linear.app/siftstack/issue/ENG-10007/axes-dropzones-on-timeseries",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-7789: Multiple alignment points for a single family member",
+      "priority": "URGENT",
+      "state": "In Progress",
+      "assignee": "Adrienne Chang",
+      "team": "Engineering",
+      "timestamp": "2026-04-09T19:58:29.226Z",
+      "evidence": [
+        {
+          "label": "ENG-7789",
+          "url": "https://linear.app/siftstack/issue/ENG-7789/multiple-alignment-points-for-a-single-family-member",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
       "title": "ENG-10037: Load Testing: Achieve 5M pts/sec Target with Scaled backend-grpc",
       "priority": "HIGH",
-      "state": "In Review",
+      "state": "In Verification",
       "assignee": "pramod@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-04-09T19:20:21.782Z",
+      "timestamp": "2026-04-09T19:35:46.688Z",
       "evidence": [
         {
           "label": "ENG-10037",
@@ -75,70 +410,6 @@
     },
     {
       "source": "linear",
-      "title": "ENG-10142: E2 Annotations: Unable to search for users in the \"assigned to\" field in the Annotation Details.",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "broch@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T19:13:09.157Z",
-      "evidence": [
-        {
-          "label": "ENG-10142",
-          "url": "https://linear.app/siftstack/issue/ENG-10142/e2-annotations-unable-to-search-for-users-in-the-assigned-to-field-in",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7789: Multiple alignment points for a single family member",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T19:08:30.774Z",
-      "evidence": [
-        {
-          "label": "ENG-7789",
-          "url": "https://linear.app/siftstack/issue/ENG-7789/multiple-alignment-points-for-a-single-family-member",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9898: Update GetAmbientTransaction to return errors instead of panicking",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T19:03:32.361Z",
-      "evidence": [
-        {
-          "label": "ENG-9898",
-          "url": "https://linear.app/siftstack/issue/ENG-9898/update-getambienttransaction-to-return-errors-instead-of-panicking",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9823: Auto-name panel from loaded panel config",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:47:10.417Z",
-      "evidence": [
-        {
-          "label": "ENG-9823",
-          "url": "https://linear.app/siftstack/issue/ENG-9823/auto-name-panel-from-loaded-panel-config",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
       "title": "ENG-10149: Get Data-batcher running coherently in Dev",
       "priority": "HIGH",
       "state": "In Progress",
@@ -149,22 +420,6 @@
         {
           "label": "ENG-10149",
           "url": "https://linear.app/siftstack/issue/ENG-10149/get-data-batcher-running-coherently-in-dev",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9924: Handle Archived Runs in Family Candidates",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Alexa Agnew",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:39:30.434Z",
-      "evidence": [
-        {
-          "label": "ENG-9924",
-          "url": "https://linear.app/siftstack/issue/ENG-9924/handle-archived-runs-in-family-candidates",
           "source": "linear"
         }
       ]
@@ -229,260 +484,6 @@
         {
           "label": "ENG-9533",
           "url": "https://linear.app/siftstack/issue/ENG-9533/fe-candidate-runs-in-e2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9831: Add a warning when saving a panel config against a family plot",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:34:39.292Z",
-      "evidence": [
-        {
-          "label": "ENG-9831",
-          "url": "https://linear.app/siftstack/issue/ENG-9831/add-a-warning-when-saving-a-panel-config-against-a-family-plot",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10148: Allow rules to be sortable in Report Templates",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "brandon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:28:06.124Z",
-      "evidence": [
-        {
-          "label": "ENG-10148",
-          "url": "https://linear.app/siftstack/issue/ENG-10148/allow-rules-to-be-sortable-in-report-templates",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10007: Axes dropzones on Timeseries",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:27:30.075Z",
-      "evidence": [
-        {
-          "label": "ENG-10007",
-          "url": "https://linear.app/siftstack/issue/ENG-10007/axes-dropzones-on-timeseries",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DOC-21: Phase 1: Getting started",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "Sergio Perez",
-      "team": "Documentation",
-      "timestamp": "2026-04-09T18:19:26.964Z",
-      "evidence": [
-        {
-          "label": "DOC-21",
-          "url": "https://linear.app/siftstack/issue/DOC-21/phase-1-getting-started",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9832: Auto name alignments when the name is still default but a user selects an annotation",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:14:28.205Z",
-      "evidence": [
-        {
-          "label": "ENG-9832",
-          "url": "https://linear.app/siftstack/issue/ENG-9832/auto-name-alignments-when-the-name-is-still-default-but-a-user-selects",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9985: [BE] add default sigma preset values to existing families",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:12:29.602Z",
-      "evidence": [
-        {
-          "label": "ENG-9985",
-          "url": "https://linear.app/siftstack/issue/ENG-9985/be-add-default-sigma-preset-values-to-existing-families",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9954: [IMPL] Switch data-batcher flow lookups to use legacy IngestionConfigFlow proto",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "adam@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:04:30.441Z",
-      "evidence": [
-        {
-          "label": "ENG-9954",
-          "url": "https://linear.app/siftstack/issue/ENG-9954/impl-switch-data-batcher-flow-lookups-to-use-legacy",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10145: Implement previous sample for bucketing logic of lower-than set sample rate runs",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T18:03:46.989Z",
-      "evidence": [
-        {
-          "label": "ENG-10145",
-          "url": "https://linear.app/siftstack/issue/ENG-10145/implement-previous-sample-for-bucketing-logic-of-lower-than-set-sample",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DOC-22: Phase 1: Import telemetry",
-      "priority": "HIGH",
-      "state": "In Progress",
-      "assignee": "Michael Cretzman",
-      "team": "Documentation",
-      "timestamp": "2026-04-09T17:51:35.966Z",
-      "evidence": [
-        {
-          "label": "DOC-22",
-          "url": "https://linear.app/siftstack/issue/DOC-22/phase-1-import-telemetry",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9968: Implement HDF5 parsing client-side for `detect_configs`",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Wei Lu",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T17:46:15.428Z",
-      "evidence": [
-        {
-          "label": "ENG-9968",
-          "url": "https://linear.app/siftstack/issue/ENG-9968/implement-hdf5-parsing-client-side-for-detect-configs",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9969: Implement CH10 parsing client-side for `detect_configs`",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Wei Lu",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T17:46:15.390Z",
-      "evidence": [
-        {
-          "label": "ENG-9969",
-          "url": "https://linear.app/siftstack/issue/ENG-9969/implement-ch10-parsing-client-side-for-detect-configs",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9980: Implement TDMS parsing client-side for `detect_configs`",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Wei Lu",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T17:46:15.351Z",
-      "evidence": [
-        {
-          "label": "ENG-9980",
-          "url": "https://linear.app/siftstack/issue/ENG-9980/implement-tdms-parsing-client-side-for-detect-configs",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10144: Table Live Mode Scroll Issues",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T17:42:52.014Z",
-      "evidence": [
-        {
-          "label": "ENG-10144",
-          "url": "https://linear.app/siftstack/issue/ENG-10144/table-live-mode-scroll-issues",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-6231: Plot multiple alignment points for a single channel in a run",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T17:32:07.295Z",
-      "evidence": [
-        {
-          "label": "ENG-6231",
-          "url": "https://linear.app/siftstack/issue/ENG-6231/plot-multiple-alignment-points-for-a-single-channel-in-a-run",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7771: Ability to publish reusable CC's from Explore",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T16:59:14.151Z",
-      "evidence": [
-        {
-          "label": "ENG-7771",
-          "url": "https://linear.app/siftstack/issue/ENG-7771/ability-to-publish-reusable-ccs-from-explore",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9986: CSRS: Implement SchemalessV2 reads",
-      "priority": "HIGH",
-      "state": "In Review",
-      "assignee": "nick.bowman@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-09T16:52:20.132Z",
-      "evidence": [
-        {
-          "label": "ENG-9986",
-          "url": "https://linear.app/siftstack/issue/ENG-9986/csrs-implement-schemalessv2-reads",
           "source": "linear"
         }
       ]
@@ -649,7 +650,7 @@
             },
             {
               "setId": "",
-              "value": 424
+              "value": 425
             },
             {
               "setId": "",
@@ -685,7 +686,7 @@
             },
             {
               "setId": "",
-              "value": 382
+              "value": 383
             },
             {
               "setId": "",
@@ -709,7 +710,7 @@
             },
             {
               "setId": "",
-              "value": 275
+              "value": 330
             }
           ]
         ],
@@ -717,7 +718,7 @@
           [
             {
               "setId": "",
-              "value": 1605
+              "value": 1615
             }
           ]
         ],
@@ -867,11 +868,11 @@
             5756.279789297659,
             5705.640577639751,
             5305.579063492063,
-            5368.622412790699,
-            6082.051604938272,
+            5368.622412790698,
+            6082.051604938271,
             6432.721223163842,
-            6688.402469543148,
-            5952.667896253603,
+            6688.402469543147,
+            5952.6678962536025,
             5192.249568571428,
             6167.751496042216,
             6847.957043243244,
@@ -2068,7 +2069,7 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Load testing at scale hitting 5M pts/sec target across staging and production environments.",
+      "topConcern": "Data-batcher deployment coherence and load testing targets for backend-grpc scaling.",
       "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-09T09:15:00Z",
@@ -2079,11 +2080,11 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "shipping",
-      "topConcern": "Data-batcher coherence in dev environment needs stabilization before broader rollout.",
+      "status": "attention",
+      "topConcern": "Shadow comparison false negatives from dedup asymmetry blocking data quality validation.",
       "linearActive": 3,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T08:45:00Z",
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-09T08:42:00Z",
       "fourPAge": "1d",
       "meetingsToday": 2
     },
@@ -2092,10 +2093,10 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "E2 family support spanning multiple features (stats, charts, annotations, alignments) with UX complexity.",
-      "linearActive": 12,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-09T10:30:00Z",
+      "topConcern": "Family candidate runs and dynamic window switching for E2 analytics workflow.",
+      "linearActive": 8,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-09T10:05:00Z",
       "fourPAge": "0d",
       "meetingsToday": 4
     },
@@ -2104,35 +2105,35 @@
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "attention",
-      "topConcern": "Client-side file parsing implementation across multiple formats (HDF5, CH10, TDMS) for detect_configs.",
+      "topConcern": "FedRAMP compliance work: AWS workspace provisioning, FIPS MD5-to-SHA256 migration, GovCloud Windmill deployment.",
       "linearActive": 5,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T07:20:00Z",
+      "slackLastSeen": "2026-04-09T07:58:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 1
+      "meetingsToday": 5
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "Coordinating parallel workstreams across platform (load testing), canvas (family features), and infra (parsing).",
-      "linearActive": 29,
+      "topConcern": "Coordinating load testing targets while managing FedRAMP security work and E2 feature velocity.",
+      "linearActive": 12,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-09T10:45:00Z",
-      "fourPAge": "0d",
-      "meetingsToday": 5
+      "slackLastSeen": "2026-04-09T09:30:00Z",
+      "fourPAge": "1d",
+      "meetingsToday": 6
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
-      "status": "shipping",
-      "topConcern": "Documentation phase 1 progressing but needs customer validation on getting started and import flows.",
-      "linearActive": 2,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-04-09T09:00:00Z",
-      "fourPAge": "1d",
+      "status": "blocked",
+      "topConcern": "Sift Edge SQL lock contention causing exits and customer deployment issues.",
+      "linearActive": 3,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-09T06:20:00Z",
+      "fourPAge": "5d",
       "meetingsToday": 2
     }
   ],
@@ -2140,400 +2141,393 @@
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "E2 family features represent significant capability expansion but require cross-team coordination and UX polish.",
+      "attention": "FedRAMP timeline pressure with multiple security workstreams and GovCloud deployment for DS customer.",
       "recentTopics": [
-        "Family feature rollout timeline",
-        "Load testing performance benchmarks",
-        "Customer documentation readiness"
+        "FedRAMP compliance roadmap",
+        "DS customer GovCloud requirements",
+        "GTM content strategy",
+        "Load testing infrastructure investment"
       ],
-      "lastSlackToNoah": "2026-04-08T16:30:00Z",
+      "lastSlackToNoah": "2026-04-08T16:45:00Z",
       "pendingDecisions": [
-        "Scope prioritization between E2 family completeness vs new feature development",
-        "Load testing success criteria for production release"
+        "Prioritize FedRAMP work vs E2 feature velocity",
+        "Resource allocation for GovCloud deployment"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Client-side parsing migration requires careful performance validation across file formats before rollout.",
+      "attention": "Load testing not hitting 5M pts/sec target yet; data-batcher coherence issues in dev environment.",
       "recentTopics": [
         "Backend-grpc scaling architecture",
-        "Data-batcher stability issues",
-        "Client-side parsing performance tradeoffs",
-        "SchemalessV2 migration path"
+        "Data-batcher migration strategy",
+        "Shadow comparison dedup asymmetry root cause",
+        "Edge deployment reliability"
       ],
-      "lastSlackToNoah": "2026-04-09T08:00:00Z",
+      "lastSlackToNoah": "2026-04-09T08:10:00Z",
       "pendingDecisions": [
-        "Client-side vs server-side parsing strategy for remaining formats",
-        "Data-batcher dev environment fix vs workaround approach"
+        "Data-batcher rollout timeline",
+        "Load testing infrastructure sizing",
+        "Edge SQL lock contention fix approach"
       ]
     }
   ],
   "customers": [
     {
-      "name": "K2 Space",
-      "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 47,
-      "topSignal": "ENG-10037: Load Testing: Achieve 5M pts/sec Target with Scaled backend-grpc",
-      "features": [
-        "families",
-        "annotations",
-        "load-testing",
-        "data-ingestion"
-      ],
-      "lastActivity": "2026-04-09T14:22:00Z",
-      "openIssues": 2
-    },
-    {
-      "name": "Astranis",
-      "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 89,
-      "topSignal": "ENG-6405: [FE] Support families in all charts",
-      "features": [
-        "families",
-        "timeseries",
-        "explore",
-        "data-batcher"
-      ],
-      "lastActivity": "2026-04-09T11:45:00Z",
-      "openIssues": 1
-    },
-    {
-      "name": "Reliable Robotics",
-      "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 62,
-      "topSignal": "ENG-10084: IA - Global nav bread crumb bar",
-      "features": [
-        "annotations",
-        "families",
-        "panel-configs",
-        "timeseries"
-      ],
-      "lastActivity": "2026-04-09T16:30:00Z",
-      "openIssues": 3
-    },
-    {
-      "name": "Varda",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 34,
-      "topSignal": "ENG-9924: Handle Archived Runs in Family Candidates",
-      "features": [
-        "families",
-        "runs",
-        "explore"
-      ],
-      "lastActivity": "2026-04-08T09:15:00Z",
-      "openIssues": 0
-    },
-    {
-      "name": "Heart Aerospace",
-      "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 71,
-      "topSignal": "ENG-9969: Implement CH10 parsing client-side for detect_configs",
-      "features": [
-        "data-ingestion",
-        "ch10-parsing",
-        "timeseries",
-        "families"
-      ],
-      "lastActivity": "2026-04-09T13:20:00Z",
-      "openIssues": 1
-    },
-    {
       "name": "Lockheed Martin",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 124,
-      "topSignal": "ENG-10013: Add YAML support to files in CEL",
+      "trajectory": "expanding",
+      "wau": 145,
+      "topSignal": "ENG-10156: provision AWS workspace for developers to access FedRamp securely",
       "features": [
-        "cel",
-        "data-ingestion",
-        "families",
-        "annotations"
+        "FedRAMP",
+        "GovCloud",
+        "FIPS compliance",
+        "Enterprise security"
       ],
-      "lastActivity": "2026-04-09T10:05:00Z",
+      "lastActivity": "2026-04-08T16:22:00Z",
       "openIssues": 2
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 98,
-      "topSignal": "ENG-10145: Implement previous sample for bucketing logic of lower-than set sample rate runs",
+      "wau": 89,
+      "topSignal": "ENG-9846: Replace MD5 with SHA-256 in share link generation (FIPS compliance)",
       "features": [
-        "bucketing",
-        "data-ingestion",
-        "timeseries",
-        "runs"
+        "FedRAMP",
+        "Advanced analytics",
+        "Family stats"
       ],
-      "lastActivity": "2026-04-09T15:40:00Z",
+      "lastActivity": "2026-04-07T11:45:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "K2 Space",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 34,
+      "topSignal": "ENG-10037: Load Testing: Achieve 5M pts/sec Target with Scaled backend-grpc",
+      "features": [
+        "High-throughput ingestion",
+        "Real-time monitoring",
+        "Explore"
+      ],
+      "lastActivity": "2026-04-09T09:15:00Z",
+      "openIssues": 0
+    },
+    {
+      "name": "Astranis",
+      "tier": "enterprise",
+      "trajectory": "expanding",
+      "wau": 78,
+      "topSignal": "ENG-6231: Plot multiple alignment points for a single channel in a run",
+      "features": [
+        "Multi-alignment",
+        "Family analysis",
+        "Advanced charting"
+      ],
+      "lastActivity": "2026-04-09T08:30:00Z",
+      "openIssues": 1
+    },
+    {
+      "name": "Reliable Robotics",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 42,
+      "topSignal": "ENG-9883: Sift Edge GUI Table View",
+      "features": [
+        "Sift Edge",
+        "Local deployment",
+        "Table views"
+      ],
+      "lastActivity": "2026-04-08T14:20:00Z",
+      "openIssues": 2
+    },
+    {
+      "name": "Varda",
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 38,
+      "topSignal": "ENG-10007: Axes dropzones on Timeseries",
+      "features": [
+        "Advanced visualization",
+        "Timeseries analysis",
+        "Explore"
+      ],
+      "lastActivity": "2026-04-09T07:50:00Z",
+      "openIssues": 0
+    },
+    {
+      "name": "Heart Aerospace",
+      "tier": "growth",
+      "trajectory": "stable",
+      "wau": 29,
+      "topSignal": "ENG-6405: [FE] Support families in all charts",
+      "features": [
+        "Family analysis",
+        "Multi-chart support",
+        "Run comparison"
+      ],
+      "lastActivity": "2026-04-08T13:10:00Z",
       "openIssues": 1
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "ENG-9980: Implement TDMS parsing client-side for detect_configs",
+      "trajectory": "stable",
+      "wau": 26,
+      "topSignal": "ENG-10015: Add ability to attach files to assets on UI",
       "features": [
-        "tdms-parsing",
-        "data-ingestion",
-        "timeseries"
+        "Asset management",
+        "File attachments",
+        "Documentation"
       ],
-      "lastActivity": "2026-04-09T12:30:00Z",
+      "lastActivity": "2026-04-07T16:40:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 41,
-      "topSignal": "ENG-7789: Multiple alignment points for a single family member",
+      "trajectory": "expanding",
+      "wau": 31,
+      "topSignal": "ENG-9924: Handle Archived Runs in Family Candidates",
       "features": [
-        "families",
-        "alignment",
-        "annotations"
+        "Run archival",
+        "Family analysis",
+        "Data management"
       ],
-      "lastActivity": "2026-04-08T16:20:00Z",
+      "lastActivity": "2026-04-09T10:05:00Z",
       "openIssues": 1
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 53,
-      "topSignal": "ENG-9968: Implement HDF5 parsing client-side for detect_configs",
+      "wau": 67,
+      "topSignal": "ENG-10142: E2 Annotations: Unable to search for users in the assigned to field",
       "features": [
-        "hdf5-parsing",
-        "data-ingestion",
-        "explore"
+        "Annotations",
+        "Collaboration",
+        "User management"
       ],
-      "lastActivity": "2026-04-09T08:50:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-08T12:25:00Z",
+      "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "expanding",
       "wau": 12,
-      "topSignal": "DOC-21: Phase 1: Getting started",
+      "topSignal": "ENG-9823: Auto-name panel from loaded panel config",
       "features": [
-        "onboarding",
-        "timeseries",
-        "data-ingestion"
+        "Panel management",
+        "Automation",
+        "Configuration"
       ],
-      "lastActivity": "2026-04-09T14:10:00Z",
+      "lastActivity": "2026-04-06T15:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "ENG-10007: Axes dropzones on Timeseries",
+      "wau": 15,
+      "topSignal": "ENG-9533: [FE] Candidate runs in E2",
       "features": [
-        "timeseries",
-        "explore",
-        "data-visualization"
+        "Run selection",
+        "E2 interface",
+        "Analytics"
       ],
-      "lastActivity": "2026-04-07T11:25:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-07T09:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 36,
-      "topSignal": "ENG-9533: [FE] Candidate runs in E2",
+      "wau": 22,
+      "topSignal": "ENG-10013: Add YAML support to files in CEL",
       "features": [
-        "runs",
-        "families",
-        "explore"
+        "CEL expressions",
+        "Configuration",
+        "Advanced queries"
       ],
-      "lastActivity": "2026-04-09T09:35:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-08T11:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 8,
-      "topSignal": "DOC-22: Phase 1: Import telemetry",
+      "wau": 9,
+      "topSignal": "ENG-10084: IA - Global nav bread crumb bar",
       "features": [
-        "data-ingestion",
-        "onboarding"
+        "Navigation",
+        "UI improvements",
+        "User experience"
       ],
-      "lastActivity": "2026-04-08T13:45:00Z",
+      "lastActivity": "2026-04-05T14:15:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 19,
-      "topSignal": "ENG-9823: Auto-name panel from loaded panel config",
+      "tier": "pilot",
+      "trajectory": "at-risk",
+      "wau": 4,
+      "topSignal": "ENG-9436: Sift Edge exits on error due to sql lock contention",
       "features": [
-        "panel-configs",
-        "explore",
-        "timeseries"
+        "Sift Edge",
+        "Local deployment"
       ],
-      "lastActivity": "2026-04-09T07:20:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-28T10:30:00Z",
+      "openIssues": 1
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 4,
-      "topSignal": "ENG-10144: Table Live Mode Scroll Issues",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "ENG-10143: [FE] Refactor data selection hook",
       "features": [
-        "live-mode",
-        "tables"
+        "Data selection",
+        "UI framework"
       ],
-      "lastActivity": "2026-04-03T10:15:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-06T08:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 15,
-      "topSignal": "ENG-10148: Allow rules to be sortable in Report Templates",
+      "wau": 11,
+      "topSignal": "ENG-10124: Add connectrpc for server streaming responses to the frontend",
       "features": [
-        "report-templates",
-        "rules",
-        "explore"
+        "Real-time streaming",
+        "Performance"
       ],
-      "lastActivity": "2026-04-09T16:05:00Z",
+      "lastActivity": "2026-04-08T17:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 27,
-      "topSignal": "ENG-9831: Add a warning when saving a panel config against a family plot",
+      "wau": 19,
+      "topSignal": "ENG-7858: [FE] Support dynamic window switching/preview for family stats in E2",
       "features": [
-        "panel-configs",
-        "families",
-        "warnings"
+        "Dynamic windowing",
+        "Family stats",
+        "E2 analytics"
       ],
-      "lastActivity": "2026-04-08T14:55:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-07T13:55:00Z",
+      "openIssues": 0
     },
     {
       "name": "OdysAviation",
-      "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 44,
-      "topSignal": "ENG-9985: [BE] add default sigma preset values to existing families",
+      "tier": "pilot",
+      "trajectory": "stable",
+      "wau": 8,
+      "topSignal": "ENG-9898: Update GetAmbientTransaction to return errors instead of panicking",
       "features": [
-        "families",
-        "presets",
-        "data-analysis"
+        "Error handling",
+        "Stability improvements"
       ],
-      "lastActivity": "2026-04-09T11:10:00Z",
+      "lastActivity": "2026-04-05T11:40:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "ENG-10143: [FE] Refactor data selection hook",
+      "wau": 6,
+      "topSignal": "ENG-10093: Grafana to Sift Explore sharelinks broken",
       "features": [
-        "data-selection",
-        "explore"
+        "Grafana integration",
+        "Share links",
+        "Migration"
       ],
-      "lastActivity": "2026-04-08T08:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-04T16:25:00Z",
+      "openIssues": 1
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 13,
-      "topSignal": "ENG-9832: Auto name alignments when the name is still default but a user selects an annotation",
+      "wau": 10,
+      "topSignal": "ENG-10150: Load Testing: Achieve 5M pts/sec in Staging with Scaled backend-grpc",
       "features": [
-        "alignments",
-        "annotations",
-        "families"
+        "High-throughput",
+        "Performance testing"
       ],
-      "lastActivity": "2026-04-09T15:25:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T10:15:00Z",
+      "openIssues": 0
     },
     {
       "name": "Starpath",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 31,
-      "topSignal": "ENG-7771: Ability to publish reusable CC's from Explore",
+      "wau": 5,
+      "topSignal": "ENG-7789: Multiple alignment points for a single family member",
       "features": [
-        "explore",
-        "computed-channels",
-        "sharing"
+        "Multi-alignment",
+        "Family analysis"
       ],
-      "lastActivity": "2026-04-09T10:40:00Z",
+      "lastActivity": "2026-04-03T09:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 38,
-      "topSignal": "ENG-6231: Plot multiple alignment points for a single channel in a run",
+      "wau": 24,
+      "topSignal": "ENG-10154: Impulse Rust Asset Downsampling in Windmill (Cron Job)",
       "features": [
-        "alignment",
-        "plotting",
-        "runs"
+        "Asset management",
+        "Windmill automation",
+        "Downsampling"
       ],
-      "lastActivity": "2026-04-08T12:15:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T15:45:00Z",
+      "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "ENG-7858: [FE] Support dynamic window switching/preview for family stats in E2",
+      "wau": 8,
+      "topSignal": "ENG-9939: Deploy Windmill in GovCloud for DS Customer Data Workflow Management",
       "features": [
-        "families",
-        "statistics",
-        "explore"
+        "GovCloud",
+        "Windmill",
+        "Workflow automation"
       ],
-      "lastActivity": "2026-04-07T14:50:00Z",
+      "lastActivity": "2026-04-07T12:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 5,
-      "topSignal": "ENG-10142: E2 Annotations: Unable to search for users in the assigned to field in the Annotation Details",
+      "wau": 3,
+      "topSignal": "ENG-9954: [IMPL] Switch data-batcher flow lookups to use legacy IngestionConfigFlow proto",
       "features": [
-        "annotations",
-        "search"
+        "Data ingestion"
       ],
-      "lastActivity": "2026-04-04T09:20:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-03-25T14:20:00Z",
+      "openIssues": 0
     },
     {
       "name": "Zipline",
-      "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 67,
+      "tier": "growth",
+      "trajectory": "expanding",
+      "wau": 41,
       "topSignal": "ENG-10149: Get Data-batcher running coherently in Dev",
       "features": [
-        "data-batcher",
-        "ingestion",
-        "dev-infrastructure"
+        "Data batching",
+        "High-volume ingestion",
+        "Performance"
       ],
-      "lastActivity": "2026-04-09T13:55:00Z",
+      "lastActivity": "2026-04-09T11:30:00Z",
       "openIssues": 1
     },
     {
@@ -2541,139 +2535,146 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 7,
-      "topSignal": "ENG-9898: Update GetAmbientTransaction to return errors instead of panicking",
+      "topSignal": "ENG-10155: document dnssec rotations",
       "features": [
-        "transactions",
-        "error-handling"
+        "Security",
+        "Infrastructure"
       ],
-      "lastActivity": "2026-04-06T16:30:00Z",
+      "lastActivity": "2026-04-06T13:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
-      "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 29,
-      "topSignal": "ENG-9954: [IMPL] Switch data-batcher flow lookups to use legacy IngestionConfigFlow proto",
+      "tier": "pilot",
+      "trajectory": "stable",
+      "wau": 9,
+      "topSignal": "ENG-10138: RFC For Api Filter Endpoint Changes",
       "features": [
-        "data-batcher",
-        "ingestion",
-        "flows"
+        "API filtering",
+        "Query optimization"
       ],
-      "lastActivity": "2026-04-09T12:05:00Z",
+      "lastActivity": "2026-04-07T10:25:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 25,
-      "topSignal": "ENG-9986: CSRS: Implement SchemalessV2 reads",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 13,
+      "topSignal": "GTM-121: Article - When Grafana dashboards stop being enough",
       "features": [
-        "schemaless",
-        "data-reads",
-        "csrs"
+        "Migration from Grafana",
+        "Advanced analytics"
       ],
-      "lastActivity": "2026-04-08T11:40:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-08T09:40:00Z",
+      "openIssues": 0
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "ENG-10150: Load Testing: Achieve 5M pts/sec in Staging with Scaled backend-grpc",
+      "wau": 6,
+      "topSignal": "ENG-10117: Shadow comparisons: false negatives from dedup asymmetry",
       "features": [
-        "load-testing",
-        "performance",
-        "grpc"
+        "Data quality",
+        "Deduplication"
       ],
-      "lastActivity": "2026-04-08T15:10:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-05T15:15:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroForge",
-      "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 33,
-      "topSignal": "ENG-10013: Add YAML support to files in CEL",
+      "tier": "pilot",
+      "trajectory": "stable",
+      "wau": 8,
+      "topSignal": "ENG-9533: [FE] Candidate runs in E2",
       "features": [
-        "cel",
-        "yaml",
-        "configuration"
+        "Run selection",
+        "E2 interface"
       ],
-      "lastActivity": "2026-04-09T14:45:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-06T11:05:00Z",
+      "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "DOC-21: Phase 1: Getting started",
+      "trajectory": "at-risk",
+      "wau": 2,
+      "topSignal": "ENG-9436: Sift Edge exits on error due to sql lock contention",
       "features": [
-        "onboarding",
-        "documentation"
+        "Sift Edge"
       ],
-      "lastActivity": "2026-04-07T10:25:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-03-22T16:30:00Z",
+      "openIssues": 1
     }
   ],
   "decisions": [
     {
-      "title": "Scale backend-grpc to production or defer Canvas v1 performance promises",
-      "context": "ENG-10037/10150 show load testing at 5M pts/sec target. Canvas users expect sub-second query response. Need decision on infrastructure investment vs. managing user expectations for Q2 launch.",
-      "owner": "Head of Engineering + PM Lead",
+      "title": "Prioritize Explore V2 family support vs. Edge stability fixes",
+      "context": "Multiple family/multi-alignment features in flight (ENG-6231, ENG-7789, ENG-6405, ENG-7858) while Edge has critical stability issues (ENG-9436: lock contention causing exits). Edge is strategic moat builder, but Explore V2 drives north star metric.",
+      "owner": "VP Engineering + Product",
+      "deadline": "2026-04-15",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Edge stability directly impacts enterprise trust and 'Build the Moat' pillar. Lock contention exits are unacceptable for production deployments. Should pause E2 features to fix foundation.",
+        "against": "Family support is core to 'Nail the Core' - enables decisions on fleet-wide patterns. Already 4+ tickets in flight, momentum exists. Edge GUI (ENG-9883) shows we're investing there too. Can parallelize."
+      }
+    },
+    {
+      "title": "Commit to GovCloud/FedRAMP GA date or deprioritize",
+      "context": "Multiple GovCloud efforts (ENG-10156 AWS workspace, ENG-9939 Windmill deployment, ENG-9846 FIPS compliance) but no clear ship date. Significant eng investment without visible customer pipeline.",
+      "owner": "Head of Product + Sales",
       "deadline": "2026-04-18",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Canvas adoption depends on performance. Early enterprise pilots need proof of scale. Infrastructure debt compounds if delayed.",
-        "against": "5M pts/sec may exceed actual Q2 demand. Could ship with 2M capacity, learn usage patterns, scale based on evidence. Preserves eng capacity for Explore V2 features."
-      }
-    },
-    {
-      "title": "Ship family stats in Explore V2 without full chart parity or wait for ENG-6405",
-      "context": "ENG-7858 enables dynamic window switching for families. ENG-6405 adds families to all charts. Partial ship means power users get 70% of value 6 weeks earlier but creates support burden explaining gaps.",
-      "owner": "Explore V2 PM",
-      "deadline": "2026-04-14",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Ship families in line charts now (ENG-7858). Unblocks 3 design partners doing comparative analysis. Gather evidence on which chart types actually matter before building all.",
-        "against": "Incomplete features hurt 'Nail the Core' perception. Users expect feature parity. Better to ship complete families experience in May than partial in April."
-      }
-    },
-    {
-      "title": "Prioritize client-side parsing (ENG-9968/9969/9980) over server-side data-batcher stability",
-      "context": "Client-side parsing (HDF5, CH10, TDMS) enables edge deployment vision. Data-batcher coherence (ENG-10149) solves today's ingestion reliability. Both compete for same backend team capacity.",
-      "owner": "CTO",
-      "deadline": "2026-04-16",
       "status": "blocked",
-      "blockedBy": "Need evidence on current data-batcher failure rate vs. customer demand signal for edge parsing. Requesting oncall metrics + customer interview summary by 4/11.",
+      "blockedBy": "Customer pipeline clarity - do we have LOIs/contracts justifying continued investment?",
       "arguments": {
-        "for": "Client-side parsing is moat-building differentiator for Sift Edge. Reduces server costs long-term. Only 2 customers hitting data-batcher issues vs 8 asking about edge.",
-        "against": "Data integrity issues erode trust in core platform. Fix stability first, then innovate. Edge parsing won't matter if customers lose confidence in cloud ingestion."
+        "for": "GovCloud is strategic moat - competitors can't easily follow. FIPS/FedRAMP opens aerospace/defense verticals. Infrastructure work (ENG-10156, ENG-9939) suggests real customer demand.",
+        "against": "Massive distraction from core product. Creates parallel infrastructure to maintain. No evidence this drives north star metric (decisions/customer). Should validate demand before building."
       }
     },
     {
-      "title": "Allow publishing calculated channels from Explore (ENG-7771) in May or hold for Python Rules GA",
-      "context": "Users want to share CC's across team without Python Rules complexity. Feature overlaps with Python Rules value prop launching Q3. Risk cannibalizing Python Rules adoption.",
-      "owner": "Product Strategy Lead",
-      "deadline": "2026-04-23",
+      "title": "Resolve shadow comparison false negatives before DLv2 rollout",
+      "context": "ENG-10117 shows dedup asymmetry causing false negatives in validation. This undermines trust in migration to new data layer - core 'Nail the Core' risk.",
+      "owner": "Data Platform Lead",
+      "deadline": "2026-04-11",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Reusable CC's are 80% solution for 90% of users. Accelerates Embed Deeper by making Explore stickier. Python Rules targets different persona (data engineers vs analysts).",
-        "against": "Confuses product narrative. Better to hold CC publishing, drive Python Rules adoption, then offer CC's as 'lite' alternative based on usage evidence."
+        "for": "Cannot ship DLv2 with known correctness issues. False negatives mean customers miss events/decisions. Breaks trust. Must fix before broader rollout.",
+        "against": "Shadow mode exists to catch these issues. Can document known discrepancies and proceed if impact is minimal. Perfect migration is impossible."
+      }
+    },
+    {
+      "title": "Consolidate or kill Canvas given Explore V2 investment",
+      "context": "Heavy Explore V2 feature development (families, multi-alignment, axes dropzones ENG-10007, global nav ENG-10084) while Canvas exists as separate product. Strategy lists both but unclear differentiation.",
+      "owner": "Head of Product",
+      "deadline": "2026-04-25",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Canvas enables different use case (collaboration/presentation vs analysis). Both serve 'Decisions Captured' north star differently. Keep both, clarify positioning.",
+        "against": "Splitting eng resources across two visualization products dilutes 'Nail the Core'. Customers confused by two tools. Merge best of Canvas into Explore V2, sunset Canvas."
+      }
+    },
+    {
+      "title": "Set load testing success criteria beyond pts/sec",
+      "context": "ENG-10037 and ENG-10150 target 5M pts/sec but unclear how this maps to customer value or 'Embed Deeper' pillar. Is this the right proxy metric?",
+      "owner": "Engineering + Product",
+      "deadline": "2026-04-16",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Need objective performance benchmarks. 5M pts/sec supports larger deployments, enabling bigger customers (embed deeper). Clear eng goal.",
+        "against": "Pts/sec is infrastructure vanity metric. Should measure: queries/decisions per session, time-to-insight, or data scale where customers hit UX degradation. Optimize for decision velocity not throughput."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "143",
-      "delta": "+8% vs Q1"
+      "value": "Unknown",
+      "delta": "No instrumentation visible in signals"
     },
     "pillars": [
       {
@@ -2681,70 +2682,70 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 feature parity",
-            "current": "78%",
-            "target": "95%",
-            "status": "at_risk"
-          },
-          {
-            "name": "Canvas query latency p95",
-            "current": "1.8s",
-            "target": "<1s",
-            "status": "at_risk"
-          },
-          {
-            "name": "Data ingestion reliability",
-            "current": "98.2%",
-            "target": "99.5%",
+            "name": "Explore V2 Family Support (multi-alignment, family stats)",
+            "current": "4+ tickets in flight, FE refactor underway",
+            "target": "GA by Q2 end",
             "status": "on_track"
+          },
+          {
+            "name": "Data Layer V2 Migration Accuracy",
+            "current": "False negatives in shadow comparison (ENG-10117)",
+            "target": "99.9% parity before rollout",
+            "status": "at_risk"
+          },
+          {
+            "name": "Core UX Polish (sharelinks, annotations, auto-naming)",
+            "current": "3 bugs (ENG-10093, ENG-10142, ENG-9823)",
+            "target": "Zero P0 UX bugs",
+            "status": "at_risk"
           }
         ]
       },
       {
         "name": "Embed Deeper",
-        "status": "on_track",
+        "status": "at_risk",
         "keyResults": [
           {
-            "name": "Python Rules beta customers",
-            "current": "4",
-            "target": "6",
+            "name": "Python Rules / CEL Extensibility",
+            "current": "YAML support added (ENG-10013), API filter changes (ENG-10138)",
+            "target": "Customer self-service rules by Q3",
             "status": "on_track"
           },
           {
-            "name": "Ask SIFT queries/user/week",
-            "current": "12",
-            "target": "15",
+            "name": "Asset Management (files, metadata)",
+            "current": "File attachment UI (ENG-10015), downsampling (ENG-10154)",
+            "target": "Full asset lifecycle in product",
             "status": "on_track"
           },
           {
-            "name": "Report template usage",
-            "current": "34%",
-            "target": "40%",
-            "status": "on_track"
+            "name": "Performance at Scale (load testing)",
+            "current": "Targeting 5M pts/sec (ENG-10037, ENG-10150)",
+            "target": "Support 10x current largest customer",
+            "status": "at_risk"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "on_track",
+        "status": "off_track",
         "keyResults": [
           {
-            "name": "Sift Edge design partners",
-            "current": "3",
-            "target": "5",
-            "status": "on_track"
+            "name": "Sift Edge Stability & Adoption",
+            "current": "Critical exit bug (ENG-9436), GUI in dev (ENG-9883)",
+            "target": "10 production Edge deployments",
+            "status": "off_track"
           },
           {
-            "name": "Client-side parsing formats",
-            "current": "1",
-            "target": "4",
-            "status": "on_track"
-          },
-          {
-            "name": "CSRS schema adoption",
-            "current": "12%",
-            "target": "25%",
+            "name": "GovCloud/FedRAMP Readiness",
+            "current": "Windmill deployment (ENG-9939), FIPS compliance (ENG-9846), AWS workspace (ENG-10156)",
+            "target": "FedRAMP authorized by Q4",
             "status": "at_risk"
+          },
+          {
+            "name": "Ask SIFT (AI-powered insights)",
+            "current": "No signals in this batch",
+            "target": "Private beta Q2",
+            "status": "off_track"
           }
         ]
       }
@@ -2753,123 +2754,140 @@
   "timeAudit": {
     "today": {
       "date": "2026-04-09",
-      "meetings": 5,
-      "focusBlocks": 2,
-      "oneOnOnes": 3,
-      "freeHours": 2,
-      "meetingHours": 6
+      "meetings": 4,
+      "focusBlocks": 3,
+      "oneOnOnes": 2,
+      "freeHours": 3,
+      "meetingHours": 5
     },
     "thisWeek": {
-      "meetings": 22,
-      "freeHours": 8,
-      "meetingHours": 32
+      "meetings": 18,
+      "freeHours": 12,
+      "meetingHours": 28
     },
-    "weekSummary": "High coordination tax on backend-grpc scaling decision. 6 hours in sync meetings, 4 hours in architecture reviews. Only 8 focus hours this week for strategic thinking.",
+    "weekSummary": "Heavy backend infrastructure work (data-batcher, DLv2, load testing) competing with frontend feature delivery (E2 families, UX polish). GovCloud creating parallel workstream.",
     "alerts": [
-      "3 decision deadlines in next 9 days - risk of analysis paralysis",
-      "Backend team at 110% capacity with load testing + data-batcher + parsing",
-      "No 1:1 scheduled this week with Explore V2 PM on family stats decision"
+      "No visible north star metric instrumentation in eng tickets - are we measuring decisions captured?",
+      "5 open decisions require exec alignment by 4/18 - risk of thrash without clarity",
+      "Edge stability (ENG-9436) is P0 but not seeing urgency in signals - production risk",
+      "Ask SIFT has zero visible progress despite being named strategic product"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Apr 9-13)",
+        "label": "This Week (Apr 9-15)",
         "events": [
           {
-            "title": "Data-batcher failure rate analysis due",
+            "title": "Decision: DLv2 shadow comparison fix required before rollout?",
             "date": "2026-04-11",
+            "time": "EOD",
+            "type": "deadline",
+            "description": "ENG-10117 false negatives block migration or document as known issue",
+            "owner": "Data Platform Lead"
+          },
+          {
+            "title": "Decision: Edge vs. E2 prioritization",
+            "date": "2026-04-15",
             "time": "17:00",
             "type": "deadline",
-            "description": "Evidence needed to unblock client-side parsing vs stability decision",
-            "owner": "Backend Lead"
+            "description": "Resolve resource allocation between stability fixes and feature development",
+            "owner": "VP Eng + Product"
           },
           {
-            "title": "Explore V2 family stats decision gate",
+            "title": "Data-batcher dev environment coherence",
             "date": "2026-04-14",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Ship partial families or wait for chart parity",
-            "owner": "Explore V2 PM"
+            "time": "12:00",
+            "type": "milestone",
+            "description": "ENG-10149 - unblock dependent DLv2 testing",
+            "owner": "Backend Team"
           }
         ]
       },
       {
-        "label": "Next Week (Apr 14-20)",
+        "label": "Next Week (Apr 16-22)",
         "events": [
           {
-            "title": "Backend-grpc scaling decision",
-            "date": "2026-04-18",
+            "title": "Decision: Load testing success criteria defined",
+            "date": "2026-04-16",
             "time": "14:00",
             "type": "deadline",
-            "description": "Commit to 5M pts/sec infrastructure or revise Canvas performance targets",
-            "owner": "Head of Engineering"
+            "description": "Beyond 5M pts/sec - map to customer outcomes",
+            "owner": "Eng + Product"
           },
           {
-            "title": "Client-side parsing prioritization decision",
-            "date": "2026-04-16",
-            "time": "11:00",
-            "type": "deadline",
-            "description": "Allocate backend capacity to parsing vs data-batcher",
-            "owner": "CTO"
+            "title": "Decision: GovCloud commit or deprioritize",
+            "date": "2026-04-18",
+            "time": "16:00",
+            "type": "gate",
+            "description": "Customer pipeline review - justify continued FedRAMP investment",
+            "owner": "Head of Product + Sales"
           },
           {
-            "title": "Q2 Product Review",
-            "date": "2026-04-17",
-            "time": "09:00",
-            "type": "meeting",
-            "description": "Board presentation on strategy execution",
-            "owner": "CEO"
+            "title": "Staging load test: 5M pts/sec validation",
+            "date": "2026-04-21",
+            "time": "10:00",
+            "type": "milestone",
+            "description": "ENG-10150 - prove scaled backend-grpc performance",
+            "owner": "Backend Infra"
           }
         ]
       },
       {
-        "label": "Late April (Apr 21-30)",
+        "label": "End of Month (Apr 23-30)",
         "events": [
           {
-            "title": "Reusable CC decision",
-            "date": "2026-04-23",
+            "title": "Decision: Canvas + Explore V2 strategy",
+            "date": "2026-04-25",
             "time": "15:00",
             "type": "deadline",
-            "description": "Ship ENG-7771 in May or hold for Python Rules GA",
-            "owner": "Product Strategy Lead"
+            "description": "Consolidate, differentiate, or sunset Canvas",
+            "owner": "Head of Product"
           },
           {
-            "title": "Canvas v1 beta kickoff",
+            "title": "E2 Family Support Feature Complete",
             "date": "2026-04-28",
-            "time": "10:00",
+            "time": "EOD",
             "type": "milestone",
-            "description": "Launch with 6 pilot customers assuming backend-grpc scaling approved",
-            "owner": "Canvas PM"
+            "description": "Multi-alignment, family stats, candidate runs functional",
+            "owner": "Frontend Team"
           },
           {
-            "title": "Explore V2 family stats release (if approved)",
-            "date": "2026-04-25",
-            "time": "16:00",
+            "title": "GTM Article: 'When Grafana Stops Being Enough'",
+            "date": "2026-04-30",
+            "time": "09:00",
             "type": "milestone",
-            "description": "Deploy ENG-7858 to production",
-            "owner": "Explore V2 PM"
+            "description": "GTM-121 - competitive positioning content live",
+            "owner": "Marketing"
           }
         ]
       },
       {
-        "label": "May 2026",
+        "label": "Q2 Milestones (May-Jun)",
         "events": [
           {
-            "title": "Python Rules beta expansion gate",
-            "date": "2026-05-12",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Review 4 beta customers, decide on expanding to 10",
-            "owner": "Python Rules PM"
+            "title": "Explore V2 Family Support GA",
+            "date": "2026-06-30",
+            "time": "EOD",
+            "type": "milestone",
+            "description": "Full multi-run analysis capabilities shipped",
+            "owner": "Product"
           },
           {
-            "title": "Sift Edge alpha milestone",
-            "date": "2026-05-20",
-            "time": "09:00",
+            "title": "Sift Edge Production Stability Gate",
+            "date": "2026-05-15",
+            "time": "12:00",
+            "type": "gate",
+            "description": "Zero exit crashes for 30 days, 5+ deployments live",
+            "owner": "Edge Team"
+          },
+          {
+            "title": "Ask SIFT Private Beta (at risk)",
+            "date": "2026-06-15",
+            "time": "10:00",
             "type": "milestone",
-            "description": "First customer deploying client-side parsing in field",
-            "owner": "Edge PM"
+            "description": "No current progress visible - needs resourcing decision",
+            "owner": "AI/ML Team"
           }
         ]
       }
