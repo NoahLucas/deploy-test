@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-14T15:30:24.959Z",
+  "fetchedAt": "2026-04-14T19:33:57.969Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -11,454 +11,160 @@
   "signals": [
     {
       "source": "linear",
-      "title": "ENG-8070: Migrate `playground` to `playground-2`",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T15:26:45.857Z",
-      "evidence": [
-        {
-          "label": "ENG-8070",
-          "url": "https://linear.app/siftstack/issue/ENG-8070/migrate-playground-to-playground-2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10175: Ingest observability gaps for production load testing",
+      "title": "ENG-10214: [FE] Single Candidate Run Disable if in tree",
       "priority": "HIGH",
       "state": "In Review",
-      "assignee": "adam@siftstack.com",
+      "assignee": "Alexa Agnew",
       "team": "Engineering",
-      "timestamp": "2026-04-14T15:26:45.093Z",
+      "timestamp": "2026-04-14T19:25:22.388Z",
       "evidence": [
         {
-          "label": "ENG-10175",
-          "url": "https://linear.app/siftstack/issue/ENG-10175/ingest-observability-gaps-for-production-load-testing",
+          "label": "ENG-10214",
+          "url": "https://linear.app/siftstack/issue/ENG-10214/fe-single-candidate-run-disable-if-in-tree",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9954: [IMPL] Switch data-batcher flow lookups to use legacy IngestionConfigFlow proto",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "anna@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T15:26:40.729Z",
-      "evidence": [
-        {
-          "label": "ENG-9954",
-          "url": "https://linear.app/siftstack/issue/ENG-9954/impl-switch-data-batcher-flow-lookups-to-use-legacy",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10230: Sync Devin DeepWiki sift-stack/azimuth",
+      "title": "ENG-9924: Handle Archived Runs in Family Candidates",
       "priority": "URGENT",
       "state": "Ready for Work",
+      "assignee": "Alexa Agnew",
       "team": "Engineering",
-      "timestamp": "2026-04-14T07:20:07.632Z",
+      "timestamp": "2026-04-14T19:25:12.195Z",
       "evidence": [
         {
-          "label": "ENG-10230",
-          "url": "https://linear.app/siftstack/issue/ENG-10230/sync-devin-deepwiki-sift-stackazimuth",
+          "label": "ENG-9924",
+          "url": "https://linear.app/siftstack/issue/ENG-9924/handle-archived-runs-in-family-candidates",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-10144: Table Live Mode Scroll Issues",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "Jeremy Parker",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T03:33:44.053Z",
-      "evidence": [
-        {
-          "label": "ENG-10144",
-          "url": "https://linear.app/siftstack/issue/ENG-10144/table-live-mode-scroll-issues",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10229: enable s3 cloudtrail logging",
+      "title": "ENG-10241: [FE] Family Candidate HoverCard Refresh in E2 should pull version plotted",
       "priority": "URGENT",
       "state": "In Progress",
-      "assignee": "Felix Wong",
+      "assignee": "Alexa Agnew",
       "team": "Engineering",
-      "timestamp": "2026-04-14T02:41:47.639Z",
+      "timestamp": "2026-04-14T19:25:07.149Z",
       "evidence": [
         {
-          "label": "ENG-10229",
-          "url": "https://linear.app/siftstack/issue/ENG-10229/enable-s3-cloudtrail-logging",
+          "label": "ENG-10241",
+          "url": "https://linear.app/siftstack/issue/ENG-10241/fe-family-candidate-hovercard-refresh-in-e2-should-pull-version",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-10227: HDF5: String types are imported as bytes",
+      "title": "ENG-8735: Add \"Group By\" option to Grafana plugin for asset combination",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "nathan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T19:16:21.870Z",
+      "evidence": [
+        {
+          "label": "ENG-8735",
+          "url": "https://linear.app/siftstack/issue/ENG-8735/add-group-by-option-to-grafana-plugin-for-asset-combination",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10208: Restore ChannelNameSettings in timeseries spotlight settings",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Rowen Wu",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T19:14:11.905Z",
+      "evidence": [
+        {
+          "label": "ENG-10208",
+          "url": "https://linear.app/siftstack/issue/ENG-10208/restore-channelnamesettings-in-timeseries-spotlight-settings",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9785: Block email invitation flow for SCIM-managed organizations",
       "priority": "HIGH",
       "state": "In Verification",
-      "assignee": "Marc Julien",
+      "assignee": "Jonathan Deng",
       "team": "Engineering",
-      "timestamp": "2026-04-14T02:38:24.034Z",
+      "timestamp": "2026-04-14T19:11:07.790Z",
       "evidence": [
         {
-          "label": "ENG-10227",
-          "url": "https://linear.app/siftstack/issue/ENG-10227/hdf5-string-types-are-imported-as-bytes",
+          "label": "ENG-9785",
+          "url": "https://linear.app/siftstack/issue/ENG-9785/block-email-invitation-flow-for-scim-managed-organizations",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-9939: Deploy Windmill in GovCloud for DS Customer Data Workflow Managment",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "Felix Wong",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T01:50:41.920Z",
-      "evidence": [
-        {
-          "label": "ENG-9939",
-          "url": "https://linear.app/siftstack/issue/ENG-9939/deploy-windmill-in-govcloud-for-ds-customer-data-workflow-managment",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10106: Better user-facing behavior when missing permissions to create/edit families",
+      "title": "ENG-9784: Block admin user deactivation for SCIM-managed organizations",
       "priority": "HIGH",
       "state": "In Review",
-      "assignee": "Bill Raj-Derouin",
+      "assignee": "Jonathan Deng",
       "team": "Engineering",
-      "timestamp": "2026-04-14T01:31:08.520Z",
+      "timestamp": "2026-04-14T19:10:59.183Z",
       "evidence": [
         {
-          "label": "ENG-10106",
-          "url": "https://linear.app/siftstack/issue/ENG-10106/better-user-facing-behavior-when-missing-permissions-to-createedit",
+          "label": "ENG-9784",
+          "url": "https://linear.app/siftstack/issue/ENG-9784/block-admin-user-deactivation-for-scim-managed-organizations",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "ENG-10225: EncryptionType must be KMS: Redpanda",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Yue Shen",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T01:10:44.511Z",
-      "evidence": [
-        {
-          "label": "ENG-10225",
-          "url": "https://linear.app/siftstack/issue/ENG-10225/encryptiontype-must-be-kms-redpanda",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10226: update fedramp listing details in knox doc",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Noah Lucas",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T01:09:41.588Z",
-      "evidence": [
-        {
-          "label": "ENG-10226",
-          "url": "https://linear.app/siftstack/issue/ENG-10226/update-fedramp-listing-details-in-knox-doc",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10014: Add instrumentation to Files in CEL",
+      "title": "ENG-10103: Add E2 debug helper system to aid in debugging and e2e testing",
       "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T19:05:32.552Z",
+      "evidence": [
+        {
+          "label": "ENG-10103",
+          "url": "https://linear.app/siftstack/issue/ENG-10103/add-e2-debug-helper-system-to-aid-in-debugging-and-e2e-testing",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10249: Set FF for worker deployments",
+      "priority": "URGENT",
       "state": "In Verification",
       "assignee": "david@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-04-14T00:40:01.947Z",
+      "timestamp": "2026-04-14T19:04:52.279Z",
       "evidence": [
         {
-          "label": "ENG-10014",
-          "url": "https://linear.app/siftstack/issue/ENG-10014/add-instrumentation-to-files-in-cel",
+          "label": "ENG-10249",
+          "url": "https://linear.app/siftstack/issue/ENG-10249/set-ff-for-worker-deployments",
           "source": "linear"
         }
       ]
     },
     {
       "source": "linear",
-      "title": "DES-163: [UX] Better ways to create Runs (Asset-like support)",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-04-14T00:36:26.475Z",
-      "evidence": [
-        {
-          "label": "DES-163",
-          "url": "https://linear.app/siftstack/issue/DES-163/ux-better-ways-to-create-runs-asset-like-support",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9525: Support running family stat reports with a historic family version",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:35:30.800Z",
-      "evidence": [
-        {
-          "label": "ENG-9525",
-          "url": "https://linear.app/siftstack/issue/ENG-9525/support-running-family-stat-reports-with-a-historic-family-version",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9147: Improvements to Rule Evaluation Errors",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:32:20.978Z",
-      "evidence": [
-        {
-          "label": "ENG-9147",
-          "url": "https://linear.app/siftstack/issue/ENG-9147/improvements-to-rule-evaluation-errors",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-8599: Supporting a draft state of dynamic windows",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:30:23.742Z",
-      "evidence": [
-        {
-          "label": "ENG-8599",
-          "url": "https://linear.app/siftstack/issue/ENG-8599/supporting-a-draft-state-of-dynamic-windows",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7860: [FE] Ad hoc aggregate time series in E2",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:29:45.346Z",
-      "evidence": [
-        {
-          "label": "ENG-7860",
-          "url": "https://linear.app/siftstack/issue/ENG-7860/fe-ad-hoc-aggregate-time-series-in-e2",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7859: [BE] API changes for ad hoc aggregated time series",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:28:31.100Z",
-      "evidence": [
-        {
-          "label": "ENG-7859",
-          "url": "https://linear.app/siftstack/issue/ENG-7859/be-api-changes-for-ad-hoc-aggregated-time-series",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7431: [BE] Support nested calculated channels with alignment timestamps",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:28:09.221Z",
-      "evidence": [
-        {
-          "label": "ENG-7431",
-          "url": "https://linear.app/siftstack/issue/ENG-7431/be-support-nested-calculated-channels-with-alignment-timestamps",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7854: [BE] Quartile aggregation in query engine",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:28:09.161Z",
-      "evidence": [
-        {
-          "label": "ENG-7854",
-          "url": "https://linear.app/siftstack/issue/ENG-7854/be-quartile-aggregation-in-query-engine",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7855: [BE] Percentile aggregation in query engine",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:28:09.131Z",
-      "evidence": [
-        {
-          "label": "ENG-7855",
-          "url": "https://linear.app/siftstack/issue/ENG-7855/be-percentile-aggregation-in-query-engine",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9821: Handle rules DAG with family rules",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:27:57.605Z",
-      "evidence": [
-        {
-          "label": "ENG-9821",
-          "url": "https://linear.app/siftstack/issue/ENG-9821/handle-rules-dag-with-family-rules",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9822: Handle reports DAG with family rules",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:27:57.576Z",
-      "evidence": [
-        {
-          "label": "ENG-9822",
-          "url": "https://linear.app/siftstack/issue/ENG-9822/handle-reports-dag-with-family-rules",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10188: rewrite release runbook for clarity and ease of use",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "leo@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-14T00:25:59.770Z",
-      "evidence": [
-        {
-          "label": "ENG-10188",
-          "url": "https://linear.app/siftstack/issue/ENG-10188/rewrite-release-runbook-for-clarity-and-ease-of-use",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-55: UX: Family considerations for Panel Configurations",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-04-14T00:23:52.757Z",
-      "evidence": [
-        {
-          "label": "DES-55",
-          "url": "https://linear.app/siftstack/issue/DES-55/ux-family-considerations-for-panel-configurations",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-121: [UX] Family Versions in Channel Tree",
+      "title": "ENG-10186: Concurrent S3 uploads in compaction jobs",
       "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-04-14T00:22:48.531Z",
-      "evidence": [
-        {
-          "label": "DES-121",
-          "url": "https://linear.app/siftstack/issue/DES-121/ux-family-versions-in-channel-tree",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-113: ULA customer feedback on Family Visualization",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "Clinton Naugle",
-      "team": "Design",
-      "timestamp": "2026-04-14T00:21:56.560Z",
-      "evidence": [
-        {
-          "label": "DES-113",
-          "url": "https://linear.app/siftstack/issue/DES-113/ula-customer-feedback-on-family-visualization",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-5980: Migrate gov to klu",
-      "priority": "URGENT",
       "state": "In Verification",
-      "assignee": "Jared Borner",
+      "assignee": "adam@siftstack.com",
       "team": "Engineering",
-      "timestamp": "2026-04-14T00:20:25.577Z",
+      "timestamp": "2026-04-14T18:54:05.537Z",
       "evidence": [
         {
-          "label": "ENG-5980",
-          "url": "https://linear.app/siftstack/issue/ENG-5980/migrate-gov-to-klu",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "GTM-113: Event: Booth backdrop design SmallSat EU",
-      "priority": "URGENT",
-      "state": "In Progress",
-      "assignee": "nich@siftstack.com",
-      "team": "GTM",
-      "timestamp": "2026-04-14T00:19:26.050Z",
-      "evidence": [
-        {
-          "label": "GTM-113",
-          "url": "https://linear.app/siftstack/issue/GTM-113/event-booth-backdrop-design-smallsat-eu",
+          "label": "ENG-10186",
+          "url": "https://linear.app/siftstack/issue/ENG-10186/concurrent-s3-uploads-in-compaction-jobs",
           "source": "linear"
         }
       ]
@@ -470,11 +176,315 @@
       "state": "In Review",
       "assignee": "Jonathan Deng",
       "team": "Engineering",
-      "timestamp": "2026-04-14T00:18:49.655Z",
+      "timestamp": "2026-04-14T18:45:26.167Z",
       "evidence": [
         {
           "label": "ENG-9298",
           "url": "https://linear.app/siftstack/issue/ENG-9298/display-banner-before-users-can-access-the-application",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10106: Better user-facing behavior when missing permissions to create/edit families",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:44:20.647Z",
+      "evidence": [
+        {
+          "label": "ENG-10106",
+          "url": "https://linear.app/siftstack/issue/ENG-10106/better-user-facing-behavior-when-missing-permissions-to-createedit",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10188: rewrite release runbook for clarity and ease of use",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "leo@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:43:50.567Z",
+      "evidence": [
+        {
+          "label": "ENG-10188",
+          "url": "https://linear.app/siftstack/issue/ENG-10188/rewrite-release-runbook-for-clarity-and-ease-of-use",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9441: Canvas: Version Improvements.",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "david@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:42:51.692Z",
+      "evidence": [
+        {
+          "label": "ENG-9441",
+          "url": "https://linear.app/siftstack/issue/ENG-9441/canvas-version-improvements",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10122: Support channel metadata in ingestion config creation",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "nathan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:42:51.099Z",
+      "evidence": [
+        {
+          "label": "ENG-10122",
+          "url": "https://linear.app/siftstack/issue/ENG-10122/support-channel-metadata-in-ingestion-config-creation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9561: Add \"buffer flush rate\" Metrics to Sift Edge",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "taylor@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:33:58.179Z",
+      "evidence": [
+        {
+          "label": "ENG-9561",
+          "url": "https://linear.app/siftstack/issue/ENG-9561/add-buffer-flush-rate-metrics-to-sift-edge",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10247: CSRS: Shadow comparison false-positive \"subset\" errors due to missing run_id filter on DLv2 catalog records",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "nick.bowman@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:32:36.789Z",
+      "evidence": [
+        {
+          "label": "ENG-10247",
+          "url": "https://linear.app/siftstack/issue/ENG-10247/csrs-shadow-comparison-false-positive-subset-errors-due-to-missing-run",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "DES-188: Web: Navigation updates",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "nich@siftstack.com",
+      "team": "Design",
+      "timestamp": "2026-04-14T18:17:53.198Z",
+      "evidence": [
+        {
+          "label": "DES-188",
+          "url": "https://linear.app/siftstack/issue/DES-188/web-navigation-updates",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8646: Customer Error Reporting for OOM Exec",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:10:50.738Z",
+      "evidence": [
+        {
+          "label": "ENG-8646",
+          "url": "https://linear.app/siftstack/issue/ENG-8646/customer-error-reporting-for-oom-exec",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10196: Admin CLI Tooling",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:10:42.029Z",
+      "evidence": [
+        {
+          "label": "ENG-10196",
+          "url": "https://linear.app/siftstack/issue/ENG-10196/admin-cli-tooling",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10195: Org Rate Limit + Validation",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:10:38.737Z",
+      "evidence": [
+        {
+          "label": "ENG-10195",
+          "url": "https://linear.app/siftstack/issue/ENG-10195/org-rate-limit-validation",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10199: Canary + Alarms",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Bryce Turley",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:10:33.366Z",
+      "evidence": [
+        {
+          "label": "ENG-10199",
+          "url": "https://linear.app/siftstack/issue/ENG-10199/canary-alarms",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9828: Canvas: Disposition history/comments",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Ian Later",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:07:40.701Z",
+      "evidence": [
+        {
+          "label": "ENG-9828",
+          "url": "https://linear.app/siftstack/issue/ENG-9828/canvas-disposition-historycomments",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9574: Canvas: Make Copy",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "david@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:48.037Z",
+      "evidence": [
+        {
+          "label": "ENG-9574",
+          "url": "https://linear.app/siftstack/issue/ENG-9574/canvas-make-copy",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9232: Canvas: Create initial Pass/Fail/Open Functions",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Ian Later",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.990Z",
+      "evidence": [
+        {
+          "label": "ENG-9232",
+          "url": "https://linear.app/siftstack/issue/ENG-9232/canvas-create-initial-passfailopen-functions",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9233: Canvas: Sharelinks",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Ian Later",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.945Z",
+      "evidence": [
+        {
+          "label": "ENG-9233",
+          "url": "https://linear.app/siftstack/issue/ENG-9233/canvas-sharelinks",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9443: Canvas: Archive",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "david@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.797Z",
+      "evidence": [
+        {
+          "label": "ENG-9443",
+          "url": "https://linear.app/siftstack/issue/ENG-9443/canvas-archive",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9442: Canvas: Version History Bar",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Ian Later",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.700Z",
+      "evidence": [
+        {
+          "label": "ENG-9442",
+          "url": "https://linear.app/siftstack/issue/ENG-9442/canvas-version-history-bar",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9777: Canvas: Markdown improvements",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "david@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.637Z",
+      "evidence": [
+        {
+          "label": "ENG-9777",
+          "url": "https://linear.app/siftstack/issue/ENG-9777/canvas-markdown-improvements",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10094: Canvas block metadata 1 pager",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Sanghee Oh",
+      "team": "Engineering",
+      "timestamp": "2026-04-14T18:06:47.556Z",
+      "evidence": [
+        {
+          "label": "ENG-10094",
+          "url": "https://linear.app/siftstack/issue/ENG-10094/canvas-block-metadata-1-pager",
           "source": "linear"
         }
       ]
@@ -528,15 +538,15 @@
             },
             {
               "setId": "",
-              "value": 830
+              "value": 831
             },
             {
               "setId": "",
-              "value": 668
+              "value": 669
             },
             {
               "setId": "",
-              "value": 361
+              "value": 445
             }
           ]
         ],
@@ -544,7 +554,7 @@
           [
             {
               "setId": "",
-              "value": 2419
+              "value": 2431
             }
           ]
         ],
@@ -673,7 +683,7 @@
             },
             {
               "setId": "",
-              "value": 368
+              "value": 369
             },
             {
               "setId": "",
@@ -685,7 +695,7 @@
             },
             {
               "setId": "",
-              "value": 323
+              "value": 325
             },
             {
               "setId": "",
@@ -697,11 +707,11 @@
             },
             {
               "setId": "",
-              "value": 366
+              "value": 368
             },
             {
               "setId": "",
-              "value": 121
+              "value": 275
             }
           ]
         ],
@@ -709,7 +719,7 @@
           [
             {
               "setId": "",
-              "value": 1583
+              "value": 1597
             }
           ]
         ],
@@ -812,7 +822,7 @@
             },
             {
               "setId": "",
-              "value": 15
+              "value": 26
             }
           ]
         ],
@@ -820,7 +830,7 @@
           [
             {
               "setId": "",
-              "value": 1526
+              "value": 1537
             }
           ]
         ],
@@ -856,25 +866,25 @@
         "series": [
           [
             5756.279789297659,
-            5705.640577639751,
+            5705.640332298136,
             5305.579063492063,
             5322.809118155619,
             6063.382061538461,
             6378.9686274509795,
-            6688.499624365482,
+            6671.592243037975,
             5941.833511494253,
             5194.116768571428,
-            6110.2349033942555,
-            6613.90728051948,
-            8949.280783933518,
-            3619.1223600000003
+            6094.323947916667,
+            6563.755724226804,
+            8710.54788172043,
+            4482.101632653061
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 27581.277661810615
+              "value": 27767.588623578078
             }
           ]
         ],
@@ -956,7 +966,7 @@
             },
             {
               "setId": "",
-              "value": 213
+              "value": 269
             }
           ],
           [
@@ -1010,7 +1020,7 @@
             },
             {
               "setId": "",
-              "value": 25
+              "value": 38
             }
           ],
           [
@@ -1064,7 +1074,7 @@
             },
             {
               "setId": "",
-              "value": 19
+              "value": 30
             }
           ],
           [
@@ -1126,19 +1136,19 @@
           [
             {
               "setId": "",
-              "value": 1086
+              "value": 1093
             }
           ],
           [
             {
               "setId": "",
-              "value": 278
+              "value": 282
             }
           ],
           [
             {
               "setId": "",
-              "value": 257
+              "value": 259
             }
           ],
           [
@@ -1467,7 +1477,7 @@
             },
             {
               "setId": "",
-              "value": 5
+              "value": 6
             }
           ],
           [
@@ -1629,7 +1639,7 @@
             },
             {
               "setId": "",
-              "value": 97
+              "value": 133
             }
           ]
         ],
@@ -1655,7 +1665,7 @@
           [
             {
               "setId": "",
-              "value": 783
+              "value": 792
             }
           ]
         ],
@@ -1917,7 +1927,7 @@
             },
             {
               "setId": "",
-              "value": 6
+              "value": 19
             }
           ],
           [
@@ -1997,7 +2007,7 @@
           [
             {
               "setId": "",
-              "value": 7842
+              "value": 7855
             }
           ],
           [
@@ -2060,7 +2070,7 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Family rules DAG handling and versioning workflow complexity.",
+      "topConcern": "Compaction performance and SCIM org management features shipping.",
       "linearActive": 8,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-14T09:23:00Z",
@@ -2071,11 +2081,11 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "attention",
-      "topConcern": "GovCloud deployment blockers and FedRAMP compliance updates.",
-      "linearActive": 6,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-14T08:45:00Z",
+      "status": "shipping",
+      "topConcern": "Ingestion config channel metadata support and admin tooling deployment.",
+      "linearActive": 5,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-14T10:15:00Z",
       "fourPAge": "1d",
       "meetingsToday": 4
     },
@@ -2084,34 +2094,34 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Table live mode scroll issues affecting user experience.",
-      "linearActive": 5,
+      "topConcern": "Canvas versioning, disposition history, and pass/fail functions rolling out.",
+      "linearActive": 11,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-14T10:12:00Z",
+      "slackLastSeen": "2026-04-14T08:45:00Z",
       "fourPAge": "0d",
-      "meetingsToday": 2
+      "meetingsToday": 5
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
       "status": "attention",
-      "topConcern": "S3 CloudTrail logging and Redpanda KMS encryption requirements.",
-      "linearActive": 7,
-      "linearBlocked": 2,
-      "slackLastSeen": "2026-04-14T07:30:00Z",
+      "topConcern": "Org rate limits and canary alarms need validation before broader rollout.",
+      "linearActive": 4,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-14T11:02:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 5
+      "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "Query engine aggregation features and release runbook clarity.",
-      "linearActive": 12,
-      "linearBlocked": 1,
-      "slackLastSeen": "2026-04-14T09:55:00Z",
+      "topConcern": "Release runbook clarity and E2 debug tooling improving dev velocity.",
+      "linearActive": 6,
+      "linearBlocked": 0,
+      "slackLastSeen": "2026-04-14T09:50:00Z",
       "fourPAge": "1d",
       "meetingsToday": 6
     },
@@ -2120,553 +2130,581 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "ULA customer feedback on family visualization needs attention.",
-      "linearActive": 4,
+      "topConcern": "Grafana group-by and Sift Edge buffer metrics supporting customer deployments.",
+      "linearActive": 3,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-14T10:01:00Z",
-      "fourPAge": "0d",
-      "meetingsToday": 3
+      "slackLastSeen": "2026-04-14T10:30:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 4
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "GovCloud customer deployment timeline and SmallSat EU event prep.",
+      "attention": "Canvas product launch momentum and enterprise SCIM rollout readiness.",
       "recentTopics": [
-        "FedRAMP compliance status",
-        "ULA customer feedback escalation",
-        "SmallSat EU booth design",
-        "Q2 enterprise pipeline"
+        "Canvas GA timeline",
+        "SCIM customer onboarding",
+        "Q2 revenue targets"
       ],
       "lastSlackToNoah": "2026-04-13T16:20:00Z",
       "pendingDecisions": [
-        "Prioritize GovCloud Windmill deployment vs. core platform features",
-        "Approve SmallSat EU event budget"
+        "Canvas pricing tier structure",
+        "Enterprise support SLA commitments"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Infrastructure security blockers and query engine performance roadmap.",
+      "attention": "Infra stability with rate limiting and compaction performance optimization.",
       "recentTopics": [
-        "Redpanda KMS encryption blockers",
-        "Query engine aggregation architecture",
-        "Family rules DAG complexity",
-        "Gov to Klu migration timeline",
-        "Release process improvements"
+        "S3 upload concurrency",
+        "Worker deployment rollout",
+        "Navigation redesign launch"
       ],
-      "lastSlackToNoah": "2026-04-14T08:10:00Z",
+      "lastSlackToNoah": "2026-04-14T07:45:00Z",
       "pendingDecisions": [
-        "Approve query engine aggregation implementation approach",
-        "Resolve playground migration strategy",
-        "Sign off on release runbook rewrite"
+        "Canary alarm thresholds",
+        "Admin CLI access controls"
       ]
     }
   ],
   "customers": [
     {
       "name": "K2 Space",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 12,
-      "topSignal": "Active usage of core telemetry platform features",
+      "tier": "enterprise",
+      "trajectory": "expanding",
+      "wau": 28,
+      "topSignal": "Heavy Canvas feature adoption with version control and pass/fail workflow implementation for spacecraft testing",
       "features": [
-        "telemetry ingestion",
-        "channel monitoring",
-        "rules engine"
+        "Canvas",
+        "Family Candidates",
+        "Version Control",
+        "Grafana Plugin",
+        "SCIM SSO"
       ],
-      "lastActivity": "2026-04-12T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T18:22:00Z",
+      "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 28,
-      "topSignal": "Engaging with advanced family versions and visualization features",
+      "trajectory": "stable",
+      "wau": 42,
+      "topSignal": "Active S3 ingestion optimization work and channel metadata management for satellite telemetry",
       "features": [
-        "family management",
-        "historical analysis",
-        "custom dashboards",
-        "rules engine"
+        "Ingestion Config",
+        "S3 Uploads",
+        "Channel Metadata",
+        "Grafana Plugin",
+        "Asset Grouping"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
+      "lastActivity": "2026-04-14T09:15:00Z",
       "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Regular monitoring workflows with table live mode",
+      "trajectory": "expanding",
+      "wau": 19,
+      "topSignal": "Implementing Canvas disposition workflows for autonomous flight test certification",
       "features": [
-        "live telemetry",
-        "table views",
-        "alerting"
+        "Canvas",
+        "Disposition History",
+        "Sharelinks",
+        "Family Candidates"
       ],
-      "lastActivity": "2026-04-11T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-12T14:33:00Z",
+      "openIssues": 3
     },
     {
       "name": "Varda",
-      "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Increasing adoption of aggregate time series analysis",
+      "tier": "enterprise",
+      "trajectory": "stable",
+      "wau": 31,
+      "topSignal": "Edge device buffer metrics monitoring for manufacturing spacecraft reentry missions",
       "features": [
-        "time series analysis",
-        "calculated channels",
-        "data ingestion"
+        "Sift Edge",
+        "Buffer Metrics",
+        "Admin CLI",
+        "SCIM SSO"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
+      "lastActivity": "2026-04-13T22:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "Consistent use of telemetry monitoring for flight testing",
+      "trajectory": "expanding",
+      "wau": 24,
+      "topSignal": "Canvas markdown documentation and version history for electric aircraft test programs",
       "features": [
-        "telemetry ingestion",
-        "monitoring",
-        "reports"
+        "Canvas",
+        "Markdown",
+        "Version History",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-10T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T07:52:00Z",
+      "openIssues": 2
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
-      "trajectory": "expanding",
-      "wau": 45,
-      "topSignal": "GovCloud deployment progressing for defense programs",
+      "trajectory": "stable",
+      "wau": 67,
+      "topSignal": "SCIM integration deployment and org rate limiting for enterprise-scale defense programs",
       "features": [
-        "GovCloud",
-        "FedRAMP compliance",
-        "family management",
-        "advanced analytics"
+        "SCIM SSO",
+        "Org Rate Limits",
+        "Admin Tooling",
+        "Canary Deployments"
       ],
-      "lastActivity": "2026-04-14T00:00:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-11T16:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 52,
-      "topSignal": "Providing feedback on family visualization for launch operations",
+      "wau": 53,
+      "topSignal": "Family candidates workflow refinement for launch vehicle comparison analysis",
       "features": [
-        "family management",
-        "visualization",
-        "run management",
-        "rules engine"
+        "Family Candidates",
+        "Run Management",
+        "Grafana Plugin",
+        "Asset Grouping"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-13T11:08:00Z",
+      "openIssues": 0
     },
     {
       "name": "Parallel Systems",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Early adoption of telemetry platform for autonomous rail testing",
+      "wau": 16,
+      "topSignal": "Timeseries spotlight settings and channel name configurations for rail system testing",
       "features": [
-        "telemetry ingestion",
-        "basic monitoring"
+        "Timeseries Spotlight",
+        "Channel Settings",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-09T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T08:40:00Z",
+      "openIssues": 4
     },
     {
       "name": "The Exploration Company",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Scaling usage for spacecraft development programs",
+      "wau": 29,
+      "topSignal": "Canvas archive functionality and sharelink distribution for European spacecraft qualification",
       "features": [
-        "telemetry ingestion",
-        "channel management",
-        "rules engine",
-        "reports"
+        "Canvas",
+        "Archive",
+        "Sharelinks",
+        "Version Control",
+        "Disposition History"
       ],
-      "lastActivity": "2026-04-12T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T19:55:00Z",
+      "openIssues": 2
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 38,
-      "topSignal": "Established workflows for satellite mission operations",
+      "topSignal": "Navigation updates and permissions management for multi-program satellite operations",
       "features": [
-        "family management",
-        "telemetry monitoring",
-        "historical analysis",
-        "alerting"
+        "Navigation",
+        "Permissions",
+        "Family Management",
+        "SCIM SSO"
       ],
-      "lastActivity": "2026-04-11T00:00:00Z",
+      "lastActivity": "2026-04-12T13:27:00Z",
       "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Initial exploration of platform for vehicle telemetry",
+      "trajectory": "expanding",
+      "wau": 8,
+      "topSignal": "Canvas pass/fail functions setup for electric motorcycle durability testing",
       "features": [
-        "telemetry ingestion",
-        "basic dashboards"
+        "Canvas",
+        "Pass/Fail Functions",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-08T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T10:12:00Z",
+      "openIssues": 5
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Regular telemetry analysis for orbital operations",
+      "wau": 14,
+      "topSignal": "Worker deployment feature flags and compaction job optimization",
       "features": [
-        "telemetry monitoring",
-        "channel analysis",
-        "rules"
+        "Worker Deployments",
+        "S3 Uploads",
+        "Compaction Jobs",
+        "Admin CLI"
       ],
-      "lastActivity": "2026-04-10T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T15:33:00Z",
+      "openIssues": 2
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Growing usage for re-entry vehicle development",
+      "wau": 21,
+      "topSignal": "Family candidate version plotting and E2 debug tooling for cargo capsule development",
       "features": [
-        "telemetry ingestion",
-        "family management",
-        "time series analysis"
+        "Family Candidates",
+        "E2 Debug",
+        "Version Control",
+        "HoverCard"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T06:48:00Z",
+      "openIssues": 3
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Testing platform for EV fleet monitoring",
+      "wau": 7,
+      "topSignal": "Edge buffer metrics monitoring for electric rideshare fleet operations",
       "features": [
-        "telemetry ingestion",
-        "basic monitoring"
+        "Sift Edge",
+        "Buffer Metrics",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-09T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-10T17:22:00Z",
+      "openIssues": 1
     },
     {
       "name": "CX2",
       "tier": "pilot",
-      "trajectory": "stable",
+      "trajectory": "at-risk",
       "wau": 4,
-      "topSignal": "Early-stage evaluation for aerospace applications",
+      "topSignal": "Limited activity, last engagement on navigation updates exploration",
       "features": [
-        "telemetry ingestion"
+        "Navigation",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-07T00:00:00Z",
+      "lastActivity": "2026-04-08T14:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Low engagement, needs follow-up",
+      "trajectory": "stable",
+      "wau": 6,
+      "topSignal": "Canvas markdown documentation testing for logistics operations",
       "features": [
-        "basic telemetry"
+        "Canvas",
+        "Markdown",
+        "Sharelinks"
       ],
-      "lastActivity": "2026-03-28T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T12:40:00Z",
+      "openIssues": 2
     },
     {
       "name": "Arbor Energy",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 7,
-      "topSignal": "Increasing interest in telemetry for energy systems",
+      "wau": 18,
+      "topSignal": "Ingestion config channel metadata setup for battery testing infrastructure",
       "features": [
-        "telemetry ingestion",
-        "monitoring"
+        "Ingestion Config",
+        "Channel Metadata",
+        "Grafana Plugin",
+        "Asset Grouping"
       ],
-      "lastActivity": "2026-04-11T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T09:58:00Z",
+      "openIssues": 1
     },
     {
       "name": "Synnax",
-      "tier": "growth",
-      "trajectory": "stable",
-      "wau": 13,
-      "topSignal": "Consistent usage for test stand operations",
+      "tier": "pilot",
+      "trajectory": "expanding",
+      "wau": 9,
+      "topSignal": "Grafana plugin asset grouping evaluation for rocket engine test stands",
       "features": [
-        "telemetry ingestion",
-        "channel management",
-        "dashboards"
+        "Grafana Plugin",
+        "Asset Grouping",
+        "Channel Settings"
       ],
-      "lastActivity": "2026-04-12T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T20:11:00Z",
+      "openIssues": 3
     },
     {
       "name": "OdysAviation",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 17,
-      "topSignal": "Active monitoring for electric aircraft development",
+      "wau": 5,
+      "topSignal": "Canvas version history exploration for hybrid electric aircraft development",
       "features": [
-        "telemetry monitoring",
-        "rules engine",
-        "reports"
+        "Canvas",
+        "Version History",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-11T16:55:00Z",
+      "openIssues": 1
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Evaluating platform for industrial applications",
+      "trajectory": "at-risk",
+      "wau": 3,
+      "topSignal": "Minimal engagement, basic Grafana plugin usage only",
       "features": [
-        "telemetry ingestion",
-        "basic monitoring"
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-08T00:00:00Z",
+      "lastActivity": "2026-04-07T11:30:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 6,
-      "topSignal": "Growing adoption for radiation testing workflows",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "Family candidate workflow testing for radiation testing operations",
       "features": [
-        "telemetry ingestion",
-        "data analysis"
+        "Family Candidates",
+        "Run Management",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-10T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-12T18:45:00Z",
+      "openIssues": 2
     },
     {
       "name": "Starpath",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Regular use for space mission planning telemetry",
+      "trajectory": "expanding",
+      "wau": 15,
+      "topSignal": "Canvas disposition comments and archive functionality for ground station network",
       "features": [
-        "telemetry monitoring",
-        "channel analysis"
+        "Canvas",
+        "Disposition History",
+        "Archive",
+        "Sharelinks"
       ],
-      "lastActivity": "2026-04-11T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T07:22:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astrolab",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Increasing usage for lunar rover development",
+      "trajectory": "stable",
+      "wau": 22,
+      "topSignal": "Shadow comparison debugging and run management for lunar rover testing",
       "features": [
-        "telemetry ingestion",
-        "family management",
-        "rules engine",
-        "visualization"
+        "Shadow Comparison",
+        "Run Management",
+        "Family Candidates",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-14T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T14:18:00Z",
+      "openIssues": 2
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Early platform testing for robotics telemetry",
+      "trajectory": "expanding",
+      "wau": 11,
+      "topSignal": "E2 debug helper system adoption for robotic arm qualification testing",
       "features": [
-        "telemetry ingestion"
+        "E2 Debug",
+        "Canvas",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-06T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T10:35:00Z",
+      "openIssues": 4
     },
     {
       "name": "Neros",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Evaluating for maritime operations monitoring",
+      "wau": 6,
+      "topSignal": "Timeseries channel settings configuration for marine robotics",
       "features": [
-        "telemetry ingestion",
-        "monitoring"
+        "Timeseries Spotlight",
+        "Channel Settings",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-09T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-12T09:52:00Z",
+      "openIssues": 1
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 42,
-      "topSignal": "Mature deployment for drone fleet telemetry",
+      "wau": 45,
+      "topSignal": "OOM error reporting improvements and admin tooling for drone delivery fleet scaling",
       "features": [
-        "telemetry ingestion",
-        "fleet monitoring",
-        "rules engine",
-        "advanced analytics"
+        "Error Reporting",
+        "Admin CLI",
+        "Org Rate Limits",
+        "Grafana Plugin",
+        "Sift Edge"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
+      "lastActivity": "2026-04-13T21:07:00Z",
       "openIssues": 1
     },
     {
       "name": "PlantD",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 3,
-      "topSignal": "Using platform for load testing observability",
+      "trajectory": "at-risk",
+      "wau": 2,
+      "topSignal": "Very low engagement, single user exploring basic features",
       "features": [
-        "telemetry ingestion",
-        "performance monitoring"
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-12T00:00:00Z",
+      "lastActivity": "2026-04-05T13:42:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 1,
-      "topSignal": "Very low activity, requires outreach",
+      "trajectory": "expanding",
+      "wau": 10,
+      "topSignal": "Canvas make copy functionality and version improvements for UAV testing",
       "features": [
-        "basic telemetry"
+        "Canvas",
+        "Make Copy",
+        "Version Improvements",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-03-22T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T08:15:00Z",
+      "openIssues": 3
     },
     {
       "name": "First Resonance",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Integration with manufacturing workflows",
+      "trajectory": "expanding",
+      "wau": 17,
+      "topSignal": "Permissions management and family creation workflows for manufacturing MES integration",
       "features": [
-        "telemetry ingestion",
-        "workflow management"
+        "Permissions",
+        "Family Management",
+        "Ingestion Config",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-10T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-13T16:28:00Z",
+      "openIssues": 2
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Testing for manufacturing telemetry use cases",
+      "wau": 8,
+      "topSignal": "Asset grouping and channel metadata exploration for smart factory telemetry",
       "features": [
-        "telemetry ingestion",
-        "basic monitoring"
+        "Asset Grouping",
+        "Channel Metadata",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-08T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-12T11:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Growing adoption for asteroid mining spacecraft telemetry",
+      "wau": 20,
+      "topSignal": "Canvas block metadata and version control for asteroid mining spacecraft development",
       "features": [
-        "telemetry ingestion",
-        "channel management",
-        "rules engine"
+        "Canvas",
+        "Block Metadata",
+        "Version Control",
+        "Family Candidates",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-14T09:03:00Z",
+      "openIssues": 2
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 3,
-      "topSignal": "Initial platform evaluation",
+      "wau": 5,
+      "topSignal": "Canary deployment monitoring and alarm configuration testing",
       "features": [
-        "telemetry ingestion"
+        "Canary Deployments",
+        "Alarms",
+        "Grafana Plugin"
       ],
-      "lastActivity": "2026-04-05T00:00:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-11T15:38:00Z",
+      "openIssues": 1
     }
   ],
   "decisions": [
     {
-      "title": "Approve Family Rules DAG implementation approach",
-      "context": "ENG-9821 & ENG-9822 represent core infrastructure for rule evaluation with families. This is foundational for 'Embed Deeper' pillar - enabling complex multi-asset rule logic. Need architectural approval before implementation continues.",
-      "owner": "Engineering Lead",
-      "deadline": "2026-04-18",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Unblocks family-based rule evaluation which is critical for multi-asset customers. Aligns with Canvas roadmap and Python Rules integration.",
-        "against": "Adds complexity to rule engine. May need performance testing before committing to architecture."
-      }
-    },
-    {
-      "title": "Prioritize GovCloud deployment vs commercial features",
-      "context": "ENG-9939 (Windmill in GovCloud), ENG-5980 (gov to klu migration), ENG-10225/10226 (FedRAMP compliance) require focused effort. Need to decide resource allocation vs Explore V2 timeline.",
-      "owner": "Product Strategy",
-      "deadline": "2026-04-16",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "GovCloud represents new market segment and revenue stream. FedRAMP compliance is competitive moat.",
-        "against": "Diverts engineering resources from core product evolution. May delay Explore V2 and Canvas enhancements."
-      }
-    },
-    {
-      "title": "Define production readiness criteria for Family Versions",
-      "context": "DES-121, DES-113, DES-55 show UX work on families. ENG-9525 enables historic family versions. Multiple threads suggest families approaching GA, but no clear launch gate defined.",
-      "owner": "Product Manager - Core Platform",
+      "title": "Prioritize Canvas GA readiness over Explore V2 enhancements",
+      "context": "30+ Canvas tickets active (versioning, disposition, sharelinks, archive, markdown). Canvas is critical to 'Embed Deeper' pillar but needs consolidation to avoid feature sprawl. Explore V2 work (family candidates, hovercards) is incremental.",
+      "owner": "Head of Product",
       "deadline": "2026-04-21",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Families are foundational for multi-asset workflows. Clear criteria ensures quality launch and drives Decisions Captured metric.",
-        "against": "May reveal gaps that delay launch. Feature is already in use by some customers."
+        "for": "Canvas directly drives 'Decisions Captured Per Customer' NSM. High signal density in tickets suggests customer pull. GA unlock enables enterprise adoption.",
+        "against": "Explore V2 improvements (ENG-10214, ENG-9924, ENG-10241) impact daily analyst workflows. Delaying risks retention in core product (Nail the Core pillar)."
       }
     },
     {
-      "title": "Approve observability infrastructure investment (ENG-10175)",
-      "context": "Production load testing observability gaps identified. Relates to 'Nail the Core' - system reliability and performance at scale. Investment needed but competes with feature work.",
-      "owner": "Engineering Manager",
+      "title": "Consolidate SCIM security work into dedicated sprint",
+      "context": "ENG-9785 (block email invites) and ENG-9784 (block admin deactivation) are SCIM-managed org hardening. Scattered execution risks incomplete security posture.",
+      "owner": "Engineering Manager - Platform",
+      "deadline": "2026-04-18",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Security work must be atomic. Bundling reduces context switching and ensures complete SCIM compliance (Build the Moat).",
+        "against": "Current in-flight work may already be near completion. Bundling could delay individual ticket delivery."
+      }
+    },
+    {
+      "title": "Deploy Sift Edge buffer flush metrics to production",
+      "context": "ENG-9561 adds buffer flush rate metrics. Edge is a 2026 strategic product. Observability gaps risk customer incidents and reduce signal quality for 'Ask SIFT'.",
+      "owner": "Edge Product Lead",
+      "deadline": "2026-04-25",
+      "status": "blocked",
+      "blockedBy": "ENG-10249 (FF for worker deployments) and ENG-10199 (Canary + Alarms) must complete first to ensure safe rollout",
+      "arguments": {
+        "for": "Metrics unblock proactive Edge support, reducing churn risk. Aligns with Signal>Evidence>Decision by surfacing edge-layer signals.",
+        "against": "Premature deployment without canary infrastructure (ENG-10199) could cause production incidents."
+      }
+    },
+    {
+      "title": "Defer Grafana plugin 'Group By' feature",
+      "context": "ENG-8735 adds asset combination grouping to Grafana plugin. Low strategic alignment—Grafana is not a core 2026 product focus.",
+      "owner": "Head of Product",
       "deadline": "2026-04-17",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Critical for production reliability and customer trust. Prevents future incidents that could damage reputation.",
-        "against": "Doesn't directly increase Decisions Captured. Opportunity cost vs customer-facing features."
+        "for": "Engineering capacity better spent on Canvas, Edge, or Python Rules. Grafana is peripheral to NSM and pillars.",
+        "against": "May be customer-requested. Deferring could signal deprioritization of existing integrations (Embed Deeper risk)."
       }
     },
     {
-      "title": "Resolve UX friction in Run creation workflow (DES-163)",
-      "context": "Asset-like support for Runs needed. Current workflow may be barrier to user adoption. Impacts 'Signal>Evidence>Decision' flow - if users can't easily create runs, signal processing suffers.",
-      "owner": "Design Lead",
-      "deadline": "2026-04-22",
-      "status": "blocked",
-      "blockedBy": "Need user research on current pain points and proposed solutions",
+      "title": "Establish Canvas metadata standards before block proliferation",
+      "context": "ENG-10094 (Canvas block metadata 1-pager) suggests undefined block schema. Canvas has 8+ feature tickets in flight. Metadata chaos will compound.",
+      "owner": "Canvas Tech Lead",
+      "deadline": "2026-04-16",
+      "status": "open",
+      "blockedBy": "",
       "arguments": {
-        "for": "Improved UX directly impacts user engagement and Decisions Captured metric. Low-hanging fruit for adoption.",
-        "against": "May be addressing symptoms rather than root cause. Need data on actual user drop-off."
+        "for": "Schema standardization now prevents technical debt. Enables future AI features (Ask SIFT integration) and version control (ENG-9442).",
+        "against": "Slows current feature velocity. Team may already have implicit standards."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "847",
-      "delta": "+12%"
+      "value": "Unknown",
+      "delta": "No signal in data"
     },
     "pillars": [
       {
@@ -2674,21 +2712,15 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Query Engine Performance (p95 latency)",
-            "current": "2.3s",
-            "target": "1.8s",
+            "name": "Explore V2 MAU",
+            "current": "Unknown",
+            "target": "Unknown",
             "status": "at_risk"
           },
           {
-            "name": "Rule Evaluation Error Rate",
-            "current": "0.8%",
-            "target": "0.3%",
-            "status": "at_risk"
-          },
-          {
-            "name": "Production Uptime",
-            "current": "99.7%",
-            "target": "99.9%",
+            "name": "Family Candidates adoption",
+            "current": "3 tickets active (ENG-9924, ENG-10214, ENG-10241)",
+            "target": "GA",
             "status": "on_track"
           }
         ]
@@ -2698,22 +2730,16 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Family Rules Adoption",
-            "current": "23%",
-            "target": "40%",
+            "name": "Canvas GA readiness",
+            "current": "8 feature tickets + metadata design",
+            "target": "GA by Q2",
             "status": "on_track"
           },
           {
-            "name": "Canvas Active Users",
-            "current": "156",
-            "target": "200",
+            "name": "Sift Edge production deployments",
+            "current": "Metrics instrumentation in progress",
+            "target": "5 production customers",
             "status": "on_track"
-          },
-          {
-            "name": "Python Rules in Production",
-            "current": "89",
-            "target": "150",
-            "status": "at_risk"
           }
         ]
       },
@@ -2722,22 +2748,16 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "GovCloud Certifications Complete",
-            "current": "67%",
-            "target": "100%",
+            "name": "SCIM security hardening",
+            "current": "2 tickets active (ENG-9785, ENG-9784)",
+            "target": "Complete",
             "status": "on_track"
           },
           {
-            "name": "Advanced Analytics Features Shipped",
-            "current": "4",
-            "target": "6",
+            "name": "Admin CLI tooling",
+            "current": "ENG-10196 active",
+            "target": "Beta",
             "status": "on_track"
-          },
-          {
-            "name": "Edge Deployment Customers",
-            "current": "3",
-            "target": "8",
-            "status": "at_risk"
           }
         ]
       }
@@ -2757,11 +2777,12 @@
       "freeHours": 8,
       "meetingHours": 32
     },
-    "weekSummary": "Heavy meeting load (80% of work hours). Focus time fragmented across mornings. Three 1:1s with eng leads on GovCloud trade-offs. Two decision-making sessions needed but not yet scheduled.",
+    "weekSummary": "High meeting load (80% time). Canvas proliferation and SCIM security work suggest need for dedicated decision-making sessions.",
     "alerts": [
-      "Only 20% focus time this week - below 30% target for strategic work",
-      "No dedicated time blocked for product strategy review before Q2 planning",
-      "Back-to-back meetings Wed PM preventing deep work on Family GA criteria"
+      "30+ engineering tickets in signals—potential thrash risk",
+      "No NSM data in signals—instrumentation gap?",
+      "Canvas metadata standards undefined with 8+ features in flight",
+      "SCIM work fragmented across teams—security risk"
     ]
   },
   "timeline": {
@@ -2770,28 +2791,28 @@
         "label": "This Week (Apr 14-18)",
         "events": [
           {
-            "title": "GovCloud resource allocation decision",
+            "title": "Decision: Canvas metadata standards",
             "date": "2026-04-16",
             "time": "14:00",
             "type": "deadline",
-            "description": "Finalize eng allocation between GovCloud compliance work and Explore V2 features",
-            "owner": "Product Strategy"
+            "description": "Finalize ENG-10094 1-pager to prevent block schema chaos",
+            "owner": "Canvas Tech Lead"
           },
           {
-            "title": "Observability investment approval gate",
+            "title": "Decision: Defer Grafana Group By",
             "date": "2026-04-17",
             "time": "10:00",
-            "type": "gate",
-            "description": "Engineering review of ENG-10175 scope and timeline impact",
-            "owner": "Engineering Manager"
+            "type": "deadline",
+            "description": "Confirm ENG-8735 deprioritization to focus on strategic products",
+            "owner": "Head of Product"
           },
           {
-            "title": "Family Rules DAG architecture review",
+            "title": "Gate: SCIM sprint consolidation",
             "date": "2026-04-18",
-            "time": "15:00",
-            "type": "deadline",
-            "description": "Approve or revise approach for ENG-9821/9822 before sprint commitment",
-            "owner": "Engineering Lead"
+            "time": "16:00",
+            "type": "gate",
+            "description": "Bundle ENG-9785 and ENG-9784 into atomic security sprint",
+            "owner": "Eng Manager - Platform"
           }
         ]
       },
@@ -2799,57 +2820,57 @@
         "label": "Next Week (Apr 21-25)",
         "events": [
           {
-            "title": "Family Versions GA criteria defined",
+            "title": "Decision: Canvas vs Explore V2 prioritization",
             "date": "2026-04-21",
-            "time": "16:00",
-            "type": "milestone",
-            "description": "Document production readiness checklist for family features launch",
-            "owner": "Product Manager - Core Platform"
-          },
-          {
-            "title": "UX research synthesis: Run creation",
-            "date": "2026-04-22",
-            "time": "11:00",
-            "type": "meeting",
-            "description": "Review DES-163 research findings and unblock design decision",
-            "owner": "Design Lead"
-          },
-          {
-            "title": "SmallSat EU booth design finalized",
-            "date": "2026-04-23",
-            "time": "17:00",
+            "time": "09:00",
             "type": "deadline",
-            "description": "GTM-113 completion for event presence",
-            "owner": "Marketing"
+            "description": "Choose between Canvas GA push or Explore V2 incremental improvements",
+            "owner": "Head of Product"
+          },
+          {
+            "title": "Milestone: Sift Edge metrics to production",
+            "date": "2026-04-25",
+            "time": "12:00",
+            "type": "milestone",
+            "description": "Deploy ENG-9561 after ENG-10249 and ENG-10199 complete",
+            "owner": "Edge Product Lead"
+          },
+          {
+            "title": "Gate: Canvas GA checklist review",
+            "date": "2026-04-25",
+            "time": "15:00",
+            "type": "gate",
+            "description": "Audit versioning, disposition, sharelinks, archive completeness",
+            "owner": "Canvas PM"
           }
         ]
       },
       {
-        "label": "Month Ahead (Apr 26-May 14)",
+        "label": "May 2026",
         "events": [
           {
-            "title": "Q2 Strategy Review & Planning",
-            "date": "2026-04-29",
-            "time": "09:00",
-            "type": "meeting",
-            "description": "Review pillar progress, adjust priorities based on April decisions",
-            "owner": "Product Strategy"
-          },
-          {
-            "title": "FedRAMP compliance checkpoint",
-            "date": "2026-05-05",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Review ENG-10225/10226 progress toward certification",
-            "owner": "Engineering Lead"
-          },
-          {
-            "title": "Explore V2 beta launch gate",
-            "date": "2026-05-12",
-            "time": "10:00",
+            "title": "Milestone: SCIM hardening complete",
+            "date": "2026-05-02",
+            "time": "17:00",
             "type": "milestone",
-            "description": "Decision point for limited beta release based on feature completeness",
-            "owner": "Product Manager - Analytics"
+            "description": "ENG-9785 and ENG-9784 deployed to production",
+            "owner": "Platform Team"
+          },
+          {
+            "title": "Gate: NSM instrumentation audit",
+            "date": "2026-05-09",
+            "time": "10:00",
+            "type": "gate",
+            "description": "Identify why Decisions Captured Per Customer has no signal in data",
+            "owner": "Analytics Lead"
+          },
+          {
+            "title": "Milestone: Canvas GA launch",
+            "date": "2026-05-30",
+            "time": "09:00",
+            "type": "milestone",
+            "description": "Assuming Apr 21 decision favors Canvas prioritization",
+            "owner": "Canvas PM"
           }
         ]
       }
