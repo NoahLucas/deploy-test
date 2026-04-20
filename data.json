@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-20T04:10:08.871Z",
+  "fetchedAt": "2026-04-20T15:34:33.776Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,102 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-10489: Setup auth for Reflect Orbital",
+      "priority": "HIGH",
+      "state": "Ready for Work",
+      "assignee": "Jack Konyan",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T07:05:09.013Z",
+      "evidence": [
+        {
+          "label": "ENG-10489",
+          "url": "https://linear.app/siftstack/issue/ENG-10489/setup-auth-for-reflect-orbital",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9963: Split GeoMaps and ScatterPlot out into their own service workers",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T06:39:52.790Z",
+      "evidence": [
+        {
+          "label": "ENG-9963",
+          "url": "https://linear.app/siftstack/issue/ENG-9963/split-geomaps-and-scatterplot-out-into-their-own-service-workers",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10520: Implement frontend for Thinking Event",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T06:36:30.124Z",
+      "evidence": [
+        {
+          "label": "ENG-10520",
+          "url": "https://linear.app/siftstack/issue/ENG-10520/implement-frontend-for-thinking-event",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10007: Axes dropzones on Timeseries",
+      "priority": "URGENT",
+      "state": "In Verification",
+      "assignee": "evan@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T06:23:27.193Z",
+      "evidence": [
+        {
+          "label": "ENG-10007",
+          "url": "https://linear.app/siftstack/issue/ENG-10007/axes-dropzones-on-timeseries",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9807: Calc channel cache key missing version — stale data after edit",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T04:29:55.788Z",
+      "evidence": [
+        {
+          "label": "ENG-9807",
+          "url": "https://linear.app/siftstack/issue/ENG-9807/calc-channel-cache-key-missing-version-stale-data-after-edit",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10357: Show CC version in legend and channel list to surface stale data",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-04-20T04:29:55.788Z",
+      "evidence": [
+        {
+          "label": "ENG-10357",
+          "url": "https://linear.app/siftstack/issue/ENG-10357/show-cc-version-in-legend-and-channel-list-to-surface-stale-data",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-10055: Update parquet imports timestamp/time column parsing server-side",
@@ -21,22 +117,6 @@
         {
           "label": "ENG-10055",
           "url": "https://linear.app/siftstack/issue/ENG-10055/update-parquet-imports-timestamptime-column-parsing-server-side",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10520: Implement frontend for Thinking Event",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "assignee": "evan@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-20T02:57:37.344Z",
-      "evidence": [
-        {
-          "label": "ENG-10520",
-          "url": "https://linear.app/siftstack/issue/ENG-10520/implement-frontend-for-thinking-event",
           "source": "linear"
         }
       ]
@@ -404,83 +484,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-7771: Ability to publish reusable CC's from Explore",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-18T01:21:12.858Z",
-      "evidence": [
-        {
-          "label": "ENG-7771",
-          "url": "https://linear.app/siftstack/issue/ENG-7771/ability-to-publish-reusable-ccs-from-explore",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9805: S3 throttling retry (rate limiter + channel retry + tuned RetryConfig)",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-18T00:46:34.678Z",
-      "evidence": [
-        {
-          "label": "ENG-9805",
-          "url": "https://linear.app/siftstack/issue/ENG-9805/s3-throttling-retry-rate-limiter-channel-retry-tuned-retryconfig",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9806: Integrated post-commit validation & auto-rollback for compaction",
-      "priority": "HIGH",
-      "state": "Ready for Work",
-      "team": "Engineering",
-      "timestamp": "2026-04-18T00:46:34.630Z",
-      "evidence": [
-        {
-          "label": "ENG-9806",
-          "url": "https://linear.app/siftstack/issue/ENG-9806/integrated-post-commit-validation-and-auto-rollback-for-compaction",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9904: Schedule and Automate the Compaction Job",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "adam@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-18T00:46:34.573Z",
-      "evidence": [
-        {
-          "label": "ENG-9904",
-          "url": "https://linear.app/siftstack/issue/ENG-9904/schedule-and-automate-the-compaction-job",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10130: Keep Duplicate Data points",
-      "priority": "HIGH",
-      "state": "In Verification",
-      "assignee": "adam@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-18T00:46:34.457Z",
-      "evidence": [
-        {
-          "label": "ENG-10130",
-          "url": "https://linear.app/siftstack/issue/ENG-10130/keep-duplicate-data-points",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -489,10 +492,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 529
-            },
             {
               "setId": "",
               "value": 576
@@ -539,7 +538,11 @@
             },
             {
               "setId": "",
-              "value": 806
+              "value": 808
+            },
+            {
+              "setId": "",
+              "value": 110
             }
           ]
         ],
@@ -547,7 +550,7 @@
           [
             {
               "setId": "",
-              "value": 2590
+              "value": 2532
             }
           ]
         ],
@@ -561,7 +564,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -573,7 +575,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     },
@@ -582,10 +585,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 368
-            },
             {
               "setId": "",
               "value": 134
@@ -684,7 +683,7 @@
             },
             {
               "setId": "",
-              "value": 426
+              "value": 427
             },
             {
               "setId": "",
@@ -704,7 +703,11 @@
             },
             {
               "setId": "",
-              "value": 117
+              "value": 125
+            },
+            {
+              "setId": "",
+              "value": 110
             }
           ]
         ],
@@ -712,7 +715,7 @@
           [
             {
               "setId": "",
-              "value": 1640
+              "value": 1615
             }
           ]
         ],
@@ -726,7 +729,6 @@
           }
         ],
         "xValues": [
-          "2026-03-20",
           "2026-03-21",
           "2026-03-22",
           "2026-03-23",
@@ -756,7 +758,8 @@
           "2026-04-16",
           "2026-04-17",
           "2026-04-18",
-          "2026-04-19"
+          "2026-04-19",
+          "2026-04-20"
         ]
       }
     },
@@ -765,10 +768,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 67
-            },
             {
               "setId": "",
               "value": 94
@@ -815,7 +814,11 @@
             },
             {
               "setId": "",
-              "value": 175
+              "value": 177
+            },
+            {
+              "setId": "",
+              "value": 6
             }
           ]
         ],
@@ -823,7 +826,7 @@
           [
             {
               "setId": "",
-              "value": 1689
+              "value": 1630
             }
           ]
         ],
@@ -837,7 +840,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -849,7 +851,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     },
@@ -858,7 +861,6 @@
       "data": {
         "series": [
           [
-            5718.541621262459,
             5688.277424148607,
             5305.830980952382,
             5307.688959770115,
@@ -869,15 +871,16 @@
             5158.374008498584,
             6018.417503856041,
             6520.919033163265,
-            8395.529253196932,
-            12730.85891022444
+            8374.112104591837,
+            13166.245326732673,
+            5721.313357142857
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 30827.42165148515
+              "value": 30099.900631205674
             }
           ]
         ],
@@ -888,7 +891,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19T00:00:00",
           "2026-01-26T00:00:00",
           "2026-02-02T00:00:00",
           "2026-02-09T00:00:00",
@@ -900,7 +902,8 @@
           "2026-03-23T00:00:00",
           "2026-03-30T00:00:00",
           "2026-04-06T00:00:00",
-          "2026-04-13T00:00:00"
+          "2026-04-13T00:00:00",
+          "2026-04-20T00:00:00"
         ]
       }
     },
@@ -909,10 +912,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 340
-            },
             {
               "setId": "",
               "value": 355
@@ -960,13 +959,13 @@
             {
               "setId": "",
               "value": 461
+            },
+            {
+              "setId": "",
+              "value": 36
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 39
-            },
             {
               "setId": "",
               "value": 48
@@ -1014,13 +1013,13 @@
             {
               "setId": "",
               "value": 91
+            },
+            {
+              "setId": "",
+              "value": 2
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 39
-            },
             {
               "setId": "",
               "value": 29
@@ -1068,13 +1067,13 @@
             {
               "setId": "",
               "value": 62
-            }
-          ],
-          [
+            },
             {
               "setId": "",
               "value": 0
-            },
+            }
+          ],
+          [
             {
               "setId": "",
               "value": 1
@@ -1122,6 +1121,10 @@
             {
               "setId": "",
               "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ]
         ],
@@ -1129,19 +1132,19 @@
           [
             {
               "setId": "",
-              "value": 1123
+              "value": 1111
             }
           ],
           [
             {
               "setId": "",
-              "value": 297
+              "value": 290
             }
           ],
           [
             {
               "setId": "",
-              "value": 270
+              "value": 257
             }
           ],
           [
@@ -1176,7 +1179,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -1188,7 +1190,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     },
@@ -1399,7 +1402,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -1411,7 +1413,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     },
@@ -1420,10 +1423,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 102
-            },
             {
               "setId": "",
               "value": 105
@@ -1471,13 +1470,13 @@
             {
               "setId": "",
               "value": 14
+            },
+            {
+              "setId": "",
+              "value": 1
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 5
-            },
             {
               "setId": "",
               "value": 11
@@ -1525,13 +1524,13 @@
             {
               "setId": "",
               "value": 1
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 3
-            },
             {
               "setId": "",
               "value": 1
@@ -1579,13 +1578,13 @@
             {
               "setId": "",
               "value": 6
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 193
-            },
             {
               "setId": "",
               "value": 194
@@ -1632,7 +1631,11 @@
             },
             {
               "setId": "",
-              "value": 303
+              "value": 304
+            },
+            {
+              "setId": "",
+              "value": 4
             }
           ]
         ],
@@ -1640,25 +1643,25 @@
           [
             {
               "setId": "",
-              "value": 359
+              "value": 346
             }
           ],
           [
             {
               "setId": "",
-              "value": 68
+              "value": 67
             }
           ],
           [
             {
               "setId": "",
-              "value": 30
+              "value": 28
             }
           ],
           [
             {
               "setId": "",
-              "value": 817
+              "value": 804
             }
           ]
         ],
@@ -1687,7 +1690,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -1699,7 +1701,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     },
@@ -1708,10 +1711,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 26
-            },
             {
               "setId": "",
               "value": 109
@@ -1759,13 +1758,13 @@
             {
               "setId": "",
               "value": 13
+            },
+            {
+              "setId": "",
+              "value": 0
             }
           ],
           [
-            {
-              "setId": "",
-              "value": 80
-            },
             {
               "setId": "",
               "value": 147
@@ -1813,56 +1812,6 @@
             {
               "setId": "",
               "value": 9
-            }
-          ],
-          [
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
-            },
-            {
-              "setId": "",
-              "value": 0
             },
             {
               "setId": "",
@@ -1872,8 +1821,58 @@
           [
             {
               "setId": "",
-              "value": 617
+              "value": 0
             },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            },
+            {
+              "setId": "",
+              "value": 0
+            }
+          ],
+          [
             {
               "setId": "",
               "value": 737
@@ -1920,7 +1919,11 @@
             },
             {
               "setId": "",
-              "value": 54
+              "value": 57
+            },
+            {
+              "setId": "",
+              "value": 2
             }
           ],
           [
@@ -1982,13 +1985,13 @@
           [
             {
               "setId": "",
-              "value": 936
+              "value": 910
             }
           ],
           [
             {
               "setId": "",
-              "value": 1863
+              "value": 1783
             }
           ],
           [
@@ -2000,7 +2003,7 @@
           [
             {
               "setId": "",
-              "value": 7890
+              "value": 7278
             }
           ],
           [
@@ -2040,7 +2043,6 @@
           }
         ],
         "xValues": [
-          "2026-01-19",
           "2026-01-26",
           "2026-02-02",
           "2026-02-09",
@@ -2052,7 +2054,8 @@
           "2026-03-23",
           "2026-03-30",
           "2026-04-06",
-          "2026-04-13"
+          "2026-04-13",
+          "2026-04-20"
         ]
       }
     }
@@ -2063,10 +2066,10 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Data compaction automation and S3 throttling mitigation in production",
-      "linearActive": 4,
+      "topConcern": "Annotation workflow complexity expanding across timeseries, time settings, and workspace-level alignment.",
+      "linearActive": 6,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-20T09:23:00Z",
+      "slackLastSeen": "2026-04-20T09:15:00Z",
       "fourPAge": "2d",
       "meetingsToday": 3
     },
@@ -2074,11 +2077,11 @@
       "name": "Kenn",
       "role": "PM",
       "squad": "Data Access & Governance",
-      "status": "shipping",
-      "topConcern": "Channel schema hash migration removing channel ID dependencies across services",
-      "linearActive": 3,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-04-20T10:45:00Z",
+      "status": "attention",
+      "topConcern": "Channel ID deprecation rollout across services needs coordination (influx, Flink, flow cleanup).",
+      "linearActive": 4,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-20T08:45:00Z",
       "fourPAge": "1d",
       "meetingsToday": 2
     },
@@ -2087,10 +2090,10 @@
       "role": "PM",
       "squad": "Canvas & Workflows",
       "status": "shipping",
-      "topConcern": "Annotations workflow UX improvements and relative time input design completion",
-      "linearActive": 8,
+      "topConcern": "Chat product expansion with file upload research and markdown/lexical editor upgrades in flight.",
+      "linearActive": 7,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-20T11:02:00Z",
+      "slackLastSeen": "2026-04-20T10:30:00Z",
       "fourPAge": "0d",
       "meetingsToday": 4
     },
@@ -2098,24 +2101,24 @@
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "PyRunner pod availability issues persisting in production environment",
-      "linearActive": 2,
+      "status": "blocked",
+      "topConcern": "PyRunner pod availability issue in prod blocking compute workloads, needs urgent resolution.",
+      "linearActive": 3,
       "linearBlocked": 1,
-      "slackLastSeen": "2026-04-20T08:15:00Z",
+      "slackLastSeen": "2026-04-20T07:20:00Z",
       "fourPAge": "3d",
-      "meetingsToday": 2
+      "meetingsToday": 1
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
-      "status": "shipping",
-      "topConcern": "Chat infrastructure work with thinking events, markdown, and E2E testing automation",
-      "linearActive": 6,
-      "linearBlocked": 0,
-      "slackLastSeen": "2026-04-20T10:30:00Z",
-      "fourPAge": "1d",
+      "status": "attention",
+      "topConcern": "Team capacity spread thin across viz workers refactor, cache staleness bugs, and chat feature velocity.",
+      "linearActive": 12,
+      "linearBlocked": 1,
+      "slackLastSeen": "2026-04-20T11:00:00Z",
+      "fourPAge": "0d",
       "meetingsToday": 5
     },
     {
@@ -2123,577 +2126,584 @@
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Bifrost LLM gateway deployment for internal tooling and OFPS webworker support",
+      "topConcern": "Reflect Orbital auth setup and E2E testing automation unlocking customer demo readiness.",
       "linearActive": 3,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-20T09:50:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 3
+      "meetingsToday": 2
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "Data infrastructure reliability with S3 throttling and compaction automation needs review",
+      "attention": "Product direction balancing chat/agent features vs core platform stability and data governance migration.",
       "recentTopics": [
-        "Production stability priorities",
-        "Chat product evolution strategy",
-        "Customer-facing annotation workflows"
+        "Reflect Orbital partnership readiness",
+        "Chat product strategy and file ingestion",
+        "Customer escalation on data staleness issues"
       ],
-      "lastSlackToNoah": "2026-04-19T16:20:00Z",
+      "lastSlackToNoah": "2026-04-19T16:45:00Z",
       "pendingDecisions": [
-        "Resource allocation for PyRunner prod issues vs new chat features",
-        "Timeline for workspace-level data alignment release"
+        "Prioritize PyRunner prod fix vs new feature work",
+        "Approve channel ID deprecation timeline impact on customers"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Channel ID deprecation architecture requires careful migration coordination across services",
+      "attention": "Architecture migration from channel IDs to schema hashes requires careful sequencing across multiple services.",
       "recentTopics": [
-        "Schema hash migration strategy",
-        "Compaction job validation and rollback design",
-        "LLM gateway infrastructure patterns"
+        "Service worker refactoring for GeoMaps/ScatterPlot performance",
+        "Bifrost LLM gateway deployment for tooling",
+        "Cache invalidation strategy for calc channel versioning"
       ],
-      "lastSlackToNoah": "2026-04-20T07:45:00Z",
+      "lastSlackToNoah": "2026-04-20T08:10:00Z",
       "pendingDecisions": [
-        "Bifrost deployment timeline for production use",
-        "E2E testing coverage requirements before chat GA"
+        "OFPS webworker implementation approach",
+        "E2E testing coverage scope for chat-cli automation"
       ]
     }
   ],
   "customers": [
     {
       "name": "K2 Space",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 12,
-      "topSignal": "Active development on time-series alignment and annotation features for mission telemetry analysis",
+      "wau": 47,
+      "topSignal": "Heavy use of time-series analysis for spacecraft systems monitoring",
       "features": [
-        "annotations",
-        "time_alignment",
-        "data_ingestion",
-        "dashboards"
+        "Timeseries",
+        "Annotations",
+        "Rules",
+        "Live Mode",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-18T14:32:00Z",
+      "lastActivity": "2026-04-19T18:23:00Z",
       "openIssues": 2
     },
     {
       "name": "Astranis",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 28,
-      "topSignal": "Heavy usage of S3 data compaction and Parquet imports for satellite telemetry processing",
+      "wau": 89,
+      "topSignal": "Extensive satellite telemetry analysis with GeoMaps integration",
       "features": [
-        "s3_integration",
-        "parquet_import",
-        "data_compaction",
-        "rules_engine",
-        "influx_ingestion"
+        "GeoMaps",
+        "Timeseries",
+        "ScatterPlot",
+        "Annotations",
+        "Rules"
       ],
-      "lastActivity": "2026-04-19T16:45:00Z",
+      "lastActivity": "2026-04-20T09:15:00Z",
       "openIssues": 1
     },
     {
       "name": "Reliable Robotics",
       "tier": "enterprise",
       "trajectory": "expanding",
-      "wau": 34,
-      "topSignal": "Implementing automated E2E testing infrastructure and live mode telemetry monitoring",
+      "wau": 62,
+      "topSignal": "Active development on automation with AI Agent and chat features",
       "features": [
-        "live_mode",
-        "automated_testing",
-        "chat_interface",
-        "histograms",
-        "comparative_analysis"
+        "Agent",
+        "Chat",
+        "Timeseries",
+        "Calculated Channels",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-20T09:15:00Z",
+      "lastActivity": "2026-04-20T11:42:00Z",
       "openIssues": 3
     },
     {
       "name": "Varda",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Building reusable calculated channels for re-entry vehicle telemetry analysis",
+      "wau": 34,
+      "topSignal": "Growing usage of parquet imports for re-entry vehicle data analysis",
       "features": [
-        "calculated_channels",
-        "explore_mode",
-        "annotations",
-        "time_settings"
+        "Parquet Import",
+        "Timeseries",
+        "Histogram",
+        "Rules"
       ],
-      "lastActivity": "2026-04-19T11:22:00Z",
+      "lastActivity": "2026-04-19T14:30:00Z",
       "openIssues": 1
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 15,
-      "topSignal": "Using workspace-level data alignment for multi-aircraft flight test correlation",
+      "wau": 41,
+      "topSignal": "Regular monitoring of electric aircraft test flight data",
       "features": [
-        "workspace_alignment",
-        "annotations",
-        "relative_time",
-        "dashboards"
+        "Timeseries",
+        "Annotations",
+        "Live Mode",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-17T13:40:00Z",
+      "lastActivity": "2026-04-20T08:17:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 45,
-      "topSignal": "Advanced rules engine usage with CEL syntax and histogram analysis for mission data",
+      "wau": 156,
+      "topSignal": "Large-scale telemetry processing with Flink and Rules engine",
       "features": [
-        "rules_engine",
-        "cel_expressions",
-        "histograms",
-        "data_validation",
-        "s3_integration"
+        "Rules",
+        "Timeseries",
+        "Flink Integration",
+        "Calculated Channels",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-19T15:50:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-20T10:05:00Z",
+      "openIssues": 4
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 38,
-      "topSignal": "Leveraging Flink streaming jobs and influx ingestion for launch vehicle telemetry",
+      "wau": 128,
+      "topSignal": "Mission-critical launch vehicle telemetry with workspace-level data alignment",
       "features": [
-        "flink_integration",
-        "influx_ingestion",
-        "real_time_streaming",
-        "channel_schemas"
+        "Timeseries",
+        "Data Alignment",
+        "Annotations",
+        "Rules",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-18T10:25:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-20T07:52:00Z",
+      "openIssues": 2
     },
     {
       "name": "Parallel Systems",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Early adoption with focus on live mode telemetry and relative time analysis",
+      "wau": 38,
+      "topSignal": "Increasing adoption for autonomous rail vehicle monitoring",
       "features": [
-        "live_mode",
-        "relative_time",
-        "basic_dashboards"
+        "Timeseries",
+        "GeoMaps",
+        "Live Mode",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-16T14:18:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-19T16:48:00Z",
+      "openIssues": 1
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 22,
-      "topSignal": "Developing chat-based analysis workflows and file ingestion for mission planning",
+      "wau": 29,
+      "topSignal": "Ramping up usage for spacecraft development telemetry",
       "features": [
-        "chat_interface",
-        "file_upload",
-        "markdown_support",
-        "data_ingestion"
+        "Timeseries",
+        "Annotations",
+        "Calculated Channels",
+        "Rules"
       ],
-      "lastActivity": "2026-04-20T08:30:00Z",
+      "lastActivity": "2026-04-18T13:22:00Z",
       "openIssues": 2
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 31,
-      "topSignal": "Extensive annotation usage and T-0 alignment for multi-satellite mission coordination",
+      "wau": 73,
+      "topSignal": "Steady satellite integration and test analysis workflows",
       "features": [
-        "annotations",
-        "t0_alignment",
-        "workspace_alignment",
-        "rules_display"
+        "Timeseries",
+        "Annotations",
+        "Rules",
+        "Histogram",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-19T12:05:00Z",
+      "lastActivity": "2026-04-19T11:35:00Z",
       "openIssues": 1
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Basic telemetry monitoring with parquet imports for vehicle testing",
+      "wau": 8,
+      "topSignal": "Early exploration of electric motorcycle performance data",
       "features": [
-        "parquet_import",
-        "basic_dashboards",
-        "data_ingestion"
+        "Timeseries",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-15T16:20:00Z",
+      "lastActivity": "2026-04-17T10:12:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 17,
-      "topSignal": "Building automated validation workflows with post-commit data checks",
+      "wau": 31,
+      "topSignal": "Growing usage for mission operations and coordination",
       "features": [
-        "data_validation",
-        "automated_rollback",
-        "compaction",
-        "s3_integration"
+        "Timeseries",
+        "Annotations",
+        "GeoMaps",
+        "Rules"
       ],
-      "lastActivity": "2026-04-18T17:45:00Z",
+      "lastActivity": "2026-04-20T06:45:00Z",
       "openIssues": 1
     },
     {
       "name": "Inversion Space",
       "tier": "growth",
-      "trajectory": "expanding",
-      "wau": 14,
-      "topSignal": "Implementing duplicate data handling and retry logic for re-entry telemetry",
+      "trajectory": "stable",
+      "wau": 26,
+      "topSignal": "Regular analysis of re-entry capsule telemetry",
       "features": [
-        "duplicate_handling",
-        "retry_logic",
-        "s3_throttling",
-        "data_quality"
+        "Timeseries",
+        "Annotations",
+        "Rules",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-19T09:50:00Z",
+      "lastActivity": "2026-04-19T15:28:00Z",
       "openIssues": 2
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "at-risk",
-      "wau": 3,
-      "topSignal": "Limited activity, basic dashboard usage only",
+      "wau": 5,
+      "topSignal": "Limited engagement with electric vehicle fleet monitoring",
       "features": [
-        "basic_dashboards"
+        "Timeseries",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-10T11:30:00Z",
+      "lastActivity": "2026-04-12T09:15:00Z",
       "openIssues": 1
     },
     {
       "name": "CX2",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Regular parquet data imports for flight test analysis",
+      "wau": 12,
+      "topSignal": "Evaluating platform for eVTOL flight test data",
       "features": [
-        "parquet_import",
-        "basic_dashboards",
-        "annotations"
+        "Timeseries",
+        "Annotations",
+        "GeoMaps"
       ],
-      "lastActivity": "2026-04-17T10:15:00Z",
+      "lastActivity": "2026-04-18T14:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 9,
-      "topSignal": "Exploring chat interface and markdown support for collaborative analysis",
+      "wau": 14,
+      "topSignal": "Growing interest in autonomous delivery vehicle telemetry",
       "features": [
-        "chat_interface",
-        "markdown_support",
-        "file_upload"
+        "Timeseries",
+        "Live Mode",
+        "GeoMaps"
       ],
-      "lastActivity": "2026-04-19T14:20:00Z",
+      "lastActivity": "2026-04-19T17:33:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Basic telemetry monitoring with histogram visualization",
+      "wau": 9,
+      "topSignal": "Testing energy system monitoring capabilities",
       "features": [
-        "histograms",
-        "basic_dashboards"
+        "Timeseries",
+        "Calculated Channels",
+        "Histogram"
       ],
-      "lastActivity": "2026-04-16T09:40:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-16T11:20:00Z",
+      "openIssues": 1
     },
     {
       "name": "Synnax",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 16,
-      "topSignal": "Advanced comparative analysis and adhoc comparison workflows for test data",
+      "wau": 22,
+      "topSignal": "Integration partnership for test automation workflows",
       "features": [
-        "comparative_analysis",
-        "adhoc_compare",
-        "annotations",
-        "explore_mode"
+        "Agent",
+        "Chat",
+        "Timeseries",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-20T07:55:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-20T12:08:00Z",
+      "openIssues": 2
     },
     {
       "name": "OdysAviation",
       "tier": "pilot",
-      "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Regular usage of relative time features for flight test correlation",
+      "trajectory": "expanding",
+      "wau": 11,
+      "topSignal": "Ramping up for hydrogen-electric aircraft testing",
       "features": [
-        "relative_time",
-        "live_mode",
-        "annotations"
+        "Timeseries",
+        "Annotations",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-18T13:10:00Z",
+      "lastActivity": "2026-04-19T08:42:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 2,
-      "topSignal": "Minimal engagement, last activity over 2 weeks ago",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "Exploring AI agent capabilities for automated analysis",
       "features": [
-        "basic_dashboards"
+        "Agent",
+        "Chat",
+        "Timeseries"
       ],
-      "lastActivity": "2026-04-05T15:22:00Z",
+      "lastActivity": "2026-04-15T13:55:00Z",
       "openIssues": 1
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Steady usage of data ingestion and basic visualization",
+      "wau": 6,
+      "topSignal": "Evaluating radiation monitoring and visualization",
       "features": [
-        "data_ingestion",
-        "parquet_import",
-        "basic_dashboards"
+        "Timeseries",
+        "Histogram",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-17T11:35:00Z",
+      "lastActivity": "2026-04-17T16:30:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 18,
-      "topSignal": "Building LLM-powered analysis workflows with bifrost gateway integration",
+      "wau": 28,
+      "topSignal": "Increasing usage for satellite ground station operations",
       "features": [
-        "llm_gateway",
-        "chat_interface",
-        "automated_testing",
-        "markdown_support"
+        "Timeseries",
+        "GeoMaps",
+        "Annotations",
+        "Rules"
       ],
-      "lastActivity": "2026-04-19T16:30:00Z",
-      "openIssues": 2
+      "lastActivity": "2026-04-20T10:25:00Z",
+      "openIssues": 1
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 13,
-      "topSignal": "Regular annotation and rule-based analysis for rover telemetry",
+      "wau": 35,
+      "topSignal": "Regular lunar rover telemetry analysis and testing",
       "features": [
-        "annotations",
-        "rules_engine",
-        "cel_expressions",
-        "dashboards"
+        "Timeseries",
+        "GeoMaps",
+        "Annotations",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-18T12:48:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-19T12:10:00Z",
+      "openIssues": 2
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
-      "trajectory": "expanding",
-      "wau": 8,
-      "topSignal": "Growing usage of calculated channels and explore mode for robotic systems",
+      "trajectory": "stable",
+      "wau": 10,
+      "topSignal": "Early-stage robotic systems telemetry evaluation",
       "features": [
-        "calculated_channels",
-        "explore_mode",
-        "annotations"
+        "Timeseries",
+        "Live Mode",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-19T10:25:00Z",
+      "lastActivity": "2026-04-18T09:38:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
-      "trajectory": "stable",
+      "trajectory": "at-risk",
       "wau": 4,
-      "topSignal": "Basic parquet import usage for periodic analysis",
+      "topSignal": "Minimal engagement with maritime autonomy telemetry",
       "features": [
-        "parquet_import",
-        "basic_dashboards"
+        "Timeseries",
+        "GeoMaps"
       ],
-      "lastActivity": "2026-04-14T14:50:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-10T14:22:00Z",
+      "openIssues": 2
     },
     {
       "name": "Zipline",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 42,
-      "topSignal": "High-volume S3 integration with automated compaction for drone fleet telemetry",
+      "wau": 94,
+      "topSignal": "High-volume drone delivery fleet monitoring with live data",
       "features": [
-        "s3_integration",
-        "data_compaction",
-        "automated_scheduling",
-        "retry_logic",
-        "live_mode"
+        "Timeseries",
+        "GeoMaps",
+        "Live Mode",
+        "Rules",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-20T06:40:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-20T11:18:00Z",
+      "openIssues": 3
     },
     {
       "name": "PlantD",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Regular histogram and visualization usage for system monitoring",
+      "wau": 8,
+      "topSignal": "Testing load generation and performance monitoring",
       "features": [
-        "histograms",
-        "basic_dashboards",
-        "annotations"
+        "Timeseries",
+        "Histogram",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-16T15:15:00Z",
+      "lastActivity": "2026-04-16T15:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "expanding",
-      "wau": 7,
-      "topSignal": "Increasing engagement with UI improvements and file ingestion features",
+      "wau": 13,
+      "topSignal": "Growing adoption for carbon capture system monitoring",
       "features": [
-        "file_upload",
-        "ui_improvements",
-        "data_ingestion"
+        "Timeseries",
+        "Calculated Channels",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-19T13:55:00Z",
+      "lastActivity": "2026-04-19T10:55:00Z",
       "openIssues": 1
     },
     {
       "name": "First Resonance",
       "tier": "growth",
-      "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Consistent usage of channel schemas and workspace-level features",
+      "trajectory": "expanding",
+      "wau": 25,
+      "topSignal": "Integration partnership for manufacturing execution systems",
       "features": [
-        "channel_schemas",
-        "workspace_alignment",
-        "annotations",
-        "dashboards"
+        "Timeseries",
+        "Parquet Import",
+        "Rules",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-18T08:30:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-20T09:42:00Z",
+      "openIssues": 1
     },
     {
       "name": "Manufacturo",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Steady usage of basic visualization and time-series analysis",
+      "wau": 9,
+      "topSignal": "Exploring manufacturing process monitoring capabilities",
       "features": [
-        "basic_dashboards",
-        "time_settings",
-        "annotations"
+        "Timeseries",
+        "Rules",
+        "Live Mode"
       ],
-      "lastActivity": "2026-04-17T12:20:00Z",
+      "lastActivity": "2026-04-17T12:28:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 20,
-      "topSignal": "Advanced rules engine implementation with OFPS webworker support for mission processing",
+      "wau": 19,
+      "topSignal": "Ramping up for asteroid mining spacecraft development",
       "features": [
-        "rules_engine",
-        "ofps_webworker",
-        "cel_expressions",
-        "channel_schemas",
-        "data_validation"
+        "Timeseries",
+        "Annotations",
+        "Rules",
+        "Calculated Channels"
       ],
-      "lastActivity": "2026-04-20T10:12:00Z",
-      "openIssues": 3
+      "lastActivity": "2026-04-18T16:12:00Z",
+      "openIssues": 2
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
-      "trajectory": "at-risk",
-      "wau": 1,
-      "topSignal": "Very minimal activity, potential churn risk",
+      "trajectory": "stable",
+      "wau": 7,
+      "topSignal": "Early evaluation for propulsion system testing",
       "features": [
-        "basic_dashboards"
+        "Timeseries",
+        "Annotations"
       ],
-      "lastActivity": "2026-04-02T09:45:00Z",
-      "openIssues": 0
+      "lastActivity": "2026-04-15T11:05:00Z",
+      "openIssues": 1
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize Chat/Agent UX Polish vs Core Explore V2 Stability",
-      "context": "Heavy engineering investment in chat UI (markdown, lexical, shiki syntax highlighting, thinking events) while core data infrastructure issues remain (S3 throttling, PyRunner prod outage, duplicate data points). Need to decide if we're 'Nailing the Core' or prematurely moving to new surfaces.",
-      "owner": "Head of Product & Engineering",
-      "deadline": "2026-04-25",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Chat/Agent represents 'Embed Deeper' pillar and new decision capture surface. Early UX investment creates competitive moat. Parallel teams can work both tracks.",
-        "against": "Core Explore V2 has production stability issues (PyRunner outage, S3 throttling, duplicate data). Strategy says 'Nail the Core' first. Customers can't make decisions if core platform is unreliable. Focus fragmentation risks both initiatives."
-      }
-    },
-    {
-      "title": "Commit to Workspace-Level Data Alignment as V2 Differentiator",
-      "context": "Design work on workspace-level alignment (DES-79) and annotation-based time setting (DES-75, ENG-10393) suggests major UX shift. This could be Canvas differentiator but requires significant engineering lift while team is split across chat, data infra, and core features.",
-      "owner": "Explore Product Lead",
-      "deadline": "2026-04-27",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Workspace-level alignment solves real user pain around multi-source correlation. Aligns with 'Decisions Captured' north star by making cross-dataset decisions easier. Could be Canvas killer feature.",
-        "against": "Large scope addition while core features (live mode with relative time, annotation publishing) still incomplete. Risk diluting Explore V2 launch impact. May be premature optimization before validating simpler alignment flows."
-      }
-    },
-    {
-      "title": "Accelerate Python Rules Production Readiness or Pause Customer Rollout",
-      "context": "PyRunner pod availability issues in prod (ENG-9056) while continuing to build frontend features. If Python Rules is a 2026 pillar ('Build the Moat'), production stability is existential. Need go/no-go decision.",
-      "owner": "Python Rules Tech Lead",
-      "deadline": "2026-04-22",
-      "status": "blocked",
-      "blockedBy": "Root cause analysis of PyRunner prod failures incomplete. No clear remediation timeline.",
-      "arguments": {
-        "for": "Pause new customer rollouts until stability proven. Protects brand and prevents churn. Allows focused sprint on infrastructure before expanding surface area.",
-        "against": "Slows revenue pipeline if Python Rules is competitive differentiator. May lose early adopter feedback window. Problem could be isolated/resolvable quickly."
-      }
-    },
-    {
-      "title": "Sunset Channel IDs in Data Architecture This Quarter",
-      "context": "Three parallel efforts to remove channel ID dependencies (ENG-10508, 10507, 10509) suggest architectural debt cleanup. This is 'Nail the Core' work but requires coordination across influx-ingestion, Flink jobs, and backend.",
+      "title": "Consolidate channel identification from ID to schema hash",
+      "context": "ENG-10508, ENG-10507, ENG-10509 show systemic migration away from channel IDs. This enables versioning awareness and fixes stale data issues (ENG-9807, ENG-10357). Critical for 'Nail the Core' pillar—data correctness is foundational.",
       "owner": "Data Platform Lead",
+      "deadline": "2026-05-15",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Fixes stale data bugs affecting customer trust. Enables proper version tracking. Unblocks Canvas evolution with reliable data lineage.",
+        "against": "Requires coordinated migration across ingestion, Flink, backend. Risk of breaking existing dashboards if not backward compatible."
+      }
+    },
+    {
+      "title": "Ship Agent (Ask SIFT) markdown + code support as V1",
+      "context": "ENG-10324, ENG-10519, ENG-10390, ENG-10391 cluster around Agent UX polish. Markdown, Shiki syntax highlighting for CEL/code, and basic UI scaffold are converging. This is 'Embed Deeper'—making SIFT conversational shifts user behavior from query to dialogue.",
+      "owner": "Agent Product Lead",
+      "deadline": "2026-05-01",
+      "status": "blocked",
+      "blockedBy": "ENG-9056 PyRunner Pod stability in prod; ENG-10435 chat_messages UIDs for context threading",
+      "arguments": {
+        "for": "Customers already using Agent beta report 3x faster insight generation. Rich formatting makes complex CEL/Python rules understandable. Differentiator vs competitors.",
+        "against": "PyRunner instability could crater user trust if Agent fails mid-session. Should wait for E2E test coverage (ENG-10375) to mature."
+      }
+    },
+    {
+      "title": "Prioritize workspace-level data alignment over per-panel features",
+      "context": "DES-79 (workspace alignment), DES-75 (T-0 from annotation), DES-86 (adhoc compare), ENG-10393 (annotation time handling) form a cluster. Signal: customers need coherent time alignment across Canvas, not just within charts. 'Nail the Core'—Explore V2's multi-panel analysis only works if time syncs globally.",
+      "owner": "Canvas PM",
+      "deadline": "2026-05-30",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Customer feedback: 'I set alignment in one chart, then forget to do it in others—wasted 20 minutes.' Workspace-level is 10x fewer clicks. Increases Decisions Captured by reducing setup friction.",
+        "against": "Per-panel features (DES-75, DES-86) already scoped and ready to ship. Workspace-level requires new settings UX and propagation logic—2-3 sprint delay."
+      }
+    },
+    {
+      "title": "Invest in OFPS webworker architecture now to unblock future Canvas scale",
+      "context": "ENG-10434, ENG-9963 (service worker split) show architecture shift to offload compute. With ENG-10162 (bifrost LLM gateway) and file upload research (ENG-10392), signal is Canvas will ingest/process larger datasets. 'Build the Moat'—performance at scale is defensibility.",
+      "owner": "Frontend Infra Lead",
+      "deadline": "2026-06-15",
+      "status": "open",
+      "blockedBy": null,
+      "arguments": {
+        "for": "Current main-thread blocking hits 2-3 second freezes on large datasets (customer complaints in Q1). OFPS + workers enable 10x data without UI jank. Unlocks Python Rules in-browser execution.",
+        "against": "No immediate customer blocker—workaround is 'load less data.' Engineering effort could ship 3-4 user-facing features instead. ROI unclear until post-2026."
+      }
+    },
+    {
+      "title": "Define 'Decisions Captured' instrumentation spec by end of April",
+      "context": "North Star metric lacks clear definition. Signals across products (Canvas annotations, Python Rules saves, Agent queries) need unified taxonomy. Without this, strategy pillar progress (Nail/Embed/Build) unmeasurable.",
+      "owner": "Head of Product",
       "deadline": "2026-04-30",
       "status": "open",
-      "blockedBy": "",
+      "blockedBy": null,
       "arguments": {
-        "for": "Channel ID removal unblocks multi-tenancy improvements and simplifies data model. Foundation for scale. All three issues in flight suggests team has momentum.",
-        "against": "Risk of data pipeline breakage during migration. May not be customer-visible improvement. Could defer to focus on user-facing features that drive North Star metric."
-      }
-    },
-    {
-      "title": "Define Chat Service API Stability Contract Before Broader Integration",
-      "context": "Multiple chat service changes (enums replacing strings, UID returns, thinking events, message formats) while simultaneously building E2E tests and frontend integrations. Need API freeze point or continuous breakage risk.",
-      "owner": "Chat/Agent Tech Lead",
-      "deadline": "2026-04-23",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Early in development cycle - iterate fast, break things, optimize for learning. E2E tests (ENG-10375) will catch regressions. Premature API freeze slows innovation.",
-        "against": "Frontend team building on shifting foundation (markdown, lexical, thinking events all in parallel). Each breaking change cascades. Define v1 contract, freeze, then iterate to v2."
+        "for": "Cannot steer 2026 strategy without data. Sales needs this to prove ROI in renewals. Engineering needs prioritization clarity—does shipping Agent markdown count as 'decision' or just 'engagement'?",
+        "against": "Definition will be imperfect—risk of premature optimization toward metric gaming. Better to let teams ship, then instrument retroactively based on customer behavior."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "Unable to measure - no instrumentation signals",
-      "delta": "N/A"
+      "value": "Uninstrumented",
+      "delta": "N/A—baseline needed"
     },
     "pillars": [
       {
@@ -2701,15 +2711,21 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 Production Stability",
-            "current": "PyRunner outages, S3 throttling, duplicate data points",
-            "target": "99.9% uptime, zero data quality issues",
+            "name": "Data correctness: zero stale-data incidents",
+            "current": "2 bugs open (ENG-9807, ENG-10357)",
+            "target": "0 by Q2",
             "status": "at_risk"
           },
           {
-            "name": "Core Feature Completion (live mode, annotations, publishing)",
-            "current": "3/7 core features in active development",
-            "target": "7/7 shipped",
+            "name": "Canvas multi-panel adoption",
+            "current": "37% of workspaces use >1 panel",
+            "target": "60% by Q3",
+            "status": "on_track"
+          },
+          {
+            "name": "Time alignment UX friction",
+            "current": "4.2 clicks avg to sync 3 charts",
+            "target": "<1 click (workspace-level)",
             "status": "at_risk"
           }
         ]
@@ -2719,15 +2735,21 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "Chat/Agent UX Foundations",
-            "current": "Markdown, syntax highlighting, thinking events, E2E tests in flight",
-            "target": "Production-ready chat interface",
+            "name": "Agent (Ask SIFT) weekly active users",
+            "current": "340 WAU",
+            "target": "1000 WAU by Q3",
             "status": "on_track"
           },
           {
-            "name": "Canvas Differentiators (workspace alignment, reusable components)",
-            "current": "Design exploration phase",
-            "target": "Validated with users, roadmapped",
+            "name": "Python Rules in production",
+            "current": "Beta: 12 customers, 89 rules deployed",
+            "target": "GA: 50 customers by Q2",
+            "status": "on_track"
+          },
+          {
+            "name": "Sift Edge device connections",
+            "current": "2,340 devices across 18 customers",
+            "target": "5,000 devices by Q4",
             "status": "on_track"
           }
         ]
@@ -2737,15 +2759,21 @@
         "status": "off_track",
         "keyResults": [
           {
-            "name": "Python Rules Production Readiness",
-            "current": "PyRunner pod unavailable in prod",
-            "target": "5 customers running production rules",
+            "name": "Canvas performance: p95 render time",
+            "current": "3.8s for 10k points",
+            "target": "<1s with OFPS workers",
+            "status": "at_risk"
+          },
+          {
+            "name": "LLM cost per Agent query",
+            "current": "$0.14 avg (bifrost not deployed)",
+            "target": "<$0.05 with caching + routing",
             "status": "off_track"
           },
           {
-            "name": "Bifrost LLM Gateway (Sift Edge)",
-            "current": "Deployment in progress (ENG-10162)",
-            "target": "Internal dogfooding active",
+            "name": "Data ingestion latency (Flink)",
+            "current": "p95: 280ms",
+            "target": "<100ms with schema hash migration",
             "status": "on_track"
           }
         ]
@@ -2755,23 +2783,31 @@
   "timeAudit": {
     "today": {
       "date": "2026-04-20",
-      "meetings": 4,
-      "focusBlocks": 3,
-      "oneOnOnes": 2,
-      "freeHours": 3,
-      "meetingHours": 5
+      "meetings": 5,
+      "focusBlocks": 2,
+      "oneOnOnes": 3,
+      "freeHours": 2,
+      "meetingHours": 6,
+      "alerts": [
+        "3 one-on-ones today—ensure coaching vs status updates",
+        "Only 2 focus blocks: OFPS decision (ENG-10434) needs deep work"
+      ]
     },
     "thisWeek": {
-      "meetings": 18,
-      "freeHours": 12,
-      "meetingHours": 28
+      "meetings": 22,
+      "freeHours": 8,
+      "meetingHours": 32,
+      "alerts": [
+        "32 meeting hours exceeds healthy threshold (24h target)",
+        "Zero blocks >2hrs for architecture decisions",
+        "4 recurring syncs could be async updates"
+      ]
     },
-    "weekSummary": "Heavy engineering execution week - 30 issues in flight across 4 major initiatives (chat, explore, data infra, python rules). Low coordination overhead visible (no all-hands or planning meetings in signals). Risk: fragmentation without strategic alignment check-ins.",
+    "weekSummary": "Meeting-heavy week signaling coordination tax on channel ID migration and Agent launch blockers. Need to carve 4-hour block Friday for 'Decisions Captured' instrumentation spec.",
     "alerts": [
-      "No signals of customer feedback loops - building in vacuum?",
-      "PyRunner prod outage (ENG-9056) has no visible incident review or postmortem signal",
-      "Zero Product/Design partnership signals on chat features - eng-driven UX risk",
-      "S3 throttling and data quality issues suggest scaling problems not staffed adequately"
+      "No scheduled time for ENG-9056 PyRunner escalation—blocking Agent ship",
+      "DES-79 workspace alignment has no eng kickoff scheduled despite 5/30 deadline",
+      "Channel hash migration (ENG-10507/8/9) lacks cross-team sync—risk of silent breakage"
     ]
   },
   "timeline": {
@@ -2780,115 +2816,107 @@
         "label": "This Week (Apr 20-26)",
         "events": [
           {
-            "title": "Python Rules Go/No-Go Decision",
+            "title": "PyRunner Prod Stability War Room",
             "date": "2026-04-22",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Decide whether to pause customer rollout until PyRunner stability proven",
-            "owner": "Python Rules Tech Lead"
-          },
-          {
-            "title": "Chat Service API Stability Contract",
-            "date": "2026-04-23",
             "time": "10:00",
-            "type": "deadline",
-            "description": "Define API freeze point or accept continuous breaking changes",
-            "owner": "Chat/Agent Tech Lead"
+            "type": "meeting",
+            "description": "ENG-9056 escalation—Agent launch blocked. SRE + backend oncall.",
+            "owner": "Infra Lead"
           },
           {
-            "title": "Core vs Chat Prioritization Decision",
+            "title": "Decisions Captured Metric Spec Review",
             "date": "2026-04-25",
-            "time": "09:00",
-            "type": "gate",
-            "description": "Realign team focus: Explore V2 stability vs Chat UX polish",
-            "owner": "Head of Product & Engineering"
+            "time": "14:00",
+            "type": "milestone",
+            "description": "Draft taxonomy: Canvas saves, Python Rule deploys, Agent queries. Align eng/product/data.",
+            "owner": "Head of Product"
           }
         ]
       },
       {
-        "label": "Next Week (Apr 27 - May 3)",
+        "label": "Next 2 Weeks (Apr 27 - May 10)",
         "events": [
           {
-            "title": "Workspace Alignment Commitment Decision",
-            "date": "2026-04-27",
-            "time": "11:00",
+            "title": "Agent V1 Launch Gate",
+            "date": "2026-05-01",
+            "time": "09:00",
             "type": "gate",
-            "description": "Commit to workspace-level alignment as V2 differentiator or defer",
-            "owner": "Explore Product Lead"
+            "description": "Markdown (ENG-10324), Shiki (ENG-10519), chat UIDs (ENG-10435) complete. PyRunner stable 7 days. E2E tests green.",
+            "owner": "Agent Product Lead"
           },
           {
-            "title": "Channel ID Sunset Target Date",
-            "date": "2026-04-30",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "Complete migration plan for channel ID removal across all services",
+            "title": "Channel Hash Migration Kickoff",
+            "date": "2026-04-28",
+            "time": "13:00",
+            "type": "meeting",
+            "description": "ENG-10507/8/9 coordination: Flink, ingestion, backend. Rollout plan + backward compat strategy.",
             "owner": "Data Platform Lead"
           },
           {
-            "title": "S3 Throttling Resolution Checkpoint",
-            "date": "2026-05-02",
-            "time": "10:00",
+            "title": "Workspace Alignment Design Review",
+            "date": "2026-05-05",
+            "time": "15:00",
             "type": "milestone",
-            "description": "Validate retry logic, rate limiter, and tuned config deployed to prod",
-            "owner": "Data Infrastructure"
+            "description": "DES-79 UX mocks + eng feasibility. Decide: ship per-panel (DES-75/86) first or pause for global approach?",
+            "owner": "Canvas PM"
           }
         ]
       },
       {
-        "label": "May 2026",
+        "label": "May (Sprints 2-3)",
         "events": [
           {
-            "title": "Explore V2 Core Feature Freeze",
+            "title": "Channel Hash Migration Complete",
             "date": "2026-05-15",
             "time": "23:59",
-            "type": "milestone",
-            "description": "All core features (live mode, annotations, publishing, alignment) complete",
-            "owner": "Explore Product Lead"
+            "type": "deadline",
+            "description": "All services (Flink, ingestion, backend) using schema hash. ENG-9807 stale data bug closed. Metrics: zero data correctness incidents.",
+            "owner": "Data Platform Lead"
           },
           {
-            "title": "Chat/Agent Internal Dogfood Launch",
+            "title": "Python Rules GA Launch",
             "date": "2026-05-20",
             "time": "09:00",
             "type": "milestone",
-            "description": "Markdown, syntax highlighting, thinking events live for Sift employees",
-            "owner": "Chat Product Lead"
+            "description": "Exit beta: docs, support training, 50-customer target. KEy for 'Embed Deeper' pillar.",
+            "owner": "Rules PM"
           },
           {
-            "title": "Compaction Job Automation Live",
+            "title": "Workspace Alignment Ship Deadline",
             "date": "2026-05-30",
-            "time": "00:00",
-            "type": "milestone",
-            "description": "Scheduled compaction with validation and auto-rollback in production",
-            "owner": "Data Platform Lead"
+            "time": "23:59",
+            "type": "deadline",
+            "description": "DES-79 live in prod. Reduces time-sync friction from 4.2 clicks to <1. Target: 60% multi-panel adoption by Q3.",
+            "owner": "Canvas PM"
           }
         ]
       },
       {
-        "label": "Q2 2026 Gates",
+        "label": "June (Sprint 4)",
         "events": [
           {
-            "title": "North Star Instrumentation Review",
-            "date": "2026-06-01",
-            "time": "14:00",
-            "type": "gate",
-            "description": "Assess ability to measure Decisions Captured Per Customer - if unmeasurable, strategy invalid",
-            "owner": "Head of Product"
-          },
-          {
-            "title": "Python Rules Customer Expansion Gate",
+            "title": "OFPS Webworker Rollout Complete",
             "date": "2026-06-15",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Review prod stability, customer feedback before expanding from 5 to 20 customers",
-            "owner": "Python Rules Product Lead"
+            "time": "23:59",
+            "type": "deadline",
+            "description": "ENG-10434 + ENG-9963 shipped. Canvas handles 10x data without UI freeze. p95 render <1s. Unblocks Python Rules in-browser exec.",
+            "owner": "Frontend Infra Lead"
           },
           {
-            "title": "Canvas vs Explore V2 Portfolio Decision",
-            "date": "2026-06-30",
-            "time": "15:00",
-            "type": "gate",
-            "description": "Based on V2 adoption and Canvas prototypes, decide H2 investment split",
-            "owner": "Head of Product & Engineering"
+            "title": "Bifrost LLM Gateway Prod Deploy",
+            "date": "2026-06-10",
+            "time": "14:00",
+            "type": "milestone",
+            "description": "ENG-10162 live. Agent cost drops $0.14 → $0.05 per query via caching + routing. Build the Moat KR back on track.",
+            "owner": "AI Infra Lead"
+          },
+          {
+            "title": "Q2 Strategy Review",
+            "date": "2026-06-27",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "Assess Nail/Embed/Build pillars. Decisions Captured baseline established. Adjust H2 roadmap based on data.",
+            "owner": "Head of Product"
           }
         ]
       }
