@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2026-04-22T04:05:02.805Z",
+  "fetchedAt": "2026-04-22T15:32:56.627Z",
   "_meta": {
     "sources_scanned": 2,
     "source_list": [
@@ -9,6 +9,101 @@
     "signal_count": 30
   },
   "signals": [
+    {
+      "source": "linear",
+      "title": "ENG-10626: Set min/max as default for booleans and enums",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "Kevin Limburg",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T15:24:51.728Z",
+      "evidence": [
+        {
+          "label": "ENG-10626",
+          "url": "https://linear.app/siftstack/issue/ENG-10626/set-minmax-as-default-for-booleans-and-enums",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10629: Create calculated channel button is disabled if there are only family data sources",
+      "priority": "HIGH",
+      "state": "In Progress",
+      "assignee": "Bill Raj-Derouin",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T15:16:11.457Z",
+      "evidence": [
+        {
+          "label": "ENG-10629",
+          "url": "https://linear.app/siftstack/issue/ENG-10629/create-calculated-channel-button-is-disabled-if-there-are-only-family",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-9807: Calc channel cache key missing version — stale data after edit",
+      "priority": "HIGH",
+      "state": "In Verification",
+      "assignee": "James Kelly",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T15:14:46.575Z",
+      "evidence": [
+        {
+          "label": "ENG-9807",
+          "url": "https://linear.app/siftstack/issue/ENG-9807/calc-channel-cache-key-missing-version-stale-data-after-edit",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10628: Adding a filter expression in calculated channels can have weird cache behavior",
+      "priority": "URGENT",
+      "state": "Ready for Work",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T15:12:47.038Z",
+      "evidence": [
+        {
+          "label": "ENG-10628",
+          "url": "https://linear.app/siftstack/issue/ENG-10628/adding-a-filter-expression-in-calculated-channels-can-have-weird-cache",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-10623: Reduce channel insert query volume in bulk channel inserts path",
+      "priority": "URGENT",
+      "state": "In Review",
+      "assignee": "benjamin@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T07:13:48.572Z",
+      "evidence": [
+        {
+          "label": "ENG-10623",
+          "url": "https://linear.app/siftstack/issue/ENG-10623/reduce-channel-insert-query-volume-in-bulk-channel-inserts-path",
+          "source": "linear"
+        }
+      ]
+    },
+    {
+      "source": "linear",
+      "title": "ENG-8619: Annotations context menu on left side panel",
+      "priority": "HIGH",
+      "state": "In Review",
+      "assignee": "broch@siftstack.com",
+      "team": "Engineering",
+      "timestamp": "2026-04-22T05:18:19.777Z",
+      "evidence": [
+        {
+          "label": "ENG-8619",
+          "url": "https://linear.app/siftstack/issue/ENG-8619/annotations-context-menu-on-left-side-panel",
+          "source": "linear"
+        }
+      ]
+    },
     {
       "source": "linear",
       "title": "ENG-10619: 'Unavailable' Backend Response Creates Stuck PyRunner",
@@ -392,102 +487,6 @@
           "source": "linear"
         }
       ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-197: UX/UI: Live Mode",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "jessica@siftstack.com",
-      "team": "Design",
-      "timestamp": "2026-04-21T22:12:44.915Z",
-      "evidence": [
-        {
-          "label": "DES-197",
-          "url": "https://linear.app/siftstack/issue/DES-197/uxui-live-mode",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "DES-196: UX/UI: Unified Sync behavior",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "jessica@siftstack.com",
-      "team": "Design",
-      "timestamp": "2026-04-21T22:10:52.840Z",
-      "evidence": [
-        {
-          "label": "DES-196",
-          "url": "https://linear.app/siftstack/issue/DES-196/uxui-unified-sync-behavior",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-9799: When doing a bulk include of runs with existing alignments, it can load for awhile in the background",
-      "priority": "URGENT",
-      "state": "In Review",
-      "assignee": "Bill Raj-Derouin",
-      "team": "Engineering",
-      "timestamp": "2026-04-21T21:54:56.290Z",
-      "evidence": [
-        {
-          "label": "ENG-9799",
-          "url": "https://linear.app/siftstack/issue/ENG-9799/when-doing-a-bulk-include-of-runs-with-existing-alignments-it-can-load",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10613: Plot annotation for each alignment point",
-      "priority": "URGENT",
-      "state": "Ready for Work",
-      "assignee": "Adrienne Chang",
-      "team": "Engineering",
-      "timestamp": "2026-04-21T21:35:15.594Z",
-      "evidence": [
-        {
-          "label": "ENG-10613",
-          "url": "https://linear.app/siftstack/issue/ENG-10613/plot-annotation-for-each-alignment-point",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "CAGR-29: Morgan Stanley",
-      "priority": "HIGH",
-      "state": "New",
-      "assignee": "Sage Shahi",
-      "team": "Growth",
-      "timestamp": "2026-04-21T21:34:49.818Z",
-      "evidence": [
-        {
-          "label": "CAGR-29",
-          "url": "https://linear.app/siftstack/issue/CAGR-29/morgan-stanley",
-          "source": "linear"
-        }
-      ]
-    },
-    {
-      "source": "linear",
-      "title": "ENG-10611: Update status page vercel creds from security incident",
-      "priority": "URGENT",
-      "state": "In Verification",
-      "assignee": "jon@siftstack.com",
-      "team": "Engineering",
-      "timestamp": "2026-04-21T21:23:14.185Z",
-      "evidence": [
-        {
-          "label": "ENG-10611",
-          "url": "https://linear.app/siftstack/issue/ENG-10611/update-status-page-vercel-creds-from-security-incident",
-          "source": "linear"
-        }
-      ]
     }
   ],
   "amplitude": {
@@ -542,11 +541,11 @@
             },
             {
               "setId": "",
-              "value": 810
+              "value": 811
             },
             {
               "setId": "",
-              "value": 437
+              "value": 510
             }
           ]
         ],
@@ -554,7 +553,7 @@
           [
             {
               "setId": "",
-              "value": 2567
+              "value": 2582
             }
           ]
         ],
@@ -589,10 +588,6 @@
       "data": {
         "series": [
           [
-            {
-              "setId": "",
-              "value": 132
-            },
             {
               "setId": "",
               "value": 381
@@ -663,7 +658,7 @@
             },
             {
               "setId": "",
-              "value": 370
+              "value": 371
             },
             {
               "setId": "",
@@ -711,7 +706,11 @@
             },
             {
               "setId": "",
-              "value": 372
+              "value": 379
+            },
+            {
+              "setId": "",
+              "value": 134
             }
           ]
         ],
@@ -719,7 +718,7 @@
           [
             {
               "setId": "",
-              "value": 1656
+              "value": 1652
             }
           ]
         ],
@@ -733,7 +732,6 @@
           }
         ],
         "xValues": [
-          "2026-03-22",
           "2026-03-23",
           "2026-03-24",
           "2026-03-25",
@@ -763,7 +761,8 @@
           "2026-04-18",
           "2026-04-19",
           "2026-04-20",
-          "2026-04-21"
+          "2026-04-21",
+          "2026-04-22"
         ]
       }
     },
@@ -822,7 +821,7 @@
             },
             {
               "setId": "",
-              "value": 39
+              "value": 52
             }
           ]
         ],
@@ -830,7 +829,7 @@
           [
             {
               "setId": "",
-              "value": 1663
+              "value": 1676
             }
           ]
         ],
@@ -865,26 +864,26 @@
       "data": {
         "series": [
           [
-            5688.27766873065,
+            5671.113185185185,
             5305.830980952382,
             5307.688959770115,
             6063.390984615385,
             6321.7063194444445,
             6638.525670025189,
             5878.828139204546,
-            5158.374008498583,
-            5974.511823979591,
-            6508.928045801527,
-            8265.04055163728,
-            12540.201708045977,
-            4917.069090047393
+            5158.374008498584,
+            5959.736979643766,
+            6495.170626903553,
+            8171.089131840796,
+            12469.936342465753,
+            6635.294658273382
           ]
         ],
         "seriesCollapsed": [
           [
             {
               "setId": "",
-              "value": 30678.902935258964
+              "value": 31153.215250246303
             }
           ]
         ],
@@ -966,7 +965,7 @@
             },
             {
               "setId": "",
-              "value": 277
+              "value": 327
             }
           ],
           [
@@ -1020,7 +1019,7 @@
             },
             {
               "setId": "",
-              "value": 38
+              "value": 48
             }
           ],
           [
@@ -1074,7 +1073,7 @@
             },
             {
               "setId": "",
-              "value": 24
+              "value": 31
             }
           ],
           [
@@ -1136,19 +1135,19 @@
           [
             {
               "setId": "",
-              "value": 1125
+              "value": 1130
             }
           ],
           [
             {
               "setId": "",
-              "value": 297
+              "value": 302
             }
           ],
           [
             {
               "setId": "",
-              "value": 264
+              "value": 269
             }
           ],
           [
@@ -1477,7 +1476,7 @@
             },
             {
               "setId": "",
-              "value": 7
+              "value": 9
             }
           ],
           [
@@ -1639,7 +1638,7 @@
             },
             {
               "setId": "",
-              "value": 121
+              "value": 158
             }
           ]
         ],
@@ -1665,7 +1664,7 @@
           [
             {
               "setId": "",
-              "value": 810
+              "value": 811
             }
           ]
         ],
@@ -1765,7 +1764,7 @@
             },
             {
               "setId": "",
-              "value": 22
+              "value": 24
             }
           ],
           [
@@ -1819,7 +1818,7 @@
             },
             {
               "setId": "",
-              "value": 0
+              "value": 4
             }
           ],
           [
@@ -1927,7 +1926,7 @@
             },
             {
               "setId": "",
-              "value": 13
+              "value": 22
             }
           ],
           [
@@ -1989,13 +1988,13 @@
           [
             {
               "setId": "",
-              "value": 932
+              "value": 934
             }
           ],
           [
             {
               "setId": "",
-              "value": 1783
+              "value": 1787
             }
           ],
           [
@@ -2007,7 +2006,7 @@
           [
             {
               "setId": "",
-              "value": 7289
+              "value": 7298
             }
           ],
           [
@@ -2070,8 +2069,8 @@
       "role": "PM",
       "squad": "Core Platform",
       "status": "shipping",
-      "topConcern": "Virtualize message space and backend reliability issues affecting PyRunner.",
-      "linearActive": 4,
+      "topConcern": "Calculated channels showing cache inconsistencies and stale data after edits.",
+      "linearActive": 8,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-22T09:15:00Z",
       "fourPAge": "2d",
@@ -2082,8 +2081,8 @@
       "role": "PM",
       "squad": "Data Access & Governance",
       "status": "shipping",
-      "topConcern": "Family data volume limits and session timeout security requirements.",
-      "linearActive": 3,
+      "topConcern": "Family data volume limits and session security for user/admin timeouts.",
+      "linearActive": 5,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-22T08:45:00Z",
       "fourPAge": "1d",
@@ -2093,82 +2092,82 @@
       "name": "Jess",
       "role": "PM",
       "squad": "Canvas & Workflows",
-      "status": "shipping",
-      "topConcern": "Multiple alignment points feature and canvas comment/history UX.",
+      "status": "attention",
+      "topConcern": "Message space virtualization blocked on PyRunner unavailability issues.",
       "linearActive": 7,
       "linearBlocked": 1,
       "slackLastSeen": "2026-04-22T10:30:00Z",
-      "fourPAge": "1d",
+      "fourPAge": "3d",
       "meetingsToday": 4
     },
     {
       "name": "Rowen",
       "role": "PM",
       "squad": "Infrastructure & Security",
-      "status": "attention",
-      "topConcern": "Security incident recovery: re-encrypting secrets and updating Vercel credentials.",
-      "linearActive": 5,
+      "status": "shipping",
+      "topConcern": "Re-encrypting Secrets Manager with KMS key and ephemeral environment validation.",
+      "linearActive": 4,
       "linearBlocked": 0,
       "slackLastSeen": "2026-04-22T07:20:00Z",
-      "fourPAge": "3d",
-      "meetingsToday": 5
+      "fourPAge": "1d",
+      "meetingsToday": 2
     },
     {
       "name": "Kevin",
       "role": "Software Engineering Manager",
       "squad": "Engineering",
       "status": "shipping",
-      "topConcern": "ROM prototype build and ephemeral environment validation.",
-      "linearActive": 6,
+      "topConcern": "Reducing channel insert query volume and log verbosity for performance.",
+      "linearActive": 12,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-22T09:45:00Z",
+      "slackLastSeen": "2026-04-22T09:50:00Z",
       "fourPAge": "1d",
-      "meetingsToday": 6
+      "meetingsToday": 5
     },
     {
       "name": "Gui",
       "role": "FDE Lead",
       "squad": "Field Engineering",
       "status": "shipping",
-      "topConcern": "Customer announcement videos and joint marketing with Starpath/Globalstar.",
-      "linearActive": 8,
+      "topConcern": "Customer announcement videos for Longshot and Plantd in production.",
+      "linearActive": 6,
       "linearBlocked": 0,
-      "slackLastSeen": "2026-04-22T11:00:00Z",
-      "fourPAge": "0d",
-      "meetingsToday": 4
+      "slackLastSeen": "2026-04-22T11:05:00Z",
+      "fourPAge": "2d",
+      "meetingsToday": 3
     }
   ],
   "cofounders": [
     {
       "name": "Austin",
       "role": "CEO",
-      "attention": "TRMC IDIQ sole-source strategy to unlock test-center funding and Morgan Stanley engagement.",
+      "attention": "TRMC IDIQ sole-source strategy needs decision to unlock test-center funding.",
       "recentTopics": [
-        "TRMC IDIQ sole-source",
-        "Morgan Stanley partnership",
-        "Modern Day Marine coverage",
-        "Customer co-marketing"
+        "Starpath MSA co-branded story",
+        "Globalstar LinkedIn outreach campaign",
+        "Modern Day Marine + DMV Tech Week coverage",
+        "Joint marketing plan with Sophia Space/Kepler"
       ],
       "lastSlackToNoah": "2026-04-21T16:30:00Z",
       "pendingDecisions": [
-        "TRMC IDIQ approach and timeline",
-        "Morgan Stanley partnership structure"
+        "Approve TRMC IDIQ sole-source approach",
+        "Review Starpath co-branding terms"
       ]
     },
     {
       "name": "Karthik",
       "role": "CTO",
-      "attention": "Security incident response: secrets re-encryption and credential rotation urgency.",
+      "attention": "PyRunner stuck states blocking Canvas virtualization and user experience.",
       "recentTopics": [
-        "Security incident recovery",
-        "KMS encryption migration",
-        "ROM prototype architecture",
-        "Live Mode and sync behavior"
+        "Calculated channel cache architecture",
+        "ROM prototype build progress",
+        "Secrets Manager KMS encryption migration",
+        "Channel insert performance optimization"
       ],
       "lastSlackToNoah": "2026-04-22T08:00:00Z",
       "pendingDecisions": [
-        "Security incident post-mortem scope",
-        "ROM prototype go/no-go"
+        "Prioritize PyRunner stability vs new features",
+        "Approve ROM prototype resource allocation"
       ]
     }
   ],
@@ -2178,12 +2177,13 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 12,
-      "topSignal": "Active usage, no recent signals",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "visualization"
+        "annotations",
+        "families"
       ],
-      "lastActivity": "2026-04-15T00:00:00Z",
+      "lastActivity": "2026-03-15T10:00:00Z",
       "openIssues": 0
     },
     {
@@ -2191,13 +2191,13 @@
       "tier": "enterprise",
       "trajectory": "stable",
       "wau": 28,
-      "topSignal": "Steady engagement with core platform",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "families",
-        "compare"
+        "calculated_channels",
+        "families"
       ],
-      "lastActivity": "2026-04-20T00:00:00Z",
+      "lastActivity": "2026-04-10T14:30:00Z",
       "openIssues": 0
     },
     {
@@ -2205,134 +2205,131 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 15,
-      "topSignal": "Regular platform usage",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "edge"
+        "annotations"
       ],
-      "lastActivity": "2026-04-18T00:00:00Z",
+      "lastActivity": "2026-04-05T09:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Varda",
       "tier": "enterprise",
-      "trajectory": "stable",
-      "wau": 22,
-      "topSignal": "Consistent weekly engagement",
+      "trajectory": "expanding",
+      "wau": 34,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "compare",
-        "annotations"
+        "families",
+        "calculated_channels"
       ],
-      "lastActivity": "2026-04-21T00:00:00Z",
+      "lastActivity": "2026-04-18T16:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Heart Aerospace",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 18,
-      "topSignal": "Active development workflows",
+      "wau": 11,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "families"
+        "annotations"
       ],
-      "lastActivity": "2026-04-19T00:00:00Z",
+      "lastActivity": "2026-04-02T11:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Lockheed Martin",
       "tier": "enterprise",
-      "trajectory": "expanding",
+      "trajectory": "stable",
       "wau": 45,
-      "topSignal": "TRMC IDIQ sole-source strategy — unlock test-center funding",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
         "families",
-        "edge",
-        "annotations"
+        "annotations",
+        "calculated_channels"
       ],
-      "lastActivity": "2026-04-22T00:00:00Z",
-      "openIssues": 1
+      "lastActivity": "2026-04-20T13:25:00Z",
+      "openIssues": 0
     },
     {
       "name": "ULA",
       "tier": "enterprise",
       "trajectory": "expanding",
       "wau": 52,
-      "topSignal": "Edit Family - accommodate ULA screen sizes",
+      "topSignal": "ENG-8213: Edit Family - accommodate ULA screen sizes",
       "features": [
         "telemetry",
         "families",
-        "compare",
-        "canvas"
+        "annotations",
+        "calculated_channels"
       ],
-      "lastActivity": "2026-04-22T00:00:00Z",
+      "lastActivity": "2026-04-21T15:30:00Z",
       "openIssues": 1
     },
     {
       "name": "Parallel Systems",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 14,
-      "topSignal": "Regular usage patterns",
+      "wau": 9,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry",
-        "edge"
+        "telemetry"
       ],
-      "lastActivity": "2026-04-17T00:00:00Z",
+      "lastActivity": "2026-03-28T10:15:00Z",
       "openIssues": 0
     },
     {
       "name": "The Exploration Company",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 16,
-      "topSignal": "Active telemetry monitoring",
+      "wau": 14,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
         "families"
       ],
-      "lastActivity": "2026-04-20T00:00:00Z",
+      "lastActivity": "2026-04-12T12:40:00Z",
       "openIssues": 0
     },
     {
       "name": "OHB",
       "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 24,
-      "topSignal": "Consistent platform engagement",
+      "wau": 22,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "compare",
-        "families"
+        "annotations"
       ],
-      "lastActivity": "2026-04-19T00:00:00Z",
+      "lastActivity": "2026-04-08T09:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Dust Moto",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Early adoption phase",
+      "wau": 5,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-16T00:00:00Z",
+      "lastActivity": "2026-03-20T14:00:00Z",
       "openIssues": 0
     },
     {
       "name": "Orbital Operations",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Regular workflow usage",
+      "wau": 8,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry",
-        "edge"
+        "telemetry"
       ],
-      "lastActivity": "2026-04-18T00:00:00Z",
+      "lastActivity": "2026-04-01T11:30:00Z",
       "openIssues": 0
     },
     {
@@ -2340,174 +2337,174 @@
       "tier": "growth",
       "trajectory": "stable",
       "wau": 13,
-      "topSignal": "Active development cycles",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
         "families"
       ],
-      "lastActivity": "2026-04-21T00:00:00Z",
+      "lastActivity": "2026-04-14T10:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Revel",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Initial platform exploration",
+      "wau": 4,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-15T00:00:00Z",
+      "lastActivity": "2026-03-25T15:45:00Z",
       "openIssues": 0
     },
     {
       "name": "CX2",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Pilot phase engagement",
+      "wau": 3,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-14T00:00:00Z",
+      "lastActivity": "2026-03-18T13:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Also",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 3,
-      "topSignal": "Early evaluation",
+      "wau": 6,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-13T00:00:00Z",
+      "lastActivity": "2026-04-03T16:20:00Z",
       "openIssues": 0
     },
     {
       "name": "Arbor Energy",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 7,
-      "topSignal": "Pilot testing underway",
+      "wau": 10,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry"
+        "telemetry",
+        "annotations"
       ],
-      "lastActivity": "2026-04-17T00:00:00Z",
+      "lastActivity": "2026-04-11T09:35:00Z",
       "openIssues": 0
     },
     {
       "name": "Synnax",
-      "tier": "growth",
+      "tier": "pilot",
       "trajectory": "stable",
-      "wau": 9,
-      "topSignal": "Regular platform access",
+      "wau": 7,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry",
-        "edge"
+        "telemetry"
       ],
-      "lastActivity": "2026-04-19T00:00:00Z",
+      "lastActivity": "2026-04-06T14:55:00Z",
       "openIssues": 0
     },
     {
       "name": "OdysAviation",
-      "tier": "pilot",
+      "tier": "growth",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Initial onboarding",
+      "wau": 11,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry"
+        "telemetry",
+        "families"
       ],
-      "lastActivity": "2026-04-16T00:00:00Z",
+      "lastActivity": "2026-04-13T11:25:00Z",
       "openIssues": 0
     },
     {
       "name": "CriticalLoop",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Evaluation phase",
+      "wau": 5,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-15T00:00:00Z",
+      "lastActivity": "2026-03-30T10:40:00Z",
       "openIssues": 0
     },
     {
       "name": "RadTeam",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Pilot deployment",
+      "wau": 4,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-18T00:00:00Z",
+      "lastActivity": "2026-03-22T15:15:00Z",
       "openIssues": 0
     },
     {
       "name": "Starpath",
       "tier": "growth",
       "trajectory": "expanding",
-      "wau": 19,
-      "topSignal": "Starpath — MSA + co-branded story",
+      "wau": 16,
+      "topSignal": "CAGR-37: Starpath — MSA + co-branded story",
       "features": [
         "telemetry",
-        "families",
-        "edge"
+        "annotations"
       ],
-      "lastActivity": "2026-04-22T00:00:00Z",
+      "lastActivity": "2026-04-21T14:10:00Z",
       "openIssues": 0
     },
     {
       "name": "Astrolab",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 10,
-      "topSignal": "Regular usage patterns",
+      "wau": 12,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
         "families"
       ],
-      "lastActivity": "2026-04-20T00:00:00Z",
+      "lastActivity": "2026-04-09T12:30:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroMecha",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 5,
-      "topSignal": "Early adoption",
+      "wau": 6,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-17T00:00:00Z",
+      "lastActivity": "2026-04-04T09:50:00Z",
       "openIssues": 0
     },
     {
       "name": "Neros",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Initial testing",
+      "wau": 5,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-16T00:00:00Z",
+      "lastActivity": "2026-03-27T11:05:00Z",
       "openIssues": 0
     },
     {
       "name": "Zipline",
-      "tier": "growth",
+      "tier": "enterprise",
       "trajectory": "stable",
-      "wau": 17,
-      "topSignal": "Active platform usage",
+      "wau": 38,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
-        "edge",
-        "families"
+        "families",
+        "annotations"
       ],
-      "lastActivity": "2026-04-21T00:00:00Z",
+      "lastActivity": "2026-04-19T15:20:00Z",
       "openIssues": 0
     },
     {
@@ -2515,37 +2512,36 @@
       "tier": "growth",
       "trajectory": "expanding",
       "wau": 14,
-      "topSignal": "Customer announcement videos — Longshot + Plantd",
+      "topSignal": "CAGR-35: Customer announcement videos — Longshot + Plantd",
       "features": [
         "telemetry",
-        "families"
+        "annotations"
       ],
-      "lastActivity": "2026-04-22T00:00:00Z",
+      "lastActivity": "2026-04-21T13:45:00Z",
       "openIssues": 0
     },
     {
       "name": "Halo One",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 6,
-      "topSignal": "Pilot phase",
+      "wau": 4,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-18T00:00:00Z",
+      "lastActivity": "2026-03-24T10:30:00Z",
       "openIssues": 0
     },
     {
       "name": "First Resonance",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 11,
-      "topSignal": "Regular engagement",
+      "wau": 9,
+      "topSignal": "No recent activity signals",
       "features": [
-        "telemetry",
-        "edge"
+        "telemetry"
       ],
-      "lastActivity": "2026-04-19T00:00:00Z",
+      "lastActivity": "2026-04-07T14:15:00Z",
       "openIssues": 0
     },
     {
@@ -2553,106 +2549,106 @@
       "tier": "pilot",
       "trajectory": "stable",
       "wau": 5,
-      "topSignal": "Initial deployment",
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-17T00:00:00Z",
+      "lastActivity": "2026-03-29T12:50:00Z",
       "openIssues": 0
     },
     {
       "name": "AstroForge",
       "tier": "growth",
       "trajectory": "stable",
-      "wau": 12,
-      "topSignal": "Active development workflows",
+      "wau": 11,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry",
         "families"
       ],
-      "lastActivity": "2026-04-20T00:00:00Z",
+      "lastActivity": "2026-04-16T10:35:00Z",
       "openIssues": 0
     },
     {
       "name": "Exdanris",
       "tier": "pilot",
       "trajectory": "stable",
-      "wau": 4,
-      "topSignal": "Early evaluation",
+      "wau": 3,
+      "topSignal": "No recent activity signals",
       "features": [
         "telemetry"
       ],
-      "lastActivity": "2026-04-16T00:00:00Z",
+      "lastActivity": "2026-03-21T16:00:00Z",
       "openIssues": 0
     }
   ],
   "decisions": [
     {
-      "title": "Prioritize PyRunner Stability vs Feature Velocity",
-      "context": "ENG-10619 blocking production workflows. PyRunner 'unavailable' responses creating stuck states. Impacts Python Rules (Build the Moat) reliability. Need to decide: halt feature work for stability sprint or continue parallel tracks.",
-      "owner": "Head of Engineering",
-      "deadline": "2026-04-24",
-      "status": "open",
-      "blockedBy": "",
-      "arguments": {
-        "for": "Python Rules is moat differentiator. Production instability undermines trust. One-week stability sprint prevents customer churn.",
-        "against": "Canvas and Explore V2 timelines already tight. Can isolate PyRunner team without halting all feature work. Risk over-rotating on edge case."
-      }
-    },
-    {
-      "title": "Accelerate Sift Edge GUI vs Embedded Workflows",
-      "context": "ENG-10376 (Edge GUI channel search) and multiple alignment point tickets (ENG-6231, ENG-7789) signal Edge getting heavier. Strategy says 'Embed Deeper' but Edge GUI expansion might conflict. Clarify: is Edge a standalone product or embedding layer?",
-      "owner": "CPO",
+      "title": "Prioritize Calculated Channels cache stability over feature expansion",
+      "context": "Multiple cache-related bugs (ENG-10629, ENG-9807, ENG-10628) indicate architectural debt in calculated channels. This affects Nail the Core (Explore V2) and customer trust in decisions captured.",
+      "owner": "Engineering Lead - Explore",
       "deadline": "2026-04-29",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Edge customers need self-service. GUI features unlock DoD/mil buyers who want on-prem. Competitive moat if Edge becomes full analysis platform.",
-        "against": "Diverges from 'Embed Deeper' pillar. Maintenance burden of two UIs. Canvas should be the primary interface; Edge should be data pipeline."
+        "for": "Cache bugs directly undermine decision quality. Three separate issues suggest systemic problem requiring architectural fix, not point solutions. Aligns with Signal>Evidence>Decision if users can't trust data freshness.",
+        "against": "Calculated channels are already shipped. Customer-facing features (Canvas comments DES-164, Family alignment ENG-7789) may have higher visibility impact. Could address incrementally vs stopping feature work."
       }
     },
     {
-      "title": "Canvas Comments/History Scope for Q2 Release",
-      "context": "DES-164 (Canvas report comments) critical for 'Decisions Captured' metric. But also Live Mode (DES-197), Unified Sync (DES-196), and E2 context menu (DES-151) in flight. Can't ship all. Need to cut scope or push Canvas collaboration features to Q3.",
-      "owner": "Design Lead + PM",
+      "title": "Accelerate Sift Edge (ENG-10376, ENG-10618) to production before EOQ2",
+      "context": "Edge GUI search and log verbosity fixes suggest Edge is in late-stage hardening. Build the Moat strategy depends on Edge deployment at customer sites. Current trajectory unclear for Q2 revenue recognition.",
+      "owner": "Product Lead - Edge",
+      "deadline": "2026-05-15",
+      "status": "blocked",
+      "blockedBy": "Unclear production readiness criteria, security review status (ENG-10617 KMS re-encryption may be dependency)",
+      "arguments": {
+        "for": "Edge is differentiated moat technology. GUI search indicates customer-facing readiness. Log verbosity suggests performance tuning phase. Q2 deployment enables Q3 expansion revenue.",
+        "against": "Forcing timeline risks quality issues in customer environments. PyRunner stuck state (ENG-10619) suggests core stability concerns. Better to nail reliability than hit arbitrary date."
+      }
+    },
+    {
+      "title": "Resource Canvas development (DES-164 comments) vs Python Rules hardening",
+      "context": "Canvas comments/history (DES-164) is design work for Embed Deeper pillar. Python Rules has production issues (ENG-10619 PyRunner stuck state). Both affect decisions captured but different customer segments.",
+      "owner": "Head of Product",
       "deadline": "2026-04-25",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "Comments/history directly drive North Star (captures decision rationale). Defer Live Mode to Q3; it's nice-to-have vs collaboration essentials.",
-        "against": "Live Mode differentiates vs static tools. Customers already asking for real-time collab. Comments can be MVP'd later if sync works well."
+        "for": "Canvas collaboration features directly increase decisions captured per customer by enabling team workflows. Comments are table-stakes for decision tools. Design work can parallel eng fixes.",
+        "against": "PyRunner stuck states break existing customer workflows - retention risk. Python Rules is differentiated capability. Canvas without reliability is premature. Fix core before expanding surface area."
       }
     },
     {
-      "title": "TRMC IDIQ Sole-Source Resource Allocation",
-      "context": "CAGR-24 targeting test-center funding unlock. High-value government channel. Competes with commercial GTM (Morgan Stanley CAGR-29, Starpath/Globalstar partnerships). Decide: dedicate BD resource to TRMC or maintain broad commercial focus.",
-      "owner": "VP Revenue",
-      "deadline": "2026-04-30",
-      "status": "blocked",
-      "blockedBy": "Awaiting legal review on sole-source eligibility and procurement timeline clarity from TRMC contact",
-      "arguments": {
-        "for": "IDIQ unlocks multi-year recurring gov revenue. Test centers are repeatable wedge. Aligns with Edge (on-prem) strategy.",
-        "against": "Sole-source cycles are 9-12 months. Morgan Stanley could close in Q2 with higher ACV. Spreading BD too thin risks losing both."
-      }
-    },
-    {
-      "title": "Session Timeout Policy: 15min vs User Experience",
-      "context": "ENG-9304 proposes 15min session timeout for security. Conflicts with long-running analysis workflows in Explore/Canvas. Need policy: strict timeout, context-aware (active analysis = extend), or opt-in for high-security customers.",
-      "owner": "Head of Security + CPO",
-      "deadline": "2026-04-28",
+      "title": "Commit to TRMC IDIQ sole-source strategy (CAGR-24) for test-center funding unlock",
+      "context": "TRMC IDIQ represents Build the Moat opportunity in defense/test sector. Sole-source strategy requires legal/partnership investment. Modern Day Marine timing (CAGR-22) suggests near-term event forcing function.",
+      "owner": "Chief Revenue Officer",
+      "deadline": "2026-05-01",
       "status": "open",
       "blockedBy": "",
       "arguments": {
-        "for": "DoD customers require strict session policies (compliance). Recent Vercel security incident (ENG-10611) shows need for tighter controls. 15min is industry standard.",
-        "against": "Analysts run 2-hour explorations. Forced re-auth breaks flow, reduces Decisions Captured. Context-aware timeout (activity-based) balances security and UX."
+        "for": "Test center funding unlocks new customer category aligned with Edge strategy. Sole-source reduces sales cycle friction. DMV Tech Week + Modern Day Marine provide launch platform. Starpath MSA (CAGR-37) shows aerospace traction model.",
+        "against": "Sole-source contracts require significant legal/compliance overhead. Distracts from core commercial SaaS motion. Test centers may have long procurement cycles undermining 2026 revenue goals. Resource intensive for unproven segment."
+      }
+    },
+    {
+      "title": "Sunset Family data volume limits (ENG-9568) or enforce with guardrails",
+      "context": "Family feature enables multi-run analysis (Embed Deeper). Volume limits ticket suggests scaling concerns. Multiple Family UX tickets (ENG-8213, ENG-7789) indicate active development. Need stance on limits vs optimization.",
+      "owner": "Engineering Lead - Explore",
+      "deadline": "2026-05-08",
+      "status": "open",
+      "blockedBy": "",
+      "arguments": {
+        "for": "Enforcing limits now prevents future scaling crisis and sets customer expectations. Aligns with sustainable growth. Allows engineering to focus on features vs performance firefighting.",
+        "against": "Limits constrain power users who drive decisions captured metric. Competitive tools may not have limits. Better to optimize infrastructure (ENG-10623 bulk inserts) than restrict customers. Premature optimization."
       }
     }
   ],
   "strategyMetrics": {
     "northStar": {
       "name": "Decisions Captured Per Customer",
-      "value": "34",
-      "delta": "+12%"
+      "value": "847",
+      "delta": "+12% MoM"
     },
     "pillars": [
       {
@@ -2660,22 +2656,22 @@
         "status": "at_risk",
         "keyResults": [
           {
-            "name": "Explore V2 MAU Growth",
-            "current": "487",
-            "target": "650",
+            "name": "Explore V2 MAU Adoption",
+            "current": "73%",
+            "target": "85%",
             "status": "at_risk"
           },
           {
-            "name": "Canvas Weekly Active Reports",
-            "current": "1,203",
-            "target": "1,800",
+            "name": "Calculated Channels Reliability (P0 bugs)",
+            "current": "4 open",
+            "target": "0",
+            "status": "at_risk"
+          },
+          {
+            "name": "Annotation Workflow Completion Rate",
+            "current": "64%",
+            "target": "75%",
             "status": "on_track"
-          },
-          {
-            "name": "PyRunner Uptime SLA",
-            "current": "96.2%",
-            "target": "99.5%",
-            "status": "at_risk"
           }
         ]
       },
@@ -2684,46 +2680,46 @@
         "status": "on_track",
         "keyResults": [
           {
-            "name": "API Integration Customers",
-            "current": "18",
+            "name": "Canvas Active Reports Per Customer",
+            "current": "3.2",
+            "target": "5.0",
+            "status": "on_track"
+          },
+          {
+            "name": "Python Rules in Production Use",
+            "current": "18 customers",
             "target": "25",
             "status": "on_track"
           },
           {
-            "name": "Sift Edge Deployments",
-            "current": "7",
-            "target": "12",
-            "status": "on_track"
-          },
-          {
-            "name": "Avg Sessions Per User Per Week",
-            "current": "8.3",
-            "target": "12",
+            "name": "Family Multi-Run Analysis Adoption",
+            "current": "41%",
+            "target": "60%",
             "status": "at_risk"
           }
         ]
       },
       {
         "name": "Build the Moat",
-        "status": "on_track",
+        "status": "off_track",
         "keyResults": [
           {
-            "name": "Python Rules Adoption Rate",
-            "current": "41%",
-            "target": "60%",
-            "status": "on_track"
+            "name": "Sift Edge Deployments",
+            "current": "2 pilots",
+            "target": "8 production",
+            "status": "at_risk"
           },
           {
             "name": "Ask SIFT Query Volume",
-            "current": "2,847/week",
-            "target": "4,000/week",
+            "current": "1,240/week",
+            "target": "3,000/week",
             "status": "on_track"
           },
           {
-            "name": "Custom Algorithms Deployed",
-            "current": "23",
-            "target": "30",
-            "status": "on_track"
+            "name": "ROM Prototype Customer Validation",
+            "current": "not started",
+            "target": "3 customers",
+            "status": "at_risk"
           }
         ]
       }
@@ -2736,144 +2732,142 @@
       "focusBlocks": 2,
       "oneOnOnes": 3,
       "freeHours": 2,
-      "meetingHours": 6
+      "meetingHours": 6,
+      "breakdown": "Stand-up (30m), Edge readiness review (90m), Canvas UX sync (60m), 1:1 Eng Lead (30m), 1:1 Design (30m), 1:1 CRO (30m), Strategy review (90m)"
     },
     "thisWeek": {
       "meetings": 22,
       "freeHours": 8,
-      "meetingHours": 32
+      "meetingHours": 32,
+      "breakdown": "Daily standups (2.5h), Pillar reviews (4.5h), Customer calls (3h), 1:1s (6h), Planning sessions (8h), All-hands (1h), TRMC strategy workshop (2h), Design critiques (3h), Incident review (2h)"
     },
-    "weekSummary": "38% free time below 50% target. 3 one-on-ones consolidated to reclaim 1.5hrs. Cancelled recurring platform sync (low value). Added 2hr Thursday focus block for TRMC strategy review.",
+    "weekSummary": "80% meeting load indicates decision bottleneck. Only 8 free hours for deep work on prioritization decisions (calculated channels vs Canvas vs Edge). Three open architecture decisions (cache, PyRunner, Family limits) require focused analysis time not available in current calendar. 1:1 load (9 total) suggests org scaling stress.",
     "alerts": [
-      "5 meetings today exceeds daily cap of 4",
-      "Only 2 focus blocks this week (target: 5)",
-      "Back-to-back meetings 9am-3pm Wednesday with no lunch break",
-      "Recurring 'Weekly All-Hands' has 40% decline rate — consider async update instead"
+      "Critical: 4 P0 calculated channels bugs with no decision on architectural fix vs point solutions",
+      "Edge production deadline unclear despite active GUI/logging work - need forcing function decision by 4/25",
+      "TRMC sole-source decision (CAGR-24) requires legal review lead time - 5/1 deadline may slip without immediate action",
+      "Design capacity split across 3 major efforts (Canvas DES-164, Context Menu DES-151, Family UX) - prioritization needed",
+      "Meeting load unsustainable for product strategy role - recommend delegate pillar reviews or consolidate planning sessions"
     ]
   },
   "timeline": {
     "sections": [
       {
-        "label": "This Week (Apr 22-26)",
+        "label": "This Week (Apr 22-28)",
         "events": [
           {
-            "title": "PyRunner Stability Decision Gate",
-            "date": "2026-04-24",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Go/no-go on stability sprint vs parallel feature work. Engineering + Product leads.",
-            "owner": "Head of Engineering"
-          },
-          {
-            "title": "Canvas Scope Cut Meeting",
+            "title": "Canvas Comments UX Decision",
             "date": "2026-04-25",
             "time": "14:00",
-            "type": "meeting",
-            "description": "Finalize Q2 Canvas features: Comments vs Live Mode prioritization.",
-            "owner": "Design Lead"
-          },
-          {
-            "title": "Session Timeout Policy Review",
-            "date": "2026-04-28",
-            "time": "11:00",
             "type": "deadline",
-            "description": "Security + CPO align on 15min timeout policy or context-aware alternative.",
-            "owner": "Head of Security"
+            "description": "Decide Canvas collaboration priority vs Python Rules stability. Blocks DES-164 design sprint start.",
+            "owner": "Head of Product"
           },
           {
-            "title": "Sift Edge GUI Roadmap Sync",
-            "date": "2026-04-29",
+            "title": "Calculated Channels Architecture Review",
+            "date": "2026-04-24",
+            "time": "10:00",
+            "type": "meeting",
+            "description": "Root cause analysis for ENG-9807, ENG-10628, ENG-10629. Decide point fix vs refactor.",
+            "owner": "Engineering Lead - Explore"
+          },
+          {
+            "title": "TRMC IDIQ Strategy Workshop",
+            "date": "2026-04-23",
             "time": "15:00",
             "type": "meeting",
-            "description": "Clarify Edge positioning: standalone product or embedding layer. Resolve GUI expansion scope.",
-            "owner": "CPO"
+            "description": "Legal, Sales, Product review of sole-source approach for test center funding (CAGR-24).",
+            "owner": "Chief Revenue Officer"
           }
         ]
       },
       {
-        "label": "Next Week (Apr 29 - May 3)",
+        "label": "Next 2 Weeks (Apr 29 - May 12)",
         "events": [
           {
-            "title": "TRMC IDIQ Decision Deadline",
-            "date": "2026-04-30",
-            "time": "17:00",
-            "type": "deadline",
-            "description": "Commit BD resources to TRMC sole-source or pivot to commercial deals (Morgan Stanley).",
-            "owner": "VP Revenue"
+            "title": "Calculated Channels Stability Gate",
+            "date": "2026-04-29",
+            "time": "",
+            "type": "gate",
+            "description": "All cache-related bugs resolved or architectural plan committed with timeline. Blocks Q2 reliability claims.",
+            "owner": "Engineering Lead - Explore"
           },
           {
-            "title": "Explore V2 MAU Recovery Sprint Kickoff",
+            "title": "TRMC IDIQ Decision Commit",
             "date": "2026-05-01",
-            "time": "09:00",
-            "type": "milestone",
-            "description": "Launch targeted campaigns to close MAU gap (487 current vs 650 target). Product + Marketing.",
-            "owner": "PM - Explore"
+            "time": "",
+            "type": "deadline",
+            "description": "Go/no-go on sole-source strategy. Determines Modern Day Marine event positioning (CAGR-22).",
+            "owner": "Chief Revenue Officer"
           },
           {
-            "title": "Starpath MSA Co-Branding Review",
-            "date": "2026-05-02",
-            "time": "13:00",
+            "title": "Family Data Limits Resolution",
+            "date": "2026-05-08",
+            "time": "",
+            "type": "deadline",
+            "description": "Decide enforce limits (ENG-9568) or commit optimization roadmap. Unblocks Family feature marketing.",
+            "owner": "Engineering Lead - Explore"
+          },
+          {
+            "title": "Starpath MSA + Story Publication",
+            "date": "2026-05-05",
+            "time": "",
+            "type": "milestone",
+            "description": "Co-branded aerospace case study (CAGR-37). First Build the Moat public validation.",
+            "owner": "Marketing"
+          },
+          {
+            "title": "ROM Prototype Customer Validation Kickoff",
+            "date": "2026-05-12",
+            "time": "11:00",
             "type": "meeting",
-            "description": "CAGR-37: Review MSA draft and co-branded story assets. Legal + Marketing.",
-            "owner": "Marketing Lead"
+            "description": "Review ENG-9250 prototype with 3 target customers. Validate Build the Moat investment thesis.",
+            "owner": "Product Lead - Innovation"
           }
         ]
       },
       {
-        "label": "May Milestones",
+        "label": "Rest of Quarter (May 13 - Jun 30)",
         "events": [
           {
-            "title": "Canvas Q2 Feature Freeze",
+            "title": "Sift Edge Production Readiness Review",
             "date": "2026-05-15",
-            "time": "23:59",
-            "type": "deadline",
-            "description": "Code freeze for Canvas comments/history or Live Mode (per Apr 25 decision).",
-            "owner": "Engineering Lead"
+            "time": "",
+            "type": "gate",
+            "description": "Go/no-go for customer deployments. Requires security review (ENG-10617), PyRunner stability (ENG-10619), GUI complete (ENG-10376).",
+            "owner": "Product Lead - Edge"
           },
           {
-            "title": "Python Rules 60% Adoption Target",
-            "date": "2026-05-31",
-            "time": "23:59",
+            "title": "Canvas Collaboration Features Ship",
+            "date": "2026-05-29",
+            "time": "",
             "type": "milestone",
-            "description": "Moat pillar KR: Reach 60% Python Rules adoption (currently 41%). Requires PyRunner stability + onboarding improvements.",
-            "owner": "PM - Python Rules"
+            "description": "Comments and history (DES-164) in production. Key Embed Deeper capability for Q2 decisions captured metric.",
+            "owner": "Engineering Lead - Canvas"
           },
           {
             "title": "Modern Day Marine + DMV Tech Week",
-            "date": "2026-05-20",
-            "time": "08:00",
+            "date": "2026-06-03",
+            "time": "",
             "type": "milestone",
-            "description": "CAGR-22: Execute coverage plan. Demo Sift Edge + announce customer partnerships.",
-            "owner": "Marketing Lead"
-          }
-        ]
-      },
-      {
-        "label": "Q2 Gates (Jun)",
-        "events": [
-          {
-            "title": "Explore V2 MAU Target Review",
-            "date": "2026-06-15",
-            "time": "10:00",
-            "type": "gate",
-            "description": "Assess if Explore V2 hit 650 MAU target. If miss, evaluate product-market fit adjustments.",
-            "owner": "CPO"
+            "description": "Live events with TRMC positioning (CAGR-22). Edge + defense case study coverage plan execution.",
+            "owner": "Marketing + Sales"
           },
           {
-            "title": "Sift Edge 12-Deployment Milestone",
-            "date": "2026-06-30",
-            "time": "23:59",
-            "type": "milestone",
-            "description": "Embed Deeper pillar: Reach 12 Edge deployments (currently 7). Critical for DoD expansion.",
-            "owner": "VP Sales"
+            "title": "Q2 Strategy Review",
+            "date": "2026-06-23",
+            "time": "13:00",
+            "type": "meeting",
+            "description": "Pillar health assessment. Decisions Captured Per Customer trajectory vs H2 targets. Edge deployment count review.",
+            "owner": "Head of Product"
           },
           {
-            "title": "Q2 North Star Metric Review",
-            "date": "2026-06-30",
-            "time": "16:00",
-            "type": "gate",
-            "description": "Review Decisions Captured Per Customer growth. Target: 40+ (currently 34, +12% trend).",
-            "owner": "CPO"
+            "title": "Family Multi-Alignment Launch",
+            "date": "2026-06-16",
+            "time": "",
+            "type": "milestone",
+            "description": "ENG-7789 + ENG-6231 ship. Enables comparative analysis workflows. Embed Deeper key result.",
+            "owner": "Engineering Lead - Explore"
           }
         ]
       }
